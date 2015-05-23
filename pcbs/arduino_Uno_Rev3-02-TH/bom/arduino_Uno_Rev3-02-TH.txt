@@ -1,0 +1,56 @@
+Partlist exported from /home/kaspar/projects/1clickBOM/pcbhub/pcbs/arduino-uno/arduino_Uno_Rev3-02-TH.sch at 21/05/2015 22:27
+
+Part     Value                 Device              Package             Description                                                                   
+AD       6x1F-H8.5             PINHD-1X6           1X06                PIN HEADER                                                                    
+C1       100n                  C-EU0603-RND        C0603-ROUND         CAPACITOR, European symbol                                                    
+C2       100n                  C-EU0603-RND        C0603-ROUND         CAPACITOR, European symbol                                                    
+C3       1u                    C-EU0603-RND        C0603-ROUND         CAPACITOR, European symbol                                                    
+C4       100n                  C-EU0603-RND        C0603-ROUND         CAPACITOR, European symbol                                                    
+C5       100n                  C-EU0603-RND        C0603-ROUND         CAPACITOR, European symbol                                                    
+C6       100n                  C-EU0603-RND        C0603-ROUND         CAPACITOR, European symbol                                                    
+C7       100n                  C-EU0603-RND        C0603-ROUND         CAPACITOR, European symbol                                                    
+C8       1u                    C-EU0603-RND        C0603-ROUND         CAPACITOR, European symbol                                                    
+C9       22p                   C-EU0603-RND        C0603-ROUND         CAPACITOR, European symbol                                                    
+C11      22p                   C-EU0603-RND        C0603-ROUND         CAPACITOR, European symbol                                                    
+D1       M7                    DIODE-SMB           SMB                 DIODE                                                                         
+D2       CD1206-S01575         DIODE-MINIMELF      MINIMELF            DIODE                                                                         
+D3       CD1206-S01575         DIODE-MINIMELF      MINIMELF            DIODE                                                                         
+F1       MF-MSMF050-2 500mA    L-EUL1812           L1812               INDUCTOR, European symbol                                                     
+FD1      FIDUCIALMOUNT         FIDUCIALMOUNT       FIDUCIA-MOUNT                                                                                     
+FD2      FIDUCIALMOUNT         FIDUCIALMOUNT       FIDUCIA-MOUNT                                                                                     
+FD3      FIDUCIALMOUNT         FIDUCIALMOUNT       FIDUCIA-MOUNT                                                                                     
+GROUND                         SJ                  SJ                  SMD solder JUMPER                                                             
+ICSP     3x2 M                 PINHD-2X3           2X03                PIN HEADER                                                                    
+ICSP1    3x2 M                 PINHD-2X3           2X03                PIN HEADER                                                                    
+IOH      10x1F-H8.5            PINHD-1X10_ARD      1X10                PIN HEADER                                                                    
+IOL      8x1F-H8.5             PINHD-1X8           1X08                PIN HEADER                                                                    
+JP2      2x2 M - NM            PINHD-2X2           2X02                PIN HEADER                                                                    
+L        YELLOW                LEDCHIP-LED0805     CHIP-LED0805        LED                                                                           
+L1       BLM21                 WE-CBF_0805         0805                SMD EMI Suppression Ferrite Beads                                             
+ON       GREEN                 LEDCHIP-LED0805     CHIP-LED0805        LED                                                                           
+PC1      47u                   CPOL-EUD            PANASONIC_D         POLARIZED CAPACITOR, European symbol                                          
+PC2      47u                   CPOL-EUD            PANASONIC_D         POLARIZED CAPACITOR, European symbol                                          
+POWER    8x1F-H8.5             PINHD-1X8           1X08                PIN HEADER                                                                    
+R1       1M                    R-EU_R0603          R0603-ROUND         RESISTOR, European symbol                                                     
+R2       1M                    R-EU_R0603          R0603-ROUND         RESISTOR, European symbol                                                     
+RESET    TS42031-160R-TR-7260  TS42                TS42                TS42                                                                          
+RESET-EN                       SJ                  SJ                  SMD solder JUMPER                                                             
+RN1      10K                   4R-NCAY16           CAY16               Array Chip Resistor                                                           
+RN2      1K                    4R-NCAY16           CAY16               Array Chip Resistor                                                           
+RN3      22R                   4R-NCAY16           CAY16               Array Chip Resistor                                                           
+RN4      1K                    4R-NCAY16           CAY16               Array Chip Resistor                                                           
+RX       YELLOW                LEDCHIP-LED0805     CHIP-LED0805        LED                                                                           
+T1       FDN340P               PMOSSOT23           SOT-23              MOS FET                                                                       
+TX       YELLOW                LEDCHIP-LED0805     CHIP-LED0805        LED                                                                           
+U$1      DISCLAIMER            DISCLAIMER          DISCLAIMER                                                                                        
+U1       NCP1117ST50T3G        MC33269ST-3.3T3     SOT223              Adjustable Output Low Dropout Voltage Regulator 800 mA                        
+U2       LP2985-33DBVR         LP2985-XXDBVR33     SOT23-DBV           ULTRALOW-POWER 50-mA LOW-DROPOUT LINEAR REGULATORS                            
+U3       ATMEGA16U2-MU(R)      ATMEGA16U2-MU       MLF32                                                                                             
+U5       LMV358IDGKR           LMV358MMX           MSOP08              Dual General Purpose, Low Voltage, Rail-to-Rail Output Operational Amplifiers 
+X1       POWERSUPPLY_DC21MMX   POWERSUPPLY_DC21MMX POWERSUPPLY_DC-21MM                                                                               
+X2       USB-B_TH              PN61729             PN61729             BERG USB connector                                                            
+Y1       16MHz                 XTAL/S              QS                  CRYSTAL                                                                       
+Y2       CSTCE16M0V53-R0 16MHZ RESONATORMU         RESONATOR                                                                                         
+Z1       CG0603MLC-05E         VARISTORCN0603      CT/CN0603           VARISTOR                                                                      
+Z2       CG0603MLC-05E         VARISTORCN0603      CT/CN0603           VARISTOR                                                                      
+ZU4      ATMEGA328P-PU         ATMEGA328P-PU       DIL28-3             MICROCONTROLLER                                                               

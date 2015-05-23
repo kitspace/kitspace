@@ -1,17 +1,16 @@
 import Graphics.Element exposing (..)
+import Graphics.Collage exposing (..)
 import Signal exposing (..)
 import Window
 import Text exposing (..)
+import Color
 
---boardImage side w h =
---    image w h
---     ("../pcbs/bus-pirate-v3.6/svg/"
---         ++ side ++ ".svg")
+--board = "arduino_Uno_Rev3-02-TH"
+board = "BusPirate-v3.6-SSOP"
 
 boardImage side w h =
     image w h
---     ("../pcbs/arduino-uno/svg/"
-     ("../pcbs/bus-pirate-v3.6/svg/"
+     ("../pcbs/" ++ board ++ "/svg/"
          ++ side ++ ".png")
 
 boardView w h =
@@ -24,19 +23,19 @@ boardView w h =
 titleView w h =
     let txt = leftAligned
         <| style
-            {defaultStyle | height <- Just 32
+            {defaultStyle | height <- Just 24
                           , bold <- True
+                          , color <- Color.rgb 100 100 100
             }
-        --<| fromString "Arduino UNO"
-        <| fromString "BusPirate v3.6"
-    in flow right [spacer ((w - widthOf txt) // 2) 1, txt]
+        <| fromString board
+        bg = collage w h [rect (toFloat w) (toFloat h) |> filled (Color.rgb 240 240 240)]
+    in layers [bg, flow right [spacer 16 1, container w h midLeft txt]]
 
 view (w,h) =
     let boardH = max 100 (round (toFloat h / 3.3))
-        titleH = max 100 (round (toFloat h / 3.3))
+        titleH = 64
     in flow down
-        [ spacer 1 20
-        , titleView w titleH
+        [ titleView w titleH
         , spacer 1 20
         , boardView w boardH
         ]
