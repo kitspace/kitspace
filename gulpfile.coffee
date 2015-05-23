@@ -7,7 +7,7 @@ gulp.task("elm-init", elm.init)
 
 gulp.task "elm", ["elm-init"], () ->
     return gulp.src(paths.elm)
-        .pipe(elm())
+        .pipe(elm.make())
         .pipe(gulp.dest("build/"))
 
 gulp.task "html", () ->
@@ -16,6 +16,6 @@ gulp.task "html", () ->
 
 gulp.task("default", ["elm", "html"])
 
-gulp.task "watch", () ->
+gulp.task "watch", ["default"], () ->
     gulp.watch(paths.elm, ["elm"])
     gulp.watch(paths.html, ["html"])

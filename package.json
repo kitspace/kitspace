@@ -5,6 +5,7 @@
   "main": "\"\"",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+    , "make": "mkdir -p build && elm-make src/*.elm --yes --output build/"
   },
   "author": "",
   "license": "AGPLv3",
