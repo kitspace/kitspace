@@ -1,10 +1,11 @@
-import Graphics.Element exposing (..)
-import Graphics.Collage exposing (..)
-import Signal exposing (..)
-import Window
-import Text exposing (..)
 import Color
-import List exposing (intersperse, (::))
+import Graphics.Collage exposing (..)
+import Graphics.Element exposing (..)
+import List exposing (..)
+import Signal exposing (..)
+import Text exposing (..)
+import Window
+import Debug
 
 boards = ["Arduino UNO", "Bus Pirate"
          ,"MC HCK", "Bus Pirate"]
@@ -17,9 +18,9 @@ dim = {thumb = {w = 200, h = 150, capH = 30}}
 thumb name =
     let txt = centered
         <| Text.style
-            {defaultStyle | height <- Just 16
-                          , bold <- True
-                          , color <- Color.rgb 55 55 55
+            { defaultStyle | height <- Just 16
+                           , bold <- True
+                           , color <- Color.rgb 55 55 55
             }
         <| fromString name
     in flow right
@@ -32,9 +33,12 @@ thumb name =
         ]
 
 boardView w h =
-    flow right
-        <| (::) (spacer 16 1)
-        <| List.map thumb boards
+    let thumbs    = List.map thumb boards
+        thumbRows = List.map row [0..nRows]
+        nPerRow   = w // (dim.thumb.w + 32)
+        nRows     = ceiling (toFloat (length thumbs) / toFloat nPerRow)
+        row n     = take nPerRow (drop (n * nPerRow) thumbs)
+    in flow down <| List.map (flow right) thumbRows
 
 searchBarView w h =
     let bg = collage w h [rect (toFloat w) (toFloat h) |> filled (Color.rgb 240 240 240)]
@@ -50,5 +54,5 @@ view (w,h) =
         ]
 
 main : Signal Element
-main = map view Window.dimensions
+main = Signal.map view Window.dimensions
 
