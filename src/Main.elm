@@ -14,7 +14,7 @@ titleView w h =
             }
         <| fromString ""
         bg = collage w h [rect (toFloat w) (toFloat h) |> filled (Color.rgb 240 240 240)]
-        logo = container 195 64 middle (image 191 48 "images/logo.png")
+        logo = container 163 64 middle (image 163 48 "images/logo.png")
     in layers [bg, flow right [spacer (w - widthOf logo - 16) 1, logo, spacer 16 1]]
 
 view (w,h) =
