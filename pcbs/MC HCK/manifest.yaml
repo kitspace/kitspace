@@ -1,0 +1,5 @@
+name: MC HCK
+description: A small, cheap, and powerful development board that supports USB for easy programming, at a low price.
+version: r5-rc3
+site: http://mchck.org
+license: CERN OHL v1.1

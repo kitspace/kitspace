@@ -1,0 +1,15 @@
+EESchema-LIBRARY Version 2.3  Date: Fri Sep  7 12:34:41 2012
+#encoding utf-8
+#
+# MOUNTHOLE
+#
+DEF ~MOUNTHOLE H 0 0 N N 1 F N
+F0 "H" -100 100 60 H V C CNN
+F1 "MOUNTHOLE" 0 -100 60 H I C CNN
+DRAW
+C 0 0 50 0 1 0 N
+X ~ 1 0 0 0 R 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
+#End Library
