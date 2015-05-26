@@ -9,6 +9,7 @@ import Debug
 
 type alias BoardInfo =
     { name        : String
+    , folder      : String
     , description : String
     , author      : String
     , version     : String
@@ -26,11 +27,7 @@ emptyBoardInfo =
     , license     = ""
     }
 
-
-boards = [ {emptyBoardInfo | name <- "Arduino UNO", folder <- "arduino-uno"}
-         , {emptyBoardInfo | name <- "Bus Pirate" , folder <- "bus-pirate"}
-         , {emptyBoardInfo | name <- "MC HCK" , folder <- "mchck"}
-         ]
+port boardPort : Signal (List BoardInfo)
 
 boardImage w h folder =
     image w h ("../pcbs/" ++ folder ++ "/images/front.png")
@@ -54,7 +51,7 @@ thumb info =
         , spacer 16 1
         ]
 
-boardView w h =
+boardView w h boards =
     let thumbs    = List.map thumb boards
         thumbRows = List.map row [0..nRows]
         nPerRow   = w // (dim.thumb.w + 32)
@@ -67,14 +64,14 @@ searchBarView w h =
         logo = container 165 h middle (image 163 48 "images/logo.png")
     in layers [bg, flow right [spacer (w - widthOf logo - 16) 1, logo, spacer 16 1]]
 
-view (w,h) =
+view (w,h) boards =
     let boardH = max 100 (round (toFloat h / 3.3))
     in flow down
         [ searchBarView w 64
         , spacer 1 20
-        , boardView w (h - 64 - 20)
+        , boardView w (h - 64 - 20) boards
         ]
 
 main : Signal Element
-main = Signal.map view Window.dimensions
+main = Signal.map2 view Window.dimensions boardPort
 
