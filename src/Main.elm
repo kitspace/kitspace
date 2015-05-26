@@ -9,6 +9,7 @@ import Http
 import Window
 import Debug
 import Json.Decode exposing (..)
+import Graphics.Input exposing (..)
 
 type alias BoardInfo =
     { name        : String
@@ -40,6 +41,10 @@ port getBoards : Task Http.Error ()
 port getBoards = Http.get (list boardDecoder) boardJsonUrl
                     `Task.andThen` Signal.send boardMB.address
 
+
+buttonMB : Signal.Mailbox ()
+buttonMB = Signal.mailbox ()
+
 dim = {thumb = {w = 200, h = 150, capH = 30}}
 
 boardImage w h folder =
@@ -53,14 +58,24 @@ thumb info =
                            , color  <- Color.rgb 55 55 55
             }
         <| fromString info.name
-    in flow right
-        [ spacer 16 1
-        , flow down
-            [ boardImage dim.thumb.w dim.thumb.h info.folder
-            , container dim.thumb.w dim.thumb.capH middle txt
+        w = dim.thumb.w + 32
+        h = dim.thumb.h + dim.thumb.capH + 32
+        img height = container w height middle
+                <| flow down
+                    [ boardImage dim.thumb.w dim.thumb.h info.folder
+                    , container dim.thumb.w dim.thumb.capH middle txt
+                    ]
+
+        hover = layers
+            [collage w h
+                [ rect (toFloat w) (toFloat h)
+                    |> filled (Color.rgb 250 250 250)
+                , rect (toFloat w) (toFloat h)
+                    |> outlined (solid Color.grey)
+                ]
+            , img h
             ]
-        , spacer 16 1
-        ]
+    in customButton (message buttonMB.address ()) (img h) hover hover
 
 boardView w h boards =
     let thumbs    = List.map thumb boards
