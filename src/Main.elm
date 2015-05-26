@@ -43,7 +43,7 @@ port getBoards = Http.get (list boardDecoder) boardJsonUrl
 dim = {thumb = {w = 200, h = 150, capH = 30}}
 
 boardImage w h folder =
-    image w h ("../pcbs/" ++ folder ++ "/images/front.png")
+    image w h ("../pcbs/" ++ folder ++ "/images/thumb.png")
 
 thumb info =
     let txt = centered
@@ -78,8 +78,7 @@ searchBarView w h =
     in layers [bg, flow right [spacer (w - widthOf logo - 16) 1, logo, spacer 16 1]]
 
 view (w,h) boards =
-    let boardH = max 100 (round (toFloat h / 3.3))
-    in flow down
+    flow down
         [ searchBarView w 64
         , spacer 1 20
         , boardView w (h - 64 - 20) boards
