@@ -4,8 +4,11 @@ import Graphics.Element exposing (..)
 import List exposing (..)
 import Signal exposing (..)
 import Text exposing (..)
+import Task exposing (..)
+import Http
 import Window
 import Debug
+import Json.Decode exposing (..)
 
 type alias BoardInfo =
     { name        : String
@@ -17,13 +20,30 @@ type alias BoardInfo =
     , license     : String
     }
 
+boardDecoder : Decoder BoardInfo
+boardDecoder =
+    object7 BoardInfo
+        ("name"        := string)
+        ("folder"      := string)
+        ("description" := string)
+        ("author"      := string)
+        ("version"     := string)
+        ("site"        := string)
+        ("license"     := string)
 
-port boardPort : Signal (List BoardInfo)
+boardMB : Signal.Mailbox (List BoardInfo)
+boardMB = Signal.mailbox []
+
+boardJsonUrl = "boards.json"
+
+port getBoards : Task Http.Error ()
+port getBoards = Http.get (list boardDecoder) boardJsonUrl
+                    `Task.andThen` Signal.send boardMB.address
+
+dim = {thumb = {w = 200, h = 150, capH = 30}}
 
 boardImage w h folder =
     image w h ("../pcbs/" ++ folder ++ "/images/front.png")
-
-dim = {thumb = {w = 200, h = 150, capH = 30}}
 
 thumb info =
     let txt = centered
@@ -45,13 +65,15 @@ thumb info =
 boardView w h boards =
     let thumbs    = List.map thumb boards
         thumbRows = List.map row [0..nRows]
-        nPerRow   = w // (dim.thumb.w + 32)
+        nPerRow   = max 1 (w // (dim.thumb.w + 32))
         nRows     = ceiling (toFloat (length thumbs) / toFloat nPerRow)
         row n     = take nPerRow (drop (n * nPerRow) thumbs)
-    in flow down <| List.map (flow right) thumbRows
+        rows = flow down <| List.map (flow right) thumbRows
+    in container w h midTop rows
 
 searchBarView w h =
-    let bg = collage w h [rect (toFloat w) (toFloat h) |> filled (Color.rgb 240 240 240)]
+    let bg = collage w h
+            [rect (toFloat w) (toFloat h) |> filled (Color.rgb 240 240 240)]
         logo = container 165 h middle (image 163 48 "images/logo.png")
     in layers [bg, flow right [spacer (w - widthOf logo - 16) 1, logo, spacer 16 1]]
 
@@ -64,5 +86,5 @@ view (w,h) boards =
         ]
 
 main : Signal Element
-main = Signal.map2 view Window.dimensions boardPort
+main = Signal.map2 view Window.dimensions boardMB.signal
 

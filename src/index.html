@@ -16,14 +16,7 @@
     </head>
     <body>
         <script type="text/javascript">
-            xhr = new XMLHttpRequest;
-            xhr.open("GET", "/boards.json", true);
-            xhr.onreadystatechange = function (event) {
-                if (event.target.readyState === 4 && event.target.status === 200) {
-                    Elm.fullscreen(Elm.Main, {boardPort: JSON.parse(event.target.responseText)});
-                }
-            }
-            xhr.send();
+            Elm.fullscreen(Elm.Main);
         </script>
     </body>
 </html>
