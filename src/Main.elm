@@ -74,8 +74,8 @@ boardView w h boards =
 searchBarView w h =
     let bg = collage w h
             [rect (toFloat w) (toFloat h) |> filled (Color.rgb 240 240 240)]
-        logo = container 165 h middle (image 163 48 "images/logo.png")
-    in layers [bg, flow right [spacer (w - widthOf logo - 16) 1, logo, spacer 16 1]]
+        logo = image 163 48 "images/logo.png"
+    in layers [bg, container w h midRight <| flow right [logo, spacer 16 1]]
 
 view (w,h) boards =
     flow down
