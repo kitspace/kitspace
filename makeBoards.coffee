@@ -2,9 +2,9 @@ yaml = require "js-yaml"
 fs   = require "fs"
 ps   = require "process"
 
-boards = []
-boardDir = "pcbs"
-boardJsPath = "build/boards.json"
+boards        = []
+boardDir      = "pcbs"
+boardJsonPath = "build/boards.json"
 
 fs.readdir boardDir, (err, files) ->
 
@@ -12,7 +12,6 @@ fs.readdir boardDir, (err, files) ->
         console.log("Error reading directory '#{err.path}': #{err.code}")
         ps.exit(1)
 
-    success = true
     for dir in files
         path = "#{boardDir}/#{dir}/info.yaml"
         try
@@ -20,7 +19,7 @@ fs.readdir boardDir, (err, files) ->
         catch e
             if e.name == "YAMLException"
                 console.log("Error: could not parse '#{path}' line:#{e.mark.line} char:#{e.mark.position}")
-                console.log("\tReason: ", e.reason)
+                console.log("\tbecause ", e.reason)
             else
                 console.log("Exception:", e)
             ps.exit(2)
@@ -33,9 +32,9 @@ fs.readdir boardDir, (err, files) ->
             console.log("'#{path}' needs a version property")
             ps.exit(4)
         boards.push(doc)
-    boardJs = fs.openSync(boardJsPath, 'w')
-    fs.write(boardJs, JSON.stringify(boards))
-    console.log("Successfully generated '#{boardJsPath}'")
+    boardJson = fs.openSync(boardJsonPath, 'w')
+    fs.write(boardJson, JSON.stringify(boards))
+    console.log("Successfully generated '#{boardJsonPath}'")
 
 
 correctTypes = (boardInfo) ->
@@ -50,7 +49,5 @@ correctTypes = (boardInfo) ->
         }
     for prop of boardInfoWithEmpty
         if (boardInfo.hasOwnProperty(prop))
-            if typeof(boardInfo[prop]) != "string"
-                boardInfo[prop] = String(boardInfo[prop])
-            boardInfoWithEmpty[prop] = boardInfo[prop]
+            boardInfoWithEmpty[prop] = String(boardInfo[prop])
     return boardInfoWithEmpty
