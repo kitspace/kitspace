@@ -7,26 +7,48 @@ import Text exposing (..)
 import Window
 import Debug
 
-boards = ["Arduino UNO", "Bus Pirate"
-         ,"MC HCK", "Bus Pirate"]
+type alias BoardInfo =
+    { name        : String
+    , description : String
+    , author      : String
+    , version     : String
+    , site        : String
+    , license     : String
+    }
 
-boardImage w h name =
-    image w h ("../pcbs/" ++ name ++ "/images/front.png")
+emptyBoardInfo =
+    { name        = ""
+    , folder      = ""
+    , description = ""
+    , author      = ""
+    , version     = ""
+    , site        = ""
+    , license     = ""
+    }
+
+
+boards = [ {emptyBoardInfo | name <- "Arduino UNO", folder <- "arduino-uno"}
+         , {emptyBoardInfo | name <- "Bus Pirate" , folder <- "bus-pirate"}
+         , {emptyBoardInfo | name <- "MC HCK" , folder <- "mchck"}
+         ]
+
+boardImage w h folder =
+    image w h ("../pcbs/" ++ folder ++ "/images/front.png")
 
 dim = {thumb = {w = 200, h = 150, capH = 30}}
 
-thumb name =
+thumb info =
     let txt = centered
         <| Text.style
             { defaultStyle | height <- Just 16
-                           , bold <- True
-                           , color <- Color.rgb 55 55 55
+                           , bold   <- True
+                           , color  <- Color.rgb 55 55 55
             }
-        <| fromString name
+        <| fromString info.name
     in flow right
         [ spacer 16 1
         , flow down
-            [ boardImage dim.thumb.w dim.thumb.h name
+            [ boardImage dim.thumb.w dim.thumb.h info.folder
             , container dim.thumb.w dim.thumb.capH middle txt
             ]
         , spacer 16 1
