@@ -17,15 +17,6 @@ type alias BoardInfo =
     , license     : String
     }
 
-emptyBoardInfo =
-    { name        = ""
-    , folder      = ""
-    , description = ""
-    , author      = ""
-    , version     = ""
-    , site        = ""
-    , license     = ""
-    }
 
 port boardPort : Signal (List BoardInfo)
 

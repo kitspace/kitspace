@@ -1,0 +1,19 @@
+{
+  "name": "1clickBOM",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "coffee": "^1.1.0",
+    "js-yaml": "^3.3.1"
+  },
+  "devDependencies": {
+    "coffee-script": "^1.9.2",
+    "process": "^0.11.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

@@ -16,18 +16,14 @@
     </head>
     <body>
         <script type="text/javascript">
-           var boards = [
-                {
-                  "name": "Bus Pirate",
-                  "folder":"bus-pirate",
-                  "description": "The Bus Pirate is an open source hacker multi-tool that talks to electronic stuff.",
-                  "version": "3.6-SSOP",
-                  "author":"",
-                  "license":"",
-                  "site": "http://dangerousprototypes.com/docs/Bus_Pirate"
+            xhr = new XMLHttpRequest;
+            xhr.open("GET", "/boards.json", true);
+            xhr.onreadystatechange = function (event) {
+                if (event.target.readyState === 4 && event.target.status === 200) {
+                    Elm.fullscreen(Elm.Main, {boardPort: JSON.parse(event.target.responseText)});
                 }
-            ];
-            Elm.fullscreen(Elm.Main, { boardPort : boards});
+            }
+            xhr.send();
         </script>
     </body>
 </html>
