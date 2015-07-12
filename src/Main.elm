@@ -69,7 +69,7 @@ thumb info =
         hover = layers
             [collage w h
                 [ rect (toFloat w) (toFloat h)
-                    |> filled (Color.rgb 250 250 250)
+                    |> filled (Color.rgb 240 240 240)
                 , rect (toFloat w) (toFloat h)
                     |> outlined (solid Color.grey)
                 ]
