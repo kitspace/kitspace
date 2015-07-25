@@ -1,18 +1,18 @@
-yaml = require "js-yaml"
-fs   = require "fs"
+yaml = require('js-yaml')
+fs   = require('fs')
 
 boards        = []
 boardDir      = "pcbs"
 boardJsonPath = "build/boards.json"
 
-exports.deps = () ->
-    dirs = fs.readdirSync(boardDir)
-    return ("#{boardDir}/#{dir}/info.yaml" for dir in dirs)
+if require.main != module
+    exports.deps = () ->
+        dirs = fs.readdirSync(boardDir)
+        return ("#{boardDir}/#{dir}/info.yaml" for dir in dirs)
 
-exports.targets = () ->
-    [boardJsonPath]
-
-if not module.parent
+    exports.targets = () ->
+        [boardJsonPath]
+else
     correctTypes = (boardInfo) ->
         boardInfoWithEmpty =
             { name        : ""
@@ -41,4 +41,3 @@ if not module.parent
 
     boardJson = fs.openSync(boardJsonPath, 'w')
     fs.write(boardJson, JSON.stringify(boards))
-
