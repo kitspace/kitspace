@@ -1,6 +1,7 @@
 #!/usr/bin/env coffee
-fs   = require('fs')
-glob = require('glob')
+fs      = require('fs')
+globule = require('globule')
+path    = require('path')
 
 ninjaBuildGen = require('ninja-build-gen')
 
@@ -9,10 +10,10 @@ ninja = ninjaBuildGen('1.3', 'build/')
 ninja.rule('coffee').run('coffee $in')
     .description('$in')
 
-for taskFile in glob.sync('tasks/*.coffee')
-    task = require('./' + taskFile.substr(0,taskFile.search('.coffee')))
-    ninja.edge(task.targets())
-        .from([taskFile].concat(task.deps()))
+for taskFile in globule.find('tasks/*.coffee')
+    task = require("./#{path.dirname(taskFile)}/#{path.basename(taskFile)}")
+    ninja.edge(task.targets)
+        .from([taskFile].concat(task.deps))
         .using('coffee')
 
 ninja.save('build.ninja')
