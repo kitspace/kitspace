@@ -1,25 +1,25 @@
-yaml = require('js-yaml')
-fs   = require('fs')
-path = require('path')
+yaml    = require('js-yaml')
+fs      = require('fs')
+path    = require('path')
 globule = require('globule')
 
-boards        = []
-boardDir      = "boards"
-boardJsonPath = "build/boards.json"
+boardDir      = 'boards'
+boardJsonPath = 'build/boards.json'
 
 if require.main != module
-    exports.deps = globule.find("#{boardDir}/**/info.yaml")
+    exports.deps = globule.find("#{boardDir}/**/1click-info.yaml")
     exports.targets = [boardJsonPath]
 else
+    boards = []
     correctTypes = (boardInfo) ->
         boardInfoWithEmpty =
-            { name        : ""
-            , folder      : ""
-            , description : ""
-            , author      : ""
-            , version     : ""
-            , site        : ""
-            , license     : ""
+            { name        : ''
+            , folder      : ''
+            , description : ''
+            , author      : ''
+            , version     : ''
+            , site        : ''
+            , license     : ''
             }
         for prop of boardInfoWithEmpty
             if (boardInfo.hasOwnProperty(prop))
@@ -29,10 +29,10 @@ else
     paths = process.argv.slice(2)
     for p in paths
         doc = correctTypes(yaml.safeLoad(fs.readFileSync(p)))
-        if doc.name == ""
+        if doc.name == ''
             console.log("'#{p}' needs a name property")
             process.exit(1)
-        else if doc.version == ""
+        else if doc.version == ''
             console.log("'#{p}' needs a version property")
             process.exit(2)
         doc.folder = path.dirname(path.relative(boardDir, p))
