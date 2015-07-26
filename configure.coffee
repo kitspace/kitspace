@@ -3,9 +3,11 @@ fs      = require('fs')
 globule = require('globule')
 path    = require('path')
 
-ninjaBuildGen = require('ninja-build-gen')
+ninjaBuildGen = require('./ninja-build-gen')
 
 ninja = ninjaBuildGen('1.3', 'build/')
+
+ninja.header("#generated from #{path.basename(module.filename)}")
 
 ninja.rule('coffee').run('coffee $in')
     .description('$in')
@@ -34,6 +36,21 @@ for taskFile in globule.find('tasks/*.coffee')
     ninja.edge(task.targets)
         .from([taskFile].concat(task.deps))
         .using('coffee')
+
+ninja.rule('remove').run('rm -rf $in')
+    .description('$command')
+
+ninja.edge('clean').from('build/').using('remove')
+
+all = ninja.edges.filter (c) ->
+    'clean' not in c.targets
+.reduce (prev, c) ->
+    prev.concat(c.targets)
+, []
+
+ninja.edge('all').from(all)
+
+ninja.byDefault('all')
 
 ninja.save('build.ninja')
 
