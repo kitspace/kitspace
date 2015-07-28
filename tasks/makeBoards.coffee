@@ -28,6 +28,7 @@ else
 
     paths = process.argv.slice(2)
     for p in paths
+        if p == '--' then break
         doc = correctTypes(yaml.safeLoad(fs.readFileSync(p)))
         if doc.name == ''
             console.log("'#{p}' needs a name property")

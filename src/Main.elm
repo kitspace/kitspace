@@ -48,7 +48,7 @@ buttonMB = Signal.mailbox ()
 dim = {thumb = {w = 200, h = 150, capH = 30}}
 
 boardImage w h folder =
-    image w h ("boards/" ++ folder ++ "/images/thumb.png")
+    image w h (folder ++ "/images/thumb.png")
 
 thumb info =
     let txt = centered

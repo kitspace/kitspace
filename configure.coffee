@@ -9,7 +9,7 @@ ninja = ninjaBuildGen('1.3', 'build/')
 
 ninja.header("#generated from #{path.basename(module.filename)}")
 
-ninja.rule('coffee').run('coffee $in')
+ninja.rule('coffee').run('coffee $in -- -- $out')
     .description('$in')
 
 ninja.rule('elm').run('elm-make $in --yes --output $out')
@@ -33,9 +33,15 @@ for d in pcbs
 
 for taskFile in globule.find('tasks/*.coffee')
     task = require("./#{path.dirname(taskFile)}/#{path.basename(taskFile)}")
-    ninja.edge(task.targets)
-        .from([taskFile].concat(task.deps))
-        .using('coffee')
+    addEdge = (t) ->
+        ninja.edge(t.targets)
+            .from([taskFile].concat(t.deps))
+            .using('coffee')
+    if typeof task == 'function'
+        for folder in globule.find('boards/**/1click-info.yaml').map((n) -> path.dirname(n))
+            addEdge(task(folder))
+    else
+        addEdge(task)
 
 ninja.rule('remove').run('rm -rf $in')
     .description('$command')
