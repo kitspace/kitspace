@@ -1,2 +1,2 @@
 #!/usr/bin/env sh
-http-server build/
+./configure.coffee && ninja && http-server build/

@@ -33,4 +33,4 @@ else
     fs.writeSync(bottom, svg.bottom)
     fs.closeSync(top)
     fs.closeSync(bottom)
-    svg2png svgs[0], png, 2.0, () ->
+    svg2png svgs[0], png, {width:200, height:150}, () ->
