@@ -15,7 +15,7 @@ ninja.rule('coffee').run('coffee -- $in -- $out')
 ninja.rule('elm').run('elm-make $in --yes --output $out')
     .description('$command')
 
-ninja.rule('copy').run('cp -r $in $out')
+ninja.rule('copy').run('cp $in $out')
     .description('$command')
 
 ninja.edge('build/elm.js').from(globule.find('src/*.elm')).using('elm')
@@ -25,11 +25,8 @@ images = globule.find('src/images/*')
 for f in html.concat(images)
     ninja.edge(f.replace('src','build')).from(f).using('copy')
 
-pcbs = globule.find('boards/**/1click-info.yaml').map((f) -> path.dirname(f))
-
-for d in pcbs
-    ninja.edge("build/#{d}")
-        .from(d).need(globule.find("#{d}/**/*")).using('copy')
+for f in globule.find('boards/**/*', {filter:'isFile'})
+    ninja.edge(f.replace('boards','build/boards')).from(f).using('copy')
 
 for taskFile in globule.find('tasks/*.coffee')
     task = require("./#{path.dirname(taskFile)}/#{path.basename(taskFile)}")
