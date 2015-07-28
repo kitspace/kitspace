@@ -5,11 +5,11 @@ path    = require('path')
 
 ninjaBuildGen = require('./ninja-build-gen')
 
-ninja = ninjaBuildGen('1.3', 'build/')
+ninja = ninjaBuildGen('1.5.1', 'build/')
 
 ninja.header("#generated from #{path.basename(module.filename)}")
 
-ninja.rule('coffee').run('coffee $in -- -- $out')
+ninja.rule('coffee').run('coffee -- $in -- $out')
     .description('$in')
 
 ninja.rule('elm').run('elm-make $in --yes --output $out')

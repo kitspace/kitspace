@@ -4,6 +4,7 @@ path         = require('path')
 boardBuilder = require('svgerber-board-builder')
 svg2png      = require('svg2png')
 boardDir = 'boards'
+{checkArgs}  = require('./utils/utils')
 
 getThumbPath = (folder) ->
 
@@ -18,9 +19,7 @@ if require.main != module
         ]
         return exports
 else
-    sepIndex = process.argv.indexOf('--')
-    deps = process.argv[2..(sepIndex - 1)]
-    targets = process.argv[(sepIndex + 1)..]
+    {deps, targets} = checkArgs(process.argv)
     png = targets[0]
     svgs = targets[1..]
     layers = []
