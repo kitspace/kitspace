@@ -25,6 +25,9 @@ images = globule.find('src/images/*')
 for f in html.concat(images)
     ninja.edge(f.replace('src','build')).from(f).using('copy')
 
+boardFolders = globule.find('boards/**/1click-info.yaml')
+    .map((f) -> path.dirname(f))
+
 for f in globule.find('boards/**/*', {filter:'isFile'})
     ninja.edge(f.replace('boards','build/boards')).from(f).using('copy')
 
@@ -35,7 +38,7 @@ for taskFile in globule.find('tasks/*.coffee')
             .from([taskFile].concat(t.deps))
             .using('coffee')
     if typeof task == 'function'
-        for folder in globule.find('boards/**/1click-info.yaml').map((n) -> path.dirname(n))
+        for folder in boardFolders
             addEdge(task(folder))
     else
         addEdge(task)

@@ -45,10 +45,10 @@ port getBoards = Http.get (list boardDecoder) boardJsonUrl
 buttonMB : Signal.Mailbox ()
 buttonMB = Signal.mailbox ()
 
-dim = {thumb = {w = 200, h = 150, capH = 30}}
+dim = {thumb = {w = 300, h = 225, capH = 30}}
 
 boardImage w h folder =
-    image w h (folder ++ "/images/thumb.png")
+    image w h ("boards/" ++ folder ++ "/images/thumb.png")
 
 thumb info =
     let txt = centered
@@ -57,7 +57,7 @@ thumb info =
                            , bold   <- True
                            , color  <- Color.rgb 55 55 55
             }
-        <| fromString info.name
+        <| fromString info.folder
         w = dim.thumb.w + 32
         h = dim.thumb.h + dim.thumb.capH + 32
         img height = container w height middle
