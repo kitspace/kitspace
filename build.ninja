@@ -1,0 +1,146 @@
+#generated from configure.coffee
+
+ninja_required_version = 1.5.1
+builddir=build/
+rule coffee
+  command = coffee -- $in -- $out
+  description = $in
+rule elm
+  command = elm-make $in --yes --output $out
+  description = $command
+rule copy
+  command = cp $in $out
+  description = $command
+rule remove
+  command = rm -rf $in
+  description = $command
+build build/elm.js: elm src/Main.elm src/Pcb.elm
+build build/index.html: copy src/index.html
+build build/images/favicon.png: copy src/images/favicon.png
+build build/images/logo.png: copy src/images/logo.png
+build build/boards/DangerousPrototypes/BusPirate/1click-info.yaml: copy boards/DangerousPrototypes/BusPirate/1click-info.yaml
+build build/boards/DangerousPrototypes/BusPirate/1clickBOM.tsv: copy boards/DangerousPrototypes/BusPirate/1clickBOM.tsv
+build build/boards/DangerousPrototypes/BusPirate/cad/BusPirate-v3.6-SSOP.brd: copy boards/DangerousPrototypes/BusPirate/cad/BusPirate-v3.6-SSOP.brd
+build build/boards/DangerousPrototypes/BusPirate/cad/BusPirate-v3.6-SSOP.sch: copy boards/DangerousPrototypes/BusPirate/cad/BusPirate-v3.6-SSOP.sch
+build build/boards/DangerousPrototypes/BusPirate/gerbers/BusPirate-v3.6-SSOP.cmp: copy boards/DangerousPrototypes/BusPirate/gerbers/BusPirate-v3.6-SSOP.cmp
+build build/boards/DangerousPrototypes/BusPirate/gerbers/BusPirate-v3.6-SSOP.drd: copy boards/DangerousPrototypes/BusPirate/gerbers/BusPirate-v3.6-SSOP.drd
+build build/boards/DangerousPrototypes/BusPirate/gerbers/BusPirate-v3.6-SSOP.dri: copy boards/DangerousPrototypes/BusPirate/gerbers/BusPirate-v3.6-SSOP.dri
+build build/boards/DangerousPrototypes/BusPirate/gerbers/BusPirate-v3.6-SSOP.gko: copy boards/DangerousPrototypes/BusPirate/gerbers/BusPirate-v3.6-SSOP.gko
+build build/boards/DangerousPrototypes/BusPirate/gerbers/BusPirate-v3.6-SSOP.gpi: copy boards/DangerousPrototypes/BusPirate/gerbers/BusPirate-v3.6-SSOP.gpi
+build build/boards/DangerousPrototypes/BusPirate/gerbers/BusPirate-v3.6-SSOP.plc: copy boards/DangerousPrototypes/BusPirate/gerbers/BusPirate-v3.6-SSOP.plc
+build build/boards/DangerousPrototypes/BusPirate/gerbers/BusPirate-v3.6-SSOP.sol: copy boards/DangerousPrototypes/BusPirate/gerbers/BusPirate-v3.6-SSOP.sol
+build build/boards/DangerousPrototypes/BusPirate/gerbers/BusPirate-v3.6-SSOP.stc: copy boards/DangerousPrototypes/BusPirate/gerbers/BusPirate-v3.6-SSOP.stc
+build build/boards/DangerousPrototypes/BusPirate/gerbers/BusPirate-v3.6-SSOP.sts: copy boards/DangerousPrototypes/BusPirate/gerbers/BusPirate-v3.6-SSOP.sts
+build build/boards/OculusVR/RiftDK1/1click-info.yaml: copy boards/OculusVR/RiftDK1/1click-info.yaml
+build build/boards/OculusVR/RiftDK1/README.md: copy boards/OculusVR/RiftDK1/README.md
+build build/boards/OculusVR/RiftDK1/TRACKER_V2_ASSY.pdf: copy boards/OculusVR/RiftDK1/TRACKER_V2_ASSY.pdf
+build build/boards/OculusVR/RiftDK1/TRACKER_V2_BOM.xlsx: copy boards/OculusVR/RiftDK1/TRACKER_V2_BOM.xlsx
+build build/boards/OculusVR/RiftDK1/TRACKER_V2_SCH.pdf: copy boards/OculusVR/RiftDK1/TRACKER_V2_SCH.pdf
+build build/boards/OculusVR/RiftDK1/cad/TRACKER.PRJPCB: copy boards/OculusVR/RiftDK1/cad/TRACKER.PRJPCB
+build build/boards/OculusVR/RiftDK1/cad/TRACKER.PRJPCBStructure: copy boards/OculusVR/RiftDK1/cad/TRACKER.PRJPCBStructure
+build build/boards/OculusVR/RiftDK1/cad/TRACKER.PcbDoc: copy boards/OculusVR/RiftDK1/cad/TRACKER.PcbDoc
+build build/boards/OculusVR/RiftDK1/cad/TRACKER.PcbLib: copy boards/OculusVR/RiftDK1/cad/TRACKER.PcbLib
+build build/boards/OculusVR/RiftDK1/cad/TRACKER.SchDoc: copy boards/OculusVR/RiftDK1/cad/TRACKER.SchDoc
+build build/boards/OculusVR/RiftDK1/cad/TRACKER.SchLib: copy boards/OculusVR/RiftDK1/cad/TRACKER.SchLib
+build build/boards/OculusVR/RiftDK1/gerbers/TRACKER.DRR: copy boards/OculusVR/RiftDK1/gerbers/TRACKER.DRR
+build build/boards/OculusVR/RiftDK1/gerbers/TRACKER.EXTREP: copy boards/OculusVR/RiftDK1/gerbers/TRACKER.EXTREP
+build build/boards/OculusVR/RiftDK1/gerbers/TRACKER.G1: copy boards/OculusVR/RiftDK1/gerbers/TRACKER.G1
+build build/boards/OculusVR/RiftDK1/gerbers/TRACKER.G2: copy boards/OculusVR/RiftDK1/gerbers/TRACKER.G2
+build build/boards/OculusVR/RiftDK1/gerbers/TRACKER.GBL: copy boards/OculusVR/RiftDK1/gerbers/TRACKER.GBL
+build build/boards/OculusVR/RiftDK1/gerbers/TRACKER.GBO: copy boards/OculusVR/RiftDK1/gerbers/TRACKER.GBO
+build build/boards/OculusVR/RiftDK1/gerbers/TRACKER.GBP: copy boards/OculusVR/RiftDK1/gerbers/TRACKER.GBP
+build build/boards/OculusVR/RiftDK1/gerbers/TRACKER.GBS: copy boards/OculusVR/RiftDK1/gerbers/TRACKER.GBS
+build build/boards/OculusVR/RiftDK1/gerbers/TRACKER.GD1: copy boards/OculusVR/RiftDK1/gerbers/TRACKER.GD1
+build build/boards/OculusVR/RiftDK1/gerbers/TRACKER.GG1: copy boards/OculusVR/RiftDK1/gerbers/TRACKER.GG1
+build build/boards/OculusVR/RiftDK1/gerbers/TRACKER.GKO: copy boards/OculusVR/RiftDK1/gerbers/TRACKER.GKO
+build build/boards/OculusVR/RiftDK1/gerbers/TRACKER.GPB: copy boards/OculusVR/RiftDK1/gerbers/TRACKER.GPB
+build build/boards/OculusVR/RiftDK1/gerbers/TRACKER.GPT: copy boards/OculusVR/RiftDK1/gerbers/TRACKER.GPT
+build build/boards/OculusVR/RiftDK1/gerbers/TRACKER.GTL: copy boards/OculusVR/RiftDK1/gerbers/TRACKER.GTL
+build build/boards/OculusVR/RiftDK1/gerbers/TRACKER.GTO: copy boards/OculusVR/RiftDK1/gerbers/TRACKER.GTO
+build build/boards/OculusVR/RiftDK1/gerbers/TRACKER.GTP: copy boards/OculusVR/RiftDK1/gerbers/TRACKER.GTP
+build build/boards/OculusVR/RiftDK1/gerbers/TRACKER.GTS: copy boards/OculusVR/RiftDK1/gerbers/TRACKER.GTS
+build build/boards/OculusVR/RiftDK1/gerbers/TRACKER.REP: copy boards/OculusVR/RiftDK1/gerbers/TRACKER.REP
+build build/boards/OculusVR/RiftDK1/gerbers/TRACKER.TXT: copy boards/OculusVR/RiftDK1/gerbers/TRACKER.TXT
+build build/boards/OculusVR/RiftDK1/gerbers/TRACKER.apr: copy boards/OculusVR/RiftDK1/gerbers/TRACKER.apr
+build build/boards/OculusVR/RiftDK1/gerbers/TRACKER_V2_P&P.csv: copy boards/OculusVR/RiftDK1/gerbers/TRACKER_V2_P&P.csv
+build build/boards/arduino/uno/1click-info.yaml: copy boards/arduino/uno/1click-info.yaml
+build build/boards/arduino/uno/bom/20150523_untitled_bom.csv: copy boards/arduino/uno/bom/20150523_untitled_bom.csv
+build build/boards/arduino/uno/bom/arduino_Uno_Rev3-02-TH.txt: copy boards/arduino/uno/bom/arduino_Uno_Rev3-02-TH.txt
+build build/boards/arduino/uno/cad/arduino_Uno_Rev3-02-TH.brd: copy boards/arduino/uno/cad/arduino_Uno_Rev3-02-TH.brd
+build build/boards/arduino/uno/cad/arduino_Uno_Rev3-02-TH.sch: copy boards/arduino/uno/cad/arduino_Uno_Rev3-02-TH.sch
+build build/boards/arduino/uno/gerbers/arduino_Uno_Rev3-02-TH.cmp: copy boards/arduino/uno/gerbers/arduino_Uno_Rev3-02-TH.cmp
+build build/boards/arduino/uno/gerbers/arduino_Uno_Rev3-02-TH.drd: copy boards/arduino/uno/gerbers/arduino_Uno_Rev3-02-TH.drd
+build build/boards/arduino/uno/gerbers/arduino_Uno_Rev3-02-TH.dri: copy boards/arduino/uno/gerbers/arduino_Uno_Rev3-02-TH.dri
+build build/boards/arduino/uno/gerbers/arduino_Uno_Rev3-02-TH.gko: copy boards/arduino/uno/gerbers/arduino_Uno_Rev3-02-TH.gko
+build build/boards/arduino/uno/gerbers/arduino_Uno_Rev3-02-TH.gpi: copy boards/arduino/uno/gerbers/arduino_Uno_Rev3-02-TH.gpi
+build build/boards/arduino/uno/gerbers/arduino_Uno_Rev3-02-TH.plc: copy boards/arduino/uno/gerbers/arduino_Uno_Rev3-02-TH.plc
+build build/boards/arduino/uno/gerbers/arduino_Uno_Rev3-02-TH.sol: copy boards/arduino/uno/gerbers/arduino_Uno_Rev3-02-TH.sol
+build build/boards/arduino/uno/gerbers/arduino_Uno_Rev3-02-TH.stc: copy boards/arduino/uno/gerbers/arduino_Uno_Rev3-02-TH.stc
+build build/boards/arduino/uno/gerbers/arduino_Uno_Rev3-02-TH.sts: copy boards/arduino/uno/gerbers/arduino_Uno_Rev3-02-TH.sts
+build build/boards/mchck/mchck/1click-info.yaml: copy boards/mchck/mchck/1click-info.yaml
+build build/boards/mchck/mchck/cad/LICENSE: copy boards/mchck/mchck/cad/LICENSE
+build build/boards/mchck/mchck/cad/LICENSE.HOWTO: copy boards/mchck/mchck/cad/LICENSE.HOWTO
+build build/boards/mchck/mchck/cad/MK20LF.lib: copy boards/mchck/mchck/cad/MK20LF.lib
+build build/boards/mchck/mchck/cad/Makefile: copy boards/mchck/mchck/cad/Makefile
+build build/boards/mchck/mchck/cad/NUC120_QFN48.lib: copy boards/mchck/mchck/cad/NUC120_QFN48.lib
+build build/boards/mchck/mchck/cad/README.md: copy boards/mchck/mchck/cad/README.md
+build build/boards/mchck/mchck/cad/STM32L15x_QFN48.lib: copy boards/mchck/mchck/cad/STM32L15x_QFN48.lib
+build build/boards/mchck/mchck/cad/SparkFun.lib: copy boards/mchck/mchck/cad/SparkFun.lib
+build build/boards/mchck/mchck/cad/adafruit.lib: copy boards/mchck/mchck/cad/adafruit.lib
+build build/boards/mchck/mchck/cad/charger.sch: copy boards/mchck/mchck/cad/charger.sch
+build build/boards/mchck/mchck/cad/cn3063.lib: copy boards/mchck/mchck/cad/cn3063.lib
+build build/boards/mchck/mchck/cad/composite-board.sh: copy boards/mchck/mchck/cad/composite-board.sh
+build build/boards/mchck/mchck/cad/conn_15.lib: copy boards/mchck/mchck/cad/conn_15.lib
+build build/boards/mchck/mchck/cad/conn_16.lib: copy boards/mchck/mchck/cad/conn_16.lib
+build build/boards/mchck/mchck/cad/conn_18.lib: copy boards/mchck/mchck/cad/conn_18.lib
+build build/boards/mchck/mchck/cad/inductor_select.lib: copy boards/mchck/mchck/cad/inductor_select.lib
+build build/boards/mchck/mchck/cad/kicad.rb: copy boards/mchck/mchck/cad/kicad.rb
+build build/boards/mchck/mchck/cad/logo.lib: copy boards/mchck/mchck/cad/logo.lib
+build build/boards/mchck/mchck/cad/mchck.cmp: copy boards/mchck/mchck/cad/mchck.cmp
+build build/boards/mchck/mchck/cad/mchck.drl: copy boards/mchck/mchck/cad/mchck.drl
+build build/boards/mchck/mchck/cad/mchck.kicad_pcb: copy boards/mchck/mchck/cad/mchck.kicad_pcb
+build build/boards/mchck/mchck/cad/mchck.mod: copy boards/mchck/mchck/cad/mchck.mod
+build build/boards/mchck/mchck/cad/mchck.net: copy boards/mchck/mchck/cad/mchck.net
+build build/boards/mchck/mchck/cad/mchck.pro: copy boards/mchck/mchck/cad/mchck.pro
+build build/boards/mchck/mchck/cad/mchck.sch: copy boards/mchck/mchck/cad/mchck.sch
+build build/boards/mchck/mchck/cad/mcp1702.lib: copy boards/mchck/mchck/cad/mcp1702.lib
+build build/boards/mchck/mchck/cad/mcp73831.lib: copy boards/mchck/mchck/cad/mcp73831.lib
+build build/boards/mchck/mchck/cad/mcu.sch: copy boards/mchck/mchck/cad/mcu.sch
+build build/boards/mchck/mchck/cad/mic5205.lib: copy boards/mchck/mchck/cad/mic5205.lib
+build build/boards/mchck/mchck/cad/microsd.lib: copy boards/mchck/mchck/cad/microsd.lib
+build build/boards/mchck/mchck/cad/mounthole.lib: copy boards/mchck/mchck/cad/mounthole.lib
+build build/boards/mchck/mchck/cad/multireg.lib: copy boards/mchck/mchck/cad/multireg.lib
+build build/boards/mchck/mchck/cad/netname-silkscreen.rb: copy boards/mchck/mchck/cad/netname-silkscreen.rb
+build build/boards/mchck/mchck/cad/nuc120ld.lib: copy boards/mchck/mchck/cad/nuc120ld.lib
+build build/boards/mchck/mchck/cad/nuc120ldq48.lib: copy boards/mchck/mchck/cad/nuc120ldq48.lib
+build build/boards/mchck/mchck/cad/power.sch: copy boards/mchck/mchck/cad/power.sch
+build build/boards/mchck/mchck/cad/renumber.rb: copy boards/mchck/mchck/cad/renumber.rb
+build build/boards/mchck/mchck/cad/tac_switchsmd_evqp2.lib: copy boards/mchck/mchck/cad/tac_switchsmd_evqp2.lib
+build build/boards/mchck/mchck/cad/usb.lib: copy boards/mchck/mchck/cad/usb.lib
+build build/boards/mchck/mchck/cad/usb.sch: copy boards/mchck/mchck/cad/usb.sch
+build build/boards/mchck/mchck/cad/vdda.lib: copy boards/mchck/mchck/cad/vdda.lib
+build build/boards/mchck/mchck/cad/vssa.lib: copy boards/mchck/mchck/cad/vssa.lib
+build build/boards/mchck/mchck/gerbers/mchck-B_Cu.gbl: copy boards/mchck/mchck/gerbers/mchck-B_Cu.gbl
+build build/boards/mchck/mchck/gerbers/mchck-B_Mask.gbs: copy boards/mchck/mchck/gerbers/mchck-B_Mask.gbs
+build build/boards/mchck/mchck/gerbers/mchck-B_SilkS.gbo: copy boards/mchck/mchck/gerbers/mchck-B_SilkS.gbo
+build build/boards/mchck/mchck/gerbers/mchck-Edge_Cuts.gbr: copy boards/mchck/mchck/gerbers/mchck-Edge_Cuts.gbr
+build build/boards/mchck/mchck/gerbers/mchck-F_Cu.gtl: copy boards/mchck/mchck/gerbers/mchck-F_Cu.gtl
+build build/boards/mchck/mchck/gerbers/mchck-F_Mask.gts: copy boards/mchck/mchck/gerbers/mchck-F_Mask.gts
+build build/boards/mchck/mchck/gerbers/mchck-F_SilkS.gto: copy boards/mchck/mchck/gerbers/mchck-F_SilkS.gto
+build build/boards/mchck/mchck/gerbers/mchck.drl: copy boards/mchck/mchck/gerbers/mchck.drl
+build build/boards/mchck/mchck/mchck-gerbers/mchck-B_Cu.gbl: copy boards/mchck/mchck/mchck-gerbers/mchck-B_Cu.gbl
+build build/boards/mchck/mchck/mchck-gerbers/mchck-B_Mask.gbs: copy boards/mchck/mchck/mchck-gerbers/mchck-B_Mask.gbs
+build build/boards/mchck/mchck/mchck-gerbers/mchck-B_SilkS.gbo: copy boards/mchck/mchck/mchck-gerbers/mchck-B_SilkS.gbo
+build build/boards/mchck/mchck/mchck-gerbers/mchck-Edge_Cuts.gbr: copy boards/mchck/mchck/mchck-gerbers/mchck-Edge_Cuts.gbr
+build build/boards/mchck/mchck/mchck-gerbers/mchck-F_Cu.gtl: copy boards/mchck/mchck/mchck-gerbers/mchck-F_Cu.gtl
+build build/boards/mchck/mchck/mchck-gerbers/mchck-F_Mask.gts: copy boards/mchck/mchck/mchck-gerbers/mchck-F_Mask.gts
+build build/boards/mchck/mchck/mchck-gerbers/mchck-F_SilkS.gto: copy boards/mchck/mchck/mchck-gerbers/mchck-F_SilkS.gto
+build build/boards/mchck/mchck/mchck-gerbers/mchck.drl: copy boards/mchck/mchck/mchck-gerbers/mchck.drl
+build build/boards.json: coffee tasks/makeBoards.coffee boards/DangerousPrototypes/BusPirate/1click-info.yaml boards/OculusVR/RiftDK1/1click-info.yaml boards/arduino/uno/1click-info.yaml boards/mchck/mchck/1click-info.yaml
+build build/boards/DangerousPrototypes/BusPirate/images/thumb.png /tmp/1clickBOM-build/boards/DangerousPrototypes/BusPirate/top.svg: coffee tasks/makeThumbs.coffee boards/DangerousPrototypes/BusPirate/1click-info.yaml boards/DangerousPrototypes/BusPirate/gerbers/BusPirate-v3.6-SSOP.cmp boards/DangerousPrototypes/BusPirate/gerbers/BusPirate-v3.6-SSOP.drd boards/DangerousPrototypes/BusPirate/gerbers/BusPirate-v3.6-SSOP.dri boards/DangerousPrototypes/BusPirate/gerbers/BusPirate-v3.6-SSOP.gko boards/DangerousPrototypes/BusPirate/gerbers/BusPirate-v3.6-SSOP.gpi boards/DangerousPrototypes/BusPirate/gerbers/BusPirate-v3.6-SSOP.plc boards/DangerousPrototypes/BusPirate/gerbers/BusPirate-v3.6-SSOP.sol boards/DangerousPrototypes/BusPirate/gerbers/BusPirate-v3.6-SSOP.stc boards/DangerousPrototypes/BusPirate/gerbers/BusPirate-v3.6-SSOP.sts
+build build/boards/OculusVR/RiftDK1/images/thumb.png /tmp/1clickBOM-build/boards/OculusVR/RiftDK1/top.svg: coffee tasks/makeThumbs.coffee boards/OculusVR/RiftDK1/1click-info.yaml boards/OculusVR/RiftDK1/gerbers/TRACKER.DRR boards/OculusVR/RiftDK1/gerbers/TRACKER.EXTREP boards/OculusVR/RiftDK1/gerbers/TRACKER.G1 boards/OculusVR/RiftDK1/gerbers/TRACKER.G2 boards/OculusVR/RiftDK1/gerbers/TRACKER.GBL boards/OculusVR/RiftDK1/gerbers/TRACKER.GBO boards/OculusVR/RiftDK1/gerbers/TRACKER.GBP boards/OculusVR/RiftDK1/gerbers/TRACKER.GBS boards/OculusVR/RiftDK1/gerbers/TRACKER.GD1 boards/OculusVR/RiftDK1/gerbers/TRACKER.GG1 boards/OculusVR/RiftDK1/gerbers/TRACKER.GKO boards/OculusVR/RiftDK1/gerbers/TRACKER.GPB boards/OculusVR/RiftDK1/gerbers/TRACKER.GPT boards/OculusVR/RiftDK1/gerbers/TRACKER.GTL boards/OculusVR/RiftDK1/gerbers/TRACKER.GTO boards/OculusVR/RiftDK1/gerbers/TRACKER.GTP boards/OculusVR/RiftDK1/gerbers/TRACKER.GTS boards/OculusVR/RiftDK1/gerbers/TRACKER.REP boards/OculusVR/RiftDK1/gerbers/TRACKER.TXT boards/OculusVR/RiftDK1/gerbers/TRACKER.apr boards/OculusVR/RiftDK1/gerbers/TRACKER_V2_P&P.csv
+build build/boards/arduino/uno/images/thumb.png /tmp/1clickBOM-build/boards/arduino/uno/top.svg: coffee tasks/makeThumbs.coffee boards/arduino/uno/1click-info.yaml boards/arduino/uno/gerbers/arduino_Uno_Rev3-02-TH.cmp boards/arduino/uno/gerbers/arduino_Uno_Rev3-02-TH.drd boards/arduino/uno/gerbers/arduino_Uno_Rev3-02-TH.dri boards/arduino/uno/gerbers/arduino_Uno_Rev3-02-TH.gko boards/arduino/uno/gerbers/arduino_Uno_Rev3-02-TH.gpi boards/arduino/uno/gerbers/arduino_Uno_Rev3-02-TH.plc boards/arduino/uno/gerbers/arduino_Uno_Rev3-02-TH.sol boards/arduino/uno/gerbers/arduino_Uno_Rev3-02-TH.stc boards/arduino/uno/gerbers/arduino_Uno_Rev3-02-TH.sts
+build build/boards/mchck/mchck/images/thumb.png /tmp/1clickBOM-build/boards/mchck/mchck/top.svg: coffee tasks/makeThumbs.coffee boards/mchck/mchck/1click-info.yaml boards/mchck/mchck/gerbers/mchck-B_Cu.gbl boards/mchck/mchck/gerbers/mchck-B_Mask.gbs boards/mchck/mchck/gerbers/mchck-B_SilkS.gbo boards/mchck/mchck/gerbers/mchck-Edge_Cuts.gbr boards/mchck/mchck/gerbers/mchck-F_Cu.gtl boards/mchck/mchck/gerbers/mchck-F_Mask.gts boards/mchck/mchck/gerbers/mchck-F_SilkS.gto boards/mchck/mchck/gerbers/mchck.drl
+build clean: remove build/
+build all: phony build/elm.js build/index.html build/images/favicon.png build/images/logo.png build/boards/DangerousPrototypes/BusPirate/1click-info.yaml build/boards/DangerousPrototypes/BusPirate/1clickBOM.tsv build/boards/DangerousPrototypes/BusPirate/cad/BusPirate-v3.6-SSOP.brd build/boards/DangerousPrototypes/BusPirate/cad/BusPirate-v3.6-SSOP.sch build/boards/DangerousPrototypes/BusPirate/gerbers/BusPirate-v3.6-SSOP.cmp build/boards/DangerousPrototypes/BusPirate/gerbers/BusPirate-v3.6-SSOP.drd build/boards/DangerousPrototypes/BusPirate/gerbers/BusPirate-v3.6-SSOP.dri build/boards/DangerousPrototypes/BusPirate/gerbers/BusPirate-v3.6-SSOP.gko build/boards/DangerousPrototypes/BusPirate/gerbers/BusPirate-v3.6-SSOP.gpi build/boards/DangerousPrototypes/BusPirate/gerbers/BusPirate-v3.6-SSOP.plc build/boards/DangerousPrototypes/BusPirate/gerbers/BusPirate-v3.6-SSOP.sol build/boards/DangerousPrototypes/BusPirate/gerbers/BusPirate-v3.6-SSOP.stc build/boards/DangerousPrototypes/BusPirate/gerbers/BusPirate-v3.6-SSOP.sts build/boards/OculusVR/RiftDK1/1click-info.yaml build/boards/OculusVR/RiftDK1/README.md build/boards/OculusVR/RiftDK1/TRACKER_V2_ASSY.pdf build/boards/OculusVR/RiftDK1/TRACKER_V2_BOM.xlsx build/boards/OculusVR/RiftDK1/TRACKER_V2_SCH.pdf build/boards/OculusVR/RiftDK1/cad/TRACKER.PRJPCB build/boards/OculusVR/RiftDK1/cad/TRACKER.PRJPCBStructure build/boards/OculusVR/RiftDK1/cad/TRACKER.PcbDoc build/boards/OculusVR/RiftDK1/cad/TRACKER.PcbLib build/boards/OculusVR/RiftDK1/cad/TRACKER.SchDoc build/boards/OculusVR/RiftDK1/cad/TRACKER.SchLib build/boards/OculusVR/RiftDK1/gerbers/TRACKER.DRR build/boards/OculusVR/RiftDK1/gerbers/TRACKER.EXTREP build/boards/OculusVR/RiftDK1/gerbers/TRACKER.G1 build/boards/OculusVR/RiftDK1/gerbers/TRACKER.G2 build/boards/OculusVR/RiftDK1/gerbers/TRACKER.GBL build/boards/OculusVR/RiftDK1/gerbers/TRACKER.GBO build/boards/OculusVR/RiftDK1/gerbers/TRACKER.GBP build/boards/OculusVR/RiftDK1/gerbers/TRACKER.GBS build/boards/OculusVR/RiftDK1/gerbers/TRACKER.GD1 build/boards/OculusVR/RiftDK1/gerbers/TRACKER.GG1 build/boards/OculusVR/RiftDK1/gerbers/TRACKER.GKO build/boards/OculusVR/RiftDK1/gerbers/TRACKER.GPB build/boards/OculusVR/RiftDK1/gerbers/TRACKER.GPT build/boards/OculusVR/RiftDK1/gerbers/TRACKER.GTL build/boards/OculusVR/RiftDK1/gerbers/TRACKER.GTO build/boards/OculusVR/RiftDK1/gerbers/TRACKER.GTP build/boards/OculusVR/RiftDK1/gerbers/TRACKER.GTS build/boards/OculusVR/RiftDK1/gerbers/TRACKER.REP build/boards/OculusVR/RiftDK1/gerbers/TRACKER.TXT build/boards/OculusVR/RiftDK1/gerbers/TRACKER.apr build/boards/OculusVR/RiftDK1/gerbers/TRACKER_V2_P&P.csv build/boards/arduino/uno/1click-info.yaml build/boards/arduino/uno/bom/20150523_untitled_bom.csv build/boards/arduino/uno/bom/arduino_Uno_Rev3-02-TH.txt build/boards/arduino/uno/cad/arduino_Uno_Rev3-02-TH.brd build/boards/arduino/uno/cad/arduino_Uno_Rev3-02-TH.sch build/boards/arduino/uno/gerbers/arduino_Uno_Rev3-02-TH.cmp build/boards/arduino/uno/gerbers/arduino_Uno_Rev3-02-TH.drd build/boards/arduino/uno/gerbers/arduino_Uno_Rev3-02-TH.dri build/boards/arduino/uno/gerbers/arduino_Uno_Rev3-02-TH.gko build/boards/arduino/uno/gerbers/arduino_Uno_Rev3-02-TH.gpi build/boards/arduino/uno/gerbers/arduino_Uno_Rev3-02-TH.plc build/boards/arduino/uno/gerbers/arduino_Uno_Rev3-02-TH.sol build/boards/arduino/uno/gerbers/arduino_Uno_Rev3-02-TH.stc build/boards/arduino/uno/gerbers/arduino_Uno_Rev3-02-TH.sts build/boards/mchck/mchck/1click-info.yaml build/boards/mchck/mchck/cad/LICENSE build/boards/mchck/mchck/cad/LICENSE.HOWTO build/boards/mchck/mchck/cad/MK20LF.lib build/boards/mchck/mchck/cad/Makefile build/boards/mchck/mchck/cad/NUC120_QFN48.lib build/boards/mchck/mchck/cad/README.md build/boards/mchck/mchck/cad/STM32L15x_QFN48.lib build/boards/mchck/mchck/cad/SparkFun.lib build/boards/mchck/mchck/cad/adafruit.lib build/boards/mchck/mchck/cad/charger.sch build/boards/mchck/mchck/cad/cn3063.lib build/boards/mchck/mchck/cad/composite-board.sh build/boards/mchck/mchck/cad/conn_15.lib build/boards/mchck/mchck/cad/conn_16.lib build/boards/mchck/mchck/cad/conn_18.lib build/boards/mchck/mchck/cad/inductor_select.lib build/boards/mchck/mchck/cad/kicad.rb build/boards/mchck/mchck/cad/logo.lib build/boards/mchck/mchck/cad/mchck.cmp build/boards/mchck/mchck/cad/mchck.drl build/boards/mchck/mchck/cad/mchck.kicad_pcb build/boards/mchck/mchck/cad/mchck.mod build/boards/mchck/mchck/cad/mchck.net build/boards/mchck/mchck/cad/mchck.pro build/boards/mchck/mchck/cad/mchck.sch build/boards/mchck/mchck/cad/mcp1702.lib build/boards/mchck/mchck/cad/mcp73831.lib build/boards/mchck/mchck/cad/mcu.sch build/boards/mchck/mchck/cad/mic5205.lib build/boards/mchck/mchck/cad/microsd.lib build/boards/mchck/mchck/cad/mounthole.lib build/boards/mchck/mchck/cad/multireg.lib build/boards/mchck/mchck/cad/netname-silkscreen.rb build/boards/mchck/mchck/cad/nuc120ld.lib build/boards/mchck/mchck/cad/nuc120ldq48.lib build/boards/mchck/mchck/cad/power.sch build/boards/mchck/mchck/cad/renumber.rb build/boards/mchck/mchck/cad/tac_switchsmd_evqp2.lib build/boards/mchck/mchck/cad/usb.lib build/boards/mchck/mchck/cad/usb.sch build/boards/mchck/mchck/cad/vdda.lib build/boards/mchck/mchck/cad/vssa.lib build/boards/mchck/mchck/gerbers/mchck-B_Cu.gbl build/boards/mchck/mchck/gerbers/mchck-B_Mask.gbs build/boards/mchck/mchck/gerbers/mchck-B_SilkS.gbo build/boards/mchck/mchck/gerbers/mchck-Edge_Cuts.gbr build/boards/mchck/mchck/gerbers/mchck-F_Cu.gtl build/boards/mchck/mchck/gerbers/mchck-F_Mask.gts build/boards/mchck/mchck/gerbers/mchck-F_SilkS.gto build/boards/mchck/mchck/gerbers/mchck.drl build/boards/mchck/mchck/mchck-gerbers/mchck-B_Cu.gbl build/boards/mchck/mchck/mchck-gerbers/mchck-B_Mask.gbs build/boards/mchck/mchck/mchck-gerbers/mchck-B_SilkS.gbo build/boards/mchck/mchck/mchck-gerbers/mchck-Edge_Cuts.gbr build/boards/mchck/mchck/mchck-gerbers/mchck-F_Cu.gtl build/boards/mchck/mchck/mchck-gerbers/mchck-F_Mask.gts build/boards/mchck/mchck/mchck-gerbers/mchck-F_SilkS.gto build/boards/mchck/mchck/mchck-gerbers/mchck.drl build/boards.json build/boards/DangerousPrototypes/BusPirate/images/thumb.png /tmp/1clickBOM-build/boards/DangerousPrototypes/BusPirate/top.svg build/boards/OculusVR/RiftDK1/images/thumb.png /tmp/1clickBOM-build/boards/OculusVR/RiftDK1/top.svg build/boards/arduino/uno/images/thumb.png /tmp/1clickBOM-build/boards/arduino/uno/top.svg build/boards/mchck/mchck/images/thumb.png /tmp/1clickBOM-build/boards/mchck/mchck/top.svg
+default all

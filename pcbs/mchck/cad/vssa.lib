@@ -1,0 +1,17 @@
+EESchema-LIBRARY Version 2.3  Date: Wed 24 Jul 2013 06:41:21 PM CEST
+#encoding utf-8
+#
+# VSSA
+#
+DEF VSSA #PWR 0 0 Y Y 1 F P
+F0 "#PWR" 0 0 30 H I C CNN
+F1 "VSSA" 0 -70 30 H V C CNN
+F2 "" 0 0 60 H V C CNN
+F3 "" 0 0 60 H V C CNN
+DRAW
+P 4 0 1 0  -50 0  0 -50  50 0  -50 0 N
+X VSSA 1 0 0 0 U 30 30 1 1 W N
+ENDDRAW
+ENDDEF
+#
+#End Library
