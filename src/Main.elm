@@ -10,6 +10,8 @@ import Window
 import Debug
 import Json.Decode exposing (..)
 import Graphics.Input exposing (..)
+import CustomGraphics exposing (..)
+import Html
 
 type alias BoardInfo =
     { name        : String
@@ -67,12 +69,7 @@ thumb info =
                     ]
 
         hover = layers
-            [collage w h
-                [ rect (toFloat w) (toFloat h)
-                    |> filled (Color.rgb 240 240 240)
-                , rect (toFloat w) (toFloat h)
-                    |> outlined (solid Color.grey)
-                ]
+            [ roundedRect w h 10 (Color.rgb 200 200 200)
             , img h
             ]
     in customButton (message buttonMB.address ()) (img h) hover hover
@@ -87,10 +84,16 @@ boardView w h boards =
     in container w h midTop rows
 
 searchBarView w h =
-    let bg = collage w h
-            [rect (toFloat w) (toFloat h) |> filled (Color.rgb 240 240 240)]
-        logo = image 163 48 "images/logo.png"
-    in layers [bg, container w h midRight <| flow right [logo, spacer 16 1]]
+        layers
+            [ collage w 100 [rect (toFloat w) 120 |> filled (Color.rgb 0x40 0x40 0x40)]
+            , flow right
+                [ spacer 20 1
+                , flow down
+                    [ spacer 0 20
+                    , image 198 70 "images/logo.png"
+                    ]
+                ]
+            ]
 
 view (w,h) boards =
     flow down

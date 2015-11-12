@@ -14,7 +14,7 @@ rule copy
 rule remove
   command = rm -rf $in
   description = $command
-build build/elm.js: elm src/Main.elm src/Pcb.elm
+build build/elm.js: elm src/CustomGraphics.elm src/Main.elm src/Pcb.elm
 build build/index.html: copy src/index.html
 build build/images/favicon.png: copy src/images/favicon.png
 build build/images/logo.png: copy src/images/logo.png
