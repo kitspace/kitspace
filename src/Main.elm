@@ -12,6 +12,7 @@ import Json.Decode exposing (..)
 import Graphics.Input exposing (..)
 import CustomGraphics exposing (..)
 import Html
+import Html.Attributes
 
 type alias BoardInfo =
     { name        : String
@@ -84,8 +85,13 @@ boardView w h boards =
     in container w h midTop rows
 
 searchBarView w h =
-        layers
-            [ collage w 80 [rect (toFloat w) 120 |> filled (Color.rgb 0x40 0x40 0x40)]
+    let style =
+            Html.Attributes.style
+                [("box-shadow", "0px 0.1em 0.5em #000")]
+    in layers
+            [ Html.toElement w 80
+                <| Html.div [style] [Html.fromElement
+                    <| collage w 80 [rect (toFloat w) 120 |> filled (Color.rgb 0x40 0x40 0x40)]]
             , flow right
                 [ spacer 20 1
                 , flow down

@@ -354,14 +354,6 @@
        y2="418.77588"
        gradientUnits="userSpaceOnUse"
        gradientTransform="translate(37.142857,-31.428571)" />
-    <filter
-       inkscape:collect="always"
-       id="filter4274">
-      <feGaussianBlur
-         inkscape:collect="always"
-         stdDeviation="0.32980936"
-         id="feGaussianBlur4276" />
-    </filter>
     <linearGradient
        inkscape:collect="always"
        xlink:href="#linearGradient4324"
@@ -14235,9 +14227,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.1767767"
-     inkscape:cx="1496.9757"
-     inkscape:cy="326.14583"
+     inkscape:zoom="0.70710678"
+     inkscape:cx="1594.1625"
+     inkscape:cy="670.12875"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -14272,7 +14264,7 @@
      inkscape:groupmode="layer"
      id="layer1">
     <rect
-       style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect6733"
        width="157.99243"
        height="160.28532"
@@ -14289,7 +14281,7 @@
        inkscape:export-xdpi="16.03425"
        inkscape:export-ydpi="16.03425"
        transform="translate(549.52299,35.315524)"
-       style="stroke:#000000;fill:#ffffff;stroke-width:4.00000007">
+       style="stroke:#000000;fill:#ffffff;stroke-width:4.00000006999999957">
       <g
          id="g11125"
          transform="matrix(0,1,-1,0,825.37971,167.97363)"
@@ -14682,7 +14674,7 @@
          inkscape:path-effect="#path-effect4162-8"
          id="path4160-6"
          d="m 452.32836,397.80861 -10,9.99219 -0.0234,148.60156 10.02733,10 -0.004,-168.59375"
-         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:1.00000002;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2.00000003;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
          inkscape:export-filename="/home/kaspar/projects/1clickBOM/PCBhub/src/images/logo.png"
          inkscape:export-xdpi="22.474966"
          inkscape:export-ydpi="22.474966" />
@@ -14820,7 +14812,7 @@
          inkscape:path-effect="#path-effect4162"
          id="path4160"
          d="m 283.70536,397.84768 9.99219,10 148.60156,0.0234 10,-10.02734 -168.59375,0.004"
-         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:1.00000002;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2.00000003;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
          inkscape:export-filename="/home/kaspar/projects/1clickBOM/PCBhub/src/images/logo.png"
          inkscape:export-xdpi="22.474966"
          inkscape:export-ydpi="22.474966" />
@@ -14830,7 +14822,7 @@
          inkscape:path-effect="#path-effect4162-3"
          id="path4160-7"
          d="m 452.3149,566.35553 -9.99219,-10 -148.60156,-0.0234 -10,10.02734 168.59375,-0.004"
-         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:1.00000002;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2.00000003;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
          inkscape:export-filename="/home/kaspar/projects/1clickBOM/PCBhub/src/images/logo.png"
          inkscape:export-xdpi="22.474966"
          inkscape:export-ydpi="22.474966" />
@@ -14840,7 +14832,7 @@
          inkscape:path-effect="#path-effect4162-8-3"
          id="path4160-6-1"
          d="m 283.66444,566.37093 10,-9.99219 0.0234,-148.60156 -10.02733,-10 0.004,168.59375"
-         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:1.00000002;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2.00000003;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
          inkscape:export-filename="/home/kaspar/projects/1clickBOM/PCBhub/src/images/logo.png"
          inkscape:export-xdpi="22.474966"
          inkscape:export-ydpi="22.474966" />
@@ -14851,7 +14843,7 @@
          height="20.329319"
          width="20.329319"
          id="rect4332"
-         style="fill:#e6e6e6;fill-opacity:1;stroke:#000000;stroke-width:1.00000002000000010;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;filter:url(#filter4729)"
+         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2.00000003;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;filter:url(#filter4729)"
          inkscape:export-filename="/home/kaspar/projects/1clickBOM/PCBhub/src/images/logo.png"
          inkscape:export-xdpi="22.474966"
          inkscape:export-ydpi="22.474966" />
