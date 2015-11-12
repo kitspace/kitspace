@@ -85,12 +85,12 @@ boardView w h boards =
 
 searchBarView w h =
         layers
-            [ collage w 100 [rect (toFloat w) 120 |> filled (Color.rgb 0x40 0x40 0x40)]
+            [ collage w 80 [rect (toFloat w) 120 |> filled (Color.rgb 0x40 0x40 0x40)]
             , flow right
                 [ spacer 20 1
                 , flow down
                     [ spacer 0 20
-                    , image 198 70 "images/logo.png"
+                    , image 141 50 "images/logo.png"
                     ]
                 ]
             ]
