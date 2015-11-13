@@ -80,18 +80,18 @@ thumb info =
             ]
     in customButton (message buttonMB.address ()) up hover hover
 
-boardView w h boards =
+boardView w boards =
     let thumbs    = List.map thumb boards
         thumbRows = List.map row [0..nRows]
         nPerRow   = max 1 (w // (dim.thumb.w + 32 + 16))
         nRows     = ceiling (toFloat (length thumbs) / toFloat nPerRow)
-        row n     =
+        row n     = (spacer 16 16) :: (
             List.intersperse (spacer 16 16)
-                <| take nPerRow (drop (n * nPerRow) thumbs)
+                <| take nPerRow (drop (n * nPerRow) thumbs))
         rows = flow down
             <| List.intersperse (spacer 16 16)
                 <| List.map (flow right) thumbRows
-    in container w h midTop rows
+    in rows
 
 searchBarView w h =
     let style =
@@ -117,7 +117,8 @@ view (w,h) boards =
     flow down
         [ searchBarView w 64
         , spacer 1 20
-        , boardView w (h - 64 - 20) boards
+        , boardView w boards
+        , spacer 1 20
         ]
 
 main : Signal Element
