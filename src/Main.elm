@@ -13,6 +13,7 @@ import Graphics.Input exposing (..)
 import CustomGraphics exposing (..)
 import Html
 import Html.Attributes
+import String
 
 type alias BoardInfo =
     { name        : String
@@ -60,7 +61,7 @@ thumb info =
                            , bold   <- True
                            , color  <- Color.rgb 55 55 55
             }
-        <| fromString info.folder
+        <| fromString (String.join "  /  " (String.split "/" info.folder))
         w = dim.thumb.w + 32
         h = dim.thumb.h + dim.thumb.capH + 32
         img height = container w height middle
@@ -68,20 +69,28 @@ thumb info =
                     [ boardImage dim.thumb.w dim.thumb.h info.folder
                     , container dim.thumb.w dim.thumb.capH middle txt
                     ]
-
-        hover = layers
-            [ roundedRect w h 10 (Color.rgb 200 200 200)
+        up = layers
+            [ roundedRect w h 10 (Color.rgb 0xF0 0xF0 0xF0)
             , img h
             ]
-    in customButton (message buttonMB.address ()) (img h) hover hover
+
+        hover = layers
+            [ roundedRect w h 10 (Color.rgb 0xCF 0xCF 0xCF)
+            , img h
+            ]
+    in customButton (message buttonMB.address ()) up hover hover
 
 boardView w h boards =
     let thumbs    = List.map thumb boards
         thumbRows = List.map row [0..nRows]
-        nPerRow   = max 1 (w // (dim.thumb.w + 32))
+        nPerRow   = max 1 (w // (dim.thumb.w + 32 + 16))
         nRows     = ceiling (toFloat (length thumbs) / toFloat nPerRow)
-        row n     = take nPerRow (drop (n * nPerRow) thumbs)
-        rows = flow down <| List.map (flow right) thumbRows
+        row n     =
+            List.intersperse (spacer 16 16)
+                <| take nPerRow (drop (n * nPerRow) thumbs)
+        rows = flow down
+            <| List.intersperse (spacer 16 16)
+                <| List.map (flow right) thumbRows
     in container w h midTop rows
 
 searchBarView w h =
@@ -90,8 +99,11 @@ searchBarView w h =
                 [("box-shadow", "0px 0.1em 0.5em #000")]
     in layers
             [ Html.toElement w 80
-                <| Html.div [style] [Html.fromElement
-                    <| collage w 80 [rect (toFloat w) 120 |> filled (Color.rgb 0x40 0x40 0x40)]]
+                <| Html.div [style]
+                [ Html.fromElement
+                    <| collage w 80
+                        [rect (toFloat w) 120 |> filled (Color.rgb 0x40 0x40 0x40)]
+                ]
             , flow right
                 [ spacer 20 1
                 , flow down
