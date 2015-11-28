@@ -1,10 +1,11 @@
 fs           = require 'fs'
 globule      = require('globule')
 path         = require('path')
-boardBuilder = require('svgerber-board-builder')
+gerberToSvg  = require('gerber-to-svg')
 svg2png      = require('svg2png')
 yaml         = require('js-yaml')
 {checkArgs}  = require('./utils/utils')
+boardBuilder = require('./utils/boardBuilder')
 
 getThumbPath = (folder) ->
 
@@ -22,13 +23,7 @@ else
     {deps, targets} = checkArgs(process.argv)
     png = targets[0]
     svgs = targets[1..]
-    layers = []
-    for p in deps[1..]
-        layers.push({filename: path.basename(p)
-          , gerber:fs.readFileSync(p, 'utf8')})
     info = yaml.safeLoad(fs.readFileSync(deps[0]))
-    svg = boardBuilder(layers, info.rendering)
-    top = fs.openSync(svgs[0], 'w')
-    fs.writeSync(top, svg.top)
-    fs.closeSync(top)
+    stackup = boardBuilder(deps[1..], info.rendering)
+    fs.writeFileSync(svgs[0], gerberToSvg(stackup.top))
     svg2png svgs[0], png, {width:300, height:225}, () ->
