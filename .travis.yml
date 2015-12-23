@@ -2,10 +2,9 @@ language: coffeescript
 sudo: required
 before_install:
   - sudo apt-get update -qq
-  - sudo apt-get build-dep -y ninja
+  - sudo apt-get install ninja-build
 script:
   - npm install
-  - npm install ninja-build
   - export PATH=$PATH:$(pwd)/node_modules/.bin
   - ./configure.coffee
   - ninja
