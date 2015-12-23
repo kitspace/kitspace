@@ -1,0 +1,4 @@
+language: coffeescript
+# command to run tests
+script:
+  - ninja
