@@ -108,7 +108,7 @@ searchBarView w h =
                 [ spacer 20 1
                 , flow down
                     [ spacer 0 20
-                    , image 141 50 "images/logo.png"
+                    , image 137 50 "images/logo.png"
                     ]
                 ]
             ]
