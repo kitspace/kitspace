@@ -14228,8 +14228,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.70710678"
-     inkscape:cx="1594.1625"
-     inkscape:cy="670.12875"
+     inkscape:cx="992.80545"
+     inkscape:cy="607.19384"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -14851,8 +14851,8 @@
     <text
        xml:space="preserve"
        style="font-size:112px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:-5px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Sans"
-       x="1040.9865"
-       y="559.36218"
+       x="1069.2708"
+       y="557.948"
        id="text9055"
        sodipodi:linespacing="125%"
        inkscape:export-filename="/home/kaspar/projects/1clickBOM/PCBhub/src/images/logo.png"
@@ -14860,10 +14860,9 @@
        inkscape:export-ydpi="16.03425"><tspan
          sodipodi:role="line"
          id="tspan9057"
-         x="1040.9865"
-         y="559.36218"
-         style="font-size:112px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;letter-spacing:0px;fill:#ffffff;font-family:Droid Sans;-inkscape-font-specification:Droid Sans Bold"
-         dx="0">1clickBOM</tspan></text>
+         x="1069.2708"
+         y="557.948"
+         style="font-size:112px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;letter-spacing:0px;fill:#ffffff;font-family:Droid Sans;-inkscape-font-specification:Droid Sans Bold">kitnic.me</tspan></text>
   </g>
   <g
      inkscape:groupmode="layer"
