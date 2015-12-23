@@ -6,5 +6,7 @@ before_install:
 script:
   - npm install
   - export PATH=$PATH:$(pwd)/node_modules/.bin
+  - wget https://github.com/ninja-build/ninja/releases/download/v1.6.0/ninja-linux.zip
+  - unzip ninja-linux.zip
   - ./configure.coffee
-  - ninja
+  - ./ninja
