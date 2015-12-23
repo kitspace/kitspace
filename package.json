@@ -15,8 +15,7 @@
     "pcb-stackup": "0.0.3",
     "process": "^0.11.1",
     "source-map-support": "^0.3.2",
-    "svg2png": "file:module_src/svg2png",
-    "svgerber-board-builder": "file:module_src/svgerber-board-builder"
+    "svg2png": "file:module_src/svg2png"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
