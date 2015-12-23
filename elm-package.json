@@ -1,16 +1,16 @@
 {
     "version": "1.0.0",
     "summary": "helpful summary of your project, less than 80 characters",
-    "repository": "https://github.com/monostable/kitnic.me",
-    "license": "BSD3",
+    "repository": "https://github.com/monostable/kitnic.me.git",
+    "license": "CPAL",
     "source-directories": [
-        "src"
+        "."
     ],
     "exposed-modules": [],
     "dependencies": {
-        "elm-lang/core": "2.0.1 <= v < 3.0.0",
-        "evancz/elm-html": "3.0.0 <= v < 4.0.0",
-        "evancz/elm-http": "1.0.0 <= v < 2.0.0"
+        "elm-lang/core": "3.0.0 <= v < 4.0.0",
+        "evancz/elm-html": "4.0.2 <= v < 5.0.0",
+        "evancz/elm-http": "3.0.0 <= v < 4.0.0"
     },
-    "elm-version": "0.15.0 <= v < 0.16.0"
+    "elm-version": "0.16.0 <= v < 0.17.0"
 }

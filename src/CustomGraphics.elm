@@ -11,7 +11,7 @@ import Color
 import Signal
 
 {-| An elliptical arc with the given center, radii and angle interval. -}
-arc : (Float, Float) -> (Float, Float) -> (Float, Float) -> Shape
+arc : (Float, Float) -> (Float, Float) -> (Float, Float) -> List (Float, Float)
 arc (cx, cy) (a, b) (startAngle, endAngle) =
   let n = 50
       t = (endAngle - startAngle) / n
@@ -44,4 +44,4 @@ roundedRectShape side  w h r =
            else [(0,hh),(hw,hh),(hw,0)]
       dd = if d then (arc (hw-r, 0-hh+r) (r, r) (0 |> degrees, -90 |> degrees))
            else [(hw,0),(hw,-hh),(0,-hh)]
-  in aa ++ bb ++ cc ++ dd
+  in polygon (aa ++ bb ++ cc ++ dd)

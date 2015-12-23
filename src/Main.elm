@@ -57,9 +57,9 @@ boardImage w h folder =
 thumb info =
     let txt = centered
         <| Text.style
-            { defaultStyle | height <- Just 16
-                           , bold   <- True
-                           , color  <- Color.rgb 55 55 55
+            { defaultStyle | height = Just 16
+                           , bold   = True
+                           , color  = Color.rgb 55 55 55
             }
         <| fromString (String.join "  /  " (String.split "/" info.folder))
         w = dim.thumb.w + 32

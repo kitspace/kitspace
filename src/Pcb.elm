@@ -24,9 +24,9 @@ boardView w h =
 titleView w h =
     let txt = leftAligned
         <| style
-            {defaultStyle | height <- Just 24
-                          , bold <- True
-                          , color <- Color.rgb 100 100 100
+            {defaultStyle | height = Just 24
+                          , bold   = True
+                          , color  = Color.rgb 100 100 100
             }
         <| fromString board
         bg = collage w h [rect (toFloat w) (toFloat h) |> filled (Color.rgb 240 240 240)]
