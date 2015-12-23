@@ -1,7 +1,0 @@
-name: Arduino UNO
-description: The Arduino Uno is a microcontroller board based on the ATmega328.
-site: http://www.arduino.cc/en/Main/ArduinoBoardUno
-rendering:
-    solderMask: blue
-    copperFinish: hasl
-    silkScreen: white

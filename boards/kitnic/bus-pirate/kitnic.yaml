@@ -1,8 +1,0 @@
-name: Bus Pirate
-description: The Bus Pirate is an open source hacker multi-tool that talks to electronic stuff.
-version: 3.6-SSOP
-site: http://dangerousprototypes.com/docs/Bus_Pirate
-rendering:
-    solderMask: red
-    copperFinish: gold
-    silkScreen: white
