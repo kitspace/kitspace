@@ -11,12 +11,12 @@ getThumbPath = (folder) ->
 
 if require.main != module
     module.exports = (folder) ->
-        deps = ["#{folder}/1click-info.yaml"]
+        deps = ["#{folder}/kitnic.yaml"]
         deps = deps.concat(globule.find("#{folder}/gerbers/*"))
         imageDir = folder.replace('boards', 'build/boards') + '/images'
         targets = [
             "#{imageDir}/thumb.png"
-            "/tmp/1clickBOM-build/#{folder}/top.svg"
+            "/tmp/kitnic-build/#{folder}/top.svg"
         ]
         return {deps:deps, targets:targets}
 else

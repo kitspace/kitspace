@@ -13,7 +13,7 @@ fs.readdir boardDir, (err, files) ->
         ps.exit(1)
 
     for dir in files
-        path = "#{boardDir}/#{dir}/info.yaml"
+        path = "#{boardDir}/#{dir}/kitnic.yaml"
         try
             doc = yaml.safeLoad(fs.readFileSync(path))
         catch e
@@ -25,12 +25,9 @@ fs.readdir boardDir, (err, files) ->
             ps.exit(2)
         doc.folder = dir
         doc = correctTypes(doc)
-        if doc.name == ""
+        if doc.name == ''
             console.log("'#{path}' needs a name property")
             ps.exit(3)
-        else if doc.version == ""
-            console.log("'#{path}' needs a version property")
-            ps.exit(4)
         boards.push(doc)
     boardJson = fs.openSync(boardJsonPath, 'w')
     fs.write(boardJson, JSON.stringify(boards))
@@ -39,13 +36,12 @@ fs.readdir boardDir, (err, files) ->
 
 correctTypes = (boardInfo) ->
     boardInfoWithEmpty =
-        { name        : ""
-        , folder      : ""
-        , description : ""
-        , author      : ""
-        , version     : ""
-        , site        : ""
-        , license     : ""
+        { name        : ''
+        , folder      : ''
+        , description : ''
+        , author      : ''
+        , site        : ''
+        , license     : ''
         }
     for prop of boardInfoWithEmpty
         if (boardInfo.hasOwnProperty(prop))

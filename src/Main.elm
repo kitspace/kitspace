@@ -20,19 +20,17 @@ type alias BoardInfo =
     , folder      : String
     , description : String
     , author      : String
-    , version     : String
     , site        : String
     , license     : String
     }
 
 boardDecoder : Decoder BoardInfo
 boardDecoder =
-    object7 BoardInfo
+    object6 BoardInfo
         ("name"        := string)
         ("folder"      := string)
         ("description" := string)
         ("author"      := string)
-        ("version"     := string)
         ("site"        := string)
         ("license"     := string)
 

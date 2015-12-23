@@ -25,7 +25,7 @@ images = globule.find('src/images/*')
 for f in html.concat(images)
     ninja.edge(f.replace('src','build')).from(f).using('copy')
 
-boardFolders = globule.find('boards/**/1click-info.yaml')
+boardFolders = globule.find('boards/**/kitnic.yaml')
     .map((f) -> path.dirname(f))
 
 for f in globule.find('boards/**/*', {filter:'isFile'})
