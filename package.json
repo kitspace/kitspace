@@ -5,6 +5,7 @@
   "main": "",
   "devDependencies": {
     "coffee-script": "^1.9.2",
+    "elm": "^0.16.0",
     "gerber-to-svg": "^0.4.2",
     "globule": "^0.2.0",
     "http-server": "^0.8.0",
