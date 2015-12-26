@@ -9,7 +9,7 @@ exports.checkArgs = (argv) ->
         console.error("task filename is not in argv")
         process.exit(1)
     sepIndex = argv.indexOf('--')
-    if (sepIndex <= 3)
+    if (sepIndex <= 2)
         console.error('no seperation of deps and targets')
         process.exit(1)
     deps = argv[2..(sepIndex - 1)]

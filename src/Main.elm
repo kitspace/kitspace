@@ -16,21 +16,19 @@ import Html.Attributes
 import String
 
 type alias BoardInfo =
-    { name        : String
-    , folder      : String
+    { id          : String
+    , name        : String
     , description : String
-    , author      : String
     , site        : String
     , license     : String
     }
 
 boardDecoder : Decoder BoardInfo
 boardDecoder =
-    object6 BoardInfo
+    object5 BoardInfo
+        ("id"          := string)
         ("name"        := string)
-        ("folder"      := string)
         ("description" := string)
-        ("author"      := string)
         ("site"        := string)
         ("license"     := string)
 
@@ -49,8 +47,8 @@ buttonMB = Signal.mailbox ()
 
 dim = {thumb = {w = 300, h = 225, capH = 30}}
 
-boardImage w h folder =
-    image w h ("boards/" ++ folder ++ "/images/thumb.png")
+boardImage w h id =
+    image w h ("boards/" ++ id ++ "/images/thumb.png")
 
 thumb info =
     let txt = centered
@@ -59,12 +57,12 @@ thumb info =
                            , bold   = True
                            , color  = Color.rgb 55 55 55
             }
-        <| fromString (String.join "  /  " (String.split "/" info.folder))
+        <| fromString (String.join "  /  " (String.split "/" info.id))
         w = dim.thumb.w + 32
         h = dim.thumb.h + dim.thumb.capH + 32
         img height = container w height middle
                 <| flow down
-                    [ boardImage dim.thumb.w dim.thumb.h info.folder
+                    [ boardImage dim.thumb.w dim.thumb.h info.id
                     , container dim.thumb.w dim.thumb.capH middle txt
                     ]
         up = layers

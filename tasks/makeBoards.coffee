@@ -7,15 +7,13 @@ globule     = require('globule')
 boardDir = 'boards'
 
 if require.main != module
-    exports.deps = globule.find("#{boardDir}/**/kitnic.yaml")
+    exports.deps = [boardDir]
     exports.targets = ['build/boards.json']
 else
     correctTypes = (boardInfo) ->
         boardInfoWithEmpty =
             { name        : ''
-            , folder      : ''
             , description : ''
-            , author      : ''
             , site        : ''
             , license     : ''
             }
@@ -26,12 +24,11 @@ else
 
     {deps, targets} = checkArgs(process.argv)
     boards = []
-    for p in deps
-        doc = correctTypes(yaml.safeLoad(fs.readFileSync(p)))
-        if doc.name == ''
-            console.log("'#{p}' needs a name property")
-            process.exit(2)
-        doc.folder = path.dirname(path.relative(boardDir, p))
+    folders = globule.find("#{boardDir}/*/*", {filter: 'isDirectory'})
+    for folder in folders
+        doc = correctTypes(yaml.safeLoad(fs.readFileSync("#{folder}/kitnic.yaml")))
+        id = path.relative(boardDir, folder)
+        doc.id = id
         boards.push(doc)
 
     boardJson = fs.openSync(targets[0], 'w')
