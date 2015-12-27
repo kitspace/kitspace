@@ -25,11 +25,15 @@ else
     {deps, targets} = checkArgs(process.argv)
     boards = []
     folders = globule.find("#{boardDir}/*/*", {filter: 'isDirectory'})
+    folders.sort((a,b) ->
+        return (a.toLowerCase() > b.toLowerCase())
+    )
     for folder in folders
-        doc = correctTypes(yaml.safeLoad(fs.readFileSync("#{folder}/kitnic.yaml")))
-        id = path.relative(boardDir, folder)
-        doc.id = id
-        boards.push(doc)
+        try
+            file = fs.readFileSync("#{folder}/kitnic.yaml")
+        info = correctTypes(yaml.safeLoad(file))
+        info.id = path.relative(boardDir, folder)
+        boards.push(info)
 
     boardJson = fs.openSync(targets[0], 'w')
     fs.write(boardJson, JSON.stringify(boards))

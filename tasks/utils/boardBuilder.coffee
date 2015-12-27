@@ -60,9 +60,10 @@ convert = (filenames, style = defaultStyle) ->
                 svgObj = gerberToSvg gerberString,
                     object: true
                     drill: (layerType == 'drl')
+                    warnArr: []
             catch e
                 try
-                    svgObj = gerberToSvg(gerberString, {object: true, drill: true})
+                    svgObj = gerberToSvg(gerberString, {object: true, drill: true, warnArr: []})
                 catch
                     console.warn "could not parse #{filename} as #{layerType} because
                                 #{e.message}"
