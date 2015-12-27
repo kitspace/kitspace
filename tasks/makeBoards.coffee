@@ -17,6 +17,10 @@ else
         text = cp.execSync("curl https://api.github.com/repos/#{id}")
         return JSON.parse(text)
 
+    getGithubReadmePath = (id) ->
+        text = cp.execSync("curl https://api.github.com/repos/#{id}/readme")
+        return JSON.parse(text).path
+
 
     correctTypes = (boardInfo) ->
         boardInfoWithEmpty =
@@ -56,6 +60,11 @@ else
                 info.site = ghInfo.homepage
             if info.site == ''
                 info.site = "https://github.com/#{info.id}"
+        readme_path = getGithubReadmePath(info.id)
+        if readme_path?
+            info.readme = fs.readFileSync("#{folder}/#{readme_path}", {encoding:'utf8'})
+        else
+            info.readme = ''
         boards.push(info)
 
     boardJson = fs.openSync(targets[0], 'w')
