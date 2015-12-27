@@ -1,13 +1,10 @@
 language: coffeescript
 sudo: required
-before_install:
-  - sudo apt-get update -qq
-  - sudo apt-get install ninja-build
 script:
+  - ./getBoards.sh
   - npm install
-  - npm install elm
-  - export PATH=$PATH:$(pwd)/node_modules/.bin
   - wget https://github.com/ninja-build/ninja/releases/download/v1.6.0/ninja-linux.zip
   - unzip ninja-linux.zip
+  - export PATH=$PATH:$(pwd)/node_modules/.bin
   - ./configure.coffee
   - ./ninja

@@ -6,7 +6,7 @@ while read line; do
         cd boards/$line && git pull &
     else
         echo "cloning boards/$line"
-        git clone "git@github.com:$line" "boards/$line" &
+        git clone --depth=1 "https://github.com/$line" "boards/$line" &
     fi
 done < ./boards.txt
 wait
