@@ -21,16 +21,18 @@ type alias BoardInfo =
     , description : String
     , site        : String
     , license     : String
+    , readme      : String
     }
 
 boardDecoder : Decoder BoardInfo
 boardDecoder =
-    object5 BoardInfo
+    object6 BoardInfo
         ("id"          := string)
         ("name"        := string)
         ("description" := string)
         ("site"        := string)
         ("license"     := string)
+        ("readme"      := string)
 
 boardMB : Signal.Mailbox (List BoardInfo)
 boardMB = Signal.mailbox []
@@ -41,6 +43,26 @@ port getBoards : Task Http.Error ()
 port getBoards = Http.get (list boardDecoder) boardJsonUrl
                     `Task.andThen` Signal.send boardMB.address
 
+
+searchFor : String -> List BoardInfo -> List BoardInfo
+searchFor query infos =
+    let queryTerms = String.words (String.toLower query)
+        matchesQueryTerms  {id, name, description, site, readme} =
+            let lowerId          = String.toLower id
+                lowerName        = String.toLower name
+                lowerDescription = String.toLower description
+                lowerSite        = String.toLower site
+                lowerReadme      = String.toLower readme
+                findTerm term =
+                    String.contains term lowerName
+                    || String.contains term lowerId
+                    || String.contains term lowerDescription
+                    || String.contains term lowerSite
+                    || String.contains term lowerReadme
+            in
+               List.all findTerm queryTerms
+    in
+       List.filter matchesQueryTerms infos
 
 buttonMB : Signal.Mailbox ()
 buttonMB = Signal.mailbox ()
