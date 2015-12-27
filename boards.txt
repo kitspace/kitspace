@@ -1,4 +1,5 @@
 kitnic/arduino-uno
 kitnic/Bus_Pirate
+kitnic/CC2538-dev-board
 kitnic/mchck-board
 kitnic/RiftDK1
