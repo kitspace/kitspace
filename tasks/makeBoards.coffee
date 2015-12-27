@@ -17,9 +17,11 @@ else
         text = cp.execSync("curl https://api.github.com/repos/#{id}")
         return JSON.parse(text)
 
-    getGithubReadmePath = (id) ->
-        text = cp.execSync("curl https://api.github.com/repos/#{id}/readme")
-        return JSON.parse(text).path
+    getGithubReadmePath = (folder) ->
+        files = globule.find("#{folder}/*", {filter:'isFile'})
+        readmes = files.filter (f) ->
+            /README.(markdown|mdown|mkdn|md|textile|rdoc|org|creole|mediawiki|wiki|rst|asciidoc|adoc|asc|pdo)/i.test(f)
+        return readmes[0]
 
 
     correctTypes = (boardInfo) ->
@@ -60,9 +62,9 @@ else
                 info.site = ghInfo.homepage
             if info.site == ''
                 info.site = "https://github.com/#{info.id}"
-        readme_path = getGithubReadmePath(info.id)
+        readme_path = getGithubReadmePath(folder)
         if readme_path?
-            info.readme = fs.readFileSync("#{folder}/#{readme_path}", {encoding:'utf8'})
+            info.readme = fs.readFileSync(readme_path, {encoding:'utf8'})
         else
             info.readme = ''
         boards.push(info)
