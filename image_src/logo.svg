@@ -14227,9 +14227,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.70710678"
-     inkscape:cx="992.80545"
-     inkscape:cy="607.19384"
+     inkscape:zoom="0.35355339"
+     inkscape:cx="867.23428"
+     inkscape:cy="526.79317"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -14271,13 +14271,13 @@
        x="838.51764"
        y="437.39682"
        ry="0"
-       inkscape:export-filename="/home/kaspar/projects/1clickBOM/PCBhub/src/images/logo.png"
+       inkscape:export-filename="/home/kaspar/projects/kitnic/code/src/images/logo.png"
        inkscape:export-xdpi="16.03425"
        inkscape:export-ydpi="16.03425" />
     <g
        id="g8708"
        clip-path="url(#clipPath9043)"
-       inkscape:export-filename="/home/kaspar/projects/1clickBOM/PCBhub/src/images/logo.png"
+       inkscape:export-filename="/home/kaspar/projects/kitnic/code/src/images/logo.png"
        inkscape:export-xdpi="16.03425"
        inkscape:export-ydpi="16.03425"
        transform="translate(549.52299,35.315524)"
@@ -14855,14 +14855,14 @@
        y="557.948"
        id="text9055"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="/home/kaspar/projects/1clickBOM/PCBhub/src/images/logo.png"
+       inkscape:export-filename="/home/kaspar/projects/kitnic/code/src/images/logo.png"
        inkscape:export-xdpi="16.03425"
        inkscape:export-ydpi="16.03425"><tspan
          sodipodi:role="line"
          id="tspan9057"
          x="1069.2708"
          y="557.948"
-         style="font-size:112px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;letter-spacing:0px;fill:#ffffff;font-family:Droid Sans;-inkscape-font-specification:Droid Sans Bold">kitnic.me</tspan></text>
+         style="font-size:112px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;letter-spacing:0px;fill:#ffffff;font-family:Droid Sans;-inkscape-font-specification:Droid Sans Bold">kitnic.it</tspan></text>
   </g>
   <g
      inkscape:groupmode="layer"
@@ -14874,7 +14874,7 @@
        d="m 956.69569,551.41548 80.68441,80.05729 -29.2857,-2.14286 21.0714,37.5 -27.8571,14.64286 -17.14285,-38.92857 -24.28572,25.35714 z"
        id="path7529"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="/home/kaspar/projects/1clickBOM/PCBhub/src/images/logo.png"
+       inkscape:export-filename="/home/kaspar/projects/kitnic/code/src/images/logo.png"
        inkscape:export-xdpi="16.03425"
        inkscape:export-ydpi="16.03425" />
   </g>
