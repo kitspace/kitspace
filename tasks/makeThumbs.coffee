@@ -9,8 +9,11 @@ boardBuilder = require('./utils/boardBuilder')
 
 if require.main != module
     module.exports = (folder) ->
-        deps = [folder]
-        deps = deps.concat(globule.find("#{folder}/gerbers/*"))
+        gerbers = globule.find("#{folder}/gerbers/*")
+        if gerbers.length == 0
+            console.error("No gerbers found for #{folder}.")
+            process.exit(1)
+        deps = [folder].concat(gerbers)
         imageDir = folder.replace('boards', 'build/boards') + '/images'
         targets = [
             "#{imageDir}/thumb.png"
@@ -24,10 +27,14 @@ else
     svgs = targets[1..]
     try
         file = fs.readFileSync("#{folder}/kitnic.yaml")
-    if file?
-        info = yaml.safeLoad(file)
-        stackup = boardBuilder(deps[1..], info.rendering)
-    else
-        stackup = boardBuilder(deps[1..])
+    try
+        if file?
+            info = yaml.safeLoad(file)
+            stackup = boardBuilder(deps[1..], info.rendering)
+        else
+            stackup = boardBuilder(deps[1..])
+    catch e
+        console.error("Could not process gerbers for #{folder}")
+        process.exit(1)
     fs.writeFileSync(svgs[0], gerberToSvg(stackup.top))
     svg2png svgs[0], png, {width:300, height:225}, () ->
