@@ -1,5 +1,4 @@
 language: coffeescript
-sudo: required
 script:
   - ./getBoards.sh
   - npm install
@@ -7,4 +6,4 @@ script:
   - unzip ninja-linux.zip
   - export PATH=$PATH:$(pwd)/node_modules/.bin
   - ./configure.coffee
-  - ./ninja
+  - ./ninja && ./deploy.sh
