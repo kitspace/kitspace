@@ -2,8 +2,9 @@ language: node_js
 node_js:
   - "0.12"
 script:
-  - ./getBoards.sh
+  - ./plugVersions.coffee
+  - ./getBoards.coffee
+  - ./configure.coffee
   - wget https://github.com/ninja-build/ninja/releases/download/v1.6.0/ninja-linux.zip
   - unzip ninja-linux.zip
-  - ./configure.coffee
   - ./ninja && ./deploy.sh

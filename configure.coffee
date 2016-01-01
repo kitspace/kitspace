@@ -1,5 +1,4 @@
 #!/usr/bin/env coffee
-fs      = require('fs')
 globule = require('globule')
 path    = require('path')
 
