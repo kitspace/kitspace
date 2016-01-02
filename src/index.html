@@ -6,38 +6,10 @@
               type="image/png"
               href="images/favicon.png">
         <style>
-            html,head,body { padding:0; margin:0; }
-            body {
-                font-family: helvetica;
-                overflow-x:hidden;
-            }
-            img {
-                -webkit-touch-callout: none;
-                -webkit-user-select: none;
-                -khtml-user-select: none;
-                -moz-user-select: none;
-                -ms-user-select: none;
-                user-select: none;
-            }
         </style>
-        <script type="text/javascript" src=elm.js></script>
     </head>
     <body>
-        <script type="text/javascript">
-            var elm = Elm.fullscreen(Elm.Main, {scrolledToBottom:window.innerHeight});
-            elm.ports.followLink.subscribe(function(id) {
-                document.location.href += id;
-            });
-            window.onscroll = function(ev) {
-                if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-                    var space = document.createElement('div');
-                    space.style.height = "150px";
-                    space.style.clear = "both";
-                    document.getElementsByTagName("body")[0].appendChild(space);
-                    console.log("you're at the bottom of the page");
-                    elm.ports.scrolledToBottom.send(window.innerHeight);
-                }
-            };
-        </script>
+        <div id="content"></div>
+        <script type="text/javascript" src=bundle.js></script>
     </body>
 </html>

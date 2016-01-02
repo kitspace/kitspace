@@ -17,12 +17,19 @@ ninja.rule('elm').run('elm-make $in --yes --output $out')
 ninja.rule('copy').run('cp $in $out')
     .description('$command')
 
+ninja.rule('browserify').run('browserify -t [babelify --presets [ react ] ] $in -o $out')
+    .description('$command')
+
 ninja.edge('build/elm.js').from(globule.find('src/*.elm')).using('elm')
 
 html = globule.find('src/*.html')
 images = globule.find('src/images/*')
 for f in html.concat(images)
     ninja.edge(f.replace('src','build')).from(f).using('copy')
+
+js = globule.find('src/*.js')
+
+ninja.edge('build/bundle.js').from('src/main.jsx').using('browserify')
 
 boardFolders = globule.find('boards/*/*/*', {filter:'isDirectory'})
 

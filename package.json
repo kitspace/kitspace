@@ -5,6 +5,9 @@
   "description": "",
   "main": "",
   "devDependencies": {
+    "babel-preset-react": "^6.3.13",
+    "babelify": "^7.2.0",
+    "browserify": "^12.0.1",
     "coffee-script": "^1.9.2",
     "elm": "^0.16.0",
     "gerber-to-svg": "^0.4.2",
@@ -15,6 +18,9 @@
     "ninja-build-parser": "^0.2.0",
     "pcb-stackup": "file:module_src/pcb-stackup",
     "process": "^0.11.1",
+    "react": "^0.14.5",
+    "react-dom": "^0.14.5",
+    "reactify": "^1.1.1",
     "source-map-support": "^0.4.0",
     "svg2png": "file:module_src/svg2png"
   },
