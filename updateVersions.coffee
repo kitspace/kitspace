@@ -10,6 +10,6 @@ for repo in repos
         versions[repo] = hash
         n_repos -= 1
         if n_repos == 0
-            fs.writeFile('./versions.json', JSON.stringify(versions))
+            fs.writeFile('./versions.json', JSON.stringify(versions, undefined, 2))
     ).bind(undefined, repo)
 

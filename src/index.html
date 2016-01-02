@@ -24,10 +24,20 @@
     </head>
     <body>
         <script type="text/javascript">
-            var elm = Elm.fullscreen(Elm.Main);
+            var elm = Elm.fullscreen(Elm.Main, {scrolledToBottom:window.innerHeight});
             elm.ports.followLink.subscribe(function(id) {
                 document.location.href += id;
             });
+            window.onscroll = function(ev) {
+                if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+                    var space = document.createElement('div');
+                    space.style.height = "150px";
+                    space.style.clear = "both";
+                    document.getElementsByTagName("body")[0].appendChild(space);
+                    console.log("you're at the bottom of the page");
+                    elm.ports.scrolledToBottom.send(window.innerHeight);
+                }
+            };
         </script>
     </body>
 </html>

@@ -76,8 +76,9 @@ searchFor query infos =
 buttonMB : Signal.Mailbox String
 buttonMB = Signal.mailbox ""
 
+port scrolledToBottom : Signal Int
 
-dim = {thumb = {w = 300, h = 225, capH = 30}}
+dim = {topBar = {h = 64}, thumb = {w = 300, h = 225, capH = 30}}
 
 
 boardImage w h id =
@@ -117,11 +118,11 @@ thumb info =
     in customButton (message buttonMB.address ("boards/" ++ info.id)) up hover hover
 
 
-boardView w boards =
+boardView w h boards =
     let thumbs    = List.map thumb boards
         thumbRows = List.map row [0..nRows]
         nPerRow   = max 1 (w // (dim.thumb.w + 32 + 16))
-        nRows     = ceiling (toFloat (length thumbs) / toFloat nPerRow)
+        nRows     = (h - dim.topBar.h) // (dim.thumb.h + dim.thumb.capH)
         row n     = (spacer 16 16) :: (
             List.intersperse (spacer 16 16)
                 <| take nPerRow (drop (n * nPerRow) thumbs))
@@ -154,13 +155,13 @@ searchBarView w h =
 
 view (w,h) boards =
     flow down
-        [ searchBarView w 64
+        [ searchBarView w dim.topBar.h
         , spacer 1 20
-        , boardView w boards
+        , boardView w h boards
         , spacer 1 20
         ]
 
 
 main : Signal Element
-main = Signal.map2 view Window.dimensions boardMB.signal
+main = Signal.map2 view (Signal.map (Debug.log "dimensions") (Signal.map2 (\h (w,_) -> (w,h)) scrolledToBottom Window.dimensions)) boardMB.signal
 

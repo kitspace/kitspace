@@ -9,5 +9,5 @@ for repo in repos
     if repo not of versions
         utils.getVersion repo, ((repo, hash) ->
             versions[repo] = hash
-            fs.writeFile('./versions.json', JSON.stringify(versions))
+            fs.writeFile('./versions.json', JSON.stringify(versions, undefined, 2))
         ).bind(undefined, repo)
