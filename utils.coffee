@@ -17,16 +17,26 @@ getVersion = (repo, callback) ->
     ).bind(undefined, repo, id)
 
 
-readRepos = () ->
-    return fs.readFileSync('./boards.txt', {encoding:'utf8'}).split('\n')
-        .filter((l) -> l != '')
-
-
 repoToFolder = (repo) ->
     folder = repo.replace(/^http:\/\//,'')
     folder = folder.replace(/^https:\/\//,'')
-    folder = folder.replace(/^.?@/,'')
+    folder = folder.replace(/^.+?@/,'')
     return "boards/#{folder}"
+
+
+readRepos = () ->
+    repos = fs.readFileSync('./boards.txt', {encoding:'utf8'}).split('\n')
+        .filter((l) -> l != '')
+    repos.reduce (prev, repo) ->
+        folder = repoToFolder(repo)
+        if folder in prev
+            console.error("duplicate folder output for boards.txt: #{folder}")
+            process.exit(1)
+        else
+            prev.push(folder)
+            return prev
+    , []
+    return repos
 
 
 exports.getVersion   = getVersion

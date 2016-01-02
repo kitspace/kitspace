@@ -72,6 +72,11 @@ dim = {thumb = {w = 300, h = 225, capH = 30}}
 boardImage w h id =
     image w h ("boards/" ++ id ++ "/images/thumb.png")
 
+
+idToTitle : String -> String
+idToTitle id =
+    String.join "  /  " (Maybe.withDefault [] (List.tail (String.split "/" id)))
+
 thumb info =
     let txt = centered
         <| Text.style
@@ -79,7 +84,7 @@ thumb info =
                            , bold   = True
                            , color  = Color.rgb 55 55 55
             }
-        <| fromString (String.join "  /  " (String.split "/" info.id))
+        <| fromString (idToTitle info.id)
         w = dim.thumb.w + 32
         h = dim.thumb.h + dim.thumb.capH + 32
         img height = container w height middle

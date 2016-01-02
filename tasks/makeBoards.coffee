@@ -14,7 +14,7 @@ if require.main != module
 
 else
     getGithubInfo = (id) ->
-        text = cp.execSync("curl https://api.github.com/repos/#{id}")
+        text = cp.execSync("curl https://api.github.com/repos#{id.replace('github.com','')}")
         return JSON.parse(text)
 
     getGithubReadmePath = (folder) ->
@@ -39,7 +39,7 @@ else
 
     {deps, targets} = checkArgs(process.argv)
     boards = []
-    folders = globule.find("#{boardDir}/*/*", {filter: 'isDirectory'})
+    folders = globule.find("#{boardDir}/*/*/*", {filter: 'isDirectory'})
     folders.sort((a,b) ->
         return (a.toLowerCase() > b.toLowerCase())
     )
@@ -61,7 +61,7 @@ else
             if info.site == '' and ghInfo.homepage?
                 info.site = ghInfo.homepage
             if info.site == ''
-                info.site = "https://github.com/#{info.id}"
+                info.site = "https://#{info.id}"
         readme_path = getGithubReadmePath(folder)
         if readme_path?
             info.readme = fs.readFileSync(readme_path, {encoding:'utf8'})

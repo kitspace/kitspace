@@ -24,7 +24,7 @@ images = globule.find('src/images/*')
 for f in html.concat(images)
     ninja.edge(f.replace('src','build')).from(f).using('copy')
 
-boardFolders = globule.find('boards/*/*', {filter:'isDirectory'})
+boardFolders = globule.find('boards/*/*/*', {filter:'isDirectory'})
 
 for taskFile in globule.find('tasks/*.coffee')
     task = require("./#{path.dirname(taskFile)}/#{path.basename(taskFile)}")
