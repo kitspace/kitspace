@@ -15,6 +15,7 @@ import Html
 import Html.Attributes
 import String
 
+
 type alias BoardInfo =
     { id          : String
     , name        : String
@@ -23,6 +24,7 @@ type alias BoardInfo =
     , license     : String
     , readme      : String
     }
+
 
 boardDecoder : Decoder BoardInfo
 boardDecoder =
@@ -34,15 +36,21 @@ boardDecoder =
         ("license"     := string)
         ("readme"      := string)
 
+
 boardMB : Signal.Mailbox (List BoardInfo)
 boardMB = Signal.mailbox []
 
+
 boardJsonUrl = "boards.json"
+
 
 port getBoards : Task Http.Error ()
 port getBoards = Http.get (list boardDecoder) boardJsonUrl
                     `Task.andThen` Signal.send boardMB.address
 
+
+port followLink : Signal String
+port followLink = buttonMB.signal
 
 searchFor : String -> List BoardInfo -> List BoardInfo
 searchFor query infos =
@@ -64,10 +72,13 @@ searchFor query infos =
     in
        List.filter matchesQueryTerms infos
 
-buttonMB : Signal.Mailbox ()
-buttonMB = Signal.mailbox ()
+
+buttonMB : Signal.Mailbox String
+buttonMB = Signal.mailbox ""
+
 
 dim = {thumb = {w = 300, h = 225, capH = 30}}
+
 
 boardImage w h id =
     image w h ("boards/" ++ id ++ "/images/thumb.png")
@@ -77,6 +88,8 @@ idToTitle : String -> String
 idToTitle id =
     String.join "  /  " (Maybe.withDefault [] (List.tail (String.split "/" id)))
 
+
+thumb : BoardInfo -> Element
 thumb info =
     let txt = centered
         <| Text.style
@@ -101,7 +114,8 @@ thumb info =
             [ roundedRect w h 10 (Color.rgb 0xCF 0xCF 0xCF)
             , img h
             ]
-    in customButton (message buttonMB.address ()) up hover hover
+    in customButton (message buttonMB.address ("boards/" ++ info.id)) up hover hover
+
 
 boardView w boards =
     let thumbs    = List.map thumb boards
@@ -115,6 +129,7 @@ boardView w boards =
             <| List.intersperse (spacer 16 16)
                 <| List.map (flow right) thumbRows
     in rows
+
 
 searchBarView w h =
     let style =
@@ -136,6 +151,7 @@ searchBarView w h =
                 ]
             ]
 
+
 view (w,h) boards =
     flow down
         [ searchBarView w 64
@@ -143,6 +159,7 @@ view (w,h) boards =
         , boardView w boards
         , spacer 1 20
         ]
+
 
 main : Signal Element
 main = Signal.map2 view Window.dimensions boardMB.signal

@@ -24,7 +24,10 @@
     </head>
     <body>
         <script type="text/javascript">
-            Elm.fullscreen(Elm.Main);
+            var elm = Elm.fullscreen(Elm.Main);
+            elm.ports.followLink.subscribe(function(id) {
+                document.location.href += id;
+            });
         </script>
     </body>
 </html>
