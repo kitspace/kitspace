@@ -1,6 +1,4 @@
 // main.js
-const React = require('react');
-const ReactDOM = require('react-dom');
 const testData = require('./boards.json');
 
 var TitleBar = React.createClass({
@@ -97,7 +95,6 @@ var BoardThumb = React.createClass({
       imgStyle.padding = '26px 27px 0px 27px';
       style.width += 20;
       style.position = 'relative';
-      style.zIndex = '500 !important';
       descrStyle.visibility =  'visible';
       style.boxShadow =  '0px 0.1em 0.5em #000';
     }
@@ -117,7 +114,18 @@ var BoardThumb = React.createClass({
           {this.props.data.id.split('/').slice(1).join(' / ')}
         </div>
         <div style={descrStyle}>
-          {this.props.data.description}
+          {(function() {
+              var str = this.props.data.description;
+              if (str.length > 87) {
+                str = str.substr(0,87);
+                if (str[87] !== ' ') {
+                  str = str.concat(' ');
+                }
+                str = str.concat('...');
+              }
+              return str;
+            }).call(this)
+          }
         </div>
       </div>
     );
