@@ -11,9 +11,6 @@ ninja.header("#generated from #{path.basename(module.filename)}")
 ninja.rule('coffee').run('coffee -- $in -- $out')
     .description('$in')
 
-ninja.rule('elm').run('elm-make $in --yes --output $out')
-    .description('$command')
-
 ninja.rule('copy').run('cp $in $out')
     .description('$command')
 
