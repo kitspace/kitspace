@@ -17,13 +17,41 @@ var TitleBar = React.createClass({
   }
 });
 
-const dim = {topBar : {h : 64}, thumb : {w : 300, h : 225, capH : 48}}
+const dim = {
+  thumb : {
+      w    : 300
+    , h    : 225
+    , capH : 48
+  }
+}
 
 var BoardThumb = React.createClass({
+  getInitialState: function() {
+    return {hover: false};
+  },
+  handleMouseOver: function (e) {
+    this.setState({hover: true});
+  },
+  handleMouseOut: function (e) {
+    this.setState({hover: false});
+  },
+  handleClick: function (e) {
+    document.location.href += this.props.data.id;
+  },
   render: function () {
     return (
-      <div style={
-        { backgroundColor:'#F0F0F0'
+      <div
+        onMouseOver={this.handleMouseOver}
+        onMouseOut={this.handleMouseOut}
+        onClick={this.handleClick}
+        style={
+        { backgroundColor: (function () {
+            if (this.state.hover) {
+              return '#CFCFCF';
+            } else {
+              return '#F0F0F0';
+            }
+          }).call(this)
         , width: dim.thumb.w + 32
         , height: dim.thumb.h + dim.thumb.capH + 16 + 5
         , borderRadius: 5
@@ -31,8 +59,8 @@ var BoardThumb = React.createClass({
         , fontWeight: 'bold'
         , fontSize: 16
         , color: 'rgb(55,55,55)'
-        }
-      }>
+        , margin: '24px 0px 0px 24px'
+        }}>
       <div>
         <img src={'boards/' + this.props.data.id + '/images/thumb.png'}
           style = {{
