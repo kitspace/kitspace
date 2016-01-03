@@ -20,6 +20,7 @@
     "process": "^0.11.1",
     "react": "^0.14.5",
     "react-dom": "^0.14.5",
+    "react-image": "^0.1.0",
     "reactify": "^1.1.1",
     "source-map-support": "^0.4.0",
     "svg2png": "file:module_src/svg2png"
