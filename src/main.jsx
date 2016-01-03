@@ -41,20 +41,59 @@ var BoardThumb = React.createClass({
   },
   render: function () {
     var style = {
-      backgroundColor: '#F0F0F0'
+      backgroundColor: '#CFCFCF'
       , width: dim.thumb.w + 32 + 16
       , height: dim.thumb.h + dim.thumb.capH + 16 + 5
       , borderRadius: 5
-      , fontFamily: 'helvetica, sans'
-      , fontWeight: 'bold'
-      , fontSize: 16
       , color: 'rgb(55,55,55)'
-      , margin: '16px 0px 0px 16px'
+      , marginTop:  16
+      , marginRight: 16
+      , marginBottom: 0
+      , marginLeft: 0
       , float: 'left'
     };
+    var imgStyle = {
+      marginTop: 16
+    };
+    var titleStyle = {
+          height: dim.thumb.capH
+          , textAlign: 'center'
+          , verticalAlign: 'middle'
+          , lineHeight: String(dim.thumb.capH) + 'px'
+          , fontFamily: 'helvetica, sans'
+          , fontWeight: 'bold'
+          , fontSize: 16
+          , paddingBottom: 5
+    };
+    var descrStyle = {
+      visibility: 'hidden'
+      , height: 40
+      , overflow: 'hidden'
+      , padding: '10 10 10 10'
+      , fontFamily: 'helvetica, sans'
+      , textAlign: 'center'
+      , marginBottom: 10
+    };
+
     if (this.state.hover) {
-      style.backgroundColor = '#CFCFCF';
+      style.backgroundColor = '#F0F0F0';
+      style.height += 80;
+      style.width += 80;
+      style.marginBottom -= 82;
+      style.marginLeft -= 41;
+      style.marginRight -= 41;
+      style.opacity = 0.9;
+      style.border = '1px solid grey';
+      imgStyle.opacity = 1.0;
+      descrStyle.opacity = 1.0;
+      titleStyle.opacity = 1.0;
+      imgStyle.padding = '26px 27px 0px 27px';
+      style.width += 20;
+      style.position = 'relative';
+      style.zIndex = '500 !important';
+      descrStyle.visibility =  'visible';
     }
+
     return (
       <div
         onMouseOver={this.handleMouseOver}
@@ -62,23 +101,16 @@ var BoardThumb = React.createClass({
         onClick={this.handleClick}
         style={style}
       >
-      <div>
-        <img src={'boards/' + this.props.data.id + '/images/thumb.png'}
-          style = {{
-            padding: '16px 16px 0px 16px'
-          }}
-        />
-      </div>
-      <div style={
-        { height: dim.thumb.capH
-        , textAlign: 'center'
-        , verticalAlign: 'middle'
-        , lineHeight: String(dim.thumb.capH) + 'px'
-        , paddingBottom: 5
-        }
-      }>
-        {this.props.data.id.split('/').slice(1).join(' / ')}
-      </div>
+        <center>
+          <img src={'boards/' + this.props.data.id + '/images/thumb.png'}
+            style = {imgStyle} />
+        </center>
+        <div style={titleStyle}>
+          {this.props.data.id.split('/').slice(1).join(' / ')}
+        </div>
+        <div style={descrStyle}>
+          {this.props.data.description}
+        </div>
       </div>
     );
   }
