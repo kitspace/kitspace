@@ -1,7 +1,7 @@
 // main.js
-var React = require('react');
-var ReactDOM = require('react-dom');
-var testData = require('./boards.json');
+const React = require('react');
+const ReactDOM = require('react-dom');
+const testData = require('./boards.json');
 
 var TitleBar = React.createClass({
   render: function () {
@@ -40,30 +40,28 @@ var BoardThumb = React.createClass({
     document.location.href += 'boards/' + this.props.data.id;
   },
   render: function () {
+    var style = {
+      backgroundColor: '#F0F0F0'
+      , width: dim.thumb.w + 32 + 16
+      , height: dim.thumb.h + dim.thumb.capH + 16 + 5
+      , borderRadius: 5
+      , fontFamily: 'helvetica, sans'
+      , fontWeight: 'bold'
+      , fontSize: 16
+      , color: 'rgb(55,55,55)'
+      , margin: '16px 0px 0px 16px'
+      , float: 'left'
+    };
+    if (this.state.hover) {
+      style.backgroundColor = '#CFCFCF';
+    }
     return (
       <div
         onMouseOver={this.handleMouseOver}
         onMouseOut={this.handleMouseOut}
         onClick={this.handleClick}
-        style={
-          { backgroundColor: (function () {
-              if (this.state.hover) {
-                return '#CFCFCF';
-              } else {
-                return '#F0F0F0';
-              }
-            }).call(this)
-          , width: dim.thumb.w + 32
-          , height: dim.thumb.h + dim.thumb.capH + 16 + 5
-          , borderRadius: 5
-          , fontFamily: 'helvetica, sans'
-          , fontWeight: 'bold'
-          , fontSize: 16
-          , color: 'rgb(55,55,55)'
-          , margin: '16px 0px 0px 16px'
-          , float: 'left'
-          }
-        }>
+        style={style}
+      >
       <div>
         <img src={'boards/' + this.props.data.id + '/images/thumb.png'}
           style = {{
