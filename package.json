@@ -17,8 +17,6 @@
     "ninja-build-parser": "^0.2.0",
     "pcb-stackup": "file:module_src/pcb-stackup",
     "process": "^0.11.1",
-    "react": "^0.14.5",
-    "react-dom": "^0.14.5",
     "react-image": "^0.1.0",
     "reactify": "^1.1.1",
     "source-map-support": "^0.4.0",
