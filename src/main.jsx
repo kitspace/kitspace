@@ -42,28 +42,33 @@ var BoardThumb = React.createClass({
   render: function () {
     var style = {
       backgroundColor: '#CFCFCF'
-      , width: dim.thumb.w + 32 + 16
-      , height: dim.thumb.h + dim.thumb.capH + 16 + 5
+      , width: (dim.thumb.w * 0.8) + 32 + 16
+      , height: (dim.thumb.h * 0.8) + dim.thumb.capH + 16 + 5
       , borderRadius: 5
       , color: 'rgb(55,55,55)'
       , marginTop:  16
-      , marginRight: 16
+      , marginRight: 0
       , marginBottom: 0
-      , marginLeft: 0
+      , marginLeft: 16
       , float: 'left'
+      , border: '1px solid #CFCFCF'
+      , cursor: 'pointer'
     };
     var imgStyle = {
-      marginTop: 16
+      width: dim.thumb.w * 0.8
+      , height: dim.thumb.h * 0.8
+      , marginTop: 16
     };
     var titleStyle = {
-          height: dim.thumb.capH
-          , textAlign: 'center'
-          , verticalAlign: 'middle'
-          , lineHeight: String(dim.thumb.capH) + 'px'
-          , fontFamily: 'helvetica, sans'
-          , fontWeight: 'bold'
-          , fontSize: 16
-          , paddingBottom: 5
+      height: dim.thumb.capH
+      , textAlign: 'center'
+      , verticalAlign: 'middle'
+      , lineHeight: String(dim.thumb.capH) + 'px'
+      , fontFamily: 'helvetica, sans'
+      , fontWeight: 'bold'
+      , fontSize: 16
+      , paddingBottom: 5
+      , opacity: 1.0
     };
     var descrStyle = {
       visibility: 'hidden'
@@ -73,25 +78,28 @@ var BoardThumb = React.createClass({
       , fontFamily: 'helvetica, sans'
       , textAlign: 'center'
       , marginBottom: 10
+      , opacity: 1.0
     };
 
     if (this.state.hover) {
       style.backgroundColor = '#F0F0F0';
-      style.height += 80;
-      style.width += 80;
-      style.marginBottom -= 82;
-      style.marginLeft -= 41;
-      style.marginRight -= 41;
-      style.opacity = 0.9;
-      style.border = '1px solid grey';
+      style.height += (dim.thumb.h * 0.2) + 80;
+      style.width += (dim.thumb.w * 0.2);
+      style.marginBottom -= (dim.thumb.h * 0.2) + 60;
+      style.marginTop -= 20;
+      style.marginLeft -= (dim.thumb.h * 0.2);
+      style.marginRight -= (dim.thumb.h * 0.2);
+      style.opacity = 0.93;
       imgStyle.opacity = 1.0;
-      descrStyle.opacity = 1.0;
-      titleStyle.opacity = 1.0;
+      imgStyle.width = dim.thumb.w;
+      imgStyle.height = dim.thumb.h;
+      titleStyle.height -= 24;
       imgStyle.padding = '26px 27px 0px 27px';
       style.width += 20;
       style.position = 'relative';
       style.zIndex = '500 !important';
       descrStyle.visibility =  'visible';
+      style.boxShadow =  '0px 0.1em 0.5em #000';
     }
 
     return (
@@ -124,7 +132,7 @@ var BoardList = React.createClass({
       );
     });
     return (
-      <div>
+      <div style={{padding: 32}}>
       {thumbNodes}
       </div>
     );
