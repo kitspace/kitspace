@@ -39,7 +39,7 @@ var BoardThumb = React.createClass({
   },
   render: function () {
     var style = {
-      backgroundColor: '#CFCFCF'
+      backgroundColor: '#DFDFDF'
       , width: (dim.thumb.w * 0.8) + 32 + 16
       , height: (dim.thumb.h * 0.8) + dim.thumb.capH + 16 + 5
       , borderRadius: 5
@@ -85,8 +85,8 @@ var BoardThumb = React.createClass({
       style.width += (dim.thumb.w * 0.2);
       style.marginBottom -= (dim.thumb.h * 0.2) + 60;
       style.marginTop -= 20;
-      style.marginLeft -= (dim.thumb.h * 0.2);
-      style.marginRight -= (dim.thumb.h * 0.2);
+      style.marginLeft -= (dim.thumb.h * 0.13);
+      style.marginRight -= (dim.thumb.h * 0.13);
       style.opacity = 0.93;
       imgStyle.opacity = 1.0;
       imgStyle.width = dim.thumb.w;

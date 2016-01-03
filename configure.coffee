@@ -16,7 +16,7 @@ ninja.rule('copy').run('cp $in $out')
 
 ninja.rule('browserify').run("browserify
     -t [babelify --presets [ react ] ]
-    $in -o | uglifyjs2 > $out"
+    $in | uglifyjs2 > $out"
 ).description('$command')
 
 html = globule.find('src/*.html')
