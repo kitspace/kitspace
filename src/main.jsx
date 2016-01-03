@@ -36,7 +36,7 @@ var BoardThumb = React.createClass({
     this.setState({hover: false});
   },
   handleClick: function (e) {
-    document.location.href += this.props.data.id;
+    document.location.href += 'boards/' + this.props.data.id;
   },
   render: function () {
     return (
@@ -60,6 +60,7 @@ var BoardThumb = React.createClass({
         , fontSize: 16
         , color: 'rgb(55,55,55)'
         , margin: '24px 0px 0px 24px'
+        , float: 'left'
         }}>
       <div>
         <img src={'boards/' + this.props.data.id + '/images/thumb.png'}
@@ -83,14 +84,29 @@ var BoardThumb = React.createClass({
   }
 });
 
-testData = {id: 'github.com/kitnic/arduino-uno'};
+var BoardList = React.createClass({
+  render: function () {
+    var thumbNodes = this.props.data.map(function(data) {
+      return (
+        <BoardThumb data={data} />
+      );
+    });
+    return (
+      <div>
+      {thumbNodes}
+      </div>
+    );
+  }
+});
+
+testData = [{id: 'github.com/kitnic/arduino-uno'}, {id: 'github.com/kitnic/Bus_Pirate'}]
 
 var Main = React.createClass({
   render: function() {
     return (
       <div>
       <TitleBar />
-      <BoardThumb data={testData} />
+      <BoardList data={testData} />
     </div>
     );
   }
