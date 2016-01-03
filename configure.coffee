@@ -14,10 +14,10 @@ ninja.rule('coffee').run('coffee -- $in -- $out')
 ninja.rule('copy').run('cp $in $out')
     .description('$command')
 
-ninja.rule('browserify').run('browserify -t [babelify --presets [ react ] ] $in -o $out')
-    .description('$command')
-
-ninja.edge('build/elm.js').from(globule.find('src/*.elm')).using('elm')
+ninja.rule('browserify').run("browserify
+    -t [babelify --presets [ react ] ]
+    $in -o | uglifyjs2 > $out"
+).description('$command')
 
 html = globule.find('src/*.html')
 images = globule.find('src/images/*')
