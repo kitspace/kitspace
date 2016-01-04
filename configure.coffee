@@ -17,7 +17,7 @@ ninja.rule('copy').run('cp $in $out')
 ninja.rule('browserify').run("browserify
     --extension='.jsx'
     --debug -t [babelify --presets [ react ] ]
-    $in > $out"
+    $in -o $out"
 ).description('$command')
 
 html = globule.find('src/*.html')
