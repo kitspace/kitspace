@@ -168,37 +168,26 @@ var BoardList = React.createClass({
   }
 });
 
-var App = React.createClass({
-  render() {
-    var mails = testData;
+var Main = React.createClass({
+  render: function () {
+    var data = testData;
 
     if (this.refs.search) {
       var filters = ['id', 'description'];
-      mails = mails.filter(this.refs.search.filter(filters));
+      data = data.filter(this.refs.search.filter(filters));
     }
 
     return (
       <div>
+        <TitleBar />
         <SearchInput ref='search' onChange={this.searchUpdated} />
-        <BoardList data={mails} />
+        <BoardList data={data} />
       </div>
     );
   },
 
-  searchUpdated(term) {
+  searchUpdated: function (term) {
     this.setState({searchTerm: term}); // needed to force re-render
-  }
-});
-
-
-var Main = React.createClass({
-  render: function() {
-    return (
-      <div>
-        <TitleBar />
-        <App />
-      </div>
-    );
   }
 });
 
