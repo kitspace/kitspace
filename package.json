@@ -21,6 +21,7 @@
     "process": "^0.11.1",
     "react-image-component": "^1.0.0",
     "react-lazyload": "^1.3.0",
+    "react-search-input": "^0.6.0",
     "reactify": "^1.1.1",
     "source-map-support": "^0.4.0",
     "svg2png": "file:module_src/svg2png"

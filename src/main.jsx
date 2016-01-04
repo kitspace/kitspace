@@ -4,6 +4,7 @@ var Image = require('./image');
 var LazyLoad = require('react-lazyload');
 var React = require('react');
 var ReactDOM = require('react-dom');
+var SearchInput = require('react-search-input');
 
 var TitleBar = React.createClass({
   render: function () {
@@ -167,12 +168,35 @@ var BoardList = React.createClass({
   }
 });
 
+var App = React.createClass({
+  render() {
+    var mails = testData;
+
+    if (this.refs.search) {
+      var filters = ['id', 'description'];
+      mails = mails.filter(this.refs.search.filter(filters));
+    }
+
+    return (
+      <div>
+        <SearchInput ref='search' onChange={this.searchUpdated} />
+        <BoardList data={mails} />
+      </div>
+    );
+  },
+
+  searchUpdated(term) {
+    this.setState({searchTerm: term}); // needed to force re-render
+  }
+});
+
+
 var Main = React.createClass({
   render: function() {
     return (
       <div>
         <TitleBar />
-        <BoardList data={testData} />
+        <App />
       </div>
     );
   }
