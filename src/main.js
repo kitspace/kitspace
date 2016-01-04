@@ -1,5 +1,33 @@
 // main.js
-const testData = require('./boards.json');
+var testData = require('./boards.json');
+var React    = require('react');
+var ReactDOM = require('react-dom');
+
+var Image = React.createClass({
+  getInitialState: function() {
+    return {opacity: 0};
+  },
+
+  fadeIn: function() {
+    this.setState({opacity: 1});
+  },
+
+  render: function (){
+    //this vs including an Object.assign polyfill
+    let style = this.props.style || {};
+    style.transition = `opacity ${this.props.speed || 1}s`;
+    style.opacity = this.state.opacity;
+
+    return (
+      <img
+        {...this.props}
+        style={style}
+        src={this.props.src}
+        onLoad={this.fadeIn}
+      />
+    )
+  }
+});
 
 var TitleBar = React.createClass({
   render: function () {
@@ -10,13 +38,16 @@ var TitleBar = React.createClass({
         , boxShadow: '0px 0.1em 0.5em #000'
         }
       }>
-      <a href='/'>
-        <img src='images/logo.png' style={{padding: '10 10 10 10'}}/>
+      <div style={{padding: '10 10 10 10'}}>
+        <a href='/'>
+          <Image src='/images/logo.png' />
         </a>
+      </div>
       </div>
     );
   }
 });
+
 
 const dim = {
   thumb : {
@@ -106,7 +137,7 @@ var BoardThumb = React.createClass({
         style={style}
       >
         <center>
-          <img src={'boards/' + this.props.data.id + '/images/thumb.png'}
+          <Image src={'boards/' + this.props.data.id + '/images/thumb.png'}
             style = {imgStyle} />
         </center>
         <div style={titleStyle}>

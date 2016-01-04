@@ -15,8 +15,8 @@ ninja.rule('copy').run('cp $in $out')
     .description('$command')
 
 ninja.rule('browserify').run("browserify
-    -t [babelify --presets [ react ] ]
-    $in | uglifyjs2 > $out"
+    --debug -t [babelify --presets [ es2015 react ] ]
+    $in > $out"
 ).description('$command')
 
 html = globule.find('src/*.html')
@@ -26,7 +26,7 @@ for f in html.concat(images)
 
 js = globule.find('src/*.js')
 
-ninja.edge('build/bundle.js').from('src/main.jsx').using('browserify')
+ninja.edge('build/bundle.js').from('src/main.js').need(js).using('browserify')
 
 boardFolders = globule.find('boards/*/*/*', {filter:'isDirectory'})
 
