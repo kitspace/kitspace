@@ -25,7 +25,7 @@ images = globule.find('src/images/*')
 for f in html.concat(images)
     ninja.edge(f.replace('src','build')).from(f).using('copy')
 
-js = globule.find('src/*.jsx')
+js = globule.find(['src/*.js', 'src/*.jsx'])
 
 ninja.edge('build/bundle.js').from('src/main.jsx').need(js).using('browserify')
 

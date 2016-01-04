@@ -5,6 +5,8 @@
   "description": "",
   "main": "",
   "devDependencies": {
+    "add-event-listener": "0.0.1",
+    "babel-cli": "^6.3.17",
     "babel-preset-es2015": "^6.3.13",
     "babel-preset-react": "^6.3.13",
     "babelify": "^7.2.0",
@@ -20,6 +22,7 @@
     "pcb-stackup": "file:module_src/pcb-stackup",
     "process": "^0.11.1",
     "react-image-component": "^1.0.0",
+    "react-lazy-load": "^2.0.2",
     "react-lazyload": "^1.3.0",
     "react-search-input": "^0.6.0",
     "reactify": "^1.1.1",
