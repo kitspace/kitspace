@@ -1,7 +1,7 @@
 // main.js
 var testData = require('./boards.json');
 var Image = require('./image');
-var LazyLoad = require('./LazyLoad');
+var LazyLoad = require('react-lazyload');
 var React = require('react');
 var ReactDOM = require('react-dom');
 var SearchInput = require('react-search-input');
@@ -90,10 +90,10 @@ var BoardThumb = React.createClass({
     };
 
     var image =
-      <LazyLoad once >
-        <img src={'boards/' + this.props.data.id + '/images/thumb.png'}
-          style = {imgStyle} />
-      </LazyLoad>
+        <LazyLoad>
+          <img src={'boards/' + this.props.data.id + '/images/thumb.png'}
+            style = {imgStyle} />
+        </LazyLoad>;
 
     if (this.state.hover) {
       style.backgroundColor  = '#F0F0F0';
@@ -155,9 +155,9 @@ var BoardThumb = React.createClass({
 
 var BoardList = React.createClass({
   render: function () {
-    var thumbNodes = this.props.data.map(function(data, index) {
+    var thumbNodes = this.props.data.map(function(data) {
       return (
-        <BoardThumb key={index} data={data} />
+        <BoardThumb data={data} />
       );
     });
     return (
