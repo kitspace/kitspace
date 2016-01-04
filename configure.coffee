@@ -15,7 +15,8 @@ ninja.rule('copy').run('cp $in $out')
     .description('$command')
 
 ninja.rule('browserify').run("browserify
-    --debug -t [babelify --presets [ es2015 react ] ]
+    --extension='.jsx'
+    --debug -t [babelify --presets [ react ] ]
     $in > $out"
 ).description('$command')
 
@@ -24,9 +25,9 @@ images = globule.find('src/images/*')
 for f in html.concat(images)
     ninja.edge(f.replace('src','build')).from(f).using('copy')
 
-js = globule.find('src/*.js')
+js = globule.find('src/*.jsx')
 
-ninja.edge('build/bundle.js').from('src/main.js').need(js).using('browserify')
+ninja.edge('build/bundle.js').from('src/main.jsx').need(js).using('browserify')
 
 boardFolders = globule.find('boards/*/*/*', {filter:'isDirectory'})
 
