@@ -43,6 +43,9 @@ var BoardThumb = React.createClass({
   handleMouseOut: function (e) {
     this.setState({hover: false});
   },
+  handleClick: function (e) {
+      document.location.href += 'boards/' + this.props.data.id;
+  },
   render: function () {
     var style = {
       backgroundColor: '#DFDFDF'
@@ -56,6 +59,7 @@ var BoardThumb = React.createClass({
       , marginLeft: 8
       , display: 'inline-block'
       , border: '1px solid #CFCFCF'
+      , cursor: 'pointer'
     };
     var imgStyle = {
       width: dim.thumb.w * 0.8
@@ -117,10 +121,10 @@ var BoardThumb = React.createClass({
 
 
     return (
-      <a href={'/boards/' + this.props.data.id} >
       <div
         onMouseOver={this.handleMouseOver}
         onMouseOut={this.handleMouseOut}
+        onClick={this.handleClick}
         style={style}
       >
         <center>
@@ -144,7 +148,6 @@ var BoardThumb = React.createClass({
           }
         </div>
       </div>
-      </a>
     );
   }
 });
