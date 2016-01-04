@@ -1,6 +1,9 @@
 // main.js
 var testData = require('./boards.json');
 var Image = require('./image');
+var LazyLoad = require('react-lazyload');
+var React = require('react');
+var ReactDOM = require('react-dom');
 
 var TitleBar = React.createClass({
   render: function () {
@@ -110,8 +113,10 @@ var BoardThumb = React.createClass({
         style={style}
       >
         <center>
+        <LazyLoad>
           <Image src={'boards/' + this.props.data.id + '/images/thumb.png'}
             style = {imgStyle} />
+        </LazyLoad>
         </center>
         <div style={titleStyle}>
           {this.props.data.id.split('/').slice(1).join(' / ')}
@@ -144,7 +149,7 @@ var BoardList = React.createClass({
       );
     });
     return (
-      <div style={{padding: 32}}>
+      <div style={{margin: 32}}>
       {thumbNodes}
       </div>
     );

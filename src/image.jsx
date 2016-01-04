@@ -1,3 +1,6 @@
+var React = require('react');
+var ReactDOM = require('react-dom');
+
 function getViewportWidth() {
         if (typeof window !== 'undefined') {
             return window.innerWidth || document.documentElement.clientWidth;
