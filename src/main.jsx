@@ -50,11 +50,11 @@ var BoardThumb = React.createClass({
       , height: (dim.thumb.h * 0.8) + dim.thumb.capH + 16 + 5
       , borderRadius: 10
       , color: 'rgb(55,55,55)'
-      , marginTop:  16
-      , marginRight: 0
-      , marginBottom: 0
-      , marginLeft: 16
-      , float: 'left'
+      , marginTop:  8
+      , marginRight: 8
+      , marginBottom: 8
+      , marginLeft: 8
+      , display: 'inline-block'
       , border: '1px solid #CFCFCF'
     };
     var imgStyle = {
@@ -84,13 +84,20 @@ var BoardThumb = React.createClass({
       , opacity: 1.0
     };
 
+    var image =
+        <LazyLoad>
+          <img src={'boards/' + this.props.data.id + '/images/thumb.png'}
+            style = {imgStyle} />
+        </LazyLoad>;
+
     if (this.state.hover) {
       style.backgroundColor  = '#F0F0F0';
+      //a lot of the calcs don't make sense
+      //this is what works to keep the others from moving
       style.height          += (dim.thumb.h * 0.2) + 80;
       style.width           += (dim.thumb.w * 0.2);
       style.marginBottom    -= (dim.thumb.h * 0.2) + 60;
-      style.marginTop       -= 20;
-      //this is what works to keep the adjacent from moving
+      style.marginTop       -= 50;
       style.marginLeft      -= (dim.thumb.h * 0.177);
       style.marginRight     -= (dim.thumb.h * 0.177);
       style.opacity          = 0.93;
@@ -103,7 +110,11 @@ var BoardThumb = React.createClass({
       style.position         = 'relative';
       descrStyle.visibility  = 'visible';
       style.boxShadow        = '0px 0.1em 0.5em #000';
+      image =
+          <img src={'boards/' + this.props.data.id + '/images/thumb.png'}
+            style = {imgStyle} />;
     }
+
 
     return (
       <a href={'/boards/' + this.props.data.id} >
@@ -113,10 +124,7 @@ var BoardThumb = React.createClass({
         style={style}
       >
         <center>
-        <LazyLoad>
-          <Image src={'boards/' + this.props.data.id + '/images/thumb.png'}
-            style = {imgStyle} />
-        </LazyLoad>
+        {image}
         </center>
         <div style={titleStyle}>
           {this.props.data.id.split('/').slice(1).join(' / ')}
@@ -149,7 +157,7 @@ var BoardList = React.createClass({
       );
     });
     return (
-      <div style={{margin: 32}}>
+      <div style={{margin: 32, textAlign:'center'}}>
       {thumbNodes}
       </div>
     );
