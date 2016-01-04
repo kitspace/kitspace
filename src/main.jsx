@@ -17,7 +17,7 @@ var TitleBar = React.createClass({
       }>
       <div style={{padding: '10 10 10 10'}}>
         <a href='/'>
-          <Image src='/images/logo.png' />
+          <img src='/images/logo.png' />
         </a>
       </div>
       </div>
@@ -91,7 +91,7 @@ var BoardThumb = React.createClass({
 
     var image =
         <LazyLoad>
-          <img src={'boards/' + this.props.data.id + '/images/thumb.png'}
+          <Image src={'boards/' + this.props.data.id + '/images/thumb.png'}
             style = {imgStyle} />
         </LazyLoad>;
 
@@ -115,9 +115,6 @@ var BoardThumb = React.createClass({
       style.position         = 'relative';
       descrStyle.visibility  = 'visible';
       style.boxShadow        = '0px 0.1em 0.5em #000';
-      image =
-          <img src={'boards/' + this.props.data.id + '/images/thumb.png'}
-            style = {imgStyle} />;
     }
 
 
