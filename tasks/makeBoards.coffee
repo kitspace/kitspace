@@ -10,26 +10,18 @@ boardDir = 'boards'
 if require.main != module
 
     exports.deps = [boardDir]
-    exports.targets = ['build/boards.json']
+    exports.targets = ['build/.temp/boards.json']
 
 else
+
     getGithubInfo = (id) ->
         text = cp.execSync("curl https://api.github.com/repos#{id.replace('github.com','')}")
         return JSON.parse(text)
 
-    getGithubReadmePath = (folder) ->
-        files = globule.find("#{folder}/*", {filter:'isFile'})
-        readmes = files.filter (f) ->
-            /README.(markdown|mdown|mkdn|md|textile|rdoc|org|creole|mediawiki|wiki|rst|asciidoc|adoc|asc|pdo)/i.test(f)
-        return readmes[0]
-
-
     correctTypes = (boardInfo) ->
         boardInfoWithEmpty =
-            { name        : ''
+            { id : ''
             , description : ''
-            , site        : ''
-            , license     : ''
             }
         for prop of boardInfoWithEmpty
             if (boardInfo.hasOwnProperty(prop))
@@ -54,19 +46,9 @@ else
             info = {}
         info = correctTypes(info)
         info.id = path.relative(boardDir, folder)
-        if info.description == '' || info.site == ''
+        if info.description == ''
             ghInfo = getGithubInfo(info.id)
-            if info.description == ''
-                info.description = ghInfo.description
-            if info.site == '' and ghInfo.homepage?
-                info.site = ghInfo.homepage
-            if info.site == ''
-                info.site = "https://#{info.id}"
-        readme_path = getGithubReadmePath(folder)
-        if readme_path?
-            info.readme = fs.readFileSync(readme_path, {encoding:'utf8'})
-        else
-            info.readme = ''
+            info.description = ghInfo.description
         boards.push(info)
 
     boardJson = fs.openSync(targets[0], 'w')

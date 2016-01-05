@@ -25,9 +25,18 @@ images = globule.find('src/images/*')
 for f in html.concat(images)
     ninja.edge(f.replace('src','build')).from(f).using('copy')
 
-js = globule.find('src/*.jsx')
+js = globule.find('src/*.js').map (f) ->
+    temp = f.replace('src', 'build/.temp')
+    ninja.edge(temp).from(f).using('copy')
+    return temp
 
-ninja.edge('build/bundle.js').from('src/main.jsx').need(js).using('browserify')
+jsx = globule.find('src/*.jsx').map (f) ->
+    temp = f.replace('src', 'build/.temp')
+    ninja.edge(temp).from(f).using('copy')
+    return temp
+
+ninja.edge('build/bundle.js').from('build/.temp/main.jsx')
+    .need(js.concat(jsx.concat(['build/.temp/boards.json']))).using('browserify')
 
 boardFolders = globule.find('boards/*/*/*', {filter:'isDirectory'})
 
