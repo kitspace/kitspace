@@ -1,6 +1,5 @@
 // main.js
 var testData = require('./boards.json');
-var Image = require('./image');
 var LazyLoad = require('react-lazyload');
 var React = require('react');
 var ReactDOM = require('react-dom');
@@ -90,8 +89,8 @@ var BoardThumb = React.createClass({
     };
 
     var image =
-        <LazyLoad>
-          <Image src={'boards/' + this.props.data.id + '/images/thumb.png'}
+        <LazyLoad once>
+          <img src={'boards/' + this.props.data.id + '/images/thumb.png'}
             style = {imgStyle} />
         </LazyLoad>;
 
