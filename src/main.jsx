@@ -89,7 +89,7 @@ var BoardThumb = React.createClass({
     };
 
     var image =
-        <LazyLoad once>
+        <LazyLoad once offset={100}>
           <img src={'boards/' + this.props.data.id + '/images/thumb.png'}
             style = {imgStyle} />
         </LazyLoad>;
