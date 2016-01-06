@@ -1,9 +1,10 @@
 // main.js
-var testData = require('./boards.json');
-var LazyLoad = require('react-lazyload');
-var React = require('react');
-var ReactDOM = require('react-dom');
+var testData    = require('./boards.json');
+var LazyLoad    = require('./LazyLoad');
+var React       = require('react');
+var ReactDOM    = require('react-dom');
 var SearchInput = require('react-search-input');
+var Image       = require('./image');
 
 var TitleBar = React.createClass({
   render: function () {
@@ -94,8 +95,8 @@ var BoardThumb = React.createClass({
     };
 
     var image =
-        <LazyLoad once offset={100}>
-          <img src={'boards/' + this.props.data.id + '/images/thumb.png'}
+        <LazyLoad once={true} component={React.createElement('div', {style:imgStyle})} distance={300}>
+          <Image src={'boards/' + this.props.data.id + '/images/thumb.png'}
             style = {imgStyle} />
         </LazyLoad>;
 

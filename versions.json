@@ -8,6 +8,10 @@
     "hash": "ffaff0188ef2dfcc8953c8bada6c5e530737c4fc"
   },
   {
+    "repo": "https://github.com/kitnic/CC2538-dev-board",
+    "hash": "79c711e473d93368f458187e0664a89da0692de0"
+  },
+  {
     "repo": "https://github.com/kitnic/mchck-board",
     "hash": "6c949d4d95d08320ba18819c77703d450e362eae"
   },
