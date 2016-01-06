@@ -74,7 +74,6 @@ var BoardThumb = React.createClass({
       , textAlign: 'center'
       , verticalAlign: 'middle'
       , lineHeight: String(dim.thumb.capH) + 'px'
-      , fontFamily: 'helvetica, sans'
       , fontWeight: 'bold'
       , fontSize: 18
       , paddingBottom: 5
@@ -85,7 +84,6 @@ var BoardThumb = React.createClass({
       , height: dim.thumb.descrH
       , overflow: 'hidden'
       , padding: '10 10 10 10'
-      , fontFamily: 'helvetica, sans'
       , textAlign: 'center'
       , verticalAlign: 'top'
       , backgroundColor: '#F0F0F0'
@@ -133,6 +131,16 @@ var BoardThumb = React.createClass({
 
 var BoardList = React.createClass({
   render: function () {
+    if (this.props.data.length === 0) {
+      return (
+        <div>
+          <div style={{height:'40%'}}></div>
+          <div style={{width:'100%', textAlign:'center'}}>
+                No results
+          </div>
+        </div>
+      );
+    }
     var thumbNodes = this.props.data.map(function(data) {
       return (
         <BoardThumb data={data} />
