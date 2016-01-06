@@ -1,10 +1,10 @@
 // main.js
-var testData    = require('./boards.json');
-var LazyLoad    = require('./LazyLoad');
-var React       = require('react');
-var ReactDOM    = require('react-dom');
-var SearchInput = require('react-search-input');
-var Image       = require('./image');
+const boards      = require('./boards.json');
+const LazyLoad    = require('./LazyLoad');
+const React       = require('react');
+const ReactDOM    = require('react-dom');
+const SearchInput = require('react-search-input');
+const Image       = require('./image');
 
 var TitleBar = React.createClass({
   render: function () {
@@ -155,25 +155,25 @@ var BoardList = React.createClass({
 });
 
 var Main = React.createClass({
+  getInitialState: function() {
+    return {result: boards};
+  },
   render: function () {
-    var data = testData;
-
-    if (this.refs.search) {
-      var filters = ['id', 'description'];
-      data = data.filter(this.refs.search.filter(filters));
-    }
-
     return (
       <div>
         <TitleBar />
         <SearchInput ref='search' onChange={this.searchUpdated} />
-        <BoardList data={data} />
+        <BoardList data={this.state.result} />
       </div>
     );
   },
 
   searchUpdated: function (term) {
-    this.setState({searchTerm: term}); // needed to force re-render
+    if (this.refs.search) {
+      var filters = ['id', 'description'];
+      var result = boards.filter(this.refs.search.filter(filters));
+      this.setState({result: result});
+    }
   }
 });
 
