@@ -30,6 +30,7 @@ const dim = {
       w    : 300
     , h    : 225
     , capH : 48
+    , descrH : 96
   }
 }
 
@@ -48,9 +49,9 @@ var BoardThumb = React.createClass({
   },
   render: function () {
     var style = {
-      backgroundColor: '#DFDFDF'
+      backgroundColor: '#FAFAFA'
       , width: (dim.thumb.w * 0.8) + 32 + 16
-      , height: (dim.thumb.h * 0.8) + dim.thumb.capH + 16 + 5
+      , height: (dim.thumb.h * 0.8) + dim.thumb.capH +  dim.thumb.descrH + 16 + 5
       , borderRadius: 10
       , color: 'rgb(55,55,55)'
       , marginTop:  8
@@ -60,6 +61,7 @@ var BoardThumb = React.createClass({
       , display: 'inline-block'
       , border: '1px solid #CFCFCF'
       , cursor: 'pointer'
+      , overflow: 'hidden'
     };
     var imgStyle = {
       width: dim.thumb.w * 0.8
@@ -73,17 +75,20 @@ var BoardThumb = React.createClass({
       , lineHeight: String(dim.thumb.capH) + 'px'
       , fontFamily: 'helvetica, sans'
       , fontWeight: 'bold'
-      , fontSize: 16
+      , fontSize: 18
       , paddingBottom: 5
       , opacity: 1.0
     };
     var descrStyle = {
-      visibility: 'hidden'
-      , height: 40
+      visibility: 'visible'
+      , height: dim.thumb.descrH
       , overflow: 'hidden'
       , padding: '10 10 10 10'
       , fontFamily: 'helvetica, sans'
       , textAlign: 'center'
+      , verticalAlign: 'top'
+      , backgroundColor: '#F0F0F0'
+      , fontSize: 16
       , marginBottom: 10
       , opacity: 1.0
     };
@@ -94,26 +99,9 @@ var BoardThumb = React.createClass({
             style = {imgStyle} />
         </LazyLoad>;
 
-    if (this.state.hover) {
-      style.backgroundColor  = '#F0F0F0';
-      //a lot of the calcs don't make sense
-      //this is what works to keep the others from moving
-      style.height          += (dim.thumb.h * 0.2) + 80;
-      style.width           += (dim.thumb.w * 0.2);
-      style.marginBottom    -= (dim.thumb.h * 0.2) + 60;
-      style.marginTop       -= 50;
-      style.marginLeft      -= (dim.thumb.h * 0.177);
-      style.marginRight     -= (dim.thumb.h * 0.177);
-      style.opacity          = 0.93;
-      imgStyle.opacity       = 1.0;
-      imgStyle.width         = dim.thumb.w;
-      imgStyle.height        = dim.thumb.h;
-      titleStyle.height     -= 24;
-      imgStyle.padding       = '26px 27px 0px 27px';
-      style.width           += 20;
-      style.position         = 'relative';
-      descrStyle.visibility  = 'visible';
-      style.boxShadow        = '0px 0.1em 0.5em #000';
+    if (this.state.hover)
+    {
+      style.boxShadow = '0px 0.1em 0.5em #000';
     }
 
 
