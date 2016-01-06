@@ -7,12 +7,15 @@ var LazyLoad = React.createClass({
   propTypes: {
     distance: React.PropTypes.number,
     component: React.PropTypes.node.isRequired,
-    children: React.PropTypes.node.isRequired
+    children: React.PropTypes.node.isRequired,
+    once: React.PropTypes.bool
   },
 
   getDefaultProps: function() {
     return {
       distance: 100
+      , component: <div></div>
+      , once: false
     };
   },
 
@@ -22,22 +25,36 @@ var LazyLoad = React.createClass({
     };
   },
   componentDidMount: function() {
-    this._checkViewport();
-    events.addEventListener(window, 'scroll', this._checkViewport);
-    events.addEventListener(window, 'resize', this._checkViewport);
+    this._startCallbackViewport();
   },
   componentWillUnmount: function() {
-    events.removeEventListener(window, 'scroll', this._checkViewport);
-    events.removeEventListener(window, 'resize', this._checkViewport);
+    this._stopCallbackViewport();
+  },
+  _startCallbackViewport: function () {
+    this._checkViewport()
+    this._timer = setInterval(this._checkViewport, 1000);
+  },
+  _stopCallbackViewport: function () {
+    clearInterval(this._timer);
   },
   _checkViewport: function() {
+    if (this._checkViewportWaiting) {
+      return;
+    }
     if (!this.isMounted()) {
       return;
     }
+    if (this.props.once && this.state.visible) {
+      return;
+    }
+    this._checkViewportWaiting = true;
     var el = this.getDOMNode();
     this.setState({
       visible: isVisible(el, this.props.distance)
     });
+    setTimeout(function () {
+      this._checkViewportWaiting = false;
+    }.bind(this), 100);
   },
 
   render: function() {
