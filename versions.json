@@ -1,8 +1,22 @@
-{
-  "https://github.com/kitnic/Bus_Pirate": "ffaff0188ef2dfcc8953c8bada6c5e530737c4fc",
-  "https://github.com/kitnic/mchck-board": "6c949d4d95d08320ba18819c77703d450e362eae",
-  "https://github.com/kitnic/HACK": "836d338d88576480916e860947cf8a73861dd8aa",
-  "https://github.com/kitnic/arduino-uno": "878e37a7d6a9617ba0a751a31918370cd234762f",
-  "https://github.com/kitnic/CC2538-dev-board": "79c711e473d93368f458187e0664a89da0692de0",
-  "https://github.com/kitnic/RiftDK1": "410c0d0b8bea7cb12418cf93a62f512c7b41524c"
-}
+[
+  {
+    "repo": "https://github.com/kitnic/arduino-uno",
+    "hash": "878e37a7d6a9617ba0a751a31918370cd234762f"
+  },
+  {
+    "repo": "https://github.com/kitnic/Bus_Pirate",
+    "hash": "ffaff0188ef2dfcc8953c8bada6c5e530737c4fc"
+  },
+  {
+    "repo": "https://github.com/kitnic/mchck-board",
+    "hash": "6c949d4d95d08320ba18819c77703d450e362eae"
+  },
+  {
+    "repo": "https://github.com/kitnic/RiftDK1",
+    "hash": "410c0d0b8bea7cb12418cf93a62f512c7b41524c"
+  },
+  {
+    "repo": "https://github.com/kitnic/HACK",
+    "hash": "836d338d88576480916e860947cf8a73861dd8aa"
+  }
+]

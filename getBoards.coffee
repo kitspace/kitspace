@@ -5,12 +5,16 @@ utils = require('./utils')
 
 versions = JSON.parse(fs.readFileSync('versions.json'))
 
-for repo, hash of versions
+for {repo, hash} in versions
     folder = utils.repoToFolder(repo)
     fs.exists folder, ((folder, repo, hash, exists) ->
         if exists
-            cp.exec("cd #{folder} && git pull && git checkout #{hash}")
+            cmd = "cd #{folder} && git pull && git checkout #{hash}"
+            console.log(cmd)
+            cp.exec(cmd)
         else
-            cp.exec("git clone #{repo} #{folder} &&
-                cd #{folder} && git checkout #{hash}")
+            cmd = "git clone #{repo} #{folder} &&
+                cd #{folder} && git checkout #{hash}"
+            console.log(cmd)
+            cp.exec(cmd)
     ).bind(undefined, folder, repo, hash)
