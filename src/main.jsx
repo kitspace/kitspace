@@ -20,6 +20,7 @@ var TitleBar = React.createClass({
           <img src='/images/logo.png' />
         </a>
       </div>
+        <SearchInput ref={function (ref) {this.search = ref}.bind(this)} onChange={this.props.searchCallback} />
       </div>
     );
   }
@@ -161,17 +162,16 @@ var Main = React.createClass({
   render: function () {
     return (
       <div>
-        <TitleBar />
-        <SearchInput ref='search' onChange={this.searchUpdated} />
+        <TitleBar ref='title' searchCallback={this.searchUpdated} />
         <BoardList data={this.state.result} />
       </div>
     );
   },
 
   searchUpdated: function (term) {
-    if (this.refs.search) {
+    if (this.refs.title.search) {
       var filters = ['id', 'description'];
-      var result = boards.filter(this.refs.search.filter(filters));
+      var result = boards.filter(this.refs.title.search.filter(filters));
       this.setState({result: result});
     }
   }
