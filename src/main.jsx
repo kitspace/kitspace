@@ -99,18 +99,11 @@ var BoardThumb = React.createClass({
             style = {imgStyle} />
         </LazyLoad>;
 
-    if (this.state.hover)
-    {
-      style.boxShadow = '0px 0.1em 0.5em #000';
-    }
-
-
     return (
       <div
-        onMouseOver={this.handleMouseOver}
-        onMouseOut={this.handleMouseOut}
         onClick={this.handleClick}
         style={style}
+        className={'hover-shadow'}
       >
         <center>
         {image}
