@@ -37,18 +37,6 @@ const dim = {
 }
 
 var BoardThumb = React.createClass({
-  getInitialState: function() {
-    return {hover: false};
-  },
-  handleMouseOver: function (e) {
-    this.setState({hover: true});
-  },
-  handleMouseOut: function (e) {
-    this.setState({hover: false});
-  },
-  handleClick: function (e) {
-      document.location.href += 'boards/' + this.props.data.id;
-  },
   render: function () {
     var style = {
       backgroundColor: '#FAFAFA'
@@ -100,32 +88,33 @@ var BoardThumb = React.createClass({
         </LazyLoad>;
 
     return (
-      <div
-        onClick={this.handleClick}
-        style={style}
-        className={'hover-shadow'}
-      >
-        <center>
-        {image}
-        </center>
-        <div style={titleStyle}>
-          {this.props.data.id.split('/').slice(1).join(' / ')}
-        </div>
-        <div style={descrStyle}>
-          {(function() {
-              var str = this.props.data.description;
-              if (str.length > 87) {
-                str = str.substr(0,87);
-                if (str[87] !== ' ') {
-                  str = str.concat(' ');
+      <a href={'/boards/' + this.props.data.id}>
+        <div
+          style={style}
+          className={'hover-shadow'}
+        >
+          <center>
+          {image}
+          </center>
+          <div style={titleStyle}>
+            {this.props.data.id.split('/').slice(1).join(' / ')}
+          </div>
+          <div style={descrStyle}>
+            {(function() {
+                var str = this.props.data.description;
+                if (str.length > 87) {
+                  str = str.substr(0,87);
+                  if (str[87] !== ' ') {
+                    str = str.concat(' ');
+                  }
+                  str = str.concat('...');
                 }
-                str = str.concat('...');
-              }
-              return str;
-            }).call(this)
-          }
+                return str;
+              }).call(this)
+            }
+          </div>
         </div>
-      </div>
+      </a>
     );
   }
 });
