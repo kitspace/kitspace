@@ -1,3 +1,0 @@
-[submodule "svg2png"]
-	path = module_src/svg2png
-	url = https://github.com/kasbah/svg2png

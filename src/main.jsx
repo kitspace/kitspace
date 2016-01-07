@@ -29,8 +29,8 @@ var TitleBar = React.createClass({
 
 const dim = {
   thumb : {
-      w    : 300
-    , h    : 225
+      w    : 240
+    , h    : 180
     , capH : 48
     , descrH : 96
   }
@@ -40,8 +40,8 @@ var BoardThumb = React.createClass({
   render: function () {
     var style = {
       backgroundColor: '#373737'
-      , width: (dim.thumb.w * 0.8) + 32 + 16
-      , height: (dim.thumb.h * 0.8) + dim.thumb.capH +  dim.thumb.descrH + 16 + 5 + 16
+      , width: dim.thumb.w + 32 + 16
+      , height: dim.thumb.h + dim.thumb.capH +  dim.thumb.descrH + 16 + 5 + 16
       , borderRadius: 10
       , marginTop:  8
       , marginRight: 8
@@ -53,8 +53,8 @@ var BoardThumb = React.createClass({
       , overflow: 'hidden'
     };
     var imgStyle = {
-      width: dim.thumb.w * 0.8
-      , height: dim.thumb.h * 0.8
+      width: dim.thumb.w
+      , height: dim.thumb.h
       , marginTop: 16
       , marginBottom: 16
     };
@@ -87,7 +87,7 @@ var BoardThumb = React.createClass({
     var image =
         <LazyLoad once={true}
           component={React.createElement('div', {style:imgStyle})} distance={300}>
-          <Image src={'boards/' + this.props.data.id + '/images/thumb.png'}
+          <Image src={'boards/' + this.props.data.id + '/images/top.svg'}
             style = {imgStyle} />
         </LazyLoad>;
 

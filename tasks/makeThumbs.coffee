@@ -2,7 +2,6 @@ fs           = require 'fs'
 globule      = require('globule')
 path         = require('path')
 gerberToSvg  = require('gerber-to-svg')
-svg2png      = require('svg2png')
 yaml         = require('js-yaml')
 Svgo         = require('svgo')
 {checkArgs}  = require('./utils/utils')
@@ -61,7 +60,6 @@ if require.main != module
         deps = [folder].concat(gerbers)
         imageDir = folder.replace('boards', 'build/boards') + '/images'
         targets = [
-            "#{imageDir}/thumb.png"
             "#{imageDir}/top.svg"
             "#{imageDir}/bottom.svg"
         ]
@@ -69,8 +67,7 @@ if require.main != module
 else
     {deps, targets} = checkArgs(process.argv)
     folder = deps[0]
-    png = targets[0]
-    [topSvgPath, bottomSvgPath] = targets[1..]
+    [topSvgPath, bottomSvgPath] = targets
     try
         file = fs.readFileSync("#{folder}/kitnic.yaml")
     try
@@ -87,6 +84,5 @@ else
     bottom = gerberToSvg(stackup.bottom)
     svgo.optimize top, (result) ->
         fs.writeFileSync(topSvgPath, result.data)
-        svg2png topSvgPath, png, {width:300, height:225}, () ->
     svgo.optimize bottom, (result) ->
         fs.writeFileSync(bottomSvgPath, result.data)
