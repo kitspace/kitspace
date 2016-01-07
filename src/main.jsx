@@ -10,7 +10,7 @@ var TitleBar = React.createClass({
   render: function () {
     return (
       <div style={
-        { backgroundColor:'rgb(55,55,55)'
+        { backgroundColor:'#373737'
         , width:'100%', height:'64px'
         , boxShadow: '0px 0.1em 0.5em #000'
         }
@@ -39,11 +39,10 @@ const dim = {
 var BoardThumb = React.createClass({
   render: function () {
     var style = {
-      backgroundColor: '#FAFAFA'
+      backgroundColor: '#373737'
       , width: (dim.thumb.w * 0.8) + 32 + 16
-      , height: (dim.thumb.h * 0.8) + dim.thumb.capH +  dim.thumb.descrH + 16 + 5
+      , height: (dim.thumb.h * 0.8) + dim.thumb.capH +  dim.thumb.descrH + 16 + 5 + 16
       , borderRadius: 10
-      , color: 'rgb(55,55,55)'
       , marginTop:  8
       , marginRight: 8
       , marginBottom: 8
@@ -57,6 +56,7 @@ var BoardThumb = React.createClass({
       width: dim.thumb.w * 0.8
       , height: dim.thumb.h * 0.8
       , marginTop: 16
+      , marginBottom: 16
     };
     var titleStyle = {
       height: dim.thumb.capH
@@ -67,6 +67,8 @@ var BoardThumb = React.createClass({
       , fontSize: 18
       , paddingBottom: 5
       , opacity: 1.0
+      , backgroundColor: '#FAFAFA'
+      , color: '#373737'
     };
     var descrStyle = {
       visibility: 'visible'
@@ -75,14 +77,16 @@ var BoardThumb = React.createClass({
       , padding: '10 10 10 10'
       , textAlign: 'center'
       , verticalAlign: 'top'
-      , backgroundColor: '#F0F0F0'
       , fontSize: 16
       , marginBottom: 10
       , opacity: 1.0
+      , backgroundColor: '#FAFAFA'
+      , color : '#373737'
     };
 
     var image =
-        <LazyLoad once={true} component={React.createElement('div', {style:imgStyle})} distance={300}>
+        <LazyLoad once={true}
+          component={React.createElement('div', {style:imgStyle})} distance={300}>
           <Image src={'boards/' + this.props.data.id + '/images/thumb.png'}
             style = {imgStyle} />
         </LazyLoad>;
