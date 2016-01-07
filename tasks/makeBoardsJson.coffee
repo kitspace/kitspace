@@ -2,7 +2,7 @@ yaml        = require('js-yaml')
 fs          = require('fs')
 path        = require('path')
 globule     = require('globule')
-{checkArgs} = require('./utils/utils')
+utils       = require('./utils/utils')
 cp          = require('child_process')
 
 boardDir = 'boards'
@@ -15,7 +15,8 @@ if require.main != module
 else
 
     getGithubInfo = (id) ->
-        text = cp.execSync("curl https://api.github.com/repos#{id.replace('github.com','')}")
+        text = cp.execSync("curl https://api.github.com/repos\
+            #{id.replace(/^github.com/,'')}")
         return JSON.parse(text)
 
     correctTypes = (boardInfo) ->
@@ -29,7 +30,7 @@ else
         return boardInfoWithEmpty
 
 
-    {deps, targets} = checkArgs(process.argv)
+    {deps, targets} = utils.processArgs(process.argv)
     boards = []
     folders = globule.find("#{boardDir}/*/*/*", {filter: 'isDirectory'})
     folders.sort((a,b) ->

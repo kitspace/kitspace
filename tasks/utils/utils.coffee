@@ -1,4 +1,4 @@
-exports.checkArgs = (argv) ->
+exports.processArgs = (argv) ->
     if argv.length < 5
         console.error('not enough arguments')
         process.exit(1)

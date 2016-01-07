@@ -4,7 +4,7 @@ path         = require('path')
 gerberToSvg  = require('gerber-to-svg')
 yaml         = require('js-yaml')
 Svgo         = require('svgo')
-{checkArgs}  = require('./utils/utils')
+utils        = require('./utils/utils')
 boardBuilder = require('./utils/boardBuilder')
 cp = require('child_process')
 Jszip = require('jszip')
@@ -80,7 +80,7 @@ if require.main != module
         ]
         return {deps, targets}
 else
-    {deps, targets} = checkArgs(process.argv)
+    {deps, targets} = utils.processArgs(process.argv)
     folder = deps[0]
     gerbers = deps[1..]
     [topSvgPath, bottomSvgPath, zipPath] = targets
