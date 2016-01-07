@@ -13,6 +13,7 @@
     "globule": "^0.2.0",
     "http-server": "^0.8.0",
     "js-yaml": "^3.3.1",
+    "jszip": "^2.5.0",
     "pcb-stackup": "^0.0.4",
     "react": "^0.14.5",
     "react-dom": "^0.14.5",

@@ -6,6 +6,9 @@ yaml         = require('js-yaml')
 Svgo         = require('svgo')
 {checkArgs}  = require('./utils/utils')
 boardBuilder = require('./utils/boardBuilder')
+cp = require('child_process')
+Jszip = require('jszip')
+
 
 svgo = new Svgo
     full : true
@@ -65,17 +68,24 @@ if require.main != module
             console.error("No gerbers found for #{folder}.")
             process.exit(1)
         deps = [folder].concat(gerbers)
-        imageDir = folder.replace('boards', 'build/boards') + '/images'
+        buildFolder = folder.replace('boards', 'build/boards')
+        version = cp.execSync("cd #{folder} && git log -n 1 --oneline"
+        , {encoding:'utf8'})
+        version = version.split(' ')[0]
+        zip = "#{path.basename(folder)}-#{version}-gerbers.zip"
         targets = [
-            "#{imageDir}/top.svg"
-            "#{imageDir}/bottom.svg"
+            "#{buildFolder}/images/top.svg"
+            "#{buildFolder}/images/bottom.svg"
+            "#{buildFolder}/#{zip}"
         ]
         return {deps, targets}
 else
     {deps, targets} = checkArgs(process.argv)
     folder = deps[0]
     gerbers = deps[1..]
-    [topSvgPath, bottomSvgPath] = targets
+    [topSvgPath, bottomSvgPath, zipPath] = targets
+    zip = new Jszip
+    zip = zip.folder(path.basename(zipPath, '.zip'))
     try
         file = fs.readFileSync("#{folder}/kitnic.yaml")
     try
@@ -84,13 +94,33 @@ else
             stackup = boardBuilder(gerbers, info.color)
         else
             stackup = boardBuilder(gerbers)
+        for gerberPath in gerbers
+            zip.file(path.basename(gerberPath), fs.readFileSync(gerberPath))
     catch e
         console.error("Could not process gerbers for #{folder}")
         console.error(e)
         process.exit(1)
+    fs.writeFile zipPath
+    , zip.generate
+        type:'nodebuffer'
+        compression:'DEFLATE'
+        compressionOptions : {level:6}
+    , (err) ->
+        if err?
+            console.error("Could not write gerber zip for #{folder}")
+            console.error(err)
+            process.exit(1)
     top = gerberToSvg(stackup.top)
     bottom = gerberToSvg(stackup.bottom)
     svgo.optimize top, (result) ->
-        fs.writeFileSync(topSvgPath, result.data)
+        fs.writeFile topSvgPath, result.data, (err) ->
+            if err?
+                console.error("Could not write top svg for #{folder}")
+                console.error(err)
+                process.exit(1)
     svgo.optimize bottom, (result) ->
-        fs.writeFileSync(bottomSvgPath, result.data)
+        fs.writeFile bottomSvgPath, result.data, (err) ->
+            if err?
+                console.error("Could not write bottom svg for #{folder}")
+                console.error(err)
+                process.exit(1)
