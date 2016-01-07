@@ -30,7 +30,7 @@ else
     try
         if file?
             info = yaml.safeLoad(file)
-            stackup = boardBuilder(deps[1..], info.rendering)
+            stackup = boardBuilder(deps[1..], info.color)
         else
             stackup = boardBuilder(deps[1..])
     catch e

@@ -45,12 +45,38 @@ styleToSvgObj = ({copperFinish, solderMask, silkScreen}) ->
              ._board-sp { color: silver; opacity: 0.0;}
              ._board-out { color: black; }"
 
-defaultStyle =
-    copperFinish: 'gold'
-    solderMask: 'green'
-    silkScreen: 'white'
 
-convert = (filenames, style = defaultStyle) ->
+colorToStyle =
+    green:
+        solderMask: 'green'
+        copperFinish: 'gold'
+        silkScreen: 'white'
+    red:
+        solderMask: 'red'
+        copperFinish: 'gold'
+        silkScreen: 'white'
+    blue:
+        solderMask: 'blue'
+        copperFinish: 'hasl'
+        silkScreen: 'white'
+    black:
+        solderMask: 'black'
+        copperFinish: 'hasl'
+        silkScreen: 'white'
+    white:
+        solderMask: 'white'
+        copperFinish: 'gold'
+        silkScreen: 'black'
+    purple:
+        solderMask: 'purple'
+        copperFinish: 'gold'
+        silkScreen: 'white'
+    yellow:
+        solderMask: 'yellow'
+        copperFinish: 'bare'
+        silkScreen: 'black'
+
+convert = (filenames, color = 'green') ->
     layers = []
     for filename in filenames
         layerType = idLayer(filename)
@@ -71,8 +97,8 @@ convert = (filenames, style = defaultStyle) ->
                 layerType = 'drl'
             layers.push({type: layerType, svg: svgObj})
     stackup = pcbStackup(layers)
-    stackup.top.svg._.push(styleToSvgObj(style))
-    stackup.bottom.svg._.push(styleToSvgObj(style))
+    stackup.top.svg._.push(styleToSvgObj(colorToStyle[color]))
+    stackup.bottom.svg._.push(styleToSvgObj(colorToStyle[color]))
     return stackup
 
 module.exports = convert
