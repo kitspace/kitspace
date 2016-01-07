@@ -27,12 +27,12 @@ var TitleBar = React.createClass({
 });
 
 
-const dim = {
+const sizes = {
   thumb : {
-      w    : 240
-    , h    : 180
-    , capH : 48
-    , descrH : 96
+      w            : 240
+    , h            : 180
+    , captionH     : 48
+    , descriptionH : 96
   }
 }
 
@@ -50,8 +50,9 @@ var BoardThumb = React.createClass({
   render: function () {
     var style = {
       backgroundColor: '#373737'
-      , width: dim.thumb.w + 32 + 16
-      , height: dim.thumb.h + dim.thumb.capH +  dim.thumb.descrH + 16 + 5 + 16
+      , width: sizes.thumb.w + 32 + 16
+      , height: sizes.thumb.h + sizes.thumb.captionH
+          + sizes.thumb.descriptionH + 16 + 5 + 16
       , borderRadius: 10
       , marginTop:  8
       , marginRight: 8
@@ -63,16 +64,16 @@ var BoardThumb = React.createClass({
       , overflow: 'hidden'
     };
     var imgStyle = {
-      width: dim.thumb.w
-      , height: dim.thumb.h
+      width: sizes.thumb.w
+      , height: sizes.thumb.h
       , marginTop: 16
       , marginBottom: 16
     };
     var titleStyle = {
-      height: dim.thumb.capH
+      height: sizes.thumb.captionH
+      , lineHeight: String(sizes.thumb.captionH) + 'px'
       , textAlign: 'center'
       , verticalAlign: 'middle'
-      , lineHeight: String(dim.thumb.capH) + 'px'
       , fontWeight: 'bold'
       , fontSize: 18
       , paddingBottom: 5
@@ -82,7 +83,7 @@ var BoardThumb = React.createClass({
     };
     var descrStyle = {
       visibility: 'visible'
-      , height: dim.thumb.descrH
+      , height: sizes.thumb.descriptionH
       , overflow: 'hidden'
       , padding: '10 10 10 10'
       , textAlign: 'center'
