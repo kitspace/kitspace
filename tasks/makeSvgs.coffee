@@ -53,7 +53,14 @@ svgo = new Svgo
 
 if require.main != module
     module.exports = (folder) ->
-        gerbers = globule.find("#{folder}/gerbers/*")
+        try
+            file = fs.readFileSync("#{folder}/kitnic.yaml")
+        if file?
+            info = yaml.safeLoad(file)
+        if info?.gerbers?
+            gerbers = globule.find("#{folder}/#{info.gerbers}/*")
+        else
+            gerbers = globule.find("#{folder}/gerbers/*")
         if gerbers.length == 0
             console.error("No gerbers found for #{folder}.")
             process.exit(1)
@@ -67,15 +74,16 @@ if require.main != module
 else
     {deps, targets} = checkArgs(process.argv)
     folder = deps[0]
+    gerbers = deps[1..]
     [topSvgPath, bottomSvgPath] = targets
     try
         file = fs.readFileSync("#{folder}/kitnic.yaml")
     try
         if file?
             info = yaml.safeLoad(file)
-            stackup = boardBuilder(deps[1..], info.color)
+            stackup = boardBuilder(gerbers, info.color)
         else
-            stackup = boardBuilder(deps[1..])
+            stackup = boardBuilder(gerbers)
     catch e
         console.error("Could not process gerbers for #{folder}")
         console.error(e)
