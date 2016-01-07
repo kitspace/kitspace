@@ -5,7 +5,6 @@
   "description": "",
   "main": "",
   "devDependencies": {
-    "add-event-listener": "0.0.1",
     "babel-preset-react": "^6.3.13",
     "babelify": "^7.2.0",
     "browserify": "^12.0.1",

@@ -1,5 +1,4 @@
 var React = require('react');
-var events = require('add-event-listener');
 var isVisible = require('./isVisible');
 
 var LazyLoad = React.createClass({
@@ -24,37 +23,27 @@ var LazyLoad = React.createClass({
       visible: false
     };
   },
+
   componentDidMount: function() {
-    this._startCallbackViewport();
-  },
-  componentWillUnmount: function() {
-    this._stopCallbackViewport();
-  },
-  _startCallbackViewport: function () {
     this._checkViewport()
     this._timer = setInterval(this._checkViewport, 1000);
   },
-  _stopCallbackViewport: function () {
+
+  componentWillUnmount: function() {
     clearInterval(this._timer);
   },
+
   _checkViewport: function() {
-    if (this._checkViewportWaiting) {
-      return;
-    }
     if (!this.isMounted()) {
       return;
     }
     if (this.props.once && this.state.visible) {
       return;
     }
-    this._checkViewportWaiting = true;
     var el = this.getDOMNode();
     this.setState({
       visible: isVisible(el, this.props.distance)
     });
-    setTimeout(function () {
-      this._checkViewportWaiting = false;
-    }.bind(this), 100);
   },
 
   render: function() {
