@@ -35,6 +35,7 @@ else
             stackup = boardBuilder(deps[1..])
     catch e
         console.error("Could not process gerbers for #{folder}")
+        console.error(e)
         process.exit(1)
     fs.writeFileSync(svgs[0], gerberToSvg(stackup.top))
     svg2png svgs[0], png, {width:300, height:225}, () ->

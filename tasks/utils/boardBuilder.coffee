@@ -67,6 +67,10 @@ colorToStyle =
         solderMask: 'white'
         copperFinish: 'gold'
         silkScreen: 'black'
+    orange:
+        solderMask: 'orange'
+        copperFinish: 'hasl'
+        silkScreen: 'white'
     purple:
         solderMask: 'purple'
         copperFinish: 'gold'
