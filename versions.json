@@ -1,7 +1,7 @@
 [
   {
     "repo": "https://github.com/kitnic/arduino-uno",
-    "hash": "7cce89432b8b55957a35b24276f1f0e9c8a135c7"
+    "hash": "b39938fa690bb506275cc4080aaad6bd66a75ac5"
   },
   {
     "repo": "https://github.com/kitnic/Bus_Pirate",
@@ -9,18 +9,18 @@
   },
   {
     "repo": "https://github.com/kitnic/CC2538-dev-board",
-    "hash": "913627db40c7a8b78ab214e1e6dc2ac86afea87a"
+    "hash": "3ba71db9d984fc0120d0fa13d23fab8333737cf6"
   },
   {
     "repo": "https://github.com/kitnic/mchck-board",
-    "hash": "7eac00e41d020da237627ca86e1cc5f8998b3dc4"
+    "hash": "beb1d4b045dab15cf0d29e02e134f4088b08a51a"
   },
   {
     "repo": "https://github.com/kitnic/RiftDK1",
-    "hash": "84d9e9217d162f8d7ad890da0e95b990405a3143"
+    "hash": "9790549bc93d663940e769983b818feb3cbd1053"
   },
   {
     "repo": "https://github.com/kitnic/HACK",
-    "hash": "836d338d88576480916e860947cf8a73861dd8aa"
+    "hash": "8cb34de8161ca8e365d2f79600597294c5d4815e"
   }
 ]
