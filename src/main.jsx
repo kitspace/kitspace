@@ -37,6 +37,16 @@ const dim = {
 }
 
 var BoardThumb = React.createClass({
+
+  getDefaultProps: function() {
+    return ({
+      data: {
+        id : 'github.com/kitnic/arduino-uno' //so we have an image to get
+        , description : ''
+      }
+    });
+  },
+
   render: function () {
     var style = {
       backgroundColor: '#373737'
@@ -135,9 +145,9 @@ var BoardList = React.createClass({
         </div>
       );
     }
-    var thumbNodes = this.props.data.map(function(data) {
+    var thumbNodes = this.props.data.map(function(data, index) {
       return (
-        <BoardThumb data={data} />
+        <BoardThumb data={data} key={'thumb-' + index}/>
       );
     });
     return (
