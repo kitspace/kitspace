@@ -16,8 +16,7 @@ else
 
     getGithubInfo = (id) ->
         text = cp.execSync("curl https://api.github.com/repos\
-            #{id.replace(/^github.com/,'')}", {encoding:'utf8'})
-        console.log('getGithubInfo', text)
+            #{id.replace(/^github.com/,'')}")
         return JSON.parse(text)
 
     correctTypes = (boardInfo) ->
@@ -48,9 +47,13 @@ else
             info = {}
         info = correctTypes(info)
         info.id = path.relative(boardDir, folder)
-        if info.description == ''
+        if info.description == '' and /^github.com/.test(info.id)
             ghInfo = getGithubInfo(info.id)
-            info.description = ghInfo.description
+            if ghInfo?.description?
+                info.description = ghInfo.description
+            else
+                console.warn("WARNING: could not get GitHub description for #{folder}")
+                console.warn(ghInfo)
         boards.push(info)
 
     boardJson = fs.openSync(targets[0], 'w')
