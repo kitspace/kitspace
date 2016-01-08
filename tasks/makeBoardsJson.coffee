@@ -15,8 +15,12 @@ if require.main != module
 else
 
     getGithubInfo = (id) ->
-        text = cp.execSync("curl https://api.github.com/repos\
-            #{id.replace(/^github.com/,'')}")
+        url =  "https://api.github.com/repos#{id.replace(/^github.com/,'')}"
+        if process?.env?.GH_TOKEN? #we use this avoid being rate-limited
+            text = cp.execSync("curl -u kasbah:#{process.env.GH_TOKEN} #{url}")
+        else
+            console.warn('Using un-authenticated access to GitHub API')
+            text = cp.execSync("curl #{url}")
         return JSON.parse(text)
 
     correctTypes = (boardInfo) ->
