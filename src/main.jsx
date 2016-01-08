@@ -155,14 +155,16 @@ var BoardThumb = React.createClass({
           <div style={descrStyle}>
             {(function() {
                 var str = this.props.data.description;
-                if (str.length > 87) {
-                  str = str.substr(0,87);
-                  if (str[87] !== ' ') {
-                    str = str.concat(' ');
+                if (str) {
+                  if (str.length > 87) {
+                    str = str.substr(0,87);
+                    if (str[87] !== ' ') {
+                      str = str.concat(' ');
+                    }
+                    str = str.concat('...');
                   }
-                  str = str.concat('...');
+                  return str;
                 }
-                return str;
               }).call(this)
             }
           </div>

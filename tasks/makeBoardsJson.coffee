@@ -16,7 +16,8 @@ else
 
     getGithubInfo = (id) ->
         text = cp.execSync("curl https://api.github.com/repos\
-            #{id.replace(/^github.com/,'')}")
+            #{id.replace(/^github.com/,'')}", {encoding:'utf8'})
+        console.log('getGithubInfo', text)
         return JSON.parse(text)
 
     correctTypes = (boardInfo) ->
