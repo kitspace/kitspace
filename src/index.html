@@ -13,6 +13,42 @@
             .hover-shadow:hover {
                 box-shadow: 0px 0.1em 0.5em black;
             }
+
+            .search-input {
+                padding: 10px 10px;
+                height: 52px;
+                position: relative;
+            }
+
+            .search-input::before {
+                content: "\26b2";
+                display: block;
+                position: absolute;
+                width: 15px;
+                z-index: 3;
+                height: 15px;
+                transform: rotate(-45deg);
+                font-size: 20px;
+                top: 15px;
+                line-height: 32px;
+                color: #A0A0A0;
+            }
+
+            .search-input > input {
+                width: 100%;
+                font-size: 18px;
+                border: none;
+                line-height: 22px;
+                padding: 5px 10px 5px 25px;
+                height: 40px;
+                position: relative;
+                border-radius: 5px;
+                background: white;
+            }
+
+            .search-input > input:focus {
+                outline: none;
+            }
         </style>
     </head>
     <body>

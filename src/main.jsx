@@ -10,17 +10,55 @@ var TitleBar = React.createClass({
   render: function () {
     return (
       <div style={
-        { backgroundColor:'#373737'
+        { backgroundColor:'#F0F0F0'
         , width:'100%', height:'64px'
         , boxShadow: '0px 0.1em 0.5em #000'
+        , overflow: 'hidden'
+        , borderBottomRightRadius: 5
+        , borderBottomLeftRadius: 5
         }
       }>
-      <div style={{padding: '10 10 10 10'}}>
-        <a href='/'>
-          <img src='/images/logo.png' />
+        <div style={{
+            padding: '10 10 10 10'
+          , float:'left'
+          , backgroundColor:'#373737'
+          , width: 140
+        }}>
+          <a href='/'>
+            <img src='/images/logo.png' />
+          </a>
+        </div>
+        <a href='/submit'
+          style={{
+            color:'white'
+            , textDecoration: 'none'
+            , fontWeight: 'bold'
+          }}
+        >
+          <div style={{
+            height:'100%'
+            , lineHeight: '60px'
+            , verticalAlign:'middle'
+            , backgroundColor: '#373737'
+            , float: 'right'
+            , paddingLeft: 10
+            , paddingRight: 10
+          }}>
+              Submit
+          </div>
         </a>
-      </div>
-        <SearchInput ref={function (ref) {this.search = ref}.bind(this)} onChange={this.props.searchCallback} />
+        <div style={{
+          paddingTop: 2
+          , marginLeft: 150
+          , marginRight: 70
+          , paddingLeft: 10
+          , paddingRight: 5
+        }}>
+          <SearchInput className='search-input'
+            ref={function (ref) {this.search = ref}.bind(this)}
+            onChange={this.props.searchCallback}
+          />
+        </div>
       </div>
     );
   }
