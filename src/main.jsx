@@ -131,12 +131,13 @@ var BoardThumb = React.createClass({
       , opacity: 1.0
       , backgroundColor: '#FAFAFA'
       , color : '#373737'
+      , fontWeight: 'normal'
     };
 
     var image =
         <LazyLoad once={true}
           component={React.createElement('div', {style:imgStyle})} distance={300}>
-          <Image src={'boards/' + this.props.data.id + '/images/top.svg'}
+          <img src={'boards/' + this.props.data.id + '/images/top.svg'}
             style = {imgStyle} />
         </LazyLoad>;
 
@@ -186,12 +187,42 @@ var BoardList = React.createClass({
     }
     var thumbNodes = this.props.data.map(function(data, index) {
       return (
-        <BoardThumb data={data} key={'thumb-' + index}/>
+        <BoardThumb data={data} key={data.id}/>
       );
     });
+    var displayIntro = this.props.data.length == boards.length ? 'inherit' : 'none';
+    var intro = (
+      <div style={{marginLeft:'10%', marginRight:'10%', marginTop:32, marginBottom: 32, display:displayIntro}}>
+      <center>
+        <div style={{backgroundColor: '#FAFAFA', padding: 20, borderRadius: 5,  textAlign:'left', maxWidth:700}}>
+        <p>
+
+          Kitnic.it is a repository of open hardware electronics projects that
+          are ready for you to order and build. Click on a project to get further
+          info, download the gerbers and see the parts list.
+
+        </p><p>
+
+          To quickly purchase labelled parts from various retailers you should
+          <a href=''> install</a> the 1-click-BOM extension. It's pretty useful
+          on it's own too and can be used on other sites.  Read more about it
+          <a href='http://1clickBOM.com'> here</a>.
+
+        </p><p>
+
+          <a href='/submit'> Submit</a> your own project to have it listed here!
+
+        </p>
+      </div>
+      </center>
+      </div>
+    );
     return (
-      <div style={{margin: 32, textAlign:'center'}}>
-      {thumbNodes}
+      <div>
+          {intro}
+        <div style={{margin: 32, textAlign:'center'}}>
+          {thumbNodes}
+        </div>
       </div>
     );
   }
