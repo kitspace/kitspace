@@ -13,7 +13,7 @@ var Image = React.createClass({
   render: function (){
     //this vs including an Object.assign polyfill
     var style = this.props.style || {};
-    style.transition = `opacity ${this.props.speed || 1}s`;
+    style.transition = 'opacity ' + (this.props.speed || 1) + 's';
     style.opacity = this.state.opacity;
 
     return (

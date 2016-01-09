@@ -137,7 +137,7 @@ var BoardThumb = React.createClass({
     var image =
         <LazyLoad once={true}
           component={React.createElement('div', {style:imgStyle})} distance={300}>
-          <img src={'boards/' + this.props.data.id + '/images/top.svg'}
+          <Image src={'boards/' + this.props.data.id + '/images/top.svg'}
             style = {imgStyle} />
         </LazyLoad>;
 
