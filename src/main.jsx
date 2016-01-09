@@ -9,7 +9,7 @@ var TitleBar = React.createClass({
   render: function () {
     return (
       <div style={
-        { backgroundColor:'#F0F0F0'
+        { backgroundColor:'#373737'
         , width:'100%', height:'64px'
         , boxShadow: '0px 0.1em 0.5em #000'
         , overflow: 'hidden'
@@ -30,28 +30,26 @@ var TitleBar = React.createClass({
         <a href='/submit'
           style={{
             color:'white'
-            , textDecoration: 'none'
-            , fontWeight: 'bold'
           }}
         >
           <div style={{
             height:'100%'
-            , lineHeight: '60px'
+            , lineHeight: '64px'
             , verticalAlign:'middle'
             , backgroundColor: '#373737'
             , float: 'right'
             , paddingLeft: 10
             , paddingRight: 10
+            , width: 140
           }}>
+          <center>
               Submit
+          </center>
           </div>
         </a>
         <div style={{
           paddingTop: 2
-          , marginLeft: 150
-          , marginRight: 70
-          , paddingLeft: 10
-          , paddingRight: 5
+          , overflow: 'hidden'
         }}>
           <SearchInput className='search-input'
             ref={function (ref) {this.search = ref}.bind(this)}
@@ -198,13 +196,13 @@ var BoardList = React.createClass({
 
           Kitnic.it is a repository of open hardware electronics projects that
           are ready for you to order and build. Click on a project to get further
-          info, download the gerbers and see the parts list.
+          info, download the gerbers and see the bill of materials.
 
         </p><p>
 
-          To quickly purchase labelled parts from various retailers you should
+          To quickly purchase the parts from various retailers you should
           <a href=''> install</a> the 1-click-BOM extension. It's pretty useful
-          on it's own too and can be used on other sites.  Read more about it
+          on it's own too and can be used on other sites. Read more about it
           <a href='http://1clickBOM.com'> here</a>.
 
         </p><p>
