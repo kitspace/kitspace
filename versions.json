@@ -22,5 +22,9 @@
   {
     "repo": "https://github.com/kitnic/HACK",
     "hash": "8cb34de8161ca8e365d2f79600597294c5d4815e"
+  },
+  {
+    "repo": "https://github.com/kitnic/FM_Transmitter",
+    "hash": "49bf0faf1622a820d3684e644afa8277795a8ee3"
   }
 ]
