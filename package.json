@@ -6,6 +6,7 @@
   "main": "",
   "devDependencies": {
     "babel-preset-react": "^6.3.13",
+    "babel-register": "^6.3.13",
     "babelify": "^7.2.0",
     "browserify": "^12.0.1",
     "coffee-script": "^1.9.2",
@@ -13,6 +14,7 @@
     "globule": "^0.2.0",
     "http-server": "^0.8.0",
     "js-yaml": "^3.3.1",
+    "jsdom": "^7.2.2",
     "jszip": "^2.5.0",
     "pcb-stackup": "^0.0.4",
     "react": "^0.14.5",

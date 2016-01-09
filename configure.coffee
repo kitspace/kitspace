@@ -20,9 +20,8 @@ ninja.rule('browserify').run("browserify
     $in -o $out"
 ).description('$command')
 
-html = globule.find('src/*.html')
 images = globule.find('src/images/*')
-for f in html.concat(images)
+for f in images
     ninja.edge(f.replace('src','build')).from(f).using('copy')
 
 js = globule.find('src/*.js').map (f) ->
@@ -35,7 +34,7 @@ jsx = globule.find('src/*.jsx').map (f) ->
     ninja.edge(temp).from(f).using('copy')
     return temp
 
-ninja.edge('build/bundle.js').from('build/.temp/main.jsx')
+ninja.edge('build/bundle.js').from('build/.temp/render.jsx')
     .need(js.concat(jsx.concat(['build/.temp/boards.json']))).using('browserify')
 
 boardFolders = globule.find('boards/*/*/*', {filter:'isDirectory'})

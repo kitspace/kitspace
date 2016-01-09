@@ -1,4 +1,3 @@
-// main.js
 const boards      = require('./boards.json');
 const LazyLoad    = require('./LazyLoad');
 const React       = require('react');
@@ -250,7 +249,4 @@ var Main = React.createClass({
   }
 });
 
-ReactDOM.render(
-  <Main />,
-  document.getElementById('content')
-);
+module.exports = Main;
