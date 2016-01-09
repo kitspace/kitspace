@@ -1,4 +1,5 @@
 var React = require('react');
+var ReactDOM = require('react-dom');
 var isVisible = require('./isVisible');
 
 var LazyLoad = React.createClass({
@@ -40,7 +41,7 @@ var LazyLoad = React.createClass({
     if (this.props.once && this.state.visible) {
       return;
     }
-    var el = this.getDOMNode();
+    var el = ReactDOM.findDOMNode(this);
     this.setState({
       visible: isVisible(el, this.props.distance)
     });
