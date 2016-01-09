@@ -3,7 +3,7 @@ const LazyLoad    = require('./LazyLoad');
 const React       = require('react');
 const ReactDOM    = require('react-dom');
 const SearchInput = require('react-search-input');
-const Image       = require('./image');
+const Image       = require('./Image');
 
 var TitleBar = React.createClass({
   render: function () {

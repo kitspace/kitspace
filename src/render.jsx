@@ -1,6 +1,6 @@
 const React    = require('react');
 const ReactDOM = require('react-dom');
-const Main     = require('./main')
+const Main     = require('./Main')
 
 ReactDOM.render(
   <Main />,

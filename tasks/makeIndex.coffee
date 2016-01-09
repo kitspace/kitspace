@@ -6,16 +6,17 @@ cp      = require('child_process')
 
 if require.main != module
 
-    exports.deps = ['build/.temp/main.jsx', 'src/index.html']
+    exports.deps = ['build/.temp/Main.jsx', 'src/index.html']
     exports.targets = ['build/index.html']
 
 else
+
+    {deps, targets} = utils.processArgs(process.argv)
 
     React = require('react')
     ReactDOMServer = require('react-dom/server')
     jsdom = require('jsdom')
 
-    {deps, targets} = utils.processArgs(process.argv)
     require('babel-register')({presets: ['react']})
     Main = require('../' + deps[0])
 
