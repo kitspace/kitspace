@@ -34,8 +34,13 @@ js = globule.find(['src/*.js', 'src/*.jsx']).map (f) ->
         ninja.edge(t).from(f).using('copy')
     return temp
 
+
 ninja.edge('build/bundle.js').from('build/.temp/render.jsx')
     .need(js.concat('build/.temp/boards.json')).using('browserify')
+
+for folder in boardFolders
+    ninja.edge("build/#{folder}/bundle.js")
+        .from("build/.temp/#{folder}/render_page.jsx").using('browserify')
 
 for taskFile in globule.find('tasks/*.coffee')
     task = require("./#{path.dirname(taskFile)}/#{path.basename(taskFile)}")
