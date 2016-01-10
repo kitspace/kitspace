@@ -30,6 +30,11 @@ else
         else
             return prev
     , ''
+    try
+        file = fs.readFileSync("#{folder}/kitnic.yaml")
+    if file?
+        kitnicYaml = yaml.safeLoad(file)
+    info.site = if kitnicYaml?.site? then kitnicYaml.site else ''
     tsv = fs.readFileSync(bomPath, {encoding:'utf8'})
     bom = oneClickBOM.parseTSV(tsv)
     info.bom = bom.lines
