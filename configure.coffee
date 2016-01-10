@@ -14,17 +14,28 @@ ninja.rule('coffee').run('coffee -- $in -- $out')
 ninja.rule('copy').run('cp $in $out')
     .description('$command')
 
-browserify = "browserify -x $exclude --debug --extension='.jsx'
+modules = ['react', 'react-dom']
+
+excludes = '-x ' + modules.join(' -x ')
+requires = '-r ' + modules.join(' -r ')
+
+browserify = "browserify --debug --extension='.jsx'
     --transform [babelify --presets [ react ] ]"
 
 #browserify and put dependency list in $out.d in makefile format using
 #relative paths
 ninja.rule('browserify')
     .run("echo -n '$out: ' > $out.d
-        && #{browserify} $in --list | sed 's!#{__dirname}/!!' | tr '\\n' ' ' >> $out.d
-        && #{browserify} $in -o $out")
+        && #{browserify} #{excludes} $in --list
+            | sed 's!#{__dirname}/!!' | tr '\\n' ' ' >> $out.d
+        && #{browserify} #{excludes} $in -o $out")
     .depfile('$out.d')
     .description("browserify $in -o $out")
+
+ninja.rule('browserify-require')
+    .run("#{browserify} #{requires} -o $out")
+
+ninja.edge('build/vendor.js').using('browserify-require')
 
 images = globule.find('src/images/*')
 for f in images
@@ -47,11 +58,11 @@ for folder in boardFolders
         jsPageTargets[folder].push(temp)
         ninja.edge(temp).from(f).using('copy')
 
-ninja.edge('build/bundle.js').from('build/.temp/render.jsx')
+ninja.edge('build/app.js').from('build/.temp/render.jsx')
     .need('build/.temp/boards.json').using('browserify')
 
 for folder in boardFolders
-    ninja.edge("build/#{folder}/bundle.js")
+    ninja.edge("build/#{folder}/app.js")
         .need("build/.temp/#{folder}/info.json")
         .from("build/.temp/#{folder}/render_page.jsx")
         .using('browserify')
