@@ -19,6 +19,7 @@
     "jszip": "^2.5.0",
     "pcb-stackup": "^0.0.4",
     "react": "^0.14.5",
+    "react-document-title": "^2.0.1",
     "react-dom": "^0.14.5",
     "react-search-input": "^0.6.0",
     "reactify": "^1.1.1",

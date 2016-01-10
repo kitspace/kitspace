@@ -26,21 +26,29 @@ for f in images
 
 boardFolders = globule.find('boards/*/*/*', {filter:'isDirectory'})
 
-js = globule.find(['src/*.js', 'src/*.jsx']).map (f) ->
+jsSrc = globule.find(['src/*.js', 'src/*.jsx'])
+
+jsMainTargets = jsSrc.map (f) ->
     temp = f.replace('src', 'build/.temp')
     ninja.edge(temp).from(f).using('copy')
-    for folder in boardFolders
-        t = f.replace('src', "build/.temp/#{folder}")
-        ninja.edge(t).from(f).using('copy')
     return temp
 
+jsPageTargets = {}
+for folder in boardFolders
+    jsPageTargets[folder] = []
+    jsSrc.map (f) ->
+        temp = f.replace('src', "build/.temp/#{folder}")
+        jsPageTargets[folder].push(temp)
+        ninja.edge(temp).from(f).using('copy')
 
 ninja.edge('build/bundle.js').from('build/.temp/render.jsx')
-    .need(js.concat('build/.temp/boards.json')).using('browserify')
+    .need(jsMainTargets.concat('build/.temp/boards.json')).using('browserify')
 
 for folder in boardFolders
     ninja.edge("build/#{folder}/bundle.js")
-        .from("build/.temp/#{folder}/render_page.jsx").using('browserify')
+        .need(jsPageTargets[folder].concat("build/.temp/#{folder}/info.json"))
+        .from("build/.temp/#{folder}/render_page.jsx")
+        .using('browserify')
 
 for taskFile in globule.find('tasks/*.coffee')
     task = require("./#{path.dirname(taskFile)}/#{path.basename(taskFile)}")
