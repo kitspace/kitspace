@@ -1,4 +1,3 @@
-fs          = require('fs')
 pcbStackup  = require('pcb-stackup')
 idLayer     = require('pcb-stackup/lib/layer-types').identify
 gerberToSvg = require('gerber-to-svg')
@@ -80,20 +79,19 @@ colorToStyle =
         copperFinish: 'bare'
         silkScreen: 'black'
 
-convert = (filenames, color = 'green') ->
+convert = (files, color = 'green') ->
     layers = []
-    for filename in filenames
+    for {filename, data} in files
         layerType = idLayer(filename)
         if layerType != 'drw' #drw is the default for any un-identifiable filenames
-            gerberString = fs.readFileSync(filename, 'utf-8')
             try
-                svgObj = gerberToSvg gerberString,
+                svgObj = gerberToSvg data,
                     object: true
                     drill: (layerType == 'drl')
                     warnArr: []
             catch e
                 try
-                    svgObj = gerberToSvg(gerberString, {object: true, drill: true, warnArr: []})
+                    svgObj = gerberToSvg(data, {object: true, drill: true, warnArr: []})
                 catch
                     console.warn "could not parse #{filename} as #{layerType} because
                                 #{e.message}"

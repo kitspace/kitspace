@@ -89,13 +89,16 @@ else
     try
         file = fs.readFileSync("#{folder}/kitnic.yaml")
     try
+        stackupData = []
+        for gerberPath in gerbers
+            data = fs.readFileSync(gerberPath, {encoding:'utf8'})
+            stackupData.push({filename:gerberPath, data:data})
+            zip.file(path.basename(gerberPath), data)
         if file?
             info = yaml.safeLoad(file)
-            stackup = boardBuilder(gerbers, info.color)
+            stackup = boardBuilder(stackupData, info.color)
         else
-            stackup = boardBuilder(gerbers)
-        for gerberPath in gerbers
-            zip.file(path.basename(gerberPath), fs.readFileSync(gerberPath))
+            stackup = boardBuilder(stackupData)
     catch e
         console.error("Could not process gerbers for #{folder}")
         console.error(e)
