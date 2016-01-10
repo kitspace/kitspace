@@ -21,6 +21,7 @@ exports.reactRender = (jsx, html, output) ->
     fs = require('fs')
     React = require('react')
     ReactDOMServer = require('react-dom/server')
+    DocumentTitle = require('react-document-title')
     jsdom = require('jsdom')
 
     require('babel-register')({presets: ['react']})
@@ -28,8 +29,17 @@ exports.reactRender = (jsx, html, output) ->
 
     react = ReactDOMServer.renderToString(React.createElement(Main))
 
+    title = DocumentTitle.rewind(react)
+
     rawHtml = fs.readFileSync(html, {encoding:'utf8'})
     document = jsdom.jsdom(rawHtml)
+
+    if title?
+        for t in document.head.getElementsByTagName('title')
+            document.head.removeChild(t)
+        tag = document.createElement('title')
+        tag.innerHTML = title
+        document.head.appendChild(tag)
 
     content = document.getElementById('content')
     content.innerHTML = react
