@@ -32,19 +32,18 @@ var Page = React.createClass({
             {titleTxt}
           </div>
         </TitleBar>
-        <div style={{marginLeft:'10%', marginRight:'10%', marginTop:32, marginBottom: 32}}>
-          <center>
-            <div style={{backgroundColor: '#F6F6F6', padding: 20, borderRadius: 5,  textAlign:'center', maxWidth:700}}>
-              <div className=''>
-                  <p>{info.description}</p>
-              </div>
-              <div className='flex-container'>
-                <div className=''>{site}</div>
-                <div className=''>{repo}</div>
-              </div>
+          <div style={{padding: 20, marginTop:10}}>
+            <div style= {{
+                display: 'flex'
+                , flexFlow: 'row wrap'
+                , justifyContent: 'space-around'
+            }}
+            >
+              <div>{info.description}</div>
+              <div>{site}</div>
+              <div>{repo}</div>
             </div>
-          </center>
-        </div>
+          </div>
         <div style={{
           backgroundColor:'#373737'
           , borderRadius: '1em'
