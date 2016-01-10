@@ -39,7 +39,7 @@ var Page = React.createClass({
                 , justifyContent: 'space-around'
             }}
             >
-              <div>{info.description}</div>
+              <div style={{marginBottom:10}}>{info.description}</div>
               <div>{site}</div>
               <div>{repo}</div>
             </div>
