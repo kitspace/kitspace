@@ -1,8 +1,9 @@
-fs      = require('fs')
-globule = require('globule')
-path    = require('path')
-yaml    = require('js-yaml')
-utils   = require('./utils/utils')
+fs          = require('fs')
+globule     = require('globule')
+path        = require('path')
+yaml        = require('js-yaml')
+utils       = require('./utils/utils')
+oneClickBOM = require('1-click-bom')
 
 if require.main != module
     module.exports = (folder) ->
@@ -19,7 +20,7 @@ if require.main != module
         return {deps, targets}
 else
     {deps, targets} = utils.processArgs(process.argv)
-    [folder, bom, boardsJSON] = deps
+    [folder, bomPath, boardsJSON] = deps
     [infoPath] = targets
     boards = JSON.parse(fs.readFileSync(boardsJSON))
     info = {id:folder.replace('boards/','')}
@@ -29,5 +30,7 @@ else
         else
             return prev
     , ''
-    info.bom = fs.readFileSync(bom, {encoding:'utf8'})
+    tsv = fs.readFileSync(bomPath, {encoding:'utf8'})
+    bom = oneClickBOM.parseTSV(tsv)
+    info.bom = bom.lines
     fs.writeFileSync(infoPath, JSON.stringify(info))
