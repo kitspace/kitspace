@@ -1,8 +1,9 @@
-const React      = require('react');
-const ReactDOM   = require('react-dom');
-const TitleBar   = require('./TitleBar');
-const BoardThumb = require('./BoardThumb');
-const boards     = require('./boards.json');
+const React       = require('react');
+const ReactDOM    = require('react-dom');
+const SearchInput = require('react-search-input');
+const TitleBar    = require('./TitleBar');
+const BoardThumb  = require('./BoardThumb');
+const boards      = require('./boards.json');
 
 var BoardList = React.createClass({
   render: function () {
@@ -66,16 +67,22 @@ var Main = React.createClass({
   render: function () {
     return (
       <div>
-        <TitleBar ref='title' searchCallback={this.searchUpdated} />
+        <TitleBar>
+          <SearchInput
+            className='search-input'
+            ref='search'
+            onChange={this.searchUpdated}
+           />
+        </TitleBar>
         <BoardList data={this.state.result} />
       </div>
     );
   },
 
   searchUpdated: function (term) {
-    if (this.refs.title.search) {
+    if (this.refs.search) {
       var filters = ['id', 'description'];
-      var result = boards.filter(this.refs.title.search.filter(filters));
+      var result = boards.filter(this.refs.search.filter(filters));
       this.setState({result: result});
     }
   }

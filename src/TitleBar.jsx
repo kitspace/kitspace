@@ -1,6 +1,5 @@
 const React       = require('react');
 const ReactDOM    = require('react-dom');
-const SearchInput = require('react-search-input');
 
 var TitleBar = React.createClass({
   render: function () {
@@ -48,10 +47,7 @@ var TitleBar = React.createClass({
           paddingTop: 2
           , overflow: 'hidden'
         }}>
-          <SearchInput className='search-input'
-            ref={function (ref) {this.search = ref}.bind(this)}
-            onChange={this.props.searchCallback}
-          />
+          {this.props.children}
         </div>
       </div>
     );
