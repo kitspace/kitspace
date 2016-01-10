@@ -1,9 +1,17 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 
+function isServer() {
+   return ! (typeof window != 'undefined' && window.document);
+}
+
 var Image = React.createClass({
   getInitialState: function() {
-    return {opacity: 0};
+    if (isServer()) {
+      return {opacity: 1};
+    } else {
+      return {opacity: 0};
+    }
   },
 
   fadeIn: function() {

@@ -15,15 +15,6 @@ const sizes = {
 
 var BoardThumb = React.createClass({
 
-  getDefaultProps: function() {
-    return ({
-      data: {
-        id : 'github.com/kitnic/arduino-uno' //so we have an image to get
-        , description : ''
-      }
-    });
-  },
-
   render: function () {
     var style = {
       backgroundColor: '#373737'
@@ -73,12 +64,18 @@ var BoardThumb = React.createClass({
       , fontWeight: 'normal'
     };
 
-    var image =
-        <LazyLoad once={true}
-          component={React.createElement('div', {style:imgStyle})} distance={300}>
-          <Image src={'boards/' + this.props.data.id + '/images/top.svg'}
-            style = {imgStyle} />
-        </LazyLoad>;
+    if (this.props.lazyLoad) {
+      var image =
+          <LazyLoad once={true}
+            component={React.createElement('div', {style:imgStyle})} distance={300}>
+            <Image src={'boards/' + this.props.data.id + '/images/top.svg'}
+              style = {imgStyle} />
+          </LazyLoad>;
+    } else {
+      var image =
+            <Image src={'boards/' + this.props.data.id + '/images/top.svg'}
+              style = {imgStyle} />;
+    }
 
     return (
       <a href={'/boards/' + this.props.data.id}>

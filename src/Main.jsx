@@ -7,6 +7,7 @@ const boards      = require('./boards.json');
 
 var BoardList = React.createClass({
   render: function () {
+    var initialLoad = this.props.data.length == boards.length;
     if (this.props.data.length === 0) {
       return (
         <div>
@@ -19,10 +20,10 @@ var BoardList = React.createClass({
     }
     var thumbNodes = this.props.data.map(function(data, index) {
       return (
-        <BoardThumb data={data} key={data.id}/>
+        <BoardThumb data={data} key={data.id + index} lazyLoad={ (! initialLoad) || (index > 10) }/>
       );
     });
-    var displayIntro = this.props.data.length == boards.length ? 'inherit' : 'none';
+    var displayIntro = initialLoad ? 'inherit' : 'none';
     var intro = (
       <div style={{marginLeft:'10%', marginRight:'10%', marginTop:32, marginBottom: 32, display:displayIntro}}>
       <center>
