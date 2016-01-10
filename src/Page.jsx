@@ -7,7 +7,9 @@ const Image    = require('./Image');
 
 var Page = React.createClass({
   render: function () {
-    var titleTxt = info.id.split('/').slice(1).join(' / ');
+    const titleTxt = info.id.split('/').slice(1).join(' / ');
+    const site = info.site != '' ? (<a href={info.site} target='_blank'><span className="octicon octicon-link" /> website</a>) : null;
+    const repo = info.repo != '' ? (<a href={info.repo} target='_blank'><span className="octicon octicon-repo" /> repo</a>) : null;
     return (
       <DocumentTitle title={titleTxt}><div>
         <TitleBar>
@@ -26,10 +28,14 @@ var Page = React.createClass({
         </TitleBar>
         <div style={{marginLeft:'10%', marginRight:'10%', marginTop:32, marginBottom: 32}}>
           <center>
-            <div style={{backgroundColor: '#FAFAFA', padding: 20, borderRadius: 5,  textAlign:'left', maxWidth:700}}>
-              <p>{info.description}</p>
-              <p>{info.id}</p>
-              <p>{info.site}</p>
+            <div style={{backgroundColor: '#F6F6F6', padding: 20, borderRadius: 5,  textAlign:'center', maxWidth:700}}>
+              <div className=''>
+                  <p>{info.description}</p>
+              </div>
+              <div className='flex-container'>
+                <div className=''>{site}</div>
+                <div className=''>{repo}</div>
+              </div>
             </div>
           </center>
         </div>

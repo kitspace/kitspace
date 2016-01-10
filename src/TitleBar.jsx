@@ -32,15 +32,15 @@ var TitleBar = React.createClass({
             height:'100%'
             , lineHeight: '64px'
             , verticalAlign:'middle'
+            , textAlign: 'center'
             , backgroundColor: '#373737'
             , float: 'right'
             , paddingLeft: 10
             , paddingRight: 10
             , width: 140
+            , color:'white'
           }}>
-          <center>
-              Submit
-          </center>
+           Submit
           </div>
         </a>
         <div style={{

@@ -10,6 +10,7 @@
         <link rel="icon"
               type="image/png"
               href="/images/favicon.png">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/octicons/3.3.0/octicons.min.css">
         <style>
             @import url(http://fonts.googleapis.com/css?family=Noto+Sans:400,700);
 
@@ -19,6 +20,7 @@
 
             body {
                 font-family: 'Noto Sans','Helvetica', 'Arial', sans-serif;
+                font-size:16px;
             }
             a {
                 color: #373737;
@@ -63,6 +65,18 @@
 
             .search-input > input:focus {
                 outline: none;
+            }
+
+            .flex-container {
+              /* We first create a flex layout context */
+              display: flex;
+
+              /* Then we define the flow direction and if we allow the items to wrap
+               */
+              flex-flow: column no-wrap;
+
+              /* Then we define how is distributed the remaining space */
+              justify-content: space-around;
             }
         </style>
     </head>

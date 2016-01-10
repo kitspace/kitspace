@@ -61,9 +61,11 @@ var BoardList = React.createClass({
 });
 
 var Main = React.createClass({
+
   getInitialState: function() {
     return {result: boards};
   },
+
   render: function () {
     return (
       <div>
