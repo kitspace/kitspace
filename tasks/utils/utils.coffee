@@ -15,3 +15,23 @@ exports.processArgs = (argv) ->
     deps = argv[2..(sepIndex - 1)]
     targets = process.argv[(sepIndex + 1)..]
     return {deps:deps, targets:targets}
+
+
+exports.reactRender = (jsx, html, output) ->
+    fs = require('fs')
+    React = require('react')
+    ReactDOMServer = require('react-dom/server')
+    jsdom = require('jsdom')
+
+    require('babel-register')({presets: ['react']})
+    Main = require(process.cwd() + '/' + jsx)
+
+    react = ReactDOMServer.renderToString(React.createElement(Main))
+
+    rawHtml = fs.readFileSync(html, {encoding:'utf8'})
+    document = jsdom.jsdom(rawHtml)
+
+    content = document.getElementById('content')
+    content.innerHTML = react
+
+    fs.writeFileSync(output, jsdom.serializeDocument(document))

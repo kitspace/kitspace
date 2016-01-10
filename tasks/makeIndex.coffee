@@ -1,8 +1,4 @@
-fs      = require('fs')
-path    = require('path')
-globule = require('globule')
-utils   = require('./utils/utils')
-cp      = require('child_process')
+utils = require('./utils/utils')
 
 if require.main != module
 
@@ -12,20 +8,4 @@ if require.main != module
 else
 
     {deps, targets} = utils.processArgs(process.argv)
-
-    React = require('react')
-    ReactDOMServer = require('react-dom/server')
-    jsdom = require('jsdom')
-
-    require('babel-register')({presets: ['react']})
-    Main = require('../' + deps[0])
-
-    react = ReactDOMServer.renderToString(React.createElement(Main))
-
-    rawHtml = fs.readFileSync(deps[1], {encoding:'utf8'})
-    document = jsdom.jsdom(rawHtml)
-
-    content = document.getElementById('content')
-    content.innerHTML = react
-
-    fs.writeFileSync(targets[0], jsdom.serializeDocument(document))
+    utils.reactRender(deps[0], deps[1], targets[0])
