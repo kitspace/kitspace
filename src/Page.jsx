@@ -8,7 +8,13 @@ const Image    = require('./Image');
 var Page = React.createClass({
   render: function () {
     const titleTxt = info.id.split('/').slice(1).join(' / ');
-    const site = info.site != '' ? (<a href={info.site} target='_blank'><span className="octicon octicon-link" /> website</a>) : null;
+    var site;
+    if (info.site == '') {
+      site = (<div style={{color:'grey', IeUserSelect:'none', WebkitUserSelect:'none', MozUserSelect:'none', cursor:'default'}} title='no website info available'><span className="octicon octicon-link" /> website</div>);
+    }
+    else {
+      site = (<a href={info.site} target='_blank'><span className="octicon octicon-link" /> website</a>);
+    }
     const repo = info.repo != '' ? (<a href={info.repo} target='_blank'><span className="octicon octicon-repo" /> repo</a>) : null;
     return (
       <DocumentTitle title={titleTxt}><div>
