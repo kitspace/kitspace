@@ -91,6 +91,8 @@ convert = (files, color = 'green') ->
                     warnArr: []
             catch e
                 try
+                    if layerType == 'drl'
+                        throw e
                     svgObj = gerberToSvg(data, {object: true, drill: true, warnArr: []})
                 catch
                     console.warn "could not parse #{filename} as #{layerType} because
