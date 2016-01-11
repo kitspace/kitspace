@@ -33,7 +33,12 @@ ninja.rule('browserify')
     .description("browserify $in -o $out")
 
 ninja.rule('browserify-require')
-    .run("#{browserify} #{requires} -o $out")
+    .run("echo -n '$out: ' > $out.d
+        && #{browserify} #{requires} $in --list
+            | grep ^#{__dirname} | sed 's!#{__dirname}/!!' | tr '\\n' ' ' >> $out.d
+        && #{browserify} #{requires} $in -o $out")
+    .depfile('$out.d')
+    .description("browserify #{requires} -o $out")
 
 ninja.edge('build/vendor.js').using('browserify-require')
 
