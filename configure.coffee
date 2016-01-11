@@ -8,19 +8,29 @@ ninja = ninjaBuildGen('1.5.1', 'build/')
 
 ninja.header("#generated from #{path.basename(module.filename)}")
 
-ninja.rule('coffee').run('coffee -- $in -- $out')
-    .description('$in')
-
-ninja.rule('copy').run('cp $in $out')
-    .description('$command')
+browserify = "browserify --debug --extension='.jsx'
+    --transform [babelify --presets [ react ] ]"
 
 modules = ['react', 'react-dom']
 
 excludes = '-x ' + modules.join(' -x ')
 requires = '-r ' + modules.join(' -r ')
 
-browserify = "browserify --debug --extension='.jsx'
-    --transform [babelify --presets [ react ] ]"
+ninja.rule('coffee').run('coffee -- $in -- $out')
+    .description('$in')
+
+ninja.rule('coffee-dep').
+    run("echo -n '$out: ' > $out.d
+    && browserify -t coffeeify --extension='.coffee' --list $taskfile
+            | sed 's!#{__dirname}/!!' | tr '\\n' ' ' >> $out.d
+    && #{browserify} --list $jsMain
+            | sed 's!#{__dirname}/!!' | tr '\\n' ' ' >> $out.d
+     && coffee -- $in -- $out")
+    .depfile('$out.d')
+
+ninja.rule('copy').run('cp $in $out')
+    .description('$command')
+
 
 #browserify and put dependency list in $out.d in makefile format using
 #relative paths
@@ -75,9 +85,15 @@ for folder in boardFolders
 for taskFile in globule.find('tasks/*.coffee')
     task = require("./#{path.dirname(taskFile)}/#{path.basename(taskFile)}")
     addEdge = (t) ->
-        ninja.edge(t.targets)
-            .from([taskFile].concat(t.deps))
-            .using('coffee')
+        if t.targets.length == 1
+            ninja.edge(t.targets[0])
+                .from([taskFile].concat(t.deps))
+                .assign('jsMain', t.deps[0])
+                .using('coffee-dep')
+        else
+            ninja.edge(t.targets)
+                .from([taskFile].concat(t.deps))
+                .using('coffee')
     if typeof task == 'function'
         for folder in boardFolders
             addEdge(task(folder))

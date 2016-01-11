@@ -16,12 +16,12 @@ if require.main != module
             bom = folder + '/' + info.bom
         else
             bom = folder + '/1-click-BOM.tsv'
-        deps = [folder, bom, 'build/.temp/boards.json']
+        deps = ['build/.temp/boards.json', folder, bom]
         targets = ["build/.temp/#{folder}/info.json"]
         return {deps, targets}
 else
     {deps, targets} = utils.processArgs(process.argv)
-    [folder, bomPath, boardsJSON] = deps
+    [boardsJSON, folder, bomPath] = deps
     [infoPath] = targets
 
     boards = JSON.parse(fs.readFileSync(boardsJSON))
