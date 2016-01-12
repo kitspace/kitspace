@@ -36,10 +36,10 @@ options = {
 styleToSvgObj = ({copperFinish, solderMask, silkScreen}) ->
     style:
         type: 'text/css',
-        _: " ._board-fr4 { color: #867C48; }
+        _: " ._board-fr4 { color: #81841A;}
              ._board-cu { color: lightgrey; }
              ._board-cf { color: #{options.cf[copperFinish].bg}; }
-             ._board-sm { color: #{options.sm[solderMask].bg}; opacity: 0.75; }
+             ._board-sm { color: #{options.sm[solderMask].bg}; opacity: 0.90; }
              ._board-ss { color: #{options.ss[silkScreen].bg}; }
              ._board-sp { color: silver; opacity: 0.0;}
              ._board-out { color: black; }"
