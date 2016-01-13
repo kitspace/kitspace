@@ -8,7 +8,7 @@ if require.main != module
             "build/.temp/#{folder}/info.json"
         ]
         targets = ["build/#{folder}/index.html"]
-        return {deps, targets}
+        return {deps, targets, moduleDep: true}
 
 else
 

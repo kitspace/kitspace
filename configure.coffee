@@ -21,12 +21,13 @@ ninja.rule('coffee').run('coffee -- $in -- $out')
 
 ninja.rule('coffee-dep').
     run("echo -n '$out: ' > $out.d
-    && browserify -t coffeeify --extension='.coffee' --list $taskfile
-            | sed 's!#{__dirname}/!!' | tr '\\n' ' ' >> $out.d
-    && #{browserify} --list $jsMain
-            | sed 's!#{__dirname}/!!' | tr '\\n' ' ' >> $out.d
-     && coffee -- $in -- $out")
+        && browserify -t coffeeify --extension='.coffee' --list $taskFile
+                | sed 's!#{__dirname}/!!' | tr '\\n' ' ' >> $out.d
+        && #{browserify} --list $jsMain
+                | sed 's!#{__dirname}/!!' | tr '\\n' ' ' >> $out.d
+        && coffee -- $in -- $targetFiles")
     .depfile('$out.d')
+    .description('coffee -- $in -- $targetFiles')
 
 ninja.rule('copy').run('cp $in $out')
     .description('$command')
@@ -85,15 +86,13 @@ for folder in boardFolders
 for taskFile in globule.find('tasks/*.coffee')
     task = require("./#{path.dirname(taskFile)}/#{path.basename(taskFile)}")
     addEdge = (t) ->
-        if t.targets.length == 1
-            ninja.edge(t.targets[0])
-                .from([taskFile].concat(t.deps))
-                .assign('jsMain', t.deps[0])
-                .using('coffee-dep')
-        else
-            ninja.edge(t.targets)
-                .from([taskFile].concat(t.deps))
-                .using('coffee')
+        edge = ninja.edge(t.targets[0])
+            .from([taskFile].concat(t.deps))
+            .assign('taskFile', taskFile)
+            .assign('targetFiles', t.targets.join(' '))
+            .using('coffee-dep')
+        if task.moduleDep
+            edge.assign('jsMain', t.deps[0])
     if typeof task == 'function'
         for folder in boardFolders
             addEdge(task(folder))

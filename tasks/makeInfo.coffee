@@ -18,7 +18,7 @@ if require.main != module
             bom = folder + '/1-click-BOM.tsv'
         deps = ['build/.temp/boards.json', folder, bom]
         targets = ["build/.temp/#{folder}/info.json"]
-        return {deps, targets}
+        return {deps, targets, moduleDep : false}
 else
     {deps, targets} = utils.processArgs(process.argv)
     [boardsJSON, folder, bomPath] = deps

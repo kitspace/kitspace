@@ -4,6 +4,7 @@ if require.main != module
 
     exports.deps = ['build/.temp/Main.jsx', 'src/index.html']
     exports.targets = ['build/index.html']
+    exports.moduleDep = true
 
 else
 

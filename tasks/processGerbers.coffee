@@ -78,7 +78,7 @@ if require.main != module
             "#{buildFolder}/images/bottom.svg"
             "#{buildFolder}/#{zip}"
         ]
-        return {deps, targets}
+        return {deps, targets, moduleDep:false}
 else
     {deps, targets} = utils.processArgs(process.argv)
     folder = deps[0]

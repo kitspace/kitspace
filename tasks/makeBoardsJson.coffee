@@ -11,6 +11,7 @@ if require.main != module
 
     exports.deps = [boardDir]
     exports.targets = ['build/.temp/boards.json']
+    exports.moduleDep = false
 
 else
 
