@@ -2,7 +2,7 @@ utils = require('./utils/utils')
 
 if require.main != module
 
-    exports.deps = ['build/.temp/Main.jsx', 'src/index.html']
+    exports.deps = ['build/.temp/Main.jsx', 'src/index.html', 'build/.temp/boards.json']
     exports.targets = ['build/index.html']
     exports.moduleDep = true
 
