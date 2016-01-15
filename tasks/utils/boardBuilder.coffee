@@ -6,21 +6,21 @@ gerberToSvg = require('gerber-to-svg')
 options = {
   # copper finish
   cf: {
-    bare:    { bg: '#C87533',       txt: 'white' }
-    gold:    { bg: 'goldenrod',     txt: 'white' }
-    'Ni/Au': { bg: 'whitesmoke',    txt: 'black' }
-    hasl:    { bg: 'silver',        txt: 'black' }
+    bare:    { bg: '#C87533',    txt: 'white' }
+    gold:    { bg: 'goldenrod',  txt: 'white' }
+    'Ni/Au': { bg: 'whitesmoke', txt: 'black' }
+    hasl:    { bg: 'silver',     txt: 'black' }
   }
   # soldermask
   sm: {
-    red:    { bg: 'darkred',    txt: 'white' }
-    orange: { bg: 'darkorange', txt: 'black' }
-    yellow: { bg: '#FFFF66',    txt: 'black' }
-    green:  { bg: 'darkgreen',  txt: 'white' }
-    blue:   { bg: 'navy',       txt: 'white' }
-    purple: { bg: 'indigo',     txt: 'white' }
-    black:  { bg: 'black',      txt: 'white' }
-    white:  { bg: 'white',      txt: 'black' }
+    red:    { bg: 'darkred', txt: 'white' }
+    orange: { bg: '#C36B00', txt: 'black' }
+    yellow: { bg: '#FFFF66', txt: 'black' }
+    green:  { bg: '#030',    txt: 'white' }
+    blue:   { bg: '#001E68', txt: 'white' }
+    purple: { bg: '#250041', txt: 'white' }
+    black:  { bg: 'black',   txt: 'white' }
+    white:  { bg: 'white',   txt: 'black' }
   }
   # silkscreen
   ss: {
@@ -36,7 +36,7 @@ options = {
 styleToSvgObj = ({copperFinish, solderMask, silkScreen}) ->
     style:
         type: 'text/css',
-        _: " ._board-fr4 { color: #81841A;}
+        _: " ._board-fr4 { color: #4D542C;}
              ._board-cu { color: lightgrey; }
              ._board-cf { color: #{options.cf[copperFinish].bg}; }
              ._board-sm { color: #{options.sm[solderMask].bg}; opacity: 0.90; }
