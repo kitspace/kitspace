@@ -1,14 +1,12 @@
 #!/usr/bin/env coffee
+ninjaBuildGen = require('ninja-build-gen')
+globule       = require('globule')
+path          = require('path')
 
 if process.argv[2] == 'production'
     config = 'production'
 else
     config = 'dev'
-
-globule = require('globule')
-path    = require('path')
-
-ninjaBuildGen = require('./ninja-build-gen')
 
 
 ninja = ninjaBuildGen('1.5.1', 'build/')
