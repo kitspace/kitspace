@@ -3,6 +3,7 @@ ninjaBuildGen = require('ninja-build-gen')
 globule       = require('globule')
 path          = require('path')
 
+
 if process.argv[2] == 'production'
     config = 'production'
 else
@@ -19,10 +20,12 @@ ninja.header("#generated from #{path.basename(module.filename)}
 browserify = "browserify --extension='.jsx' --transform [ babelify
     --presets [ react ] ]"
 
+
 if config == 'dev'
     browserify += ' --debug'
 else
     browserify += ' -g uglifyify'
+
 
 modules = ['react', 'react-dom']
 excludes = '-x ' + modules.join(' -x ')
@@ -101,18 +104,23 @@ else
 
 ninja.edge('build/vendor.js').using('browserify-require')
 
+
 images = globule.find('src/images/*')
 for f in images
     ninja.edge(f.replace('src','build')).from(f).using('copy')
 
+
 boardFolders = globule.find('boards/*/*/*', {filter:'isDirectory'})
 
+
 jsSrc = globule.find(['src/*.js', 'src/*.jsx'])
+
 
 jsMainTargets = jsSrc.map (f) ->
     temp = f.replace('src', 'build/.temp')
     ninja.edge(temp).from(f).using('copy')
     return temp
+
 
 jsPageTargets = {}
 for folder in boardFolders
@@ -122,14 +130,17 @@ for folder in boardFolders
         jsPageTargets[folder].push(temp)
         ninja.edge(temp).from(f).using('copy')
 
+
 ninja.edge('build/app.js').from('build/.temp/render.jsx')
     .need('build/.temp/boards.json').using('browserify')
+
 
 for folder in boardFolders
     ninja.edge("build/#{folder}/app.js")
         .need("build/.temp/#{folder}/info.json")
         .from("build/.temp/#{folder}/render_page.jsx")
         .using('browserify')
+
 
 for taskFile in globule.find('tasks/*.coffee')
     task = require("./#{path.dirname(taskFile)}/#{path.basename(taskFile)}")
@@ -147,10 +158,13 @@ for taskFile in globule.find('tasks/*.coffee')
     else
         addEdge(task)
 
+
 ninja.rule('remove').run('rm -rf $in')
     .description('$command')
 
+
 ninja.edge('clean').from('build/').using('remove')
+
 
 all = ninja.edges.filter (c) ->
     'clean' not in c.targets
@@ -158,10 +172,14 @@ all = ninja.edges.filter (c) ->
     prev.concat(c.targets)
 , []
 
+
 ninja.edge('all').from(all)
+
 
 ninja.byDefault('all')
 
+
 ninja.save('build.ninja')
+
 
 console.log("generated ./build.ninja with '#{config}' config")
