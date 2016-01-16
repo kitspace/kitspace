@@ -1,4 +1,10 @@
 #!/usr/bin/env coffee
+
+if process.argv[2] == 'production'
+    config = 'production'
+else
+    config = 'dev'
+
 globule = require('globule')
 path    = require('path')
 
@@ -6,7 +12,8 @@ ninjaBuildGen = require('./ninja-build-gen')
 
 ninja = ninjaBuildGen('1.5.1', 'build/')
 
-ninja.header("#generated from #{path.basename(module.filename)}")
+ninja.header("#generated from #{path.basename(module.filename)}
+    with '#{config}' config")
 
 browserify = "browserify --debug --extension='.jsx'
     --transform [babelify --presets [ react ] ]"
@@ -19,15 +26,19 @@ requires = '-r ' + modules.join(' -r ')
 ninja.rule('coffee').run('coffee -- $in -- $out')
     .description('$in')
 
-ninja.rule('coffee-dep').
-    run("echo -n '$out: ' > $out.d
-        && browserify -t coffeeify --extension='.coffee' --list $taskFile
-                | sed 's!#{__dirname}/!!' | tr '\\n' ' ' >> $out.d
-        && #{browserify} --list $jsMain
-                | sed 's!#{__dirname}/!!' | tr '\\n' ' ' >> $out.d
-        && coffee -- $in -- $targetFiles")
-    .depfile('$out.d')
-    .description('coffee -- $in -- $targetFiles')
+if (config == 'production')
+    ninja.rule('coffee-dep').
+        run("coffee -- $in -- $targetFiles")
+else
+    ninja.rule('coffee-dep').
+        run("echo -n '$out: ' > $out.d
+            && browserify -t coffeeify --extension='.coffee' --list $taskFile
+                    | sed 's!#{__dirname}/!!' | tr '\\n' ' ' >> $out.d
+            && #{browserify} --list $jsMain
+                    | sed 's!#{__dirname}/!!' | tr '\\n' ' ' >> $out.d
+            && coffee -- $in -- $targetFiles")
+        .depfile('$out.d')
+        .description('coffee -- $in -- $targetFiles')
 
 ninja.rule('copy').run('cp $in $out')
     .description('$command')
@@ -35,21 +46,29 @@ ninja.rule('copy').run('cp $in $out')
 
 #browserify and put dependency list in $out.d in makefile format using
 #relative paths
-ninja.rule('browserify')
-    .run("echo -n '$out: ' > $out.d
-        && #{browserify} #{excludes} $in --list
-            | sed 's!#{__dirname}/!!' | tr '\\n' ' ' >> $out.d
-        && #{browserify} #{excludes} $in -o $out")
-    .depfile('$out.d')
-    .description("browserify $in -o $out")
+if (config == 'production')
+    ninja.rule('browserify')
+        .run("#{browserify} #{excludes} $in -o $out")
+else
+    ninja.rule('browserify')
+        .run("echo -n '$out: ' > $out.d
+            && #{browserify} #{excludes} $in --list
+                | sed 's!#{__dirname}/!!' | tr '\\n' ' ' >> $out.d
+            && #{browserify} #{excludes} $in -o $out")
+        .depfile('$out.d')
+        .description("browserify $in -o $out")
 
-ninja.rule('browserify-require')
-    .run("echo -n '$out: ' > $out.d
-        && #{browserify} #{requires} $in --list
-            | grep ^#{__dirname} | sed 's!#{__dirname}/!!' | tr '\\n' ' ' >> $out.d
-        && #{browserify} #{requires} $in -o $out")
-    .depfile('$out.d')
-    .description("browserify #{requires} -o $out")
+if (config == 'production')
+    ninja.rule('browserify-require')
+        .run("#{browserify} #{requires} $in -o $out")
+else
+    ninja.rule('browserify-require')
+        .run("echo -n '$out: ' > $out.d
+            && #{browserify} #{requires} $in --list
+                | grep ^#{__dirname} | sed 's!#{__dirname}/!!' | tr '\\n' ' ' >> $out.d
+            && #{browserify} #{requires} $in -o $out")
+        .depfile('$out.d')
+        .description("browserify #{requires} -o $out")
 
 ninja.edge('build/vendor.js').using('browserify-require')
 
@@ -116,4 +135,4 @@ ninja.byDefault('all')
 
 ninja.save('build.ninja')
 
-console.log('generated build.ninja')
+console.log("generated ./build.ninja with '#{config}' config")

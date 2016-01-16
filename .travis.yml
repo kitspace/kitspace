@@ -4,7 +4,7 @@ node_js:
 script:
   - ./plugVersions.coffee
   - ./getBoards.coffee
-  - ./configure.coffee
+  - ./configure.coffee production
   - wget https://github.com/ninja-build/ninja/releases/download/v1.6.0/ninja-linux.zip
   - unzip ninja-linux.zip
   - ./ninja && ./deploy.sh
