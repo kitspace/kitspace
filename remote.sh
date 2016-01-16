@@ -2,8 +2,6 @@
 # used for rsyncing to a build server, set KITNIC_BUILD_SERVER to an rsync
 # accessible folder with this repo in it, use ./serve.sh on the server
 
-set -e
-
 if [ "$KITNIC_BUILD_SERVER" == "" ]; then
     echo "You need to set KITNIC_BUILD_SERVER";
     exit 1;

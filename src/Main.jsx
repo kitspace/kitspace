@@ -7,7 +7,7 @@ const boards      = require('./boards.json');
 
 var BoardList = React.createClass({
   render: function () {
-    var initialLoad = this.props.data.length == boards.length;
+    var initialLoad = !(this.props.searching);
     if (this.props.data.length === 0) {
       return (
         <div>
@@ -24,7 +24,6 @@ var BoardList = React.createClass({
           lazyLoad={ (! initialLoad) || (index > 10) }/>
       );
     });
-    var displayIntro = initialLoad ? 'inherit' : 'none';
     var intro = (
       <div style=
         {{
@@ -32,7 +31,7 @@ var BoardList = React.createClass({
           , marginRight:'10%'
           , marginTop:32
           , marginBottom: 32
-          , display:displayIntro
+          , display:(initialLoad ? 'inherit' : 'none')
       }}>
       <center>
         <div style=
@@ -79,7 +78,10 @@ var BoardList = React.createClass({
 var Main = React.createClass({
 
   getInitialState: function() {
-    return {result: boards};
+    return {
+      result: boards
+      , searching: false
+    };
   },
 
   render: function () {
@@ -92,7 +94,7 @@ var Main = React.createClass({
             onChange={this.searchUpdated}
            />
         </TitleBar>
-        <BoardList data={this.state.result} />
+        <BoardList data={this.state.result} searching={this.state.searching}/>
       </div>
     );
   },
@@ -102,6 +104,7 @@ var Main = React.createClass({
       var filters = ['id', 'description'];
       var result = boards.filter(this.refs.search.filter(filters));
       if (term.length > 2) {
+        //piwik tracking
         _paq.push(['trackSiteSearch',
             // Search keyword searched for
             term,
@@ -113,7 +116,7 @@ var Main = React.createClass({
             result.length
         ]);
       }
-      this.setState({result: result});
+      this.setState({result: result, searching:(term.length > 0)});
     }
   }
 });
