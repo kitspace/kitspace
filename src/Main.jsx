@@ -86,6 +86,16 @@ var Main = React.createClass({
     if (this.refs.search) {
       var filters = ['id', 'description'];
       var result = boards.filter(this.refs.search.filter(filters));
+      if (term.length > 2) {
+        _paq.push(['trackSiteSearch',
+            // Search keyword searched for
+            term,
+            // Search category selected in your search engine. If you do not need this, set to false
+            "Boards",
+            // Number of results on the Search results page. Zero indicates a 'No Result Search Keyword'. Set to false if you don't know
+            result.length
+        ]);
+      }
       this.setState({result: result});
     }
   }
