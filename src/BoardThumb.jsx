@@ -73,7 +73,7 @@ var BoardThumb = React.createClass({
           </LazyLoad>;
     } else {
       var image =
-            <Image src={'boards/' + this.props.data.id + '/images/top.svg'}
+            <img src={'boards/' + this.props.data.id + '/images/top.svg'}
               style = {imgStyle} />;
     }
 
