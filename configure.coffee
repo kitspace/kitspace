@@ -18,7 +18,8 @@ ninja.header("#generated from #{path.basename(module.filename)}
     with '#{config}' config")
 
 
-browserify = "browserify --extension='.jsx' --transform [babelify --presets [ react ] ]"
+browserify = "browserify --extension='.jsx' --transform [ babelify
+    --presets [ react ] ]"
 
 if config == 'dev'
     browserify += ' --debug'
@@ -73,10 +74,10 @@ if (config == 'production')
 
     compress_opts = [o + '=' + s for o,s of compress_opts]
 
-    uglify = "uglifyjs --mangle --reserved '#{modules}'
+    uglifyjs = "uglifyjs --mangle --reserved '#{modules}'
         --compress '#{compress_opts}'"
 
-    rule.run("#{browserify} #{excludes} $in | #{uglify} > $out")
+    rule.run("#{browserify} #{excludes} $in | #{uglifyjs} > $out")
 else
     #write to $out.d depfile in makefile format for proper incremental builds
     rule.run("echo -n '$out: ' > $out.d
@@ -89,7 +90,7 @@ else
 
 rule = ninja.rule('browserify-require')
 if (config == 'production')
-    rule.run("#{browserify} #{requires} $in | #{uglify} > $out")
+    rule.run("#{browserify} #{requires} $in | #{uglifyjs} > $out")
 else
     #write to $out.d depfile in makefile format for proper incremental builds
     rule.run("echo -n '$out: ' > $out.d
