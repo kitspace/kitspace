@@ -26,6 +26,7 @@
     "reactify": "^1.1.1",
     "source-map-support": "^0.4.0",
     "svgo": "^0.6.1",
+    "uglifyify": "^3.0.1",
     "uglifyjs": "^2.4.10"
   },
   "scripts": {

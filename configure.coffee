@@ -18,9 +18,12 @@ ninja.header("#generated from #{path.basename(module.filename)}
     with '#{config}' config")
 
 
-browserify = "browserify #{if config == 'production' then '' else '--debug'}
-    --extension='.jsx' --transform [babelify --presets [ react ] ]"
+browserify = "browserify --extension='.jsx' --transform [babelify --presets [ react ] ]"
 
+if config == 'dev'
+    browserify += ' --debug'
+else
+    browserify += ' -g uglifyify'
 
 modules = ['react', 'react-dom']
 excludes = '-x ' + modules.join(' -x ')
@@ -48,7 +51,32 @@ else
 
 rule = ninja.rule('browserify')
 if (config == 'production')
-    rule.run("#{browserify} #{excludes} $in | uglifyjs > $out")
+    compress_opts =
+        sequences     : true  # join consecutive statemets with the “comma operator”
+        properties    : true  # optimize property access: a["foo"] → a.foo
+        dead_code     : true  # discard unreachable code
+        drop_debugger : true  # discard “debugger” statements
+        unsafe        : false # some unsafe optimizations (see below)
+        conditionals  : true  # optimize if-s and conditional expressions
+        comparisons   : true  # optimize comparisons
+        evaluate      : true  # evaluate constant expressions
+        booleans      : true  # optimize boolean expressions
+        loops         : true  # optimize loops
+        unused        : false # drop unused variables/functions
+        hoist_funs    : true  # hoist function declarations
+        hoist_vars    : false # hoist variable declarations
+        if_return     : true  # optimize if-s followed by return/continue
+        join_vars     : true  # join var declarations
+        cascade       : true  # try to cascade `right` into `left` in sequences
+        side_effects  : true  # drop side-effect-free statements
+        warnings      : true
+
+    compress_opts = [o + '=' + s for o,s of compress_opts]
+
+    uglify = "uglifyjs --mangle --reserved '#{modules}'
+        --compress '#{compress_opts}'"
+
+    rule.run("#{browserify} #{excludes} $in | #{uglify} > $out")
 else
     #write to $out.d depfile in makefile format for proper incremental builds
     rule.run("echo -n '$out: ' > $out.d
@@ -61,7 +89,7 @@ else
 
 rule = ninja.rule('browserify-require')
 if (config == 'production')
-    rule.run("#{browserify} #{requires} $in -o $out | uglifyjs #{requires} > $out")
+    rule.run("#{browserify} #{requires} $in | #{uglify} > $out")
 else
     #write to $out.d depfile in makefile format for proper incremental builds
     rule.run("echo -n '$out: ' > $out.d
