@@ -10,65 +10,67 @@ path    = require('path')
 
 ninjaBuildGen = require('./ninja-build-gen')
 
+
 ninja = ninjaBuildGen('1.5.1', 'build/')
+
 
 ninja.header("#generated from #{path.basename(module.filename)}
     with '#{config}' config")
 
-browserify = "browserify --debug --extension='.jsx'
-    --transform [babelify --presets [ react ] ]"
+
+browserify = "browserify #{if config == 'production' then '' else '--debug'}
+    --extension='.jsx' --transform [babelify --presets [ react ] ]"
+
 
 modules = ['react', 'react-dom']
-
 excludes = '-x ' + modules.join(' -x ')
 requires = '-r ' + modules.join(' -r ')
 
-ninja.rule('coffee').run('coffee -- $in -- $out')
-    .description('$in')
-
-if (config == 'production')
-    ninja.rule('coffee-dep').
-        run("coffee -- $in -- $targetFiles")
-else
-    ninja.rule('coffee-dep').
-        run("echo -n '$out: ' > $out.d
-            && browserify -t coffeeify --extension='.coffee' --list $taskFile
-                    | sed 's!#{__dirname}/!!' | tr '\\n' ' ' >> $out.d
-            && #{browserify} --list $jsMain
-                    | sed 's!#{__dirname}/!!' | tr '\\n' ' ' >> $out.d
-            && coffee -- $in -- $targetFiles")
-        .depfile('$out.d')
-        .description('coffee -- $in -- $targetFiles')
 
 ninja.rule('copy').run('cp $in $out')
     .description('$command')
 
 
-#browserify and put dependency list in $out.d in makefile format using
-#relative paths
+rule = ninja.rule('coffee-task')
 if (config == 'production')
-    ninja.rule('browserify')
-        .run("#{browserify} #{excludes} $in -o $out")
+    rule.run("coffee -- $in -- $targetFiles")
 else
-    ninja.rule('browserify')
-        .run("echo -n '$out: ' > $out.d
-            && #{browserify} #{excludes} $in --list
+    #write to $out.d depfile in makefile format for proper incremental builds
+    rule.run("echo -n '$out: ' > $out.d
+        && browserify -t coffeeify --extension='.coffee' --list $taskFile
                 | sed 's!#{__dirname}/!!' | tr '\\n' ' ' >> $out.d
-            && #{browserify} #{excludes} $in -o $out")
-        .depfile('$out.d')
-        .description("browserify $in -o $out")
+        && #{browserify} --list $jsMain
+                | sed 's!#{__dirname}/!!' | tr '\\n' ' ' >> $out.d
+        && coffee -- $in -- $targetFiles")
+    .depfile('$out.d')
+    .description('coffee -- $in -- $targetFiles')
 
+
+rule = ninja.rule('browserify')
 if (config == 'production')
-    ninja.rule('browserify-require')
-        .run("#{browserify} #{requires} $in -o $out")
+    rule.run("#{browserify} #{excludes} $in | uglifyjs > $out")
 else
-    ninja.rule('browserify-require')
-        .run("echo -n '$out: ' > $out.d
-            && #{browserify} #{requires} $in --list
-                | grep ^#{__dirname} | sed 's!#{__dirname}/!!' | tr '\\n' ' ' >> $out.d
-            && #{browserify} #{requires} $in -o $out")
-        .depfile('$out.d')
-        .description("browserify #{requires} -o $out")
+    #write to $out.d depfile in makefile format for proper incremental builds
+    rule.run("echo -n '$out: ' > $out.d
+        && #{browserify} #{excludes} $in --list
+            | sed 's!#{__dirname}/!!' | tr '\\n' ' ' >> $out.d
+        && #{browserify} #{excludes} $in -o $out")
+    .depfile('$out.d')
+    .description("browserify $in -o $out")
+
+
+rule = ninja.rule('browserify-require')
+if (config == 'production')
+    rule.run("#{browserify} #{requires} $in -o $out | uglifyjs #{requires} > $out")
+else
+    #write to $out.d depfile in makefile format for proper incremental builds
+    rule.run("echo -n '$out: ' > $out.d
+        && #{browserify} #{requires} $in --list
+            | grep ^#{__dirname} | sed 's!#{__dirname}/!!' | tr '\\n' ' ' >> $out.d
+        && #{browserify} #{requires} $in -o $out")
+    .depfile('$out.d')
+    .description("browserify #{requires} -o $out")
+
 
 ninja.edge('build/vendor.js').using('browserify-require')
 
@@ -109,7 +111,7 @@ for taskFile in globule.find('tasks/*.coffee')
             .from([taskFile].concat(t.deps))
             .assign('taskFile', taskFile)
             .assign('targetFiles', t.targets.join(' '))
-            .using('coffee-dep')
+            .using('coffee-task')
         if task.moduleDep
             edge.assign('jsMain', t.deps[0])
     if typeof task == 'function'
