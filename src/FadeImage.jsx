@@ -1,7 +1,7 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 
-var Image = React.createClass({
+var FadeImage = React.createClass({
   getInitialState: function() {
       return {opacity: 0};
   },
@@ -27,4 +27,4 @@ var Image = React.createClass({
   }
 });
 
-module.exports = Image;
+module.exports = FadeImage;

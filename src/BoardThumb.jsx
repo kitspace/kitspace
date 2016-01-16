@@ -2,7 +2,7 @@ const React    = require('react');
 const ReactDOM = require('react-dom');
 const boards   = require('./boards.json');
 const LazyLoad = require('./LazyLoad');
-const Image    = require('./Image');
+const FadeImage    = require('./FadeImage');
 
 const sizes = {
   thumb : {
@@ -68,7 +68,7 @@ var BoardThumb = React.createClass({
       var image =
           <LazyLoad once={true}
             component={React.createElement('div', {style:imgStyle})} distance={300}>
-            <Image src={'boards/' + this.props.data.id + '/images/top.svg'}
+            <FadeImage src={'boards/' + this.props.data.id + '/images/top.svg'}
               style = {imgStyle} />
           </LazyLoad>;
     } else {

@@ -3,7 +3,7 @@ const ReactDOM      = require('react-dom');
 const DocumentTitle = require('react-document-title');
 const info          = require('./info.json');
 const TitleBar      = require('./TitleBar');
-const Image    = require('./Image');
+const FadeImage    = require('./FadeImage');
 
 var Page = React.createClass({
   render: function () {
