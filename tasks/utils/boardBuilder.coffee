@@ -16,9 +16,9 @@ options = {
     red:    { bg: 'darkred', txt: 'white' }
     orange: { bg: '#C36B00', txt: 'black' }
     yellow: { bg: '#FFFF66', txt: 'black' }
-    green:  { bg: '#030',    txt: 'white' }
+    green:  { bg: '#040',    txt: 'white' }
     blue:   { bg: '#001E68', txt: 'white' }
-    purple: { bg: '#250041', txt: 'white' }
+    purple: { bg: '#2E0051', txt: 'white' }
     black:  { bg: 'black',   txt: 'white' }
     white:  { bg: 'white',   txt: 'black' }
   }
