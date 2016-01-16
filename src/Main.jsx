@@ -37,7 +37,7 @@ var BoardList = React.createClass({
         </p><p>
 
           To quickly purchase the parts from various retailers you should
-          <a href=''> install</a> the 1-click-BOM extension. It's pretty useful
+          <a href='http://1clickBOM.com'> install</a> the 1-click-BOM extension. It's pretty useful
           on it's own too and can be used on other sites. Read more about it
           <a href='http://1clickBOM.com'> here</a>.
 
