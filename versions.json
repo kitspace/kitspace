@@ -26,5 +26,9 @@
   {
     "repo": "https://github.com/kitnic/FM_Transmitter",
     "hash": "49bf0faf1622a820d3684e644afa8277795a8ee3"
+  },
+  {
+    "repo": "https://github.com/kasbah/nomech",
+    "hash": "4db1cabfc1e040e4e3bdc4dc76bdbcec9cff4de6"
   }
 ]
