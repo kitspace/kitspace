@@ -9,11 +9,11 @@ fi
 
 function send() {
     rsync -r . $KITNIC_BUILD_SERVER --update --delete --progress \
-        --exclude build --exclude node_modules --exclude .git;
+        --exclude build --exclude node_modules --exclude .git --exclude '\..*sw.';
 }
 
 send;
 
-while inotifywait --exclude '\..*sw.' -r -q -e modify ./ src tasks; do
+while inotifywait --exclude '\..*sw.' -r -q -e modify ./; do
     send;
 done
