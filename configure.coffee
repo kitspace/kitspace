@@ -17,6 +17,16 @@ ninja.header("#generated from #{path.basename(module.filename)}
     with '#{config}' config")
 
 
+# - Rules - #
+
+ninja.rule('copy').run('cp $in $out')
+    .description('$command')
+
+
+ninja.rule('remove').run('rm -rf $in')
+    .description('$command')
+
+
 browserify = "browserify --extension='.jsx' --transform [ babelify
     --presets [ react ] ]"
 
@@ -30,10 +40,6 @@ else
 modules = ['react', 'react-dom']
 excludes = '-x ' + modules.join(' -x ')
 requires = '-r ' + modules.join(' -r ')
-
-
-ninja.rule('copy').run('cp $in $out')
-    .description('$command')
 
 
 rule = ninja.rule('coffee-task')
@@ -102,6 +108,8 @@ else
     .description("browserify #{requires} -o $out")
 
 
+# - Edges - #
+
 ninja.edge('build/vendor.js').using('browserify-require')
 
 
@@ -157,10 +165,6 @@ for taskFile in globule.find('tasks/*.coffee')
             addEdge(task(folder))
     else
         addEdge(task)
-
-
-ninja.rule('remove').run('rm -rf $in')
-    .description('$command')
 
 
 ninja.edge('clean').from('build/').using('remove')
