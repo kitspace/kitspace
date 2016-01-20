@@ -6,3 +6,4 @@ https://github.com/kitnic/RiftDK1
 https://github.com/kitnic/HACK
 https://github.com/kitnic/FM_Transmitter
 https://github.com/kasbah/nomech
+https://github.com/kasbah/push-on-hold-off

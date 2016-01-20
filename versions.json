@@ -30,5 +30,9 @@
   {
     "repo": "https://github.com/kasbah/nomech",
     "hash": "6db28cdbaa1fb8b36a4b0efe4c6dba1977c834ff"
+  },
+  {
+    "repo": "https://github.com/kasbah/push-on-hold-off",
+    "hash": "12a0b9fd7dee31544ac7270888981329d9ffd0d5"
   }
 ]
