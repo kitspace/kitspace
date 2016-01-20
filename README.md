@@ -1,3 +1,4 @@
+![https://travis-ci.org/monostable/kitnic.svg?branch=master][build status]
 
 # Requirements
 
