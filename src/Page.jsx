@@ -3,6 +3,7 @@ const ReactDOM      = require('react-dom');
 const DocumentTitle = require('react-document-title');
 const TitleBar      = require('./TitleBar');
 const FadeImage     = require('./FadeImage');
+const BOM           = require('./BOM');
 
 const info    = require('./info.json');
 const zipPath = require('./zip-info.json');
@@ -36,9 +37,10 @@ var Page = React.createClass({
         <span className="octicon octicon-repo" /> repo
       </a>;
     return (
-      <DocumentTitle title={titleTxt}><div>
-        <TitleBar>
-          <div style={{
+      <DocumentTitle title={titleTxt}>
+        <div>
+          <TitleBar>
+            <div style={{
               color: 'white'
               , width: '100%'
               , textAlign: 'center'
@@ -47,10 +49,10 @@ var Page = React.createClass({
               , fontSize: 24
               , borderRadius: '5px'
              }}
-          >
-            {titleTxt}
-          </div>
-        </TitleBar>
+            >
+              {titleTxt}
+            </div>
+          </TitleBar>
           <div style={{padding: 20, marginTop:10}}>
             <div style= {{
                 display: 'flex'
@@ -59,13 +61,13 @@ var Page = React.createClass({
             }}
             >
               <div style={{marginBottom:10}}>{info.description}</div>
-              <div style= {{
+                <div style= {{
                   display: 'flex'
                   , flexFlow: 'row wrap'
                   , justifyContent: 'space-around'
                   , flexGrow:2
-              }}
-              >
+                }}
+                >
                 <div>{site}</div>
                 <div>{repo}</div>
                 <div>
@@ -81,20 +83,22 @@ var Page = React.createClass({
           , borderRadius: '1em'
         }}
         >
-        <img
-          src='images/top.svg'
-          style = {{
-            width: '30%'
-          }}
-        />
-        <img
-          src='images/bottom.svg'
-          style = {{
-            width: '30%'
-          }}
-        />
+          <img
+            src='images/top.svg'
+            style = {{
+              width: '30%'
+            }}
+          />
+          <img
+            src='images/bottom.svg'
+            style = {{
+              width: '30%'
+            }}
+          />
         </div>
-      </div></DocumentTitle>
+      <BOM items={info.bom ? info.bom : []} />
+      </div>
+    </DocumentTitle>
     );
   },
 });
