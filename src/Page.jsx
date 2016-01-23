@@ -10,12 +10,29 @@ var Page = React.createClass({
     const titleTxt = info.id.split('/').slice(1).join(' / ');
     var site;
     if (info.site == '') {
-      site = (<div style={{color:'grey', IeUserSelect:'none', WebkitUserSelect:'none', MozUserSelect:'none', cursor:'default'}} title='no website info available'><span className="octicon octicon-link" /> website</div>);
+      site =
+        (<div style={{
+          color:'grey'
+          , IeUserSelect:'none'
+          , WebkitUserSelect:'none'
+          , MozUserSelect:'none'
+          , cursor:'default'
+          }}
+          title='no website info available'
+         >
+          <span className="octicon octicon-link" />website
+        </div>);
     }
     else {
-      site = (<a href={info.site} target='_blank'><span className="octicon octicon-link" /> website</a>);
+      site =
+        (<a href={info.site} target='_blank'>
+          <span className="octicon octicon-link" /> website
+        </a>);
     }
-    const repo = info.repo != '' ? (<a href={info.repo} target='_blank'><span className="octicon octicon-repo" /> repo</a>) : null;
+    const repo =
+      <a href={info.repo} target='_blank'>
+        <span className="octicon octicon-repo" /> repo
+      </a>;
     return (
       <DocumentTitle title={titleTxt}><div>
         <TitleBar>
