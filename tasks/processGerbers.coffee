@@ -74,6 +74,7 @@ if require.main != module
         version = version.split(' ')[0]
         zip = "#{path.basename(folder)}-#{version}-gerbers.zip"
         targets = [
+            "build/.temp/#{folder}/zip-info.json"
             "#{buildFolder}/images/top.svg"
             "#{buildFolder}/images/bottom.svg"
             "#{buildFolder}/#{zip}"
@@ -83,7 +84,11 @@ else
     {deps, targets} = utils.processArgs(process.argv)
     folder = deps[0]
     gerbers = deps[1..]
-    [topSvgPath, bottomSvgPath, zipPath] = targets
+    [zipInfoPath, topSvgPath, bottomSvgPath, zipPath] = targets
+    fs.writeFile zipInfoPath, JSON.stringify(path.basename(zipPath)), (err) ->
+        if err?
+            console.error(err)
+            process.exit(1)
     zip = new Jszip
     zip = zip.folder(path.basename(zipPath, '.zip'))
     try

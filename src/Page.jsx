@@ -1,9 +1,11 @@
 const React         = require('react');
 const ReactDOM      = require('react-dom');
 const DocumentTitle = require('react-document-title');
-const info          = require('./info.json');
 const TitleBar      = require('./TitleBar');
-const FadeImage    = require('./FadeImage');
+const FadeImage     = require('./FadeImage');
+
+const info    = require('./info.json');
+const zipPath = require('./zip-info.json');
 
 var Page = React.createClass({
   render: function () {
@@ -59,6 +61,11 @@ var Page = React.createClass({
               <div style={{marginBottom:10}}>{info.description}</div>
               <div>{site}</div>
               <div>{repo}</div>
+              <div>
+                <a href={zipPath}>
+                  <span className="octicon octicon-circuit-board" /> gerbers
+                </a>
+              </div>
             </div>
           </div>
         <div style={{
