@@ -6,6 +6,7 @@ if require.main != module
             "build/.temp/#{folder}/Page.jsx"
             'src/index.html'
             "build/.temp/#{folder}/info.json"
+            "build/.temp/#{folder}/zip-info.json"
         ]
         targets = ["build/#{folder}/index.html"]
         return {deps, targets, moduleDep: true}

@@ -4,10 +4,10 @@ globule       = require('globule')
 path          = require('path')
 
 
-if process.argv[2] == 'production'
-    config = 'production'
-else
+if process.argv[2] == 'dev'
     config = 'dev'
+else
+    config = 'production'
 
 
 ninja = ninjaBuildGen('1.5.1', 'build/')
@@ -44,7 +44,7 @@ requires = '-r ' + modules.join(' -r ')
 
 rule = ninja.rule('coffee-task')
 if (config == 'production')
-    rule.run("coffee -- $in -- $targetFiles")
+    rule.run("coffee -- $in -- $out")
 else
     #write to $out.d depfile in makefile format for proper incremental builds
     rule.run("echo -n '$out: ' > $out.d
@@ -146,6 +146,7 @@ ninja.edge('build/app.js').from('build/.temp/render.jsx')
 for folder in boardFolders
     ninja.edge("build/#{folder}/app.js")
         .need("build/.temp/#{folder}/info.json")
+        .need("build/.temp/#{folder}/zip-info.json")
         .from("build/.temp/#{folder}/render_page.jsx")
         .using('browserify')
 
@@ -153,13 +154,20 @@ for folder in boardFolders
 for taskFile in globule.find('tasks/*.coffee')
     task = require("./#{path.dirname(taskFile)}/#{path.basename(taskFile)}")
     addEdge = (t) ->
-        edge = ninja.edge(t.targets[0])
-            .from([taskFile].concat(t.deps))
-            .assign('taskFile', taskFile)
-            .assign('targetFiles', t.targets.join(' '))
-            .using('coffee-task')
-        if task.moduleDep
-            edge.assign('jsMain', t.deps[0])
+        if config == 'production'
+            ninja.edge(t.targets)
+                .from([taskFile].concat(t.deps))
+                .using('coffee-task')
+        else
+            edge = ninja.edge(t.targets[0])
+                .from([taskFile].concat(t.deps))
+                .assign('taskFile', taskFile)
+                .assign('targetFiles', t.targets.join(' '))
+                .using('coffee-task')
+            if task.moduleDep
+                edge.assign('jsMain', t.deps[0])
+            for target in t.targets[1..]
+                ninja.edge(target).from(t.targets[0])
     if typeof task == 'function'
         for folder in boardFolders
             addEdge(task(folder))

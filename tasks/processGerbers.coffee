@@ -85,10 +85,7 @@ else
     folder = deps[0]
     gerbers = deps[1..]
     [zipInfoPath, topSvgPath, bottomSvgPath, zipPath] = targets
-    fs.writeFile zipInfoPath, JSON.stringify(path.basename(zipPath)), (err) ->
-        if err?
-            console.error(err)
-            process.exit(1)
+    fs.writeFileSync(zipInfoPath, JSON.stringify(path.basename(zipPath)))
     zip = new Jszip
     zip = zip.folder(path.basename(zipPath, '.zip'))
     try
