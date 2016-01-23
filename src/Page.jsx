@@ -59,12 +59,20 @@ var Page = React.createClass({
             }}
             >
               <div style={{marginBottom:10}}>{info.description}</div>
-              <div>{site}</div>
-              <div>{repo}</div>
-              <div>
-                <a href={zipPath}>
-                  <span className="octicon octicon-circuit-board" /> gerbers
-                </a>
+              <div style= {{
+                  display: 'flex'
+                  , flexFlow: 'row wrap'
+                  , justifyContent: 'space-around'
+                  , flexGrow:2
+              }}
+              >
+                <div>{site}</div>
+                <div>{repo}</div>
+                <div>
+                  <a href={zipPath}>
+                    <span className="octicon octicon-circuit-board" /> gerbers
+                  </a>
+                </div>
               </div>
             </div>
           </div>
