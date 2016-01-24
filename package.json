@@ -34,5 +34,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Kaspar Emanuel",
-  "license": "CPAL-1.0"
+  "license": "CPAL-1.0",
+  "dependencies": {
+    "lodash": "^4.0.0"
+  }
 }
