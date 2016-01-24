@@ -47,12 +47,10 @@ rule = ninja.rule('coffee-task')
 if (config == 'production')
     rule.run("coffee -- $in -- $out")
 else
-    #write to $out.d depfile in makefile format for proper incremental builds
-    rule.run("echo -n '$out: ' > $out.d
-        && browserify -t coffeeify --extension='.coffee' --list $taskFile
-                | sed 's!#{__dirname}/!!' | tr '\\n' ' ' >> $out.d
-        && #{browserify} --list $jsMain
-                | sed 's!#{__dirname}/!!' | tr '\\n' ' ' >> $out.d
+    #write to $out.d depfile in makefile format for ninja to keep track of deps
+    rule.run("browserify -t coffeeify --extension='.coffee' --list $taskFile > $out.d
+        && if [ '$jsMain' != '' ]; then #{browserify} --list $jsMain >> $out.d; fi
+        && coffee ./depfileify.coffee $out $out.d
         && coffee -- $in -- $targetFiles")
     .depfile('$out.d')
     .description('coffee -- $in -- $targetFiles')
