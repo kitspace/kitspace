@@ -36,6 +36,7 @@ if config == 'dev'
 else
     browserify += ' -g uglifyify'
 
+persistify = browserify.replace('browserify', 'persistify')
 
 modules = ['react', 'react-dom']
 excludes = '-x ' + modules.join(' -x ')
@@ -86,26 +87,14 @@ if (config == 'production')
 
     rule.run("#{browserify} #{excludes} $in | #{uglifyjs} > $out")
 else
-    #write to $out.d depfile in makefile format for proper incremental builds
-    rule.run("echo -n '$out: ' > $out.d
-        && #{browserify} #{excludes} $in --list
-            | sed 's!#{__dirname}/!!' | tr '\\n' ' ' >> $out.d
-        && #{browserify} #{excludes} $in -o $out")
-    .depfile('$out.d')
-    .description("browserify $in -o $out")
+    rule.run("#{persistify} #{excludes} $in -o $out")
 
 
 rule = ninja.rule('browserify-require')
 if (config == 'production')
     rule.run("#{browserify} #{requires} $in | #{uglifyjs} > $out")
 else
-    #write to $out.d depfile in makefile format for proper incremental builds
-    rule.run("echo -n '$out: ' > $out.d
-        && #{browserify} #{requires} $in --list
-            | grep ^#{__dirname} | sed 's!#{__dirname}/!!' | tr '\\n' ' ' >> $out.d
-        && #{browserify} #{requires} $in -o $out")
-    .depfile('$out.d')
-    .description("browserify #{requires} -o $out")
+    rule.run("#{persistify} #{requires} $in -o $out")
 
 
 # - Edges - #
