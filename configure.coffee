@@ -4,10 +4,10 @@ globule       = require('globule')
 path          = require('path')
 
 
-if process.argv[2] == 'dev'
-    config = 'dev'
-else
+if process.argv[2] == 'production'
     config = 'production'
+else
+    config = 'dev'
 
 
 ninja = ninjaBuildGen('1.5.1', 'build/')
