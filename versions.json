@@ -1,7 +1,7 @@
 [
   {
     "repo": "https://github.com/kitnic/arduino-uno",
-    "hash": "b39938fa690bb506275cc4080aaad6bd66a75ac5"
+    "hash": "0bb254b8d2f341bdf27cdc1e37cebc6060030175"
   },
   {
     "repo": "https://github.com/kitnic/Bus_Pirate",
@@ -33,6 +33,6 @@
   },
   {
     "repo": "https://github.com/kasbah/push-on-hold-off",
-    "hash": "12a0b9fd7dee31544ac7270888981329d9ffd0d5"
+    "hash": "c0e4d62b687a8c1d97801fb50e9039ff2f77a6bd"
   }
 ]
