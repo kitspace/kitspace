@@ -1,9 +1,5 @@
-
 [![build status][1]](https://travis-ci.org/monostable/kitnic)
-
-Chat with us: 
-
-[![Visit our IRC channel][2]](https://kiwiirc.com/client/irc.freenode.net/#kitnic)
+[![Join gitter.im chat][2]](https://gitter.im/monostable/kitnic)
 
 ## Requirements
 
@@ -12,5 +8,4 @@ Chat with us:
 - ninja >= 1.5.1 
 
 [1]: https://travis-ci.org/monostable/kitnic.svg?branch=master
-[2]: https://kiwiirc.com/buttons/irc.freenode.net/kitnic.png
-
+[2]: https://badges.gitter.im/monostable/kitnic.svg
