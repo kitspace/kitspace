@@ -7,6 +7,8 @@ Chat with us:
 
 ## Requirements
 
+[![Join the chat at https://gitter.im/monostable/kitnic](https://badges.gitter.im/monostable/kitnic.svg)](https://gitter.im/monostable/kitnic?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 - npm >= 2.1.6
 - inotify-tools
 - ninja >= 1.5.1 
