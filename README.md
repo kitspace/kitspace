@@ -4,7 +4,7 @@
 ## Requirements
 
 - npm >= 2.1.6
-- inotify-tools
+- inotify-tools or fswatch
 - ninja >= 1.5.1 
 
 [1]: https://travis-ci.org/monostable/kitnic.svg?branch=master
