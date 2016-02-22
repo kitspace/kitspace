@@ -34,5 +34,9 @@
   {
     "repo": "https://github.com/kasbah/push-on-hold-off",
     "hash": "c0e4d62b687a8c1d97801fb50e9039ff2f77a6bd"
+  },
+  {
+    "repo": "https://github.com/kitnic/BQ25570_Harvester",
+    "hash": "48c698fe8f2061fd272cd2ed211ab41f5c5b3b8b"
   }
 ]
