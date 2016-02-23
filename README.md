@@ -13,15 +13,19 @@ files using the web interface][5].
 
 To register your project with Kitnic edit the [boards.txt](boards.txt) file,
 appending the full public URL to your repo (including `https://`, `http://` or
-`git@` ). Make a pull request with your edit and Travis CI will make sure it
-builds ok. If it builds we will preview your page for you and if you are
-satisified it will be merged and appear on [kitnic.it](http://kitnic.it).
+`git@` ). Submit a pull request and Travis CI should confirm that it builds ok.
+We can then preview your page for you and can merge it so it appears on
+[kitnic.it](http://kitnic.it). 
 
 You will need certain things in your repository for this to work:
 
-1. A directory with plotted gerbers (these will be rendered and offered as a zip for download)
-1. A 1-click-BOM.tsv, this will allow others to quickly purchase the components required to make your project. Use the [1-click-BOM extension](http://1clickBOM.com) to help you make this and test it out.
-1. (Optional) A kitnic.yaml where you can specify a website, give a description, pick a rendering color or configure custom paths for the two requirements above.
+1. A directory with plotted gerbers, these will be rendered as a preview and offered as a zip for download.
+1. A 1-click-BOM.tsv, this will allow others to quickly purchase the components
+   required to make your project. Use the [1-click-BOM extension](http://1clickBOM.com) 
+   to help you make this and test it out.
+1. (Optional) A kitnic.yaml where you can specify a website, give a
+   description, pick a rendering color or configure custom paths for the two
+   requirements above.
 
 If you don't have a kitnic.yaml with a description we will try and find a
 description from your repo. If we can't find one the build will fail.
@@ -39,7 +43,7 @@ gerbers: A path to your folder of gerbers in case it isn't `gerbers/`.
 ```
 Paths should be in UNIX style (i.e. use `/` not `\`) and relative to the root of your
 repository. The YAML format is pretty straight forward (the above is valid
-YAML) but if you must know more check the example below or [the YAML website][6].
+YAML) but if you must know more check the example below and [the YAML website][6].
 
 ### Some examples
 
