@@ -44,9 +44,15 @@ var BoardList = React.createClass({
         }}>
         <p>
 
-          Kitnic is a registry of open hardware electronics projects that
-          are ready for you to order and build. Click on a project to get further
-          info, download the gerbers and see the bill of materials.
+          Kitnic is a registry of open hardware electronics projects that are
+          ready for you to order and build. Or at least that's the plan, this
+          is early stages yet. If you notice any problems please
+          <a href='https://github.com/monostable/kitnic/issues'> get in touch </a>.
+
+        </p><p>
+
+          Click on any project to get further info, download the gerbers and see
+          the bill of materials.
 
         </p><p>
 

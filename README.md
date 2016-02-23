@@ -20,12 +20,11 @@ satisified it will be merged and appear on [kitnic.it](http://kitnic.it).
 You will need certain things in your repository for this to work:
 
 1. A directory with plotted gerbers (these will be rendered and offered as a zip for download)
-1. A 1-click-BOM.tsv This will allow others to quickly purchase the components required to make your project. Use the [1-click-BOM extension](http://1clickBOM.com) to help you make this and test it out.
+1. A 1-click-BOM.tsv, this will allow others to quickly purchase the components required to make your project. Use the [1-click-BOM extension](http://1clickBOM.com) to help you make this and test it out.
 1. (Optional) A kitnic.yaml where you can specify a website, give a description, pick a rendering color or configure custom paths for the two requirements above.
 
-If you don't have a kitnic.yaml with a description the build on Travis will try
-and find a description for you from GitHub. If it can't find one (or you are
-not using GitHub) the build will fail.
+If you don't have a kitnic.yaml with a description we will try and find a
+description from your repo. If we can't find one the build will fail.
 
 ### Kitnic.yaml format
 
@@ -38,7 +37,7 @@ color: The solder resist color of the rendering. Can be one of green, red, blue,
 bom: A path to your 1-click-BOM in case it isn't `1-click-BOM.tsv`.
 gerbers: A path to your folder of gerbers in case it isn't `gerbers/`.
 ```
-Paths should be in UNIX style (i.e. use '/' not '\') and relative to the root of your
+Paths should be in UNIX style (i.e. use `/` not `\`) and relative to the root of your
 repository. The YAML format is pretty straight forward (the above is valid
 YAML) but if you must know more check the example below or [the YAML website][6].
 
