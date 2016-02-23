@@ -27,23 +27,31 @@ You will need certain things in your repository for this to work:
    description, pick a rendering color or configure custom paths for the two
    requirements above.
 
-If you don't have a kitnic.yaml with a description we will try and find a
+If you don't have a `kitnic.yaml` with a description we will try and find a
 description from your repo. If we can't find one the build will fail.
 
 ### Kitnic.yaml format
 
-Currently the kitnic.yaml makes use of the following fields:
+Currently the `kitnic.yaml` makes use of the following fields:
 
 ```yaml
 description: A description for your project
 site: A site you would like to link to (include http:// or https://)
-color: The solder resist color of the rendering. Can be one of green, red, blue, black, white, orange, purple or yellow.
+color: The solder resist color of the rendering. Can be one of: 
+       - green
+       - red
+       - blue
+       - black
+       - white
+       - orange
+       - purple 
+       - yellow
 bom: A path to your 1-click-BOM in case it isn't `1-click-BOM.tsv`.
 gerbers: A path to your folder of gerbers in case it isn't `gerbers/`.
+
 ```
 Paths should be in UNIX style (i.e. use `/` not `\`) and relative to the root of your
-repository. The YAML format is pretty straight forward (the above is valid
-YAML) but if you must know more check the example below and [the YAML website][6].
+repository. The YAML format is pretty straight forward but if you need to know more check the example below and [the YAML website][6]. Use [this YAML validator][7] to be extra sure.
 
 ### Some examples
 
@@ -115,3 +123,4 @@ gerbers: manufacture/gerbers-and-drills
 [4]: https://help.github.com/articles/create-a-repo/
 [5]: https://help.github.com/articles/adding-a-file-to-a-repository/
 [6]: http://www.yaml.org/start.html
+[7]: http://codebeautify.org/yaml-validator
