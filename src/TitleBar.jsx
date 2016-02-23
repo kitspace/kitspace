@@ -23,7 +23,7 @@ var TitleBar = React.createClass({
             <img src='/images/logo.png' />
           </a>
         </div>
-        <a href='/submit'
+        <a href='https://github.com/monostable/kitnic/#submitting-your-project-repo'
           style={{
             color:'white'
           }}

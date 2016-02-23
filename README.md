@@ -6,19 +6,43 @@
 
 ##Submitting your project repo
 
-### Required
-1. A `1-click-BOM.tsv` in the root of your repo, or specify another location
-     of the `.tsv` in `kitnic.yaml` using the `bom:` field. You should use the [1-click-BOM extension](http://1clickBOM.com) to make and test these out.
-1. Gerbers in a folder called `gerbers` in the root of your repo. You can
-     specify another location in `kitnic.yaml` using the `gerbers:` field
-1. A `description:` field in `kitnic.yaml` or a description on GitHub if you
-   are using GitHub
+To have your project included on Kitnic it needs to be in a publicly accessible
+git repository (but it doesn't have to be on GitHub). If you don't know how to
+use git then don't worry, you can still [create a repo on GitHub][4] and [upload your
+files using the web interface][5].
 
-###Optional
-1. A `color:` field in `kitnic.yaml` to specify a rendering color of the
-      solder resist on kitnic.it, this can be one of `green`, `red`, `blue`,
-      `black`, `white`, `orange`, `purple` or `yellow`. The default if not color is specified is `green`.
-1. A `site:` field to link to an external site
+To register your project with Kitnic edit the [boards.txt](boards.txt) file,
+appending the full public URL to your repo (including `https://`, `http://` or
+`git@` ). Make a pull request with your edit and Travis CI will make sure it
+builds ok. If it builds we will preview your page for you and if you are
+satisified it will be merged and appear on [kitnic.it](http://kitnic.it).
+
+You will need certain things in your repository for this to work:
+
+1. A directory with plotted gerbers (these will be rendered and offered as a zip for download)
+1. A 1-click-BOM.tsv This will allow others to quickly purchase the components required to make your project. Use the [1-click-BOM extension](http://1clickBOM.com) to help you make this and test it out.
+1. (Optional) A kitnic.yaml where you can specify a website, give a description, pick a rendering color or configure custom paths for the two requirements above.
+
+If you don't have a kitnic.yaml with a description the build on Travis will try
+and find a description for you from GitHub. If it can't find one (or you are
+not using GitHub) the build will fail.
+
+### Kitnic.yaml format
+
+Currently the kitnic.yaml makes use of the following fields:
+
+```yaml
+description: A description for your project
+site: A site you would like to link to (include http:// or https://)
+color: The solder resist color of the rendering. Can be one of green, red, blue, black, white, orange, purple or yellow.
+bom: A path to your 1-click-BOM in case it isn't `1-click-BOM.tsv`.
+gerbers: A path to your folder of gerbers in case it isn't `gerbers/`.
+```
+Paths should be in UNIX style (i.e. use '/' not '\') and relative to the root of your
+repository. The YAML format is pretty straight forward (the above is valid
+YAML) but if you must know more check the example below or [the YAML website][6].
+
+### Some examples
 
 So, the minimum required file tree is something like :
 
@@ -66,7 +90,7 @@ A more advanced example could be something like:
 
 with `kitnic.yaml` containing:
 
-```
+```yaml
 description: A more advanced example
 site: https://example.com
 color: red
@@ -80,8 +104,11 @@ gerbers: manufacture/gerbers-and-drills
 
 - npm >= 2.1.6
 - inotify-tools or fswatch
-- ninja >= 1.5.1 
+- ninja >= 1.5.1
 
 [1]: https://travis-ci.org/monostable/kitnic.svg?branch=master
 [2]: https://badges.gitter.im/monostable/kitnic.svg
 [3]: https://github.com/monostable/1clickBOM#usage
+[4]: https://help.github.com/articles/create-a-repo/
+[5]: https://help.github.com/articles/adding-a-file-to-a-repository/
+[6]: http://www.yaml.org/start.html

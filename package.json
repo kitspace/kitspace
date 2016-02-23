@@ -5,7 +5,7 @@
   "description": "",
   "main": "",
   "devDependencies": {
-    "1-click-bom": "monostable/nodejs-1-click-bom",
+    "1-click-bom": "^0.4.1",
     "babel-preset-react": "^6.3.13",
     "babel-register": "^6.3.13",
     "babelify": "^7.2.0",

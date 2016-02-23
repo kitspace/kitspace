@@ -57,7 +57,7 @@ var BoardList = React.createClass({
 
         </p><p>
 
-          <a href='/submit'> Submit</a> your own project to have it listed here!
+          <a href='https://github.com/monostable/kitnic/#submitting-your-project-repo'> Submit</a> your own project to have it listed here!
 
         </p>
       </div>
