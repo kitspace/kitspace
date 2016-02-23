@@ -20,10 +20,10 @@ We can then preview your page for you and can merge it so it appears on
 You will need certain things in your repository for this to work:
 
 1. A directory with plotted gerbers, these will be rendered as a preview and offered as a zip for download.
-1. A 1-click-BOM.tsv, this will allow others to quickly purchase the components
+1. A `1-click-BOM.tsv`, this will allow others to quickly purchase the components
    required to make your project. Use the [1-click-BOM extension](http://1clickBOM.com) 
    to help you make this and test it out.
-1. (Optional) A kitnic.yaml where you can specify a website, give a
+1. (Optional) A `kitnic.yaml` where you can specify a website, give a
    description, pick a rendering color or configure custom paths for the two
    requirements above.
 
@@ -37,7 +37,7 @@ Currently the `kitnic.yaml` makes use of the following fields:
 ```yaml
 description: A description for your project
 site: A site you would like to link to (include http:// or https://)
-color: The solder resist color of the rendering. Can be one of: 
+color: The solder resist color of the preview rendering. Can be one of: 
        - green
        - red
        - blue
@@ -51,7 +51,7 @@ gerbers: A path to your folder of gerbers in case it isn't `gerbers/`.
 
 ```
 Paths should be in UNIX style (i.e. use `/` not `\`) and relative to the root of your
-repository. The YAML format is pretty straight forward but if you need to know more check the example below and [the YAML website][6]. Use [this YAML validator][7] to be extra sure.
+repository. The YAML format is pretty straight forward but if you need to know more check the example below and [the YAML website][6]. Use [this YAML validator][7] to be extra sure that your `kitnic.yaml` is valid.
 
 ### Some examples
 
