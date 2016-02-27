@@ -13,10 +13,8 @@ const sizes = {
   }
 }
 
-var BoardThumb = React.createClass({
-
-  render: function () {
-    var style = {
+const style =  {
+    container: {
       backgroundColor: '#373737'
       , width: sizes.thumb.w + 32 + 16
       , height: sizes.thumb.h + sizes.thumb.captionH
@@ -30,14 +28,14 @@ var BoardThumb = React.createClass({
       , border: '1px solid #CFCFCF'
       , cursor: 'pointer'
       , overflow: 'hidden'
-    };
-    var imgStyle = {
+    },
+    img: {
       width: sizes.thumb.w
       , height: sizes.thumb.h
       , marginTop: 16
       , marginBottom: 16
-    };
-    var titleStyle = {
+    },
+    title: {
       height: sizes.thumb.captionH
       , lineHeight: String(sizes.thumb.captionH) + 'px'
       , textAlign: 'center'
@@ -48,8 +46,8 @@ var BoardThumb = React.createClass({
       , opacity: 1.0
       , backgroundColor: '#FAFAFA'
       , color: '#373737'
-    };
-    var descrStyle = {
+    },
+    description: {
       visibility: 'visible'
       , height: sizes.thumb.descriptionH
       , overflow: 'hidden'
@@ -62,34 +60,37 @@ var BoardThumb = React.createClass({
       , backgroundColor: '#FAFAFA'
       , color : '#373737'
       , fontWeight: 'normal'
-    };
+    }
+}
 
+var BoardThumb = React.createClass({
+  render: function () {
     if (this.props.lazyLoad) {
       var image =
           <LazyLoad once={true}
-            component={React.createElement('div', {style:imgStyle})} distance={300}>
+            component={React.createElement('div', {style:style.img})} distance={300}>
             <FadeImage src={'boards/' + this.props.data.id + '/images/top.svg'}
-              style = {imgStyle} />
+              style = {style.img} />
           </LazyLoad>;
     } else {
       var image =
             <img src={'boards/' + this.props.data.id + '/images/top.svg'}
-              style = {imgStyle} />;
+              style = {style.img} />;
     }
 
     return (
       <a href={'/boards/' + this.props.data.id}>
         <div
-          style={style}
+          style={style.container}
           className={'hover-shadow'}
         >
           <center>
           {image}
           </center>
-          <div style={titleStyle}>
+          <div style={style.title}>
             {this.props.data.id.split('/').slice(1).join(' / ')}
           </div>
-          <div style={descrStyle}>
+          <div style={style.description}>
             {(function() {
                 var str = this.props.data.description;
                 if (str.length > 87) {

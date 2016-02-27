@@ -7,9 +7,8 @@ const FadeImage     = require('./FadeImage');
 const info    = require('./info.json');
 const zipPath = require('./zip-info.json');
 
-var Page = React.createClass({
-
-  disabledSiteStyle: {
+const style = {
+  disabledSite: {
     color:'grey',
     IeUserSelect:'none',
     WebkitUserSelect:'none',
@@ -17,7 +16,7 @@ var Page = React.createClass({
     cursor:'default'
   },
 
-  titleTextStyle: {
+  titleText: {
     color: 'white',
     width: '100%',
     textAlign: 'center',
@@ -27,27 +26,31 @@ var Page = React.createClass({
     borderRadius: '5px'
   },
 
-  infoBarStyle: {padding: 20, marginTop:10},
+  infoBar: {padding: 20, marginTop:10},
 
-  infoBarInnerStyle: {
+  infoBarInner: {
     display: 'flex',
     flexFlow: 'row wrap',
     justifyContent: 'space-around'
   },
 
-  infoBarLinksContainerStyle: {
+  infoBarLinksContainer: {
     display: 'flex',
     flexFlow: 'row wrap',
     justifyContent: 'space-around',
     flexGrow:2
-  },
+  }
+}
+
+var Page = React.createClass({
+
 
   render: function () {
     const titleTxt = info.id.split('/').slice(1).join(' / ');
     var site;
     if (info.site == '') {
       site =
-        (<div style={this.disabledSiteStyle} title='no website info available'>
+        (<div style={style.disabledSite} title='no website info available'>
           <span className="octicon octicon-link" />website
         </div>);
     }
@@ -64,14 +67,14 @@ var Page = React.createClass({
     return (
       <DocumentTitle title={titleTxt}><div>
         <TitleBar>
-          <div style={this.titleTextStyle}>
+          <div style={style.titleText}>
             {titleTxt}
           </div>
         </TitleBar>
-          <div style={this.infoBarStyle}>
-            <div style={this.infoBarInnerStyle}>
+          <div style={style.infoBar}>
+            <div style={style.infoBarInner}>
               <div style={{marginBottom:10}}>{info.description}</div>
-              <div style={this.infoBarLinksContainerStyle}>
+              <div style={style.infoBarLinksContainer}>
                 <div>{site}</div>
                 <div>{repo}</div>
                 <div>

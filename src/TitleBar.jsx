@@ -1,8 +1,8 @@
 const React       = require('react');
 const ReactDOM    = require('react-dom');
 
-var TitleBar = React.createClass({
-  titleBarStyle: {
+const style = {
+  titleBar: {
     backgroundColor:'#373737',
     width:'100%', height:'64px',
     boxShadow: '0px 0.1em 0.5em #000',
@@ -11,14 +11,14 @@ var TitleBar = React.createClass({
     borderBottomLeftRadius: 5
   },
 
-  logoContainerStyle: {
+  logoContainer: {
     padding: '10 10 10 10',
     float:'left',
     backgroundColor:'#373737',
     width: 140
   },
 
-  submitStyle: {
+  submit: {
     height:'100%',
     lineHeight: '64px',
     verticalAlign:'middle',
@@ -31,25 +31,28 @@ var TitleBar = React.createClass({
     color:'white'
   },
 
-  middleContainerStyle: {
+  middleContainer: {
     paddingTop: 2,
     overflow: 'hidden'
-  },
+  }
+}
+
+var TitleBar = React.createClass({
 
   render: function () {
     return (
-      <div style={this.titleBarStyle}>
-        <div style={this.logoContainerStyle}>
+      <div style={style.titleBar}>
+        <div style={style.logoContainer}>
           <a href='/'>
             <img src='/images/logo.png' />
           </a>
         </div>
         <a href='https://github.com/monostable/kitnic/#submitting-your-project-repo'>
-          <div style={this.submitStyle}>
+          <div style={style.submit}>
            Submit
           </div>
         </a>
-        <div style={this.middleContainerStyle}>
+        <div style={style.middleContainer}>
           {this.props.children}
         </div>
       </div>

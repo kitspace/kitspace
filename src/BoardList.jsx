@@ -2,25 +2,27 @@ const React       = require('react');
 const ReactDOM    = require('react-dom');
 const BoardThumb  = require('./BoardThumb');
 
-var BoardList = React.createClass({
-
-  introContainerStyle: function (initialLoad) {
+const style = {
+  introContainer: function (show) {
     return {
       marginLeft:'10%',
       marginRight:'10%',
       marginTop:32,
       marginBottom: 32,
-      display:(initialLoad ? 'inherit' : 'none')
+      display:(show ? 'inherit' : 'none')
     }
   },
 
-  introStyle: {
+  intro: {
     backgroundColor: '#FAFAFA',
     padding: 20,
     borderRadius: 5,
     textAlign:'left',
     maxWidth:700
-  },
+  }
+}
+
+var BoardList = React.createClass({
 
   render: function () {
     var initialLoad = !(this.props.searching);
@@ -41,8 +43,8 @@ var BoardList = React.createClass({
       );
     });
     var intro = (
-      <div style={this.introContainerStyle(initialLoad)}>
-        <div style={this.introStyle}>
+      <div style={style.introContainer(initialLoad)}>
+        <div style={style.intro}>
           <p>
 
             Kitnic is a registry of open hardware electronics projects that are

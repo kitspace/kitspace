@@ -5,6 +5,28 @@ const TitleBar    = require('./TitleBar');
 const BoardList   = require('./BoardList');
 const boards      = require('./boards.json');
 
+const style = {
+  searchContainer: {
+    display:'flex',
+    paddingTop:10,
+    justifyContent: 'center'
+  },
+
+  iconContainer: {
+    backgroundColor:'white',
+    width:32,
+    height:40,
+    borderRadius: '5px 0 0 5px'
+  },
+
+  icon: {
+    paddingTop:4,
+    width:30,
+    height:30
+  },
+
+}
+
 var Main = React.createClass({
 
   getInitialState: function() {
@@ -14,32 +36,13 @@ var Main = React.createClass({
     };
   },
 
-  searchContainerStyle: {
-    display:'flex',
-    paddingTop:10,
-    justifyContent: 'center'
-  },
-
-  iconContainerStyle: {
-    backgroundColor:'white',
-    width:32,
-    height:40,
-    borderRadius: '5px 0 0 5px'
-  },
-
-  iconStyle: {
-    paddingTop:4,
-    width:30,
-    height:30
-  },
-
   render: function () {
     return (
       <div>
         <TitleBar>
-          <div style={this.searchContainerStyle}>
-            <div style={this.iconContainerStyle}>
-            <img src='/images/mag_icon.svg' style={this.iconStyle} />
+          <div style={style.searchContainer}>
+            <div style={style.iconContainer}>
+            <img src='/images/mag_icon.svg' style={style.icon} />
             </div>
             <SearchInput
               className='search-input'
