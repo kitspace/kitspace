@@ -90,23 +90,32 @@ var Main = React.createClass({
     };
   },
 
+  searchContainerStyle: {
+    display:'flex',
+    paddingTop:10,
+    justifyContent: 'center'
+  },
+
+  iconContainerStyle: {
+    backgroundColor:'white',
+    width:32,
+    height:40,
+    borderRadius: '5px 0 0 5px'
+  },
+
+  iconStyle: {
+    paddingTop:4,
+    width:30,
+    height:30
+  },
+
   render: function () {
     return (
       <div>
         <TitleBar>
-          <div style={{
-            display:'flex',
-            paddingTop:10,
-            justifyContent: 'center',
-          }}>
-            <div style={{
-              backgroundColor:'white'
-              , width:32
-              , height:40
-              , borderRadius: '5px 0 0 5px'
-            }}
-            >
-            <img src='/images/mag_icon.svg' style={{paddingTop:4, width:30, height:30}} />
+          <div style={this.searchContainerStyle}>
+            <div style={iconContainerStyle}>
+            <img src='/images/mag_icon.svg' style={iconStyle} />
             </div>
             <SearchInput
               className='search-input'
