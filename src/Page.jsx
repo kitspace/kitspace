@@ -7,21 +7,50 @@ const FadeImage     = require('./FadeImage');
 const info    = require('./info.json');
 const zipPath = require('./zip-info.json');
 
+const style = {
+  disabledSite: {
+    color:'grey',
+    IeUserSelect:'none',
+    WebkitUserSelect:'none',
+    MozUserSelect:'none',
+    cursor:'default'
+  },
+
+  titleText: {
+    color: 'white',
+    width: '100%',
+    textAlign: 'center',
+    verticalAlign: ' middle',
+    lineHeight: '60px',
+    fontSize: 24,
+    borderRadius: '5px'
+  },
+
+  infoBar: {padding: 20, marginTop:10},
+
+  infoBarInner: {
+    display: 'flex',
+    flexFlow: 'row wrap',
+    justifyContent: 'space-around'
+  },
+
+  infoBarLinksContainer: {
+    display: 'flex',
+    flexFlow: 'row wrap',
+    justifyContent: 'space-around',
+    flexGrow:2
+  }
+}
+
 var Page = React.createClass({
+
+
   render: function () {
     const titleTxt = info.id.split('/').slice(1).join(' / ');
     var site;
     if (info.site == '') {
       site =
-        (<div style={{
-          color:'grey'
-          , IeUserSelect:'none'
-          , WebkitUserSelect:'none'
-          , MozUserSelect:'none'
-          , cursor:'default'
-          }}
-          title='no website info available'
-         >
+        (<div style={style.disabledSite} title='no website info available'>
           <span className="octicon octicon-link" />website
         </div>);
     }
@@ -38,34 +67,14 @@ var Page = React.createClass({
     return (
       <DocumentTitle title={titleTxt}><div>
         <TitleBar>
-          <div style={{
-              color: 'white'
-              , width: '100%'
-              , textAlign: 'center'
-              , verticalAlign: ' middle'
-              , lineHeight: '60px'
-              , fontSize: 24
-              , borderRadius: '5px'
-             }}
-          >
+          <div style={style.titleText}>
             {titleTxt}
           </div>
         </TitleBar>
-          <div style={{padding: 20, marginTop:10}}>
-            <div style= {{
-                display: 'flex'
-                , flexFlow: 'row wrap'
-                , justifyContent: 'space-around'
-            }}
-            >
+          <div style={style.infoBar}>
+            <div style={style.infoBarInner}>
               <div style={{marginBottom:10}}>{info.description}</div>
-              <div style= {{
-                  display: 'flex'
-                  , flexFlow: 'row wrap'
-                  , justifyContent: 'space-around'
-                  , flexGrow:2
-              }}
-              >
+              <div style={style.infoBarLinksContainer}>
                 <div>{site}</div>
                 <div>{repo}</div>
                 <div>
