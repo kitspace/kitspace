@@ -85,8 +85,12 @@ if (config == 'production')
 
     rule.run("#{browserify} #{excludes} $in | #{uglifyjs} > $out")
 else
-    rule.run("#{persistify} #{excludes} $in -o $out")
-
+    rule.run("#{browserify} #{excludes} --list $in > $out.d
+        && coffee ./depfileify.coffee $out $out.d
+        && #{persistify} #{excludes} $in -o $out"
+    )
+    .depfile('$out.d')
+    .description("persistify #{excludes} $in -o $out")
 
 rule = ninja.rule('browserify-require')
 if (config == 'production')
