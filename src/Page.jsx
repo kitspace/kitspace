@@ -8,20 +8,46 @@ const info    = require('./info.json');
 const zipPath = require('./zip-info.json');
 
 var Page = React.createClass({
+
+  disabledSiteStyle: {
+    color:'grey',
+    IeUserSelect:'none',
+    WebkitUserSelect:'none',
+    MozUserSelect:'none',
+    cursor:'default'
+  },
+
+  titleTextStyle: {
+    color: 'white',
+    width: '100%',
+    textAlign: 'center',
+    verticalAlign: ' middle',
+    lineHeight: '60px',
+    fontSize: 24,
+    borderRadius: '5px'
+  },
+
+  infoBarStyle: {padding: 20, marginTop:10},
+
+  infoBarInnerStyle: {
+    display: 'flex',
+    flexFlow: 'row wrap',
+    justifyContent: 'space-around'
+  },
+
+  infoBarLinksContainerStyle: {
+    display: 'flex',
+    flexFlow: 'row wrap',
+    justifyContent: 'space-around',
+    flexGrow:2
+  },
+
   render: function () {
     const titleTxt = info.id.split('/').slice(1).join(' / ');
     var site;
     if (info.site == '') {
       site =
-        (<div style={{
-          color:'grey'
-          , IeUserSelect:'none'
-          , WebkitUserSelect:'none'
-          , MozUserSelect:'none'
-          , cursor:'default'
-          }}
-          title='no website info available'
-         >
+        (<div style={this.disabledSiteStyle} title='no website info available'>
           <span className="octicon octicon-link" />website
         </div>);
     }
@@ -38,34 +64,14 @@ var Page = React.createClass({
     return (
       <DocumentTitle title={titleTxt}><div>
         <TitleBar>
-          <div style={{
-              color: 'white'
-              , width: '100%'
-              , textAlign: 'center'
-              , verticalAlign: ' middle'
-              , lineHeight: '60px'
-              , fontSize: 24
-              , borderRadius: '5px'
-             }}
-          >
+          <div style={this.titleTextStyle}>
             {titleTxt}
           </div>
         </TitleBar>
-          <div style={{padding: 20, marginTop:10}}>
-            <div style= {{
-                display: 'flex'
-                , flexFlow: 'row wrap'
-                , justifyContent: 'space-around'
-            }}
-            >
+          <div style={this.infoBarStyle}>
+            <div style={this.infoBarInnerStyle}>
               <div style={{marginBottom:10}}>{info.description}</div>
-              <div style= {{
-                  display: 'flex'
-                  , flexFlow: 'row wrap'
-                  , justifyContent: 'space-around'
-                  , flexGrow:2
-              }}
-              >
+              <div style={this.infoBarLinksContainerStyle}>
                 <div>{site}</div>
                 <div>{repo}</div>
                 <div>
