@@ -9,8 +9,8 @@ var Main = React.createClass({
 
   getInitialState: function() {
     return {
-      result: boards
-      , searching: false
+      result: boards,
+      searching: false
     };
   },
 
