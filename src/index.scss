@@ -18,23 +18,9 @@ a {
 }
 
 .search-input {
-    padding: 10px 10px;
+    width:100%;
     height: 52px;
     position: relative;
-}
-
-.search-input::before {
-    content: "\26b2";
-    display: block;
-    position: absolute;
-    width: 15px;
-    z-index: 3;
-    height: 15px;
-    transform: rotate(-45deg);
-    font-size: 20px;
-    top: 15px;
-    line-height: 32px;
-    color: #A0A0A0;
 }
 
 .search-input > input {
@@ -42,10 +28,9 @@ a {
     font-size: 18px;
     border: none;
     line-height: 22px;
-    padding: 5px 10px 5px 25px;
     height: 40px;
     position: relative;
-    border-radius: 5px;
+    border-radius: 0 5px 5px 0;
     background: white;
 }
 

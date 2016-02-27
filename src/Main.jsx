@@ -94,11 +94,26 @@ var Main = React.createClass({
     return (
       <div>
         <TitleBar>
-          <SearchInput
-            className='search-input'
-            ref='search'
-            onChange={this.searchUpdated}
-           />
+          <div style={{
+            display:'flex',
+            paddingTop:10,
+            justifyContent: 'center',
+          }}>
+            <div style={{
+              backgroundColor:'white'
+              , width:32
+              , height:40
+              , borderRadius: '5px 0 0 5px'
+            }}
+            >
+            <img src='/images/mag_icon.svg' style={{paddingTop:4, width:30, height:30}} />
+            </div>
+            <SearchInput
+              className='search-input'
+              ref='search'
+              onChange={this.searchUpdated}
+             />
+          </div>
         </TitleBar>
         <BoardList data={this.state.result} searching={this.state.searching}/>
       </div>
