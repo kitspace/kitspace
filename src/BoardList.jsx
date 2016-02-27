@@ -3,6 +3,25 @@ const ReactDOM    = require('react-dom');
 const BoardThumb  = require('./BoardThumb');
 
 var BoardList = React.createClass({
+
+  introContainerStyle: function (initialLoad) {
+    return {
+      marginLeft:'10%',
+      marginRight:'10%',
+      marginTop:32,
+      marginBottom: 32,
+      display:(initialLoad ? 'inherit' : 'none')
+    }
+  },
+
+  introStyle: {
+    backgroundColor: '#FAFAFA',
+    padding: 20,
+    borderRadius: 5,
+    textAlign:'left',
+    maxWidth:700
+  },
+
   render: function () {
     var initialLoad = !(this.props.searching);
     if (this.props.data.length === 0) {
@@ -22,49 +41,34 @@ var BoardList = React.createClass({
       );
     });
     var intro = (
-      <div style=
-        {{
-          marginLeft:'10%'
-          , marginRight:'10%'
-          , marginTop:32
-          , marginBottom: 32
-          , display:(initialLoad ? 'inherit' : 'none')
-      }}>
-      <center>
-        <div style=
-          {{
-            backgroundColor: '#FAFAFA'
-            , padding: 20
-            , borderRadius: 5
-            , textAlign:'left'
-            , maxWidth:700
-        }}>
-        <p>
+      <div style={this.introContainerStyle(initialLoad)}>
+        <div style={this.introStyle}>
+          <p>
 
-          Kitnic is a registry of open hardware electronics projects that are
-          ready for you to order and build. Or at least that's the plan, this
-          is early stages yet. If you notice any problems please
-          <a href='https://github.com/monostable/kitnic/issues'> get in touch </a>.
+            Kitnic is a registry of open hardware electronics projects that are
+            ready for you to order and build. Or at least that's the plan, this
+            is early stages yet. If you notice any problems please
+            <a href='https://github.com/monostable/kitnic/issues'> get in touch </a>.
 
-        </p><p>
+          </p><p>
 
-          Click on any project to get further info, download the gerbers and see
-          the bill of materials.
+            Click on any project to get further info, download the gerbers and see
+            the bill of materials.
 
-        </p><p>
+          </p><p>
 
-          To quickly purchase the parts from various retailers you should
-          <a href='http://1clickBOM.com'> install</a> the 1-click-BOM extension.
-          It's pretty useful on it's own too and can be used on other sites.
-          Read more about it <a href='http://1clickBOM.com'>here</a>.
+            To quickly purchase the parts from various retailers you should
+            <a href='http://1clickBOM.com'> install</a> the 1-click-BOM extension.
+            It's pretty useful on it's own too and can be used on other sites.
+            Read more about it <a href='http://1clickBOM.com'>here</a>.
 
-        </p><p>
+          </p><p>
 
-          <a href='https://github.com/monostable/kitnic/#submitting-your-project-repo'> Submit</a> your own project to have it listed here!
+            <a href='https://github.com/monostable/kitnic/#submitting-your-project-repo'>
+            Submit</a> your own project to have it listed here!
 
-        </p>
-      </div>
-      </center>
+          </p>
+        </div>
       </div>
     );
     return (
