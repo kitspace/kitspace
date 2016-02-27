@@ -114,6 +114,7 @@ gerbers: manufacture/gerbers-and-drills
 ### Requirements
 
 - npm >= 2.1.6
+- sass >= 3.2.12
 - inotify-tools or fswatch
 - ninja >= 1.5.1
 

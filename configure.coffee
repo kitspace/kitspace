@@ -95,6 +95,9 @@ else
     rule.run("#{persistify} #{requires} $in -o $out")
 
 
+ninja.rule('sass').run('sass $in $out')
+
+
 # - Edges - #
 
 ninja.edge('build/vendor.js').using('browserify-require')
@@ -110,6 +113,11 @@ boardFolders = globule.find('boards/*/*/*', {filter:'isDirectory'})
 
 jsSrc = globule.find(['src/*.js', 'src/*.jsx'])
 
+sassSrc = globule.find('src/*.scss')
+
+for src in sassSrc
+    ninja.edge(src.replace(/^src\//, 'build/').replace(/.scss$/, '.css'))
+        .from(src).using('sass')
 
 jsMainTargets = jsSrc.map (f) ->
     temp = f.replace('src', 'build/.temp')
