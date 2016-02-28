@@ -6,7 +6,7 @@
     background-color:white;
     width:32px;
     height:40px;
-    @media (max-device-width: 799px) {
+    @include breakpoint(mobile) {
         width: 72px;
         height: 80px;
     }
@@ -16,7 +16,7 @@
 .search-input {
     width:100%;
     height: 52px;
-    @media (max-device-width: 799px) {
+    @include breakpoint(mobile) {
         height: 92px;
     }
     position: relative;
@@ -26,13 +26,13 @@
     width: 100%;
     height: 80%;
     font-size: 18px;
-    @media (max-device-width: 799px) {
+    @include breakpoint(mobile) {
         font-size: 24px;
     }
     border: none;
     line-height: 22px;
     height: 40px;
-    @media (max-device-width: 799px) {
+    @include breakpoint(mobile) {
         height: 80px;
     }
     position: relative;
