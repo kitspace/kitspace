@@ -12,17 +12,8 @@ const style = {
     justifyContent: 'center'
   },
 
-  iconContainer: {
-    backgroundColor:'white',
-    width:32,
-    height:40,
-    borderRadius: '5px 0 0 5px'
-  },
-
   icon: {
-    paddingTop:4,
-    width:30,
-    height:30
+    width:'100%',
   },
 
 }
@@ -41,7 +32,7 @@ var Main = React.createClass({
       <div>
         <TitleBar>
           <div style={style.searchContainer}>
-            <div style={style.iconContainer}>
+            <div className='search-input-icon'>
             <img src='/images/mag_icon.svg' style={style.icon} />
             </div>
             <SearchInput

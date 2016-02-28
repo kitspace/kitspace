@@ -99,7 +99,7 @@ else
     rule.run("#{persistify} #{requires} $in -o $out")
 
 
-ninja.rule('sass').run('sass --load-path $path $in $out')
+ninja.rule('sass').run('sass --sourcemap=none --load-path $path $in $out')
 
 
 # - Edges - #
