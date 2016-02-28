@@ -99,7 +99,7 @@ else
     rule.run("#{persistify} #{requires} $in -o $out")
 
 
-ninja.rule('sass').run('sass $in $out')
+ninja.rule('sass').run('sass --load-path $path $in $out')
 
 
 # - Edges - #
@@ -117,11 +117,17 @@ boardFolders = globule.find('boards/*/*/*', {filter:'isDirectory'})
 
 jsSrc = globule.find(['src/*.js', 'src/*.jsx'])
 
+
 sassSrc = globule.find('src/*.scss')
 
-for src in sassSrc
-    ninja.edge(src.replace(/^src\//, 'build/').replace(/.scss$/, '.css'))
-        .from(src).using('sass')
+
+ninja.edge('build/index.css').from('src/main.scss')
+    .need(sassSrc).assign('path', 'src/')
+    .using('sass')
+
+ninja.edge('build/page.css').from('src/page.scss')
+    .need(sassSrc).assign('path', 'src/')
+    .using('sass')
 
 jsMainTargets = jsSrc.map (f) ->
     temp = f.replace('src', 'build/.temp')

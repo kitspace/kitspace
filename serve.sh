@@ -13,7 +13,8 @@ case "$OSTYPE" in
 esac
 
 
-./configure.coffee dev && ninja -v && http-server build/ &
+./configure.coffee dev && ninja -v;
+http-server build/ &
 
 if [ "$OS" == 'LINUX' ]; then
     while inotifywait --exclude '\..*sw.' -r -q -e modify src/ tasks/ boards/; do

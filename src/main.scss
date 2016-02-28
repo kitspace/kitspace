@@ -1,0 +1,28 @@
+@import 'common';
+@import 'title_bar';
+
+.search-input {
+    width:100%;
+    height: 52px;
+    position: relative;
+}
+
+.search-input > input {
+    width: 100%;
+    font-size: 18px;
+    border: none;
+    line-height: 22px;
+    height: 40px;
+    position: relative;
+    border-radius: 0 5px 5px 0;
+    background: white;
+}
+
+.search-input > input:focus {
+    outline: none;
+}
+
+@media screen and (max-device-width: 799px) {
+    .thumbImage {
+    }
+}
