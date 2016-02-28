@@ -3,7 +3,7 @@ utils = require('./utils/utils')
 if require.main != module
     module.exports = (folder) ->
         deps = [
-            "build/.temp/#{folder}/Page.jsx"
+            "build/.temp/#{folder}/page.jsx"
             'src/page.html'
             "build/.temp/#{folder}/info.json"
             "build/.temp/#{folder}/zip-info.json"

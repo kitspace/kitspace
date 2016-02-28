@@ -1,8 +1,8 @@
 const React    = require('react');
 const ReactDOM = require('react-dom');
 const boards   = require('./boards.json');
-const LazyLoad = require('./LazyLoad');
-const FadeImage    = require('./FadeImage');
+const LazyLoad = require('./lazy_load');
+const FadeImage    = require('./fade_image');
 
 const sizes = {
   thumb : {

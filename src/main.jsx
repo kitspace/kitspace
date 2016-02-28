@@ -1,8 +1,8 @@
 const React       = require('react');
 const ReactDOM    = require('react-dom');
 const SearchInput = require('react-search-input');
-const TitleBar    = require('./TitleBar');
-const BoardList   = require('./BoardList');
+const TitleBar    = require('./title_bar');
+const BoardList   = require('./board_list');
 const boards      = require('./boards.json');
 
 const style = {

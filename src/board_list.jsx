@@ -1,6 +1,6 @@
 const React       = require('react');
 const ReactDOM    = require('react-dom');
-const BoardThumb  = require('./BoardThumb');
+const BoardThumb  = require('./board_thumb');
 
 const style = {
   introContainer: function (show) {

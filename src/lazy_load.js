@@ -1,6 +1,6 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
-var isVisible = require('./isVisible');
+var isVisible = require('./is_visible');
 
 var LazyLoad = React.createClass({
   displayName: 'LazyLoad',

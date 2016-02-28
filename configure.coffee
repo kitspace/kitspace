@@ -118,17 +118,6 @@ boardFolders = globule.find('boards/*/*/*', {filter:'isDirectory'})
 jsSrc = globule.find(['src/*.js', 'src/*.jsx'])
 
 
-sassSrc = globule.find('src/*.scss')
-
-
-ninja.edge('build/index.css').from('src/main.scss')
-    .need(sassSrc).assign('path', 'src/')
-    .using('sass')
-
-ninja.edge('build/page.css').from('src/page.scss')
-    .need(sassSrc).assign('path', 'src/')
-    .using('sass')
-
 jsMainTargets = jsSrc.map (f) ->
     temp = f.replace('src', 'build/.temp')
     ninja.edge(temp).from(f).using('copy')
@@ -142,6 +131,19 @@ for folder in boardFolders
         temp = f.replace('src', "build/.temp/#{folder}")
         jsPageTargets[folder].push(temp)
         ninja.edge(temp).from(f).using('copy')
+
+
+sassSrc = globule.find('src/*.scss')
+
+
+ninja.edge('build/index.css').from('src/main.scss')
+    .need(sassSrc).assign('path', 'src/')
+    .using('sass')
+
+
+ninja.edge('build/page.css').from('src/page.scss')
+    .need(sassSrc).assign('path', 'src/')
+    .using('sass')
 
 
 ninja.edge('build/app.js').from('build/.temp/render.jsx')
