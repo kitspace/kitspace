@@ -6,6 +6,9 @@
     border-bottom-left-radius: 5;
     display: flex;
     flex-wrap: wrap;
+    @include breakpoint(mobile) {
+        padding-top:10px;
+    }
 }
 
 .logoContainer {
@@ -13,7 +16,6 @@
     background-color:#373737;
     width: 140px;
     @include breakpoint(mobile) {
-        padding-top: 20px;
         width: 50%;
     }
 }
@@ -21,7 +23,7 @@
 .logoImg {
     width: 90%;
     @include breakpoint(mobile) {
-        width: 40%;
+        width: 70%;
     }
 }
 
@@ -30,29 +32,30 @@
     flex-grow: 2;
     @include breakpoint(mobile) {
         width: 100%;
-        height: 100px;
         order:3;
-        padding-bottom:10px;
+        padding:10px;
     }
 }
 
 .submitContainer {
     width: 140px;
     @include breakpoint(mobile) {
-        padding-top: 20px;
         width:40%;
         order: 2;
     }
 }
 
+//centering trick, wtf css
+.submit:before {
+  content: "";
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
 
 .submit {
-    line-height: 64px;
-    vertical-align:middle;
     text-align: center;
     background-color: #373737;
-    padding-left: 10px;
-    padding-right: 10px;
     width: 140px;
     @include breakpoint(mobile) {
         width:100%;

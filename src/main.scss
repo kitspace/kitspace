@@ -4,10 +4,8 @@
 
 .searchContainer {
     display:flex;
-    padding-top:10;
-    justify-content: center;
-    @include breakpoint(mobile) {
-        padding: 20px;
+    @include breakpoint(desktop) {
+        padding-top:10px;
     }
 }
 
