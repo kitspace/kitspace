@@ -6,12 +6,6 @@ const BoardList   = require('./board_list');
 const boards      = require('./boards.json');
 
 const style = {
-  searchContainer: {
-    display:'flex',
-    paddingTop:10,
-    justifyContent: 'center'
-  },
-
   icon: {
     width:'100%',
   },
@@ -31,7 +25,7 @@ var Main = React.createClass({
     return (
       <div>
         <TitleBar>
-          <div style={style.searchContainer}>
+          <div className='searchContainer'>
             <div className='search-input-icon'>
             <img src='/images/mag_icon.svg' style={style.icon} />
             </div>

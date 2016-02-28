@@ -2,14 +2,10 @@
     background-color:#373737;
     width:100%;
     box-shadow: 0px 0.1em 0.5em #000;
-    overflow: hidden;
     border-bottom-right-radius: 5;
     border-bottom-left-radius: 5;
     display: flex;
     flex-wrap: wrap;
-    @include breakpoint(desktop) {
-        height:64px;
-    }
 }
 
 .logoContainer {
@@ -17,16 +13,35 @@
     background-color:#373737;
     width: 140px;
     @include breakpoint(mobile) {
+        padding-top: 20px;
         width: 100%;
     }
 }
 
+.logoImg {
+    width: 90%;
+    @include breakpoint(mobile) {
+        width: 40%;
+    }
+}
+
 .middleContainer {
-    padding: 2;
-    overflow: hidden;
+    padding: 2px;
     flex-grow: 2;
     @include breakpoint(mobile) {
         width: 100%;
         height: 100px;
     }
 }
+
+.submit {
+    line-height: 64px;
+    vertical-align:middle;
+    text-align: center;
+    background-color: #373737;
+    padding-left: 10;
+    padding-right: 10;
+    width: 140;
+    color:white;
+}
+

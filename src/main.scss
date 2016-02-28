@@ -2,6 +2,16 @@
 @import 'title_bar';
 @import 'board_thumb';
 
+.searchContainer {
+    display:flex;
+    padding-top:10;
+    justify-content: center;
+    @include breakpoint(mobile) {
+        padding: 20px;
+    }
+}
+
+
 .search-input-icon {
     background-color:white;
     width:32px;
