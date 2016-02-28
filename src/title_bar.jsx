@@ -44,7 +44,7 @@ var TitleBar = React.createClass({
       <div style={style.titleBar}>
         <div style={style.logoContainer}>
           <a href='/'>
-            <img src='/images/logo.png' />
+            <img style={{width:128, height:47}} src='/images/logo.svg' />
           </a>
         </div>
         <a href='https://github.com/monostable/kitnic/#submitting-your-project-repo'>
