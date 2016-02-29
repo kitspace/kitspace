@@ -10,7 +10,7 @@ fi
 function send() {
     rsync -r . $KITNIC_BUILD_SERVER --update --delete --progress \
         --exclude='build' --exclude='node_modules' --exclude='.git' \
-        --exclude='.*.sw*';
+        --exclude='.sass-cache' --exclude='.*.sw*';
 }
 
 send;
