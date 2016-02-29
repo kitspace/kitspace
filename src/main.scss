@@ -4,9 +4,7 @@
 
 .searchContainer {
     display:flex;
-    @include breakpoint(desktop) {
-        padding-top:10px;
-    }
+    padding-top:10px;
 }
 
 

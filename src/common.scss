@@ -1,10 +1,11 @@
 
 @mixin breakpoint($point) {
   @if $point == mobile {
-    @media (max-device-width: 799px), (min-resolution: 150dpi) { @content; }
-  }
-  @else if $point == desktop {
-    @media (min-device-width: 799px), (max-resolution: 150dpi){ @content; }
+    @media (max-device-width: 899px)
+    , (max-device-width: 1024px) and (orientation: landscape)
+    , (min-resolution: 300dpi)
+    , handheld
+      { @content; }
   }
 }
 
