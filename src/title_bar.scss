@@ -1,3 +1,70 @@
-.hover-shadow:hover {
-    box-shadow: 0px 0.1em 0.5em black;
+.titleBar {
+    background-color:#373737;
+    width:100%;
+    box-shadow: 0px 0.1em 0.5em #000;
+    border-bottom-right-radius: 5;
+    border-bottom-left-radius: 5;
+    display: flex;
+    flex-wrap: wrap;
+    @include breakpoint(mobile) {
+        padding-top:10px;
+    }
 }
+
+.logoContainer {
+    padding: 10px 10px 10px 10px;
+    background-color:#373737;
+    width: 140px;
+    top: 50%;
+    left: 50%;
+    @include breakpoint(mobile) {
+        width: 50%;
+    }
+}
+
+.logoImg {
+    width: 90%;
+    @include breakpoint(mobile) {
+        width: 70%;
+    }
+}
+
+.middleContainer {
+    padding: 2px;
+    flex-grow: 2;
+    @include breakpoint(mobile) {
+        width: 100%;
+        order:3;
+        padding:10px;
+    }
+}
+
+.submitContainer {
+    width: 140px;
+    @include breakpoint(mobile) {
+        width:40%;
+        order: 2;
+    }
+}
+
+//centering trick, wtf css
+.submit:before {
+  content: "";
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+
+.submit {
+    text-align: center;
+    background-color: #373737;
+    width: 140px;
+    height:64px;
+    @include breakpoint(mobile) {
+        padding-top:8%;
+        width:100%;
+        font-size: -webkit-xxx-large;
+    }
+    color:white;
+}
+

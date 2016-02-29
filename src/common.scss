@@ -1,4 +1,13 @@
-@import url(http://fonts.googleapis.com/css?family=Noto+Sans:400,700);
+
+@mixin breakpoint($point) {
+  @if $point == mobile {
+    @media (max-device-width: 899px)
+    , (max-device-width: 1024px) and (orientation: landscape)
+    , (min-resolution: 300dpi)
+    , handheld
+      { @content; }
+  }
+}
 
 html, head, body {
     margin: 0;
@@ -6,7 +15,10 @@ html, head, body {
 
 body {
     font-family: 'Noto Sans','Helvetica', 'Arial', sans-serif;
-    font-size:16px;
+    font-size: 16px;
+    @include breakpoint(mobile) {
+        font-size: 24px;
+    }
 }
 
 a {

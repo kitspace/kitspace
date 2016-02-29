@@ -43,6 +43,7 @@ var BoardList = React.createClass({
       );
     });
     var intro = (
+      <center>
       <div style={style.introContainer(initialLoad)}>
         <div style={style.intro}>
           <p>
@@ -72,6 +73,7 @@ var BoardList = React.createClass({
           </p>
         </div>
       </div>
+      </center>
     );
     return (
       <div>
