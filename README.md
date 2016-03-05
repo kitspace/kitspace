@@ -11,9 +11,9 @@ To submit your open source hardware project to Kitnic, just follow these require
 **1. Export your plotted gerbers & drill data.**
 Your gerbers will be rendered as a preview and offered as a zip for download.
 They should be exported from your PCB design package in RS-274-X format
-together with drill information into a directory - by default the path `gerbers/`
-will be searched. if this is not where they are stored, please add this info in
-the kitnic.yaml file (see below).
+together with drill information into a directory - by default the path
+`gerbers/` will be searched. If this is not where they are stored, please add
+this info in the kitnic.yaml file (see below).
 
 **2. Create the 1-click-BOM file.**
 A Bill Of Materials (BOM) is needed; this should be as a tab-separated (.tsv)
