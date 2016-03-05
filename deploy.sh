@@ -9,10 +9,11 @@ then
     exit 0
 elif  [ "${TRAVIS_BRANCH}" != "master" ]
 then
-    echo -e "${SSH_KEY}" > key
-    chmod 600 key
-    scp -i key -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -r build "ubuntu@preview.kitnic.it:www/kitnic/${TRAVIS_BRANCH}"
-    rm key
+    echo -e "${SSH_KEY}" > key-file
+    chmod 600 key-file
+    ssh -i key-file -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no "ubuntu@preview.kitnic.it" "rm -rf www/kitnic/${TRAVIS_BRANCH}"
+    scp -i key-file -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -r build "ubuntu@preview.kitnic.it:www/kitnic/${TRAVIS_BRANCH}"
+    rm -f key-file
 else
     cd build
     git init
