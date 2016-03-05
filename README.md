@@ -4,31 +4,25 @@
 
 [![Join gitter.im chat][2]](https://gitter.im/monostable/kitnic) or IRC freenode#kitnic
 
-##Submitting your project repo
+##Submitting your project
 
-To have your project included on Kitnic it needs to be in a publicly accessible
-git repository (but it doesn't have to be on GitHub). If you don't know how to
-use git then don't worry, you can still [create a repo on GitHub][4] and [upload your
-files using the web interface][5].
+To submit your open source hardware project to Kitnic, just follow these requirements / steps;
 
-To register your project with Kitnic edit the [boards.txt](boards.txt) file,
-appending the full public URL to your repo (including `https://`, `http://` or
-`git@` ). Submit a pull request and Travis CI should confirm that it builds ok.
-We can then preview your page for you and can merge it so it appears on
-[kitnic.it](http://kitnic.it). 
+**1. Export your plotted gerbers & drill data.**
+Your gerbers will be rendered as a preview and offered as a zip for download. They should be exported from your PCB design package in RS-274-X format together with drill information into a directory - by default the `/gerbers/` will be searched. if this is not where they are stored, please add this info in the kitnic.yaml file (see below).
 
-You will need certain things in your repository for this to work:
+**2. Create the 1-click-BOM file.**
+A Bill Of Materials (BOM) is needed; this should be as a tab-separated (.tsv) file in the format used by the [1-click-BOM extension](http://1clickBOM.com) - `1-click-BOM.tsv`. This format will allow others to quickly purchase the components required to make your project. Download the extension to help you make this and test it out. By default this file is expected in the root of the project, if the file has a different name or is in a different location, please add this info in the kitnic.yaml file (see below).
 
-1. A directory with plotted gerbers, these will be rendered as a preview and offered as a zip for download.
-1. A `1-click-BOM.tsv`, this will allow others to quickly purchase the components
-   required to make your project. Use the [1-click-BOM extension](http://1clickBOM.com) 
-   to help you make this and test it out.
-1. (Optional) A `kitnic.yaml` where you can specify a website, give a
-   description, pick a rendering color or configure custom paths for the two
-   requirements above.
+**3. (Optional) Create the YAML project description file.**
+The `kitnic.yaml` file allows you to specify a website, give a description, pick a rendering color or configure custom paths for the two requirements above. If you don't have a `kitnic.yaml` with a description we will try and find a description from your repo. If we can't find one the build will fail. See the section below for details of the file format.
 
-If you don't have a `kitnic.yaml` with a description we will try and find a
-description from your repo. If we can't find one the build will fail.
+**4. Add your project to a Git repository.**
+To have your project included on Kitnic it needs to be in a publicly accessible git repository (but it doesn't have to be on GitHub). If you don't know how to use git then *don't worry*! - you can easily [create a repo on GitHub][4] and [upload your files using the web interface][5].
+
+**5. Add your project to Kitnics board list.**
+To add your project to Kitnic, edit the [boards.txt](boards.txt) file, by appending the full public URL to your repo (including `https://`, `http://` or`git@` ). Then submit a pull request and Travis CI should confirm that it builds ok. We will then preview your page for you and can merge it so it appears on [kitnic.it](http://kitnic.it). If any of the requirements above are not met then this process will likely fail, so check bfore submitting.
+
 
 ### Kitnic.yaml format
 
