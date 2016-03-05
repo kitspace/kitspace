@@ -3,7 +3,7 @@ const ReactDOM      = require('react-dom');
 const DocumentTitle = require('react-document-title');
 const TitleBar      = require('./title_bar');
 const FadeImage     = require('./fade_image');
-const BOM           = require('./BOM');
+const BOM           = require('./bom');
 
 const info    = require('./info.json');
 const zipPath = require('./zip-info.json');
