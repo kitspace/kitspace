@@ -4,10 +4,10 @@ globule       = require('globule')
 path          = require('path')
 
 
-if process.argv[2] == 'dev'
-    config = 'dev'
-else
+if process.argv[2] == 'production'
     config = 'production'
+else
+    config = 'dev'
 
 
 ninja = ninjaBuildGen('1.5.1', 'build/')
@@ -36,6 +36,7 @@ if config == 'dev'
 else
     browserify += ' -g uglifyify'
 
+persistify = browserify.replace('browserify', 'persistify')
 
 modules = ['react', 'react-dom']
 excludes = '-x ' + modules.join(' -x ')
@@ -46,12 +47,10 @@ rule = ninja.rule('coffee-task')
 if (config == 'production')
     rule.run("coffee -- $in -- $out")
 else
-    #write to $out.d depfile in makefile format for proper incremental builds
-    rule.run("echo -n '$out: ' > $out.d
-        && browserify -t coffeeify --extension='.coffee' --list $taskFile
-                | sed 's!#{__dirname}/!!' | tr '\\n' ' ' >> $out.d
-        && #{browserify} --list $jsMain
-                | sed 's!#{__dirname}/!!' | tr '\\n' ' ' >> $out.d
+    #write to $out.d depfile in makefile format for ninja to keep track of deps
+    rule.run("browserify -t coffeeify --extension='.coffee' --list $taskFile > $out.d
+        && if [ '$jsMain' != '' ]; then #{browserify} --list $jsMain >> $out.d; fi
+        && coffee ./depfileify.coffee $out $out.d
         && coffee -- $in -- $targetFiles")
     .depfile('$out.d')
     .description('coffee -- $in -- $targetFiles')
@@ -86,26 +85,21 @@ if (config == 'production')
 
     rule.run("#{browserify} #{excludes} $in | #{uglifyjs} > $out")
 else
-    #write to $out.d depfile in makefile format for proper incremental builds
-    rule.run("echo -n '$out: ' > $out.d
-        && #{browserify} #{excludes} $in --list
-            | sed 's!#{__dirname}/!!' | tr '\\n' ' ' >> $out.d
-        && #{browserify} #{excludes} $in -o $out")
+    rule.run("#{browserify} #{excludes} --list $in > $out.d
+        && coffee ./depfileify.coffee $out $out.d
+        && #{persistify} #{excludes} $in -o $out"
+    )
     .depfile('$out.d')
-    .description("browserify $in -o $out")
-
+    .description("persistify #{excludes} $in -o $out")
 
 rule = ninja.rule('browserify-require')
 if (config == 'production')
     rule.run("#{browserify} #{requires} $in | #{uglifyjs} > $out")
 else
-    #write to $out.d depfile in makefile format for proper incremental builds
-    rule.run("echo -n '$out: ' > $out.d
-        && #{browserify} #{requires} $in --list
-            | grep ^#{__dirname} | sed 's!#{__dirname}/!!' | tr '\\n' ' ' >> $out.d
-        && #{browserify} #{requires} $in -o $out")
-    .depfile('$out.d')
-    .description("browserify #{requires} -o $out")
+    rule.run("#{persistify} #{requires} $in -o $out")
+
+
+ninja.rule('sass').run('sass --sourcemap=none --load-path $path $in $out')
 
 
 # - Edges - #
@@ -137,6 +131,19 @@ for folder in boardFolders
         temp = f.replace('src', "build/.temp/#{folder}")
         jsPageTargets[folder].push(temp)
         ninja.edge(temp).from(f).using('copy')
+
+
+sassSrc = globule.find('src/*.scss')
+
+
+ninja.edge('build/index.css').from('src/main.scss')
+    .need(sassSrc).assign('path', 'src/')
+    .using('sass')
+
+
+ninja.edge('build/page.css').from('src/page.scss')
+    .need(sassSrc).assign('path', 'src/')
+    .using('sass')
 
 
 ninja.edge('build/app.js').from('build/.temp/render.jsx')

@@ -5,7 +5,7 @@
   "description": "",
   "main": "",
   "devDependencies": {
-    "1-click-bom": "monostable/nodejs-1-click-bom",
+    "1-click-bom": "^0.4.1",
     "babel-preset-react": "^6.3.13",
     "babel-register": "^6.3.13",
     "babelify": "^7.2.0",
@@ -20,6 +20,7 @@
     "jszip": "^2.5.0",
     "ninja-build-gen": "^0.2.1",
     "pcb-stackup": "^0.0.4",
+    "persistify": "^1.0.0",
     "react": "^0.14.5",
     "react-document-title": "^2.0.1",
     "react-dom": "^0.14.5",

@@ -1,11 +1,11 @@
 [
   {
     "repo": "https://github.com/kitnic/arduino-uno",
-    "hash": "b39938fa690bb506275cc4080aaad6bd66a75ac5"
+    "hash": "523180b7fb4fb17e89be774486a8fe97f828558a"
   },
   {
     "repo": "https://github.com/kitnic/Bus_Pirate",
-    "hash": "7f79145f97682a7cd6cf5dc2080f6f0833d3ae60"
+    "hash": "78b7315f724b94d71053ff9725e4dad7ffe448d5"
   },
   {
     "repo": "https://github.com/kitnic/CC2538-dev-board",
@@ -33,6 +33,10 @@
   },
   {
     "repo": "https://github.com/kasbah/push-on-hold-off",
-    "hash": "12a0b9fd7dee31544ac7270888981329d9ffd0d5"
+    "hash": "c0e4d62b687a8c1d97801fb50e9039ff2f77a6bd"
+  },
+  {
+    "repo": "https://github.com/kitnic/BQ25570_Harvester",
+    "hash": "0bbcbd02d1d6a0033a88638712d768a78ee9a99b"
   }
 ]

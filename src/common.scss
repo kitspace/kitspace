@@ -1,0 +1,28 @@
+
+@mixin breakpoint($point) {
+  @if $point == mobile {
+    @media (max-device-width: 899px)
+    , (max-device-width: 1024px) and (orientation: landscape)
+    , (min-resolution: 300dpi)
+    , handheld
+      { @content; }
+  }
+}
+
+html, head, body {
+    margin: 0;
+}
+
+body {
+    font-family: 'Noto Sans','Helvetica', 'Arial', sans-serif;
+    font-size: 16px;
+    @include breakpoint(mobile) {
+        font-size: 24px;
+    }
+}
+
+a {
+    color: #373737;
+    text-decoration: none;
+    font-weight: bold;
+}
