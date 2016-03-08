@@ -12,12 +12,12 @@ let BOM = React.createClass({
     }
 
     // Pluck the object keys to use as headers
-    const keys = _.keys(this.props.items[0]);
-    const retailers = _.keys(this.props.items[1].retailers);
-    const partNumberLength = _.max(this.props.items.map((item) => item.partNumbers.length));
-    const partNumbers = _.times(partNumberLength, _.constant('Part Numbers'));
-
-    console.log(partNumberLength)
+    const keys             = _.keys(this.props.items[0]);
+    const retailers        = _.keys(this.props.items[1].retailers);
+    const partNumberLength = _.max(this.props.items.map((item) => {
+      item.partNumbers.length
+    }).concat(1));
+    const partNumbers      = _.times(partNumberLength, _.constant('Part Numbers'));
 
     let headers = keys
       .concat(partNumbers)
@@ -32,17 +32,24 @@ let BOM = React.createClass({
 
       let row = keys.map((key) => {
         if (key !== 'retailers' && key !== 'row' && key !== 'partNumbers') {
-          return ( <td key={`${row}-${key}`}>{ item[key] }</td> );
+          return ( <td key={`${index}-${key}`}>{ item[key] }</td> );
         }
       });
+
       row = row.concat(_.times(partNumberLength, (index) => {
         let partNumber = item.partNumbers[index];
+        let style = {};
+        //color pink if no part numbers at all for this line
+        if (index == 0 && partNumber === '' || partNumber == null) {
+          style = {backgroundColor:'pink'};
+        }
         return (
-          <td key={`${item}-partNumber-${index}`}>
+          <td key={`${item}-partNumber-${index}`} style={style}>
             { partNumber }
           </td>
         );
       }));
+
       row = row.concat(_.keys(item.retailers).map((key, index) => {
         let style = {};
         if (item.retailers[key] === '') {
