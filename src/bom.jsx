@@ -28,11 +28,11 @@ let BOM = React.createClass({
         }
       });
 
-    let rows = this.props.items.map((item, index) => {
+    let rows = this.props.items.map((item, rowIndex) => {
 
       let row = keys.map((key) => {
         if (key !== 'retailers' && key !== 'row' && key !== 'partNumbers') {
-          return ( <td key={`${index}-${key}`}>{ item[key] }</td> );
+          return ( <td key={`${rowIndex}-${key}`}>{ item[key] }</td> );
         }
       });
 
@@ -44,7 +44,7 @@ let BOM = React.createClass({
           style = {backgroundColor:'pink'};
         }
         return (
-          <td key={`${item}-partNumber-${index}`} style={style}>
+          <td key={`${item.references}-partNumber-${index}`} style={style}>
             { partNumber }
           </td>
         );
@@ -56,13 +56,13 @@ let BOM = React.createClass({
           style = {backgroundColor:'pink'};
         }
         return (
-          <td key={`${item}-${key}-${index}`} style={style}>
+          <td key={`${item.references}-${key}-${index}`} style={style}>
             { item.retailers[key] }
           </td>
         );
       }));
 
-      return ( <tr key={index}>{ row }</tr> );
+      return ( <tr className={`tr-${rowIndex % 2}`} key={`bom-tr-${rowIndex}`}>{ row }</tr> );
 
     });
 
