@@ -44,7 +44,7 @@ let BOM = React.createClass({
           style = {backgroundColor:'pink'};
         }
         return (
-          <td key={`${item.references}-partNumber-${index}`} style={style}>
+          <td key={`${item.reference}-partNumber-${index}`} style={style}>
             { partNumber }
           </td>
         );
@@ -56,7 +56,7 @@ let BOM = React.createClass({
           style = {backgroundColor:'pink'};
         }
         return (
-          <td key={`${item.references}-${key}-${index}`} style={style}>
+          <td key={`${item.reference}-${key}-${index}`} style={style}>
             { item.retailers[key] }
           </td>
         );
