@@ -13,23 +13,46 @@ let BOM = React.createClass({
 
     // Pluck the object keys to use as headers
     const keys = _.keys(this.props.items[0]);
-    const retailers = _.keys(this.props.items[1].retailers)
+    const retailers = _.keys(this.props.items[1].retailers);
+    const partNumberLength = _.max(this.props.items.map((item) => item.partNumbers.length));
+    const partNumbers = _.times(partNumberLength, _.constant('Part Numbers'));
 
-    let headers = keys.concat(retailers).map((item, index) => {
-      if (item !== 'retailers' && item !== 'row') {
-        return ( <td key={`header-${index}`}>{ item }</td> );
-      }
-    });
+    console.log(partNumberLength)
+
+    let headers = keys
+      .concat(partNumbers)
+      .concat(retailers)
+      .map((key, index) => {
+        if (key !== 'retailers' && key !== 'row' && key !== 'partNumbers') {
+          return ( <td key={`header-${index}`}>{ _.startCase(key) }</td> );
+        }
+      });
 
     let rows = this.props.items.map((item, index) => {
 
       let row = keys.map((key) => {
-        if (key !== 'retailers' && key !== 'row') {
-            return ( <td key={key}>{ item[key] }</td> );
+        if (key !== 'retailers' && key !== 'row' && key !== 'partNumbers') {
+          return ( <td key={`${row}-${key}`}>{ item[key] }</td> );
         }
       });
-      row = row.concat(retailers.map((key) => {
-        return ( <td key={`${item}-${key}`}>{ item.retailers[key] }</td> );
+      row = row.concat(_.times(partNumberLength, (index) => {
+        let partNumber = item.partNumbers[index];
+        return (
+          <td key={`${item}-partNumber-${index}`}>
+            { partNumber }
+          </td>
+        );
+      }));
+      row = row.concat(_.keys(item.retailers).map((key, index) => {
+        let style = {};
+        if (item.retailers[key] === '') {
+          style = {backgroundColor:'pink'};
+        }
+        return (
+          <td key={`${item}-${key}-${index}`} style={style}>
+            { item.retailers[key] }
+          </td>
+        );
       }));
 
       return ( <tr key={index}>{ row }</tr> );
