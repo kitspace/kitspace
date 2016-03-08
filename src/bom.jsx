@@ -5,6 +5,12 @@ const _ = require('lodash');
 let BOM = React.createClass({
   render: function () {
 
+    //get rid of this once proper BOMs are made a requirement and enforced
+    //much earlier
+    if (this.props.items.length === 0) {
+      return (<div>{'no BOM yet'}</div>);
+    }
+
     // Pluck the object keys to use as headers
     const keys = _.keys(this.props.items[0]);
     const retailers = _.keys(this.props.items[1].retailers)
