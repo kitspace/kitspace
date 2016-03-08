@@ -3,6 +3,7 @@ const ReactDOM      = require('react-dom');
 const DocumentTitle = require('react-document-title');
 const TitleBar      = require('./title_bar');
 const FadeImage     = require('./fade_image');
+const BOM           = require('./bom');
 
 const info    = require('./info.json');
 const zipPath = require('./zip-info.json');
@@ -90,20 +91,22 @@ var Page = React.createClass({
           , borderRadius: '1em'
         }}
         >
-        <img
-          src='images/top.svg'
-          style = {{
-            width: '30%'
-          }}
-        />
-        <img
-          src='images/bottom.svg'
-          style = {{
-            width: '30%'
-          }}
-        />
+          <img
+            src='images/top.svg'
+            style = {{
+              width: '30%'
+            }}
+          />
+          <img
+            src='images/bottom.svg'
+            style = {{
+              width: '30%'
+            }}
+          />
         </div>
-      </div></DocumentTitle>
+      <BOM items={info.bom ? info.bom : []} />
+      </div>
+    </DocumentTitle>
     );
   },
 });

@@ -4,3 +4,4 @@ elm-stuff/*
 node_modules/*
 *.sw*
 boards/*
+npm-debug.log
