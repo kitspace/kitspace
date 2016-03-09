@@ -1,6 +1,7 @@
 'use strict'
 const React = require('react');
 const _ = require('lodash');
+const oneClickBOM = require('1-click-bom');
 
 let BOM = React.createClass({
   render: function () {
@@ -11,38 +12,36 @@ let BOM = React.createClass({
       return (<div>{'no BOM yet'}</div>);
     }
 
-    // Pluck the object keys to use as headers
-    const keys             = _.keys(this.props.items[0]);
-    const retailers        = _.keys(this.props.items[1].retailers);
+    const keys = ['reference', 'quantity', 'description'];
+    const retailers = oneClickBOM.lineData.retailer_list;
     const partNumberLength = _.max(this.props.items.map((item) => {
-      item.partNumbers.length
+      return item.partNumbers.length;
     }).concat(1));
-    const partNumbers      = _.times(partNumberLength, _.constant('Part Numbers'));
+    const partNumbers = _.times(partNumberLength, _.constant('Part Number'));
 
-    let headers = keys
-      .concat(partNumbers)
-      .concat(retailers)
-      .map((key, index) => {
-        if (key !== 'retailers' && key !== 'row' && key !== 'partNumbers') {
-          return ( <td key={`header-${index}`}>{ _.startCase(key) }</td> );
-        }
-      });
+    const makeHeading = (heading, index) => {
+      return ( <td key={`heading-${heading}-${index}`}>{heading}</td> );
+    };
+
+    let headings = ['References', 'Qty', 'Description'].map(makeHeading);
+    headings = headings.concat(partNumbers.map(makeHeading));
+    headings = headings.concat(retailers.map(makeHeading));
 
     let rows = this.props.items.map((item, rowIndex) => {
 
       let row = keys.map((key) => {
-        if (key !== 'retailers' && key !== 'row' && key !== 'partNumbers') {
-          return ( <td key={`${rowIndex}-${key}`}>{ item[key] }</td> );
-        }
+        return ( <td key={`${rowIndex}-${key}`}>{ item[key] }</td> );
       });
 
       row = row.concat(_.times(partNumberLength, (index) => {
         let partNumber = item.partNumbers[index];
         let style = {};
+
         //color pink if no part numbers at all for this line
-        if (index == 0 && partNumber === '' || partNumber == null) {
+        if (index === 0 && (partNumber === '' || partNumber == null)) {
           style = {backgroundColor:'pink'};
         }
+
         return (
           <td key={`${item.reference}-partNumber-${index}`} style={style}>
             { partNumber }
@@ -69,7 +68,7 @@ let BOM = React.createClass({
     return (
       <table>
         <thead>
-          <tr>{ headers }</tr>
+          <tr>{ headings }</tr>
         </thead>
         <tbody>
           { rows }
