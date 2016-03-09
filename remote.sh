@@ -7,6 +7,13 @@ if [ "$KITNIC_BUILD_SERVER" == "" ]; then
     exit 1;
 fi
 
+case "$OSTYPE" in
+  solaris*) OS="SOLARIS" ;;
+  darwin*)  OS="OSX" ;;
+  linux*)   OS="LINUX" ;;
+  bsd*)     OS="BSD" ;;
+esac
+
 function send() {
     rsync -r . $KITNIC_BUILD_SERVER --update --delete --progress \
         --exclude='build' --exclude='node_modules' --exclude='.git' \
@@ -15,6 +22,12 @@ function send() {
 
 send;
 
-while inotifywait --exclude '\..*sw.' -r -q -e modify ./; do
-    send;
-done
+if [ "$OS" == 'LINUX' ]; then
+    while inotifywait --exclude '\..*sw.' -r -q -e modify ./; do
+        send;
+    done
+elif [ "$OS" == 'OSX' ]; then
+    while fswatch --one-event src/ tasks/ boards/; do
+        send;
+    done
+fi
