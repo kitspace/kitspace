@@ -17,12 +17,12 @@ if require.main != module
         else
             bom = folder + '/1-click-BOM.tsv'
         deps = ['build/.temp/boards.json', folder, bom]
-        targets = ["build/.temp/#{folder}/info.json"]
+        targets = ["build/.temp/#{folder}/info.json", "build/#{folder}/1-click-BOM.tsv"]
         return {deps, targets, moduleDep : false}
 else
     {deps, targets} = utils.processArgs(process.argv)
     [boardsJSON, folder, bomPath] = deps
-    [infoPath] = targets
+    [infoPath, outBomPath] = targets
 
     boards = JSON.parse(fs.readFileSync(boardsJSON))
     info = {id:folder.replace('boards/','')}
@@ -44,8 +44,12 @@ else
     bom = oneClickBOM.parseTSV(tsv)
     info.bom = bom.lines
 
+
     repo = cp.execSync("cd #{folder} && git remote -v", {encoding:'utf8'})
     repo = repo.split('\t')[1].split(' ')[0]
     info.repo = repo
 
-    fs.writeFileSync(infoPath, JSON.stringify(info))
+    fs.writeFile(infoPath, JSON.stringify(info), ->)
+
+    tsvOut = oneClickBOM.writeTSV(bom.lines)
+    fs.writeFile(outBomPath, tsvOut, ->)
