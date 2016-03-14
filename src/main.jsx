@@ -8,7 +8,7 @@ const boards      = require('./boards.json');
 const style = {
   icon: {
     width:'100%',
-  },
+  }
 
 }
 
@@ -46,17 +46,8 @@ var Main = React.createClass({
       var filters = ['id', 'description'];
       var result = boards.filter(this.refs.search.filter(filters));
       if (term.length > 2) {
-        //piwik tracking
-        _paq.push(['trackSiteSearch',
-            // Search keyword searched for
-            term,
-            // Search category selected in your search engine. If you do not
-            // need this, set to false
-            "Boards",
-            // Number of results on the Search results page. Zero indicates a
-            // 'No Result Search Keyword'. Set to false if you don't know
-            result.length
-        ]);
+        var cat = result.length === 0 ? 'no_result' : 'result';
+        ga('send', 'pageview', '/search?q=' + term + '&results=' + cat);
       }
       this.setState({result: result, searching:(term.length > 0)});
     }
