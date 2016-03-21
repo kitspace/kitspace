@@ -5,9 +5,9 @@
     border-bottom-right-radius: 5;
     border-bottom-left-radius: 5;
     display: flex;
-    flex-wrap: wrap;
     @include breakpoint(mobile) {
         padding-top:10px;
+        flex-wrap: wrap;
     }
 }
 
@@ -17,6 +17,7 @@
     width: 140px;
     top: 50%;
     left: 50%;
+    flex-shrink:0;
     @include breakpoint(mobile) {
         width: 50%;
     }
@@ -32,6 +33,7 @@
 .middleContainer {
     padding: 2px;
     flex-grow: 2;
+    min-width:180px;
     @include breakpoint(mobile) {
         width: 100%;
         order:3;

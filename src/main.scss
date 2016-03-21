@@ -7,7 +7,6 @@
     padding-top:10px;
 }
 
-
 .search-input-icon {
     background-color:white;
     width:32px;
@@ -32,13 +31,12 @@
     width: 100%;
     height: 80%;
     font-size: 18px;
-    @include breakpoint(mobile) {
-        font-size: 24px;
-    }
     border: none;
     line-height: 22px;
     height: 40px;
     @include breakpoint(mobile) {
+        font-size: 48px;
+        line-height: 52px;
         height: 80px;
     }
     position: relative;
