@@ -45,10 +45,8 @@ var BoardThumb = React.createClass({
     }
 
     return (
+      <div className='BoardThumb'>
       <a href={'/boards/' + this.props.data.id}>
-        <div
-          className='container hover-shadow'
-        >
           <div className='imgContainer'>
             <center>
               {image}
@@ -63,8 +61,8 @@ var BoardThumb = React.createClass({
           <div className='description'>
             {truncate(this.props.data.description, 87)}
           </div>
-        </div>
       </a>
+      </div>
     );
   }
 });
