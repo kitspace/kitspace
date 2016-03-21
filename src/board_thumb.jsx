@@ -8,19 +8,18 @@ const sizes = {
   thumb : {
     w            : 240,
     h            : 180,
-    captionH     : 48,
+    captionH     : 40,
     descriptionH : 96
   }
 }
 
 const style =  {
   container: {
-    backgroundColor : '#373737',
     width           : sizes.thumb.w + 32 + 16,
     height          :
       sizes.thumb.h + sizes.thumb.captionH
-        + sizes.thumb.descriptionH + 16 + 5 + 16,
-    borderRadius    : 10,
+        + sizes.thumb.descriptionH + 16 + 5 + 16 + 5,
+    borderRadius    : 4,
     marginTop       : 8,
     marginRight     : 8,
     marginBottom    : 8,
@@ -28,41 +27,77 @@ const style =  {
     display         : 'inline-block',
     border          : '1px solid #CFCFCF',
     cursor          : 'pointer',
-    overflow        : 'hidden'
+    overflow        : 'hidden',
+  },
+  imgContainer: {
+    backgroundColor : '#373737',
   },
   img: {
     width        : sizes.thumb.w,
     height       : sizes.thumb.h,
     marginTop    : 16,
-    marginBottom : 16
+    marginBottom : 16,
   },
   title: {
     height          : sizes.thumb.captionH,
     lineHeight      : String(sizes.thumb.captionH) + 'px',
     textAlign       : 'center',
-    verticalAlign   : 'middle',
+    verticalAlign   : 'bottom',
     fontWeight      : 'bold',
     fontSize        : 18,
-    paddingBottom   : 5,
     opacity         : 1.0,
     backgroundColor : '#FAFAFA',
-    color           : '#373737'
+    color           : '#373737',
+    textAlign       : 'left',
+    paddingLeft     : 10,
+  },
+  url: {
+    fontSize        : 13,
+    backgroundColor : '#FAFAFA',
+    color           : 'grey',
+    opacity         : 1.0,
+    fontWeight      : 'normal',
+    paddingLeft     : 10,
+    textAlign: 'left',
   },
   description: {
     visibility      : 'visible',
     height          : sizes.thumb.descriptionH,
     overflow        : 'hidden',
-    padding         : '10 10 10 10',
-    textAlign       : 'center',
+    padding         : '8 10 5 10',
     verticalAlign   : 'top',
     fontSize        : 16,
     marginBottom    : 10,
     opacity         : 1.0,
     backgroundColor : '#FAFAFA',
     color           : '#373737',
-    fontWeight      : 'normal'
+    fontWeight      : 'normal',
+    textAlign: 'left',
   }
 }
+
+function reverse(s){
+    return s.split("").reverse().join("");
+}
+
+function truncate(input, len, fromStart) {
+    var str = input;
+    if (fromStart) {
+      str = reverse(str);
+    }
+    if (str.length > len) {
+      str = str.substr(0,len);
+      if (str[len] !== ' ') {
+        str = str.concat(' ');
+      }
+      str = str.concat('...');
+    }
+    if (fromStart) {
+      str = reverse(str);
+    }
+    return str;
+}
+
 
 var BoardThumb = React.createClass({
   render: function () {
@@ -86,25 +121,19 @@ var BoardThumb = React.createClass({
           style={style.container}
           className={'hover-shadow'}
         >
+          <div style={style.imgContainer}>
           <center>
           {image}
           </center>
+          </div>
           <div style={style.title}>
-            {this.props.data.id.split('/').slice(1).join(' / ')}
+            {truncate(this.props.data.id.split('/').slice(2).join(' / '), 30, true)}
+          </div>
+          <div style={style.url}>
+            {truncate(this.props.data.id.split('/').slice(0,2).join(' / '), 30, true)}
           </div>
           <div style={style.description}>
-            {(function() {
-                var str = this.props.data.description;
-                if (str.length > 87) {
-                  str = str.substr(0,87);
-                  if (str[87] !== ' ') {
-                    str = str.concat(' ');
-                  }
-                  str = str.concat('...');
-                }
-                return str;
-              }).call(this)
-            }
+            {truncate(this.props.data.description, 87)}
           </div>
         </div>
       </a>
