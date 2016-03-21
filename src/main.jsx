@@ -41,6 +41,19 @@ var Main = React.createClass({
     );
   },
 
+  handleKeydown: function(event) {
+    //enter key
+    if (event.which == 13) {
+      document.getElementsByClassName('search-input')[0].firstElementChild.blur();
+    }
+    return false;
+  },
+
+
+  componentDidMount: function() {
+    document.getElementsByClassName('search-input')[0].firstElementChild.addEventListener('keydown', this.handleKeydown);
+  },
+
   searchUpdated: function (term) {
     if (this.refs.search) {
       var filters = ['id', 'description'];
