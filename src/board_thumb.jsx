@@ -59,7 +59,7 @@ var BoardThumb = React.createClass({
             {truncate(this.props.data.id.split('/').slice(0,2).join(' / '), 30, true)}
           </div>
           <div className='description'>
-            {truncate(this.props.data.description, 87)}
+            {truncate(this.props.data.description, 85)}
           </div>
       </a>
       </div>
