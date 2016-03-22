@@ -8,74 +8,38 @@ const BOM           = require('./bom');
 const info    = require('./info.json');
 const zipPath = require('./zip-info.json');
 
-const style = {
-  disabledSite: {
-    color:'grey',
-    IeUserSelect:'none',
-    WebkitUserSelect:'none',
-    MozUserSelect:'none',
-    cursor:'default'
-  },
-
-  titleText: {
-    color: 'white',
-    width: '100%',
-    textAlign: 'center',
-    verticalAlign: ' middle',
-    lineHeight: '60px',
-    fontSize: 24,
-    borderRadius: '5px'
-  },
-
-  infoBar: {padding: 20, marginTop:10},
-
-  infoBarInner: {
-    display: 'flex',
-    flexFlow: 'row wrap',
-    justifyContent: 'space-around'
-  },
-
-  infoBarLinksContainer: {
-    display: 'flex',
-    flexFlow: 'row wrap',
-    justifyContent: 'space-around',
-    flexGrow:2
-  }
-}
-
 var Page = React.createClass({
-
-
   render: function () {
     const titleTxt = info.id.split('/').slice(1).join(' / ');
     var site;
     if (info.site == '') {
       site =
-        (<div style={style.disabledSite} title='no website info available'>
+        (<div className='disabledSite' title='no website info available'>
           <span className="octicon octicon-link" />website
         </div>);
     }
     else {
       site =
-        (<a href={info.site} target='_blank'>
+        (<a href={info.site}>
           <span className="octicon octicon-link" /> website
         </a>);
     }
     const repo =
-      <a href={info.repo} target='_blank'>
+      <a href={info.repo}>
         <span className="octicon octicon-repo" /> repo
       </a>;
     return (
       <DocumentTitle title={titleTxt}><div>
+      <div className='Page'>
         <TitleBar>
-          <div style={style.titleText}>
+          <div className='titleText'>
             {titleTxt}
           </div>
         </TitleBar>
-          <div style={style.infoBar}>
-            <div style={style.infoBarInner}>
+          <div className='infoBar'>
+            <div className='infoBarInner'>
               <div style={{marginBottom:10}}>{info.description}</div>
-              <div style={style.infoBarLinksContainer}>
+              <div className='infoBarLinksContainer'>
                 <div>{site}</div>
                 <div>{repo}</div>
                 <div>
@@ -105,6 +69,7 @@ var Page = React.createClass({
           />
         </div>
       <BOM items={info.bom ? info.bom : []} />
+      </div>
       </div>
     </DocumentTitle>
     );
