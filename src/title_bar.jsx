@@ -17,10 +17,10 @@ var TitleBar = React.createClass({
           {this.props.children}
         </div>
         <div className='submitContainer'>
-          <a href='https://github.com/monostable/kitnic/#submitting-your-project-repo'>
-            <div className='submit'>
-             Submit
-            </div>
+          <a href='https://github.com/monostable/kitnic/#submitting-your-project'>
+            <center>
+              <img className='submitImage' src='/images/submit.svg' />
+            </center>
           </a>
         </div>
       </div>

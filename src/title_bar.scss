@@ -15,8 +15,6 @@
     padding: 10px 10px 10px 10px;
     background-color:#373737;
     width: 140px;
-    top: 50%;
-    left: 50%;
     flex-shrink:0;
     @include breakpoint(mobile) {
         width: 50%;
@@ -30,6 +28,21 @@
     }
 }
 
+.submitContainer {
+    padding: 10px 10px 10px 10px;
+    background-color:#373737;
+    width: 140px;
+    flex-shrink:0;
+    @include breakpoint(mobile) {
+        width: 40%;
+    }
+}
+
+
+.submitImage {
+    width:60%;
+}
+
 .middleContainer {
     padding: 2px;
     flex-grow: 2;
@@ -40,33 +53,3 @@
         padding:10px;
     }
 }
-
-.submitContainer {
-    width: 140px;
-    @include breakpoint(mobile) {
-        width:40%;
-        order: 2;
-    }
-}
-
-//centering trick, wtf css
-.submit:before {
-  content: "";
-  display: inline-block;
-  height: 100%;
-  vertical-align: middle;
-}
-
-.submit {
-    text-align: center;
-    background-color: #373737;
-    width: 140px;
-    height:64px;
-    @include breakpoint(mobile) {
-        padding-top:8%;
-        width:100%;
-        font-size: -webkit-xxx-large;
-    }
-    color:white;
-}
-
