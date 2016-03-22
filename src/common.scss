@@ -7,13 +7,6 @@
     , handheld
       { @content; }
   }
-  @else if $point == desktop {
-    @media (min-device-width: 899px)
-    , (min-device-width: 1024px) and (orientation: landscape)
-    , (max-resolution: 300dpi)
-    , (not handheld)
-      { @content; }
-  }
 }
 
 html, head, body {
