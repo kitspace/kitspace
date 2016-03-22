@@ -38,6 +38,10 @@ $mobile-descriptionH : $descriptionH * 3 + 48;
     cursor        : pointer;
     overflow      : hidden;
 
+    a:hover {
+        text-decoration: none;
+    }
+
 
     .imgContainer {
         background-color : #373737;
