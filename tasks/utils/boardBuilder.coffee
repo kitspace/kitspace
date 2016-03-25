@@ -3,44 +3,44 @@ idLayer     = require('pcb-stackup/lib/layer-types').identify
 gerberToSvg = require('gerber-to-svg')
 
 # board colors
-options = {
-  # copper finish
-  cf: {
-    bare:    { bg: '#C87533',    txt: 'white' }
-    gold:    { bg: 'goldenrod',  txt: 'white' }
-    'Ni/Au': { bg: 'whitesmoke', txt: 'black' }
-    hasl:    { bg: 'silver',     txt: 'black' }
-  }
-  # soldermask
-  sm: {
-    red:    { bg: 'darkred', txt: 'white' }
-    orange: { bg: '#C36B00', txt: 'black' }
-    yellow: { bg: '#FFFF66', txt: 'black' }
-    green:  { bg: '#040',    txt: 'white' }
-    blue:   { bg: '#001E68', txt: 'white' }
-    purple: { bg: '#2E0051', txt: 'white' }
-    black:  { bg: 'black',   txt: 'white' }
-    white:  { bg: 'white',   txt: 'black' }
-  }
-  # silkscreen
-  ss: {
-    red:    { bg: 'red',    txt: 'white' }
-    yellow: { bg: 'yellow', txt: 'black' }
-    green:  { bg: 'green',  txt: 'white' }
-    blue:   { bg: 'blue',   txt: 'white' }
-    black:  { bg: 'black',  txt: 'white' }
-    white:  { bg: 'white',  txt: 'black' }
-  }
-}
+options =
+    # copper finish
+    cf:
+        bare    : '#C87533'
+        gold    : 'goldenrod'
+        'Ni/Au' : 'whitesmoke'
+        hasl    : 'silver'
+
+    # soldermask
+    sm:
+        red    : {color: 'darkred' , opacity: 0.90}
+        orange : {color: '#C36B00' , opacity: 0.90}
+        yellow : {color: '#FFFF66' , opacity: 0.50}
+        green  : {color: '#040'    , opacity: 0.90}
+        blue   : {color: '#001E68' , opacity: 0.90}
+        purple : {color: '#2E0051' , opacity: 0.90}
+        black  : {color: 'black'   , opacity: 0.90}
+        white  : {color: 'white'   , opacity: 0.90}
+
+    # silkscreen
+    ss:
+        red    : 'red'
+        yellow : 'yellow'
+        green  : 'green'
+        blue   : 'blue'
+        black  : 'black'
+        white  : 'white'
+
+
 
 styleToSvgObj = ({copperFinish, solderMask, silkScreen}) ->
     style:
         type: 'text/css',
         _: " ._board-fr4 { color: #4D542C;}
              ._board-cu { color: lightgrey; }
-             ._board-cf { color: #{options.cf[copperFinish].bg}; }
-             ._board-sm { color: #{options.sm[solderMask].bg}; opacity: 0.90; }
-             ._board-ss { color: #{options.ss[silkScreen].bg}; }
+             ._board-cf { color: #{options.cf[copperFinish]}; }
+             ._board-sm { color: #{options.sm[solderMask].color}; opacity: #{options.sm[solderMask].opacity}; }
+             ._board-ss { color: #{options.ss[silkScreen]}; }
              ._board-sp { color: silver; opacity: 0.0;}
              ._board-out { color: black; }"
 
@@ -76,7 +76,7 @@ colorToStyle =
         silkScreen: 'white'
     yellow:
         solderMask: 'yellow'
-        copperFinish: 'bare'
+        copperFinish: 'gold'
         silkScreen: 'black'
 
 convert = (files, color = 'green') ->
