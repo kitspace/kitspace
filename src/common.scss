@@ -3,8 +3,8 @@
   @if $point == mobile {
     @media (max-device-width: 899px)
     , (max-device-width: 1024px) and (orientation: landscape)
-    , (min-resolution: 2dppx)
-    , (handheld)
+    , (min-resolution: 300dpi)
+    , handheld
       { @content; }
   }
 }
