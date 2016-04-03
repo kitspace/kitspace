@@ -6,7 +6,7 @@
 
 ##Submitting your project
 
-To submit your open source hardware project to Kitnic, just follow these requirements / steps;
+To submit your open source hardware project to Kitnic, just follow these steps:
 
 **1. Export your plotted gerbers & drill data.**
 Your gerbers will be rendered as a preview and offered as a zip for download.
@@ -18,9 +18,9 @@ this info in the kitnic.yaml file (see below).
 **2. Create the 1-click-BOM file.**
 A Bill Of Materials (BOM) is needed; this should be as a tab-separated (.tsv)
 file in the format used by the [1-click-BOM extension](http://1clickBOM.com) -
-`1-click-BOM.tsv`. This format will allow others to quickly purchase the
-components required to make your project. Download the extension to help you
-make this and test it out. By default this file is expected in the root of the
+`1-click-BOM.tsv`. This format will allow people to quickly purchase the
+components. Download the extension and see the guide on exporting a 1-click-BOM from your design [here](https://1clickbom.com/#making-a-1-click-bom).
+By default this file is expected in the root of the
 project, if the file has a different name or is in a different location, please
 add this info in the kitnic.yaml file (see below).
 
@@ -33,8 +33,8 @@ See the section below for details of the file format.
 
 **4. Add your project to a Git repository.**
 To have your project included on Kitnic it needs to be in a publicly accessible
-git repository (but it doesn't have to be on GitHub). If you don't know how to
-use git then *don't worry*! - you can easily [create a repo on GitHub][4] and
+Git repository (but it doesn't have to be on GitHub). If you don't know how to
+use Git then *don't worry*! - you can easily [create a repo on GitHub][4] and
 [upload your files using the web interface][5].
 
 **5. Add your project to Kitnics board list.**
