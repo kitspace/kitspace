@@ -3,7 +3,6 @@ const React          = require('react');
 const _              = require('lodash');
 const oneClickBOM    = require('1-click-bom');
 const browserVersion = require('browser-version');
-console.log(browserVersion());
 
 let BOM = React.createClass({
   getInitialState: function() {
@@ -42,7 +41,24 @@ let BOM = React.createClass({
 
     let headings = ['References', 'Qty', 'Description'].map(makeHeading);
     headings = headings.concat(partNumbers.map(makeHeading));
-    headings = headings.concat(retailers.map(makeHeading));
+
+    const makeRetailerHeading = (retailer, index) => {
+      let href = '//1clickBOM.com';
+      let onClick = '';
+      if (this.state.browser === 'Chrome') {
+        href = '#'
+        onClick = () => chrome.webstore.install(undefined, undefined, (err) => console.log(err));
+      } else if (this.state.browser === 'Firefox') {
+        href = 'https://addons.mozilla.org/firefox/downloads/latest/634060/addon-634060-latest.xpi'
+      }
+      return (
+        <td key={`heading-${retailer}`}>
+        <a href={href} id={`addToCart-${retailer}`} onClick={onClick}>{retailer}</a>
+        </td>
+      );
+    };
+
+    headings = headings.concat(retailers.map(makeRetailerHeading));
 
     let rows = this.props.items.map((item, rowIndex) => {
 
