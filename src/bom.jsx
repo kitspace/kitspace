@@ -1,9 +1,26 @@
 'use strict'
-const React = require('react');
-const _ = require('lodash');
-const oneClickBOM = require('1-click-bom');
+const React          = require('react');
+const _              = require('lodash');
+const oneClickBOM    = require('1-click-bom');
+const browserVersion = require('browser-version');
+console.log(browserVersion());
 
 let BOM = React.createClass({
+  getInitialState: function() {
+    return {
+      browser: null
+    };
+  },
+
+  componentDidMount: function () {
+    const version = browserVersion();
+    if (/Chrome/.test(version)) {
+      this.setState({browser: 'Chrome'})
+    } else if (/Firefox/.test(version)) {
+      this.setState({browser: 'Firefox'})
+    }
+  },
+
   render: function () {
 
     //get rid of this once proper BOMs are made a requirement and enforced
