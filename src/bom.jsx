@@ -57,8 +57,8 @@ let BOM = React.createClass({
     const makeRetailerHeading = (retailer, index) => {
       return (
         <td key={`heading-${retailer}`} className='retailerHeading' onClick={this.state.onClick.bind(null,retailer)}>
-          {retailer}
-          <span className='custom_icon'> </span>
+          {retailer}<span> </span>
+          <i className="fa fa-cart-plus fa-lg"></i>
         </td>
       );
     };

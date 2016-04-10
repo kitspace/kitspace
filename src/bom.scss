@@ -21,23 +21,6 @@ thead {
     background-color: lightGrey;
 }
 
-@font-face {
-    font-family:"Custom Icon Font";
-    src: url("/images/fontcustom.ttf");
-}
-
-span.custom_icon {
-    font-family:"Custom Icon Font";
-    font-size:24px;
-    vertical-align:middle;
-    font-weight: normal;
-
-}
-
-span.custom_icon:hover {
-    text-decoration: none;
-}
-
 .retailerHeading {
     cursor:pointer;
 }
