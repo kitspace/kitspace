@@ -7,16 +7,28 @@ const browserVersion = require('browser-version');
 let BOM = React.createClass({
   getInitialState: function() {
     return {
-      browser: null
+      href: '://1clickBOM.com',
+      onClick: ''
     };
   },
 
   componentDidMount: function () {
     const version = browserVersion();
     if (/Chrome/.test(version)) {
-      this.setState({browser: 'Chrome'})
+      this.setState({href:'', onClick: () => chrome.webstore.install(undefined, undefined, (err) => console.log(err))});
     } else if (/Firefox/.test(version)) {
-      this.setState({browser: 'Firefox'})
+      this.setState({href:'https://addons.mozilla.org/firefox/downloads/latest/634060/addon-634060-latest.xpi', onClick: ''});
+    }
+    if (typeof window !== undefined) {
+      //for communicating with the extension
+      window.setExtensionLinks = () => {
+        this.setState({
+          href:'#',
+          onClick: function (obj) {
+            window.postMessage({type:'FromPage', retailer:obj.target.parentElement.id}, '*');
+          }
+        })
+      }
     }
   },
 
@@ -43,17 +55,9 @@ let BOM = React.createClass({
     headings = headings.concat(partNumbers.map(makeHeading));
 
     const makeRetailerHeading = (retailer, index) => {
-      let href = '//1clickBOM.com';
-      let onClick = '';
-      if (this.state.browser === 'Chrome') {
-        href = ''
-        onClick = () => chrome.webstore.install(undefined, undefined, (err) => console.log(err));
-      } else if (this.state.browser === 'Firefox') {
-        href = 'https://addons.mozilla.org/firefox/downloads/latest/634060/addon-634060-latest.xpi'
-      }
       return (
         <td key={`heading-${retailer}`}>
-          <a href={href} className={`add-to-cart`} retailer={retailer} onClick={onClick}>
+          <a href={this.state.href} className='addToCart' id={retailer} onClick={this.state.onClick}>
             {retailer}
             <span className='custom_icon'> </span>
           </a>
