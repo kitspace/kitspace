@@ -55,7 +55,9 @@
   .toggle-board-form{
     margin-top:1rem;
   }
-
+  .board-diagram{
+    max-height:15rem
+  }
   @media (min-width:500px) {
     .toggle-board-side {
       display:none;

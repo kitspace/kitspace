@@ -76,18 +76,22 @@ var Page = React.createClass({
           , borderRadius: '1em'
         }}
         >
+          <div className="circuit-container">
           <img className={frontBoardClass}
             src='images/top.svg'
             style = {{
               width: '50%',
             }}
           />
+          </div>
+          <div className="circuit-container">
           <img className={backBoardClass}
             src='images/bottom.svg'
             style = {{
               width: '50%',
             }}
           />
+          </div>
         </div>
         <form className="toggle-board-form" onSubmit={this.swapBoardView}>
           <button className="toggle-board-side">
