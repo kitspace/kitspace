@@ -17,7 +17,7 @@
     width: 100%;
     text-align: center;
     vertical-align:  middle;
-    line-height: 60px;
+    line-height: 2.5rem;
     font-size: 24px;
     border-radius: 5px
   }
@@ -46,14 +46,20 @@
     font-weight:bold;
     font-size:16px;
   }
+  .board-showcase{
+    display:flex;
+  }
+  .board-edge{
+    width:100%;
+  }
   .board-container {
+    background:#373737;
+    border-top:1px solid #404040;
     display: flex;
     justify-content: space-around;
     max-height: 15rem;
     padding: 2rem;
     margin-bottom:1rem;
-    border-top: 5px solid #000;
-    border-bottom: 5px solid #000;
   }
   .toggle-board-form {
     margin-top:1rem;
@@ -69,7 +75,6 @@
   }
   .circuit-border {
     width:0.5rem;
-    background:#000;
   }
 
   .toggle-board-view{
@@ -77,22 +82,32 @@
     justify-content:space-around;
   }
   .circuit-toggle-btn:disabled{
-    background:#373737;
+    background: dimgrey;
   }
   .circuit-toggle-btn{
+    background:#373737;
     padding: 1rem 2rem;
-    width: 40%;
+    width: 100%;
     font-weight: bold;
     font-size: 16px;
     cursor: pointer;
-    background: dimgrey;
+    background:#373737;
     color: white;
-    border-top: 2px solid black;
+    border-top: 2px solid #eee;
     border-left: 0;
     border-right: 0;
     border-bottom: 0;
-    border-top-left-radius: 1rem;
-    border-top-right-radius: 1rem;
+  }
+  .circuit-front-btn {
+    // border-top-left-radius: 1rem;
+  }
+  .circuit-back-btn {
+    // border-top-right-radius: 1rem;
+  }
+  .subtitleText{
+    font-size:13px;
+    text-align:center;
+    color:gray;
   }
   @media (min-width:600px) {
     .toggle-board-side {
@@ -109,7 +124,9 @@
     }
   }
   @media (max-width:600px) {
-
+    .board-edge {
+      display:none;
+    }
     .back-board {
       display:none;
     }
