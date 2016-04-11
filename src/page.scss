@@ -53,9 +53,11 @@
   .board-edge{
     background:gray;
     width:100%;
+    border-bottom:1px solid #000;
   }
   .board-container {
     background:#373737;
+    border-bottom:1px solid #000;
     border-top:1px solid #404040;
     display: flex;
     justify-content: space-around;
