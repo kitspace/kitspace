@@ -22,8 +22,20 @@ var Page = React.createClass({
       viewFrontBoard: next
     });
   },
+  frontBoardView: function(e) {
+    e.preventDefault();
+    this.setState({
+      viewFrontBoard:1
+    });
+  },
+  backBoardView: function(e) {
+    e.preventDefault();
+    this.setState({
+      viewFrontBoard:0
+    });
+  },
   render: function () {
-    const titleTxt = info.id.split('/').slice(1).join(' / ');
+    const titleTxt = info.id.split('/').slice(2).join(' / ')
     var site;
     var frontBoardClass = 'front-board board-diagram ';
     var backBoardClass = 'back-board board-diagram ';
@@ -71,33 +83,30 @@ var Page = React.createClass({
               </div>
             </div>
           </div>
+          <div className="toggle-board-view">
+            <button disabled={this.state.viewFrontBoard} className="circuit-toggle-btn" onClick={this.frontBoardView}>
+              Front View
+            </button>
+            <button disabled={!this.state.viewFrontBoard} className="circuit-toggle-btn" onClick={this.backBoardView}>
+              Back View
+            </button>
+          </div>
         <div className="board-container" style={{
           backgroundColor:'#373737'
           , borderRadius: '1em'
         }}
         >
-          <div className="circuit-container">
           <img className={frontBoardClass}
             src='images/top.svg'
-            style = {{
-              width: '50%',
-            }}
           />
+          <div className="circuit-border-container">
+            <div className="circuit-border">
+            </div>
           </div>
-          <div className="circuit-container">
           <img className={backBoardClass}
             src='images/bottom.svg'
-            style = {{
-              width: '50%',
-            }}
           />
-          </div>
         </div>
-        <form className="toggle-board-form" onSubmit={this.swapBoardView}>
-          <button className="toggle-board-side">
-            View {this.state.viewFrontBoard ? 'back' : 'front'} side
-          </button>
-        </form>
       <BOM items={info.bom ? info.bom : []} />
       </div>
       </div>
