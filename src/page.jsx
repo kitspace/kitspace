@@ -9,9 +9,24 @@ const info    = require('./info.json');
 const zipPath = require('./zip-info.json');
 
 var Page = React.createClass({
+  getInitialState: function() {
+    return {
+      viewFrontBoard:1
+    }
+  },
+  swapBoardView: function(e) {
+    e.preventDefault();
+    const curr = this.state.viewFrontBoard;
+    const next = 1 - curr;
+    this.setState({
+      viewFrontBoard: next
+    });
+  },
   render: function () {
     const titleTxt = info.id.split('/').slice(1).join(' / ');
     var site;
+    var frontBoardClass = 'front-board board-diagram ';
+    var backBoardClass = 'back-board board-diagram ';
     if (info.site == '') {
       site =
         (<div className='disabledSite' title='no website info available'>
@@ -23,6 +38,12 @@ var Page = React.createClass({
         (<a href={info.site}>
           <span className="octicon octicon-link" /> website
         </a>);
+    }
+
+    if (this.state.viewFrontBoard) {
+      frontBoardClass += ' selected-board';
+    }else{
+      backBoardClass += ' selected-board';
     }
     const repo =
       <a href={info.repo}>
@@ -50,25 +71,29 @@ var Page = React.createClass({
               </div>
             </div>
           </div>
-        <div style={{
+        <div className="board-container" style={{
           backgroundColor:'#373737'
           , borderRadius: '1em'
         }}
         >
-          <img
+          <img className={frontBoardClass}
             src='images/top.svg'
             style = {{
-              width: '30%'
+              width: '50%',
             }}
           />
-          <img
+          <img className={backBoardClass}
             src='images/bottom.svg'
             style = {{
-              width: '30%'
+              width: '50%',
             }}
           />
-          <button>test button</button>
         </div>
+        <form className="toggle-board-form" onSubmit={this.swapBoardView}>
+          <button className="toggle-board-side">
+            View {this.state.viewFrontBoard ? 'back' : 'front'} side
+          </button>
+        </form>
       <BOM items={info.bom ? info.bom : []} />
       </div>
       </div>
