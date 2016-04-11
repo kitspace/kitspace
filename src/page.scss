@@ -52,10 +52,11 @@
   }
   .board-edge{
     background:gray;
-    width:100%;
+    width:10%;
     border-bottom:1px solid #000;
   }
   .board-container {
+    width:100%;
     background:#373737;
     border-bottom:1px solid #000;
     border-top:1px solid #404040;
@@ -68,7 +69,7 @@
     margin-top:1rem;
   }
   .board-diagram {
-    max-height:15rem;
+    height:15rem;
     width:50%;
   }
   .circuit-border-container {
