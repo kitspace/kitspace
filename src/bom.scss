@@ -12,8 +12,19 @@ thead {
     a {
         color: white;
     }
+    a:hover {
+        text-decoration: none;
+    }
 }
 
 .tr-1 {
     background-color: lightGrey;
+}
+
+.retailerHeading {
+    cursor:pointer;
+}
+
+.retailerHeading:hover {
+    background-color:grey;
 }
