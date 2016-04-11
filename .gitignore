@@ -5,3 +5,4 @@ node_modules/*
 boards/*
 npm-debug.log
 .sass-cache/
+.DS_Store
