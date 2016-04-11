@@ -67,6 +67,7 @@ var Page = React.createClass({
               width: '30%'
             }}
           />
+          <button>test button</button>
         </div>
       <BOM items={info.bom ? info.bom : []} />
       </div>
