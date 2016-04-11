@@ -47,9 +47,11 @@
     font-size:16px;
   }
   .board-showcase{
+    margin-bottom:1rem;
     display:flex;
   }
   .board-edge{
+    background:gray;
     width:100%;
   }
   .board-container {
@@ -59,7 +61,6 @@
     justify-content: space-around;
     max-height: 15rem;
     padding: 2rem;
-    margin-bottom:1rem;
   }
   .toggle-board-form {
     margin-top:1rem;
