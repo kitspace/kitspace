@@ -113,7 +113,7 @@
     text-align:center;
     color:gray;
   }
-  @media (min-width:600px) {
+  @media (min-width:810px) {
     .toggle-board-side {
       display:none;
     }
@@ -127,7 +127,7 @@
       padding-right:1rem;
     }
   }
-  @media (max-width:600px) {
+  @media (max-width:810px) {
     .board-edge {
       display:none;
     }
