@@ -35,7 +35,8 @@ var Page = React.createClass({
     });
   },
   render: function () {
-    const titleTxt = info.id.split('/').slice(2).join(' / ')
+    const titleTxt = info.id.split('/').slice(2).join(' / ');
+    const subtitleTxt = info.id.split('/').slice(0,2).join(' / ');
     var site;
     var frontBoardClass = 'front-board board-diagram ';
     var backBoardClass = 'back-board board-diagram ';
@@ -68,6 +69,9 @@ var Page = React.createClass({
           <div className='titleText'>
             {titleTxt}
           </div>
+          <div className='subtitleText'>
+            {subtitleTxt}
+          </div>
         </TitleBar>
           <div className='infoBar'>
             <div className='infoBarInner'>
@@ -84,28 +88,33 @@ var Page = React.createClass({
             </div>
           </div>
           <div className="toggle-board-view">
-            <button disabled={this.state.viewFrontBoard} className="circuit-toggle-btn" onClick={this.frontBoardView}>
+            <button disabled={this.state.viewFrontBoard} className="circuit-toggle-btn circuit-front-btn" onClick={this.frontBoardView}>
               Front View
             </button>
-            <button disabled={!this.state.viewFrontBoard} className="circuit-toggle-btn" onClick={this.backBoardView}>
+            <button disabled={!this.state.viewFrontBoard} className="circuit-toggle-btn circuit-back-btn" onClick={this.backBoardView}>
               Back View
             </button>
           </div>
-        <div className="board-container" style={{
-          backgroundColor:'#373737'
-          , borderRadius: '1em'
-        }}
-        >
-          <img className={frontBoardClass}
-            src='images/top.svg'
-          />
-          <div className="circuit-border-container">
-            <div className="circuit-border">
+          <div className="board-showcase">
+            <div className="board-edge">
             </div>
-          </div>
-          <img className={backBoardClass}
-            src='images/bottom.svg'
-          />
+              <div className="board-container" style={{
+
+              }}
+              >
+                <img className={frontBoardClass}
+                  src='images/top.svg'
+                />
+                <div className="circuit-border-container">
+                  <div className="circuit-border">
+                  </div>
+                </div>
+                <img className={backBoardClass}
+                  src='images/bottom.svg'
+                />
+              </div>
+            <div className="board-edge">
+            </div>
         </div>
       <BOM items={info.bom ? info.bom : []} />
       </div>
