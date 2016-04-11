@@ -50,10 +50,10 @@
     display: flex;
     justify-content: space-around;
     max-height: 15rem;
-    padding:2rem;
+    padding: 2rem;
     margin-bottom:1rem;
-    border-top:0.5rem solid #000;
-    border-bottom:0.5rem solid #000;
+    border-top: 5px solid #000;
+    border-bottom: 5px solid #000;
   }
   .toggle-board-form {
     margin-top:1rem;
@@ -76,12 +76,23 @@
     display:flex;
     justify-content:space-around;
   }
+  .circuit-toggle-btn:disabled{
+    background:#373737;
+  }
   .circuit-toggle-btn{
     padding: 1rem 2rem;
     width: 40%;
     font-weight: bold;
     font-size: 16px;
     cursor: pointer;
+    background: dimgrey;
+    color: white;
+    border-top: 2px solid black;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
   }
   @media (min-width:600px) {
     .toggle-board-side {
