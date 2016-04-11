@@ -36,7 +36,7 @@
     justify-content: space-around;
     flex-grow:2
   }
-  .toggle-board-side{
+  .toggle-board-side {
     width:100%;
     box-sizing:border-box;
     padding:1rem;
@@ -46,32 +46,72 @@
     font-weight:bold;
     font-size:16px;
   }
-  .board-container{
+  .board-container {
     display: flex;
     justify-content: space-around;
-    flex-wrap: wrap;
     max-height: 15rem;
+    padding:2rem;
+    margin-bottom:1rem;
+    border-top:0.5rem solid #000;
+    border-bottom:0.5rem solid #000;
   }
-  .toggle-board-form{
+  .toggle-board-form {
     margin-top:1rem;
   }
-  .board-diagram{
-    max-height:15rem
+  .board-diagram {
+    max-height:15rem;
+    width:50%;
   }
-  @media (min-width:500px) {
+  .circuit-border-container {
+    width:0.4rem;
+    display:flex;
+    justify-content:center;
+  }
+  .circuit-border {
+    width:0.5rem;
+    background:#000;
+  }
+
+  .toggle-board-view{
+    display:flex;
+    justify-content:space-around;
+  }
+  .circuit-toggle-btn{
+    padding: 1rem 2rem;
+    width: 40%;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  @media (min-width:600px) {
     .toggle-board-side {
       display:none;
     }
-  }
-  @media (max-width:500px) {
+    .toggle-board-view{
+      display:none;
+    }
     .back-board{
+        padding-left:1rem;
+    }
+    .front-board{
+      padding-right:1rem;
+    }
+  }
+  @media (max-width:600px) {
+
+    .back-board {
       display:none;
     }
-    img.board-diagram{
+    img.board-diagram {
       display:none;
+      width:100%;
     }
-    img.selected-board.board-diagram{
+
+    img.selected-board.board-diagram {
       display:block;
+    }
+    .circuit-border-container {
+      display:none;
     }
   }
 
