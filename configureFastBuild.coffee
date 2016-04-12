@@ -147,7 +147,6 @@ ninja.edge('build/responsive-tables.css').from('src/responsive-tables.scss')
     .need(sassSrc).assign('path', 'src/')
     .using('sass')
 
-
 ninja.edge('build/app.js').from('build/.temp/render.jsx')
     .need('build/.temp/boards.json').using('browserify')
 
