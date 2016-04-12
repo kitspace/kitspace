@@ -74,9 +74,19 @@ let BOM = React.createClass({
     }.bind(this));
     const version = browserVersion();
     if (/Chrome/.test(version)) {
-      this.setState({onClick: () => chrome.webstore.install(undefined, undefined, (err) => console.log(err))});
+      this.setState({
+        onClick: () => {
+          chrome.webstore.install(undefined, undefined, (err) => console.log(err));
+        }
+      });
     } else if (/Firefox/.test(version)) {
-      this.setState({onClick: () => window.open('//addons.mozilla.org/firefox/downloads/latest/634060/addon-634060-latest.xpi', '_self')})
+      this.setState({
+        onClick: () => {
+          window.open(
+            '//addons.mozilla.org/firefox/downloads/latest/634060/addon-634060-latest.xpi',
+            '_self');
+        }
+      });
     }
     if (typeof window !== undefined) {
       //for communicating with the extension
