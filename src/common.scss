@@ -4,7 +4,19 @@
     @media (max-device-width: 899px)
     , (max-device-width: 1024px) and (orientation: landscape)
     , (min-resolution: 300dpi)
-    , handheld
+    , (handheld)
+      { @content; }
+  }
+  @else if $point == mobile_or_small_width {
+    @media (max-device-width: 899px)
+    , (max-device-width: 1024px) and (orientation: landscape)
+    , (min-resolution: 300dpi)
+    , (handheld)
+    , (max-width: 810px)
+      { @content; }
+  }
+  @else if $point == small_width {
+    @media (max-width: 810px)
       { @content; }
   }
 }

@@ -95,18 +95,25 @@
     border-bottom: 0;
   }
 
-  @media (min-width:810px) and (max-resolution: 200dpi){
+  .toggle-board-view{
+    display:none;
+  }
+  .back-board{
+    padding-left:1rem;
+  }
+  .front-board{
+    padding-right:1rem;
+  }
+  @include breakpoint(mobile_or_small_width) {
     .toggle-board-view{
-      display:none;
+      display:flex;
     }
     .back-board{
-      padding-left:1rem;
+      padding-left:0rem;
     }
     .front-board{
-      padding-right:1rem;
+      padding-right:0rem;
     }
-  }
-  @media (max-width:810px), (min-resolution: 200dpi) {
     .board-edge {
       display:none;
     }
