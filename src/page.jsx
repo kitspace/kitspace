@@ -89,10 +89,10 @@ var Page = React.createClass({
           </div>
           <div className="toggle-board-view">
             <button disabled={this.state.viewFrontBoard} className="circuit-toggle-btn circuit-front-btn" onClick={this.frontBoardView}>
-              Front View
+              Front
             </button>
             <button disabled={!this.state.viewFrontBoard} className="circuit-toggle-btn circuit-back-btn" onClick={this.backBoardView}>
-              Back View
+              Back
             </button>
           </div>
           <div className="board-showcase">

@@ -44,19 +44,18 @@
     display:flex;
   }
   .board-edge{
-    background:gray;
     width:10%;
-    border-bottom:1px solid #000;
   }
   .board-container {
     width:100%;
     background:#373737;
-    border-bottom:1px solid #000;
     border-top:1px solid #404040;
     display: flex;
     justify-content: space-around;
     max-height: 15rem;
     padding: 2rem;
+    border-radius:5px;
+    box-shadow: 0px 0.1em 0.5em #000;
   }
   .toggle-board-form {
     margin-top:1rem;
@@ -74,36 +73,35 @@
     width:0.5rem;
   }
   .toggle-board-view{
-    display:flex;
+    display:none;
     justify-content:space-around;
   }
   .circuit-toggle-btn:disabled{
     background: dimgrey;
   }
   .circuit-toggle-btn{
-    background:#373737;
-    padding: 1rem 2rem;
-    width: 100%;
-    font-weight: bold;
-    font-size: 16px;
-    cursor: pointer;
-    background:#373737;
-    color: white;
-    border-top: 2px solid #eee;
-    border-left: 0;
-    border-right: 0;
-    border-bottom: 0;
+    background    : #373737;
+    padding       : 1rem 2rem;
+    width         : 100%;
+    font-weight   : bold;
+    font-size     : 16px;
+    cursor        : pointer;
+    background    : #373737;
+    color         : white;
+    border-top    : 2px solid #eee;
+    border-left   : 0;
+    border-right  : 0;
+    border-bottom : 0;
+    border-radius : 5px 5px 0px 0px;
   }
 
-  .toggle-board-view{
-    display:none;
-  }
   .back-board{
     padding-left:1rem;
   }
   .front-board{
     padding-right:1rem;
   }
+
   @include breakpoint(mobile_or_small_width) {
     .toggle-board-view{
       display:flex;
@@ -124,12 +122,14 @@
       display:none;
       width:100%;
     }
-
     img.selected-board.board-diagram {
       display:block;
     }
     .circuit-border-container {
       display:none;
+    }
+    .board-container {
+      border-radius:0px 0px 5px 5px;
     }
   }
 
