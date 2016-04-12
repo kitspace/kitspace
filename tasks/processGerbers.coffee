@@ -81,7 +81,7 @@ if require.main != module
         ]
         return {deps, targets, moduleDep:false}
 else
-    {deps, targets} = utils.processArgs(process.argv)
+    {config, deps, targets} = utils.processArgs(process.argv)
     folder = deps[0]
     gerbers = deps[1..]
     [topSvgPath, bottomSvgPath, zipPath, zipInfoPath] = targets

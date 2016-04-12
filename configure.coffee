@@ -43,15 +43,15 @@ requires = '-r ' + modules.join(' -r ')
 
 rule = ninja.rule('coffee-task')
 if (config == 'production')
-    rule.run("coffee -- $in -- $out")
+    rule.run("coffee -- $in -- #{config} $out")
 else
     #write to $out.d depfile in makefile format for ninja to keep track of deps
     rule.run("browserify -t coffeeify --extension='.coffee' --list $taskFile > $out.d
         && if [ '$jsMain' != '' ]; then #{browserify} --list $jsMain >> $out.d; fi
         && coffee ./depfileify.coffee $out $out.d
-        && coffee -- $in -- $targetFiles")
+        && coffee -- $in -- #{config} $targetFiles")
     .depfile('$out.d')
-    .description('coffee -- $in -- $targetFiles')
+    .description("coffee -- $in -- #{config} $targetFiles")
 
 
 rule = ninja.rule('browserify')
@@ -175,7 +175,7 @@ for taskFile in globule.find('tasks/*.coffee')
                 ninja.edge(target).from(t.targets[0])
     if typeof task == 'function'
         for folder in boardFolders
-            addEdge(task(folder))
+            addEdge(task(folder, config))
     else
         addEdge(task)
 

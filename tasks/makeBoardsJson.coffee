@@ -35,7 +35,7 @@ else
         return boardInfoWithEmpty
 
 
-    {deps, targets} = utils.processArgs(process.argv)
+    {config, deps, targets} = utils.processArgs(process.argv)
     boards = []
     folders = globule.find("#{boardDir}/*/*/*", {filter: 'isDirectory'})
     folders.sort((a,b) ->
