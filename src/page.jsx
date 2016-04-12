@@ -63,7 +63,7 @@ var Page = React.createClass({
         <span className="octicon octicon-repo" /> repo
       </a>;
     return (
-      <DocumentTitle title={titleTxt}><div>
+      <DocumentTitle title={`${titleTxt} - kitnic.it`}><div>
       <div className='Page'>
         <TitleBar>
           <div className='titleText'>
@@ -75,11 +75,11 @@ var Page = React.createClass({
         </TitleBar>
           <div className='infoBar'>
             <div className='infoBarInner'>
-              <div style={{marginBottom:10}}>{info.description}</div>
+              <div className='infoBarDescription'>{info.description}</div>
               <div className='infoBarLinksContainer'>
-                <div>{site}</div>
-                <div>{repo}</div>
-                <div>
+                <div className='infoBarLinks'>{site}</div>
+                <div className='infoBarLinks'>{repo}</div>
+                <div className='infoBarLinks'>
                   <a href={zipPath}>
                     <span className="octicon octicon-circuit-board" /> gerbers
                   </a>

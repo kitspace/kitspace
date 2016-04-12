@@ -13,7 +13,10 @@
   }
 
   .subtitleText{
-    font-size:100% ;
+    font-size:14px;
+    @include breakpoint(mobile) {
+      font-size:32px;
+    }
     text-align:center;
     color:gray;
   }
@@ -22,11 +25,20 @@
     width: 100%;
     text-align: center;
     vertical-align:  middle;
-    line-height: 2.5rem;
-    font-size:220%;
+    font-size:24px;
+    line-height:2.5rem;
+    @include breakpoint(mobile) {
+      font-size:64px;
+      padding-top:5px;
+      padding-bottom:20px;
+    }
     border-radius: 5px
   }
   .infoBar {padding: 20px; margin-top:10px}
+  .infoBarDescription {
+    margin-bottom:10;
+    margin-top:5;
+  }
   .infoBarInner {
     display: flex;
     flex-flow: row wrap;
@@ -37,7 +49,12 @@
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;
-    flex-grow:2
+    flex-grow:2;
+    margin-top:5;
+  }
+  .infoBarLinks {
+    margin-left: 5px;
+    margin-right: 5px;
   }
   .board-showcase{
     margin-bottom:1rem;
@@ -131,6 +148,35 @@
     .board-container {
       border-radius:0px 0px 5px 5px;
       border: 5px solid dimgrey;
+    }
+  }
+
+  @include breakpoint(mobile) {
+    .toggle-board-view{
+      height:128px;
+    }
+    .circuit-toggle-btn {
+      font-size:48px;
+    }
+    .board-container {
+      max-height: 25rem;
+    }
+    .board-diagram {
+      height:25rem;
+    }
+    .octicon {
+      font-size: 48px;
+    }
+    .infoBarInner {
+      font-size:40px;
+    }
+    .infoBarLinksContainer {
+      background-color:#F9F9F9;
+      border-radius: 20px;
+      font-size: 48px;
+    }
+    .middleContainer {
+      background-color: #1D1D1D;
     }
   }
 
