@@ -61,6 +61,10 @@ let BOM = React.createClass({
       $(this).height(heights[index]);
     });
   },
+  componentWillUnmount: function () {
+    window.removeEventListener('resize');
+    window.removeEventListener('redraw');
+  },
   componentDidMount: function () {
     this.updateTables();
     window.addEventListener('resize', this.updateTables);
