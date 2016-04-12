@@ -26,9 +26,7 @@
     font-size:220%;
     border-radius: 5px
   }
-
   .infoBar {padding: 20px; margin-top:10px}
-
   .infoBarInner {
     display: flex;
     flex-flow: row wrap;
@@ -40,16 +38,6 @@
     flex-flow: row wrap;
     justify-content: space-around;
     flex-grow:2
-  }
-  .toggle-board-side {
-    width:100%;
-    box-sizing:border-box;
-    padding:1rem;
-    display:flex;
-    justify-content:center;
-    white-space: pre;
-    font-weight:bold;
-    font-size:16px;
   }
   .board-showcase{
     margin-bottom:1rem;
@@ -85,7 +73,6 @@
   .circuit-border {
     width:0.5rem;
   }
-
   .toggle-board-view{
     display:flex;
     justify-content:space-around;
@@ -107,28 +94,18 @@
     border-right: 0;
     border-bottom: 0;
   }
-  .circuit-front-btn {
-    // border-top-left-radius: 1rem;
-  }
-  .circuit-back-btn {
-    // border-top-right-radius: 1rem;
-  }
-
-  @media (min-width:810px) {
-    .toggle-board-side {
-      display:none;
-    }
+  @media (min-width:810px) and (max-resolution: 200dpi){
     .toggle-board-view{
       display:none;
     }
     .back-board{
-        padding-left:1rem;
+      padding-left:1rem;
     }
     .front-board{
       padding-right:1rem;
     }
   }
-  @media (max-width:810px) {
+  @media (max-width:810px), (min-resolution: 200dpi) {
     .board-edge {
       display:none;
     }

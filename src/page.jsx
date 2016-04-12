@@ -115,6 +115,7 @@ var Page = React.createClass({
               </div>
             <div className="board-edge">
             </div>
+
         </div>
       <BOM items={info.bom ? info.bom : []} />
       </div>
