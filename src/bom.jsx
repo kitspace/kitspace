@@ -88,14 +88,23 @@ let BOM = React.createClass({
         }
       });
     }
+    window.addEventListener('message', (event) => {
+      if (event.source != window)
+        return;
+      if (event.data.from == 'extension')
+        switch (event.data.message) {
+          case 'register':
+            this.setState({
+              onClick: function (retailer) {
+                window.postMessage({from:'page', message:'quickAddToCart', value:retailer}, '*');
+              }
+            });
+            break;
+        }
+    }, false);
     if (typeof window !== undefined) {
       //for communicating with the extension
       window.setExtensionLinks = () => {
-        this.setState({
-          onClick: function (retailer) {
-            window.postMessage({type:'FromPage', retailer:retailer}, '*');
-          }
-        })
       }
     }
   },
