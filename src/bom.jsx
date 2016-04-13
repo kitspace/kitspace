@@ -7,10 +7,15 @@ const $              = require('jquery');
 
 let BOM = React.createClass({
   getInitialState: function() {
+    let adding = {};
+    for (let retailer of oneClickBOM.lineData.retailer_list) {
+      adding[retailer] = undefined;
+    }
     return {
       onClick: function () {
         window.open('//1clickBOM.com', '_self');
       },
+      adding: adding,
       switched: false
     };
   },
@@ -88,6 +93,7 @@ let BOM = React.createClass({
         }
       });
     }
+    //extension communication
     window.addEventListener('message', (event) => {
       if (event.source != window)
         return;
@@ -100,13 +106,13 @@ let BOM = React.createClass({
               }
             });
             break;
+          case 'updateAddingState':
+            this.setState({
+              adding: event.data.value
+            });
+            break;
         }
     }, false);
-    if (typeof window !== undefined) {
-      //for communicating with the extension
-      window.setExtensionLinks = () => {
-      }
-    }
   },
 
   render: function () {
@@ -132,10 +138,11 @@ let BOM = React.createClass({
     headings = headings.concat(partNumbers.map(makeHeading));
 
     const makeRetailerHeading = (retailer, index) => {
+      const iconClass = this.state.adding[retailer] ? 'icon-spin1 animate-spin' : 'icon-basket-3';
       return (
         <td key={`heading-${retailer}`} className='retailerHeading' onClick={this.state.onClick.bind(null,retailer)}>
           {retailer}<span> </span>
-          <i className="fa fa-cart-plus fa-lg"></i>
+          <i style={{fontSize:18}} className={iconClass}></i>
         </td>
       );
     };
