@@ -1,6 +1,7 @@
 @import 'common';
 @import 'title_bar';
 @import 'bom';
+@import 'board_showcase';
 
 .Page {
 
@@ -38,95 +39,6 @@
     flex-flow: row wrap;
     justify-content: space-around;
     flex-grow:2
-  }
-  .boardShowcase{
-    margin-bottom:1rem;
-    display:flex;
-  }
-  .boardEdge{
-    background:gray;
-    width:10%;
-    border-bottom:1px solid #000;
-  }
-  .boardContainer {
-    width:100%;
-    background:#373737;
-    border-bottom:1px solid #000;
-    border-top:1px solid #404040;
-    display: flex;
-    justify-content: space-around;
-    max-height: 15rem;
-    padding: 2rem;
-  }
-  .toggleBoardForm {
-    margin-top:1rem;
-  }
-  .boardDiagram {
-    height:15rem;
-    width:50%;
-  }
-  .circuitBorderContainer {
-    width:0.4rem;
-    display:flex;
-    justify-content:center;
-  }
-  .circuitBorder {
-    width:0.5rem;
-  }
-  .toggleBoardView{
-    display:flex;
-    justify-content:space-around;
-  }
-  .circuitToggleBtn:disabled{
-    background: dimgrey;
-  }
-  .circuitToggleBtn{
-    background:#373737;
-    padding: 1rem 2rem;
-    width: 100%;
-    font-weight: bold;
-    font-size: 16px;
-    cursor: pointer;
-    background:#373737;
-    color: white;
-    border-top: 2px solid #eee;
-    border-left: 0;
-    border-right: 0;
-    border-bottom: 0;
-  }
-
-  table.responsive{ border-spacing: 0 }
-  table.responsive td {border:0; padding: 9px 10px; text-align: left }
-
-  @media (min-width:810px) and (max-resolution: 200dpi){
-    .toggleBoardView{
-      display:none;
-    }
-    .backBoard{
-      padding-left:1rem;
-    }
-    .frontBoard{
-      padding-right:1rem;
-    }
-  }
-  @media (max-width:810px), (min-resolution: 200dpi) {
-    .boardEdge {
-      display:none;
-    }
-    .backBoard {
-      display:none;
-    }
-    img.boardDiagram {
-      display:none;
-      width:100%;
-    }
-
-    img.selectedBoard.boardDiagram {
-      display:block;
-    }
-    .circuitBorderContainer {
-      display:none;
-    }
   }
 
 }
