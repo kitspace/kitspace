@@ -38,8 +38,8 @@ var Page = React.createClass({
     const titleTxt = info.id.split('/').slice(2).join(' / ');
     const subtitleTxt = info.id.split('/').slice(0,2).join(' / ');
     var site;
-    var frontBoardClass = 'front-board board-diagram ';
-    var backBoardClass = 'back-board board-diagram ';
+    var frontBoardClass = 'frontBoard boardDiagram ';
+    var backBoardClass = 'backBoard boardDiagram ';
     if (info.site == '') {
       site =
         (<div className='disabledSite' title='no website info available'>
@@ -54,9 +54,9 @@ var Page = React.createClass({
     }
 
     if (this.state.viewFrontBoard) {
-      frontBoardClass += ' selected-board';
+      frontBoardClass += ' selectedBoard';
     }else{
-      backBoardClass += ' selected-board';
+      backBoardClass += ' selectedBoard';
     }
     const repo =
       <a href={info.repo}>
@@ -87,33 +87,33 @@ var Page = React.createClass({
               </div>
             </div>
           </div>
-          <div className="toggle-board-view">
-            <button disabled={this.state.viewFrontBoard} className="circuit-toggle-btn circuit-front-btn" onClick={this.frontBoardView}>
+          <div className="toggleBoardView">
+            <button disabled={this.state.viewFrontBoard} className="circuitToggleBtn circuitFrontBtn" onClick={this.frontBoardView}>
               Front View
             </button>
-            <button disabled={!this.state.viewFrontBoard} className="circuit-toggle-btn circuit-back-btn" onClick={this.backBoardView}>
+            <button disabled={!this.state.viewFrontBoard} className="circuitToggleBtn circuitBackBtn" onClick={this.backBoardView}>
               Back View
             </button>
           </div>
-          <div className="board-showcase">
-            <div className="board-edge">
+          <div className="boardShowcase">
+            <div className="boardEdge">
             </div>
-              <div className="board-container" style={{
+              <div className="boardContainer" style={{
 
               }}
               >
                 <img className={frontBoardClass}
                   src='images/top.svg'
                 />
-                <div className="circuit-border-container">
-                  <div className="circuit-border">
+                <div className="circuitBorderContainer">
+                  <div className="circuitBorder">
                   </div>
                 </div>
                 <img className={backBoardClass}
                   src='images/bottom.svg'
                 />
               </div>
-            <div className="board-edge">
+            <div className="boardEdge">
             </div>
 
         </div>
