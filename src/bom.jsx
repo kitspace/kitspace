@@ -48,7 +48,7 @@ let BOM = React.createClass({
     const partNumbers = _.times(partNumberLength, _.constant('Part Number'));
 
     const makeHeading = (heading, index) => {
-      return ( <td key={`heading-${heading}-${index}`}>{heading}</td> );
+      return ( <th key={`heading-${heading}-${index}`}>{heading}</th> );
     };
 
     let headings = ['References', 'Qty', 'Description'].map(makeHeading);
@@ -56,10 +56,10 @@ let BOM = React.createClass({
 
     const makeRetailerHeading = (retailer, index) => {
       return (
-        <td key={`heading-${retailer}`} className='retailerHeading' onClick={this.state.onClick.bind(null,retailer)}>
+        <th key={`heading-${retailer}`} className='retailerHeading' onClick={this.state.onClick.bind(null,retailer)}>
           {retailer}<span> </span>
           <i className="fa fa-cart-plus fa-lg"></i>
-        </td>
+        </th>
       );
     };
 
@@ -68,7 +68,7 @@ let BOM = React.createClass({
     let rows = this.props.items.map((item, rowIndex) => {
 
       let row = keys.map((key) => {
-        return ( <td key={`${rowIndex}-${key}`}>{ item[key] }</td> );
+        return ( <td data-th={key.charAt(0).toUpperCase() + key.slice(1)} key={`${rowIndex}-${key}`}>{ item[key] }</td> );
       });
 
       row = row.concat(_.times(partNumberLength, (index) => {
@@ -81,7 +81,7 @@ let BOM = React.createClass({
         }
 
         return (
-          <td key={`${item.reference}-partNumber-${index}`} style={style}>
+          <td data-th="Part Number" key={`${item.reference}-partNumber-${index}`} style={style}>
             { partNumber }
           </td>
         );
@@ -93,7 +93,7 @@ let BOM = React.createClass({
           style = {backgroundColor:'pink'};
         }
         return (
-          <td key={`${item.reference}-${key}-${index}`} style={style}>
+          <td data-th={key} key={`${item.reference}-${key}-${index}`} style={style}>
             { item.retailers[key] }
           </td>
         );
