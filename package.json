@@ -38,7 +38,6 @@
   "license": "CPAL-1.0",
   "dependencies": {
     "browser-version": "^1.0.0",
-    "jquery": "^2.2.3",
     "lodash": "^4.0.0"
   }
 }

@@ -3,75 +3,17 @@ const React          = require('react');
 const _              = require('lodash');
 const oneClickBOM    = require('1-click-bom');
 const browserVersion = require('browser-version');
-const $              = require('jquery');
+
 
 let BOM = React.createClass({
   getInitialState: function() {
     return {
       onClick: function () {
         window.open('//1clickBOM.com', '_self');
-      },
-      switched: false
+      }
     };
   },
-  updateTables: function () {
-    if (($(window).width() < 767) && !this.state.switched) {
-      this.setState({switched: true});
-      $('table.responsive').each(function(i, element) {
-        this.splitTable($(element));
-      }.bind(this));
-      return true;
-    }else if (this.state.switched && ($(window).width() > 767)) {
-      this.setState({switched: false});
-      $('table.responsive').each(function(i, element) {
-        this.unsplitTable($(element));
-      }.bind(this))
-    }
-  },
-  splitTable: function (original) {
-    original.wrap("<div class='table-wrapper' />");
-    var copy = original.clone();
-    copy.find("td:not(:first-child), th:not(:first-child)").css("display", "none");
-    copy.removeClass("responsive");
-    original.closest(".table-wrapper").append(copy);
-    copy.wrap("<div class='pinned' />");
-    original.wrap("<div class='scrollable' />");
-    this.setCellHeights(original, copy);
-  },
-  unsplitTable: function (original) {
-    original.closest(".table-wrapper").find(".pinned").remove();
-    original.unwrap();
-    original.unwrap();
-  },
-  setCellHeights: function (original, copy) {
-    var tr = original.find('tr'),
-        tr_copy = copy.find('tr'),
-        heights = [];
-    tr.each(function (index) {
-      var self = $(this),
-          tx = self.find('th, td');
-
-      tx.each(function () {
-        var height = $(this).outerHeight(true);
-        heights[index] = heights[index] || 0;
-        if (height > heights[index]) heights[index] = height;
-      });
-    });
-    tr_copy.each(function (index) {
-      $(this).height(heights[index]);
-    });
-  },
-  componentWillUnmount: function () {
-    window.removeEventListener('resize');
-    window.removeEventListener('redraw');
-  },
   componentDidMount: function () {
-    this.updateTables();
-    window.addEventListener('resize', this.updateTables);
-    window.addEventListener('redraw', function(){
-      this.setState({switched:false});
-      this.updateTables();
-    }.bind(this));
     const version = browserVersion();
     if (/Chrome/.test(version)) {
       this.setState({onClick: () => chrome.webstore.install(undefined, undefined, (err) => console.log(err))});
