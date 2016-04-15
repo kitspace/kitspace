@@ -135,10 +135,10 @@ let BOM = React.createClass({
 
     });
     let tblClass = 'responsive';
-    let btnText = 'Default table';
+    let btnText = 'Hide stores';
     if (this.state.fullView === 0){
       tblClass += ' defaultTblView';
-      btnText = 'Full table';
+      btnText = 'Show stores';
     }
     return (
       <div className="bomContainer">

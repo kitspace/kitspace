@@ -52,7 +52,7 @@ table.responsive{
 table.defaultTblView tr td:nth-of-type(1n+5),
 table.defaultTblView tr th:nth-of-type(1n+5){
     display:none;
-    }
+}
 .bomToggleContainer{
     display:flex;
     justify-content:center;
@@ -69,7 +69,12 @@ table.defaultTblView tr th:nth-of-type(1n+5){
     border:0;
     padding:0.5rem 1rem;
     cursor: pointer;
-    font-size:1.2rem;
+    font-size:16px;
+    @include breakpoint(mobile) {
+        font-size:48px;
+        padding:2rem;
+    }
+    border-bottom:1px solid #222;
 }
 
 
