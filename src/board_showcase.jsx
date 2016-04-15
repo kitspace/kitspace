@@ -31,10 +31,10 @@ var BoardShowcase = React.createClass({
 			<div className="boardShowcaseContainer">
 				<div className="toggleBoardView">
 					<button disabled={this.state.viewFrontBoard} className="circuitToggleBtn circuitFrontBtn" onClick={this.frontBoardView}>
-						Front View
+						Front
 					</button>
 					<button disabled={!this.state.viewFrontBoard} className="circuitToggleBtn circuitBackBtn" onClick={this.backBoardView}>
-						Back View
+						Back
 					</button>
 				</div>
 				<div className="boardShowcase">

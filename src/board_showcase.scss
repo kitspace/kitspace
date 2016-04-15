@@ -1,12 +1,11 @@
+@import 'common';
 .boardShowcaseContainer{
 	.boardShowcase{
 		margin-bottom:1rem;
 		display:flex;
 	}
 	.boardEdge{
-		background:gray;
 		width:10%;
-		border-bottom:1px solid #000;
 	}
 	.boardContainer {
 		width:100%;
@@ -17,6 +16,8 @@
 		justify-content: space-around;
 		max-height: 15rem;
 		padding: 2rem;
+		border-radius: 5px;
+    	box-shadow: 0px 0.1em 0.5em #000;
 	}
 	.toggleBoardForm {
 		margin-top:1rem;
@@ -34,29 +35,42 @@
 		width:0.5rem;
 	}
 	.toggleBoardView{
-		display:flex;
+		display:none;
 		justify-content:space-around;
 	}
 	.circuitToggleBtn:disabled{
 		background: dimgrey;
 	}
 	.circuitToggleBtn{
-		background:#373737;
+		background:#2D2C2C;
 		padding: 1rem 2rem;
 		width: 100%;
 		font-weight: bold;
 		font-size: 16px;
 		cursor: pointer;
-		background:#373737;
 		color: white;
+		border-radius:5px 5px 0 0;
 		border-top: 2px solid #eee;
 		border-left: 0;
 		border-right: 0;
 		border-bottom: 0;
+		z-index: 1;
 	}
-	@media (min-width:810px) and (max-resolution: 200dpi){
+	@include breakpoint(mobile) {
+		.circuitToggleBtn {
+			font-size: 48px;
+		}
+		.boardDiagram {
+			height:25rem;
+		}
+		.octicon {
+			font-size:48px;
+		}
+		.boardContainer {
+			max-height:25rem;
+		}
 		.toggleBoardView{
-			display:none;
+			height:128px;
 		}
 		.backBoard{
 			padding-left:1rem;
@@ -65,7 +79,14 @@
 			padding-right:1rem;
 		}
 	}
-	@media (max-width:810px), (min-resolution: 200dpi) {
+	@include breakpoint(mobile_or_small_width) {
+		.boardContainer {
+			border-radius:0 0 5px 5px;
+			border:5px solid dimgrey;
+		}
+		.toggleBoardView {
+			display:flex;
+		}
 		.boardEdge {
 			display:none;
 		}
