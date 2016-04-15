@@ -7,29 +7,54 @@ const browserVersion = require('browser-version');
 
 let BOM = React.createClass({
   getInitialState: function() {
+    let adding = {};
+    for (let retailer of oneClickBOM.lineData.retailer_list) {
+      adding[retailer] = undefined;
+    }
     return {
       onClick: function () {
         window.open('//1clickBOM.com', '_self');
-      }
+      },
+      adding: adding
     };
   },
   componentDidMount: function () {
     const version = browserVersion();
     if (/Chrome/.test(version)) {
-      this.setState({onClick: () => chrome.webstore.install(undefined, undefined, (err) => console.log(err))});
+      this.setState({
+        onClick: () => {
+          chrome.webstore.install(undefined, undefined, (err) => console.log(err));
+        }
+      });
     } else if (/Firefox/.test(version)) {
-      this.setState({onClick: () => window.open('//addons.mozilla.org/firefox/downloads/latest/634060/addon-634060-latest.xpi', '_self')})
+      this.setState({
+        onClick: () => {
+          window.open(
+            '//addons.mozilla.org/firefox/downloads/latest/634060/addon-634060-latest.xpi',
+            '_self');
+        }
+      });
     }
-    if (typeof window !== undefined) {
-      //for communicating with the extension
-      window.setExtensionLinks = () => {
-        this.setState({
-          onClick: function (retailer) {
-            window.postMessage({type:'FromPage', retailer:retailer}, '*');
-          }
-        })
-      }
-    }
+    //extension communication
+    window.addEventListener('message', (event) => {
+      if (event.source != window)
+        return;
+      if (event.data.from == 'extension')
+        switch (event.data.message) {
+          case 'register':
+            this.setState({
+              onClick: function (retailer) {
+                window.postMessage({from:'page', message:'quickAddToCart', value:retailer}, '*');
+              }
+            });
+            break;
+          case 'updateAddingState':
+            this.setState({
+              adding: event.data.value
+            });
+            break;
+        }
+    }, false);
   },
 
   render: function () {
@@ -55,10 +80,11 @@ let BOM = React.createClass({
     headings = headings.concat(partNumbers.map(makeHeading));
 
     const makeRetailerHeading = (retailer, index) => {
+      const iconClass = this.state.adding[retailer] ? 'icon-spin1 animate-spin' : 'icon-basket-3';
       return (
         <th key={`heading-${retailer}`} className='retailerHeading' onClick={this.state.onClick.bind(null,retailer)}>
           {retailer}<span> </span>
-          <i className="fa fa-cart-plus fa-lg"></i>
+          <i style={{fontSize:18}} className={iconClass}></i>
         </th>
       );
     };
@@ -115,5 +141,6 @@ let BOM = React.createClass({
     )
   }
 });
+
 
 module.exports = BOM;
