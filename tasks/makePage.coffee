@@ -3,7 +3,6 @@ utils = require('./utils/utils')
 
 if require.main != module
     module.exports = (folder, config) ->
-        console.log('config', config)
         targets = ["build/#{folder}/index.html"]
         if config == 'production'
             deps = [
