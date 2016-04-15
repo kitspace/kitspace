@@ -15,7 +15,8 @@ let BOM = React.createClass({
       onClick: function () {
         window.open('//1clickBOM.com', '_self');
       },
-      adding: adding
+      adding: adding,
+      fullView: 0
     };
   },
   componentDidMount: function () {
@@ -56,7 +57,12 @@ let BOM = React.createClass({
         }
     }, false);
   },
-
+  toggleTblView: function (e) {
+    e.preventDefault();
+    this.setState({
+      fullView: this.state.fullView = 1 - this.state.fullView
+    });
+  },
   render: function () {
 
     //get rid of this once proper BOMs are made a requirement and enforced
@@ -128,16 +134,30 @@ let BOM = React.createClass({
       return ( <tr className={`tr-${rowIndex % 2}`} key={`bom-tr-${rowIndex}`}>{ row }</tr> );
 
     });
-
+    let tblClass = 'responsive';
+    let btnText = 'Default table';
+    if (this.state.fullView === 0){
+      tblClass += ' defaultTblView';
+      btnText = 'Full table';
+    }
     return (
-      <table className="responsive">
-        <thead>
-          <tr>{ headings }</tr>
-        </thead>
-        <tbody>
-          { rows }
-        </tbody>
-      </table>
+      <div className="bomContainer">
+      <div className="bomToggleContainer">
+        <button className="bomToggle" onClick={this.toggleTblView}>
+          {btnText}
+        </button>
+      </div>
+      <div className="bomTblContainer">
+        <table className={tblClass}>
+          <thead>
+            <tr>{ headings }</tr>
+          </thead>
+          <tbody>
+            { rows }
+          </tbody>
+        </table>
+        </div>
+      </div>
     )
   }
 });
