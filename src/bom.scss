@@ -1,3 +1,6 @@
+@import 'common';
+@import 'spinners_n_carts';
+@import 'animation';
 td {
     border: 1px solid grey;
 }
@@ -18,7 +21,7 @@ thead {
 }
 
 .tr-1 {
-    background-color: lightGrey;
+    background-color:white;
 }
 
 .retailerHeading {
@@ -28,3 +31,70 @@ thead {
 .retailerHeading:hover {
     background-color:grey;
 }
+.tr-0{
+    background:lightGray;
+    border-top: 2px solid #eee;
+    border-bottom: 2px solid #C5C5C5;}
+
+table.responsive{
+    margin-top:-1rem;
+    @media (min-width:810px) and (max-resolution: 200dpi) {
+        margin:0;
+    }
+    width:100vw;
+    table-layout: fixed;
+
+    thead{
+        display:none;
+        @media (min-width:810px) and (max-resolution: 200dpi) {
+            display: table-header-group;
+        }
+    }
+    tr {
+        padding:2rem 0;
+        display:flex;
+        flex-direction:column;
+        // border-bottom: 1px dashed #373737;
+        @media (min-width:810px) and (max-resolution: 200dpi) {
+            display:table-row;
+        }
+    }
+    td {
+        display: block;
+        &:first-child {
+            padding-top: 0.5rem;
+        }
+        &:last-child {
+            padding-bottom: 0.5rem
+        }
+        &:before {
+            content: attr(data-th)": ";
+            font-weight:bold;
+            width:8.5rem;
+            display:inline-block;
+            @media (min-width:810px) and (max-resolution: 200dpi) {
+                display:none;
+            }
+        }
+    }
+    th, td {
+        text-align: left;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        @media (min-width:810px) and (max-resolution: 200dpi) {
+            display:table-cell;
+            padding: 9px 10px;
+            &:first-child {
+                padding-left:0;
+            }
+            &:last-child {
+                padding-right:0;
+            }
+        }
+    }
+}
+table.responsive{ border-spacing: 0 }
+table.responsive td {border:0; padding: 9px 10px; text-align: left }
+
+

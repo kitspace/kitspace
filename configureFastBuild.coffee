@@ -32,26 +32,26 @@ browserify = "browserify --extension='.jsx' --transform [ babelify
 
 
 if config == 'dev'
-    browserify += ' --debug'
+    browserify += ' --fast'
 else
     browserify += ' -g uglifyify'
 
-modules = ['react', 'react-dom', 'lodash', 'react-document-title', 'browser-version', '1-click-bom']
+modules = ['react', 'react-dom']
 excludes = '-x ' + modules.join(' -x ')
 requires = '-r ' + modules.join(' -r ')
 
 
 rule = ninja.rule('coffee-task')
 if (config == 'production')
-    rule.run("coffee -- $in -- #{config} $out")
+    rule.run("coffee -- $in -- $out")
 else
     #write to $out.d depfile in makefile format for ninja to keep track of deps
-    rule.run("browserify -t coffeeify --extension='.coffee' --list $taskFile > $out.d
+    rule.run("browserify --fast -t coffeeify --extension='.coffee' --list $taskFile > $out.d
         && if [ '$jsMain' != '' ]; then #{browserify} --list $jsMain >> $out.d; fi
         && coffee ./depfileify.coffee $out $out.d
-        && coffee -- $in -- #{config} $targetFiles")
+        && coffee -- $in -- $targetFiles")
     .depfile('$out.d')
-    .description("coffee -- $in -- #{config} $targetFiles")
+    .description('coffee -- $in -- $targetFiles')
 
 
 rule = ninja.rule('browserify')
@@ -83,7 +83,7 @@ if (config == 'production')
 
     rule.run("#{browserify} #{excludes} $in | #{uglifyjs} > $out")
 else
-    rule.run("#{browserify} #{excludes} --list $in > $out.d
+    rule.run("#{browserify} --fast #{excludes} --list $in > $out.d
         && coffee ./depfileify.coffee $out $out.d
         && #{browserify} #{excludes} $in -o $out"
     )
@@ -94,7 +94,7 @@ rule = ninja.rule('browserify-require')
 if (config == 'production')
     rule.run("#{browserify} #{requires} $in | #{uglifyjs} > $out")
 else
-    rule.run("#{browserify} #{requires} $in -o $out")
+    rule.run("#{browserify} --fast #{requires} $in -o $out")
 
 
 ninja.rule('sass').run('sass --sourcemap=none --load-path $path $in $out')
@@ -155,28 +155,28 @@ for folder in boardFolders
         .using('browserify')
 
 
-for taskFile in globule.find('tasks/*.coffee')
-    task = require("./#{path.dirname(taskFile)}/#{path.basename(taskFile)}")
-    addEdge = (t) ->
-        if config == 'production'
-            ninja.edge(t.targets)
-                .from([taskFile].concat(t.deps))
-                .using('coffee-task')
-        else
-            edge = ninja.edge(t.targets[0])
-                .from([taskFile].concat(t.deps))
-                .assign('taskFile', taskFile)
-                .assign('targetFiles', t.targets.join(' '))
-                .using('coffee-task')
-            if task.moduleDep
-                edge.assign('jsMain', t.deps[0])
-            for target in t.targets[1..]
-                ninja.edge(target).from(t.targets[0])
-    if typeof task == 'function'
-        for folder in boardFolders
-            addEdge(task(folder, config))
-    else
-        addEdge(task)
+# for taskFile in globule.find('tasks/*.coffee')
+#     task = require("./#{path.dirname(taskFile)}/#{path.basename(taskFile)}")
+#     addEdge = (t) ->
+#         if config == 'production'
+#             ninja.edge(t.targets)
+#                 .from([taskFile].concat(t.deps))
+#                 .using('coffee-task')
+#         else
+#             edge = ninja.edge(t.targets[0])
+#                 .from([taskFile].concat(t.deps))
+#                 .assign('taskFile', taskFile)
+#                 .assign('targetFiles', t.targets.join(' '))
+#                 .using('coffee-task')
+#             if task.moduleDep
+#                 edge.assign('jsMain', t.deps[0])
+#             for target in t.targets[1..]
+#                 ninja.edge(target).from(t.targets[0])
+#     if typeof task == 'function'
+#         for folder in boardFolders
+#             addEdge(task(folder))
+#     else
+#         addEdge(task)
 
 
 ninja.edge('clean').from('build/').using('remove')

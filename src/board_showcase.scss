@@ -1,0 +1,108 @@
+@import 'common';
+.boardShowcaseContainer{
+	.boardShowcase{
+		margin-bottom:1rem;
+		display:flex;
+	}
+	.boardEdge{
+		width:10%;
+	}
+	.boardContainer {
+		width:100%;
+		background:#373737;
+		border-bottom:1px solid #000;
+		border-top:1px solid #404040;
+		display: flex;
+		justify-content: space-around;
+		max-height: 15rem;
+		padding: 2rem;
+		border-radius: 5px;
+    	box-shadow: 0px 0.1em 0.5em #000;
+	}
+	.toggleBoardForm {
+		margin-top:1rem;
+	}
+	.boardDiagram {
+		height:15rem;
+		width:50%;
+	}
+	.circuitBorderContainer {
+		width:0.4rem;
+		display:flex;
+		justify-content:center;
+	}
+	.circuitBorder {
+		width:0.5rem;
+	}
+	.toggleBoardView{
+		display:none;
+		justify-content:space-around;
+	}
+	.circuitToggleBtn:disabled{
+		background: dimgrey;
+	}
+	.circuitToggleBtn{
+		background:#2D2C2C;
+		padding: 1rem 2rem;
+		width: 100%;
+		font-weight: bold;
+		font-size: 16px;
+		cursor: pointer;
+		color: white;
+		border-radius:5px 5px 0 0;
+		border-top: 2px solid #eee;
+		border-left: 0;
+		border-right: 0;
+		border-bottom: 0;
+		z-index: 1;
+	}
+	@include breakpoint(mobile) {
+		.circuitToggleBtn {
+			font-size: 48px;
+		}
+		.boardDiagram {
+			height:25rem;
+		}
+		.octicon {
+			font-size:48px;
+		}
+		.boardContainer {
+			max-height:25rem;
+		}
+		.toggleBoardView{
+			height:128px;
+		}
+		.backBoard{
+			padding-left:1rem;
+		}
+		.frontBoard{
+			padding-right:1rem;
+		}
+	}
+	@include breakpoint(mobile_or_small_width) {
+		.boardContainer {
+			border-radius:0 0 5px 5px;
+			border:5px solid dimgrey;
+		}
+		.toggleBoardView {
+			display:flex;
+		}
+		.boardEdge {
+			display:none;
+		}
+		.backBoard {
+			display:none;
+		}
+		img.boardDiagram {
+			display:none;
+			width:100%;
+		}
+		img.selectedBoard.boardDiagram {
+			display:block;
+		}
+		.circuitBorderContainer {
+			display:none;
+		}
+	}
+
+}
