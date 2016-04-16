@@ -4,7 +4,9 @@
 @import 'board_showcase';
 
 .Page {
-
+  .pageContainer {
+    padding:0 2rem;
+  }
   .disabledSite {
     color:grey;
     -ie-user-select:none;
@@ -16,7 +18,7 @@
   .subtitleText{
     font-size:14px;
     @include breakpoint(mobile) {
-      font-size:32px;
+      font-size:32px
     }
     text-align:center;
     color:gray;

@@ -42,6 +42,7 @@ var Page = React.createClass({
             {subtitleTxt}
           </div>
         </TitleBar>
+        <div className="pageContainer">
           <div className='infoBar'>
             <div className='infoBarInner'>
               <div className='infoBarDescription'>{info.description}</div>
@@ -58,6 +59,7 @@ var Page = React.createClass({
           </div>
       <BoardShowcase />
       <BOM items={info.bom ? info.bom : []} />
+      </div>
       </div>
       </div>
     </DocumentTitle>

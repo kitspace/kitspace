@@ -140,23 +140,43 @@ let BOM = React.createClass({
       tblClass += ' defaultTblView';
       btnText = 'Show stores';
     }
+    let storeBtns;
+    storeBtns = retailers.map(function(retailer, key){
+      let imgHref = '/images/'+retailer+'.ico';
+      return (
+        <button key={`btn${retailer}`}>
+          <img className="storeIcos" key={retailer} src={imgHref} alt={retailer} />
+          Buy now
+        </button>
+        );
+    });
+
     return (
       <div className="bomContainer">
-      <div className="bomToggleContainer">
-        <button className="bomToggle" onClick={this.toggleTblView}>
-          {btnText}
-        </button>
-      </div>
-      <div className="bomTblContainer">
-        <table className={tblClass}>
-          <thead>
-            <tr>{ headings }</tr>
-          </thead>
-          <tbody>
-            { rows }
-          </tbody>
-        </table>
+        <div className="storeBtnContainer">
+          <div className="storeBtns">
+              {storeBtns}
+          </div>
         </div>
+        <div className="bomToggleContainer">
+          <button className="bomToggle" onClick={this.toggleTblView}>
+            {btnText}
+          </button>
+        </div>
+        <div className="bomTblContainer">
+          <div className="bomTblEdge"> </div>
+          <div className="bomTblViewPort">
+            <table className={tblClass}>
+              <thead>
+                <tr>{ headings }</tr>
+              </thead>
+              <tbody>
+                { rows }
+              </tbody>
+            </table>
+          </div>
+          <div className="bomTblEdge"> </div>
+          </div>
       </div>
     )
   }
