@@ -31,19 +31,30 @@ thead {
 .retailerHeading:hover {
     background-color:grey;
 }
-.tr-0{
+.tr-0 {
     background:lightGray;
     border-top: 2px solid #eee;
     border-bottom: 2px solid #C5C5C5;
 }
-table.responsive{
+table.responsive {
+    table-layout: fixed;
     box-shadow:0 0.1rem 0.5rem #000;
     width:100%;
     border-spacing: 0;
+    th.expandedTd {
+        // width:45%;
+    }
     td {
         border:0; padding: 9px 10px; text-align: left;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
-    th{
+    td.expandedTd {
+        overflow: initial;
+        text-overflow:initial;
+    }
+    th {
         padding:0 10px;
         height:40px;
         box-sizing:border-box;
@@ -54,27 +65,25 @@ table.defaultTblView tr td:nth-of-type(1n+5),
 table.defaultTblView tr th:nth-of-type(1n+5){
     display:none;
 }
-.bomToggleContainer{
+.bomToggleContainer {
     display:flex;
     justify-content:flex-end;
 }
-.storeBtnContainer{
-    display: flex;
-    justify-content:center;
-}
-.bomTblContainer{
+.bomTblContainer {
     display:flex;
 }
-.bomTblEdge{
+.bomTblEdge {
     width:10%;
     @include breakpoint(mobile_or_small_width) {
         display:none;
     }
 }
-.bomTblViewPort{
+.bomTblViewPort {
     width:100%;
+    overflow-x:auto;
+    overflow-y:hidden;
 }
-.bomToggle{
+.bomToggle {
     margin-bottom:1rem;
     background:dimgrey;
     color:#fff;
@@ -83,15 +92,56 @@ table.defaultTblView tr th:nth-of-type(1n+5){
     padding:0.5rem 1rem;
     cursor: pointer;
     font-size:16px;
-    @include breakpoint(mobile) {
+    @include breakpoint (mobile) {
         font-size:48px;
         padding:2rem;
     }
     border-bottom:1px solid #222;
 }
-.storeIcos{
+.storeIcos {
     height:16px;
     width:16px;
+    padding-right:0.2rem;
+    @include breakpoint (mobile) {
+        height:32px;
+        width:32px;
+    }
 }
+.storeButtons {
+    padding:0.5rem 1rem;
+    font-size:16px;
+    cursor:pointer;
+    display: flex;
+    align-items: center;
+    background: #696969;
+    border: 0;
+    border-radius:5px;
+    color:#fff;
+    border-bottom:1px solid #222;
+    @include breakpoint (mobile) {
+        font-size:32px;
+        padding:2rem;
+    }
+}
+.columnVisibility{
+    font-size:8px;
+    font-weight:normal;
+}
+.storeButtons:hover{
 
+}
+.storeBtns {
+    display:flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width:100%;
+}
+.storeButtonInner {
+    display:flex;
+    flex-direction:column;
+}
+.thContainer{
+    display:flex;
+    justify-content:space-between;
+}
 
