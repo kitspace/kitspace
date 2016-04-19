@@ -29,17 +29,17 @@ let BOM = React.createClass({
       return item.partNumbers.length;
     }).concat(1));
   },
-  columnGrowUpdate: function (offset) {
-    let tds = document.querySelectorAll('table.responsive tr td:nth-child('+(parseInt(offset)+1)+')');
-    tds = [...tds];
-    let widths = 0;
-    if (tds.length){
-      widths = tds.map(function(elem, key){
-          return elem.scrollWidth;
-      });
-    }
-    return {max: _.max(widths), offset: offset };
-  },
+  // columnGrowUpdate: function (offset) {
+  //   let tds = document.querySelectorAll('table.responsive tr td:nth-child('+(parseInt(offset)+1)+')');
+  //   tds = [...tds];
+  //   let widths = 0;
+  //   if (tds.length){
+  //     widths = tds.map(function(elem, key){
+  //         return elem.scrollWidth;
+  //     });
+  //   }
+  //   return {max: _.max(widths), offset: offset };
+  // },
   componentDidUpdate: function () {
     // let grow = this.columnGrowUpdate();
     // if (grow.offset !== false){
@@ -102,16 +102,16 @@ let BOM = React.createClass({
       fullView: this.state.fullView = 1 - this.state.fullView
     });
   },
-  toggleColumnExpand: function(offset, headingsLength) {
-    let newColumns = _.range(0, headingsLength).map(()=> 0);
-    newColumns[offset] = 1;
-    let newGrow = _.range(0, headingsLength).map(()=> 0);
-    newGrow[offset] = this.columnGrowUpdate(offset).max;
-    this.setState({
-      columnsContract:newColumns,
-      columnsGrowWidth:newGrow
-    });
-  },
+  // toggleColumnExpand: function(offset, headingsLength) {
+  //   let newColumns = _.range(0, headingsLength).map(()=> 0);
+  //   newColumns[offset] = 1;
+  //   let newGrow = _.range(0, headingsLength).map(()=> 0);
+  //   newGrow[offset] = this.columnGrowUpdate(offset).max;
+  //   this.setState({
+  //     columnsContract:newColumns,
+  //     columnsGrowWidth:newGrow
+  //   });
+  // },
   toggleColumnEnabled: function(offset){
     return this.state.columnsContract[offset];
   },
