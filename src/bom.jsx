@@ -9,11 +9,20 @@ const DoubleScrollbar = require('react-double-scrollbar');
 let BOM = React.createClass({
   getInitialState: function() {
     let adding = {};
+    let retailerCompletion = {};
+
     for (let retailer of oneClickBOM.lineData.retailer_list) {
       adding[retailer] = undefined;
+      // retailerCompletion[retailer] = ;
+
+      retailerCompletion[retailer] = _.some(this.props.items,function(item,index) {
+        let offset = item.retailers[retailer];
+        return (offset !== undefined && offset !== '' && offset !== null);
+      });
     }
     let headerLength = this.columnCount();
     let columnSettings = _.range(0, headerLength).map(()=> 0);
+
     return {
       onClick: function () {
         window.open('//1clickBOM.com', '_self');
@@ -21,7 +30,8 @@ let BOM = React.createClass({
       adding: adding,
       fullView: 0,
       columnsContract:columnSettings,
-      columnsGrowWidth:columnSettings
+      columnsGrowWidth:columnSettings,
+      retailerCompletion: retailerCompletion
     };
   },
   columnCount: function () {
@@ -219,7 +229,7 @@ let BOM = React.createClass({
       return (
         <button onClick={this.state.onClick.bind(null,retailer)} className="storeButtons" key={`btn${retailer}`}>
           <div className="storeButtonInner">
-            <img className="storeIcos" key={retailer} src={imgHref} alt={retailer} />{retailer}
+            <img className="storeIcos" key={retailer} src={imgHref} alt={retailer} />{retailer} {(this.state.retailerCompletion[retailer])?'✓':''}
           </div>
         </button>
         );
