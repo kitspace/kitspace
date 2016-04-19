@@ -58,6 +58,7 @@ var Page = React.createClass({
             </div>
           </div>
       <BoardShowcase />
+
       <BOM items={info.bom ? info.bom : []} />
       </div>
       </div>

@@ -4,12 +4,7 @@
 @import 'board_showcase';
 
 .Page {
-  .pageContainer {
-    padding:0 10%;
-    @include breakpoint(mobile_or_small_width) {
-      padding:0;
-    }
-  }
+
   .disabledSite {
     color:grey;
     -ie-user-select:none;
@@ -78,6 +73,13 @@
       background: #1D1D1D;
     }
   }
+  .pageContainer {
+    padding:0 10%;
+    @include breakpoint(mobile_or_small_width) {
+      padding:0;
+    }
+  }
+
 
 
 }

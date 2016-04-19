@@ -3,6 +3,7 @@ const React          = require('react');
 const _              = require('lodash');
 const oneClickBOM    = require('1-click-bom');
 const browserVersion = require('browser-version');
+const DoubleScrollbar = require('react-double-scrollbar');
 
 
 let BOM = React.createClass({
@@ -134,10 +135,7 @@ let BOM = React.createClass({
       let width = this.state.columnsGrowWidth[index];
       let style = (width !== 0) ? {width:width+'px'} : {width:'auto'};
       return ( <th style={style} className={tdClasses(index)} data-offset={index} key={`heading-${heading}-${index}`}>
-          <label onClick={this.toggleColumnExpand.bind(null,index,headingsLength)} >
             {heading}
-            <input title="Expand details for this column" type="radio" name="expand-cols" />
-          </label>
         </th> );
     }.bind(this);
     let headings = ['References', 'Qty', 'Description'].concat(partNumbers,retailers);
@@ -188,38 +186,38 @@ let BOM = React.createClass({
       btnText = 'Show details';
     }
     let storeBtns;
+    let storeContainerLogo = function() {
+      let iconClass = (this.state.adding.length) ? 'icon-spin1 animate-spin' : 'icon-basket-3';
+      return (
+          <div className="storeContainerLogo" key="storeContainerLogo">
+            <i className={iconClass}></i>
+            Buy now
+          </div>
+        );
+    }.bind(this);
+
     storeBtns = retailers.map(function(retailer, key){
       let imgHref = '/images/'+retailer+'.ico';
-      let iconClass = this.state.adding[retailer] ? 'icon-spin1 animate-spin' : 'icon-basket-3';
       return (
         <button onClick={this.state.onClick.bind(null,retailer)} className="storeButtons" key={`btn${retailer}`}>
-            <div className="storeButtonInner">
-              <div>
-                <img className="storeIcos" key={retailer} src={imgHref} alt={retailer} />{retailer}
-              </div>
-              <div>
-                <i style={{fontSize:18}} className={iconClass}></i>
-                Buy now
-              </div>
+          <div className="storeButtonInner">
+            <img className="storeIcos" key={retailer} src={imgHref} alt={retailer} />{retailer}
           </div>
         </button>
         );
     }.bind(this));
-
+    storeBtns.unshift();
     return (
       <div className="bomContainer">
-        <div className="storeBtnContainer">
-          <div className="storeBtns">
-              {storeBtns}
+          <div className="storeBtnContainer">
+              {storeContainerLogo()}
+              <div className="storeBtns">
+                {storeBtns}
+              </div>
           </div>
-        </div>
-        <div className="bomToggleContainer">
-          <button className="bomToggle" onClick={this.toggleTblView}>
-            {btnText}
-          </button>
-        </div>
+
         <div className="bomTblContainer">
-          <div className="bomTblViewPort">
+          <DoubleScrollbar>
             <table className={tblClass}>
               <thead>
                 <tr>{ headings }</tr>
@@ -228,7 +226,7 @@ let BOM = React.createClass({
                 { rows }
               </tbody>
             </table>
-          </div>
+          </DoubleScrollbar>
           </div>
       </div>
     )
