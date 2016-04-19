@@ -14,10 +14,9 @@ let BOM = React.createClass({
     for (let retailer of oneClickBOM.lineData.retailer_list) {
       adding[retailer] = undefined;
       // retailerCompletion[retailer] = ;
-
-      retailerCompletion[retailer] = _.some(this.props.items,function(item,index) {
+      retailerCompletion[retailer] = _.every(this.props.items,function(item,index) {
         let offset = item.retailers[retailer];
-        return (offset !== undefined && offset !== '' && offset !== null);
+        return (offset !== undefined && offset);
       });
     }
     let headerLength = this.columnCount();
