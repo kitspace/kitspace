@@ -36,7 +36,7 @@ if config == 'dev'
 else
     browserify += ' -g uglifyify'
 
-modules = ['react', 'react-dom', 'lodash', 'react-document-title', 'browser-version', '1-click-bom', 'react-double-scrollbar']
+modules = ['react', 'react-dom', 'lodash', 'react-document-title', 'browser-version', '1-click-bom']
 excludes = '-x ' + modules.join(' -x ')
 requires = '-r ' + modules.join(' -r ')
 
