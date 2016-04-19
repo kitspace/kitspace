@@ -226,9 +226,12 @@ let BOM = React.createClass({
     storeBtns = retailers.map(function(retailer, key){
       let imgHref = '/images/'+retailer+'.ico';
       return (
-        <button onClick={this.state.onClick.bind(null,retailer)} className="storeButtons" key={`btn${retailer}`}>
+        <button onClick={this.state.onClick.bind(null,retailer)}
+        title={(this.state.retailerCompletion[retailer])?'This store has all the components required':'This store is missing components required'}
+        className="storeButtons" key={`btn${retailer}`}>
           <div className="storeButtonInner">
-            <img className="storeIcos" key={retailer} src={imgHref} alt={retailer} />{retailer} {(this.state.retailerCompletion[retailer])?'✓':''}
+            <img className="storeIcos" key={retailer} src={imgHref} alt={retailer} />{retailer}
+            <span className="tickApproval">{(this.state.retailerCompletion[retailer])?'✓':''}</span>
           </div>
         </button>
         );

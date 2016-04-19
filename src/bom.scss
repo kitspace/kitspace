@@ -165,11 +165,11 @@ table.defaultTblView tr th:nth-of-type(1n+5){
 .storeButtonInner {
     display:flex;
 }
-.thContainer{
+.thContainer {
     display:flex;
     justify-content:space-between;
 }
-.storeContainerLogo{
+.storeContainerLogo {
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
     display:flex;
@@ -190,4 +190,8 @@ table.defaultTblView tr th:nth-of-type(1n+5){
         padding:2rem;
     }
 }
-
+.tickApproval {
+    color: green;
+    text-shadow: 0 -1px 0 #37E039;
+    margin-left: 1rem;
+}
