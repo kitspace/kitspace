@@ -3,7 +3,7 @@ const React          = require('react');
 const _              = require('lodash');
 const oneClickBOM    = require('1-click-bom');
 const browserVersion = require('browser-version');
-// const DoubleScrollbar = require('react-double-scrollbar');
+const DoubleScrollbar = require('react-double-scrollbar');
 
 
 let BOM = React.createClass({
