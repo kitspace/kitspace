@@ -140,35 +140,35 @@ let BOM = React.createClass({
     let tdClasses = function(offset) {
       return (this.toggleColumnEnabled(offset))?'expandedTd expandedTd'+offset:'';
     }.bind(this);
-    // const makeHeading = function(heading, index, headingsLength) {
-    //   let width = this.state.columnsGrowWidth[index];
-    //   let style = (width !== 0) ? {width:width+'px'} : {width:'auto'};
-    //   return ( <th style={style} className={tdClasses(index)} data-offset={index} key={`heading-${heading}-${index}`}>
-    //         {heading}
-    //     </th> );
-    // }.bind(this);
-    // let headings = ['References', 'Qty', 'Description'].concat(partNumbers,retailers);
-    // headings = headings.map(_.partial(makeHeading,_,_,headings.length));
+    const makeHeading = function(heading, index, headingsLength) {
+      let width = this.state.columnsGrowWidth[index];
+      let style = (width !== 0) ? {width:width+'px'} : {width:'auto'};
+      return ( <th style={style} className={tdClasses(index)} data-offset={index} key={`heading-${heading}-${index}`}>
+            {heading}
+        </th> );
+    }.bind(this);
+    let headings = ['References', 'Qty', 'Description'].concat(partNumbers,retailers);
+    headings = headings.map(_.partial(makeHeading,_,_,headings.length));
 
 
-    const makeHeading = (heading, index) => {
-      return ( <th key={`heading-${heading}-${index}`}>{heading}</th> );
-    };
+    // const makeHeading = (heading, index) => {
+    //   return ( <th key={`heading-${heading}-${index}`}>{heading}</th> );
+    // };
 
-    let headings = ['References', 'Qty', 'Description'].map(makeHeading);
-    headings = headings.concat(partNumbers.map(makeHeading));
+    // let headings = ['References', 'Qty', 'Description'].map(makeHeading);
+    // headings = headings.concat(partNumbers.map(makeHeading));
 
-    const makeRetailerHeading = (retailer, index) => {
-      const iconClass = this.state.adding[retailer] ? 'icon-spin1 animate-spin' : 'icon-basket-3';
-      return (
-        <th key={`heading-${retailer}`} className='retailerHeading' onClick={this.state.onClick.bind(null,retailer)}>
-          {retailer}<span> </span>
-          <i style={{fontSize:18}} className={iconClass}></i>
-        </th>
-      );
-    };
+    // const makeRetailerHeading = (retailer, index) => {
+    //   const iconClass = this.state.adding[retailer] ? 'icon-spin1 animate-spin' : 'icon-basket-3';
+    //   return (
+    //     <th key={`heading-${retailer}`} className='retailerHeading' onClick={this.state.onClick.bind(null,retailer)}>
+    //       {retailer}<span> </span>
+    //       <i style={{fontSize:18}} className={iconClass}></i>
+    //     </th>
+    //   );
+    // };
 
-    headings = headings.concat(retailers.map(makeRetailerHeading));
+    // headings = headings.concat(retailers.map(makeRetailerHeading));
     let rows = this.props.items.map((item, rowIndex) => {
 
       let row = keys.map((key,index) => {
