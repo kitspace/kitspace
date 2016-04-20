@@ -149,6 +149,8 @@ let BOM = React.createClass({
     // }.bind(this);
     // let headings = ['References', 'Qty', 'Description'].concat(partNumbers,retailers);
     // headings = headings.map(_.partial(makeHeading,_,_,headings.length));
+
+
     const makeHeading = (heading, index) => {
       return ( <th key={`heading-${heading}-${index}`}>{heading}</th> );
     };
@@ -214,24 +216,28 @@ let BOM = React.createClass({
     }
     let storeBtns;
     let storeContainerLogo = function() {
-      let iconClass = (this.state.adding.length) ? 'icon-spin1 animate-spin' : 'icon-basket-3';
+      let adding = _.some(this.state.adding, function(v, k){
+        return v;
+      });
+      let iconClass = (adding) ? 'icon-spin1 animate-spin' : 'icon-basket-3';
       return (
           <div className="storeContainerLogo" key="storeContainerLogo">
             <i className={iconClass}></i>
-            Buy now
+            Buy Parts
           </div>
         );
     }.bind(this);
 
     storeBtns = retailers.map(function(retailer, key){
       let imgHref = '/images/'+retailer+'.ico';
+      let storeBtnClass = 'storeButtons';
+      storeBtnClass += (this.state.retailerCompletion[retailer])?' partsComplete':'';
       return (
         <button onClick={this.state.onClick.bind(null,retailer)}
-        title={(this.state.retailerCompletion[retailer])?'This store has all the components required':'This store is missing components required'}
-        className="storeButtons" key={`btn${retailer}`}>
+        title={`Add parts ${retailer} to cart`}
+        className={storeBtnClass} key={`btn${retailer}`}>
           <div className="storeButtonInner">
             <img className="storeIcos" key={retailer} src={imgHref} alt={retailer} />{retailer}
-            <span className="tickApproval">{(this.state.retailerCompletion[retailer])?'✓':''}</span>
           </div>
         </button>
         );

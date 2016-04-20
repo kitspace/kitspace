@@ -37,7 +37,7 @@ thead {
     border-bottom: 2px solid #C5C5C5;
 }
 table.responsive {
-    box-shadow:0 0.1rem 0.5rem #000;
+    // box-shadow:0 0.1rem 0.5rem #000;
     @include breakpoint(mobile) {
         tr th,tr td {
             font-size:48px;
@@ -118,40 +118,44 @@ table.defaultTblView tr th:nth-of-type(1n+5){
         width:32px;
     }
 }
+.storeButtons.partsComplete {
+    opacity: 1;
+}
 .storeButtons {
-    border-top:1px solid #aaa;
-    padding:0.5rem 1rem;
     font-size:16px;
     cursor:pointer;
     display: flex;
     align-items: center;
-    background: #696969;
-    border-radius:5px;
-    border-left:0;
-    border-right:0;
+    opacity: 0.5;
+    background: #4caf50;
+    border-radius:3px;
+    border:0;
+    border-bottom:1px solid #357B38;
     color:#fff;
-    border-bottom:1px solid #222;
+    width:15%;
+    justify-content:center;
+    padding: 0.6rem 0.9rem;
     @include breakpoint (mobile) {
         font-size:38px;
         padding:2rem;
     }
 }
+.storeButtons:hover{
+    background:#5ACA5E;
+}
 .columnVisibility{
     font-size:8px;
     font-weight:normal;
 }
-.storeButtons:hover{
 
-}
 .storeBtnContainer{
     display:flex;
     flex-wrap: wrap;
     width:100%;
-    background:#373737;
-    border-radius:5px;
-    border-top:1px solid #454545;
-    border-bottom:1px solid #000;
-    box-shadow:0px 0.1em 0.5em #000;
+    background:#D3D3D3;
+    border-radius:3px;
+    border-top:1px solid #929292;
+    border-bottom:1px solid #B9B9B9;
     justify-content:center;
 }
 .storeBtns {
@@ -162,6 +166,8 @@ table.defaultTblView tr th:nth-of-type(1n+5){
     margin-bottom:1rem;
 }
 .storeButtonInner {
+    justify-content:space-around;
+    width:100%;
     display:flex;
 }
 .thContainer {
@@ -169,15 +175,15 @@ table.defaultTblView tr th:nth-of-type(1n+5){
     justify-content:space-between;
 }
 .storeContainerLogo {
-    border-top-right-radius: 5px;
-    border-top-left-radius: 5px;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
     display:flex;
     justify-content:center;
     align-items:center;
     background:#696969;
     margin-right:auto;
-    border-bottom:1px solid #272727;
-    border-top:1px solid #aaa;
+    border-bottom:1px solid #585858;
+    border-top:1px solid #8C8C8C;
     color:#fff;
     flex:1 0 auto;
     // width:100%;
@@ -190,7 +196,7 @@ table.defaultTblView tr th:nth-of-type(1n+5){
     }
 }
 .tickApproval {
-    color: green;
+    padding-left:0.2rem;
+    color: #52842F;
     text-shadow: 0 -1px 0 #37E039;
-    margin-left: 1rem;
 }
