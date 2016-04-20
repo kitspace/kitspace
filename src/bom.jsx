@@ -216,28 +216,35 @@ let BOM = React.createClass({
     }
     let storeBtns;
     let storeContainerLogo = function() {
-      let adding = _.some(this.state.adding, function(v, k){
-        return v;
-      });
-      let iconClass = (adding) ? 'icon-spin1 animate-spin' : 'icon-basket-3';
+      // let adding = _.some(this.state.adding, function(v, k){
+      //   return v;
+      // });
+      // let iconClass = (adding) ? 'icon-spin1 animate-spin' : 'icon-basket-3';
       return (
           <div className="storeContainerLogo" key="storeContainerLogo">
-            <i className={iconClass}></i>
+            <i className='icon-basket-3'></i>
             Buy Parts
           </div>
         );
     }.bind(this);
-
-    storeBtns = retailers.map(function(retailer, key){
+    let storeIcon = function(adding, retailer) {
       let imgHref = '/images/'+retailer+'.ico';
+      if (adding)
+        return (<i className="icon-spin1 animate-spin"></i>);
+      return (<img className="storeIcos" key={retailer} src={imgHref} alt={retailer} />);
+    };
+    storeBtns = retailers.map(function(retailer, key){
       let storeBtnClass = 'storeButtons';
       storeBtnClass += (this.state.retailerCompletion[retailer])?' partsComplete':'';
       return (
         <button onClick={this.state.onClick.bind(null,retailer)}
-        title={`Add parts ${retailer} to cart`}
+        title={`Add parts to ${retailer} cart`}
         className={storeBtnClass} key={`btn${retailer}`}>
           <div className="storeButtonInner">
-            <img className="storeIcos" key={retailer} src={imgHref} alt={retailer} />{retailer}
+            <div className="retailerIco">
+              {storeIcon(this.state.adding[retailer],retailer)}
+            </div>
+            <div className="retailerText">{retailer}</div>
           </div>
         </button>
         );

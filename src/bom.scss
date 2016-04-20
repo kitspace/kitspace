@@ -110,45 +110,48 @@ table.defaultTblView tr th:nth-of-type(1n+5){
     border-bottom:1px solid #222;
 }
 .storeIcos {
-    height:16px;
-    width:16px;
-    padding-right:0.2rem;
+    width:1rem;
+    height:1rem;
+    margin-top:1px;
     @include breakpoint (mobile) {
         height:32px;
         width:32px;
     }
 }
 .storeButtons.partsComplete {
-    opacity: 1;
+   background: #4caf50;
+}
+.storeButtons.partsComplete:hover {
+    background:#5ACA5E;
 }
 .storeButtons {
     font-size:16px;
     cursor:pointer;
     display: flex;
     align-items: center;
-    opacity: 0.5;
-    background: #4caf50;
+    background:#ffc107;
     border-radius:3px;
     border:0;
-    border-bottom:1px solid #357B38;
+    border-bottom:1px solid #5A5A5A;
     color:#fff;
     width:15%;
     justify-content:center;
-    padding: 0.6rem 0.9rem;
+    // padding: 0.6rem 0.9rem;
+    padding:0;
     @include breakpoint (mobile) {
         font-size:38px;
-        padding:2rem;
+        // padding:2rem;
     }
 }
 .storeButtons:hover{
-    background:#5ACA5E;
+    background:#FFCD39;
 }
 .columnVisibility{
     font-size:8px;
     font-weight:normal;
 }
 
-.storeBtnContainer{
+.storeBtnContainer {
     display:flex;
     flex-wrap: wrap;
     width:100%;
@@ -165,8 +168,18 @@ table.defaultTblView tr th:nth-of-type(1n+5){
     flex-wrap:wrap;
     margin-bottom:1rem;
 }
+.retailerIco, .retailerText {
+    padding:0.6rem 0.9rem;
+}
+.retailerIco {
+    background:gray;
+    width:22px; //keep the loader/icons still between transitions
+}
 .storeButtonInner {
-    justify-content:space-around;
+    .retailerText{
+        flex:1;
+        padding:0.6rem 0;
+    }
     width:100%;
     display:flex;
 }
