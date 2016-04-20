@@ -3,6 +3,7 @@
 	.boardShowcase{
 		margin-bottom:1rem;
 		display:flex;
+		flex-direction: column;
 	}
 	.boardEdge{
 		width:10%;
@@ -11,13 +12,15 @@
 		width:100%;
 		background:#373737;
 		border-bottom:1px solid #1B1B1B;
-		border-top:1px solid #404040;
+		// border-top:1px solid #404040;
 		display: flex;
 		justify-content: space-around;
 		max-height:20rem;
 		box-sizing:border-box;
 		padding: 2rem;
 		border-radius: 5px;
+		border-top-left-radius: 0;
+		border-top-right-radius: 0;
 	}
 	.toggleBoardForm {
 		margin-top:1rem;

@@ -129,12 +129,12 @@ table.defaultTblView tr th:nth-of-type(1n+5){
     cursor:pointer;
     display: flex;
     align-items: center;
-    background:#ffc107;
+    background:#ff9800;
     border-radius:3px;
     border:0;
-    border-bottom:1px solid #5A5A5A;
+    // border-bottom:1px solid #5A5A5A;
     color:#fff;
-    width:15%;
+    width:auto;
     justify-content:center;
     // padding: 0.6rem 0.9rem;
     padding:0;
@@ -144,7 +144,7 @@ table.defaultTblView tr th:nth-of-type(1n+5){
     }
 }
 .storeButtons:hover{
-    background:#FFCD39;
+    background:#FFAA2C;
 }
 .columnVisibility{
     font-size:8px;
@@ -162,6 +162,7 @@ table.defaultTblView tr th:nth-of-type(1n+5){
     justify-content:center;
 }
 .storeBtns {
+    padding:0 1rem;
     display:flex;
     justify-content: space-around;
     width:100%;
@@ -169,16 +170,43 @@ table.defaultTblView tr th:nth-of-type(1n+5){
     margin-bottom:1rem;
 }
 .retailerIco, .retailerText {
-    padding:0.6rem 0.9rem;
+    // padding:0.6rem 0.9rem;
 }
+
 .retailerIco {
+    border-top-left-radius: 3px;
+    // background:#FF9800;
+    // border-top: 0.6rem solid #D3D3D3;
+    // border-bottom: 0.6rem solid #D3D3D3;
+    // border-left: 0.9rem solid #D3D3D3;
+    // border-right: 0.6rem solid #FF9800;
     background:gray;
+    border:1px solid rgba(0, 0, 0, 0.05);
+    padding:0.6rem 0.9rem;
     width:22px; //keep the loader/icons still between transitions
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.retailerIco.retailerComplete{
+    // background:#4caf50;
+    // border-right: 0.6rem solid #4caf50;
 }
 .storeButtonInner {
     .retailerText{
         flex:1;
         padding:0.6rem 0;
+        min-width:5rem;
+        background: rgba(255,255,255,0.1);
+        border-top: 2px solid #ff9800;
+        border-right: 2px solid #ff9800;
+        border-bottom: 2px solid #ff9800;
+        box-sizing: border-box;
+    }
+    .retailerText.retailerTextComplete {
+        border-top: 2px solid #4caf50;
+        border-right: 2px solid #4caf50;
+        border-bottom: 2px solid #4caf50;
     }
     width:100%;
     display:flex;

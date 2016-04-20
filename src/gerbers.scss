@@ -1,0 +1,24 @@
+@import 'common';
+.gerbersContainer {
+	display: flex;
+	justify-content:center;
+	padding:1rem 0;
+	.zipPath {
+		text-decoration: none;
+	}
+	.gerbers {
+		background: #4caf50;
+		border:2px solid #4caf50;
+		color: #fff;
+		padding: 0.6rem 0.9rem;
+		cursor: pointer;
+		border-radius: 3px;
+		@include breakpoint('mobile') {
+			font-size:48px;
+			padding:1.2rem 1.8rem;
+		}
+	}
+	.gerbers:hover {
+		background: #5ACA5E;
+	}
+}
