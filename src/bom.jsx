@@ -240,11 +240,13 @@ let BOM = React.createClass({
       retailerIcoClass += (this.state.retailerCompletion[retailer])?' retailerComplete':'';
       let retailerTextClass = 'retailerText';
       retailerTextClass += (this.state.retailerCompletion[retailer])?' retailerTextComplete': '';
+      let storeButtonInnerClass = 'storeButtonInner';
+      storeButtonInnerClass += (this.state.retailerCompletion[retailer])?' storeButtonInnerComplete': '';
       return (
         <button onClick={this.state.onClick.bind(null,retailer)}
         title={`Add parts to ${retailer} cart`}
         className={storeBtnClass} key={`btn${retailer}`}>
-          <div className="storeButtonInner">
+          <div className={storeButtonInnerClass}>
             <div className={retailerIcoClass}>
               {storeIcon(this.state.adding[retailer],retailer)}
             </div>
