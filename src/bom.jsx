@@ -243,7 +243,7 @@ let BOM = React.createClass({
       let storeButtonInnerClass = 'storeButtonInner';
       storeButtonInnerClass += (this.state.retailerCompletion[retailer])?' storeButtonInnerComplete': '';
       return (
-        <button onClick={this.state.onClick.bind(null,retailer)}
+        <span onClick={this.state.onClick.bind(null,retailer)}
         title={`Add parts to ${retailer} cart`}
         className={storeBtnClass} key={`btn${retailer}`}>
           <div className={storeButtonInnerClass}>
@@ -252,7 +252,7 @@ let BOM = React.createClass({
             </div>
             <div className={retailerTextClass}>{retailer}</div>
           </div>
-        </button>
+        </span>
         );
     }.bind(this));
     storeBtns.unshift();
