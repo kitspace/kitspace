@@ -146,6 +146,9 @@ ninja.edge('build/page.css').from('src/page.scss')
 ninja.edge('build/app.js').from('build/.temp/render.jsx')
     .need('build/.temp/boards.json').using('browserify')
 
+ninja.edge('build/polyfill.min.js').from('build/.temp/polyfill.min.js')
+    .using('copy')
+
 
 for folder in boardFolders
     ninja.edge("build/#{folder}/app.js")
