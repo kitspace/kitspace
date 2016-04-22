@@ -8,7 +8,7 @@ let Gerbers = React.createClass({
 				<a className="zipPath" ref={zipPath}>
 					<div className="gerbers">
 						<i className="octicon octicon-circuit-board"></i>
-						{` `}Download Gerber
+						{` `}Download Gerbers
 					</div>
 				</a>
 			</div>

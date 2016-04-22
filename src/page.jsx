@@ -49,11 +49,6 @@ var Page = React.createClass({
               <div className='infoBarLinksContainer'>
                 <div className='infoBarLinks'>{site}</div>
                 <div className='infoBarLinks'>{repo}</div>
-                <div className='infoBarLinks'>
-                  <a href={zipPath}>
-                    <span className="octicon octicon-circuit-board" /> gerbers
-                  </a>
-                </div>
               </div>
             </div>
           </div>

@@ -125,6 +125,7 @@ table.defaultTblView tr th:nth-of-type(1n+5){
     background:#5ACA5E;
 }
 .storeButtons {
+    margin:1rem 0;
     font-size:16px;
     cursor:pointer;
     display: flex;
@@ -167,7 +168,6 @@ table.defaultTblView tr th:nth-of-type(1n+5){
     justify-content: space-around;
     width:100%;
     flex-wrap:wrap;
-    margin-bottom:1rem;
 }
 .retailerIco, .retailerText {
     // padding:0.6rem 0.9rem;
@@ -227,9 +227,7 @@ table.defaultTblView tr th:nth-of-type(1n+5){
     border-top:1px solid #8C8C8C;
     color:#fff;
     flex:1 0 auto;
-    // width:100%;
     padding:0.8rem 0;
-    margin-bottom:1rem;
     font-size:1.3rem;
     @include breakpoint(mobile) {
         font-size:48px;
