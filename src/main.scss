@@ -1,32 +1,28 @@
-@import 'common';
-@import 'title_bar';
-@import 'board_thumb';
-
+@import "common";
+@import "title_bar";
+@import "board_thumb";
 .searchContainer {
-    display:flex;
-    padding-top:10px;
+    display: flex;
+    padding-top: 10px;
 }
-
 .search-input-icon {
-    background-color:white;
-    width:32px;
-    height:40px;
+    background-color: #fff;
+    width: 32px;
+    height: 40px;
+    border-radius: 5px 0 0 5px;
     @include breakpoint(mobile) {
         width: 72px;
         height: 80px;
     }
-    border-radius: 5px 0 0 5px;
 }
-
 .search-input {
-    width:100%;
+    width: 100%;
     height: 52px;
+    position: relative;
     @include breakpoint(mobile) {
         height: 92px;
     }
-    position: relative;
 }
-
 .search-input > input {
     width: 100%;
     height: 80%;
@@ -34,16 +30,15 @@
     border: none;
     line-height: 22px;
     height: 40px;
+    position: relative;
+    border-radius: 0 5px 5px 0;
+    background: #fff;
     @include breakpoint(mobile) {
         font-size: 48px;
         line-height: 52px;
         height: 80px;
     }
-    position: relative;
-    border-radius: 0 5px 5px 0;
-    background: white;
 }
-
 .search-input > input:focus {
     outline: none;
 }

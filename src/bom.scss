@@ -1,16 +1,14 @@
-@import 'common';
-@import 'spinners_n_carts';
-@import 'animation';
+@import "common";
+@import "spinners_n_carts";
+@import "animation";
 td {
     border: 1px solid grey;
 }
-
 thead {
     font-weight: bold;
     background-color: dimGrey;
     color: white;
 }
-
 thead {
     a {
         color: white;
@@ -19,245 +17,189 @@ thead {
         text-decoration: none;
     }
 }
-
 .tr-1 {
-    background-color:white;
+    background-color: white;
 }
-
 .retailerHeading {
-    cursor:pointer;
+    cursor: pointer;
 }
-
 .retailerHeading:hover {
-    background-color:grey;
+    background-color: grey;
 }
 .tr-0 {
-    background:lightGray;
+    background: lightGray;
     border-top: 2px solid #eee;
     border-bottom: 2px solid #C5C5C5;
 }
 table.responsive {
-    // box-shadow:0 0.1rem 0.5rem #000;
     @include breakpoint(mobile) {
-        tr th,tr td {
-            font-size:48px;
-            padding:0.5rem;
+        tr th, tr td {
+            font-size: 48px;
+            padding: 8px;
         }
     }
     border-spacing: 0;
-    th.expandedTd {
-        // width:45%;
-    }
     td {
-        border:0; padding: 9px 10px; text-align: left;
+        border: 0;
+        padding: 9px 10px;
+        text-align: left;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
     }
     td.expandedTd {
         overflow: initial;
-        text-overflow:initial;
+        text-overflow: initial;
     }
     th {
-        padding:0 10px;
-        height:40px;
-        box-sizing:border-box;
+        padding: 0 10px;
+        height: 40px;
+        box-sizing: border-box;
         text-align: left;
     }
 }
-table.defaultTblView tr td:nth-of-type(1n+5),
-table.defaultTblView tr th:nth-of-type(1n+5){
-    // display:none;
-}
 .bomToggleContainer {
-    display:flex;
-    justify-content:flex-end;
-}
-.bomTblContainer {
+    display: flex;
+    justify-content: flex-end;
 }
 .bomTblEdge {
-    width:10%;
+    width: 10%;
     @include breakpoint(mobile_or_small_width) {
-        display:none;
+        display: none;
     }
 }
-.bomTblViewPort {
-    // width:100%;
-    // overflow-x:auto;
-    // overflow-y:hidden;
-}
-// .doubleScroll {
-//  overflow: auto; overflow-y: hidden;
-// }
-// .doubleScroll > table {
-//     margin: 0;
-//     padding: 1em;
-//     white-space: nowrap;
-// }
 .bomToggle {
-    margin-bottom:1rem;
-    background:dimgrey;
-    color:#fff;
-    border-radius:5px;
-    border:0;
-    padding:0.5rem 1rem;
+    margin-bottom: 16px;
+    background: dimgrey;
+    color: #fff;
+    border-radius: 5px;
+    border: 0;
+    padding: 8px 16px;
     cursor: pointer;
-    font-size:16px;
-    @include breakpoint (mobile) {
-        font-size:48px;
-        padding:2rem;
+    font-size: 16px;
+    border-bottom: 1px solid #222;
+    @include breakpoint(mobile) {
+        font-size: 48px;
+        padding: 32px;
     }
-    border-bottom:1px solid #222;
 }
 .storeIcos {
-    width:1rem;
-    height:1rem;
-    margin-top:1px;
-    @include breakpoint (mobile) {
-        height:32px;
-        width:32px;
+    width: 16px;
+    height: 16px;
+    margin-top: 1px;
+    @include breakpoint(mobile) {
+        height: 32px;
+        width: 32px;
     }
 }
 .storeButtons.partsComplete {
-   background: transparent;
+    background: transparent;
 }
-// .storeButtons.partsComplete:hover {
-//     background:#5ACA5E;
-// }
 .storeButtons {
-    box-sizing:border-box;
-    margin:1rem 0;
-    font-size:16px;
-    cursor:pointer;
+    box-sizing: border-box;
+    margin: 16px 0;
+    font-size: 16px;
+    cursor: pointer;
     display: flex;
     align-items: center;
-    background:transparent;
-    border-radius:3px;
-    border:0;
-    // width:0;
-    // border-bottom:1px solid #5A5A5A;
-    color:#fff;
-    justify-content:center;
-    // padding: 0.6rem 0.9rem;
-    padding:0;
-    @include breakpoint (mobile) {
-        font-size:38px;
-        // padding:2rem;
+    background: transparent;
+    border-radius: 3px;
+    border: 0;
+    color: #fff;
+    justify-content: center;
+    padding: 0;
+    @include breakpoint(mobile) {
+        font-size: 38px;
     }
 }
-// .storeButtons:hover{
-//     background:#FFA219;
-// }
-.columnVisibility{
-    font-size:8px;
-    font-weight:normal;
+.columnVisibility {
+    font-size: 8px;
+    font-weight: normal;
 }
-
 .storeBtnContainer {
-    display:flex;
+    display: flex;
     flex-wrap: wrap;
-    width:100%;
-    background:#D3D3D3;
-    border-radius:3px;
-    border-top:1px solid #929292;
-    border-bottom:1px solid #B9B9B9;
-    justify-content:center;
+    width: 100%;
+    background: #D3D3D3;
+    border-radius: 3px;
+    border-top: 1px solid #929292;
+    border-bottom: 1px solid #B9B9B9;
+    justify-content: center;
 }
 .storeBtns {
-    padding:0 1rem;
-    display:flex;
+    padding: 0 16px;
+    display: flex;
     justify-content: space-around;
-    width:100%;
-    flex-wrap:wrap;
+    width: 100%;
+    flex-wrap: wrap;
 }
-.retailerIco, .retailerText {
-    // padding:0.6rem 0.9rem;
-}
-
 .retailerIco {
     border-top-left-radius: 3px;
-    // background:#FF9800;
-    // border-top: 0.6rem solid #D3D3D3;
-    // border-bottom: 0.6rem solid #D3D3D3;
-    // border-left: 0.9rem solid #D3D3D3;
-    // border-right: 0.6rem solid #FF9800;
-    background:gray;
-    border:1px solid rgba(0, 0, 0, 0.05);
-    padding:0.6rem 0.9rem;
-    width:22px; //keep the loader/icons still between transitions
+    background: gray;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 9.6px 14.4px;
+    width: 22px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.retailerIco.retailerComplete{
-    // background:#4caf50;
-    // border-right: 0.6rem solid #4caf50;
+.storeButtonInner:hover {
+    background: #FFA219;
 }
-// .storeButtonInner:hover{
-//     background:purple;
-// }
-.storeButtonInner:hover{
-   background:#FFA219;
+.storeButtonInner.storeButtonInnerComplete:hover {
+    background: #5ACA5E;
 }
-.storeButtonInner.storeButtonInnerComplete:hover{
-    background:#5ACA5E;
+.storeButtonInner {
+    background: #ff9800;
 }
-.storeButtonInner{
-    background:#ff9800;
-}
-.storeButtonInner.storeButtonInnerComplete{
+.storeButtonInner.storeButtonInnerComplete {
     background: #4caf50;
 }
 .storeButtonInner {
-
-    .retailerText{
+    .retailerText {
         text-align: center;
-        flex:1;
-        padding:0.6rem 0;
-        min-width:5rem;
-        background: rgba(255,255,255,0.1);
+        flex: 1;
+        padding: 9.6px 0;
+        min-width: 80px;
+        background: rgba(255, 255, 255, 0.1);
         border-top: 2px solid #ff9800;
         border-right: 2px solid #ff9800;
         border-bottom: 2px solid #ff9800;
         box-sizing: border-box;
     }
-
     .retailerText.retailerTextComplete {
         border-top: 2px solid #4caf50;
         border-right: 2px solid #4caf50;
         border-bottom: 2px solid #4caf50;
     }
-    .retailerText.retailerTextComplete:hover {
-
-    }
-    width:100%;
-    display:flex;
+    width: 100%;
+    display: flex;
 }
 .thContainer {
-    display:flex;
-    justify-content:space-between;
+    display: flex;
+    justify-content: space-between;
 }
 .storeContainerLogo {
     border-top-right-radius: 3px;
     border-top-left-radius: 3px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:#696969;
-    margin-right:auto;
-    border-bottom:1px solid #585858;
-    border-top:1px solid #8C8C8C;
-    color:#fff;
-    flex:1 0 auto;
-    padding:0.8rem 0;
-    font-size:1.3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #696969;
+    margin-right: auto;
+    border-bottom: 1px solid #585858;
+    border-top: 1px solid #8C8C8C;
+    color: #fff;
+    flex: 1 0 auto;
+    padding: 12.8px 0;
+    font-size: 20.8px;
     @include breakpoint(mobile) {
-        font-size:48px;
-        padding:2rem;
+        font-size: 48px;
+        padding: 32px;
     }
 }
 .tickApproval {
-    padding-left:0.2rem;
+    padding-left: 3.2px;
     color: #52842F;
     text-shadow: 0 -1px 0 #37E039;
 }
