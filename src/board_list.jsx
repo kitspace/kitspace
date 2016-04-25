@@ -23,7 +23,6 @@ const style = {
 }
 
 var BoardList = React.createClass({
-
   render: function () {
     var initialLoad = !(this.props.searching);
     if (this.props.data.length === 0) {

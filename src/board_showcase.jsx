@@ -40,7 +40,6 @@ var BoardShowcase = React.createClass({
 					</button>
 				</div>
 				<div className="boardShowcase">
-
 					<div className="boardContainer">
 						<img className={frontBoardClass} src='images/top.svg'/>
 						<div className="circuitBorderContainer">
@@ -53,4 +52,5 @@ var BoardShowcase = React.createClass({
 		);
 	}
 });
+
 module.exports = BoardShowcase;

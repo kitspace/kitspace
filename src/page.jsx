@@ -14,7 +14,6 @@ var Page = React.createClass({
     const titleTxt = info.id.split('/').slice(2).join(' / ');
     const subtitleTxt = info.id.split('/').slice(0,2).join(' / ');
     var site;
-
     if (info.site == '') {
       site =
         (<div className='disabledSite' title='no website info available'>
@@ -53,7 +52,6 @@ var Page = React.createClass({
             </div>
           </div>
       <BoardShowcase />
-
       <BOM items={info.bom ? info.bom : []} />
       </div>
       </div>

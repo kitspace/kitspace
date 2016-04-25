@@ -4,7 +4,6 @@ const boards   = require('./boards.json');
 const LazyLoad = require('./lazy_load');
 const FadeImage    = require('./fade_image');
 
-
 function reverse(s){
     return s.split("").reverse().join("");
 }
@@ -27,10 +26,8 @@ function truncate(input, len, fromStart) {
     return str;
 }
 
-
 var BoardThumb = React.createClass({
   render: function () {
-
     if (this.props.lazyLoad) {
       var image =
           <LazyLoad once={true}
@@ -40,10 +37,9 @@ var BoardThumb = React.createClass({
           </LazyLoad>;
     } else {
       var image =
-            <img src={'boards/' + this.props.data.id + '/images/top.svg'}
+          <img src={'boards/' + this.props.data.id + '/images/top.svg'}
              className = 'img' />;
     }
-
     return (
       <div className='BoardThumb'>
       <a href={'/boards/' + this.props.data.id}>
@@ -66,6 +62,5 @@ var BoardThumb = React.createClass({
     );
   }
 });
-
 
 module.exports = BoardThumb;
