@@ -100,15 +100,29 @@ let BOM = React.createClass({
     const makeHeading = function(heading, index, headingsLength) {
       let width = this.state.columnsGrowWidth[index];
       let style = (width !== 0) ? {width:width+'px'} : {width:'auto'};
-      return ( <th style={style} className={tdClasses(index)} data-offset={index} key={`heading-${heading}-${index}`}>
-            {heading}
+      return (
+        <th
+            style={style}
+            className={tdClasses(index)}
+            data-offset={index}
+            key={`heading-${heading}-${index}`}
+         >
+          {heading}
         </th> );
     }.bind(this);
     let headings = ['References', 'Qty', 'Description'].concat(partNumbers,retailers);
     headings = headings.map(_.partial(makeHeading,_,_,headings.length));
     let rows = this.props.items.map((item, rowIndex) => {
       let row = keys.map((key,index) => {
-        return ( <td data-offset={index} className={tdClasses(index)} data-th={key.charAt(0).toUpperCase() + key.slice(1)} key={`${rowIndex}-${key}`}>{ item[key] }</td> );
+        return (
+          <td
+            data-offset={index}
+            className={tdClasses(index)}
+            data-th={key.charAt(0).toUpperCase() + key.slice(1)}
+            key={`${rowIndex}-${key}`}
+          >
+            { item[key] }
+          </td> );
       });
       row = row.concat(_.times(partNumberLength, _.partial((index, initIndex) => {
         let partNumber = item.partNumbers[index];
@@ -118,7 +132,13 @@ let BOM = React.createClass({
           style = {backgroundColor:'pink'};
         }
         return (
-          <td data-offset={initIndex+index} className={tdClasses(initIndex+index)} data-th="Part Number" key={`${item.reference}-partNumber-${index}`} style={style}>
+          <td
+            data-offset={initIndex+index}
+            className={tdClasses(initIndex+index)}
+            data-th="Part Number"
+            key={`${item.reference}-partNumber-${index}`}
+            style={style}
+          >
             { partNumber }
           </td>
         );
@@ -131,14 +151,27 @@ let BOM = React.createClass({
           style = {backgroundColor:'pink'};
         }
         return (
-          <td data-offset={initIndex+index} className={tdClasses(initIndex+index)} data-th={key} key={`${item.reference}-${key}-${index}`} style={style}>
+          <td
+            data-offset={initIndex+index}
+            className={tdClasses(initIndex+index)}
+            data-th={key}
+            key={`${item.reference}-${key}-${index}`}
+            style={style}
+          >
             { item.retailers[key] }
           </td>
         );
       }, _, _, row.length)
       ));
 
-      return ( <tr className={`tr-${rowIndex % 2}`} key={`bom-tr-${rowIndex}`}>{ row }</tr> );
+      return (
+        <tr
+          className={`tr-${rowIndex % 2}`}
+          key={`bom-tr-${rowIndex}`}
+        >
+          { row }
+        </tr>
+      );
 
     });
     let tblClass = 'responsive';
