@@ -13,9 +13,6 @@ thead {
     a {
         color: white;
     }
-    a:hover {
-        text-decoration: none;
-    }
 }
 .tr-1 {
     background-color: white;
@@ -93,7 +90,6 @@ table.responsive {
     }
 }
 .storeButtons.partsComplete {
-    background: transparent;
 }
 .storeButtons {
     box-sizing: border-box;
@@ -102,7 +98,6 @@ table.responsive {
     cursor: pointer;
     display: flex;
     align-items: center;
-    background: transparent;
     border-radius: 3px;
     border: 0;
     color: #fff;
@@ -134,54 +129,48 @@ table.responsive {
     flex-wrap: wrap;
 }
 .retailerIco {
+    border-bottom-left-radius: 3px;
     border-top-left-radius: 3px;
-    background: gray;
-    border: 1px solid rgba(0, 0, 0, 0.05);
     padding: 9.6px 14.4px;
+    background: rgba(0,0,0,0.1);
     width: 22px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 .storeButtonInner:hover {
-    background: #FFA219;
+    background: #D29191;
 }
 .storeButtonInner.storeButtonInnerComplete:hover {
     background: #5ACA5E;
 }
+
 .storeButtonInner {
-    background: #ff9800;
+    background: #D67B7B;
 }
 .storeButtonInner.storeButtonInnerComplete {
     background: #4caf50;
 }
 .storeButtonInner {
+    border-radius:3px;
+    width: 100%;
+    display: flex;
+
     .retailerText {
         text-align: center;
         flex: 1;
         padding: 9.6px 0;
         min-width: 80px;
-        background: rgba(255, 255, 255, 0.1);
-        border-top: 2px solid #ff9800;
-        border-right: 2px solid #ff9800;
-        border-bottom: 2px solid #ff9800;
         box-sizing: border-box;
+        font-weight:bold;
     }
-    .retailerText.retailerTextComplete {
-        border-top: 2px solid #4caf50;
-        border-right: 2px solid #4caf50;
-        border-bottom: 2px solid #4caf50;
-    }
-    width: 100%;
-    display: flex;
 }
 .thContainer {
     display: flex;
     justify-content: space-between;
 }
 .storeContainerLogo {
-    border-top-right-radius: 3px;
-    border-top-left-radius: 3px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -191,7 +180,7 @@ table.responsive {
     border-top: 1px solid #8C8C8C;
     color: #fff;
     flex: 1 0 auto;
-    padding: 12.8px 0;
+    padding: 3px 0;
     font-size: 20.8px;
     @include breakpoint(mobile) {
         font-size: 48px;
