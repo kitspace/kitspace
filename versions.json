@@ -21,7 +21,7 @@
   },
   {
     "repo": "https://github.com/kitnic/HACK",
-    "hash": "8cb34de8161ca8e365d2f79600597294c5d4815e"
+    "hash": "9ec2b1a89be02d13fbfedc17ce75c5333fd53902"
   },
   {
     "repo": "https://github.com/kitnic/FM_Transmitter",
@@ -37,6 +37,6 @@
   },
   {
     "repo": "https://github.com/kitnic/BQ25570_Harvester",
-    "hash": "0bbcbd02d1d6a0033a88638712d768a78ee9a99b"
+    "hash": "f7207120c199cab0ac16c3455cac90d0ba7ee099"
   }
 ]
