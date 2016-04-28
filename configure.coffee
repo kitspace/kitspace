@@ -36,7 +36,7 @@ if config == 'dev'
 else
     browserify += ' -g uglifyify'
 
-modules = ['react', 'react-dom', 'lodash', 'react-document-title', 'browser-version', '1-click-bom']
+modules = ['react', 'react-dom', 'lodash', 'react-document-title', 'browser-version', '1-click-bom', 'react-double-scrollbar']
 excludes = '-x ' + modules.join(' -x ')
 requires = '-r ' + modules.join(' -r ')
 
@@ -145,6 +145,9 @@ ninja.edge('build/page.css').from('src/page.scss')
 
 ninja.edge('build/app.js').from('build/.temp/render.jsx')
     .need('build/.temp/boards.json').using('browserify')
+
+ninja.edge('build/polyfill.min.js').from('build/.temp/polyfill.min.js')
+    .using('copy')
 
 
 for folder in boardFolders

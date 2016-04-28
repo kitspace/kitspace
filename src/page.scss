@@ -1,78 +1,82 @@
-@import 'common';
-@import 'title_bar';
-@import 'bom';
-@import 'board_showcase';
-
+@import "common";
+@import "title_bar";
+@import "bom";
+@import "board_showcase";
+@import "gerbers";
 .Page {
-
-  .disabledSite {
-    color:grey;
-    -ie-user-select:none;
-    -webkit-user-select:none;
-    -moz-user-select:none;
-    cursor:default
-  }
-
-  .subtitleText{
-    font-size:14px;
-    @include breakpoint(mobile) {
-      font-size:32px;
+    .disabledSite {
+        color: grey;
+        -ie-user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        cursor: default;
     }
-    text-align:center;
-    color:gray;
-  }
-  .titleText {
-    color: white;
-    width: 100%;
-    text-align: center;
-    vertical-align:  middle;
-    font-size:24px;
-    line-height:2.5rem;
-    @include breakpoint(mobile) {
-      font-size:64px;
-      padding-top:5px;
-      padding-bottom:20px;
+    .subtitleText {
+        font-size: 14px;
+        text-align: center;
+        color: gray;
+        @include breakpoint(mobile) {
+            font-size: 32px;
+        }
     }
-    border-radius: 5px
-  }
-  .infoBar {padding: 20px; margin-top:10px}
-  .infoBarDescription {
-    margin-bottom:10;
-    margin-top:5;
-  }
-  .infoBarInner {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-around
-  }
-
-  .infoBarLinksContainer {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-around;
-    flex-grow:2;
-    margin-top:5;
-  }
-  .infoBarLinks {
-    margin-left: 5px;
-    margin-right: 5px;
-  }
-  @include breakpoint (mobile) {
-    .octicon {
-        font-size:48px;
+    .titleText {
+        color: white;
+        width: 100%;
+        text-align: center;
+        vertical-align: middle;
+        font-size: 24px;
+        line-height: 40px;
+        border-radius: 5px;
+        @include breakpoint(mobile) {
+            font-size: 64px;
+            padding-top: 5px;
+            padding-bottom: 20px;
+        }
+    }
+    .infoBar {
+        padding: 20px;
+        margin-top: 10px;
+    }
+    .infoBarDescription {
+        margin-bottom: 10;
+        margin-top: 5;
     }
     .infoBarInner {
-      font-size:40px;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-around;
     }
     .infoBarLinksContainer {
-      background: #F9F9F9;
-      border-radius: 20px;
-      font-size: 48px;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-around;
+        flex-grow: 2;
+        margin-top: 5;
     }
-    .middleContainer {
-      background: #1D1D1D;
+    .infoBarLinks {
+        margin-left: 5px;
+        margin-right: 5px;
     }
-  }
-
-
+    @include breakpoint(mobile) {
+        .octicon {
+            font-size: 48px;
+        }
+        .infoBarInner {
+            font-size: 40px;
+        }
+        .infoBarLinksContainer {
+            background: #F9F9F9;
+            border-radius: 20px;
+            font-size: 48px;
+        }
+        .middleContainer {
+            background: #1D1D1D;
+        }
+    }
+    .pageContainer {
+        padding: 0 10%;
+        @include breakpoint(mobile_or_small_width) {
+            padding: 0;
+        }
+    }
 }

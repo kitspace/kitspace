@@ -9,10 +9,11 @@ then
     exit 0
 elif  [ "${TRAVIS_BRANCH}" != "master" ]
 then
+    echo -e "disallow: *\n" > build/robots.txt
     echo -e "${SSH_KEY}" > key-file
     chmod 600 key-file
-    ssh -i key-file -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no "ubuntu@preview.kitnic.it" "rm -rf www/kitnic/${TRAVIS_BRANCH}"
-    scp -i key-file -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -r build "ubuntu@preview.kitnic.it:www/kitnic/${TRAVIS_BRANCH}"
+    ssh -i key-file -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no "ubuntu@preview.kitnic.it" "rm -rf www/preview/${TRAVIS_BRANCH}"
+    scp -i key-file -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -r build "ubuntu@preview.kitnic.it:www/preview/${TRAVIS_BRANCH}"
     rm -f key-file
 else
     cd build

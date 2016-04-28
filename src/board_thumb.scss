@@ -1,114 +1,100 @@
-$thumb-w      : 240px;
-$thumb-h      : 180px;
-$captionH     : 40px;
-$descriptionH : 96px;
-
-$mobile-thumb-w      : $thumb-w * 3;
-$mobile-thumb-h      : $thumb-h * 3;
-$mobile-captionH     : $captionH * 3;
-$mobile-descriptionH : $descriptionH * 3 + 48;
-
+$thumb-w: 240px;
+$thumb-h: 180px;
+$captionH: 40px;
+$descriptionH: 96px;
+$mobile-thumb-w: $thumb-w * 3;
+$mobile-thumb-h: $thumb-h * 3;
+$mobile-captionH: $captionH * 3;
+$mobile-descriptionH: $descriptionH * 3 + 48;
 .BoardThumb:hover {
     box-shadow: 0px 0.1em 0.5em #0C9BEF;
 }
-
 .BoardThumb {
-    width         : $thumb-w + 32px + 16px;
-    height        :
-    $thumb-h + $captionH
-    + $descriptionH + 16px + 5px + 16px + 5px;
-    border-radius : 4px;
-    margin-top    : 8px;
-    margin-right  : 8px;
-    margin-bottom : 8px;
-    margin-left   : 8px;
+    width: $thumb-w + 32px + 16px;
+    height: $thumb-h + $captionH + $descriptionH + 16px + 5px + 16px + 5px;
+    border-radius: 4px;
+    margin-top: 8px;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    margin-left: 8px;
     @include breakpoint(mobile) {
-        width  : $mobile-thumb-w + 32px + 16px;
-        height :
-        $mobile-thumb-h + $mobile-captionH
-        + $mobile-descriptionH + 16px + 5px + 16px + 5px;
-        border-radius : 12px;
-        margin-top    : 24px;
-        margin-right  : 24px;
-        margin-bottom : 24px;
-        margin-left   : 24px;
+        width: $mobile-thumb-w + 32px + 16px;
+        height: $mobile-thumb-h + $mobile-captionH + $mobile-descriptionH + 16px + 5px + 16px + 5px;
+        border-radius: 12px;
+        margin-top: 24px;
+        margin-right: 24px;
+        margin-bottom: 24px;
+        margin-left: 24px;
     }
-    display       : inline-block;
-    border        : 1px solid #CFCFCF;
-    cursor        : pointer;
-    overflow      : hidden;
-
+    display: inline-block;
+    border: 1px solid #CFCFCF;
+    cursor: pointer;
+    overflow: hidden;
     a:hover {
         text-decoration: none;
     }
-
-
     .imgContainer {
-        background-color : #373737;
+        background-color: #373737;
     }
-
     .img {
-        width        : $thumb-w;
-        height       : $thumb-h;
+        width: $thumb-w;
+        height: $thumb-h;
         @include breakpoint(mobile) {
-            width        : $mobile-thumb-w;
-            height       : $mobile-thumb-h;
+            width: $mobile-thumb-w;
+            height: $mobile-thumb-h;
         }
-        margin-top    : 16px;
-        margin-bottom : 16px;
+        margin-top: 16px;
+        margin-bottom: 16px;
     }
-
     .title {
-        height           : $captionH;
-        line-height      : $captionH;
-        font-size        : 18px;
-        padding-left     : 10px;
+        height: $captionH;
+        line-height: $captionH;
+        font-size: 18px;
+        padding-left: 10px;
         @include breakpoint(mobile) {
-            height           : $mobile-captionH;
-            line-height      : $mobile-captionH;
-            font-size        : 54px;
-            padding-left     : 30px;
+            height: $mobile-captionH;
+            line-height: $mobile-captionH;
+            font-size: 54px;
+            padding-left: 30px;
         }
-        text-align       : center;
-        vertical-align   : bottom;
-        font-weight      : bold;
-        opacity          : 1.0;
-        background-color : #FAFAFA;
-        color            : #373737;
-        text-align       : left;
+        text-align: center;
+        vertical-align: bottom;
+        font-weight: bold;
+        opacity: 1.0;
+        background-color: #FAFAFA;
+        color: #373737;
+        text-align: left;
     }
-
     .url {
-        font-size        : 13px;
-        padding-left     : 10px;
+        font-size: 13px;
+        padding-left: 10px;
         @include breakpoint(mobile) {
-            font-size    : 39px;
-            padding-left : 30px;
+            font-size: 39px;
+            padding-left: 30px;
         }
-        background-color : #FAFAFA;
-        color            : grey;
-        opacity          : 1.0;
-        font-weight      : normal;
-        text-align       : left;
+        background-color: #FAFAFA;
+        color: grey;
+        opacity: 1.0;
+        font-weight: normal;
+        text-align: left;
     }
-
     .description {
-        font-size        : 16px;
-        visibility       : visible;
-        height           : $descriptionH;
-        padding          : 8px 10px 5px 10px;
+        font-size: 16px;
+        visibility: visible;
+        height: $descriptionH;
+        padding: 8px 10px 5px 10px;
         @include breakpoint(mobile) {
-            height : $mobile-descriptionH;
-            font-size : 48px;
-            padding-left : 30px;
+            height: $mobile-descriptionH;
+            font-size: 48px;
+            padding-left: 30px;
         }
-        overflow         : hidden;
-        vertical-align   : top;
-        margin-bottom    : 10px;
-        opacity          : 1.0;
-        background-color : #FAFAFA;
-        color            : #373737;
-        font-weight      : normal;
-        text-align       : left;
+        overflow: hidden;
+        vertical-align: top;
+        margin-bottom: 10px;
+        opacity: 1.0;
+        background-color: #FAFAFA;
+        color: #373737;
+        font-weight: normal;
+        text-align: left;
     }
 }

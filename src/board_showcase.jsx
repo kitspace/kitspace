@@ -1,5 +1,6 @@
 const React    = require('react');
 const ReactDOM = require('react-dom');
+const Gerbers  = require('./gerbers');
 
 var BoardShowcase = React.createClass({
 	getInitialState: function() {
@@ -29,6 +30,7 @@ var BoardShowcase = React.createClass({
 		}
 		return (
 			<div className="boardShowcaseContainer">
+				<Gerbers />
 				<div className="toggleBoardView">
 					<button disabled={this.state.viewFrontBoard} className="circuitToggleBtn circuitFrontBtn" onClick={this.frontBoardView}>
 						Front
@@ -38,7 +40,6 @@ var BoardShowcase = React.createClass({
 					</button>
 				</div>
 				<div className="boardShowcase">
-					<div className="boardEdge"></div>
 					<div className="boardContainer">
 						<img className={frontBoardClass} src='images/top.svg'/>
 						<div className="circuitBorderContainer">
@@ -46,10 +47,10 @@ var BoardShowcase = React.createClass({
 						</div>
 						<img className={backBoardClass} src='images/bottom.svg'/>
 					</div>
-					<div className="boardEdge"></div>
 				</div>
 			</div>
 		);
 	}
 });
+
 module.exports = BoardShowcase;

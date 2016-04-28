@@ -9,18 +9,15 @@ const style = {
   icon: {
     width:'100%',
   }
-
 }
 
 var Main = React.createClass({
-
   getInitialState: function() {
     return {
       result: boards,
       searching: false
     };
   },
-
   render: function () {
     return (
       <div>
@@ -40,7 +37,6 @@ var Main = React.createClass({
       </div>
     );
   },
-
   handleKeydown: function(event) {
     //enter key
     if (event.which == 13) {
@@ -48,12 +44,9 @@ var Main = React.createClass({
     }
     return false;
   },
-
-
   componentDidMount: function() {
     document.getElementsByClassName('search-input')[0].firstElementChild.addEventListener('keydown', this.handleKeydown);
   },
-
   searchUpdated: function (term) {
     if (this.refs.search) {
       var filters = ['id', 'description'];

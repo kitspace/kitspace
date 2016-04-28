@@ -14,7 +14,6 @@ var Page = React.createClass({
     const titleTxt = info.id.split('/').slice(2).join(' / ');
     const subtitleTxt = info.id.split('/').slice(0,2).join(' / ');
     var site;
-
     if (info.site == '') {
       site =
         (<div className='disabledSite' title='no website info available'>
@@ -42,22 +41,19 @@ var Page = React.createClass({
             {subtitleTxt}
           </div>
         </TitleBar>
+        <div className="pageContainer">
           <div className='infoBar'>
             <div className='infoBarInner'>
               <div className='infoBarDescription'>{info.description}</div>
               <div className='infoBarLinksContainer'>
                 <div className='infoBarLinks'>{site}</div>
                 <div className='infoBarLinks'>{repo}</div>
-                <div className='infoBarLinks'>
-                  <a href={zipPath}>
-                    <span className="octicon octicon-circuit-board" /> gerbers
-                  </a>
-                </div>
               </div>
             </div>
           </div>
       <BoardShowcase />
       <BOM items={info.bom ? info.bom : []} />
+      </div>
       </div>
       </div>
     </DocumentTitle>
