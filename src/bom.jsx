@@ -219,7 +219,7 @@ let BOM = React.createClass({
     }.bind(this));
     storeBtns.unshift();
     return (
-      <div className="bomContainer">
+      <div className="BOM">
           <div className="storeBtnContainer">
               {storeContainerLogo()}
               <div className="storeBtns">
