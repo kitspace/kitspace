@@ -41,9 +41,9 @@ use Git then *don't worry*! - you can easily [create a repo on GitHub][4] and
 To add your project to Kitnic, edit the [boards.txt](boards.txt) file, by
 appending the full public URL to your repo (including `https://`, `http://`
 or`git@` ). Then submit a pull request and Travis CI should confirm that it
-builds ok. We will then preview your page for you and can merge it so it
-appears on [kitnic.it](http://kitnic.it). If any of the requirements above are
-not met then this process will likely fail, so check before submitting.
+builds ok.  If any of the requirements above are not met then this process will likely fail.
+
+We will then preview your page and merge it so it appears on [kitnic.it](http://kitnic.it). 
 
 
 ### Kitnic.yaml format
