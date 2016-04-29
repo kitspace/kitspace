@@ -5,6 +5,7 @@ yaml        = require('js-yaml')
 utils       = require('./utils/utils')
 oneClickBOM = require('1-click-bom')
 cp = require('child_process')
+utf8 = require('to-utf-8')
 
 if require.main != module
     module.exports = (folder) ->
@@ -35,21 +36,27 @@ else
     , ''
 
     try
-        file = fs.readFileSync("#{folder}/kitnic.yaml")
+        file = fs.readFileSync("#{folder}/kitnic.yaml", 'utf8')
     if file?
         kitnicYaml = yaml.safeLoad(file)
     info.site = if kitnicYaml?.site? then kitnicYaml.site else ''
 
-    tsv = fs.readFileSync(bomPath, {encoding:'utf8'})
-    bom = oneClickBOM.parseTSV(tsv)
-    info.bom = bom.lines
+    stream = fs.createReadStream(bomPath)
+        .pipe(utf8())
 
+    tsv = ''
+    stream.on 'data', (chunk) ->
+        tsv += chunk.toString()
 
-    repo = cp.execSync("cd #{folder} && git remote -v", {encoding:'utf8'})
-    repo = repo.split('\t')[1].split(' ')[0]
-    info.repo = repo
+    stream.on 'end', () ->
+        bom = oneClickBOM.parseTSV(tsv)
+        info.bom = bom.lines
 
-    fs.writeFile(infoPath, JSON.stringify(info), ->)
+        repo = cp.execSync("cd #{folder} && git remote -v", {encoding:'utf8'})
+        repo = repo.split('\t')[1].split(' ')[0]
+        info.repo = repo
 
-    tsvOut = oneClickBOM.writeTSV(bom.lines)
-    fs.writeFile(outBomPath, tsvOut, ->)
+        fs.writeFile(infoPath, JSON.stringify(info), ->)
+
+        tsvOut = oneClickBOM.writeTSV(bom.lines)
+        fs.writeFile(outBomPath, tsvOut, ->)
