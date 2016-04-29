@@ -88,8 +88,6 @@
             width: 32px;
         }
     }
-    .storeButtons.partsComplete {
-    }
     .storeButtons {
         box-sizing: border-box;
         margin: 16px 0;
@@ -141,14 +139,14 @@
     .storeButtonInner:hover {
         background: #D29191;
     }
-    .storeButtonInner.storeButtonInnerComplete:hover {
+    .storeButtonInner.completeParts:hover {
         background: #5ACA5E;
     }
 
     .storeButtonInner {
         background: #D67B7B;
     }
-    .storeButtonInner.storeButtonInnerComplete {
+    .storeButtonInner.completeParts {
         background: #4caf50;
     }
     .storeButtonInner {

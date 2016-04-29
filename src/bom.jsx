@@ -195,8 +195,12 @@ let BOM = React.createClass({
         return (<i className="icon-spin1 animate-spin"></i>);
       return (<img className="storeIcos" key={retailer} src={imgHref} alt={retailer} />);
     };
-   const addComplete = function(css, condition){
-      return (condition)?css+' '+css+'Complete':css;
+    const addComplete = function(css, condition){
+      if (condition) {
+        return css + ' completeParts';
+      } else {
+        return css;
+      }
     };
     storeBtns = retailers.map(function(retailer, key){
       let addCompleteClass = _.partial(addComplete,_,this.state.retailerCompletion[retailer]);
