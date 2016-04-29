@@ -1,20 +1,24 @@
 'use strict'
-const React          = require('react');
-const _              = require('lodash');
-const oneClickBOM    = require('1-click-bom');
-const browserVersion = require('browser-version');
+const React           = require('react');
+const _               = require('lodash');
+const oneClickBOM     = require('1-click-bom');
+const browserVersion  = require('browser-version');
 const DoubleScrollbar = require('react-double-scrollbar');
 
 let BOM = React.createClass({
   getInitialState: function() {
     let adding = {};
-    let retailerCompletion = {};
+    let partsSpecified = {};
     for (let retailer of oneClickBOM.lineData.retailer_list) {
       adding[retailer] = undefined;
-      retailerCompletion[retailer] = _.every(this.props.items,function(item,index) {
-        let offset = item.retailers[retailer];
-        return (offset !== undefined && offset);
-      });
+      let retailerItems = _.map(this.props.items, (item) => item.retailers[retailer])
+      if (_.every(retailerItems)) {
+        partsSpecified[retailer] = ' allPartsSpecified';
+      } else if (_.some(retailerItems)) {
+        partsSpecified[retailer] = ' somePartsSpecified';
+      } else {
+        partsSpecified[retailer] = '';
+      }
     }
     let headerLength = this.columnCount();
     let columnSettings = _.range(0, headerLength).map(()=> 0);
@@ -26,7 +30,7 @@ let BOM = React.createClass({
       fullView: 0,
       columnsContract:columnSettings,
       columnsGrowWidth:columnSettings,
-      retailerCompletion: retailerCompletion
+      partsSpecified: partsSpecified
     };
   },
   columnCount: function () {
@@ -196,8 +200,7 @@ let BOM = React.createClass({
       return (<img className="storeIcos" key={retailer} src={imgHref} alt={retailer} />);
     };
     storeBtns = retailers.map((retailer, key) => {
-      const isComplete = this.state.retailerCompletion[retailer];
-      let storeButtonInnerClass = 'storeButtonInner' + (isComplete ? ' completeParts' : '');
+      let storeButtonInnerClass = 'storeButtonInner' + this.state.partsSpecified[retailer];
       let storeBtnClass         = 'storeButtons';
       let retailerIcoClass      = 'retailerIco';
       let retailerTextClass     = 'retailerText';
