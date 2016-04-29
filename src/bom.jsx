@@ -195,19 +195,12 @@ let BOM = React.createClass({
         return (<i className="icon-spin1 animate-spin"></i>);
       return (<img className="storeIcos" key={retailer} src={imgHref} alt={retailer} />);
     };
-    const addComplete = function(css, condition){
-      if (condition) {
-        return css + ' completeParts';
-      } else {
-        return css;
-      }
-    };
-    storeBtns = retailers.map(function(retailer, key){
-      let addCompleteClass = _.partial(addComplete,_,this.state.retailerCompletion[retailer]);
-      let storeBtnClass = addCompleteClass('storeButtons');
-      let retailerIcoClass = addCompleteClass('retailerIco');
-      let retailerTextClass = addCompleteClass('retailerText');
-      let storeButtonInnerClass = addCompleteClass('storeButtonInner');
+    storeBtns = retailers.map((retailer, key) => {
+      const isComplete = this.state.retailerCompletion[retailer];
+      let storeButtonInnerClass = 'storeButtonInner' + (isComplete ? ' completeParts' : '');
+      let storeBtnClass         = 'storeButtons';
+      let retailerIcoClass      = 'retailerIco';
+      let retailerTextClass     = 'retailerText';
       return (
         <span onClick={this.state.onClick.bind(null,retailer)}
         title={`Add parts to ${retailer} cart`}
@@ -220,7 +213,7 @@ let BOM = React.createClass({
           </div>
         </span>
         );
-    }.bind(this));
+    });
     storeBtns.unshift();
     return (
       <div className="BOM">
