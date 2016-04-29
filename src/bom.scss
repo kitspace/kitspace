@@ -2,9 +2,6 @@
 @import "spinners_n_carts";
 @import "animation";
 .BOM {
-    td {
-        border: 1px solid grey;
-    }
     thead {
         font-weight: bold;
         background-color: dimGrey;
@@ -27,6 +24,7 @@
         border-bottom: 2px solid #C5C5C5;
     }
     table.responsive {
+        font-size: 14px;
         @include breakpoint(mobile) {
             tr th, tr td {
                 font-size: 48px;
@@ -35,7 +33,8 @@
         }
         border-spacing: 0;
         td {
-            border: 0;
+            border-right: 1px solid #969696;
+            border-bottom: 1px solid #969696;
             padding: 9px 10px;
             text-align: left;
             white-space: nowrap;
@@ -47,6 +46,8 @@
             text-overflow: initial;
         }
         th {
+            border-right: 1px solid #969696;
+            border-bottom: 1px solid #969696;
             padding: 0 10px;
             height: 40px;
             box-sizing: border-box;
