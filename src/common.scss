@@ -1,11 +1,18 @@
 @mixin breakpoint($point) {
     @if $point == mobile {
-        @media (max-device-width: 899px), (max-device-width: 1024px) and (orientation: landscape), (min-resolution: 300dpi), (handheld) {
+        @media (max-device-width: 899px)
+        , (max-device-width: 1024px) and (orientation: landscape)
+        , (min-resolution: 300dpi)
+        , (handheld) {
             @content;
         }
     }
     @else if $point == mobile_or_small_width {
-        @media (max-device-width: 899px), (max-device-width: 1024px) and (orientation: landscape), (min-resolution: 300dpi), (handheld), (max-width: 810px) {
+        @media (max-device-width: 899px)
+        , (max-device-width: 1024px) and (orientation: landscape)
+        , (min-resolution: 300dpi)
+        , (handheld)
+        , (max-width: 810px) {
             @content;
         }
     }
