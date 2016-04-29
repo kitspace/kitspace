@@ -13,11 +13,11 @@ let BOM = React.createClass({
       adding[retailer] = undefined;
       let retailerItems = _.map(this.props.items, (item) => item.retailers[retailer])
       if (_.every(retailerItems)) {
-        partsSpecified[retailer] = ' allPartsSpecified';
+        partsSpecified[retailer] = 'allPartsSpecified';
       } else if (_.some(retailerItems)) {
-        partsSpecified[retailer] = ' somePartsSpecified';
+        partsSpecified[retailer] = 'somePartsSpecified';
       } else {
-        partsSpecified[retailer] = '';
+        partsSpecified[retailer] = 'noPartsSpecified';
       }
     }
     let headerLength = this.columnCount();
@@ -193,24 +193,30 @@ let BOM = React.createClass({
           </div>
         );
     }.bind(this);
-    let storeIcon = function(adding, retailer) {
-      let imgHref = '/images/'+retailer+'.ico';
+    let storeIcon = function(adding, retailer, disabled) {
+      let imgHref = `/images/${retailer}${disabled ? '-grey' : ''}.ico`;
       if (adding)
         return (<i className="icon-spin1 animate-spin"></i>);
       return (<img className="storeIcos" key={retailer} src={imgHref} alt={retailer} />);
     };
     storeBtns = retailers.map((retailer, key) => {
-      let storeButtonInnerClass = 'storeButtonInner' + this.state.partsSpecified[retailer];
-      let storeBtnClass         = 'storeButtons';
+      let storeButtonInnerClass = 'storeButtonInner ' + this.state.partsSpecified[retailer];
+      let storeBtnClass         = 'storeButtons ';
       let retailerIcoClass      = 'retailerIco';
       let retailerTextClass     = 'retailerText';
+      let anySpecified = this.state.partsSpecified[retailer] === 'allPartsSpecified'
+        || this.state.partsSpecified[retailer] === 'somePartsSpecified';
+      let onClick = '';
+      if (anySpecified) {
+        onClick = this.state.onClick.bind(null,retailer);
+      }
       return (
-        <span onClick={this.state.onClick.bind(null,retailer)}
+        <span onClick={onClick}
         title={`Add parts to ${retailer} cart`}
         className={storeBtnClass} key={`btn${retailer}`}>
           <div className={storeButtonInnerClass}>
             <div className={retailerIcoClass}>
-              {storeIcon(this.state.adding[retailer],retailer)}
+              {storeIcon(this.state.adding[retailer],retailer, ! anySpecified)}
             </div>
             <div className={retailerTextClass}>{retailer}</div>
           </div>

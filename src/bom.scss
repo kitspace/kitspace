@@ -12,9 +12,6 @@
     .tr-1 {
         background-color: white;
     }
-    .retailerHeading {
-        cursor: pointer;
-    }
     .retailerHeading:hover {
         background-color: grey;
     }
@@ -92,7 +89,6 @@
         box-sizing: border-box;
         margin: 16px 0;
         font-size: 16px;
-        cursor: pointer;
         display: flex;
         align-items: center;
         border-radius: 3px;
@@ -136,18 +132,23 @@
         align-items: center;
     }
 
-    .storeButtonInner:hover {
+    .storeButtonInner.somePartsSpecified:hover {
+        cursor: pointer;
         background: #D29191;
     }
     .storeButtonInner.allPartsSpecified:hover {
+        cursor: pointer;
         background: #5ACA5E;
     }
 
-    .storeButtonInner {
+    .storeButtonInner.somePartsSpecified {
         background: #D67B7B;
     }
     .storeButtonInner.allPartsSpecified {
         background: #4caf50;
+    }
+    .storeButtonInner.noPartsSpecified {
+        background: darkgrey;
     }
     .storeButtonInner {
         border-radius:3px;
