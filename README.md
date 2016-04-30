@@ -1,8 +1,12 @@
-#Kitnic
+# https://kitnic.it
 
 [![build status][1]](https://travis-ci.org/monostable/kitnic) 
 
-A registry of open source hardware electronics projects that are ready to order and build. We use some clever magic in the form of our [browser extension][7] to put the listed components directly into people's shopping carts. 
+Kitnic is a registry of open source hardware electronics projects that are ready to order and build. The most important elements of a Kitnic project page are: 
+
+- A prominent link to download the Gerber files and a preview rendering of the board
+- The ability to quickly add the required components to a retailer shopping cart (using clever magic in the form of our [browser extension][7]) 
+
 
 ## Get in touch
 
@@ -12,7 +16,7 @@ A registry of open source hardware electronics projects that are ready to order 
 
 ##Submitting your project
 
-To submit your project to Kitnic, just follow these steps:
+To submit your project to Kitnic, follow these steps:
 
 **1. Export your plotted gerbers & drill data.**
 Your gerbers will be rendered as a preview and offered as a zip for download.
@@ -77,8 +81,7 @@ Paths should be in UNIX style (i.e. use `/` not `\`) and relative to the root of
 repository. The YAML format is pretty straight forward but if you need to know more check the example below and [the YAML website][6]. Use [this YAML validator][7] to be extra sure that your `kitnic.yaml` is valid.
 
 ### Some examples
-
-So, the minimum required file tree is something like :
+Check out the repo links of the projects listed on [kitnic.it](https://kitnic.it) already. The minimum required file tree is something like :
 
 ```
 .
