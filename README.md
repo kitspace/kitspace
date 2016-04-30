@@ -19,18 +19,15 @@ Kitnic is a registry of open source hardware electronics projects that are ready
 To submit your project to Kitnic, follow these steps:
 
 **1. Export your plotted gerbers & drill data.**
-Your gerbers will be rendered as a preview and offered as a zip for download.
-They should be exported from your PCB design package in RS-274-X format
+Gerbers should be exported from your PCB design package in RS-274-X format
 together with drill information into a directory - by default the path
 `gerbers/` will be searched. If this is not where they are stored, please add
 this info in the kitnic.yaml file (see below).
 
 **2. Create the 1-click-BOM file.**
-A Bill Of Materials (BOM) is needed; this should be as a tab-separated (.tsv)
-file in the format used by the [1-click-BOM extension](http://1clickBOM.com) -
-`1-click-BOM.tsv`. This format will allow people to quickly purchase the
-components. Download the extension and see the guide on exporting a 1-click-BOM from your design [here](https://1clickbom.com/#making-a-1-click-bom).
-By default this file is expected in the root of the
+Download the extension and see [the guide on exporting a 1-click-BOM from your design](https://1clickbom.com/#making-a-1-click-bom). This format will allow people to quickly purchase the
+components. 
+By default this file is expected to be a `1-click-BOM.tsv` in the root of the
 project, if the file has a different name or is in a different location, please
 add this info in the kitnic.yaml file (see below).
 
@@ -39,7 +36,7 @@ The `kitnic.yaml` file allows you to specify a website, give a description,
 pick a rendering color or configure custom paths for the two requirements
 above. If you don't have a `kitnic.yaml` with a description we will try and
 find a description from your repo. If we can't find one the build will fail.
-See the section below for details of the file format.
+See [the section below](#kitnicyaml-format) for details of the file format.
 
 **4. Add your project to a Git repository.**
 To have your project included on Kitnic it needs to be in a publicly accessible
