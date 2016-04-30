@@ -48,7 +48,7 @@ else
     #write to $out.d depfile in makefile format for ninja to keep track of deps
     rule.run("browserify -t coffeeify --extension='.coffee' --list $taskFile > $out.d
         && if [ '$jsMain' != '' ]; then #{browserify} --list $jsMain >> $out.d; fi
-        && coffee ./depfileify.coffee $out $out.d
+        && coffee ./scripts/depfileify.coffee $out $out.d
         && coffee -- $in -- #{config} $targetFiles")
     .depfile('$out.d')
     .description("coffee -- $in -- #{config} $targetFiles")
@@ -84,7 +84,7 @@ if (config == 'production')
     rule.run("#{browserify} #{excludes} $in | #{uglifyjs} > $out")
 else
     rule.run("#{browserify} #{excludes} --list $in > $out.d
-        && coffee ./depfileify.coffee $out $out.d
+        && coffee ./scripts/depfileify.coffee $out $out.d
         && #{browserify} #{excludes} $in -o $out"
     )
     .depfile('$out.d')

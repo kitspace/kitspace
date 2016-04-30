@@ -1,12 +1,12 @@
 language: node_js
 node_js:
-  - "4.2.4"
+  - "5"
 before_install:
- - gem install sass
+  - gem install sass
 script:
-  - ./plugVersions.coffee
-  - ./get_boards.coffee production
+  - ./scripts/plug_versions.coffee
+  - ./scripts/get_boards.coffee production
   - ./configure.coffee production
   - wget https://github.com/ninja-build/ninja/releases/download/v1.6.0/ninja-linux.zip
   - unzip ninja-linux.zip
-  - ./ninja && ./deploy.sh
+  - ./ninja && ./scripts/deploy.sh
