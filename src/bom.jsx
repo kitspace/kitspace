@@ -64,7 +64,10 @@ let BOM = React.createClass({
           case 'register':
             this.setState({
               onClick: function (retailer) {
-                window.postMessage({from:'page', message:'quickAddToCart', value:retailer}, '*');
+                window.postMessage({
+                  from:'page',
+                  message:'quickAddToCart',
+                  value:retailer}, '*');
               }
             });
             break;
