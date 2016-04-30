@@ -33,7 +33,8 @@
     "uglifyjs": "^2.4.10"
   },
   "scripts": {
-    "start": "./scripts/get_boards.coffee && ./scripts/start.sh"
+    "prestart": "./scripts/get_boards.coffee",
+    "start": "./scripts/start.sh"
   },
   "author": "Kaspar Emanuel",
   "license": "CPAL-1.0",
