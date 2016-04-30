@@ -5,7 +5,7 @@ before_install:
  - gem install sass
 script:
   - ./plugVersions.coffee
-  - ./getBoards.coffee
+  - ./getBoards.coffee production
   - ./configure.coffee production
   - wget https://github.com/ninja-build/ninja/releases/download/v1.6.0/ninja-linux.zip
   - unzip ninja-linux.zip

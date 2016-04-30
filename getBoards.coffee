@@ -3,7 +3,11 @@ fs = require('fs')
 cp = require('child_process')
 utils = require('./utils')
 
-versions = JSON.parse(fs.readFileSync('versions.json'))
+if process.argv[2] == 'production'
+    versions = JSON.parse(fs.readFileSync('versions.json'))
+else
+    versions = JSON.parse(fs.readFileSync('test_versions.json'))
+
 
 for {repo, hash} in versions
     folder = utils.repoToFolder(repo)
