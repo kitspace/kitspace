@@ -1,8 +1,8 @@
 #Kitnic
 
-A registry of open source hardware electronics projects that are ready to order and build. We use some clever magic in the form of our [browser extension][7] to put the listed components directly into people's shopping carts. 
-
 [![build status][1]](https://travis-ci.org/monostable/kitnic) 
+
+A registry of open source hardware electronics projects that are ready to order and build. We use some clever magic in the form of our [browser extension][7] to put the listed components directly into people's shopping carts. 
 
 ## Get in touch
 
