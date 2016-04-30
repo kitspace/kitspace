@@ -4,9 +4,11 @@
 
 [![Join gitter.im chat][2]](https://gitter.im/monostable/kitnic) or IRC freenode#kitnic
 
+[Post on our Google group](https://groups.google.com/forum/#!forum/kitnic-discuss)
+
 ##Submitting your project
 
-To submit your open source hardware project to Kitnic, just follow these steps:
+To submit your project to Kitnic, just follow these steps:
 
 **1. Export your plotted gerbers & drill data.**
 Your gerbers will be rendered as a preview and offered as a zip for download.
@@ -42,8 +44,7 @@ To add your project to Kitnic, edit the [boards.txt](boards.txt) file, by
 appending the full public URL to your repo (including `https://`, `http://`
 or`git@` ). Then submit a pull request and Travis CI should confirm that it
 builds ok. We will then preview your page for you and can merge it so it
-appears on [kitnic.it](http://kitnic.it). If any of the requirements above are
-not met then this process will likely fail, so check before submitting.
+appears on [kitnic.it](http://kitnic.it).
 
 
 ### Kitnic.yaml format
@@ -129,10 +130,21 @@ gerbers: manufacture/gerbers-and-drills
 ## Development
 ### Requirements
 
-- npm >= 2.1.6
-- sass >= 3.2.12
-- inotify-tools or fswatch
-- ninja >= 1.5.1
+- [Nodejs](https://nodejs.org) >= 4
+- [fswatch](http://emcrisostomo.github.io/fswatch/) on OSX/Windows or inotify-tools on Linux
+- [Ninja Build](https://github.com/ninja-build/ninja/releases) >= 1.5.1
+- [Sass](http://sass-lang.com/install) >= 3.2.12
+- The rest of the dependencies can be retrieved via `npm install`
+
+### Running a local dev server
+
+- Get requirements above and make sure executables are on your path
+- `npm install`
+- `npm start`
+- Point your browser at `http://127.0.0.1:8080`. The script should watch for
+file-saves and re-build when you change a source file.
+
+
 
 [1]: https://travis-ci.org/monostable/kitnic.svg?branch=master
 [2]: https://badges.gitter.im/monostable/kitnic.svg
