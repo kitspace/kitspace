@@ -12,16 +12,22 @@ case "$OSTYPE" in
   bsd*)     OS="BSD" ;;
 esac
 
+build() {
+    ./configure.coffee $1
+    echo "ninja";
+    ninja && echo '* build succeeded *' || echo 'BUILD FAILED';
+}
 
-./configure.coffee dev && ninja -v;
 http-server build/ &
+
+build $1
 
 if [ "$OS" == 'LINUX' ]; then
     while inotifywait --exclude '\..*sw.' -r -q -e modify src/ tasks/ boards/; do
-        ninja && echo '* build succeeded *';
+      build $1
     done
 elif [ "$OS" == 'OSX' ]; then
     while fswatch --one-event src/ tasks/ boards/; do
-        ninja && echo '* build succeeded *';
+        build $1
     done
 fi

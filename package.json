@@ -33,6 +33,7 @@
     "uglifyjs": "^2.4.10"
   },
   "scripts": {
+    "start": "./get_boards.coffee && ./start.sh",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Kaspar Emanuel",
