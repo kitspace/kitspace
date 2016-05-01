@@ -45,7 +45,7 @@ else
     for folder in folders
         file = undefined
         try
-            file = fs.readFileSync("#{folder}/kitnic.yaml", 'utf8')
+            file = fs.readFileSync("#{folder}/kitnic.yaml")
         if file?
             info = yaml.safeLoad(file)
         else
