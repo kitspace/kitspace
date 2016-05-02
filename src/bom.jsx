@@ -79,7 +79,7 @@ let BOM = React.createClass({
         }
     }, false);
   },
-  toggleTblView: function (e) {
+  toggleTableView: function (e) {
     e.preventDefault();
     this.setState({
       fullView: this.state.fullView = 1 - this.state.fullView
@@ -102,7 +102,7 @@ let BOM = React.createClass({
     }).concat(1));
     const partNumbers = _.times(partNumberLength, _.constant('Part Number'));
     let tdClasses = function(offset) {
-      return (this.toggleColumnEnabled(offset))?'expandedTd expandedTd'+offset:'';
+      return (this.toggleColumnEnabled(offset)) ? 'expandedTd expandedTd' + offset : '';
     }.bind(this);
     const makeHeading = function(heading, index, headingsLength) {
       let width = this.state.columnsGrowWidth[index];
@@ -142,7 +142,7 @@ let BOM = React.createClass({
           <td
             data-offset={initIndex+index}
             className={tdClasses(initIndex+index)}
-            data-th="Part Number"
+            data-th='Part Number'
             key={`${item.reference}-partNumber-${index}`}
             style={style}
           >
@@ -181,33 +181,22 @@ let BOM = React.createClass({
       );
 
     });
-    let tblClass = 'responsive';
-    let btnText = 'Hide details';
-    if (this.state.fullView === 0){
-      tblClass += ' defaultTblView';
-      btnText = 'Show details';
-    }
-    let storeBtns;
-    let storeContainerLogo = function() {
-      return (
-          <div className="storeContainerLogo" key="storeContainerLogo">
-            <i className='icon-basket-3'></i>
-            Buy Parts
-          </div>
-        );
-    }.bind(this);
+    let tableClass = 'responsive';
+    let storeButtons;
     let storeIcon = function(adding, retailer, disabled) {
       let imgHref = `/images/${retailer}${disabled ? '-grey' : ''}.ico`;
       if (adding)
-        return (<i className="icon-spin1 animate-spin"></i>);
-      return (<img className="storeIcos" key={retailer} src={imgHref} alt={retailer} />);
+        return (<i className='icon-spin1 animate-spin'></i>);
+      return (<img className='storeIcons' key={retailer} src={imgHref} alt={retailer} />);
     };
-    storeBtns = retailers.map((retailer, key) => {
-      let storeButtonInnerClass = 'storeButtonInner ' + this.state.partsSpecified[retailer];
-      let storeBtnClass         = 'storeButtons ';
-      let retailerIcoClass      = 'retailerIco';
-      let retailerTextClass     = 'retailerText';
-      let anySpecified = this.state.partsSpecified[retailer] === 'allPartsSpecified'
+    storeButtons = retailers.map((retailer, key) => {
+      let storeButtonInnerClass =
+        'storeButtonInner ' + this.state.partsSpecified[retailer];
+      let storeButtonClass  = 'storeButton';
+      let retailerIconClass = 'retailerIcon';
+      let retailerTextClass = 'retailerText';
+      let anySpecified =
+        this.state.partsSpecified[retailer] === 'allPartsSpecified'
         || this.state.partsSpecified[retailer] === 'somePartsSpecified';
       let onClick = '';
       if (anySpecified) {
@@ -216,28 +205,31 @@ let BOM = React.createClass({
       return (
         <span onClick={onClick}
         title={`Add parts to ${retailer} cart`}
-        className={storeBtnClass} key={`btn${retailer}`}>
+        className={storeButtonClass} key={`storeButton-${retailer}`}>
           <div className={storeButtonInnerClass}>
-            <div className={retailerIcoClass}>
+            <div className={retailerIconClass}>
               {storeIcon(this.state.adding[retailer],retailer, ! anySpecified)}
             </div>
             <div className={retailerTextClass}>{retailer}</div>
           </div>
         </span>
-        );
+      );
     });
-    storeBtns.unshift();
+    storeButtons.unshift();
     return (
-      <div className="BOM">
-          <div className="storeBtnContainer">
-              {storeContainerLogo()}
-              <div className="storeBtns">
-                {storeBtns}
-              </div>
+      <div className='BOM'>
+        <div className='storeButtonContainer'>
+          <div className='storeContainerLogo' key='storeContainerLogo'>
+            <i className='icon-basket-3'></i>
+            Buy Parts
           </div>
-        <div className="bomTblContainer">
+          <div className='storeButtons'>
+            {storeButtons}
+          </div>
+        </div>
+        <div className='bomTableContainer'>
           <DoubleScrollbar>
-            <table className={tblClass}>
+            <table className={tableClass}>
               <thead>
                 <tr>{ headings }</tr>
               </thead>

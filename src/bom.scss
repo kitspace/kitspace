@@ -55,7 +55,7 @@
         display: flex;
         justify-content: flex-end;
     }
-    .bomTblEdge {
+    .bomTableEdge {
         width: 10%;
         @include breakpoint(mobile_or_small_width) {
             display: none;
@@ -76,7 +76,7 @@
             padding: 32px;
         }
     }
-    .storeIcos {
+    .storeIcons {
         width: 16px;
         height: 16px;
         margin-top: 1px;
@@ -85,7 +85,7 @@
             width: 32px;
         }
     }
-    .storeButtons {
+    .storeButton {
         box-sizing: border-box;
         margin: 16px 0;
         font-size: 16px;
@@ -109,7 +109,7 @@
         font-size: 8px;
         font-weight: normal;
     }
-    .storeBtnContainer {
+    .storeButtonContainer {
         display: flex;
         flex-wrap: wrap;
         width: 100%;
@@ -119,14 +119,14 @@
         border-bottom: 1px solid #B9B9B9;
         justify-content: center;
     }
-    .storeBtns {
+    .storeButtons {
         padding: 0 16px;
         display: flex;
         justify-content: space-around;
         width: 100%;
         flex-wrap: wrap;
     }
-    .retailerIco {
+    .retailerIcon {
         border-bottom-left-radius: 3px;
         border-top-left-radius: 3px;
         padding: 9.6px 14.4px;
