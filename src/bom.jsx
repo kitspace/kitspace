@@ -27,9 +27,9 @@ let BOM = React.createClass({
         window.open('//1clickBOM.com', '_self');
       },
       adding: adding,
-      fullView: 0,
-      columnsContract:columnSettings,
-      columnsGrowWidth:columnSettings,
+      // fullView: 0,
+      // columnsContract:columnSettings,
+      // columnsGrowWidth:columnSettings,
       partsSpecified: partsSpecified
     };
   },
@@ -79,15 +79,6 @@ let BOM = React.createClass({
         }
     }, false);
   },
-  toggleTableView: function (e) {
-    e.preventDefault();
-    this.setState({
-      fullView: this.state.fullView = 1 - this.state.fullView
-    });
-  },
-  toggleColumnEnabled: function(offset){
-    return this.state.columnsContract[offset];
-  },
   render: function () {
     //get rid of this once proper BOMs are made a requirement and enforced
     //much earlier
@@ -101,74 +92,48 @@ let BOM = React.createClass({
       return item.partNumbers.length;
     }).concat(1));
     const partNumbers = _.times(partNumberLength, _.constant('Part Number'));
-    let tdClasses = function(offset) {
-      return (this.toggleColumnEnabled(offset)) ? 'expandedTd expandedTd' + offset : '';
-    }.bind(this);
-    const makeHeading = function(heading, index, headingsLength) {
-      let width = this.state.columnsGrowWidth[index];
-      let style = (width !== 0) ? {width:width+'px'} : {width:'auto'};
+    const makeHeading = (heading, index) => {
       return (
-        <th
-            style={style}
-            className={tdClasses(index)}
-            data-offset={index}
-            key={`heading-${heading}-${index}`}
-         >
-          {heading}
+        <th key={`heading-${heading}-${index}`} >
+          { heading }
         </th> );
-    }.bind(this);
+    };
     let headings = ['References', 'Qty', 'Description'].concat(partNumbers,retailers);
-    headings = headings.map(_.partial(makeHeading,_,_,headings.length));
-    let rows = this.props.items.map((item, rowIndex) => {
-      let row = keys.map((key,index) => {
+    headings = headings.map(makeHeading);
+    let rows = this.props.items.map( (item, rowIndex) => {
+      let row = keys.map( (key, index) => {
         return (
-          <td
-            data-offset={index}
-            className={tdClasses(index)}
-            data-th={key.charAt(0).toUpperCase() + key.slice(1)}
-            key={`${rowIndex}-${key}`}
-          >
+          <td key={`${rowIndex}-${key}`} >
             { item[key] }
           </td> );
       });
-      row = row.concat(_.times(partNumberLength, _.partial((index, initIndex) => {
+      row = row.concat(_.times(partNumberLength, (index) => {
         let partNumber = item.partNumbers[index];
-        let style = {};
         //color pink if no part numbers at all for this line
-        if (index === 0 && (partNumber === '' || partNumber == null)) {
-          style = {backgroundColor:'pink'};
-        }
+        let style = (index === 0 && (partNumber === '' || partNumber == null)) ?
+         {backgroundColor:'pink'} : {};
         return (
           <td
-            data-offset={initIndex+index}
-            className={tdClasses(initIndex+index)}
-            data-th='Part Number'
             key={`${item.reference}-partNumber-${index}`}
             style={style}
           >
             { partNumber }
           </td>
         );
-      },_,row.length)
+      }
       ));
 
-      row = row.concat(_.keys(item.retailers).map(_.partial((key, index, initIndex) => {
-        let style = {};
-        if (item.retailers[key] === '') {
-          style = {backgroundColor:'pink'};
-        }
+      row = row.concat(_.keys(item.retailers).map((key, index) => {
+        let style = (item.retailers[key] === '') ? {backgroundColor:'pink'} : {};
         return (
           <td
-            data-offset={initIndex+index}
-            className={tdClasses(initIndex+index)}
-            data-th={key}
             key={`${item.reference}-${key}-${index}`}
             style={style}
           >
             { item.retailers[key] }
           </td>
         );
-      }, _, _, row.length)
+      }
       ));
 
       return (
@@ -179,17 +144,15 @@ let BOM = React.createClass({
           { row }
         </tr>
       );
-
     });
     let tableClass = 'responsive';
-    let storeButtons;
     let storeIcon = function(adding, retailer, disabled) {
       let imgHref = `/images/${retailer}${disabled ? '-grey' : ''}.ico`;
       if (adding)
         return (<i className='icon-spin1 animate-spin'></i>);
       return (<img className='storeIcons' key={retailer} src={imgHref} alt={retailer} />);
     };
-    storeButtons = retailers.map((retailer, key) => {
+    let storeButtons = retailers.map((retailer, key) => {
       let storeButtonInnerClass =
         'storeButtonInner ' + this.state.partsSpecified[retailer];
       let storeButtonClass  = 'storeButton';
