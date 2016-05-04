@@ -13,6 +13,8 @@
     "browserify": "^12.0.1",
     "coffee-script": "^1.9.2",
     "coffeeify": "^2.0.1",
+    "eslint": "^2.9.0",
+    "eslint-plugin-react": "^5.0.1",
     "gerber-to-svg": "^0.4.2",
     "globule": "^0.2.0",
     "http-server": "^0.8.0",

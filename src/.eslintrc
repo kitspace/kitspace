@@ -1,0 +1,37 @@
+{
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es6": true
+  },
+  "plugins": [
+    "react"
+  ],
+  "rules": {
+    "comma-dangle": ["off"],
+    "indent": [
+      "error",
+      2
+    ],
+    "quotes": [
+      "warn",
+      "single"
+    ],
+    "no-trailing-spaces": [
+      "error", {
+        "skipBlankLines": false
+      }
+    ],
+    "no-irregular-whitespace": ["error", {
+      "skipComments": false
+    }],
+    "space-infix-ops": ["error", {
+      "int32Hint": false
+    }],
+    "semi": [
+      "error",
+      "always"
+    ]
+  },
+  "extends": ["eslint:recommended", "plugin:react/recommended"]
+}
