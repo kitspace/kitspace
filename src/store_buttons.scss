@@ -1,0 +1,110 @@
+.storeButtonContainer{
+	display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    background: #D3D3D3;
+    border-radius: 3px;
+    border-top: 1px solid #929292;
+    border-bottom: 1px solid #B9B9B9;
+    justify-content: center;
+
+    .storeIcons {
+        width: 16px;
+        height: 16px;
+        margin-top: 1px;
+        @include breakpoint(mobile) {
+            height: 32px;
+            width: 32px;
+        }
+    }
+    .storeButton {
+        box-sizing: border-box;
+        margin: 16px 0;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        border-radius: 3px;
+        border: 0;
+        color: #fff;
+        justify-content: center;
+        padding: 0;
+        -webkit-touch-callout: none; /* iOS Safari */
+        -webkit-user-select: none;   /* Chrome/Safari/Opera */
+        -khtml-user-select: none;    /* Konqueror */
+        -moz-user-select: none;      /* Firefox */
+        -ms-user-select: none;       /* Internet Explorer/Edge */
+        @include breakpoint(mobile) {
+            font-size: 38px;
+        }
+    }
+    .storeButtons {
+        padding: 0 16px;
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+        flex-wrap: wrap;
+    }
+    .retailerIcon {
+        border-bottom-left-radius: 3px;
+        border-top-left-radius: 3px;
+        padding: 9.6px 14.4px;
+        background: rgba(0,0,0,0.1);
+        width: 22px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .storeButtonInner.somePartsSpecified:hover {
+        cursor: pointer;
+        background: #D29191;
+    }
+    .storeButtonInner.allPartsSpecified:hover {
+        cursor: pointer;
+        background: #5ACA5E;
+    }
+
+    .storeButtonInner.somePartsSpecified {
+        background: #D67B7B;
+    }
+    .storeButtonInner.allPartsSpecified {
+        background: #4caf50;
+    }
+    .storeButtonInner.noPartsSpecified {
+        background: darkgrey;
+        .retailerText {
+            cursor: default;
+        }
+    }
+    .storeButtonInner {
+        border-radius:3px;
+        width: 100%;
+        display: flex;
+
+        .retailerText {
+            text-align: center;
+            flex: 1;
+            padding: 9.6px 0;
+            min-width: 80px;
+            box-sizing: border-box;
+            font-weight:bold;
+        }
+    }
+    .storeContainerLogo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #696969;
+        margin-right: auto;
+        border-bottom: 1px solid #585858;
+        border-top: 1px solid #8C8C8C;
+        color: #fff;
+        flex: 1 0 auto;
+        padding: 3px 0;
+        font-size: 20.8px;
+        @include breakpoint(mobile) {
+            font-size: 48px;
+            padding: 32px;
+        }
+    }
+}

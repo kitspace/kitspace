@@ -5,6 +5,7 @@ const TitleBar      = require('./title_bar');
 const FadeImage     = require('./fade_image');
 const BOM           = require('./bom');
 const BoardShowcase = require('./board_showcase');
+const StoreButtons    = require('./store_buttons');
 
 const info    = require('./info.json');
 const zipPath = require('./zip-info.json');
@@ -31,30 +32,32 @@ var Page = React.createClass({
         <span className="octicon octicon-repo" /> repo
       </a>;
     return (
-      <DocumentTitle title={`${titleTxt} - kitnic.it`}><div>
-      <div className='Page'>
-        <TitleBar>
-          <div className='titleText'>
-            {titleTxt}
-          </div>
-          <div className='subtitleText'>
-            {subtitleTxt}
-          </div>
-        </TitleBar>
-        <div className="pageContainer">
-          <div className='infoBar'>
-            <div className='infoBarInner'>
-              <div className='infoBarDescription'>{info.description}</div>
-              <div className='infoBarLinksContainer'>
-                <div className='infoBarLinks'>{site}</div>
-                <div className='infoBarLinks'>{repo}</div>
+      <DocumentTitle title={`${titleTxt} - kitnic.it`}>
+      <div>
+        <div className='Page'>
+          <TitleBar>
+            <div className='titleText'>
+              {titleTxt}
+            </div>
+            <div className='subtitleText'>
+              {subtitleTxt}
+            </div>
+          </TitleBar>
+          <div className="pageContainer">
+            <div className='infoBar'>
+              <div className='infoBarInner'>
+                <div className='infoBarDescription'>{info.description}</div>
+                <div className='infoBarLinksContainer'>
+                  <div className='infoBarLinks'>{site}</div>
+                  <div className='infoBarLinks'>{repo}</div>
+                </div>
               </div>
             </div>
+            <BoardShowcase />
+            <StoreButtons items={ info.bom ? info.bom : [] } />
+            <BOM items={ info.bom ? info.bom : [] } />
           </div>
-      <BoardShowcase />
-      <BOM items={info.bom ? info.bom : []} />
-      </div>
-      </div>
+        </div>
       </div>
     </DocumentTitle>
     );

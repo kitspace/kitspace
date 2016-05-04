@@ -2,90 +2,15 @@
 const React           = require('react');
 const _               = require('lodash');
 const oneClickBOM     = require('1-click-bom');
-const browserVersion  = require('browser-version');
 const DoubleScrollbar = require('react-double-scrollbar');
 
 let BOM = React.createClass({
-  getInitialState: function() {
-    let adding = {};
-    let partsSpecified = {};
-    for (let retailer of oneClickBOM.lineData.retailer_list) {
-      adding[retailer] = undefined;
-      let retailerItems = _.map(this.props.items, (item) => item.retailers[retailer])
-      if (_.every(retailerItems)) {
-        partsSpecified[retailer] = 'allPartsSpecified';
-      } else if (_.some(retailerItems)) {
-        partsSpecified[retailer] = 'somePartsSpecified';
-      } else {
-        partsSpecified[retailer] = 'noPartsSpecified';
-      }
-    }
-    let headerLength = this.columnCount();
-    let columnSettings = _.range(0, headerLength).map(()=> 0);
-    return {
-      onClick: function () {
-        window.open('//1clickBOM.com', '_self');
-      },
-      adding: adding,
-      // fullView: 0,
-      // columnsContract:columnSettings,
-      // columnsGrowWidth:columnSettings,
-      partsSpecified: partsSpecified
-    };
-  },
-  columnCount: function () {
-    return 3+oneClickBOM.lineData.retailer_list.length + _.max(this.props.items.map((item) => {
-      return item.partNumbers.length;
-    }).concat(1));
-  },
-  componentDidMount: function () {
-    const version = browserVersion();
-    if (/Chrome/.test(version)) {
-      this.setState({
-        onClick: () => {
-          chrome.webstore.install(undefined, undefined, (err) => console.log(err));
-        }
-      });
-    } else if (/Firefox/.test(version)) {
-      this.setState({
-        onClick: () => {
-          window.open(
-            '//addons.mozilla.org/firefox/downloads/latest/634060/addon-634060-latest.xpi',
-            '_self');
-        }
-      });
-    }
-    //extension communication
-    window.addEventListener('message', (event) => {
-      if (event.source != window)
-        return;
-      if (event.data.from == 'extension')
-        switch (event.data.message) {
-          case 'register':
-            this.setState({
-              onClick: function (retailer) {
-                window.postMessage({
-                  from:'page',
-                  message:'quickAddToCart',
-                  value:retailer}, '*');
-              }
-            });
-            break;
-          case 'updateAddingState':
-            this.setState({
-              adding: event.data.value
-            });
-            break;
-        }
-    }, false);
-  },
   render: function () {
     //get rid of this once proper BOMs are made a requirement and enforced
     //much earlier
     if (this.props.items.length === 0) {
       return (<div>{'no BOM yet'}</div>);
     }
-
     const keys = ['reference', 'quantity', 'description'];
     const retailers = oneClickBOM.lineData.retailer_list;
     const partNumberLength = _.max(this.props.items.map((item) => {
@@ -122,7 +47,6 @@ let BOM = React.createClass({
         );
       }
       ));
-
       row = row.concat(_.keys(item.retailers).map((key, index) => {
         let style = (item.retailers[key] === '') ? {backgroundColor:'pink'} : {};
         return (
@@ -135,7 +59,6 @@ let BOM = React.createClass({
         );
       }
       ));
-
       return (
         <tr
           className={`tr-${rowIndex % 2}`}
@@ -145,54 +68,11 @@ let BOM = React.createClass({
         </tr>
       );
     });
-    let tableClass = 'responsive';
-    let storeIcon = function(adding, retailer, disabled) {
-      let imgHref = `/images/${retailer}${disabled ? '-grey' : ''}.ico`;
-      if (adding)
-        return (<i className='icon-spin1 animate-spin'></i>);
-      return (<img className='storeIcons' key={retailer} src={imgHref} alt={retailer} />);
-    };
-    let storeButtons = retailers.map((retailer, key) => {
-      let storeButtonInnerClass =
-        'storeButtonInner ' + this.state.partsSpecified[retailer];
-      let storeButtonClass  = 'storeButton';
-      let retailerIconClass = 'retailerIcon';
-      let retailerTextClass = 'retailerText';
-      let anySpecified =
-        this.state.partsSpecified[retailer] === 'allPartsSpecified'
-        || this.state.partsSpecified[retailer] === 'somePartsSpecified';
-      let onClick = '';
-      if (anySpecified) {
-        onClick = this.state.onClick.bind(null,retailer);
-      }
-      return (
-        <span onClick={onClick}
-        title={`Add parts to ${retailer} cart`}
-        className={storeButtonClass} key={`storeButton-${retailer}`}>
-          <div className={storeButtonInnerClass}>
-            <div className={retailerIconClass}>
-              {storeIcon(this.state.adding[retailer],retailer, ! anySpecified)}
-            </div>
-            <div className={retailerTextClass}>{retailer}</div>
-          </div>
-        </span>
-      );
-    });
-    storeButtons.unshift();
     return (
       <div className='BOM'>
-        <div className='storeButtonContainer'>
-          <div className='storeContainerLogo' key='storeContainerLogo'>
-            <i className='icon-basket-3'></i>
-            Buy Parts
-          </div>
-          <div className='storeButtons'>
-            {storeButtons}
-          </div>
-        </div>
         <div className='bomTableContainer'>
           <DoubleScrollbar>
-            <table className={tableClass}>
+            <table className='responsive'>
               <thead>
                 <tr>{ headings }</tr>
               </thead>
