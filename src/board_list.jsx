@@ -1,5 +1,5 @@
+'use strict';
 const React       = require('react');
-const ReactDOM    = require('react-dom');
 const BoardThumb  = require('./board_thumb');
 
 const style = {
@@ -10,9 +10,8 @@ const style = {
       marginTop:32,
       marginBottom: 32,
       display:(show ? 'inherit' : 'none')
-    }
+    };
   },
-
   intro: {
     backgroundColor: '#FAFAFA',
     padding: 20,
@@ -20,9 +19,12 @@ const style = {
     textAlign:'left',
     maxWidth:700
   }
-}
-
+};
 var BoardList = React.createClass({
+  propTypes: {
+    data: React.PropTypes.array,
+    searching: React.PropTypes.bool
+  },
   render: function () {
     var initialLoad = !(this.props.searching);
     if (this.props.data.length === 0) {
@@ -36,9 +38,11 @@ var BoardList = React.createClass({
       );
     }
     var thumbNodes = this.props.data.map(function(data, index) {
+      let lazyLoad = (! initialLoad) || (index > 10);
+      lazyLoad = true; //test lazy loading for all images
       return (
         <BoardThumb data={data} key={data.id + index}
-          lazyLoad={ (! initialLoad) || (index > 10) }/>
+          lazyLoad={ lazyLoad }/>
       );
     });
     var intro = (
@@ -54,13 +58,15 @@ var BoardList = React.createClass({
           </p><p>
 
             To quickly purchase the parts from various retailers you should
-            <a href='http://1clickBOM.com'> install</a> the 1-click-BOM extension.
+            <a href='http://1clickBOM.com'> install</a> the
+             1-click-BOM extension.
             It's pretty useful on it's own too and can be used on other sites.
             Read more about it <a href='http://1clickBOM.com'>here</a>.
 
           </p><p>
 
-            <a href='https://github.com/monostable/kitnic/#submitting-your-project'>
+            <a href='
+            https://github.com/monostable/kitnic/#submitting-your-project'>
             Submit</a> your own project to have it listed here!
 
           </p>

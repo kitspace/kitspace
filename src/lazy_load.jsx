@@ -26,7 +26,7 @@ var LazyLoad = React.createClass({
   },
 
   componentDidMount: function() {
-    this._checkViewport()
+    this._checkViewport();
     this._timer = setInterval(this._checkViewport, 1000);
   },
 
@@ -35,9 +35,6 @@ var LazyLoad = React.createClass({
   },
 
   _checkViewport: function() {
-    if (!this.isMounted()) {
-      return;
-    }
     if (this.props.once && this.state.visible) {
       return;
     }

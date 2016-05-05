@@ -13,6 +13,7 @@
       "error",
       2
     ],
+    "keyword-spacing": "error",
     "quotes": [
       "warn",
       "single"
@@ -24,6 +25,9 @@
     ],
     "no-irregular-whitespace": ["error", {
       "skipComments": false
+    }],
+    "max-len": ["error", {
+      "tabWidth": 2
     }],
     "space-infix-ops": ["error", {
       "int32Hint": false

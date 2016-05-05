@@ -1,10 +1,13 @@
-'use strict'
+'use strict';
 const React           = require('react');
 const _               = require('lodash');
 const oneClickBOM     = require('1-click-bom');
 const DoubleScrollbar = require('react-double-scrollbar');
 
 let BOM = React.createClass({
+  propTypes: {
+    items: React.PropTypes.array
+  },
   render: function () {
     //get rid of this once proper BOMs are made a requirement and enforced
     //much earlier
@@ -23,10 +26,11 @@ let BOM = React.createClass({
           { heading }
         </th> );
     };
-    let headings = ['References', 'Qty', 'Description'].concat(partNumbers,retailers);
+    let headings = ['References', 'Qty', 'Description']
+    .concat(partNumbers,retailers);
     headings = headings.map(makeHeading);
     let rows = this.props.items.map( (item, rowIndex) => {
-      let row = keys.map( (key, index) => {
+      let row = keys.map( (key) => {
         return (
           <td key={`${rowIndex}-${key}`} >
             { item[key] }
@@ -48,7 +52,8 @@ let BOM = React.createClass({
       }
       ));
       row = row.concat(_.keys(item.retailers).map((key, index) => {
-        let style = (item.retailers[key] === '') ? {backgroundColor:'pink'} : {};
+        let style = (item.retailers[key] === '')
+        ? {backgroundColor:'pink'} : {};
         return (
           <td
             key={`${item.reference}-${key}-${index}`}
@@ -83,7 +88,7 @@ let BOM = React.createClass({
           </DoubleScrollbar>
           </div>
       </div>
-    )
+    );
   }
 });
 

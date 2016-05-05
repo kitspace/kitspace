@@ -1,7 +1,9 @@
-const React       = require('react');
-const ReactDOM    = require('react-dom');
+const React = require('react');
 
 var TitleBar = React.createClass({
+  propTypes: {
+    children: React.PropTypes.any
+  },
   render: function () {
     return (
       <div className='titleBar'>
@@ -16,7 +18,8 @@ var TitleBar = React.createClass({
           {this.props.children}
         </div>
         <div className='submitContainer'>
-          <a href='https://github.com/monostable/kitnic/#submitting-your-project'>
+          <a
+          href='https://github.com/monostable/kitnic/#submitting-your-project'>
             <center>
               <img className='submitImage' src='/images/submit.svg' />
             </center>
