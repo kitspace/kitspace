@@ -7,7 +7,6 @@
     border-top: 1px solid #929292;
     border-bottom: 1px solid #B9B9B9;
     justify-content: center;
-
     .storeIcons {
         width: 16px;
         height: 16px;
@@ -19,7 +18,7 @@
     }
     .storeButton {
         box-sizing: border-box;
-        margin: 16px 0;
+        margin: 16px 10px;
         font-size: 16px;
         display: flex;
         align-items: center;
@@ -50,11 +49,13 @@
         padding: 9.6px 14.4px;
         background: rgba(0,0,0,0.1);
         width: 22px;
+        @include breakpoint(mobile) {
+        	width:32px;
+        }
         display: flex;
         justify-content: center;
         align-items: center;
     }
-
     .storeButtonInner.somePartsSpecified:hover {
         cursor: pointer;
         background: #D29191;
@@ -63,7 +64,6 @@
         cursor: pointer;
         background: #5ACA5E;
     }
-
     .storeButtonInner.somePartsSpecified {
         background: #D67B7B;
     }
@@ -80,7 +80,6 @@
         border-radius:3px;
         width: 100%;
         display: flex;
-
         .retailerText {
             text-align: center;
             flex: 1;
@@ -88,6 +87,9 @@
             min-width: 80px;
             box-sizing: border-box;
             font-weight:bold;
+            @include breakpoint(mobile) {
+            	padding:9.6px 10px;
+            }
         }
     }
     .storeContainerLogo {
