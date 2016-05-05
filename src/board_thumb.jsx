@@ -44,7 +44,7 @@ let BoardThumb = React.createClass({
              className = 'img' />;
     }
     return (
-      <div className='BoardThumb'>
+      <div className='boardThumb'>
         <a href={'/boards/' + this.props.data.id}>
             <div className='imgContainer'>
               <center>

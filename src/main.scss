@@ -1,44 +1,52 @@
-@import "common";
-@import "title_bar";
-@import "board_thumb";
+@import 'board_thumb';
+@import 'colors';
+@import 'common';
+@import 'title_bar';
+
 .searchContainer {
     display: flex;
     padding-top: 10px;
 }
-.search-input-icon {
-    background-color: #fff;
-    width: 32px;
-    height: 40px;
+
+.searchInputIcon {
+    background-color: $white;
     border-radius: 5px 0 0 5px;
+    height: 40px;
+    width: 32px;
+
     @include breakpoint(mobile) {
-        width: 72px;
         height: 80px;
+        width: 72px;
     }
 }
-.search-input {
-    width: 100%;
+
+.searchInput {
     height: 52px;
     position: relative;
+    width: 100%;
+
     @include breakpoint(mobile) {
         height: 92px;
     }
-}
-.search-input > input {
-    width: 100%;
-    height: 80%;
-    font-size: 18px;
-    border: none;
-    line-height: 22px;
-    height: 40px;
-    position: relative;
-    border-radius: 0 5px 5px 0;
-    background: #fff;
-    @include breakpoint(mobile) {
-        font-size: 48px;
-        line-height: 52px;
-        height: 80px;
+
+    input {
+        background: $white;
+        border: 0;
+        border-radius: 0 5px 5px 0;
+        font-size: 18px;
+        height: 40px;
+        line-height: 22px;
+        position: relative;
+        width: 100%;
+
+        @include breakpoint(mobile) {
+            font-size: 48px;
+            height: 80px;
+            line-height: 52px;
+        }
     }
-}
-.search-input > input:focus {
-    outline: none;
+
+    input:focus {
+        outline: none;
+    }
 }

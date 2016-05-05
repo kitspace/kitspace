@@ -1,100 +1,115 @@
+@import 'colors';
+@import 'common';
+
 $thumb-w: 240px;
 $thumb-h: 180px;
-$captionH: 40px;
-$descriptionH: 96px;
+$caption-h: 40px;
+$description-h: 96px;
 $mobile-thumb-w: $thumb-w * 3;
 $mobile-thumb-h: $thumb-h * 3;
-$mobile-captionH: $captionH * 3;
-$mobile-descriptionH: $descriptionH * 3 + 48;
-.BoardThumb:hover {
-    box-shadow: 0px 0.1em 0.5em #0C9BEF;
+$mobile-caption-h: $caption-h * 3;
+$mobile-description-h: $description-h * 3 + 48;
+
+.boardThumb:hover {
+    box-shadow: 0 .1em .5em $azure-radiance;
 }
-.BoardThumb {
-    width: $thumb-w + 32px + 16px;
-    height: $thumb-h + $captionH + $descriptionH + 16px + 5px + 16px + 5px;
+
+.boardThumb {
+    border: 1px solid $alto;
     border-radius: 4px;
-    margin-top: 8px;
-    margin-right: 8px;
+    cursor: pointer;
+    display: inline-block;
+    height: $thumb-h + $caption-h + $description-h + 16px + 5px + 16px + 5px;
     margin-bottom: 8px;
     margin-left: 8px;
+    margin-right: 8px;
+    margin-top: 8px;
+    overflow: hidden;
+    width: $thumb-w + 32px + 16px;
+
     @include breakpoint(mobile) {
-        width: $mobile-thumb-w + 32px + 16px;
-        height: $mobile-thumb-h + $mobile-captionH + $mobile-descriptionH + 16px + 5px + 16px + 5px;
         border-radius: 12px;
-        margin-top: 24px;
-        margin-right: 24px;
+        height: $mobile-thumb-h + $mobile-caption-h + $mobile-description-h + 16px + 5px + 16px + 5px;
         margin-bottom: 24px;
         margin-left: 24px;
+        margin-right: 24px;
+        margin-top: 24px;
+        width: $mobile-thumb-w + 32px + 16px;
     }
-    display: inline-block;
-    border: 1px solid #CFCFCF;
-    cursor: pointer;
-    overflow: hidden;
+
     a:hover {
         text-decoration: none;
     }
+
     .imgContainer {
-        background-color: #373737;
+        background-color: $mine-shaft;
     }
+
     .img {
-        width: $thumb-w;
         height: $thumb-h;
-        @include breakpoint(mobile) {
-            width: $mobile-thumb-w;
-            height: $mobile-thumb-h;
-        }
-        margin-top: 16px;
         margin-bottom: 16px;
-    }
-    .title {
-        height: $captionH;
-        line-height: $captionH;
-        font-size: 18px;
-        padding-left: 10px;
+        margin-top: 16px;
+        width: $thumb-w;
+
         @include breakpoint(mobile) {
-            height: $mobile-captionH;
-            line-height: $mobile-captionH;
+            height: $mobile-thumb-h;
+            width: $mobile-thumb-w;
+        }
+    }
+
+    .title {
+        background-color: $alabaster;
+        color: $mine-shaft;
+        font-size: 18px;
+        font-weight: bold;
+        height: $caption-h;
+        line-height: $caption-h;
+        opacity: 1;
+        padding-left: 10px;
+        text-align: left;
+        vertical-align: bottom;
+
+        @include breakpoint(mobile) {
             font-size: 54px;
+            height: $mobile-caption-h;
+            line-height: $mobile-caption-h;
             padding-left: 30px;
         }
-        text-align: center;
-        vertical-align: bottom;
-        font-weight: bold;
-        opacity: 1.0;
-        background-color: #FAFAFA;
-        color: #373737;
-        text-align: left;
     }
+
     .url {
+        background-color: $alabaster;
+        color: $gray;
         font-size: 13px;
+        font-weight: normal;
+        opacity: 1;
         padding-left: 10px;
+        text-align: left;
+
         @include breakpoint(mobile) {
             font-size: 39px;
             padding-left: 30px;
         }
-        background-color: #FAFAFA;
-        color: grey;
-        opacity: 1.0;
-        font-weight: normal;
-        text-align: left;
     }
+
     .description {
+        background-color: $alabaster;
+        color: $mine-shaft;
         font-size: 16px;
+        font-weight: normal;
+        height: $description-h;
+        margin-bottom: 10px;
+        opacity: 1;
+        overflow: hidden;
+        padding: 8px 10px 5px;
+        text-align: left;
+        vertical-align: top;
         visibility: visible;
-        height: $descriptionH;
-        padding: 8px 10px 5px 10px;
+
         @include breakpoint(mobile) {
-            height: $mobile-descriptionH;
             font-size: 48px;
+            height: $mobile-description-h;
             padding-left: 30px;
         }
-        overflow: hidden;
-        vertical-align: top;
-        margin-bottom: 10px;
-        opacity: 1.0;
-        background-color: #FAFAFA;
-        color: #373737;
-        font-weight: normal;
-        text-align: left;
     }
 }

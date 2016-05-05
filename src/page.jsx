@@ -30,7 +30,7 @@ var Page = React.createClass({
     return (
       <DocumentTitle title={`${titleTxt} - kitnic.it`}>
       <div>
-        <div className='Page'>
+        <div className='page'>
           <TitleBar>
             <div className='titleText'>
               {titleTxt}
