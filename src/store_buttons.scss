@@ -1,109 +1,128 @@
-.storeButtonContainer{
-	display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-    background: #D3D3D3;
+@import 'colors';
+
+.storeButtonContainer {
+    background: $alto;
+    border-bottom: 1px solid $silver;
     border-radius: 3px;
-    border-top: 1px solid #929292;
-    border-bottom: 1px solid #B9B9B9;
+    border-top: 1px solid $gray;
+    display: flex;
+    flex-wrap: wrap;
     justify-content: center;
+    width: 100%;
+
     .storeIcons {
-        width: 16px;
         height: 16px;
         margin-top: 1px;
+        width: 16px;
+
         @include breakpoint(mobile) {
             height: 32px;
             width: 32px;
         }
     }
+
     .storeButton {
-        box-sizing: border-box;
-        margin: 16px 10px;
-        font-size: 16px;
-        display: flex;
         align-items: center;
-        border-radius: 3px;
         border: 0;
-        color: #fff;
+        border-radius: 3px;
+        box-sizing: border-box;
+        color: $white;
+        display: flex;
+        font-size: 16px;
         justify-content: center;
+        margin: 16px 10px;
         padding: 0;
-        -webkit-touch-callout: none; /* iOS Safari */
-        -webkit-user-select: none;   /* Chrome/Safari/Opera */
-        -khtml-user-select: none;    /* Konqueror */
-        -moz-user-select: none;      /* Firefox */
-        -ms-user-select: none;       /* Internet Explorer/Edge */
+        -webkit-touch-callout: none; // iOS Safari
+        -khtml-user-select: none;    // Konqueror
+        -moz-user-select: none;      // Firefox
+        -ms-user-select: none;       // Internet Explorer/Edge
+        -webkit-user-select: none;   // Chrome/Safari/Opera
         @include breakpoint(mobile) {
             font-size: 38px;
         }
     }
+
     .storeButtons {
-        padding: 0 16px;
         display: flex;
-        justify-content: space-around;
-        width: 100%;
         flex-wrap: wrap;
+        justify-content: space-around;
+        padding: 0 16px;
+        width: 100%;
     }
+
     .retailerIcon {
+        align-items: center;
+        background: $black-10;
         border-bottom-left-radius: 3px;
         border-top-left-radius: 3px;
-        padding: 9.6px 14.4px;
-        background: rgba(0,0,0,0.1);
-        width: 22px;
-        @include breakpoint(mobile) {
-        	width:32px;
-        }
         display: flex;
         justify-content: center;
-        align-items: center;
+        padding: 9.6px 14.4px;
+        width: 22px;
+
+        @include breakpoint(mobile) {
+            width: 32px;
+        }
     }
-    .storeButtonInner.somePartsSpecified:hover {
-        cursor: pointer;
-        background: #D29191;
-    }
-    .storeButtonInner.allPartsSpecified:hover {
-        cursor: pointer;
-        background: #5ACA5E;
-    }
-    .storeButtonInner.somePartsSpecified {
-        background: #D67B7B;
-    }
-    .storeButtonInner.allPartsSpecified {
-        background: #4caf50;
-    }
-    .storeButtonInner.noPartsSpecified {
-        background: darkgrey;
+
+    .noPartsSpecified {
+        background: $silver-chalice;
+
         .retailerText {
             cursor: default;
         }
     }
+
+    .allPartsSpecified {
+        background: $fruit-salad;
+    }
+
+    .somePartsSpecified:hover {
+        background: $puce;
+        cursor: pointer;
+    }
+
+    .allPartsSpecified:hover {
+        background: $emerald;
+        cursor: pointer;
+    }
+
+    .somePartsSpecified {
+        background: $new-york-pink;
+    }
+
     .storeButtonInner {
-        border-radius:3px;
-        width: 100%;
+        border-radius: 3px;
         display: flex;
+        width: 100%;
+
         .retailerText {
-            text-align: center;
-            flex: 1;
-            padding: 9.6px 0;
-            min-width: 80px;
             box-sizing: border-box;
-            font-weight:bold;
+            flex: 1;
+            font-weight: bold;
+            min-width: 80px;
+            padding: 9.6px 0;
+            text-align: center;
+
             @include breakpoint(mobile) {
-            	padding:9.6px 10px;
+                padding: 9.6px 10px;
             }
         }
     }
+
     .storeContainerLogo {
-        display: flex;
-        justify-content: center;
         align-items: center;
-        background: #696969;
-        margin-right: auto;
-        border-bottom: 1px solid #585858;
-        border-top: 1px solid #8C8C8C;
-        color: #fff;
+        background: $dove-gray;
+        border-bottom: 1px solid $scorpion;
+        border-top: 1px solid $gray;
+        color: $white;
+        display: flex;
         flex: 1 0 auto;
-        padding: 3px 0;
         font-size: 20.8px;
+        justify-content: center;
+        margin-right: auto;
+        padding: 3px 0;
+
         @include breakpoint(mobile) {
             font-size: 48px;
             padding: 32px;

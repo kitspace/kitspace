@@ -66,7 +66,7 @@ let BOM = React.createClass({
       ));
       return (
         <tr
-          className={`tr-${rowIndex % 2}`}
+          className={`tr${rowIndex % 2}`}
           key={`bom-tr-${rowIndex}`}
         >
           { row }
@@ -74,10 +74,10 @@ let BOM = React.createClass({
       );
     });
     return (
-      <div className='BOM'>
+      <div className='bom'>
         <div className='bomTableContainer'>
           <DoubleScrollbar>
-            <table className='responsive'>
+            <table className='bomTable'>
               <thead>
                 <tr>{ headings }</tr>
               </thead>

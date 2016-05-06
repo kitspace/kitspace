@@ -4,39 +4,44 @@
         , (max-device-width: 1024px) and (orientation: landscape)
         , (min-resolution: 300dpi)
         , (handheld) {
-            @content;
+                @content;
         }
-    }
-    @else if $point == mobile_or_small_width {
+    } @else if $point == mobile_or_small_width {
         @media (max-device-width: 899px)
         , (max-device-width: 1024px) and (orientation: landscape)
         , (min-resolution: 300dpi)
         , (handheld)
         , (max-width: 810px) {
-            @content;
+                @content;
         }
-    }
-    @else if $point == small_width {
-        @media (max-width: 810px) {
-            @content;
-        }
+    } @else if $point == small_width {
+            @media (max-width: 810px) {
+                    @content;
+            }
     }
 }
-html, head, body {
+
+html,
+head,
+body {
     margin: 0;
 }
+
 body {
     font-family: 'Noto Sans','Helvetica', 'Arial', sans-serif;
     font-size: 16px;
+
     @include breakpoint(mobile) {
         font-size: 24px;
     }
 }
+
 a {
-    color: #373737;
-    text-decoration: none;
+    color: $mine-shaft;
     font-weight: bold;
+    text-decoration: none;
 }
+
 a:hover {
     text-decoration: underline;
 }

@@ -22,11 +22,11 @@ var Main = React.createClass({
       <div>
         <TitleBar>
           <div className='searchContainer'>
-            <div className='search-input-icon'>
+            <div className='searchInputIcon'>
             <img src='/images/mag_icon.svg' style={style.icon} />
             </div>
             <SearchInput
-              className='search-input'
+              className='searchInput'
               ref='search'
               onChange={this.searchUpdated}
              />
@@ -39,13 +39,13 @@ var Main = React.createClass({
   handleKeydown: function(event) {
     //enter key
     if (event.which == 13) {
-      document.getElementsByClassName('search-input')[0]
+      document.getElementsByClassName('searchInput')[0]
       .firstElementChild.blur();
     }
     return false;
   },
   componentDidMount: function() {
-    document.getElementsByClassName('search-input')[0]
+    document.getElementsByClassName('searchInput')[0]
     .firstElementChild.addEventListener('keydown', this.handleKeydown);
   },
   searchUpdated: function (term) {

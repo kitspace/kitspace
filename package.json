@@ -44,5 +44,6 @@
     "browser-version": "^1.0.0",
     "lodash": "^4.0.0",
     "react-double-scrollbar": "0.0.9"
-  }
+  },
+  "sasslintConfig": "./src/.sass-lint.yml"
 }

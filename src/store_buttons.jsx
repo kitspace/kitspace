@@ -78,7 +78,7 @@ const StoreButtons = React.createClass({
   storeIcon: function(adding, retailer, disabled) {
     const imgHref = `/images/${retailer}${disabled ? '-grey' : ''}.ico`;
     if (adding)
-      return (<i className='icon-spin1 animate-spin'></i>);
+      return (<i className='icon-spin1 animateSpin'></i>);
     return (
       <img
         className='storeIcons'

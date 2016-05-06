@@ -1,81 +1,98 @@
-@import "common";
-@import "title_bar";
-@import "bom";
-@import "board_showcase";
-@import "gerbers";
-@import "store_buttons";
-.Page {
-    .disabledSite {
-        color: grey;
-        -ie-user-select: none;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        cursor: default;
+@import 'colors';
+@import 'common';
+@import 'title_bar';
+@import 'bom';
+@import 'board_showcase';
+@import 'gerbers';
+@import 'store_buttons';
+
+.page {
+    @include breakpoint(mobile) {
+        .octicon {
+            font-size: 48px;
+        }
+
+        .infoBarInner {
+            font-size: 40px;
+        }
+
+        .infoBarLinksContainer {
+            background: $alabaster;
+            border-radius: 20px;
+            font-size: 48px;
+        }
+
+        .middleContainer {
+            background: $cod-gray;
+        }
     }
+
+    .disabledSite {
+        color: $gray;
+        cursor: default;
+        -ie-user-select: none;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+    }
+
     .subtitleText {
+        color: $gray;
         font-size: 14px;
         text-align: center;
-        color: gray;
+
         @include breakpoint(mobile) {
             font-size: 32px;
         }
     }
+
     .titleText {
-        color: white;
-        width: 100%;
-        text-align: center;
-        vertical-align: middle;
+        border-radius: 5px;
+        color: $white;
         font-size: 24px;
         line-height: 40px;
-        border-radius: 5px;
+        text-align: center;
+        vertical-align: middle;
+        width: 100%;
+
         @include breakpoint(mobile) {
             font-size: 64px;
-            padding-top: 5px;
             padding-bottom: 20px;
+            padding-top: 5px;
         }
     }
+
     .infoBar {
-        padding: 20px;
         margin-top: 10px;
+        padding: 20px;
     }
+
     .infoBarDescription {
-        margin-bottom: 10;
-        margin-top: 5;
+        margin-bottom: 10px;
+        margin-top: 5px;
     }
+
     .infoBarInner {
         display: flex;
         flex-flow: row wrap;
         justify-content: space-around;
     }
+
     .infoBarLinksContainer {
         display: flex;
         flex-flow: row wrap;
-        justify-content: space-around;
         flex-grow: 2;
-        margin-top: 5;
+        justify-content: space-around;
+        margin-top: 5px;
     }
+
     .infoBarLinks {
         margin-left: 5px;
         margin-right: 5px;
     }
-    @include breakpoint(mobile) {
-        .octicon {
-            font-size: 48px;
-        }
-        .infoBarInner {
-            font-size: 40px;
-        }
-        .infoBarLinksContainer {
-            background: #F9F9F9;
-            border-radius: 20px;
-            font-size: 48px;
-        }
-        .middleContainer {
-            background: #1D1D1D;
-        }
-    }
+
     .pageContainer {
         padding: 0 10%;
+
         @include breakpoint(mobile_or_small_width) {
             padding: 0;
         }
