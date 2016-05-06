@@ -5,6 +5,7 @@ const browserVersion   = require('browser-version');
 const _                = require('lodash');
 const BomInstallPrompt = require('./bom_install_prompt');
 
+
 const StoreButtons = React.createClass({
   propTypes: {
     items: React.PropTypes.any
@@ -54,6 +55,7 @@ const StoreButtons = React.createClass({
       },2000);
     }
     return {
+      compatibleBrowser: false,
       adding: adding,
       partsSpecified: partsSpecified,
       onClick: onClick,
@@ -133,6 +135,7 @@ const StoreButtons = React.createClass({
     storeButtons.unshift();
     return storeButtons;
   },
+
   render: function() {
     return (
       <div className='storeButtonContainer'>
