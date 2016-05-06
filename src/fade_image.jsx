@@ -1,9 +1,13 @@
 var React = require('react');
-var ReactDOM = require('react-dom');
 
 var FadeImage = React.createClass({
+  propTypes: {
+    style: React.PropTypes.any,
+    speed: React.PropTypes.any,
+    src: React.PropTypes.string.isRequired
+  },
   getInitialState: function() {
-      return {opacity: 0};
+    return {opacity: 0};
   },
 
   fadeIn: function() {
@@ -23,7 +27,7 @@ var FadeImage = React.createClass({
         src={this.props.src}
         onLoad={this.fadeIn}
       />
-    )
+    );
   }
 });
 

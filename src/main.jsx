@@ -1,5 +1,4 @@
 const React       = require('react');
-const ReactDOM    = require('react-dom');
 const SearchInput = require('react-search-input');
 const TitleBar    = require('./title_bar');
 const BoardList   = require('./board_list');
@@ -9,7 +8,7 @@ const style = {
   icon: {
     width:'100%',
   }
-}
+};
 
 var Main = React.createClass({
   getInitialState: function() {
@@ -40,12 +39,14 @@ var Main = React.createClass({
   handleKeydown: function(event) {
     //enter key
     if (event.which == 13) {
-      document.getElementsByClassName('search-input')[0].firstElementChild.blur();
+      document.getElementsByClassName('search-input')[0]
+      .firstElementChild.blur();
     }
     return false;
   },
   componentDidMount: function() {
-    document.getElementsByClassName('search-input')[0].firstElementChild.addEventListener('keydown', this.handleKeydown);
+    document.getElementsByClassName('search-input')[0]
+    .firstElementChild.addEventListener('keydown', this.handleKeydown);
   },
   searchUpdated: function (term) {
     if (this.refs.search) {
@@ -53,7 +54,11 @@ var Main = React.createClass({
       var result = boards.filter(this.refs.search.filter(filters));
       if (term.length > 2) {
         var cat = result.length === 0 ? 'no_result' : 'result';
-        ga('send', 'pageview', '/search?q=' + term + '&results=' + cat);
+        ga( //eslint-disable-line no-undef
+        'send',
+        'pageview',
+        '/search?q=' + term + '&results=' + cat
+        );
       }
       this.setState({result: result, searching:(term.length > 0)});
     }

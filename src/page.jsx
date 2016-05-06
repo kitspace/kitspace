@@ -1,14 +1,10 @@
 const React         = require('react');
-const ReactDOM      = require('react-dom');
 const DocumentTitle = require('react-document-title');
 const TitleBar      = require('./title_bar');
-const FadeImage     = require('./fade_image');
 const BOM           = require('./bom');
 const BoardShowcase = require('./board_showcase');
-const StoreButtons    = require('./store_buttons');
-
-const info    = require('./info.json');
-const zipPath = require('./zip-info.json');
+const StoreButtons  = require('./store_buttons');
+const info          = require('./info.json');
 
 var Page = React.createClass({
   render: function () {
@@ -64,4 +60,4 @@ var Page = React.createClass({
   },
 });
 
-module.exports = Page
+module.exports = Page;
