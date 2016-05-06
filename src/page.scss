@@ -5,6 +5,7 @@
 @import 'board_showcase';
 @import 'gerbers';
 @import 'store_buttons';
+@import 'bom_install_prompt';
 
 .page {
     @include breakpoint(mobile) {

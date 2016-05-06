@@ -6,6 +6,7 @@ const FadeImage    = require('./fade_image');
 function reverse(s){
   return s.split('').reverse().join('');
 }
+
 function truncate(input, len, fromStart) {
   var str = input;
   if (fromStart) {
