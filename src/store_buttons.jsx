@@ -1,8 +1,9 @@
 'use strict';
-const React           = require('react');
-const oneClickBOM     = require('1-click-bom');
-const browserVersion  = require('browser-version');
-const _               = require('lodash');
+const React            = require('react');
+const oneClickBOM      = require('1-click-bom');
+const browserVersion   = require('browser-version');
+const _                = require('lodash');
+const BomInstallPrompt = require('./bom_install_prompt');
 
 const StoreButtons = React.createClass({
   propTypes: {
@@ -16,9 +17,9 @@ const StoreButtons = React.createClass({
     if (/Chrome/.test(version)) {
       onClick = () => {
         chrome.webstore.install( //eslint-disable-line no-undef
-        undefined, undefined, (err) =>
+          undefined, undefined, (err) =>
           console.log(err) //eslint-disable-line no-console
-        );
+          );
       };
     } else if (/Firefox/.test(version)) {
       onClick = () => {
@@ -44,10 +45,20 @@ const StoreButtons = React.createClass({
         partsSpecified[retailer] = 'noPartsSpecified';
       }
     }
+    //waiting to avoid flashing on page load
+    if (typeof window != 'undefined'){
+      setTimeout(() => {
+        this.setState({
+          extensionPresence: !this.state.extensionWaiting ? 1 : -1
+        });
+      },2000);
+    }
     return {
       adding: adding,
       partsSpecified: partsSpecified,
-      onClick: onClick
+      onClick: onClick,
+      extensionWaiting: true,
+      extensionPresence: 0
     };
   },
   componentDidMount: function () {
@@ -55,7 +66,10 @@ const StoreButtons = React.createClass({
     window.addEventListener('message', (event) => {
       if (event.source != window)
         return;
-      if (event.data.from == 'extension')
+      if (event.data.from == 'extension'){
+        this.setState({
+          extensionWaiting: false
+        });
         switch (event.data.message) {
         case 'register':
           this.setState({
@@ -73,6 +87,7 @@ const StoreButtons = React.createClass({
           });
           break;
         }
+      }
     }, false);
   },
   storeIcon: function(adding, retailer, disabled) {
@@ -81,10 +96,10 @@ const StoreButtons = React.createClass({
       return (<i className='icon-spin1 animateSpin'></i>);
     return (
       <img
-        className='storeIcons'
-        key={retailer}
-        src={imgHref}
-        alt={retailer} />);
+      className='storeIcons'
+      key={retailer}
+      src={imgHref}
+      alt={retailer} />);
   },
   storeButtons: function() {
     const retailers = oneClickBOM.lineData.retailer_list;
@@ -120,15 +135,17 @@ const StoreButtons = React.createClass({
   },
   render: function() {
     return (
-    <div className='storeButtonContainer'>
-      <div className='storeContainerLogo' key='storeContainerLogo'>
-        <i className='icon-basket-3'></i>
-        Buy Parts
+      <div className='storeButtonContainer'>
+        <div className='storeContainerLogo' key='storeContainerLogo'>
+          <i className='icon-basket-3'></i>
+          Buy Parts
+        </div>
+        <BomInstallPrompt
+        extensionPresence={this.state.extensionPresence} />
+        <div className='storeButtons'>
+          {this.storeButtons()}
+        </div>
       </div>
-      <div className='storeButtons'>
-        {this.storeButtons()}
-      </div>
-    </div>
     );
   }
 });
