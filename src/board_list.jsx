@@ -38,11 +38,9 @@ var BoardList = React.createClass({
       );
     }
     var thumbNodes = this.props.data.map(function(data, index) {
-      let lazyLoad = (! initialLoad) || (index > 10);
-      lazyLoad = true; //test lazy loading for all images
       return (
         <BoardThumb data={data} key={data.id + index}
-          lazyLoad={ lazyLoad }/>
+          lazyLoad={ true }/>
       );
     });
     var intro = (
