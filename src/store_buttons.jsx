@@ -4,11 +4,31 @@ const oneClickBOM      = require('1-click-bom');
 const browserVersion   = require('browser-version');
 const _                = require('lodash');
 const BomInstallPrompt = require('./bom_install_prompt');
+const ExtensionCompatibilityPrompt  =
+require('./extension_compatibility_prompt');
 
 
 const StoreButtons = React.createClass({
   propTypes: {
     items: React.PropTypes.any
+  },
+  isExtensionCompatible: function(version) {
+    if (typeof navigator == 'undefined')
+      return true;
+    if (/Mobile/i.test(navigator.userAgent))
+      return false;
+    return (/Chrome/.test(version) || /Firefox/.test(version));
+  },
+  getExtensionLink: function(version) {
+    if (!this.isExtensionCompatible(version))
+      return 'https://1clickbom.com/';
+    if (/Chrome/.test(version))
+      return 'https://chrome.google.com/webstore/detail' +
+      '/1clickbom/mflpmlediakefinapghmabapjeippfdi';
+    if (/Firefox/.test(version))
+      return 'https://addons.mozilla.org/firefox/downloads' +
+      '/latest/634060/addon-634060-latest.xpi';
+    return 'https://1clickbom.com/';
   },
   getInitialState: function() {
     let adding = {};
@@ -55,7 +75,8 @@ const StoreButtons = React.createClass({
       },2000);
     }
     return {
-      compatibleBrowser: false,
+      compatibleBrowser: this.isExtensionCompatible(version),
+      extensionInstallLink: this.getExtensionLink(version),
       adding: adding,
       partsSpecified: partsSpecified,
       onClick: onClick,
@@ -144,7 +165,12 @@ const StoreButtons = React.createClass({
           Buy Parts
         </div>
         <BomInstallPrompt
-        extensionPresence={this.state.extensionPresence} />
+        extensionPresence={this.state.extensionPresence}
+        bomInstallLink={this.state.extensionInstallLink}
+        compatibleBrowser={this.state.compatibleBrowser}
+        />
+        <ExtensionCompatibilityPrompt
+        compatibleBrowser={this.state.compatibleBrowser} />
         <div className='storeButtons'>
           {this.storeButtons()}
         </div>
