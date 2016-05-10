@@ -39,6 +39,7 @@
         -webkit-user-select: none;   // Chrome/Safari/Opera
         @include breakpoint(mobile) {
             font-size: 38px;
+            min-width: 233px;
         }
     }
 
