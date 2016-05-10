@@ -19,17 +19,6 @@ const StoreButtons = React.createClass({
       return false;
     return (/Chrome/.test(version) || /Firefox/.test(version));
   },
-  getExtensionLink: function(version) {
-    if (!this.isExtensionCompatible(version))
-      return 'https://1clickbom.com/';
-    if (/Chrome/.test(version))
-      return 'https://chrome.google.com/webstore/detail' +
-      '/1clickbom/mflpmlediakefinapghmabapjeippfdi';
-    if (/Firefox/.test(version))
-      return 'https://addons.mozilla.org/firefox/downloads' +
-      '/latest/634060/addon-634060-latest.xpi';
-    return 'https://1clickbom.com/';
-  },
   getInitialState: function() {
     let adding = {};
     let partsSpecified = {};
@@ -76,7 +65,7 @@ const StoreButtons = React.createClass({
     }
     return {
       compatibleBrowser: this.isExtensionCompatible(version),
-      extensionInstallLink: this.getExtensionLink(version),
+      extensionInstallLink: onClick,
       adding: adding,
       partsSpecified: partsSpecified,
       onClick: onClick,

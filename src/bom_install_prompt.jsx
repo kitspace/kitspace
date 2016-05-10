@@ -3,7 +3,7 @@ const React = require('react');
 const bomInstallPrompt = React.createClass({
   propTypes: {
     extensionPresence: React.PropTypes.number.isRequired,
-    bomInstallLink: React.PropTypes.string.isRequired,
+    bomInstallLink: React.PropTypes.func.isRequired,
     compatibleBrowser: React.PropTypes.bool.isRequired
   },
   render: function(){
@@ -12,7 +12,7 @@ const bomInstallPrompt = React.createClass({
       <div className='bomInstallPrompt'>
         Please install the <a
         className='bomInstallAnchor'
-        href={this.props.bomInstallLink}
+        onClick={this.props.bomInstallLink}
         >
         1ClickBOM Extension</a> to use this feature
       </div>);
