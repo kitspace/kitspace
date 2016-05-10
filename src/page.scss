@@ -57,6 +57,7 @@
 
         @include breakpoint(mobile) {
             font-size: 64px;
+            line-height: 74px;
             padding-bottom: 20px;
             padding-top: 5px;
         }
