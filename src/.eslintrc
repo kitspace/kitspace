@@ -23,6 +23,7 @@
         "skipBlankLines": false
       }
     ],
+    "eol-last": "error",
     "no-irregular-whitespace": ["error", {
       "skipComments": false
     }],
