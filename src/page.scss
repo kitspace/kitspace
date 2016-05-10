@@ -6,6 +6,7 @@
 @import 'gerbers';
 @import 'store_buttons';
 @import 'bom_install_prompt';
+@import 'extension_compatibility_prompt';
 
 .page {
     @include breakpoint(mobile) {
