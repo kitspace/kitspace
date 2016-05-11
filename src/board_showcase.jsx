@@ -48,21 +48,17 @@ var BoardShowcase = React.createClass({
           </button>
         </div>
         <div className="boardShowcase">
-          <div className="boardContainer">
-            <LazyLoad once={true}
+          <LazyLoad once={true}
             component={React.createElement('div', {className:'img'})}
             distance={300}>
+            <div className="boardContainer">
               <FadeImage className={frontBoardClass} src='images/top.svg' />
-            </LazyLoad>
-            <div className="circuitBorderContainer">
-              <div className="circuitBorder"></div>
-            </div>
-            <LazyLoad once={true}
-            component={React.createElement('div', {className:'img'})}
-            distance={300}>
+              <div className="circuitBorderContainer">
+                <div className="circuitBorder"></div>
+              </div>
               <FadeImage className={backBoardClass} src='images/bottom.svg' />
-            </LazyLoad>
-          </div>
+            </div>
+          </LazyLoad>
         </div>
       </div>
     );
