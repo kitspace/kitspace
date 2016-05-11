@@ -3,8 +3,10 @@
 
 .boardShowcaseContainer {
     @include breakpoint(mobile) {
-        .circuitToggleBtn {
-            font-size: 48px;
+        .responsiveTabs {
+            .circuitToggleBtn {
+                font-size: 48px;
+            }
         }
 
         .boardDiagram {
@@ -38,7 +40,7 @@
             border-radius: 0 0 5px 5px;
         }
 
-        .toggleBoardView {
+        .responsiveTabs.toggleBoardView {
             display: flex;
         }
 
@@ -84,8 +86,9 @@
         max-height: 320px;
         padding: 2rem;
         width: 100%;
+
         @include breakpoint(mobile_or_small_width) {
-            border-radius: 0px;
+            border-radius: 0;
         }
     }
 

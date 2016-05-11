@@ -27,6 +27,7 @@
     .bomTable {
         border-spacing: 0;
         font-size: 14px;
+        min-width: 100%;
 
         @include breakpoint(mobile) {
             th,

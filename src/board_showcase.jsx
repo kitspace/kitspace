@@ -33,7 +33,7 @@ var BoardShowcase = React.createClass({
     return (
       <div className="boardShowcaseContainer">
         <Gerbers />
-        <div className="toggleBoardView">
+        <div className="toggleBoardView responsiveTabs">
           <button
           disabled={this.state.viewFrontBoard}
           className="circuitToggleBtn circuitFrontBtn"
