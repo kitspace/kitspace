@@ -77,15 +77,16 @@
     .boardContainer {
         background: $mine-shaft;
         border-bottom: 1px solid $cod-gray;
-        border-radius: 5px;
-        border-top-left-radius: 0;
-        border-top-right-radius: 0;
+        border-radius: 3px;
         box-sizing: border-box;
         display: flex;
         justify-content: space-around;
         max-height: 320px;
         padding: 2rem;
         width: 100%;
+        @include breakpoint(mobile_or_small_width) {
+            border-radius: 0px;
+        }
     }
 
     .toggleBoardForm {
