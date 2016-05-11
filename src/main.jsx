@@ -23,7 +23,7 @@ var Main = React.createClass({
         <TitleBar>
           <div className='searchContainer'>
             <div className='searchInputIcon'>
-            <img src='/images/mag_icon.svg' style={style.icon} />
+              <img src='/images/mag_icon.svg' style={style.icon} />
             </div>
             <SearchInput
               className='searchInput'

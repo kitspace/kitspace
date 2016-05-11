@@ -4,7 +4,9 @@
 @import 'title_bar';
 
 .searchContainer {
+    box-sizing: border-box;
     display: flex;
+    height: 61px;
     padding-top: 10px;
 }
 
@@ -32,10 +34,11 @@
     input {
         background: $white;
         border: 0;
-        border-radius: 0 5px 5px 0;
+        border-radius: 0 3px 3px 0;
         font-size: 18px;
         height: 40px;
         line-height: 22px;
+        padding-right: 16px;
         position: relative;
         width: 100%;
 
