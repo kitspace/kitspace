@@ -2,12 +2,13 @@ const React = require('react');
 
 const bomInstallPrompt = React.createClass({
   propTypes: {
-    extensionPresence: React.PropTypes.number.isRequired,
+    extensionPresence: React.PropTypes.string.isRequired,
     bomInstallLink: React.PropTypes.func.isRequired,
     compatibleBrowser: React.PropTypes.bool.isRequired
   },
   render: function(){
-    if (this.props.extensionPresence === -1 && this.props.compatibleBrowser) {
+    if (this.props.extensionPresence === 'not_present'
+      && this.props.compatibleBrowser) {
       return (
       <div className='bomInstallPrompt'>
 

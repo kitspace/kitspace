@@ -59,7 +59,8 @@ const StoreButtons = React.createClass({
     if (typeof window != 'undefined'){
       setTimeout(() => {
         this.setState({
-          extensionPresence: !this.state.extensionWaiting ? 1 : -1
+          extensionPresence:
+            !this.state.extensionWaiting ? 'present' : 'not_present'
         });
       },2000);
     }
@@ -70,7 +71,7 @@ const StoreButtons = React.createClass({
       partsSpecified: partsSpecified,
       onClick: onClick,
       extensionWaiting: true,
-      extensionPresence: 0
+      extensionPresence: 'unknown'
     };
   },
   componentDidMount: function () {
