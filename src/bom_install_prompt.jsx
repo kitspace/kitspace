@@ -10,11 +10,11 @@ const bomInstallPrompt = React.createClass({
     if (this.props.extensionPresence === -1 && this.props.compatibleBrowser) {
       return (
       <div className='bomInstallPrompt'>
-        Please install the <a
-        className='bomInstallAnchor'
-        onClick={this.props.bomInstallLink}
-        >
-        1ClickBOM Extension</a> to use this feature
+
+        Please <a className='bomInstallAnchor'
+        onClick={this.props.bomInstallLink}> install the 1-click BOM
+        extension </a> to make full use of this feature.
+
       </div>);
     }
     return (<div></div>);

@@ -9,12 +9,12 @@ const ExtensionCompatibilityPrompt = React.createClass({
       return null;
     return (
       <div className='extensionCompatibilityPrompt'>
-        Sorry the <a
-        className='bomPromptLink'
-        href='https://1clickbom.com/'>1-Click BOM
-        </a> extension is not compatible with this device.
-      </div>
-    );
-  }
+
+        Sorry, the <a className='bomPromptLink' href='https://1clickbom.com/'>
+        1-click BOM extension </a> is not yet available for your browser. Only
+          the Digikey add-to-cart links work fully, Farnell and Newark should
+        work but the references will not be added as line-notes.
+
+      </div>); }
 });
 module.exports = ExtensionCompatibilityPrompt;
