@@ -7,19 +7,19 @@ const FadeImage = require('./fade_image');
 var BoardShowcase = React.createClass({
   getInitialState: function() {
     return {
-      viewFrontBoard:1
+      viewFrontBoard: true
     };
   },
   frontBoardView: function(e) {
     e.preventDefault();
     this.setState({
-      viewFrontBoard:1
+      viewFrontBoard: true
     });
   },
   backBoardView: function(e) {
     e.preventDefault();
     this.setState({
-      viewFrontBoard:0
+      viewFrontBoard: false
     });
   },
   render: function () {
