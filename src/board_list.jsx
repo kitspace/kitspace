@@ -66,7 +66,8 @@ var BoardList = React.createClass({
             Read more about it
             <a
             className='clickableLink'
-            onClick={onClick}>here</a>.
+            href='http://1clickBOM.com'
+            >here</a>.
 
           </p><p>
 
