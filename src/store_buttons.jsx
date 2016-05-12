@@ -22,6 +22,7 @@ const StoreButtons = React.createClass({
   getInitialState: function() {
     let adding = {};
     let partsSpecified = {};
+    let parts = {};
     const version = browserVersion();
     var onClick;
     if (/Chrome/.test(version)) {
@@ -47,6 +48,27 @@ const StoreButtons = React.createClass({
       adding[retailer] = undefined;
       let retailerItems = _.map(this.props.items,
         (item) => item.retailers[retailer]);
+      let partCount = retailerItems.reduce((carry, val) => {
+        if (val)
+          carry++;
+        return carry;
+      }, 0);
+      let summary;
+      if (this.props.items.length == partCount){
+        summary = 'all specified';
+      } else if (partCount == 0) {
+        summary = 'none specified';
+      } else {
+        summary = partCount + '/' + this.props.items.length + ' specified';
+      }
+
+      parts[retailer] =
+      {
+        count: partCount,
+        total: this.props.items.length,
+        summary: summary
+      };
+
       if (_.every(retailerItems)) {
         partsSpecified[retailer] = 'allPartsSpecified';
       } else if (_.some(retailerItems)) {
@@ -69,6 +91,7 @@ const StoreButtons = React.createClass({
       extensionInstallLink: onClick,
       adding: adding,
       partsSpecified: partsSpecified,
+      parts: parts,
       onClick: onClick,
       extensionWaiting: true,
       extensionPresence: 'unknown'
@@ -129,9 +152,11 @@ const StoreButtons = React.createClass({
       if (anySpecified) {
         onClick = this.state.onClick.bind(null,retailer);
       }
+      let partsInfo = this.state.parts[retailer];
+
       return (
         <span onClick={onClick}
-        title={`Add parts to ${retailer} cart`}
+        title={partsInfo.summary}
         className={storeButtonClass} key={`storeButton-${retailer}`}>
           <div className={storeButtonInnerClass}>
             <div className={retailerIconClass}>
