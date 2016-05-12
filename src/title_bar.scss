@@ -50,13 +50,12 @@
     color: $white;
     display: flex;
     flex-shrink: 0;
-    flex-wrap: wrap;
     justify-content: space-between;
     padding: 10px;
     z-index: 1;
 
     @include breakpoint(mobile) {
-        width: 30%;
+        width: 45%;
     }
 
     .submissionButton {
@@ -71,18 +70,17 @@
         font-family: 'Noto Sans','Helvetica', 'Arial', sans-serif;
         font-size: 16px;
         font-weight: bold;
-        height: 40px;
         line-height: 0;
         margin-right: 8px;
         min-width: 174px;
-        padding: 9px 16px;
+        padding: 20px 15px;
         white-space: nowrap;
 
         @include breakpoint(mobile) {
-            font-size: 24px;
+            font-size: 32px;
             height: auto;
-            margin-bottom: 10px;
             min-width: 307px;
+            padding: 30px 40px;
         }
     }
 
@@ -145,6 +143,7 @@
         z-index: 0;
 
         @include breakpoint(mobile_or_small_width) {
+            order: 0;
             position: static;
             width: auto;
         }
@@ -159,8 +158,12 @@
     flex-grow: 2;
 
     @include breakpoint(mobile) {
-        order: 3;
         padding: 10px 10px 40px;
+    }
+
+    @include breakpoint(mobile_or_small_width) {
+        margin: 10px;
+        order: 3;
         width: 100%;
     }
 }
