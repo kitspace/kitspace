@@ -1,6 +1,7 @@
 'use strict';
-const React       = require('react');
-const BoardThumb  = require('./board_thumb');
+const React            = require('react');
+const BoardThumb       = require('./board_thumb');
+const InstallExtension = require('./install_extension');
 
 const style = {
   introContainer: function (show) {
@@ -26,6 +27,7 @@ var BoardList = React.createClass({
     searching: React.PropTypes.bool
   },
   render: function () {
+    let onClick = InstallExtension;
     var initialLoad = !(this.props.searching);
     if (this.props.data.length === 0) {
       return (
@@ -56,10 +58,10 @@ var BoardList = React.createClass({
           </p><p>
 
             To quickly purchase the parts from various retailers you should
-            <a href='http://1clickBOM.com'> install</a> the
+            <a onClick={onClick} href='http://1clickBOM.com'> install</a> the
              1-click-BOM extension.
             It's pretty useful on it's own too and can be used on other sites.
-            Read more about it <a href='http://1clickBOM.com'>here</a>.
+            Read more about it <a onClick={onClick} href='http://1clickBOM.com'>here</a>.
 
           </p><p>
 

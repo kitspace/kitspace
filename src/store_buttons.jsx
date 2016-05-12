@@ -6,6 +6,7 @@ const _                = require('lodash');
 const BomInstallPrompt = require('./bom_install_prompt');
 const ExtensionCompatibilityPrompt  =
 require('./extension_compatibility_prompt');
+const InstallExtension = require('./install_extension');
 
 
 const StoreButtons = React.createClass({
@@ -23,26 +24,8 @@ const StoreButtons = React.createClass({
     let adding = {};
     let partsSpecified = {};
     const version = browserVersion();
-    var onClick;
-    if (/Chrome/.test(version)) {
-      onClick = () => {
-        chrome.webstore.install( //eslint-disable-line no-undef
-          undefined, undefined, (err) =>
-          console.log(err) //eslint-disable-line no-console
-          );
-      };
-    } else if (/Firefox/.test(version)) {
-      onClick = () => {
-        window.open(
-          '//addons.mozilla.org/firefox/' +
-          'downloads/latest/634060/addon-634060-latest.xpi',
-          '_self');
-      };
-    } else {
-      onClick = () => {
-        window.open('//1clickBOM.com', '_self');
-      };
-    }
+    var onClick = InstallExtension;
+
     for (let retailer of oneClickBOM.lineData.retailer_list) {
       adding[retailer] = undefined;
       let retailerItems = _.map(this.props.items,
