@@ -58,10 +58,15 @@ var BoardList = React.createClass({
           </p><p>
 
             To quickly purchase the parts from various retailers you should
-            <a onClick={onClick} href='http://1clickBOM.com'> install</a> the
+            <a
+            className='clickableLink'
+            onClick={onClick}> install</a> the
              1-click-BOM extension.
             It's pretty useful on it's own too and can be used on other sites.
-            Read more about it <a onClick={onClick} href='http://1clickBOM.com'>here</a>.
+            Read more about it
+            <a
+            className='clickableLink'
+            onClick={onClick}>here</a>.
 
           </p><p>
 
