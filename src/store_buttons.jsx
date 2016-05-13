@@ -7,6 +7,7 @@ const BomInstallPrompt = require('./bom_install_prompt');
 const ExtensionCompatibilityPrompt  =
 require('./extension_compatibility_prompt');
 const InstallExtension = require('./install_extension');
+const DirectStores     = require('./direct_stores');
 
 
 const StoreButtons = React.createClass({
@@ -131,11 +132,21 @@ const StoreButtons = React.createClass({
       let anySpecified =
         this.state.partsSpecified[retailer] === 'allPartsSpecified'
         || this.state.partsSpecified[retailer] === 'somePartsSpecified';
-      let onClick = '';
+      let onClick;
       if (anySpecified) {
         onClick = this.state.onClick.bind(null,retailer);
       }
       let partsInfo = this.state.parts[retailer];
+
+      //if the extension is not here fallback to direct submissions
+      if ((!this.state.compatibleBrowser
+        || this.state.extensionPresence != 'present')
+        && typeof document !== 'undefined'
+        && document.getElementById(retailer + 'Form') !== null) {
+        onClick = () => {
+          document.getElementById(retailer + 'Form').submit();
+        };
+      }
 
       return (
         <span onClick={onClick}
@@ -169,6 +180,7 @@ const StoreButtons = React.createClass({
         />
         <ExtensionCompatibilityPrompt
         compatibleBrowser={this.state.compatibleBrowser} />
+        <DirectStores items={this.props.items} />
         <div className='storeButtons'>
           {this.storeButtons()}
         </div>
