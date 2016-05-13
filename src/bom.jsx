@@ -1,7 +1,5 @@
 'use strict';
 const React           = require('react');
-const _               = require('lodash');
-const oneClickBOM     = require('1-click-bom');
 const DoubleScrollbar = require('react-double-scrollbar');
 const { table, thead, tbody, tr, th, td } =
   require('react-hyperscript-helpers');
@@ -11,13 +9,13 @@ function tsvToTable(tsv) {
   let headingJSX = lines[0].split('\t').map((text) => {
     return th(text);
   });
-  headingJSX = thead([tr(headingJSX)])
+  headingJSX = thead([tr(headingJSX)]);
   const bodyJSX = tbody(lines.slice(1).map((line, index) => {
     line = line.split('\t');
     return tr(`.tr${index % 2}`, line.map((text) => {
       let style = {};
       if (text == '') {
-        style = {backgroundColor:'pink'}
+        style = {backgroundColor:'pink'};
       }
       return td({style: style}, text);
     }));
@@ -39,7 +37,7 @@ let BOM = React.createClass({
       <div className='bom'>
         <div className='bomTableContainer'>
           <DoubleScrollbar>
-          {table}
+          {tsvToTable(this.props.data.tsv)}
           </DoubleScrollbar>
           </div>
       </div>
