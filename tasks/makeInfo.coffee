@@ -44,8 +44,7 @@ else
     bom = oneClickBOM.parseTSV(tsv)
     info.bom = {}
     info.bom.lines = bom.lines
-    info.bom.tsv = tsv
-
+    info.bom.tsv = oneClickBOM.writeTSV(bom.lines)
 
     repo = cp.execSync("cd #{folder} && git remote -v", {encoding:'utf8'})
     repo = repo.split('\t')[1].split(' ')[0]
@@ -53,5 +52,4 @@ else
 
     fs.writeFile(infoPath, JSON.stringify(info), ->)
 
-    tsvOut = oneClickBOM.writeTSV(bom.lines)
-    fs.writeFile(outBomPath, tsvOut, ->)
+    fs.writeFile(outBomPath, info.bom.tsv, ->)

@@ -11,7 +11,7 @@ const th    = hyper.th;
 const td    = hyper.td;
 
 function tsvToTable(tsv) {
-  const lines = tsv.split('\n');
+  const lines = tsv.split('\n').slice(0, -1);
   let headingJSX = lines[0].split('\t').map((text) => {
     return th(text);
   });

@@ -13,14 +13,16 @@ case "$OSTYPE" in
 esac
 
 build() {
-    ./configure.coffee $1
     echo "ninja"
     ninja && echo '* build succeeded *' || echo 'BUILD FAILED'
 }
 
+./configure.coffee $1
+
 build $1
 
 http-server build/ &
+
 
 echo "watching for file changes in src/ tasks/ boards/"
 if [ "$OS" == 'LINUX' ]; then
