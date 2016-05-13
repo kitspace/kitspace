@@ -141,6 +141,7 @@ const StoreButtons = React.createClass({
       //if the extension is not here fallback to direct submissions
       if ((!this.state.compatibleBrowser
         || this.state.extensionPresence != 'present')
+        && typeof document !== 'undefined'
         && document.getElementById(retailer + 'Form') !== null) {
         onClick = () => {
           document.getElementById(retailer + 'Form').submit();
