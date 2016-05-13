@@ -41,6 +41,7 @@
   "license": "CPAL-1.0",
   "dependencies": {
     "browser-version": "^1.0.0",
+    "hyperscript-helpers": "^2.1.1",
     "lodash": "^4.0.0",
     "react-double-scrollbar": "0.0.9"
   },

@@ -3,6 +3,23 @@ const React           = require('react');
 const _               = require('lodash');
 const oneClickBOM     = require('1-click-bom');
 const DoubleScrollbar = require('react-double-scrollbar');
+const { table, thead, tbody, tr, th, td } =
+  require('hyperscript-helpers')(React.createElement);
+
+function tsvToTable(tsv) {
+  const lines = tsv.split('\n');
+  const heading = lines[0].split('\t');
+  const headingJSX = thead('', tr('', heading.map((text) => {
+    return th('', text)
+  })));
+  const bodyJSX = tbody('', lines.slice(1).map((line) => {
+    line = line.split('\t');
+    return tr('', line.map((text) => {
+      return td('', text);
+    }));
+  }));
+  return table('bomTable', [headingJSX, bodyJSX]);
+}
 
 let BOM = React.createClass({
   propTypes: {
@@ -14,6 +31,7 @@ let BOM = React.createClass({
     if (this.props.data.lines.length === 0) {
       return (<div>{'no BOM yet'}</div>);
     }
+
     const keys = ['reference', 'quantity', 'description'];
     const retailers = oneClickBOM.lineData.retailer_list;
     const partNumberLength = _.max(this.props.data.lines.map((line) => {
@@ -77,14 +95,7 @@ let BOM = React.createClass({
       <div className='bom'>
         <div className='bomTableContainer'>
           <DoubleScrollbar>
-            <table className='bomTable'>
-              <thead>
-                <tr>{ headings }</tr>
-              </thead>
-              <tbody>
-                { rows }
-              </tbody>
-            </table>
+            { tsvToTable(this.props.data.tsv)}
           </DoubleScrollbar>
           </div>
       </div>
