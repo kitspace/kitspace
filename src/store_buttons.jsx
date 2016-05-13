@@ -7,6 +7,7 @@ const BomInstallPrompt = require('./bom_install_prompt');
 const ExtensionCompatibilityPrompt  =
 require('./extension_compatibility_prompt');
 const InstallExtension = require('./install_extension');
+const DirectStores     = require('./direct_stores');
 
 
 const StoreButtons = React.createClass({
@@ -136,6 +137,26 @@ const StoreButtons = React.createClass({
         onClick = this.state.onClick.bind(null,retailer);
       }
       let partsInfo = this.state.parts[retailer];
+      if (!this.state.compatibleBrowser || this.state.extensionPresence == 'not_present'){
+        if (retailer == 'Digikey') {
+          onClick = (e) => {
+            // e.preventDefault();
+            // let formData = new FormData();
+            // formData.append('', '');
+          };
+        } else if (retailer == 'Newark') {
+          onClick = (e) => {
+            // e.preventDefault();
+            // let formData = new FormData();
+          };
+
+        } else if (retailer == 'Farnell') {
+          onClick = (e) => {
+            // e.preventDefault();
+            // let formData = new FormData();
+          };
+        }
+      }
 
       return (
         <span onClick={onClick}
@@ -169,6 +190,7 @@ const StoreButtons = React.createClass({
         />
         <ExtensionCompatibilityPrompt
         compatibleBrowser={this.state.compatibleBrowser} />
+        <DirectStores items={this.props.items} />
         <div className='storeButtons'>
           {this.storeButtons()}
         </div>
