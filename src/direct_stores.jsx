@@ -39,6 +39,7 @@ const DirectStores = React.createClass({
   digikey: function (parts) {
     return (
       <form
+      target="_blank"
       key='DigikeyForm'
       id='DigikeyForm'
       method='POST'
@@ -55,6 +56,7 @@ const DirectStores = React.createClass({
     const queryString = parts.map(this.tildeDelimiter).join('~');
     return (
       <form
+      target="_blank"
       key='FarnellForm'
       id='FarnellForm'
       method='GET'
@@ -69,6 +71,7 @@ const DirectStores = React.createClass({
     const queryString = parts.map(this.tildeDelimiter).join('~');
     return (
       <form
+      target="_blank"
       key='NewarkForm'
       id='NewarkForm'
       method='GET'
