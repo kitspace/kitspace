@@ -42,7 +42,8 @@
   "dependencies": {
     "browser-version": "^1.0.0",
     "lodash": "^4.0.0",
-    "react-double-scrollbar": "0.0.9"
+    "react-double-scrollbar": "0.0.9",
+    "react-hyperscript-helpers": "^1.1.0"
   },
   "sasslintConfig": "./src/.sass-lint.yml"
 }
