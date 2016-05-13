@@ -50,8 +50,8 @@ var Page = React.createClass({
               </div>
             </div>
             <BoardShowcase />
-            <StoreButtons items={ info.bom ? info.bom : [] } />
-            <BOM items={ info.bom ? info.bom : [] } />
+            <StoreButtons items={ info.bom.lines ? info.bom.lines : [] } />
+            <BOM data={ info.bom ? info.bom : [] } />
           </div>
         </div>
       </div>

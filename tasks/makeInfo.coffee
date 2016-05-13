@@ -42,7 +42,9 @@ else
 
     tsv = fs.readFileSync(bomPath, {encoding:'utf8'})
     bom = oneClickBOM.parseTSV(tsv)
-    info.bom = bom.lines
+    info.bom = {}
+    info.bom.lines = bom.lines
+    info.bom.tsv = tsv
 
 
     repo = cp.execSync("cd #{folder} && git remote -v", {encoding:'utf8'})
