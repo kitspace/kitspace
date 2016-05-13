@@ -18,7 +18,8 @@ function tsvToTable(tsv) {
   });
   headingJSX = thead([tr(headingJSX)]);
   const markPink = (index) => {
-    return ['Manufacturer', 'MPN'].indexOf(headings[index]) < 0;
+    return ['Manufacturer', 'MPN', 'Description']
+      .indexOf(headings[index]) < 0;
   }
   const bodyJSX = tbody(lines.slice(1).map((line, rowIndex) => {
     line = line.split('\t');
