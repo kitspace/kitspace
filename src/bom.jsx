@@ -1,8 +1,14 @@
 'use strict';
 const React           = require('react');
 const DoubleScrollbar = require('react-double-scrollbar');
-const { table, thead, tbody, tr, th, td } =
-  require('react-hyperscript-helpers');
+const hyper           = require('react-hyperscript-helpers');
+
+const table = hyper.table;
+const thead = hyper.thead;
+const tbody = hyper.tbody;
+const tr    = hyper.tr;
+const th    = hyper.th;
+const td    = hyper.td;
 
 function tsvToTable(tsv) {
   const lines = tsv.split('\n');
