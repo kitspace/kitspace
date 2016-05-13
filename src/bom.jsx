@@ -11,16 +11,20 @@ const th    = hyper.th;
 const td    = hyper.td;
 
 function tsvToTable(tsv) {
-  const lines = tsv.split('\n');
-  let headingJSX = lines[0].split('\t').map((text) => {
+  const lines = tsv.split('\n').slice(0, -1);
+  const headings = lines[0].split('\t');
+  let headingJSX = headings.map((text) => {
     return th(text);
   });
   headingJSX = thead([tr(headingJSX)]);
-  const bodyJSX = tbody(lines.slice(1).map((line, index) => {
+  const markPink = (index) => {
+    return ['Manufacturer', 'MPN'].indexOf(headings[index]) < 0;
+  }
+  const bodyJSX = tbody(lines.slice(1).map((line, rowIndex) => {
     line = line.split('\t');
-    return tr(`.tr${index % 2}`, line.map((text) => {
+    return tr(`.tr${rowIndex % 2}`, line.map((text, columnIndex) => {
       let style = {};
-      if (text == '') {
+      if (markPink(columnIndex) && text == '') {
         style = {backgroundColor:'pink'};
       }
       return td({style: style}, text);
