@@ -132,30 +132,19 @@ const StoreButtons = React.createClass({
       let anySpecified =
         this.state.partsSpecified[retailer] === 'allPartsSpecified'
         || this.state.partsSpecified[retailer] === 'somePartsSpecified';
-      let onClick = '';
+      let onClick;
       if (anySpecified) {
         onClick = this.state.onClick.bind(null,retailer);
       }
       let partsInfo = this.state.parts[retailer];
-      if (!this.state.compatibleBrowser || this.state.extensionPresence == 'not_present'){
-        if (retailer == 'Digikey') {
-          onClick = (e) => {
-            // e.preventDefault();
-            // let formData = new FormData();
-            // formData.append('', '');
-          };
-        } else if (retailer == 'Newark') {
-          onClick = (e) => {
-            // e.preventDefault();
-            // let formData = new FormData();
-          };
 
-        } else if (retailer == 'Farnell') {
-          onClick = (e) => {
-            // e.preventDefault();
-            // let formData = new FormData();
-          };
-        }
+      //if the extension is not here fallback to direct submissions
+      if ((!this.state.compatibleBrowser
+        || this.state.extensionPresence != 'present')
+        && document.getElementById(retailer + 'Form') !== null) {
+        onClick = () => {
+          document.getElementById(retailer + 'Form').submit();
+        };
       }
 
       return (
