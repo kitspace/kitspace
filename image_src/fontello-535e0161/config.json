@@ -227,6 +227,12 @@
       "css": "cog",
       "code": 59428,
       "src": "websymbols"
+    },
+    {
+      "uid": "221947bea81f49a11b863c686a7bd235",
+      "css": "search",
+      "code": 59429,
+      "src": "websymbols"
     }
   ]
 }
