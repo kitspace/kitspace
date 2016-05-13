@@ -8,8 +8,7 @@ const { table, thead, tbody, tr, th, td } =
 
 function tsvToTable(tsv) {
   const lines = tsv.split('\n');
-  const heading = lines[0].split('\t');
-  let headingJSX = heading.map((text) => {
+  let headingJSX = lines[0].split('\t').map((text) => {
     return th(text);
   });
   headingJSX = thead([tr(headingJSX)])
