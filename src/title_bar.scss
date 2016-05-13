@@ -35,12 +35,20 @@
     }
 }
 
-.logoImg {
-    min-height: 46px;
+.logoImgContainer {
     width: 90%;
 
     @include breakpoint(mobile) {
         width: 70%;
+    }
+}
+
+.logoImg {
+    height: 46px;
+    width: 100%;
+
+    @include breakpoint(mobile) {
+        height: 92px;
     }
 }
 
