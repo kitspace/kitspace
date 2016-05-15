@@ -4,12 +4,6 @@ const TitleBar    = require('./title_bar');
 const BoardList   = require('./board_list');
 const boards      = require('./boards.json');
 
-const style = {
-  icon: {
-    width:'100%',
-  }
-};
-
 var Main = React.createClass({
   getInitialState: function() {
     return {
@@ -23,7 +17,7 @@ var Main = React.createClass({
         <TitleBar>
           <div className='searchContainer'>
             <div className='searchInputIcon'>
-              <img src='/images/mag_icon.svg' style={style.icon} />
+              <span className='icon-search searchIcon'></span>
             </div>
             <SearchInput
               className='searchInput'

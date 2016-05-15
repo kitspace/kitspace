@@ -2,6 +2,7 @@
 @import 'colors';
 @import 'common';
 @import 'title_bar';
+@import 'spinners_n_carts';
 
 .searchContainer {
     box-sizing: border-box;
@@ -11,14 +12,25 @@
 }
 
 .searchInputIcon {
+    align-items: center;
     background-color: $white;
     border-radius: 5px 0 0 5px;
+    display: flex;
     height: 40px;
+    padding-left: 8px;
     width: 32px;
 
     @include breakpoint(mobile) {
         height: 80px;
         width: 72px;
+    }
+}
+
+.searchIcon {
+    color: $silver-chalice;
+
+    @include breakpoint(mobile) {
+        font-size: 48px;
     }
 }
 
