@@ -48,7 +48,7 @@ var BoardList = React.createClass({
     var intro = (
       <center>
       <div style={style.introContainer(initialLoad)}>
-        <div style={style.intro}>
+        <div className='introText' style={style.intro}>
           <p>
 
             Kitnic is a registry of open hardware electronics projects that are
