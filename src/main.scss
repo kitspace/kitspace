@@ -11,6 +11,19 @@
     padding-top: 10px;
 }
 
+.searchBackground {
+    background: $white;
+    border-radius: 4px;
+    box-sizing: border-box;
+    display: flex;
+    height: 40px;
+    width: 100%;
+
+    @include breakpoint(mobile) {
+        height: 80px;
+    }
+}
+
 .searchInputIcon {
     align-items: center;
     background-color: $white;
@@ -22,7 +35,7 @@
 
     @include breakpoint(mobile) {
         height: 80px;
-        width: 72px;
+        width: 73px;
     }
 }
 
@@ -39,9 +52,9 @@
 }
 
 .searchInput {
+    flex-grow: 1;
     height: 52px;
     position: relative;
-    width: 100%;
 
     @include breakpoint(mobile) {
         height: 92px;

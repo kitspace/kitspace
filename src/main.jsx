@@ -16,14 +16,16 @@ var Main = React.createClass({
       <div>
         <TitleBar>
           <div className='searchContainer'>
-            <div className='searchInputIcon'>
-              <span className='icon-search searchIcon'></span>
+            <div className='searchBackground'>
+              <div className='searchInputIcon'>
+                <span className='icon-search searchIcon'></span>
+              </div>
+              <SearchInput
+                className='searchInput'
+                ref='search'
+                onChange={this.searchUpdated}
+               />
             </div>
-            <SearchInput
-              className='searchInput'
-              ref='search'
-              onChange={this.searchUpdated}
-             />
           </div>
         </TitleBar>
         <BoardList data={this.state.result} searching={this.state.searching}/>
