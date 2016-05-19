@@ -70,3 +70,9 @@
         outline: none;
     }
 }
+
+.introText {
+    @include breakpoint(mobile) {
+        font-size: 48px;
+    }
+}
