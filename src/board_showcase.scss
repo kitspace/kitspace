@@ -1,16 +1,14 @@
 @import 'common';
 @import 'colors';
 
-.boardShowcaseContainer {
-    @include breakpoint(mobile) {
-        .responsiveTabs {
-            .circuitToggleBtn {
-                font-size: 48px;
-            }
+@include breakpoint(mobile) {
+    .boardShowcaseContainer {
+        .circuitToggleBtn {
+            font-size: 48px;
         }
 
         .boardDiagram {
-            height: 400px;
+            height: 100%;
         }
 
         .octicon {
@@ -18,7 +16,7 @@
         }
 
         .boardContainer {
-            max-height: 480px;
+            max-height: 800px;
         }
 
         .toggleBoardView {
@@ -33,106 +31,106 @@
             padding-right: 16px;
         }
     }
+}
 
-    @include breakpoint(mobile_or_small_width) {
-        .boardContainer {
-            border: 5px solid $dove-gray;
-            border-radius: 0 0 5px 5px;
-        }
-
-        .responsiveTabs.toggleBoardView {
-            display: flex;
-        }
-
-        .boardEdge {
-            display: none;
-        }
-
-        .backBoard {
-            display: none;
-        }
-
-        .boardContainer .boardDiagram {
-            display: none;
-            width: 100%;
-        }
-
-        .boardContainer .selectedBoard.boardDiagram {
-            display: block;
-        }
-
-        .circuitBorderContainer {
-            display: none;
-        }
+@include breakpoint(mobile_or_small_width) {
+    .boardContainer {
+        border: 5px solid $dove-gray;
+        border-radius: 0 0 5px 5px;
     }
 
-    .boardShowcase {
+    .responsiveTabs.toggleBoardView {
         display: flex;
-        flex-direction: column;
-        margin-bottom: 16px;
     }
 
     .boardEdge {
-        width: 10%;
+        display: none;
     }
 
-    .boardContainer {
-        background: $mine-shaft;
-        border-bottom: 1px solid $cod-gray;
-        border-radius: 3px;
-        box-sizing: border-box;
-        display: flex;
-        justify-content: space-around;
-        max-height: 320px;
-        padding: 2rem;
+    .backBoard {
+        display: none;
+    }
+
+    .boardContainer .boardDiagram {
+        display: none;
         width: 100%;
-
-        @include breakpoint(mobile_or_small_width) {
-            border-radius: 0;
-        }
     }
 
-    .toggleBoardForm {
-        margin-top: 16px;
-    }
-
-    .boardDiagram {
-        height: 240px;
-        width: 50%;
+    .boardContainer .selectedBoard.boardDiagram {
+        display: block;
     }
 
     .circuitBorderContainer {
-        display: flex;
-        justify-content: center;
-        width: 6.4px;
-    }
-
-    .circuitBorder {
-        width: 8px;
-    }
-
-    .toggleBoardView {
         display: none;
-        justify-content: space-around;
     }
+}
 
-    .circuitToggleBtn:disabled {
-        background: $dove-gray;
-    }
+.boardShowcase {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+}
 
-    .circuitToggleBtn {
-        background: $mine-shaft;
-        border-bottom: 0;
-        border-left: 0;
-        border-radius: 5px 5px 0 0;
-        border-right: 0;
-        border-top: 2px solid $gallery;
-        color: $white;
-        cursor: pointer;
-        font-size: 16px;
-        font-weight: bold;
-        padding: 16px 32px;
-        width: 100%;
-        z-index: 1;
+.boardEdge {
+    width: 10%;
+}
+
+.boardContainer {
+    background: $mine-shaft;
+    border-bottom: 1px solid $cod-gray;
+    border-radius: 3px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-around;
+    max-height: 320px;
+    padding: 2rem;
+    width: 100%;
+
+    @include breakpoint(mobile_or_small_width) {
+        border-radius: 0;
     }
+}
+
+.toggleBoardForm {
+    margin-top: 16px;
+}
+
+.boardDiagram {
+    height: 240px;
+    width: 50%;
+}
+
+.circuitBorderContainer {
+    display: flex;
+    justify-content: center;
+    width: 6.4px;
+}
+
+.circuitBorder {
+    width: 8px;
+}
+
+.toggleBoardView {
+    display: none;
+    justify-content: space-around;
+}
+
+.circuitToggleBtn:disabled {
+    background: $dove-gray;
+}
+
+.circuitToggleBtn {
+    background: $mine-shaft;
+    border-bottom: 0;
+    border-left: 0;
+    border-radius: 5px 5px 0 0;
+    border-right: 0;
+    border-top: 2px solid $gallery;
+    color: $white;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 16px 32px;
+    width: 100%;
+    z-index: 1;
 }
