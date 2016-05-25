@@ -7,3 +7,4 @@ https://github.com/kitnic/FM_Transmitter
 https://github.com/kasbah/nomech
 https://github.com/kasbah/push-on-hold-off
 https://github.com/kitnic/BQ25570_Harvester
+https://github.com/JarrettR/USBvil
