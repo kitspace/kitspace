@@ -22,10 +22,10 @@ To submit your project to Kitnic, follow these steps:
 `gerbers/` will be searched. If this is not where they are stored, please add
 this info in the kitnic.yaml file (see below).
 
-**2. Create the 1-click-BOM file.**
-Download the extension and see [the guide on exporting a 1-click-BOM from your design](https://1clickbom.com/#making-a-1-click-bom). This format will allow people to quickly purchase the
+**2. Create the 1-click-bom file.**
+Download the extension and see [the guide on exporting a 1-click-bom from your design](https://1clickbom.com/#making-a-1-click-bom). This format will allow people to quickly purchase the
 components. 
-By default this file is expected to be a `1-click-BOM.tsv` in the root of the
+By default this file is expected to be a `1-click-bom.tsv` in the root of the
 project, if the file has a different name or is in a different location, please
 add this info in the kitnic.yaml file (see below).
 
@@ -69,7 +69,7 @@ color: The solder resist color of the preview rendering. Can be one of:
        - orange
        - purple 
        - yellow
-bom: A path to your 1-click-BOM in case it isn't `1-click-BOM.tsv`.
+bom: A path to your 1-click-bom in case it isn't `1-click-bom.tsv`.
 gerbers: A path to your folder of gerbers in case it isn't `gerbers/`.
 
 ```
