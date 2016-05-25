@@ -61,7 +61,7 @@ var BoardList = React.createClass({
             retailers you should <a
             className='clickableLink'
             onClick={onClick}>install</a> the
-             1-click-BOM extension.
+             1-click BOM extension.
             It's pretty useful on it's own too and can be used on other sites.
             Read more about it <a
             className='clickableLink'

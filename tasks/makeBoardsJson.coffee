@@ -27,7 +27,7 @@ else
     correctTypes = (boardInfo) ->
         boardInfoWithEmpty =
             { id : ''
-            , description : ''
+            , summary : ''
             }
         for prop of boardInfoWithEmpty
             if (boardInfo.hasOwnProperty(prop))
@@ -52,10 +52,10 @@ else
             info = {}
         info = correctTypes(info)
         info.id = path.relative(boardDir, folder)
-        if info.description == '' and /^github.com/.test(info.id)
+        if info.summary == '' and /^github.com/.test(info.id)
             ghInfo = getGithubInfo(info.id)
             if ghInfo?.description?
-                info.description = ghInfo.description
+                info.summary = ghInfo.description
             else
                 console.warn("WARNING: could not get GitHub description for #{folder}")
                 console.warn(ghInfo)

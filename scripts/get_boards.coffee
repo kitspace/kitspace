@@ -4,12 +4,12 @@ cp = require('child_process')
 utils = require('./utils')
 
 if process.argv[2] == 'production'
-    versions = JSON.parse(fs.readFileSync('versions.json'))
+    registry = JSON.parse(fs.readFileSync('registry.json'))
 else
-    versions = JSON.parse(fs.readFileSync('test_versions.json'))
+    registry = JSON.parse(fs.readFileSync('dev_registry.json'))
 
 
-for {repo, hash} in versions
+for {repo, hash} in registry
     folder = utils.repoToFolder(repo)
     fs.exists folder, ((folder, repo, hash, exists) ->
         if exists

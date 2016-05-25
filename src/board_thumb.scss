@@ -4,11 +4,11 @@
 $thumb-w: 240px;
 $thumb-h: 180px;
 $caption-h: 40px;
-$description-h: 96px;
+$summary-h: 96px;
 $mobile-thumb-w: $thumb-w * 3;
 $mobile-thumb-h: $thumb-h * 3;
 $mobile-caption-h: $caption-h * 3;
-$mobile-description-h: $description-h * 3 + 48;
+$mobile-summary-h: $summary-h * 3 + 48;
 
 .boardThumb:hover {
     box-shadow: 0 .1em .5em $azure-radiance;
@@ -19,7 +19,7 @@ $mobile-description-h: $description-h * 3 + 48;
     border-radius: 4px;
     cursor: pointer;
     display: inline-block;
-    height: $thumb-h + $caption-h + $description-h + 16px + 5px + 16px + 5px;
+    height: $thumb-h + $caption-h + $summary-h + 16px + 5px + 16px + 5px;
     margin-bottom: 8px;
     margin-left: 8px;
     margin-right: 8px;
@@ -29,7 +29,7 @@ $mobile-description-h: $description-h * 3 + 48;
 
     @include breakpoint(mobile) {
         border-radius: 12px;
-        height: $mobile-thumb-h + $mobile-caption-h + $mobile-description-h + 16px + 5px + 16px + 5px;
+        height: $mobile-thumb-h + $mobile-caption-h + $mobile-summary-h + 16px + 5px + 16px + 5px;
         margin-bottom: 24px;
         margin-left: 24px;
         margin-right: 24px;
@@ -92,12 +92,12 @@ $mobile-description-h: $description-h * 3 + 48;
         }
     }
 
-    .description {
+    .summary {
         background-color: $alabaster;
         color: $mine-shaft;
         font-size: 16px;
         font-weight: normal;
-        height: $description-h;
+        height: $summary-h;
         margin-bottom: 10px;
         opacity: 1;
         overflow: hidden;
@@ -108,7 +108,7 @@ $mobile-description-h: $description-h * 3 + 48;
 
         @include breakpoint(mobile) {
             font-size: 48px;
-            height: $mobile-description-h;
+            height: $mobile-summary-h;
             padding-left: 30px;
         }
     }

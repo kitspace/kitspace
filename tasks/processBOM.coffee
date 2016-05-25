@@ -15,7 +15,7 @@ if require.main != module
         if info?.bom?
             bom = folder + '/' + info.bom
         else
-            bom = folder + '/1-click-BOM.tsv'
+            bom = folder + '/1-click-bom.tsv'
         deps = ['build/.temp/boards.json', folder, bom]
         targets = ["build/.temp/#{folder}/info.json", "build/#{folder}/1-click-BOM.tsv"]
         return {deps, targets, moduleDep : false}
@@ -27,9 +27,9 @@ else
     boards = JSON.parse(fs.readFileSync(boardsJSON))
     info = {id:folder.replace('boards/','')}
 
-    info.description = boards.reduce (prev, obj) ->
+    info.summary = boards.reduce (prev, obj) ->
         if obj.id == info.id
-            return obj.description
+            return obj.summary
         else
             return prev
     , ''
