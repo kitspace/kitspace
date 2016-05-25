@@ -29,6 +29,10 @@
   },
   {
     "repo": "https://github.com/kitnic/BQ25570_Harvester",
-    "hash": "40dac792ec2ddd42662d34ed4220084c8c693db9"
+    "hash": "06547ddac9e74a276df7cb6e349f4727b38c2bc0"
+  },
+  {
+    "repo": "https://github.com/JarrettR/USBvil",
+    "hash": "5166b1e07b6be2e3b4af97b6ae239580b830266b"
   }
 ]
