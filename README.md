@@ -18,9 +18,7 @@ Kitnic is a registry of open source hardware electronics projects that are ready
 
 To submit your project to Kitnic, follow these steps:
 
-**1. Export your plotted gerbers & drill data.**
-Gerbers should be exported from your PCB design package in RS-274-X format
-together with drill information into a directory - by default the path
+**1. Export your plotted gerbers & drill data** into a directory - by default the path
 `gerbers/` will be searched. If this is not where they are stored, please add
 this info in the kitnic.yaml file (see below).
 
