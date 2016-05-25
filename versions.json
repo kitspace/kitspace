@@ -1,5 +1,9 @@
 [
   {
+    "repo": "https://github.com/mattvenn/esp8266-breakout",
+    "hash": "ce18dfac0423bc582e22ffea716008d392860681"
+  },
+  {
     "repo": "https://github.com/kitnic/arduino-uno",
     "hash": "523180b7fb4fb17e89be774486a8fe97f828558a"
   },
@@ -10,14 +14,6 @@
   {
     "repo": "https://github.com/kitnic/CC2538-dev-board",
     "hash": "3ba71db9d984fc0120d0fa13d23fab8333737cf6"
-  },
-  {
-    "repo": "https://github.com/kitnic/mchck-board",
-    "hash": "beb1d4b045dab15cf0d29e02e134f4088b08a51a"
-  },
-  {
-    "repo": "https://github.com/kitnic/RiftDK1",
-    "hash": "9790549bc93d663940e769983b818feb3cbd1053"
   },
   {
     "repo": "https://github.com/kitnic/HACK",
