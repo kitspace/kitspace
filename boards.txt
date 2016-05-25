@@ -1,4 +1,3 @@
-https://github.com/mattvenn/esp8266-breakout
 https://github.com/kitnic/arduino-uno
 https://github.com/kitnic/Bus_Pirate
 https://github.com/kitnic/CC2538-dev-board

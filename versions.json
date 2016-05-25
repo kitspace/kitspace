@@ -1,15 +1,11 @@
 [
   {
-    "repo": "https://github.com/mattvenn/esp8266-breakout",
-    "hash": "ce18dfac0423bc582e22ffea716008d392860681"
-  },
-  {
     "repo": "https://github.com/kitnic/arduino-uno",
-    "hash": "523180b7fb4fb17e89be774486a8fe97f828558a"
+    "hash": "b0c9ab1454e1b01d8fee568c1690b6552085021a"
   },
   {
     "repo": "https://github.com/kitnic/Bus_Pirate",
-    "hash": "78b7315f724b94d71053ff9725e4dad7ffe448d5"
+    "hash": "36a8b2bb32ccb4e96556d3571185c0d47df083a2"
   },
   {
     "repo": "https://github.com/kitnic/CC2538-dev-board",
@@ -17,22 +13,22 @@
   },
   {
     "repo": "https://github.com/kitnic/HACK",
-    "hash": "7fe5ec0e12705ff987382fa73b3b5e7708e56500"
+    "hash": "9ae6221d6c72ed27ad6e1e2bc0cd689e1c3a6840"
   },
   {
     "repo": "https://github.com/kitnic/FM_Transmitter",
-    "hash": "49bf0faf1622a820d3684e644afa8277795a8ee3"
+    "hash": "dabc2aca707a48b714f705f3aaec75b2aa591a7e"
   },
   {
     "repo": "https://github.com/kasbah/nomech",
-    "hash": "99cd8317b7d8144eabd6db9d140a0de21fd12a95"
+    "hash": "c528fe84810cacb68b7a1d741b930d86448bc64b"
   },
   {
     "repo": "https://github.com/kasbah/push-on-hold-off",
-    "hash": "c0e4d62b687a8c1d97801fb50e9039ff2f77a6bd"
+    "hash": "e76e1429da0303d2427b562890227141d06d2979"
   },
   {
     "repo": "https://github.com/kitnic/BQ25570_Harvester",
-    "hash": "51d56a1a96a2451af4c8c00e55594b2356251882"
+    "hash": "40dac792ec2ddd42662d34ed4220084c8c693db9"
   }
 ]
