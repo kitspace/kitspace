@@ -29,12 +29,13 @@ By default this file is expected to be a `1-click-bom.tsv` in the root of the
 project, if the file has a different name or is in a different location, please
 add this info in the kitnic.yaml file (see below).
 
-**3. (Optional) Create the YAML project description file.**
-The `kitnic.yaml` file allows you to specify a website, give a description,
-pick a rendering color or configure custom paths for the two requirements
-above. If you don't have a `kitnic.yaml` with a description we will try and
-find a description from your repo. If we can't find one the build will fail.
-See [the section below](#kitnicyaml-format) for details of the file format.
+**3. (Optional) Create the YAML project description file.** The `kitnic.yaml`
+file allows you to specify a website you would like to link to, give a summary
+of your project, pick a rendering color or configure custom paths for the two
+requirements above. If you don't have a `kitnic.yaml` with a summary we
+will try and find a summary from your repo. If we can't find one the build
+will fail.  See [the section below](#kitnicyaml-format) for details of the file
+format.
 
 **4. Add your project to a Git repository.**
 To have your project included on Kitnic it needs to be in a publicly accessible
@@ -58,7 +59,7 @@ If you run into any problems please get in touch via [Gitter chat](https://gitte
 Currently the `kitnic.yaml` makes use of the following fields:
 
 ```yaml
-description: A description for your project
+summary: A description for your project
 site: A site you would like to link to (include http:// or https://)
 color: The solder resist color of the preview rendering. Can be one of: 
        - green
@@ -124,7 +125,7 @@ A more advanced example could be something like:
 with `kitnic.yaml` containing:
 
 ```yaml
-description: A more advanced example
+summary: A more advanced example
 site: https://example.com
 color: red
 bom: manufacture/advanced-example-BOM.tsv

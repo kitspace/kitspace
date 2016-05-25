@@ -46,7 +46,7 @@ var Main = React.createClass({
   },
   searchUpdated: function (term) {
     if (this.refs.search) {
-      var filters = ['id', 'description'];
+      var filters = ['id', 'summary'];
       var result = boards.filter(this.refs.search.filter(filters));
       if (term.length > 2) {
         var cat = result.length === 0 ? 'no_result' : 'result';

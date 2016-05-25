@@ -27,9 +27,9 @@ else
     boards = JSON.parse(fs.readFileSync(boardsJSON))
     info = {id:folder.replace('boards/','')}
 
-    info.description = boards.reduce (prev, obj) ->
+    info.summary = boards.reduce (prev, obj) ->
         if obj.id == info.id
-            return obj.description
+            return obj.summary
         else
             return prev
     , ''
