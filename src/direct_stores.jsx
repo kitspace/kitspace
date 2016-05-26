@@ -6,11 +6,9 @@ const DirectStores = React.createClass({
   },
   getInitialState: function () {
     return {
-      storeForms: [
-        this.digikey(this.getParts('Digikey')),
-        this.farnell(this.getParts('Farnell')),
-        this.newark(this.getParts('Newark'))
-      ]
+        digikeyParts: this.getParts('Digikey'),
+        farnellParts: this.getParts('Farnell'),
+        newarkParts: this.getParts('Newark')
     };
   },
   getParts: function (retailer) {
@@ -86,8 +84,12 @@ const DirectStores = React.createClass({
   render: function () {
     return (
       <span>
-        {this.state.storeForms}
-      </span>
+      {[
+        this.digikey(this.state.digikeyParts),
+        this.farnell(this.state.farnellParts),
+        this.newark(this.state.newarkParts)
+      ]}
+       </span>
       );
   }
 });
