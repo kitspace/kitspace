@@ -34,7 +34,8 @@
   },
   "scripts": {
     "prestart": "./scripts/get_boards.coffee",
-    "start": "./scripts/start.sh"
+    "start": "./scripts/start.sh",
+    "update": "./scripts/update_registry.coffee"
   },
   "author": "Kaspar Emanuel",
   "license": "CPAL-1.0",
