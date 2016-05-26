@@ -3,7 +3,7 @@ const React = require('react');
 
 const digikey_data   = require('1-click-bom/lib/data/digikey.json');
 const farnell_data   = require('1-click-bom/lib/data/farnell.json');
-const countries_data = browser.getLocal('1-click-bom/lib/data/countries.json');
+const countries_data = require('1-click-bom/lib/data/countries.json');
 
 const get = function(url, arg, callback, error_callback) {
   var line, notify, timeout, xhr;
@@ -23,11 +23,17 @@ const get = function(url, arg, callback, error_callback) {
   xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
   xhr.url = url;
   xhr.onreadystatechange = function(event) {
-    return network_callback(event, callback, error_callback, notify);
+    if (event.target.readyState === 4) {
+      if (event.target.status === 200) {
+        return callback(event);
+      } else {
+        return error_callback(event);
+      }
+    }
   };
   xhr.timeout = timeout;
   xhr.ontimedout = function(event) {
-    return network_callback(event, callback, error_callback, notify);
+    return error_callback(event);
   };
   return xhr.send();
 };
@@ -35,6 +41,11 @@ const get = function(url, arg, callback, error_callback) {
 
 const getLocation = function(callback) {
   var code;
+  var used_country_codes = [];
+  for (_ in countries_data) {
+    code = countries_data[_];
+    used_country_codes.push(code);
+  }
   const url = 'https://freegeoip.kitnic.it';
   return get(url, {
     timeout: 5000
@@ -46,7 +57,7 @@ const getLocation = function(callback) {
       if (code === 'GB') {
         code = 'UK';
       }
-      if (indexOf.call(countries_data, code) < 0) {
+      if (used_country_codes.indexOf(code) < 0) {
         code = 'Other';
       }
       return callback(code);
@@ -63,9 +74,10 @@ const DirectStores = React.createClass({
   },
   getInitialState: function () {
     if (typeof window != 'undefined'){
-      getLocation((code) =>
-        this.setState({countryCode: code})
-      );
+      getLocation((code) => {
+        console.log(code);
+        this.setState({countryCode: code});
+      });
     }
     return {
         digikeyParts: this.getParts('Digikey'),
@@ -98,7 +110,7 @@ const DirectStores = React.createClass({
       );
   },
   digikey: function (countryCode, parts) {
-    const site = digikey_data.sites(digikey_data.lookup(countryCode));
+    const site = digikey_data.sites[digikey_data.lookup[countryCode]];
     return (
       <form
       target="_blank"
@@ -115,7 +127,7 @@ const DirectStores = React.createClass({
     return part.sku + '~' + part.quantity;
   },
   farnell: function (countryCode, parts) {
-    const site = farnell_data.sites(farnell_data.lookup(countryCode));
+    const site = farnell_data.sites[farnell_data.lookup[countryCode]];
     const queryString = parts.map(this.tildeDelimiter).join('~');
     return (
       <form
