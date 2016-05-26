@@ -39,11 +39,14 @@ const StoreButtons = React.createClass({
       }, 0);
       let summary;
       if (this.props.items.length == partCount){
-        summary = 'all specified';
+        summary = 'All parts specified';
+        partsSpecified[retailer] = 'allPartsSpecified';
       } else if (partCount == 0) {
-        summary = 'none specified';
+        summary = 'No parts specified';
+        partsSpecified[retailer] = 'noPartsSpecified';
       } else {
-        summary = partCount + '/' + this.props.items.length + ' specified';
+        summary = partCount + '/' + this.props.items.length + ' parts specified';
+        partsSpecified[retailer] = 'somePartsSpecified';
       }
 
       parts[retailer] =
@@ -53,13 +56,6 @@ const StoreButtons = React.createClass({
         summary: summary
       };
 
-      if (_.every(retailerItems)) {
-        partsSpecified[retailer] = 'allPartsSpecified';
-      } else if (_.some(retailerItems)) {
-        partsSpecified[retailer] = 'somePartsSpecified';
-      } else {
-        partsSpecified[retailer] = 'noPartsSpecified';
-      }
     }
     //waiting to avoid flashing on page load
     if (typeof window != 'undefined'){
