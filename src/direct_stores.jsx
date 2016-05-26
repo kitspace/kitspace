@@ -1,14 +1,77 @@
 'use strict';
 const React = require('react');
+
+const digikey_data   = require('1-click-bom/lib/data/digikey.json');
+const farnell_data   = require('1-click-bom/lib/data/farnell.json');
+const countries_data = browser.getLocal('1-click-bom/lib/data/countries.json');
+
+const get = function(url, arg, callback, error_callback) {
+  var line, notify, timeout, xhr;
+  line = arg.line, notify = arg.notify, timeout = arg.timeout;
+  if (line == null) {
+    line = null;
+  }
+  if (notify == null) {
+    notify = false;
+  }
+  if (timeout == null) {
+    timeout = 60000;
+  }
+  xhr = new XMLHttpRequest;
+  xhr.line = line;
+  xhr.open('GET', url, true);
+  xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+  xhr.url = url;
+  xhr.onreadystatechange = function(event) {
+    return network_callback(event, callback, error_callback, notify);
+  };
+  xhr.timeout = timeout;
+  xhr.ontimedout = function(event) {
+    return network_callback(event, callback, error_callback, notify);
+  };
+  return xhr.send();
+};
+
+
+const getLocation = function(callback) {
+  var code;
+  const url = 'https://freegeoip.kitnic.it';
+  return get(url, {
+    timeout: 5000
+  }, (function(_this) {
+    return function(event) {
+      var response;
+      response = JSON.parse(event.target.responseText);
+      code = response.country_code;
+      if (code === 'GB') {
+        code = 'UK';
+      }
+      if (indexOf.call(countries_data, code) < 0) {
+        code = 'Other';
+      }
+      return callback(code);
+    };
+  })(this), function() {
+    return callback('Other');
+  });
+};
+
+
 const DirectStores = React.createClass({
   propTypes: {
     items: React.PropTypes.any.isRequired
   },
   getInitialState: function () {
+    if (typeof window != 'undefined'){
+      getLocation((code) =>
+        this.setState({countryCode: code})
+      );
+    }
     return {
         digikeyParts: this.getParts('Digikey'),
         farnellParts: this.getParts('Farnell'),
-        newarkParts: this.getParts('Newark')
+        newarkParts: this.getParts('Newark'),
+        countryCode: 'Other'
     };
   },
   getParts: function (retailer) {
@@ -34,14 +97,15 @@ const DirectStores = React.createClass({
       </span>
       );
   },
-  digikey: function (parts) {
+  digikey: function (countryCode, parts) {
+    const site = digikey_data.sites(digikey_data.lookup(countryCode));
     return (
       <form
       target="_blank"
       key='DigikeyForm'
       id='DigikeyForm'
       method='POST'
-      action={'https://www.digikey.com/classic/ordering/fastadd.aspx' +
+      action={`https${site}/classic/ordering/fastadd.aspx` +
       '?WT.z_cid=ref_kitnic'}>
         { parts.map(this.digikeyPartRenderer) }
       </form>);
@@ -50,7 +114,8 @@ const DirectStores = React.createClass({
   tildeDelimiter: function (part) {
     return part.sku + '~' + part.quantity;
   },
-  farnell: function (parts) {
+  farnell: function (countryCode, parts) {
+    const site = farnell_data.sites(farnell_data.lookup(countryCode));
     const queryString = parts.map(this.tildeDelimiter).join('~');
     return (
       <form
@@ -58,7 +123,7 @@ const DirectStores = React.createClass({
       key='FarnellForm'
       id='FarnellForm'
       method='GET'
-      action='http://uk.farnell.com/jsp/extlink.jsp' >
+      action={`http${site}/jsp/extlink.jsp`} >
         <input type='hidden' name='CMP' value='ref_kitnic' />
         <input type='hidden' name='action' value='buy' />
         <input type='hidden' name='product' value={queryString} />
@@ -85,8 +150,8 @@ const DirectStores = React.createClass({
     return (
       <span>
       {[
-        this.digikey(this.state.digikeyParts),
-        this.farnell(this.state.farnellParts),
+        this.digikey(this.state.countryCode, this.state.digikeyParts),
+        this.farnell(this.state.countryCode, this.state.farnellParts),
         this.newark(this.state.newarkParts)
       ]}
        </span>
