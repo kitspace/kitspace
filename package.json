@@ -39,7 +39,7 @@
   "author": "Kaspar Emanuel",
   "license": "CPAL-1.0",
   "dependencies": {
-    "1-click-bom": "^1.0.0",
+    "1-click-bom": "github:monostable/nodejs-1-click-bom",
     "browser-version": "^1.0.0",
     "lodash": "^4.0.0",
     "react-double-scrollbar": "0.0.9",
