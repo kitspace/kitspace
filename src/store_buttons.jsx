@@ -39,11 +39,14 @@ const StoreButtons = React.createClass({
       }, 0);
       let summary;
       if (this.props.items.length == partCount){
-        summary = 'all specified';
+        summary = 'All parts specified';
+        partsSpecified[retailer] = 'all_parts_specified';
       } else if (partCount == 0) {
-        summary = 'none specified';
+        summary = 'No parts specified';
+        partsSpecified[retailer] = 'no_parts_specified';
       } else {
-        summary = partCount + '/' + this.props.items.length + ' specified';
+        summary = partCount + '/' + this.props.items.length + 'parts specified';
+        partsSpecified[retailer] = 'some_parts_specified';
       }
 
       parts[retailer] =
@@ -53,13 +56,6 @@ const StoreButtons = React.createClass({
         summary: summary
       };
 
-      if (_.every(retailerItems)) {
-        partsSpecified[retailer] = 'allPartsSpecified';
-      } else if (_.some(retailerItems)) {
-        partsSpecified[retailer] = 'somePartsSpecified';
-      } else {
-        partsSpecified[retailer] = 'noPartsSpecified';
-      }
     }
     //waiting to avoid flashing on page load
     if (typeof window != 'undefined'){
@@ -130,8 +126,8 @@ const StoreButtons = React.createClass({
       let retailerIconClass = 'retailerIcon';
       let retailerTextClass = 'retailerText';
       let anySpecified =
-        this.state.partsSpecified[retailer] === 'allPartsSpecified'
-        || this.state.partsSpecified[retailer] === 'somePartsSpecified';
+        this.state.partsSpecified[retailer] === 'all_parts_specified'
+        || this.state.partsSpecified[retailer] === 'some_parts_specified';
       let onClick;
       if (anySpecified) {
         onClick = this.state.onClick.bind(null,retailer);
