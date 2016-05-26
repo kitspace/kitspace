@@ -76,7 +76,7 @@ const DirectStores = React.createClass({
   },
   getParts: function (retailer) {
     let parts = this.props.items;
-    parts = parts.filter( part => retailer in part.retailers );
+    parts = parts.filter( part => retailer in part.retailers && part.retailers[retailer] != '');
     parts = parts.map( part => {
       return {
         sku: part.retailers[retailer],
