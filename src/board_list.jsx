@@ -70,9 +70,12 @@ var BoardList = React.createClass({
 
           </p><p>
 
-            <a href='
-            https://github.com/monostable/kitnic/#submitting-your-project'>
-            Submit</a> your own project to have it listed here!
+            <a href='https://github.com/monostable/kitnic/#submitting-your-project'>
+            Submit</a> your own project to have it listed here! Follow this project
+            on <a href='https://twitter.com/kitnic_it'>Twitter</a>
+            , <a href='https://hackaday.io/project/11871-kitnic'>Hackaday.io
+            </a> or <a href='https://github.com/monostable/kitnic'>GitHub</a> to get updates
+            as we progress and add content.
 
           </p>
         </div>
