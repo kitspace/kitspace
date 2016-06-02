@@ -1,12 +1,12 @@
 // scss-lint:disable PseudoElement SelectorFormat Comment Indentation SingleLinePerSelector PropertySortOrder StringQuotes
 @font-face {
-  font-family: 'spinners_n_carts';
-  src: url('/images/spinners_n_carts.eot?82417844');
-  src: url('/images/spinners_n_carts.eot?82417844#iefix') format('embedded-opentype'),
-       url('/images/spinners_n_carts.woff2?82417844') format('woff2'),
-       url('/images/spinners_n_carts.woff?82417844') format('woff'),
-       url('/images/spinners_n_carts.ttf?82417844') format('truetype'),
-       url('/images/spinners_n_carts.svg?82417844#spinners_n_carts') format('svg');
+  font-family: 'fontello';
+  src: url('/images/fontello.eot?82417844');
+  src: url('/images/fontello.eot?82417844#iefix') format('embedded-opentype'),
+       url('/images/fontello.woff2?82417844') format('woff2'),
+       url('/images/fontello.woff?82417844') format('woff'),
+       url('/images/fontello.ttf?82417844') format('truetype'),
+       url('/images/fontello.svg?82417844#fontello') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -15,14 +15,14 @@
 /*
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
-    font-family: 'spinners_n_carts';
-    src: url('../font/spinners_n_carts.svg?82417844#spinners_n_carts') format('svg');
+    font-family: 'fontello';
+    src: url('../font/fontello.svg?82417844#fontello') format('svg');
   }
 }
 */
 
  [class^="icon-"]:before, [class*=" icon-"]:before {
-  font-family: "spinners_n_carts";
+  font-family: "fontello";
   font-style: normal;
   font-weight: normal;
   speak: none;
