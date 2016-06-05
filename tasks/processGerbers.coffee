@@ -95,8 +95,10 @@ else
             data = fs.readFileSync(gerberPath, {encoding:'utf8'})
             stackupData.push({filename:gerberPath, gerber:data})
             zip.file(path.basename(gerberPath), data)
-        if file? color = yaml.safeLoad(file).color
-        boardBuilder stackupData, color || 'green', (stackup) ->
+        if file? then color = yaml.safeLoad(file).color
+        boardBuilder stackupData, color || 'green', (error, stackup) ->
+            if error?
+                throw error
             fs.writeFile zipPath
             , zip.generate
                 type:'nodebuffer'

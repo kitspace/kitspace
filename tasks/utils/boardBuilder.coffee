@@ -1,8 +1,5 @@
-pcbStackup  = require('pcb-stackup')
-idLayer     = require('pcb-stackup/lib/layer-types').identify
-gerberToSvg = require('gerber-to-svg')
+pcbStackup  = require('pcb-stackup/lib/easy-stackup')
 
-# board colors
 options =
     # copper finish
     cf:
@@ -31,22 +28,14 @@ options =
         black  : 'black'
         white  : 'white'
 
-
-styleToSvgObj = ({copperFinish, solderMask, silkScreen}) ->
-    style:
-        type: 'text/css',
-        _: " ._board-fr4 { color: #4D542C;}
-             ._board-cu { color: lightgrey; }
-             ._board-cf { color: #{options.cf[copperFinish]}; }
-             ._board-sm { color: #{options.sm[solderMask].color}; opacity: #{options.sm[solderMask].opacity}; }
-             ._board-ss { color: #{options.ss[silkScreen]}; }
-             ._board-sp { color: silver; opacity: 0.0;}
-             ._board-out { color: black; }"
-
 styleToOption = ({copperFinish, solderMask, silkScreen}) ->
-            fr4: '#4D542C'
-            cu: 'lightgrey'
-            cf: options.cf[copperFinish]
+    fr4: '#4D542C'
+    cu: 'lightgrey'
+    cf: options.cf[copperFinish]
+    sm: options.sm[solderMask]
+    ss: options.ss[silkScreen]
+    sp: 'rgba(0, 0, 0, 0.0)'
+    out: 'black'
 
 colorToStyle =
     green:
@@ -83,8 +72,6 @@ colorToStyle =
         silkScreen: 'black'
 
 convert = (layers, color, callback) ->
-    pcbStackup layers,
-        color:
-
+    pcbStackup layers, {color: styleToOption(colorToStyle[color])}, callback
 
 module.exports = convert
