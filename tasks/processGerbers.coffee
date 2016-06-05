@@ -109,21 +109,16 @@ else
         boardBuilder stackupData, color || 'green', (error, stackup) ->
             if error?
                 throw error
-            svgo.optimize stackup.top, (result) ->
-                fs.writeFile topSvgPath, result.data, (err) ->
-                    if err?
-                        console.error("Could not write top svg for #{folder}")
-                        console.error(err)
-                        process.exit(1)
-
-            svgo.optimize stackup.bottom, (result) ->
-                fs.writeFile bottomSvgPath, result.data, (err) ->
-                    if err?
-                        console.error("Could not write bottom svg for #{folder}")
-                        console.error(err)
-                        process.exit(1)
-
-
+            fs.writeFile topSvgPath, stackup.top, (err) ->
+                if err?
+                    console.error("Could not write top svg for #{folder}")
+                    console.error(err)
+                    process.exit(1)
+            fs.writeFile bottomSvgPath, stackup.bottom, (err) ->
+                if err?
+                    console.error("Could not write bottom svg for #{folder}")
+                    console.error(err)
+                    process.exit(1)
     catch e
         console.error("Could not process gerbers for #{folder}")
         console.error(e)
