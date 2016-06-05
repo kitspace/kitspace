@@ -91,28 +91,22 @@ else
         file = fs.readFileSync("#{folder}/kitnic.yaml")
     try
         stackupData = []
-
         for gerberPath in gerbers
             data = fs.readFileSync(gerberPath, {encoding:'utf8'})
             stackupData.push({filename:gerberPath, gerber:data})
             zip.file(path.basename(gerberPath), data)
-
-        fs.writeFile zipPath
-        , zip.generate
-            type:'nodebuffer'
-            compression:'DEFLATE'
-            compressionOptions : {level:6}
-        , (err) ->
-            if err?
-                console.error("Could not write gerber zip for #{folder}")
-                console.error(err)
-                process.exit(1)
-
-        if file? then color = yaml.safeLoad(file).color
-        boardBuilder stackupData, color || 'green', (error, stackup) ->
-            if error?
-                throw error
-
+        if file? color = yaml.safeLoad(file).color
+        boardBuilder stackupData, color || 'green', (stackup) ->
+            fs.writeFile zipPath
+            , zip.generate
+                type:'nodebuffer'
+                compression:'DEFLATE'
+                compressionOptions : {level:6}
+            , (err) ->
+                if err?
+                    console.error("Could not write gerber zip for #{folder}")
+                    console.error(err)
+                    process.exit(1)
             svgo.optimize stackup.top, (result) ->
                 fs.writeFile topSvgPath, result.data, (err) ->
                     if err?
