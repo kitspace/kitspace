@@ -10,14 +10,14 @@ options =
 
     # soldermask
     sm:
-        red    : 'rgba(0x8B,    0,    0, 0.90)'
-        orange : 'rgba(0xC3, 0x6B,    0, 0.90)'
-        yellow : 'rgba(0xFF, 0xFF, 0x66, 0.50)'
-        green  : 'rgba(   0, 0x40,    0, 0.90)'
-        blue   : 'rgba(   0, 0x1E, 0x68, 0.90)'
-        purple : 'rgba(0x2E,    0, 0x51, 0.90)'
-        black  : 'rgba(   0,    0,    0, 0.90)'
-        white  : 'rgba(0xFF, 0xFF, 0xFF, 0.90)'
+        red    : 'rgba(139,   0,   0, 0.90)'
+        orange : 'rgba(195, 107,   0, 0.90)'
+        yellow : 'rgba(255, 255, 102, 0.50)'
+        green  : 'rgba(  0,  68,   0, 0.90)'
+        blue   : 'rgba(  0,  30, 104, 0.90)'
+        purple : 'rgba( 46,   0,  81, 0.90)'
+        black  : 'rgba(  0,   0,   0, 0.90)'
+        white  : 'rgba(255, 255, 255, 0.90)'
 
     # silkscreen
     ss:
@@ -71,7 +71,8 @@ colorToStyle =
         copperFinish: 'gold'
         silkScreen: 'black'
 
-convert = (layers, color, callback) ->
-    pcbStackup layers, {color: styleToOption(colorToStyle[color])}, callback
-
-module.exports = convert
+module.exports = (layers, color, callback) ->
+    pcbStackup layers,
+        color: styleToOption(colorToStyle[color])
+        maskWithOutline: false
+    , callback
