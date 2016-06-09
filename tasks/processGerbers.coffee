@@ -7,6 +7,7 @@ utils        = require('./utils/utils')
 boardBuilder = require('./utils/boardBuilder')
 cp = require('child_process')
 Jszip = require('jszip')
+Jsdom = require('jsdom')
 
 
 svgo = new Svgo
@@ -110,7 +111,9 @@ else
             if error?
                 throw error
             svgo.optimize stackup.top, (result) ->
-                fs.writeFile topSvgPath, result.data, (err) ->
+                document = Jsdom.jsdom(result.data)
+                document.body.style.backgroundColor = "#373737"
+                fs.writeFile topSvgPath, Jsdom.serializeDocument(document), (err) ->
                     if err?
                         console.error("Could not write top svg for #{folder}")
                         console.error(err)
