@@ -55,6 +55,8 @@ svgo = new Svgo
 
     ]
 
+kitnic_button_svg =
+
 badgify = (input_svg) ->
     document = Jsdom.jsdom(input_svg)
     svg = document.querySelector('svg')
@@ -63,13 +65,11 @@ badgify = (input_svg) ->
     y = Number(viewBox[1])
     w = Number(viewBox[2])
     h = Number(viewBox[3])
-    console.log([x, y, w, h].join(' '))
     margin = h * 0.1
     x -= margin
     y -= margin
     w += margin * 2
     h += margin * 3
-    console.log([x, y, w, h].join(' '))
     svg.setAttribute('viewBox', [x, y, w, h].join(' '))
     rect = document.createElement('rect')
     rect.setAttribute('x', x)
@@ -78,7 +78,6 @@ badgify = (input_svg) ->
     rect.setAttribute('height', h)
     rect.setAttribute('fill', '#373737')
     rect.setAttribute('rx', margin * 0.1)
-    console.log(rect.outerHTML)
     svg.insertBefore(rect, svg.firstElementChild)
     return svg.outerHTML
 
