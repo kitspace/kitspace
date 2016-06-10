@@ -1,0 +1,284 @@
+<?xml version="1.0"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="_top" stroke-width="0" stroke-linecap="round" stroke-linejoin="round" viewBox="2094.120000 2670.820000 1451.560000 689.760000">
+  <defs>
+    <path id="tool-D10-pad-1115" d="M-14-18h28v36h-28z"/>
+    <path id="tool-D11-pad-1116" d="M-18-14h36v28h-36z"/>
+    <path id="tool-D12-pad-1117" d="M-20-20h40v40h-40z"/>
+    <rect id="tool-D13-pad-1118" width="17.7" height="82.7" x="-8.85" y="-41.35" rx="8.85" ry="8.85"/>
+    <path id="tool-D14-pad-1119" d="M-41.35-9.85h82.7v19.7h-82.7z"/>
+    <circle id="tool-D17-pad-1122" r="29.55"/>
+    <path id="tool-D18-pad-1123" d="M-29.55-29.55h59.1v59.1h-59.1z"/>
+    <path id="tool-D19-pad-1124" d="M-29.55-29.55h59.1v59.1h-59.1z"/>
+    <circle id="tool-D20-pad-1125" r="15.75"/>
+    <rect id="tool-D21-pad-1126" width="157.5" height="65" x="-78.75" y="-32.5" rx="32.5" ry="32.5"/>
+    <circle id="tool-D22-pad-1127" r="35"/>
+    <circle id="tool-D23-pad-1128" r="25"/>
+    <path id="tool-D29-pad-1167" d="M-18-22h36v44h-36z"/>
+    <path id="tool-D30-pad-1168" d="M-22-18h44v36h-44z"/>
+    <path id="tool-D31-pad-1169" d="M-24-24h48v48h-48z"/>
+    <rect id="tool-D32-pad-1170" width="25.7" height="90.7" x="-12.85" y="-45.35" rx="12.85" ry="12.85"/>
+    <path id="tool-D33-pad-1171" d="M-45.35-13.85h90.7v27.7h-90.7z"/>
+    <circle id="tool-D34-pad-1172" r="33.55"/>
+    <path id="tool-D35-pad-1173" d="M-33.55-33.55h67.1v67.1h-67.1z"/>
+    <path id="tool-D36-pad-1174" d="M-33.55-33.55h67.1v67.1h-67.1z"/>
+    <circle id="tool-D37-pad-1175" r="19.75"/>
+    <rect id="tool-D38-pad-1176" width="165.5" height="73" x="-82.75" y="-36.5" rx="36.5" ry="36.5"/>
+    <circle id="tool-D39-pad-1177" r="39"/>
+    <circle id="tool-D40-pad-1178" r="29"/>
+    <circle id="tool-T1-pad-1179" r="14"/>
+    <circle id="tool-T2-pad-1180" r="17.7"/>
+    <circle id="tool-T3-pad-1181" r="20.65"/>
+    <circle id="tool-T4-pad-1182" r="32"/>
+    <circle id="tool-T5-pad-1183" r="21.65"/>
+    <g id="_top-cu" fill="currentColor" stroke="currentColor">
+      <use x="2506.9" y="2925.2" xlink:href="#tool-D10-pad-1115"/>
+      <use x="2570.9" y="2925.2" xlink:href="#tool-D10-pad-1115"/>
+      <use x="2571.4" y="2866.1" xlink:href="#tool-D10-pad-1115"/>
+      <use x="2507.4" y="2866.1" xlink:href="#tool-D10-pad-1115"/>
+      <use x="2570.9" y="2807.1" xlink:href="#tool-D10-pad-1115"/>
+      <use x="2506.9" y="2807.1" xlink:href="#tool-D10-pad-1115"/>
+      <use x="3063.5" y="2921.3" xlink:href="#tool-D10-pad-1115"/>
+      <use x="2999.5" y="2921.3" xlink:href="#tool-D10-pad-1115"/>
+      <use x="3019.7" y="3004.4" xlink:href="#tool-D10-pad-1115"/>
+      <use x="3083.7" y="3004.4" xlink:href="#tool-D10-pad-1115"/>
+      <use x="2463.6" y="3066.9" xlink:href="#tool-D10-pad-1115"/>
+      <use x="2527.6" y="3066.9" xlink:href="#tool-D10-pad-1115"/>
+      <use x="2463.6" y="3126" xlink:href="#tool-D10-pad-1115"/>
+      <use x="2527.6" y="3126" xlink:href="#tool-D10-pad-1115"/>
+      <use x="3146.2" y="3123" xlink:href="#tool-D11-pad-1116"/>
+      <use x="3146.2" y="3059" xlink:href="#tool-D11-pad-1116"/>
+      <use x="3012.2" y="3058.6" xlink:href="#tool-D12-pad-1117"/>
+      <use x="3090.2" y="3058.6" xlink:href="#tool-D12-pad-1117"/>
+      <use x="3012.2" y="3114.6" xlink:href="#tool-D12-pad-1117"/>
+      <use x="3090.2" y="3114.6" xlink:href="#tool-D12-pad-1117"/>
+      <use x="2699.8" y="2824.8" xlink:href="#tool-D13-pad-1118"/>
+      <use x="2725.4" y="2824.8" xlink:href="#tool-D13-pad-1118"/>
+      <use x="2751" y="2824.8" xlink:href="#tool-D13-pad-1118"/>
+      <use x="2776.6" y="2824.8" xlink:href="#tool-D13-pad-1118"/>
+      <use x="2802.2" y="2824.8" xlink:href="#tool-D13-pad-1118"/>
+      <use x="2827.8" y="2824.8" xlink:href="#tool-D13-pad-1118"/>
+      <use x="2853.3" y="2824.8" xlink:href="#tool-D13-pad-1118"/>
+      <use x="2878.9" y="2824.8" xlink:href="#tool-D13-pad-1118"/>
+      <use x="2904.5" y="2824.8" xlink:href="#tool-D13-pad-1118"/>
+      <use x="2930.1" y="2824.8" xlink:href="#tool-D13-pad-1118"/>
+      <use x="2699.8" y="3096.5" xlink:href="#tool-D13-pad-1118"/>
+      <use x="2725.4" y="3096.5" xlink:href="#tool-D13-pad-1118"/>
+      <use x="2751" y="3096.5" xlink:href="#tool-D13-pad-1118"/>
+      <use x="2776.6" y="3096.5" xlink:href="#tool-D13-pad-1118"/>
+      <use x="2802.2" y="3096.5" xlink:href="#tool-D13-pad-1118"/>
+      <use x="2827.8" y="3096.5" xlink:href="#tool-D13-pad-1118"/>
+      <use x="2853.3" y="3096.5" xlink:href="#tool-D13-pad-1118"/>
+      <use x="2878.9" y="3096.5" xlink:href="#tool-D13-pad-1118"/>
+      <use x="2904.5" y="3096.5" xlink:href="#tool-D13-pad-1118"/>
+      <use x="2930.1" y="3096.5" xlink:href="#tool-D13-pad-1118"/>
+      <use x="2362.2" y="2883.9" xlink:href="#tool-D14-pad-1119"/>
+      <use x="2362.2" y="2982.3" xlink:href="#tool-D14-pad-1119"/>
+      <use x="2362.2" y="3061" xlink:href="#tool-D14-pad-1119"/>
+      <use x="2362.2" y="3159.4" xlink:href="#tool-D14-pad-1119"/>
+      <path fill="none" stroke-width="10" d="M2252 3118.1l7.8-7.9m-59 7.9h51.2m601.3-73.8v52.2m0-52.2l16.8-16.7h43.3l86.1-86.2m0-20.1v20.1m60.1-16.2h66.4m-101.9 35.4l35.5-35.4m-51.7 35.4h16.2m86.1-78.7l74.8-74.8m-200.7 74.8h125.9m-149.6 23.6l23.7-23.6m-82.7 23.6h59m-79.9-20.9l20.9 20.9m2.9-80.7v44.3l16.4 16.4h24.3l23.3-23.3h78.7l55.2-55.1m-531 59h31l15.7 15.8v161.4l53.2 53.2h28.5m-166.3-106.3l5.9 5.9m-5.9-5.9l37.4-37.4m-43.3 46.3v67.8m-59.1-126.8l59.1 59m299.2-66l15.7 15.7m-15.7-123v107.3m-55.1 7.8v19.7m0-19.7l30.5-30.5m-109.3 26.6l7.9 7.9m-7.9-23.6v15.7m0-15.7l27.6-27.6m132.8 3l36.5 36.4v15.1m-36.5-123.4v71.9m155.4 166.3l7-7m-6.1 0h6.1m-61.7 55.6l55.6-55.6m6.1 0l4-3.9m-192.9-226.3l1-1m298.2 100.4h14.4m-526.2-118.1l27.5 27.5m498.7 90.6l106 106m-316.3 7.2l77.8-77.8m-77.8 77.8v58.1m156.6-33.5l58.7-58.6m.8 0v54.6m-62.5-54.6h61.7m-76.2 75.2l16.6-16.6 4.4-4.4m-4.4 4.4h.9m-31.5 16.6h14m-49 35l35-35m-43 35h8m-228.9 168.9l22.5-22.5m-93.3 22.5h70.8m-122-51.2l51.2 51.2m93.3-93.4v70.9m39.5-164.5l1.8 1.7v46l48.6 48.6h52.9l15.3-15.3h173m-558.6 3.9H2713m167.7-39.9l31.3 31.3m42-61.2v27.2m-47.7-40.6v40.6m42 34l15.3-15.3m-51.6 15.3h36.3m-8.3-20l14-14m-33.8 14h19.8m-33.7-14l13.9 14m224.7 24.7l36.2-36.2m-124.8 16.2l34.4-34.5m-127.1 34.5h92.7m-52.8-94.5h5.2m172.4 14.4v63.9m0-63.9l26.2-26.2h162.2m-490.6 45.3l1.8 1.7v43.3m23.8-45l1.8 1.7m-335.4-173v27.6m-102.4-110.9l34.8-34.8h3.6m-97.5 126l19.1-19.1m0-88.6v88.6m0-88.6l.3-.3m0-40.6v40.6m-25.3 157.2l45-45m0-103.6v103.6m0-103.6l.3-.4m0-40.6v40.6m19.7 8.6v98.2m59.1 126.8v59.1m-67-129.9l3 2.9v67.9m-77.8 116.2v17.7m-129.9-271.7l3.9 4m-59-4h55.1m3.9 283.5v33.5m0-33.5l53.2-53.2h49.2m-161.4-230.3v189m262.8-51.2v59.1m-167.1-178.4l14.5-14.5m-14.5 14.5v.7m-13 13l13-13m-13 13v82m27.5-110.2h98.4m-47.2 49.2h41.3m-102.3 78.7h61m-78.7-17.7l17.7 17.7m127.6-276.5l37.4-37.4h403.9l32.7 32.6v43.4l1.7 1.7m-455.7-32.1l25.7-25.6h387.4l15.3 15.3v40.7l1.7 1.7m-217.5 187h78.8l36.4 36.4v48.3m-56.1-202.8h39.3l16.8-16.7m0-52.2v52.2m37.2 313.1l14-13.9m0-79.7v79.7m-58.5 11.2v44.9m0-44.9l32.9-32.9m0-58v58m-232.9 43.9v33.9m0-33.9l17-17m126.7 0l36.3-36.2m0-47v47m0-47l1.7-1.7M2469.3 3200v32.3m0-32.3l38.6-38.6h196.8l20.7-20.7m0-44.2v44.2m-1.7-42.5l1.7-1.7m-218.5-230.4v59.1m64-118.1h43.3m149.6 161.4l7.9-7.9m30.5-135.8v85.6m127.9-85.6h32.5m-81.9 1.7v58.1m-1.8-59.8l1.8 1.7m365.7 204.7h131.3l33 32.9v26.1l30.2 30.3m-71.4-69.3l21.2 21.2v97.8l50.2 50.3M3086.7 3119l4 4h55.5m-126.5-118.6v47.7m125.7-47.7h.8"/>
+      <path fill="none" stroke-width="20" d="M2385.8 2826.8l4 3.9v25.6m-27.6 27.6l27.6-27.6m-27.6 303.1l23.6 23.7"/>
+      <use x="3440.9" y="2820.5" xlink:href="#tool-D17-pad-1122"/>
+      <use x="3440.9" y="2920.5" xlink:href="#tool-D17-pad-1122"/>
+      <use x="3440.9" y="3020.5" xlink:href="#tool-D17-pad-1122"/>
+      <use x="3440.9" y="3120.5" xlink:href="#tool-D17-pad-1122"/>
+      <use x="3069.3" y="3236.2" xlink:href="#tool-D17-pad-1122"/>
+      <use x="2969.3" y="3236.2" xlink:href="#tool-D17-pad-1122"/>
+      <use x="2869.3" y="3236.2" xlink:href="#tool-D17-pad-1122"/>
+      <use x="2769.3" y="3236.2" xlink:href="#tool-D17-pad-1122"/>
+      <use x="2669.3" y="3236.2" xlink:href="#tool-D17-pad-1122"/>
+      <use x="2569.3" y="3236.2" xlink:href="#tool-D17-pad-1122"/>
+      <use x="2469.3" y="3236.2" xlink:href="#tool-D17-pad-1122"/>
+      <use x="3440.9" y="3220.5" xlink:href="#tool-D18-pad-1123"/>
+      <use x="3169.3" y="3236.2" xlink:href="#tool-D19-pad-1124"/>
+      <use x="2259.8" y="2933.1" xlink:href="#tool-D20-pad-1125"/>
+      <use x="2259.8" y="3110.2" xlink:href="#tool-D20-pad-1125"/>
+      <use x="2259.8" y="2797.2" xlink:href="#tool-D21-pad-1126"/>
+      <use x="2259.8" y="3246.1" xlink:href="#tool-D21-pad-1126"/>
+      <use x="2307.1" y="3246.1" xlink:href="#tool-D22-pad-1127"/>
+      <use x="2212.6" y="3246.1" xlink:href="#tool-D22-pad-1127"/>
+      <use x="2259.8" y="3246.1" xlink:href="#tool-D22-pad-1127"/>
+      <use x="2259.8" y="2795.3" xlink:href="#tool-D22-pad-1127"/>
+      <use x="2212.6" y="2795.3" xlink:href="#tool-D22-pad-1127"/>
+      <use x="2307.1" y="2795.3" xlink:href="#tool-D22-pad-1127"/>
+      <use x="2539.4" y="2996.1" xlink:href="#tool-D23-pad-1128"/>
+      <use x="2834.6" y="2948.8" xlink:href="#tool-D23-pad-1128"/>
+      <use x="3126" y="2925.2" xlink:href="#tool-D23-pad-1128"/>
+      <use x="2641.7" y="2834.6" xlink:href="#tool-D23-pad-1128"/>
+      <use x="2460.6" y="2996.1" xlink:href="#tool-D23-pad-1128"/>
+      <use x="2385.8" y="2826.8" xlink:href="#tool-D23-pad-1128"/>
+      <use x="2385.8" y="3200.8" xlink:href="#tool-D23-pad-1128"/>
+      <use x="2200.8" y="2929.1" xlink:href="#tool-D23-pad-1128"/>
+      <use x="2200.8" y="3118.1" xlink:href="#tool-D23-pad-1128"/>
+      <use x="2661.4" y="3011.8" xlink:href="#tool-D23-pad-1128"/>
+      <use x="2905.5" y="2948.8" xlink:href="#tool-D23-pad-1128"/>
+      <use x="2689" y="2948.8" xlink:href="#tool-D23-pad-1128"/>
+      <use x="2763.8" y="2948.8" xlink:href="#tool-D23-pad-1128"/>
+      <use x="2988.2" y="2818.9" xlink:href="#tool-D23-pad-1128"/>
+      <use x="3102.4" y="2807.1" xlink:href="#tool-D23-pad-1128"/>
+      <use x="3185" y="2807.1" xlink:href="#tool-D23-pad-1128"/>
+      <use x="3137.8" y="3007.9" xlink:href="#tool-D23-pad-1128"/>
+      <use x="3253.9" y="3228.3" xlink:href="#tool-D23-pad-1128"/>
+      <use x="3253.9" y="2815" xlink:href="#tool-D23-pad-1128"/>
+    </g>
+    <mask id="_top_mech-mask" fill="#fff" fill-rule="evenodd" stroke="#fff">
+      <path d="M3372 2956.7v-181.1h116.2v492.1H3372v-181.1a15.7 15.7 0 0 0-15.7-15.7h-135.8a15.7 15.7 0 0 0-15.8 15.7v76.8a15.7 15.7 0 0 0 15.8 15.7h112.2v124H2151.6v-574.8h1181.1v135.9h-112.2a15.7 15.7 0 0 0-15.8 15.7v76.8a15.7 15.7 0 0 0 15.8 15.7h135.8a15.7 15.7 0 0 0 15.7-15.7"/>
+      <g id="_top-drl" fill="#000" stroke="#000">
+        <use x="3185" y="2807.1" xlink:href="#tool-T1-pad-1179"/>
+        <use x="3126" y="2925.2" xlink:href="#tool-T1-pad-1179"/>
+        <use x="3137.8" y="3007.9" xlink:href="#tool-T1-pad-1179"/>
+        <use x="3102.4" y="2807.1" xlink:href="#tool-T1-pad-1179"/>
+        <use x="2988.2" y="2818.9" xlink:href="#tool-T1-pad-1179"/>
+        <use x="2905.5" y="2948.8" xlink:href="#tool-T1-pad-1179"/>
+        <use x="2834.6" y="2948.8" xlink:href="#tool-T1-pad-1179"/>
+        <use x="2763.8" y="2948.8" xlink:href="#tool-T1-pad-1179"/>
+        <use x="2689" y="2948.8" xlink:href="#tool-T1-pad-1179"/>
+        <use x="2661.4" y="3011.8" xlink:href="#tool-T1-pad-1179"/>
+        <use x="2539.4" y="2996.1" xlink:href="#tool-T1-pad-1179"/>
+        <use x="2460.6" y="2996.1" xlink:href="#tool-T1-pad-1179"/>
+        <use x="2385.8" y="2826.8" xlink:href="#tool-T1-pad-1179"/>
+        <use x="2641.7" y="2834.6" xlink:href="#tool-T1-pad-1179"/>
+        <use x="2200.8" y="2929.1" xlink:href="#tool-T1-pad-1179"/>
+        <use x="2200.8" y="3118.1" xlink:href="#tool-T1-pad-1179"/>
+        <use x="2385.8" y="3200.8" xlink:href="#tool-T1-pad-1179"/>
+        <use x="3440.9" y="2820.5" xlink:href="#tool-T2-pad-1180"/>
+        <use x="3440.9" y="2920.5" xlink:href="#tool-T2-pad-1180"/>
+        <use x="3440.9" y="3020.5" xlink:href="#tool-T2-pad-1180"/>
+        <use x="3440.9" y="3120.5" xlink:href="#tool-T2-pad-1180"/>
+        <use x="3069.3" y="3236.2" xlink:href="#tool-T2-pad-1180"/>
+        <use x="2969.3" y="3236.2" xlink:href="#tool-T2-pad-1180"/>
+        <use x="2869.3" y="3236.2" xlink:href="#tool-T2-pad-1180"/>
+        <use x="2769.3" y="3236.2" xlink:href="#tool-T2-pad-1180"/>
+        <use x="2669.3" y="3236.2" xlink:href="#tool-T2-pad-1180"/>
+        <use x="2569.3" y="3236.2" xlink:href="#tool-T2-pad-1180"/>
+        <use x="2469.3" y="3236.2" xlink:href="#tool-T2-pad-1180"/>
+        <use x="3169.3" y="3236.2" xlink:href="#tool-T2-pad-1180"/>
+        <use x="3440.9" y="3220.5" xlink:href="#tool-T2-pad-1180"/>
+        <use x="3253.9" y="2815" xlink:href="#tool-T3-pad-1181"/>
+        <use x="3253.9" y="3228.3" xlink:href="#tool-T3-pad-1181"/>
+        <use x="2212.6" y="2795.3" xlink:href="#tool-T4-pad-1182"/>
+        <use x="2259.8" y="2795.3" xlink:href="#tool-T4-pad-1182"/>
+        <use x="2307.1" y="2795.3" xlink:href="#tool-T4-pad-1182"/>
+        <use x="2307.1" y="3246.1" xlink:href="#tool-T4-pad-1182"/>
+        <use x="2259.8" y="3246.1" xlink:href="#tool-T4-pad-1182"/>
+        <use x="2212.6" y="3246.1" xlink:href="#tool-T4-pad-1182"/>
+        <use x="2259.8" y="2933.1" xlink:href="#tool-T5-pad-1183"/>
+        <use x="2259.8" y="3110.2" xlink:href="#tool-T5-pad-1183"/>
+      </g>
+    </mask>
+  </defs>
+  <rect style="z-index=-90000" id="rect2985" x="2151.6" y="2728.3" width="1336.6" height="574.8" fill="#373737"/>
+  <g mask="url(#_top_mech-mask)" transform="matrix(1 0 0 -1 0 6031.4)">
+    <path fill="currentColor" d="M2151.6 2728.3h1336.6v574.8H2151.6z" class="_board-fr4"/>
+    <use class="_board-cu" xlink:href="#_top-cu"/>
+    <defs>
+      <g id="_top-sm" fill="currentColor" stroke="currentColor">
+        <use x="2506.9" y="2925.2" xlink:href="#tool-D29-pad-1167"/>
+        <use x="2570.9" y="2925.2" xlink:href="#tool-D29-pad-1167"/>
+        <use x="2571.4" y="2866.1" xlink:href="#tool-D29-pad-1167"/>
+        <use x="2507.4" y="2866.1" xlink:href="#tool-D29-pad-1167"/>
+        <use x="2570.9" y="2807.1" xlink:href="#tool-D29-pad-1167"/>
+        <use x="2506.9" y="2807.1" xlink:href="#tool-D29-pad-1167"/>
+        <use x="3063.5" y="2921.3" xlink:href="#tool-D29-pad-1167"/>
+        <use x="2999.5" y="2921.3" xlink:href="#tool-D29-pad-1167"/>
+        <use x="3019.7" y="3004.4" xlink:href="#tool-D29-pad-1167"/>
+        <use x="3083.7" y="3004.4" xlink:href="#tool-D29-pad-1167"/>
+        <use x="2463.6" y="3066.9" xlink:href="#tool-D29-pad-1167"/>
+        <use x="2527.6" y="3066.9" xlink:href="#tool-D29-pad-1167"/>
+        <use x="2463.6" y="3126" xlink:href="#tool-D29-pad-1167"/>
+        <use x="2527.6" y="3126" xlink:href="#tool-D29-pad-1167"/>
+        <use x="3146.2" y="3123" xlink:href="#tool-D30-pad-1168"/>
+        <use x="3146.2" y="3059" xlink:href="#tool-D30-pad-1168"/>
+        <use x="3012.2" y="3058.6" xlink:href="#tool-D31-pad-1169"/>
+        <use x="3090.2" y="3058.6" xlink:href="#tool-D31-pad-1169"/>
+        <use x="3012.2" y="3114.6" xlink:href="#tool-D31-pad-1169"/>
+        <use x="3090.2" y="3114.6" xlink:href="#tool-D31-pad-1169"/>
+        <use x="2699.8" y="2824.8" xlink:href="#tool-D32-pad-1170"/>
+        <use x="2725.4" y="2824.8" xlink:href="#tool-D32-pad-1170"/>
+        <use x="2751" y="2824.8" xlink:href="#tool-D32-pad-1170"/>
+        <use x="2776.6" y="2824.8" xlink:href="#tool-D32-pad-1170"/>
+        <use x="2802.2" y="2824.8" xlink:href="#tool-D32-pad-1170"/>
+        <use x="2827.8" y="2824.8" xlink:href="#tool-D32-pad-1170"/>
+        <use x="2853.3" y="2824.8" xlink:href="#tool-D32-pad-1170"/>
+        <use x="2878.9" y="2824.8" xlink:href="#tool-D32-pad-1170"/>
+        <use x="2904.5" y="2824.8" xlink:href="#tool-D32-pad-1170"/>
+        <use x="2930.1" y="2824.8" xlink:href="#tool-D32-pad-1170"/>
+        <use x="2699.8" y="3096.5" xlink:href="#tool-D32-pad-1170"/>
+        <use x="2725.4" y="3096.5" xlink:href="#tool-D32-pad-1170"/>
+        <use x="2751" y="3096.5" xlink:href="#tool-D32-pad-1170"/>
+        <use x="2776.6" y="3096.5" xlink:href="#tool-D32-pad-1170"/>
+        <use x="2802.2" y="3096.5" xlink:href="#tool-D32-pad-1170"/>
+        <use x="2827.8" y="3096.5" xlink:href="#tool-D32-pad-1170"/>
+        <use x="2853.3" y="3096.5" xlink:href="#tool-D32-pad-1170"/>
+        <use x="2878.9" y="3096.5" xlink:href="#tool-D32-pad-1170"/>
+        <use x="2904.5" y="3096.5" xlink:href="#tool-D32-pad-1170"/>
+        <use x="2930.1" y="3096.5" xlink:href="#tool-D32-pad-1170"/>
+        <use x="2362.2" y="2883.9" xlink:href="#tool-D33-pad-1171"/>
+        <use x="2362.2" y="2982.3" xlink:href="#tool-D33-pad-1171"/>
+        <use x="2362.2" y="3061" xlink:href="#tool-D33-pad-1171"/>
+        <use x="2362.2" y="3159.4" xlink:href="#tool-D33-pad-1171"/>
+        <use x="3440.9" y="2820.5" xlink:href="#tool-D34-pad-1172"/>
+        <use x="3440.9" y="2920.5" xlink:href="#tool-D34-pad-1172"/>
+        <use x="3440.9" y="3020.5" xlink:href="#tool-D34-pad-1172"/>
+        <use x="3440.9" y="3120.5" xlink:href="#tool-D34-pad-1172"/>
+        <use x="3069.3" y="3236.2" xlink:href="#tool-D34-pad-1172"/>
+        <use x="2969.3" y="3236.2" xlink:href="#tool-D34-pad-1172"/>
+        <use x="2869.3" y="3236.2" xlink:href="#tool-D34-pad-1172"/>
+        <use x="2769.3" y="3236.2" xlink:href="#tool-D34-pad-1172"/>
+        <use x="2669.3" y="3236.2" xlink:href="#tool-D34-pad-1172"/>
+        <use x="2569.3" y="3236.2" xlink:href="#tool-D34-pad-1172"/>
+        <use x="2469.3" y="3236.2" xlink:href="#tool-D34-pad-1172"/>
+        <use x="3440.9" y="3220.5" xlink:href="#tool-D35-pad-1173"/>
+        <use x="3169.3" y="3236.2" xlink:href="#tool-D36-pad-1174"/>
+        <use x="2259.8" y="2933.1" xlink:href="#tool-D37-pad-1175"/>
+        <use x="2259.8" y="3110.2" xlink:href="#tool-D37-pad-1175"/>
+        <use x="2259.8" y="2797.2" xlink:href="#tool-D38-pad-1176"/>
+        <use x="2259.8" y="3246.1" xlink:href="#tool-D38-pad-1176"/>
+        <use x="2307.1" y="3246.1" xlink:href="#tool-D39-pad-1177"/>
+        <use x="2212.6" y="3246.1" xlink:href="#tool-D39-pad-1177"/>
+        <use x="2259.8" y="3246.1" xlink:href="#tool-D39-pad-1177"/>
+        <use x="2259.8" y="2795.3" xlink:href="#tool-D39-pad-1177"/>
+        <use x="2212.6" y="2795.3" xlink:href="#tool-D39-pad-1177"/>
+        <use x="2307.1" y="2795.3" xlink:href="#tool-D39-pad-1177"/>
+        <use x="2539.4" y="2996.1" xlink:href="#tool-D40-pad-1178"/>
+        <use x="2834.6" y="2948.8" xlink:href="#tool-D40-pad-1178"/>
+        <use x="3126" y="2925.2" xlink:href="#tool-D40-pad-1178"/>
+        <use x="2641.7" y="2834.6" xlink:href="#tool-D40-pad-1178"/>
+        <use x="2460.6" y="2996.1" xlink:href="#tool-D40-pad-1178"/>
+        <use x="2385.8" y="2826.8" xlink:href="#tool-D40-pad-1178"/>
+        <use x="2385.8" y="3200.8" xlink:href="#tool-D40-pad-1178"/>
+        <use x="2200.8" y="2929.1" xlink:href="#tool-D40-pad-1178"/>
+        <use x="2200.8" y="3118.1" xlink:href="#tool-D40-pad-1178"/>
+        <use x="2661.4" y="3011.8" xlink:href="#tool-D40-pad-1178"/>
+        <use x="2905.5" y="2948.8" xlink:href="#tool-D40-pad-1178"/>
+        <use x="2689" y="2948.8" xlink:href="#tool-D40-pad-1178"/>
+        <use x="2763.8" y="2948.8" xlink:href="#tool-D40-pad-1178"/>
+        <use x="2988.2" y="2818.9" xlink:href="#tool-D40-pad-1178"/>
+        <use x="3102.4" y="2807.1" xlink:href="#tool-D40-pad-1178"/>
+        <use x="3185" y="2807.1" xlink:href="#tool-D40-pad-1178"/>
+        <use x="3137.8" y="3007.9" xlink:href="#tool-D40-pad-1178"/>
+        <use x="3253.9" y="3228.3" xlink:href="#tool-D40-pad-1178"/>
+        <use x="3253.9" y="2815" xlink:href="#tool-D40-pad-1178"/>
+      </g>
+      <mask id="_top-sm_mask" color="#000">
+        <path fill="#fff" d="M2151.6 2728.3h1336.6v574.8H2151.6z"/>
+        <use xlink:href="#_top-sm"/>
+      </mask>
+      <mask id="_top-cu_finish-mask" color="#fff">
+        <use xlink:href="#_top-cu"/>
+      </mask>
+    </defs>
+    <g mask="url(#_top-sm_mask)">
+      <path fill="currentColor" d="M2151.6 2728.3h1336.6v574.8H2151.6z" class="_board-sm"/>
+      <g id="_top-ss" fill="currentColor" stroke="currentColor" class="_board-ss">
+        <path d="M3041 2931.8h-19v5h19v-5m0 0zM2534.4 2928.7h14v-7h-14v-12h-5v31h5v-12m0 0zM3047.2 2988.9h-5v31h5v-31m0 0zM3064.7 3042.1h-27v5h27v-5m0 0zM3061.2 2988.9h-5v31h5v-31m0 0zM2548.4 2791.6h-5v31h5v-31m0 0zM2534.4 2791.6h-5v31h5v-31m0 0zM2548.9 2850.6h-19v5h19v-5m0 0zM3041 2905.8h-19v5h19v-5m0 0zM2548.9 2876.6h-19v5h19v-5m0 0zM3161.7 3095.5h-31v5h31v-5m0 0zM3161.7 3081.5h-31v5h31v-5m0 0zM2491.1 3110.5h-5v31h5v-31m0 0zM3064.7 3126.1h-27v5h27v-5m0 0zM2505.1 3110.5h-5v31h5v-31m0 0zM2505.1 3051.4h-5v31h5v-31m0 0zM2491.1 3051.4h-5v31h5v-31m0 0zM3055.7 3064.1h-9v45h9v-45m0 0zM3064.7 3089.1h16v-5h-16v-7h-4.5v19h4.5v-7m0 0zM3042.2 3077.1h-4.5v7h-16v5h16v7h4.5v-19m0 0z"/>
+        <path fill="none" stroke-width="10" d="M2599 3093.3l-10 10h-19.9l-10-10v-40l10-10h19.9l10 10m20-10h20-10v60l-10-10m-23.9 70.9l-10 10h-20l-10-10v-40l10-10h20l10 10m60-10h-40l40 40v10l-10 10h-20l-10-10m132.9-127.8v-50l10-10h20l10 10v50m20-60h20-10v60l-10-10m-626.9-32.3v60h30l10-10v-20l-10-10h-30m60-20h20-10v60l-10-10"/>
+        <path fill="none" stroke-width="23.6" d="M2935 3000a11.8 11.8 0 0 1-23.6 0 11.8 11.8 0 0 1 23.6 0"/>
+        <path fill="none" stroke-width="9.8" d="M2965.6 3096.5a4.9 4.9 0 0 1-9.8 0 4.9 4.9 0 0 1 9.8 0"/>
+        <path fill="none" stroke-width="1" d="M2534.4 2921.7h14m-14 7h14m-14-19v12m0 7v12m-5-31h5m-5 0v31h5m14-19v7m-18.5-52.1v5m0-5h19v5m-19 0h19m-19-31h19m-19 0v5h19v-5m-.5-59v31m-5-31v31m0-31h5m-19 0h5v31m-5-31v31m14 0h5m-19 0h5m596.3 277.9h31m-31-5h31v5m0-19v5m-31 0h31m-31-5h31m-31 14v5m0-19v5M3022 2931.8v5m0-5h19v5m-19 0h19m-19-31h19m-19 0v5h19v-5m1.2 83.1v31m5-31v31m-5 0h5m9 0h5m-5-31v31m5-31v31m-19-31h5m9 0h5m-23.5 137.2h27m-27 5h27m-27-5v5m27-5v5m-27-89v5m27-5v5m-43 37v5m0-5h16m4.5-7v19m-20.5-7h16v7m27-19v7m-18-20v45m-9-67h27m-27 5h27m0 37h16m-20.5-7v19m4.5-7h16m0-5v5m-16 0v7m-18 13h9m0-45v45m-9-45h9m-18 13v7m0-7h4.5m-4.5 19h4.5m18 0h4.5m-4.5-19h4.5m-578.6-25.7v31m5-31v31m-5 0h5m9 0h5m-5-31v31m5-31v31m-19-31h5m9 0h5m-19 59.1v31m5-31v31m-5 0h5m9 0h5m-5-31v31m5-31v31m-19-31h5m9 0h5"/>
+        <path fill="none" stroke-width="7.9" d="M2419.3 3182.3v89.4m800-89.4v89.4m-800-89.4h800m-552-300.4v157.5m295.3-157.5v157.5m-295.3-157.5h295.3m-295.3 157.5h295.3"/>
+      </g>
+    </g>
+    <use class="_board-cf" mask="url(#_top-cu_finish-mask)" xlink:href="#_top-sm"/>
+  </g>
+  <style>._board-fr4{color:#4d542c}._board-cu{color:#d3d3d3}._board-cf{color:#daa520}._board-sm{color:#ff6;opacity:.5}._board-ss{color:#000}._board-sp{color:silver;opacity:0}._board-out{color:#000}</style>
+</svg>

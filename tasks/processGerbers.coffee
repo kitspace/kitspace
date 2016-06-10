@@ -7,6 +7,7 @@ utils        = require('./utils/utils')
 boardBuilder = require('./utils/boardBuilder')
 cp = require('child_process')
 Jszip = require('jszip')
+Jsdom = require('jsdom')
 
 
 svgo = new Svgo
@@ -54,6 +55,33 @@ svgo = new Svgo
 
     ]
 
+badgify = (input_svg) ->
+    document = Jsdom.jsdom(input_svg)
+    svg = document.querySelector('svg')
+    viewBox = svg.getAttribute('viewBox').split(' ')
+    x = Number(viewBox[0])
+    y = Number(viewBox[1])
+    w = Number(viewBox[2])
+    h = Number(viewBox[3])
+    console.log([x, y, w, h].join(' '))
+    margin = h * 0.1
+    x -= margin
+    y -= margin
+    w += margin * 2
+    h += margin * 3
+    console.log([x, y, w, h].join(' '))
+    svg.setAttribute('viewBox', [x, y, w, h].join(' '))
+    rect = document.createElement('rect')
+    rect.setAttribute('x', x)
+    rect.setAttribute('y', y)
+    rect.setAttribute('width', w)
+    rect.setAttribute('height', h)
+    rect.setAttribute('fill', '#373737')
+    rect.setAttribute('rx', margin * 0.1)
+    console.log(rect.outerHTML)
+    svg.insertBefore(rect, svg.firstElementChild)
+    return svg.outerHTML
+
 if require.main != module
     module.exports = (folder) ->
         try
@@ -74,6 +102,7 @@ if require.main != module
         version = version.split(' ')[0]
         zip = "#{path.basename(folder)}-#{version}-gerbers.zip"
         targets = [
+            "#{buildFolder}/badges/large.svg"
             "#{buildFolder}/images/top.svg"
             "#{buildFolder}/images/bottom.svg"
             "#{buildFolder}/#{zip}"
@@ -84,7 +113,7 @@ else
     {config, deps, targets} = utils.processArgs(process.argv)
     folder = deps[0]
     gerbers = deps[1..]
-    [topSvgPath, bottomSvgPath, zipPath, zipInfoPath] = targets
+    [badgeSvgPath, topSvgPath, bottomSvgPath, zipPath, zipInfoPath] = targets
     fs.writeFileSync(zipInfoPath, JSON.stringify(path.basename(zipPath)))
     zip = new Jszip
     zip = zip.folder(path.basename(zipPath, '.zip'))
@@ -126,3 +155,4 @@ else
         console.error("Could not process gerbers for #{folder}")
         console.error(e)
         process.exit(1)
+
