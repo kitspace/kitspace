@@ -79,13 +79,13 @@ colorToStyle =
         copperFinish: 'gold'
         silkScreen: 'black'
 
-convert = (files, color, callback) ->
+convert = (files, color = 'green') ->
     layers = []
-    for {filename, gerber} in files
+    for {filename, data} in files
         layerType = idLayer(filename)
         if layerType != 'drw' #drw is the default for any un-identifiable filenames
             try
-                svgObj = gerberToSvg gerber,
+                svgObj = gerberToSvg data,
                     object: true
                     drill: (layerType == 'drl')
                     warnArr: []
@@ -93,7 +93,7 @@ convert = (files, color, callback) ->
                 try
                     if layerType == 'drl'
                         throw e
-                    svgObj = gerberToSvg(gerber, {object: true, drill: true, warnArr: []})
+                    svgObj = gerberToSvg(data, {object: true, drill: true, warnArr: []})
                 catch
                     console.warn "could not parse #{filename} as #{layerType} because
                                 #{e.message}"
@@ -103,9 +103,6 @@ convert = (files, color, callback) ->
     stackup = pcbStackup(layers)
     stackup.top.svg._.push(styleToSvgObj(colorToStyle[color]))
     stackup.bottom.svg._.push(styleToSvgObj(colorToStyle[color]))
-    ret = {}
-    ret.top = gerberToSvg(stackup.top)
-    ret.bottom = gerberToSvg(stackup.bottom)
-    callback(null, ret)
+    return stackup
 
 module.exports = convert
