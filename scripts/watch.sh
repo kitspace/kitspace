@@ -21,9 +21,6 @@ build() {
 
 build $1
 
-http-server build/ &
-
-
 echo "watching for file changes in src/ tasks/ boards/"
 if [ "$OS" == 'LINUX' ]; then
     while inotifywait --exclude '\..*sw.' -r -q -e modify src/ tasks/ boards/; do

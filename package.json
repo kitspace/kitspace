@@ -33,9 +33,10 @@
     "uglifyjs": "^2.4.10"
   },
   "scripts": {
-    "prestart": "./scripts/get_boards.coffee",
-    "start": "./scripts/start.sh",
-    "update": "./scripts/update_registry.coffee"
+    "watch": "./scripts/watch.sh",
+    "start": "./scripts/get_boards.coffee && npm run serve & npm run watch",
+    "update": "./scripts/update_registry.coffee",
+    "serve": "http-server build/"
   },
   "author": "Kaspar Emanuel",
   "license": "CPAL-1.0",
