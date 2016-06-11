@@ -82,7 +82,7 @@ Check out the repo links of the projects listed on [kitnic.it](https://kitnic.it
 
 ```
 .
-├── 1-click-bom.tsv
+├── 1-click-BOM.tsv
 └── gerbers
     ├── example.cmp
     ├── example.drd
