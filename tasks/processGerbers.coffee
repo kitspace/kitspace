@@ -109,12 +109,12 @@ else
         boardBuilder stackupData, color || 'green', (error, stackup) ->
             if error?
                 throw error
-            fs.writeFile topSvgPath, stackup.top, (err) ->
+            fs.writeFile topSvgPath, stackup.top.svg, (err) ->
                 if err?
                     console.error("Could not write top svg for #{folder}")
                     console.error(err)
                     process.exit(1)
-            fs.writeFile bottomSvgPath, stackup.bottom, (err) ->
+            fs.writeFile bottomSvgPath, stackup.bottom.svg, (err) ->
                 if err?
                     console.error("Could not write bottom svg for #{folder}")
                     console.error(err)

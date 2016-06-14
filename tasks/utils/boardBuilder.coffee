@@ -1,4 +1,4 @@
-pcbStackup  = require('pcb-stackup/lib/easy-stackup')
+pcbStackup  = require('pcb-stackup')
 
 options =
     # copper finish

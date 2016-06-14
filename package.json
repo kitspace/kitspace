@@ -14,7 +14,6 @@
     "coffeeify": "^2.0.1",
     "eslint": "^2.9.0",
     "eslint-plugin-react": "^5.0.1",
-    "gerber-to-svg": "^0.4.2",
     "globule": "^0.2.0",
     "http-server": "^0.8.0",
     "js-yaml": "^3.3.1",
