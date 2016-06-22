@@ -95,7 +95,10 @@ const StoreButtons = React.createClass({
               window.postMessage({
                 from:'page',
                 message:'quickAddToCart',
-                value:retailer}, '*');
+                value:{
+                  retailer: retailer,
+                  multiplier: this._getMultiplier()
+                }}, '*');
             }
           });
           break;
@@ -164,6 +167,12 @@ const StoreButtons = React.createClass({
     return storeButtons;
   },
 
+  _getMultiplier: function () {
+        const multi =this.state.buyMultiplier;
+        const percent = this.state.buyAddPercent;
+        return multi + (multi * (percent/100));
+  },
+
   _quantity: function () {
         return (
           <form id='quantityContainer' noValidate>
@@ -174,7 +183,11 @@ const StoreButtons = React.createClass({
               min={1}
               value={this.state.buyMultiplier}
               onChange={(e) => {
-                this.setState({buyMultiplier: e.target.value})
+                var v = parseFloat(e.target.value);
+                if (isNaN(v) || v < 1) {
+                  v = 1;
+                }
+                this.setState({buyMultiplier: v})
               }}
               />
             </div>
@@ -209,7 +222,7 @@ const StoreButtons = React.createClass({
         <ExtensionCompatibilityPrompt
         compatibleBrowser={this.state.compatibleBrowser} />
         {this._quantity()}
-        <DirectStores items={this.props.items} />
+        <DirectStores multiplier={this._getMultiplier()} items={this.props.items} />
         <div className='storeButtons'>
           {this.storeButtons()}
         </div>
