@@ -3,7 +3,6 @@ const React            = require('react');
 const oneClickBOM      = require('1-click-bom');
 const browserVersion   = require('browser-version');
 const _                = require('lodash');
-const InputNumber      = require('rc-input-number');
 const BomInstallPrompt = require('./bom_install_prompt');
 const ExtensionCompatibilityPrompt  =
 require('./extension_compatibility_prompt');
