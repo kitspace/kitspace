@@ -172,7 +172,6 @@ const StoreButtons = React.createClass({
             type='number'
             min={1}
             value={this.state.buyMultiplier}
-            style={{width: 60}}
             onChange={(e) => {
               this.setState({buyMultiplier: e.target.value})
             }}
@@ -185,7 +184,6 @@ const StoreButtons = React.createClass({
             min={0}
             step={10}
             value={this.state.buyAddPercent}
-            style={{width: 60}}
             onChange={(e) =>{
               this.setState({buyAddPercent: e.target.value})
             }}

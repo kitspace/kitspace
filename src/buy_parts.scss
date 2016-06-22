@@ -145,9 +145,11 @@
     }
 
     #quantityContainer input {
+        width:50px;
         @include breakpoint(mobile) {
             font-size: 48px;
             height: 64px;
+            width:100px;
         }
     }
 
