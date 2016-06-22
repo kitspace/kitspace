@@ -165,6 +165,37 @@ const StoreButtons = React.createClass({
     return storeButtons;
   },
 
+  _quantity: function () {
+        return (<div id='quantityContainer'>
+          <div>
+            <span className='notSelectable' style={{fontWeight:'bold', marginRight:5}}>{'x'}</span>
+            <input
+            type='number'
+            min={1}
+            value={this.state.buyMultiplier}
+            style={{width: 60}}
+            onChange={(e) => {
+              this.setState({buyMultiplier: e.target.value})
+            }}
+            />
+          </div>
+          <span className='notSelectable' style={{fontSize:'2em', marginLeft:10, marginRight:10}}>{' + '}</span>
+          <div>
+            <input
+            type='number'
+            min={0}
+            step={10}
+            value={this.state.buyAddPercent}
+            style={{width: 60}}
+            onChange={(e) =>{
+              this.setState({buyAddPercent: e.target.value})
+            }}
+            />
+            <span className='notSelectable' style={{marginLeft:5}}>{'%'}</span>
+          </div>
+        </div>);
+  },
+
   render: function() {
     return (
       <div className='storeButtonContainer'>
@@ -179,32 +210,7 @@ const StoreButtons = React.createClass({
         />
         <ExtensionCompatibilityPrompt
         compatibleBrowser={this.state.compatibleBrowser} />
-        <div id='quantityContainer'>
-          <div>
-            <InputNumber
-            min={1}
-            value={this.state.buyMultiplier}
-            style={{width: 60}}
-            onChange={(v) =>{
-              this.setState({buyMultiplier: v})
-            }}
-            />
-          </div>
-          <span style={{fontSize:30, marginLeft:10, marginRight:20}}>{' + '}</span>
-          <div>
-            <InputNumber
-            min={0}
-            max={100}
-            step={10}
-            value={this.state.buyAddPercent}
-            style={{width: 60}}
-            onChange={(v) =>{
-              this.setState({buyAddPercent: v})
-            }}
-            />
-            <span>{' %'}</span>
-          </div>
-        </div>
+        {this._quantity()}
         <DirectStores items={this.props.items} />
         <div className='storeButtons'>
           {this.storeButtons()}
