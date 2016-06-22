@@ -3,7 +3,7 @@ const DocumentTitle = require('react-document-title');
 const TitleBar      = require('./title_bar');
 const BOM           = require('./bom');
 const BoardShowcase = require('./board_showcase');
-const StoreButtons  = require('./store_buttons');
+const StoreButtons  = require('./buy_parts');
 const info          = require('./info.json');
 
 var Page = React.createClass({
