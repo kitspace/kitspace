@@ -168,7 +168,7 @@ const StoreButtons = React.createClass({
   },
 
   _getMultiplier: function () {
-        const multi =this.state.buyMultiplier;
+        const multi = this.state.buyMultiplier;
         const percent = this.state.buyAddPercent;
         return multi + (multi * (percent/100));
   },
@@ -199,7 +199,11 @@ const StoreButtons = React.createClass({
               step={10}
               value={this.state.buyAddPercent}
               onChange={(e) =>{
-                this.setState({buyAddPercent: e.target.value})
+                var v = parseFloat(e.target.value);
+                if (isNaN(v) || v < 0) {
+                  v = 0;
+                }
+                this.setState({buyAddPercent: v})
               }}
               />
               <span className='notSelectable' style={{marginLeft:5}}>{'%'}</span>

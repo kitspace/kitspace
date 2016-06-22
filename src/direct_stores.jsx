@@ -70,19 +70,16 @@ const getLocation = function(callback) {
 
 const DirectStores = React.createClass({
   propTypes: {
-    items: React.PropTypes.any.isRequired
+    items: React.PropTypes.any.isRequired,
+    multiplier: React.PropTypes.number.isRequired
   },
   getInitialState: function () {
     if (typeof window != 'undefined'){
       getLocation((code) => {
-        console.log(code);
         this.setState({countryCode: code});
       });
     }
     return {
-        digikeyParts: this.getParts('Digikey'),
-        farnellParts: this.getParts('Farnell'),
-        newarkParts: this.getParts('Newark'),
         countryCode: 'Other'
     };
   },
@@ -93,7 +90,7 @@ const DirectStores = React.createClass({
       return {
         sku: part.retailers[retailer],
         reference: part.reference,
-        quantity: part.quantity
+        quantity: Math.ceil(this.props.multiplier * part.quantity)
       };
     }
     );
@@ -159,12 +156,15 @@ const DirectStores = React.createClass({
   },
 
   render: function () {
+    const digikeyParts = this.getParts('Digikey');
+    const farnellParts = this.getParts('Farnell');
+    const newarkParts  = this.getParts('Newark');
     return (
       <span>
       {[
-        this.digikey(this.state.countryCode, this.state.digikeyParts),
-        this.farnell(this.state.countryCode, this.state.farnellParts),
-        this.newark(this.state.newarkParts)
+        this.digikey(this.state.countryCode, digikeyParts),
+        this.farnell(this.state.countryCode, farnellParts),
+        this.newark(newarkParts)
       ]}
        </span>
       );
