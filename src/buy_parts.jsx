@@ -91,7 +91,7 @@ const StoreButtons = React.createClass({
         switch (event.data.message) {
         case 'register':
           this.setState({
-            onClick: function (retailer) {
+            onClick: (retailer) => {
               window.postMessage({
                 from:'page',
                 message:'quickAddToCart',
