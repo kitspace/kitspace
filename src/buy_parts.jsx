@@ -3,6 +3,7 @@ const React            = require('react');
 const oneClickBOM      = require('1-click-bom');
 const browserVersion   = require('browser-version');
 const _                = require('lodash');
+const InputNumber      = require('rc-input-number');
 const BomInstallPrompt = require('./bom_install_prompt');
 const ExtensionCompatibilityPrompt  =
 require('./extension_compatibility_prompt');
@@ -74,7 +75,9 @@ const StoreButtons = React.createClass({
       parts: parts,
       onClick: onClick,
       extensionWaiting: true,
-      extensionPresence: 'unknown'
+      extensionPresence: 'unknown',
+      buyMultiplier: 1,
+      buyAddPercent: 10
     };
   },
   componentDidMount: function () {
@@ -176,6 +179,32 @@ const StoreButtons = React.createClass({
         />
         <ExtensionCompatibilityPrompt
         compatibleBrowser={this.state.compatibleBrowser} />
+        <div id='quantityContainer'>
+          <div>
+            <InputNumber
+            min={1}
+            value={this.state.buyMultiplier}
+            style={{width: 60}}
+            onChange={(v) =>{
+              this.setState({buyMultiplier: v})
+            }}
+            />
+          </div>
+          <span style={{fontSize:30, marginLeft:10, marginRight:20}}>{' + '}</span>
+          <div>
+            <InputNumber
+            min={0}
+            max={100}
+            step={10}
+            value={this.state.buyAddPercent}
+            style={{width: 60}}
+            onChange={(v) =>{
+              this.setState({buyAddPercent: v})
+            }}
+            />
+            <span>{' %'}</span>
+          </div>
+        </div>
         <DirectStores items={this.props.items} />
         <div className='storeButtons'>
           {this.storeButtons()}

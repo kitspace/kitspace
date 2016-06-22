@@ -44,6 +44,7 @@
     "1-click-bom": "github:monostable/nodejs-1-click-bom",
     "browser-version": "^1.0.0",
     "lodash": "^4.0.0",
+    "rc-input-number": "^2.5.11",
     "react-double-scrollbar": "0.0.9",
     "react-hyperscript-helpers": "^1.1.0"
   },
