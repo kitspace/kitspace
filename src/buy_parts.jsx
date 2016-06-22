@@ -165,32 +165,33 @@ const StoreButtons = React.createClass({
   },
 
   _quantity: function () {
-        return (<div id='quantityContainer'>
-          <div>
-            <span className='notSelectable' style={{fontWeight:'bold', marginRight:5}}>{'x'}</span>
-            <input
-            type='number'
-            min={1}
-            value={this.state.buyMultiplier}
-            onChange={(e) => {
-              this.setState({buyMultiplier: e.target.value})
-            }}
-            />
-          </div>
-          <span className='notSelectable' style={{fontSize:'2em', marginLeft:10, marginRight:10}}>{' + '}</span>
-          <div>
-            <input
-            type='number'
-            min={0}
-            step={10}
-            value={this.state.buyAddPercent}
-            onChange={(e) =>{
-              this.setState({buyAddPercent: e.target.value})
-            }}
-            />
-            <span className='notSelectable' style={{marginLeft:5}}>{'%'}</span>
-          </div>
-        </div>);
+        return (
+          <form id='quantityContainer' noValidate>
+            <div>
+              <span className='notSelectable' style={{fontWeight:'bold', marginRight:5}}>{'x'}</span>
+              <input
+              type='number'
+              min={1}
+              value={this.state.buyMultiplier}
+              onChange={(e) => {
+                this.setState({buyMultiplier: e.target.value})
+              }}
+              />
+            </div>
+            <span className='notSelectable' style={{fontSize:'2em', marginLeft:10, marginRight:10}}>{' + '}</span>
+            <div>
+              <input
+              type='number'
+              min={0}
+              step={10}
+              value={this.state.buyAddPercent}
+              onChange={(e) =>{
+                this.setState({buyAddPercent: e.target.value})
+              }}
+              />
+              <span className='notSelectable' style={{marginLeft:5}}>{'%'}</span>
+            </div>
+          </form>);
   },
 
   render: function() {
