@@ -10,47 +10,48 @@ Jszip = require('jszip')
 
 
 svgo = new Svgo
-    full : false
+    full : true
     plugins : [
-        { removeDoctype                  : false }
-        { removeXMLProcInst              : false }
-        { removeComments                 : false }
-        { removeMetadata                 : false }
-        { removeEditorsNSData            : false }
-        { cleanupAttrs                   : false }
+        { removeDoctype                  : true  }
+        { removeXMLProcInst              : true  }
+        { removeComments                 : true  }
+        { removeMetadata                 : true  }
+        { removeEditorsNSData            : true  }
+        { cleanupAttrs                   : true  }
         { minifyStyles                   : false }
-        { convertStyleToAttrs            : false }
-        { cleanupIDs                     : false }
-        { removeRasterImages             : false }
-        { removeUselessDefs              : false }
-        { cleanupNumericValues           : false }
-        { cleanupListOfValues            : false }
-        { convertColors                  : false }
-        { removeUnknownsAndDefaults      : false }
-        { removeNonInheritableGroupAttrs : false }
-        { removeUselessStrokeAndFill     : false }
-        { removeViewBox                  : false }
-        { cleanupEnableBackground        : false }
-        { removeHiddenElems              : false }
-        { removeEmptyText                : false }
-        { convertShapeToPath             : false }
+        { convertStyleToAttrs            : true  }
+        { cleanupIDs                     : true  }
+        { removeRasterImages             : true  }
+        { removeUselessDefs              : true  }
+        { cleanupNumericValues           : true  }
+        { cleanupListOfValues            : true  }
+        { convertColors                  : true  }
+        { removeUnknownsAndDefaults      : true  }
+        { removeNonInheritableGroupAttrs : true  }
+        { removeUselessStrokeAndFill     : true  }
+        { removeViewBox                  : true  }
+        { cleanupEnableBackground        : true  }
+        { removeHiddenElems              : true  }
+        { removeEmptyText                : true  }
+        { convertShapeToPath             : true  }
         { moveElemsAttrsToGroup          : false }
-        { moveGroupAttrsToElems          : false }
+        { moveGroupAttrsToElems          : true  }
         { collapseGroups                 : false }
-        { convertPathData                : false }
-        { convertTransform               : false }
-        { removeEmptyAttrs               : false }
-        { removeEmptyContainers          : false }
-        { mergePaths                     : false }
-        { removeUnusedNS                 : false }
-        { transformsWithOnePath          : false }
-        { sortAttrs                      : false }
-        { removeTitle                    : false }
-        { removeDesc                     : false }
-        { removeDimensions               : false }
-        { removeAttrs                    : false }
+        { convertPathData                : true  }
+        { convertTransform               : true  }
+        { removeEmptyAttrs               : true  }
+        { removeEmptyContainers          : true  }
+        { mergePaths                     : true  }
+        { removeUnusedNS                 : true  }
+        { transformsWithOnePath          : true  }
+        { sortAttrs                      : true  }
+        { removeTitle                    : true  }
+        { removeDesc                     : true  }
+        { removeDimensions               : true  }
+        { removeAttrs                    : true  }
         { addClassesToSVGElement         : false }
         { removeStyleElement             : false }
+
     ]
 
 if require.main != module
