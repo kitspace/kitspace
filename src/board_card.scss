@@ -43,12 +43,12 @@ $mobile-summary-h: $summary-h * 3 + 48;
 
     .imgContainer {
         background-color: $mine-shaft;
+        padding-bottom: 16px;
+        padding-top: 16px;
     }
 
     .img {
         height: $card-h;
-        margin-bottom: 16px;
-        margin-top: 16px;
         width: $card-w;
 
         @include breakpoint(mobile) {
