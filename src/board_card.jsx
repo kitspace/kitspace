@@ -24,7 +24,7 @@ function truncate(input, len, fromStart) {
   }
   return str;
 }
-let BoardThumb = React.createClass({
+let BoardCard = React.createClass({
   propTypes: {
     lazyLoad: React.PropTypes.bool,
     data: React.PropTypes.object
@@ -45,7 +45,7 @@ let BoardThumb = React.createClass({
              className = 'img' />;
     }
     return (
-      <div className='boardThumb'>
+      <div className='boardCard'>
         <a href={'/boards/' + this.props.data.id}>
             <div className='imgContainer'>
               <center>
@@ -69,4 +69,4 @@ let BoardThumb = React.createClass({
   }
 });
 
-module.exports = BoardThumb;
+module.exports = BoardCard;

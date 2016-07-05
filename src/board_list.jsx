@@ -1,6 +1,6 @@
 'use strict';
 const React            = require('react');
-const BoardThumb       = require('./board_thumb');
+const BoardCard        = require('./board_card');
 const InstallExtension = require('./install_extension');
 
 const style = {
@@ -39,9 +39,9 @@ var BoardList = React.createClass({
         </div>
       );
     }
-    var thumbNodes = this.props.data.map(function(data, index) {
+    var cardNodes = this.props.data.map(function(data, index) {
       return (
-        <BoardThumb data={data} key={data.id + index}
+        <BoardCard data={data} key={data.id + index}
           lazyLoad={ true }/>
       );
     });
@@ -53,7 +53,7 @@ var BoardList = React.createClass({
 
             Kitnic is a registry of open hardware electronics projects that are
             ready for you to order and build. Click on any project to get
-            further info, download the gerbers and see the bill of materials.
+            further info, download the Gerbers and see the bill of materials.
 
           </p><p>
 
@@ -86,7 +86,7 @@ var BoardList = React.createClass({
       <div>
           {intro}
         <div style={{margin: 32, textAlign:'center'}}>
-          {thumbNodes}
+          {cardNodes}
         </div>
       </div>
     );
