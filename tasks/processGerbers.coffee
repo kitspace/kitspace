@@ -10,7 +10,7 @@ Jszip = require('jszip')
 
 
 svgo = new Svgo
-    full : true
+    full : false
     plugins : [
         { removeDoctype                  : false }
         { removeXMLProcInst              : false }
