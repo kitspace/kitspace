@@ -1,8 +1,5 @@
 pcbStackup  = require('pcb-stackup')
-idLayer     = require('pcb-stackup/lib/layer-types').identify
-gerberToSvg = require('gerber-to-svg')
 
-# board colors
 options =
     # copper finish
     cf:
@@ -13,14 +10,14 @@ options =
 
     # soldermask
     sm:
-        red    : {color: 'darkred' , opacity: 0.90}
-        orange : {color: '#C36B00' , opacity: 0.90}
-        yellow : {color: '#FFFF66' , opacity: 0.50}
-        green  : {color: '#040'    , opacity: 0.90}
-        blue   : {color: '#001E68' , opacity: 0.90}
-        purple : {color: '#2E0051' , opacity: 0.90}
-        black  : {color: 'black'   , opacity: 0.90}
-        white  : {color: 'white'   , opacity: 0.90}
+        red    : 'rgba(139,   0,   0, 0.90)'
+        orange : 'rgba(195, 107,   0, 0.90)'
+        yellow : 'rgba(255, 255, 102, 0.50)'
+        green  : 'rgba(  0,  68,   0, 0.90)'
+        blue   : 'rgba(  0,  30, 104, 0.90)'
+        purple : 'rgba( 46,   0,  81, 0.90)'
+        black  : 'rgba(  0,   0,   0, 0.90)'
+        white  : 'rgba(255, 255, 255, 0.90)'
 
     # silkscreen
     ss:
@@ -31,19 +28,14 @@ options =
         black  : 'black'
         white  : 'white'
 
-
-
-styleToSvgObj = ({copperFinish, solderMask, silkScreen}) ->
-    style:
-        type: 'text/css',
-        _: " ._board-fr4 { color: #4D542C;}
-             ._board-cu { color: lightgrey; }
-             ._board-cf { color: #{options.cf[copperFinish]}; }
-             ._board-sm { color: #{options.sm[solderMask].color}; opacity: #{options.sm[solderMask].opacity}; }
-             ._board-ss { color: #{options.ss[silkScreen]}; }
-             ._board-sp { color: silver; opacity: 0.0;}
-             ._board-out { color: black; }"
-
+styleToOption = ({copperFinish, solderMask, silkScreen}) ->
+    fr4: '#4D542C'
+    cu: 'lightgrey'
+    cf: options.cf[copperFinish]
+    sm: options.sm[solderMask]
+    ss: options.ss[silkScreen]
+    sp: 'rgba(0, 0, 0, 0.0)'
+    out: 'black'
 
 colorToStyle =
     green:
@@ -79,33 +71,8 @@ colorToStyle =
         copperFinish: 'gold'
         silkScreen: 'black'
 
-convert = (files, color, callback) ->
-    layers = []
-    for {filename, gerber} in files
-        layerType = idLayer(filename)
-        if layerType != 'drw' #drw is the default for any un-identifiable filenames
-            try
-                svgObj = gerberToSvg gerber,
-                    object: true
-                    drill: (layerType == 'drl')
-                    warnArr: []
-            catch e
-                try
-                    if layerType == 'drl'
-                        throw e
-                    svgObj = gerberToSvg(gerber, {object: true, drill: true, warnArr: []})
-                catch
-                    console.warn "could not parse #{filename} as #{layerType} because
-                                #{e.message}"
-                    continue
-                layerType = 'drl'
-            layers.push({type: layerType, svg: svgObj})
-    stackup = pcbStackup(layers)
-    stackup.top.svg._.push(styleToSvgObj(colorToStyle[color]))
-    stackup.bottom.svg._.push(styleToSvgObj(colorToStyle[color]))
-    ret = {}
-    ret.top = gerberToSvg(stackup.top)
-    ret.bottom = gerberToSvg(stackup.bottom)
-    callback(null, ret)
-
-module.exports = convert
+module.exports = (layers, color, callback) ->
+    pcbStackup layers,
+        color: styleToOption(colorToStyle[color])
+        maskWithOutline: true
+    , callback

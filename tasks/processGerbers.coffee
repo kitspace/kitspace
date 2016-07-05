@@ -18,7 +18,7 @@ svgo = new Svgo
         { removeMetadata                 : true  }
         { removeEditorsNSData            : true  }
         { cleanupAttrs                   : true  }
-        { minifyStyles                   : true  }
+        { minifyStyles                   : false }
         { convertStyleToAttrs            : true  }
         { cleanupIDs                     : true  }
         { removeRasterImages             : true  }
@@ -36,7 +36,7 @@ svgo = new Svgo
         { convertShapeToPath             : true  }
         { moveElemsAttrsToGroup          : false }
         { moveGroupAttrsToElems          : true  }
-        { collapseGroups                 : true  }
+        { collapseGroups                 : false }
         { convertPathData                : true  }
         { convertTransform               : true  }
         { removeEmptyAttrs               : true  }
@@ -51,6 +51,7 @@ svgo = new Svgo
         { removeAttrs                    : true  }
         { addClassesToSVGElement         : false }
         { removeStyleElement             : false }
+
     ]
 
 if require.main != module
@@ -90,13 +91,6 @@ else
     try
         file = fs.readFileSync("#{folder}/kitnic.yaml")
     try
-        stackupData = []
-
-        for gerberPath in gerbers
-            data = fs.readFileSync(gerberPath, {encoding:'utf8'})
-            stackupData.push({filename:gerberPath, gerber:data})
-            zip.file(path.basename(gerberPath), data)
-
         fs.writeFile zipPath
         , zip.generate
             type:'nodebuffer'
@@ -107,27 +101,27 @@ else
                 console.error("Could not write gerber zip for #{folder}")
                 console.error(err)
                 process.exit(1)
-
+        stackupData = []
+        for gerberPath in gerbers
+            data = fs.readFileSync(gerberPath, {encoding:'utf8'})
+            stackupData.push({filename:gerberPath, gerber:data})
+            zip.file(path.basename(gerberPath), data)
         if file? then color = yaml.safeLoad(file).color
         boardBuilder stackupData, color || 'green', (error, stackup) ->
             if error?
                 throw error
-
-            svgo.optimize stackup.top, (result) ->
+            svgo.optimize stackup.top.svg, (result) ->
                 fs.writeFile topSvgPath, result.data, (err) ->
                     if err?
                         console.error("Could not write top svg for #{folder}")
                         console.error(err)
                         process.exit(1)
-
-            svgo.optimize stackup.bottom, (result) ->
+            svgo.optimize stackup.bottom.svg, (result) ->
                 fs.writeFile bottomSvgPath, result.data, (err) ->
                     if err?
                         console.error("Could not write bottom svg for #{folder}")
                         console.error(err)
                         process.exit(1)
-
-
     catch e
         console.error("Could not process gerbers for #{folder}")
         console.error(e)
