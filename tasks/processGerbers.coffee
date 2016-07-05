@@ -110,13 +110,13 @@ else
             if error?
                 throw error
             svgo.optimize stackup.top.svg, (result) ->
-                fs.writeFile topSvgPath, result, (err) ->
+                fs.writeFile topSvgPath, result.data, (err) ->
                     if err?
                         console.error("Could not write top svg for #{folder}")
                         console.error(err)
                         process.exit(1)
             svgo.optimize stackup.bottom.svg, (result) ->
-                fs.writeFile bottomSvgPath, result, (err) ->
+                fs.writeFile bottomSvgPath, result.data, (err) ->
                     if err?
                         console.error("Could not write bottom svg for #{folder}")
                         console.error(err)

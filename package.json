@@ -27,7 +27,7 @@
     "react-search-input": "^0.6.0",
     "reactify": "^1.1.1",
     "source-map-support": "^0.4.0",
-    "svgo": "^0.6.1",
+    "svgo": "^0.6.6",
     "uglifyify": "^3.0.1",
     "uglifyjs": "^2.4.10"
   },
