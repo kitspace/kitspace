@@ -9,6 +9,7 @@ then
     exit 0
 elif  [ "${TRAVIS_BRANCH}" != "master" ]
 then
+    rm -rf build/.temp
     echo -e "User-agent: *\n Disallow: /\n" > build/robots.txt
     echo -e "${SSH_KEY}" > key-file
     chmod 600 key-file
@@ -16,6 +17,7 @@ then
     scp -i key-file -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -r build "ubuntu@preview.kitnic.it:www/preview/${TRAVIS_BRANCH}"
     rm -f key-file
 else
+    rm -rf build/.temp
     cd build
     git init
     echo "kitnic.it" > CNAME
