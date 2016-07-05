@@ -481,15 +481,6 @@
        effect="spiro"
        id="path-effect4162-8-3-9-8-2-7-9-3"
        is_visible="true" />
-    <filter
-       color-interpolation-filters="sRGB"
-       inkscape:collect="always"
-       id="filter4729-7-0-8-9-1-1">
-      <feGaussianBlur
-         inkscape:collect="always"
-         stdDeviation="0.17990548"
-         id="feGaussianBlur4731-7-2-7-8-2-7" />
-    </filter>
     <mask
        id="a-89">
       <rect
@@ -673,6 +664,40 @@
          stop-opacity=".1"
          id="stop7-0-5-4-9-0" />
     </linearGradient>
+    <linearGradient
+       y2="34.058773"
+       x2="0"
+       y1="0"
+       x1="0"
+       gradientTransform="matrix(1.7029386,0,0,0.58722022,0,-0.0883885)"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient5071-3-3"
+       xlink:href="#b-6-6-0-9-3-3"
+       inkscape:collect="always" />
+    <linearGradient
+       id="b-6-6-0-9-3-3"
+       x2="0"
+       y2="1">
+      <stop
+         offset="0"
+         stop-color="#bbb"
+         stop-opacity=".1"
+         id="stop5-8-2-3-1-8-9" />
+      <stop
+         offset="1"
+         stop-opacity=".1"
+         id="stop7-0-5-4-9-0-7" />
+    </linearGradient>
+    <linearGradient
+       y2="34.058773"
+       x2="0"
+       y1="0"
+       x1="0"
+       gradientTransform="matrix(1.7029386,0,0,0.58722022,3e-6,-0.08838738)"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient6733"
+       xlink:href="#b-6-6-0-9-3-3"
+       inkscape:collect="always" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -682,8 +707,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.4142136"
-     inkscape:cx="486.13427"
-     inkscape:cy="512.39694"
+     inkscape:cx="462.32488"
+     inkscape:cy="451.34609"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -3004,28 +3029,15 @@
          transform="translate(514.41157,327.12367)"
          id="g12-2-66"
          mask="url(#a-89-6)">
-        <g
-           id="g5073-4">
-          <path
-             style="fill:#4caf50"
-             inkscape:connector-curvature="0"
-             d="M 0,0 H 11 V 20 H 0 z"
-             id="path14-1-00" />
-          <path
-             style="fill:#4caf50"
-             inkscape:connector-curvature="0"
-             d="M 11,0 H 58 V 20 H 11 z"
-             id="path16-0-4" />
-          <path
-             style="fill:#4caf50"
-             inkscape:connector-curvature="0"
-             d="M 1.0493561,-0.1767767 H 12.049356 V 19.823223 H 1.0493561 z"
-             id="path14-1-0-6" />
-        </g>
         <path
-           style="fill:url(#linearGradient5071-3)"
+           style="fill:#44cc11;fill-opacity:1"
+           d="M 448.59375 695.4375 L 448.59375 695.625 L 447.53125 695.625 L 447.53125 715.625 L 458.53125 715.625 L 505.53125 715.625 L 505.53125 695.625 L 459.59375 695.625 L 459.59375 695.4375 L 448.59375 695.4375 z "
+           transform="translate(-447.54111,-695.61469)"
+           id="path14-1-00" />
+        <path
+           style="fill:url(#linearGradient6733)"
            inkscape:connector-curvature="0"
-           d="M 0,-0.0883885 H 58 V 19.911612 H 0 z"
+           d="m 3e-6,-0.08838738 h 58 V 19.911613 h -58 z"
            id="path18-5-4-0-2" />
       </g>
       <g
