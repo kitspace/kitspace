@@ -12,43 +12,43 @@ Jszip = require('jszip')
 svgo = new Svgo
     full : true
     plugins : [
-        { removeDoctype                  : true  }
-        { removeXMLProcInst              : true  }
-        { removeComments                 : true  }
-        { removeMetadata                 : true  }
-        { removeEditorsNSData            : true  }
-        { cleanupAttrs                   : true  }
-        { minifyStyles                   : true  }
-        { convertStyleToAttrs            : true  }
-        { cleanupIDs                     : true  }
-        { removeRasterImages             : true  }
-        { removeUselessDefs              : true  }
-        { cleanupNumericValues           : true  }
-        { cleanupListOfValues            : true  }
-        { convertColors                  : true  }
-        { removeUnknownsAndDefaults      : true  }
-        { removeNonInheritableGroupAttrs : true  }
-        { removeUselessStrokeAndFill     : true  }
-        { removeViewBox                  : true  }
-        { cleanupEnableBackground        : true  }
-        { removeHiddenElems              : true  }
-        { removeEmptyText                : true  }
-        { convertShapeToPath             : true  }
+        { removeDoctype                  : false }
+        { removeXMLProcInst              : false }
+        { removeComments                 : false }
+        { removeMetadata                 : false }
+        { removeEditorsNSData            : false }
+        { cleanupAttrs                   : false }
+        { minifyStyles                   : false }
+        { convertStyleToAttrs            : false }
+        { cleanupIDs                     : false }
+        { removeRasterImages             : false }
+        { removeUselessDefs              : false }
+        { cleanupNumericValues           : false }
+        { cleanupListOfValues            : false }
+        { convertColors                  : false }
+        { removeUnknownsAndDefaults      : false }
+        { removeNonInheritableGroupAttrs : false }
+        { removeUselessStrokeAndFill     : false }
+        { removeViewBox                  : false }
+        { cleanupEnableBackground        : false }
+        { removeHiddenElems              : false }
+        { removeEmptyText                : false }
+        { convertShapeToPath             : false }
         { moveElemsAttrsToGroup          : false }
-        { moveGroupAttrsToElems          : true  }
-        { collapseGroups                 : true  }
-        { convertPathData                : true  }
-        { convertTransform               : true  }
-        { removeEmptyAttrs               : true  }
-        { removeEmptyContainers          : true  }
-        { mergePaths                     : true  }
-        { removeUnusedNS                 : true  }
-        { transformsWithOnePath          : true  }
-        { sortAttrs                      : true  }
-        { removeTitle                    : true  }
-        { removeDesc                     : true  }
-        { removeDimensions               : true  }
-        { removeAttrs                    : true  }
+        { moveGroupAttrsToElems          : false }
+        { collapseGroups                 : false }
+        { convertPathData                : false }
+        { convertTransform               : false }
+        { removeEmptyAttrs               : false }
+        { removeEmptyContainers          : false }
+        { mergePaths                     : false }
+        { removeUnusedNS                 : false }
+        { transformsWithOnePath          : false }
+        { sortAttrs                      : false }
+        { removeTitle                    : false }
+        { removeDesc                     : false }
+        { removeDimensions               : false }
+        { removeAttrs                    : false }
         { addClassesToSVGElement         : false }
         { removeStyleElement             : false }
     ]
@@ -109,16 +109,18 @@ else
         boardBuilder stackupData, color || 'green', (error, stackup) ->
             if error?
                 throw error
-            fs.writeFile topSvgPath, stackup.top.svg, (err) ->
-                if err?
-                    console.error("Could not write top svg for #{folder}")
-                    console.error(err)
-                    process.exit(1)
-            fs.writeFile bottomSvgPath, stackup.bottom.svg, (err) ->
-                if err?
-                    console.error("Could not write bottom svg for #{folder}")
-                    console.error(err)
-                    process.exit(1)
+            svgo.optimize stackup.top.svg, (result) ->
+                fs.writeFile topSvgPath, result, (err) ->
+                    if err?
+                        console.error("Could not write top svg for #{folder}")
+                        console.error(err)
+                        process.exit(1)
+            svgo.optimize stackup.bottom.svg, (result) ->
+                fs.writeFile bottomSvgPath, result, (err) ->
+                    if err?
+                        console.error("Could not write bottom svg for #{folder}")
+                        console.error(err)
+                        process.exit(1)
     catch e
         console.error("Could not process gerbers for #{folder}")
         console.error(e)
