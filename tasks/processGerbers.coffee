@@ -91,6 +91,11 @@ else
     try
         file = fs.readFileSync("#{folder}/kitnic.yaml")
     try
+        stackupData = []
+        for gerberPath in gerbers
+            data = fs.readFileSync(gerberPath, {encoding:'utf8'})
+            stackupData.push({filename:gerberPath, gerber:data})
+            zip.file(path.basename(gerberPath), data)
         fs.writeFile zipPath
         , zip.generate
             type:'nodebuffer'
@@ -101,11 +106,6 @@ else
                 console.error("Could not write gerber zip for #{folder}")
                 console.error(err)
                 process.exit(1)
-        stackupData = []
-        for gerberPath in gerbers
-            data = fs.readFileSync(gerberPath, {encoding:'utf8'})
-            stackupData.push({filename:gerberPath, gerber:data})
-            zip.file(path.basename(gerberPath), data)
         if file? then color = yaml.safeLoad(file).color
         boardBuilder stackupData, color || 'green', (error, stackup) ->
             if error?
