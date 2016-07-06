@@ -32,6 +32,7 @@ body {
     @include breakpoint(mobile) {
         font-size: 24px;
     }
+    overflow-y: scroll;
 }
 
 a {
