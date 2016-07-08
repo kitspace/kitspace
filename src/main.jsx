@@ -1,8 +1,11 @@
 const React       = require('react');
-const SearchInput = require('react-search-input');
+const ReactSearchInput = require('react-search-input');
 const TitleBar    = require('./title_bar');
 const BoardList   = require('./board_list');
 const boards      = require('./boards.json');
+
+const SearchInput = ReactSearchInput.default;
+
 
 var Main = React.createClass({
   getInitialState: function() {
@@ -22,7 +25,6 @@ var Main = React.createClass({
               </div>
               <SearchInput
                 className='searchInput'
-                ref='search'
                 onChange={this.searchUpdated}
                />
             </div>
@@ -45,19 +47,17 @@ var Main = React.createClass({
     .firstElementChild.addEventListener('keydown', this.handleKeydown);
   },
   searchUpdated: function (term) {
-    if (this.refs.search) {
-      var filters = ['id', 'summary'];
-      var result = boards.filter(this.refs.search.filter(filters));
-      if (term.length > 2) {
-        var cat = result.length === 0 ? 'no_result' : 'result';
-        ga( //eslint-disable-line no-undef
-        'send',
-        'pageview',
-        '/search?q=' + term + '&results=' + cat
-        );
-      }
-      this.setState({result: result, searching:(term.length > 0)});
+    const filters = ['id', 'summary'];
+    var result = boards.filter(ReactSearchInput.createFilter(term, filters));
+    if (term.length > 2) {
+      var cat = result.length === 0 ? 'no_result' : 'result';
+      ga( //eslint-disable-line no-undef
+      'send',
+      'pageview',
+      '/search?q=' + term + '&results=' + cat
+      );
     }
+    this.setState({result: result, searching:(term.length > 0)});
   }
 });
 

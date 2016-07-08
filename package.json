@@ -24,7 +24,7 @@
     "react": "^0.14.5",
     "react-document-title": "^2.0.1",
     "react-dom": "^0.14.5",
-    "react-search-input": "^0.6.0",
+    "react-search-input": "~0.10.1",
     "reactify": "^1.1.1",
     "source-map-support": "^0.4.0",
     "svgo": "^0.6.6",
@@ -33,9 +33,9 @@
   },
   "scripts": {
     "watch": "./scripts/watch.sh",
-    "start": "./scripts/get_boards.coffee && npm run serve & npm run watch",
+    "start": "./scripts/get_boards.coffee && npm run server & npm run watch",
     "update": "./scripts/update_registry.coffee",
-    "serve": "http-server build/"
+    "server": "http-server build/"
   },
   "author": "Kaspar Emanuel",
   "license": "CPAL-1.0",
