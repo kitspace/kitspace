@@ -29,47 +29,47 @@ options =
         white  : 'white'
 
 styleToOption = ({copperFinish, solderMask, silkScreen}) ->
-    fr4: '#4D542C'
-    cu: 'lightgrey'
-    cf: options.cf[copperFinish]
-    sm: options.sm[solderMask]
-    ss: options.ss[silkScreen]
-    sp: 'rgba(0, 0, 0, 0.0)'
-    out: 'black'
+    fr4 : '#4D542C'
+    cu  : 'lightgrey'
+    cf  : options.cf[copperFinish]
+    sm  : options.sm[solderMask]
+    ss  : options.ss[silkScreen]
+    sp  : 'rgba(0, 0, 0, 0.0)'
+    out : 'black'
 
 colorToStyle =
     green:
-        solderMask: 'green'
-        copperFinish: 'gold'
-        silkScreen: 'white'
+        solderMask   : 'green'
+        copperFinish : 'gold'
+        silkScreen   : 'white'
     red:
-        solderMask: 'red'
-        copperFinish: 'gold'
-        silkScreen: 'white'
+        solderMask   : 'red'
+        copperFinish : 'gold'
+        silkScreen   : 'white'
     blue:
-        solderMask: 'blue'
-        copperFinish: 'hasl'
-        silkScreen: 'white'
+        solderMask   : 'blue'
+        copperFinish : 'hasl'
+        silkScreen   : 'white'
     black:
-        solderMask: 'black'
-        copperFinish: 'hasl'
-        silkScreen: 'white'
+        solderMask   : 'black'
+        copperFinish : 'hasl'
+        silkScreen   : 'white'
     white:
-        solderMask: 'white'
-        copperFinish: 'gold'
-        silkScreen: 'black'
+        solderMask   : 'white'
+        copperFinish : 'gold'
+        silkScreen   : 'black'
     orange:
-        solderMask: 'orange'
-        copperFinish: 'hasl'
-        silkScreen: 'white'
+        solderMask   : 'orange'
+        copperFinish : 'hasl'
+        silkScreen   : 'white'
     purple:
-        solderMask: 'purple'
-        copperFinish: 'gold'
-        silkScreen: 'white'
+        solderMask   : 'purple'
+        copperFinish : 'gold'
+        silkScreen   : 'white'
     yellow:
-        solderMask: 'yellow'
-        copperFinish: 'gold'
-        silkScreen: 'black'
+        solderMask   : 'yellow'
+        copperFinish : 'gold'
+        silkScreen   : 'black'
 
 module.exports = (layers, color, callback) ->
     pcbStackup layers,
