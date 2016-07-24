@@ -6,3 +6,4 @@ https://github.com/kasbah/nomech
 https://github.com/kasbah/push-on-hold-off
 https://github.com/kitnic/BQ25570_Harvester
 https://github.com/JarrettR/USBvil
+https://github.com/8BitMixtape/NextLevelEdition
