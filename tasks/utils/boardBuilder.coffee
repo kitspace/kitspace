@@ -74,5 +74,5 @@ colorToStyle =
 module.exports = (layers, color, callback) ->
     pcbStackup layers,
         color: styleToOption(colorToStyle[color])
-        maskWithOutline: true
+        outlineGapFill: 0.011
     , callback
