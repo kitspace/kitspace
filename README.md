@@ -18,9 +18,10 @@ Kitnic is a registry of open source hardware electronics projects that are ready
 
 To submit your project to Kitnic, follow these steps:
 
-**1. Export your plotted gerbers & drill data** into a directory - by default the path
-`gerbers/` will be searched. If this is not where they are stored, please add
-this info in the kitnic.yaml file (see below).
+**1. Export your plotted gerbers & drill data** and check that they will render
+nicely using [viewer.tracespace.io][viewer]. Put them into a directory - by
+default the path `gerbers/` will be searched. If this is not where they are
+stored, please add this info in the kitnic.yaml file (see below).
 
 **2. Create the 1-click-bom file.**
 Download the extension and see [the guide on exporting a 1-click-bom from your design](https://1clickbom.com/#making-a-1-click-bom). This format will allow people to quickly purchase the
@@ -151,7 +152,7 @@ gerbers: manufacture/gerbers-and-drills
 file-saves and re-build when you change a source file.
 
 
-
+[viewer]: http://viewer.tracespace.io
 [1]: https://travis-ci.org/monostable/kitnic.svg?branch=master
 [2]: https://badges.gitter.im/monostable/kitnic.svg
 [3]: https://github.com/monostable/1clickBOM#usage
