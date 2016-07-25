@@ -42,8 +42,8 @@ const get = function(url, arg, callback, error_callback) {
 const getLocation = function(callback) {
   var code;
   var used_country_codes = [];
-  for (_ in countries_data) {
-    code = countries_data[_];
+  for (let key in countries_data) {
+    code = countries_data[key];
     used_country_codes.push(code);
   }
   const url = 'https://freegeoip.kitnic.it';
