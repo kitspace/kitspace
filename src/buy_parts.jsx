@@ -2,7 +2,6 @@
 const React            = require('react');
 const oneClickBOM      = require('1-click-bom');
 const browserVersion   = require('browser-version');
-const _                = require('lodash');
 const BomInstallPrompt = require('./bom_install_prompt');
 const ExtensionCompatibilityPrompt  =
 require('./extension_compatibility_prompt');
@@ -30,8 +29,7 @@ const StoreButtons = React.createClass({
 
     for (let retailer of oneClickBOM.lineData.retailer_list) {
       adding[retailer] = undefined;
-      let retailerItems = _.map(this.props.items,
-        (item) => item.retailers[retailer]);
+      let retailerItems = this.props.items.map((item) => item.retailers[retailer]);
       let partCount = retailerItems.reduce((carry, val) => {
         if (val)
           carry++;
