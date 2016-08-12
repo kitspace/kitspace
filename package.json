@@ -17,7 +17,7 @@
     "glob": "^7.0.5",
     "globule": "^0.2.0",
     "html-to-react": "^1.0.0",
-    "htmltojsx": "^0.2.5",
+    "htmltojsx": "kasbah/react-magic#escape-chars",
     "http-server": "^0.8.0",
     "js-yaml": "^3.3.1",
     "jsdom": "^7.2.2",
