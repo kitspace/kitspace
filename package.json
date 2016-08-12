@@ -16,16 +16,14 @@
     "eslint-plugin-react": "^5.0.1",
     "glob": "^7.0.5",
     "globule": "^0.2.0",
+    "html-to-react": "^1.0.0",
+    "htmltojsx": "^0.2.5",
     "http-server": "^0.8.0",
     "js-yaml": "^3.3.1",
     "jsdom": "^7.2.2",
     "jszip": "^2.5.0",
     "ninja-build-gen": "^0.2.1",
     "pcb-stackup": "github:tracespace/pcb-stackup#0e81042a60bb1798699717cd67f32be61c09d595",
-    "react": "^0.14.5",
-    "react-document-title": "^2.0.1",
-    "react-dom": "^0.14.5",
-    "react-search-input": "~0.10.1",
     "reactify": "^1.1.1",
     "renderme": "^0.1.0",
     "source-map-support": "^0.4.0",
@@ -45,7 +43,11 @@
     "1-click-bom": "github:monostable/nodejs-1-click-bom",
     "browser-version": "^1.0.0",
     "react-double-scrollbar": "0.0.9",
-    "react-hyperscript-helpers": "^1.1.0"
+    "react-hyperscript-helpers": "^1.1.0",
+    "react": "^0.14.5",
+    "react-document-title": "^2.0.1",
+    "react-dom": "^0.14.5",
+    "react-search-input": "~0.10.1"
   },
   "sasslintConfig": "./src/.sass-lint.yml"
 }

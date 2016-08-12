@@ -96,4 +96,18 @@
             padding: 0;
         }
     }
+    .readme {
+        @include breakpoint(mobile_or_small_width) {
+            padding: 0 20px 0 20px;
+        }
+    }
+    .readme code {
+            padding: 0;
+            padding-top: 0.2em;
+            padding-bottom: 0.2em;
+            margin: 0;
+            font-size: 85%;
+            background-color: rgba(0,0,0,0.04);
+            border-radius: 3px;
+    }
 }
