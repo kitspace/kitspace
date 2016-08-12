@@ -21,10 +21,11 @@ else
     {config, deps, targets} = utils.processArgs(process.argv)
     index = targets[0]
     if config == 'production'
+        #do server-side rendering
         jsx = deps[0]
         html = deps[1]
         utils.reactRender(jsx, html, index)
     else if config == 'dev'
-        html = deps[0]
         #just copy the page.html to index.html
+        html = deps[0]
         fs.createReadStream(html).pipe(fs.createWriteStream(index))
