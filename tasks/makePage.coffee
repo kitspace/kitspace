@@ -9,6 +9,7 @@ if require.main != module
                 "build/.temp/#{folder}/page.jsx"
                 'src/page.html'
                 "build/.temp/#{folder}/info.json"
+                "build/.temp/#{folder}/readme.jsx"
                 "build/.temp/#{folder}/zip-info.json"
             ]
             return {deps, targets, moduleDep: true}
