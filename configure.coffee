@@ -156,6 +156,7 @@ for folder in boardFolders
     ninja.edge("build/#{folder}/app.js")
         .need("build/.temp/#{folder}/info.json")
         .need("build/.temp/#{folder}/zip-info.json")
+        .need("build/.temp/#{folder}/readme.jsx")
         .need(jsPageTargets[folder])
         .from("build/.temp/#{folder}/render_page.jsx")
         .using('browserify')
