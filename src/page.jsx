@@ -6,7 +6,6 @@ const BoardShowcase = require('./board_showcase');
 const StoreButtons  = require('./buy_parts');
 const info          = require('./info.json');
 const Readme        = require('./readme');
-console.log(Readme)
 
 var Page = React.createClass({
   render: function () {

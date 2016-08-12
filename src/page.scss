@@ -97,9 +97,10 @@
         }
     }
     .readme {
-        @include breakpoint(mobile_or_small_width) {
-            padding: 0 20px 0 20px;
-        }
+        margin: 15px 5px 5px 5px;
+        padding: 20px;
+        border-radius: 5px;
+        border: 1px solid #EEEEEE;
     }
     .readme code {
             padding: 0;
