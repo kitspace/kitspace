@@ -16,7 +16,7 @@ esac
 
 function send() {
     rsync -r . $KITNIC_BUILD_SERVER --update --delete --progress \
-        --exclude='build' --exclude='node_modules' --exclude='.git' \
+        --exclude='build' --exclude='boards' --exclude='node_modules' --exclude='.git' \
         --exclude='.sass-cache' --exclude='.*.sw*';
 }
 
@@ -27,7 +27,7 @@ if [ "$OS" == 'LINUX' ]; then
         send;
     done
 elif [ "$OS" == 'OSX' ]; then
-    while fswatch --one-event src/ tasks/ boards/; do
+    while fswatch --one-event src/ tasks/; do
         send;
     done
 fi
