@@ -1,22 +1,6 @@
 [
   {
     "repo": "https://github.com/kitnic/HACK",
-    "hash": "9ae6221d6c72ed27ad6e1e2bc0cd689e1c3a6840"
-  },
-  {
-    "repo": "https://github.com/kitnic/FM_Transmitter",
-    "hash": "dabc2aca707a48b714f705f3aaec75b2aa591a7e"
-  },
-  {
-    "repo": "https://github.com/kasbah/nomech",
-    "hash": "c528fe84810cacb68b7a1d741b930d86448bc64b"
-  },
-  {
-    "repo": "https://github.com/kasbah/push-on-hold-off",
-    "hash": "e76e1429da0303d2427b562890227141d06d2979"
-  },
-  {
-    "repo": "https://github.com/JarrettR/USBvil",
-    "hash": "5166b1e07b6be2e3b4af97b6ae239580b830266b"
+    "hash": "9ce81027df5e860ee78c101ade40bf73724c5ed6"
   }
 ]

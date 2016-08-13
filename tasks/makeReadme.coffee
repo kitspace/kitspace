@@ -24,6 +24,6 @@ else
     try readme = deps[1]
     if readme?
         pkg = {repository: {url: info.repo}}
-        html = marky(fs.readFileSync(readme, 'utf8'), {prefixHeadingIds:false, package: pkg}).html()
+        html = marky(fs.readFileSync(readme, 'utf8'), {package: pkg}).html()
     reactComponent = converter.convert("<div class='readme'>#{html}</div>")
     fs.writeFileSync(readmeJsx, "const React = require('react');\n" + reactComponent + "\nmodule.exports = Readme;\n")
