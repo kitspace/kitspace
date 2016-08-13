@@ -36,9 +36,9 @@ if config == 'dev'
 else
     browserify += ' -g uglifyify'
 
-modules = ['react', 'react-dom', 'react-document-title', 'browser-version', '1-click-bom', 'react-double-scrollbar']
-excludes = '-x ' + modules.join(' -x ')
-requires = '-r ' + modules.join(' -r ')
+dependencies = Object.keys(require('./package.json').dependencies)
+excludes = '-x ' + dependencies.join(' -x ')
+requires = '-r ' + dependencies.join(' -r ')
 
 
 rule = ninja.rule('coffee-task')
@@ -78,7 +78,7 @@ if (config == 'production')
 
     compress_opts = [o + '=' + s for o,s of compress_opts]
 
-    uglifyjs = "uglifyjs --mangle --reserved '#{modules}'
+    uglifyjs = "uglifyjs --mangle --reserved '#{dependencies}'
         --compress '#{compress_opts}'"
 
     rule.run("#{browserify} #{excludes} $in | #{uglifyjs} > $out")
