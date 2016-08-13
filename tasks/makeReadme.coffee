@@ -9,7 +9,7 @@ converter = new htmlToJsx({createClass:true, outputClassName: 'Readme'})
 
 if require.main != module
     module.exports = (folder) ->
-        pattern = "#{folder}/readme?(\.markdown|\.mdown|\.mkdn|\.md"
+        pattern = "#{folder}/readme?(\.markdown|\.mdown|\.mkdn|\.md)"
         readmes = glob.sync(pattern, {nocase:true})
         deps = []
         if readmes.length > 0
