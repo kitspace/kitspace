@@ -102,6 +102,15 @@
         border-radius: 5px;
         border: 1px solid #EEEEEE;
     }
+
+    .readme .highlight {
+        overflow-x: auto;
+    }
+
+    .deep-link > a:hover {
+        text-decoration: none;
+    }
+
     .readme code {
             padding: 0;
             padding-top: 0.2em;
