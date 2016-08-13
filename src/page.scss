@@ -111,7 +111,11 @@
         text-decoration: none;
     }
 
-    .readme code {
+    .readme {
+        word-wrap: break-word;
+    }
+
+    .readme code, .readme .highlight {
             padding: 0;
             padding-top: 0.2em;
             padding-bottom: 0.2em;
