@@ -55,6 +55,7 @@ var BoardList = React.createClass({
             ready for you to order and build. Click on any project to get
             further info, download the Gerbers and see the bill of materials.
 
+
           </p><p>
 
             To quickly purchase the parts from various
@@ -77,7 +78,19 @@ var BoardList = React.createClass({
             </a> or <a href='https://github.com/monostable/kitnic'>GitHub</a> to get updates
             as we progress and add content.
 
+          </p><p>
+
+            <i>
+
+            We are giving away 20 free PCB manufacturing vouchers with <
+              a href='http://dangerousprototypes.com/store/pcbs'>Dangerous
+            Prototypes</a> for the first 20 projects
+            that register. Current status: 17/20 left.
+
+            </i>
+
           </p>
+
         </div>
       </div>
       </center>

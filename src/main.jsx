@@ -35,7 +35,7 @@ var Main = React.createClass({
     );
   },
   handleKeydown: function(event) {
-    //enter key
+    //lose focus when pressing enter key, for mobile
     if (event.which == 13) {
       document.getElementsByClassName('searchInput')[0]
       .firstElementChild.blur();

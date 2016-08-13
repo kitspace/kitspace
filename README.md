@@ -1,5 +1,7 @@
 # https://kitnic.it
-**We are giving away 20 free PCB services to the first 20 projects that register. Just follow [the instructions below](#submitting-your-project). Current status: 18/20 left.**
+**We are giving away 20 free PCB manufacturing vouchers to the first 20
+projects that register. Just follow [the instructions
+below](#submitting-your-project). Current status: 17/20 left.**
 
 [![build status][1]](https://travis-ci.org/monostable/kitnic) 
 
