@@ -11,7 +11,7 @@ if require.main != module
     module.exports = (folder) ->
         pattern = "#{folder}/readme?(\.markdown|\.mdown|\.mkdn|\.md)"
         readmes = glob.sync(pattern, {nocase:true})
-        deps = []
+        deps = ["build/.temp/#{folder}/info.json"]
         if readmes.length > 0
             deps.push(readmes[0])
         targets = ["build/.temp/#{folder}/readme.jsx"]
@@ -20,8 +20,10 @@ else
     {deps, targets} = utils.processArgs(process.argv)
     readmeJsx = targets[0]
     html = ''
-    try readme = deps[0]
+    info = require(__dirname + '/../' + deps[0])
+    try readme = deps[1]
     if readme?
-        html = marky(fs.readFileSync(readme, 'utf8')).html()
+        pkg = {repository: {url: info.repo}}
+        html = marky(fs.readFileSync(readme, 'utf8'), {package: pkg}).html()
     reactComponent = converter.convert("<div class='readme'>#{html}</div>")
     fs.writeFileSync(readmeJsx, "const React = require('react');\n" + reactComponent + "\nmodule.exports = Readme;\n")
