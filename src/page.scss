@@ -96,4 +96,35 @@
             padding: 0;
         }
     }
+    .readme {
+        margin: 15px 5px 5px 5px;
+        padding: 20px;
+        border-radius: 5px;
+        border: 1px solid #EEEEEE;
+    }
+
+    .readme .highlight {
+        overflow-x: auto;
+    }
+
+    .deep-link > a:hover {
+        text-decoration: none;
+    }
+
+    .readme {
+        word-wrap: break-word;
+    }
+
+    .readme code, .readme .highlight {
+            padding: 0;
+            padding-top: 0.2em;
+            padding-bottom: 0.2em;
+            margin: 0;
+            font-size: 85%;
+            background-color: rgba(0,0,0,0.04);
+            border-radius: 3px;
+    }
+    .readme img {
+        max-width:100%;
+    }
 }

@@ -9,9 +9,6 @@ exports.processArgs = (argv) ->
         console.error('task filename is not in task arguments')
         process.exit(1)
     sepIndex = argv.indexOf('--')
-    if (sepIndex <= 2)
-        console.error('no seperation of deps and targets')
-        process.exit(1)
     deps = argv[2..(sepIndex - 1)]
     config = process.argv[(sepIndex + 1)]
     targets = process.argv[(sepIndex + 2)..]

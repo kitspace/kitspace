@@ -3,6 +3,14 @@ node_js:
   - "4"
 before_install:
   - gem install sass
+env:
+  - CXX=g++-4.8
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-4.8
 script:
   - ./scripts/plug_versions.coffee
   - ./scripts/get_boards.coffee production
