@@ -13,8 +13,8 @@ const bomInstallPrompt = React.createClass({
       <div className='bomInstallPrompt'>
 
         Please <a className='bomInstallAnchor'
-        onClick={this.props.bomInstallLink}> install the 1-click BOM
-        extension </a> to make full use of this feature.
+        onClick={this.props.bomInstallLink}>install the 1-click BOM
+        extension</a> to make full use of this feature.
 
       </div>);
     }
