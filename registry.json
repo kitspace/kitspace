@@ -4,6 +4,10 @@
     "hash": "fcb3107c66670035c7cb330f5d98eddde5d17f56"
   },
   {
+    "repo": "https://github.com/kitnic/arduino-uno",
+    "hash": "9ffdc5d898d92d0799e5ff7173454efe08a0f08c"
+  },
+  {
     "repo": "https://github.com/kitnic/Bus_Pirate",
     "hash": "0ca376a0eedd116e3ffdbd5dfd5398a67fdba708"
   },
@@ -21,7 +25,7 @@
   },
   {
     "repo": "https://github.com/kasbah/push-on-hold-off",
-    "hash": "609a51d25d1a55527ed7a0b7ac9e7d604a46dc9d"
+    "hash": "29085bc9666c7f61e2cd6ad68889258931a5d268"
   },
   {
     "repo": "https://github.com/kitnic/BQ25570_Harvester",
