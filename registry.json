@@ -38,5 +38,9 @@
   {
     "repo": "https://github.com/8BitMixtape/NextLevelEdition",
     "hash": "eeedfdc0708bdb86a98d9972087fa25538cfe863"
+  },
+  {
+    "repo": "https://github.com/dvdfreitag/Signal-Detector",
+    "hash": "6978ba247948e1a5631f9671909d77d109ff48ec"
   }
 ]
