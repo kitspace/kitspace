@@ -47,7 +47,7 @@ Git repository (but it doesn't have to be on GitHub). If you don't know how to
 use Git then *don't worry*! - you can easily [create a repo on GitHub][4] and
 [upload your files using the web interface][5].
 
-**5. Add your project to Kitnics board list.**
+**5. Add your project to Kitnic's board list.**
 To add your project to Kitnic, edit the [boards.txt](boards.txt) file, by
 appending the full public URL to your repo (including `https://`, `http://`
 or`git@` ). Then submit a pull request and Travis CI should confirm that it
