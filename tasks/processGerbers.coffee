@@ -87,7 +87,7 @@ else
     [topSvgPath, bottomSvgPath, zipPath, zipInfoPath] = targets
     fs.writeFileSync(zipInfoPath, JSON.stringify(path.basename(zipPath)))
     zip = new Jszip
-    zip = zip.folder(path.basename(zipPath, '.zip'))
+    folder_name = path.basename(zipPath, '.zip')
     try
         file = fs.readFileSync("#{folder}/kitnic.yaml")
     try
@@ -95,17 +95,16 @@ else
         for gerberPath in gerbers
             data = fs.readFileSync(gerberPath, {encoding:'utf8'})
             stackupData.push({filename:gerberPath, gerber:data})
-            zip.file(path.basename(gerberPath), data)
-        fs.writeFile zipPath
-        , zip.generate
+            zip.file(path.join(folder_name, path.basename(gerberPath)), data)
+        zip.generateAsync
             type:'nodebuffer'
             compression:'DEFLATE'
             compressionOptions : {level:6}
-        , (err) ->
-            if err?
-                console.error("Could not write gerber zip for #{folder}")
-                console.error(err)
-                process.exit(1)
+        .then (content) ->
+            fs.writeFile zipPath, content, (err) ->
+                if err?
+                    console.error("Could not write gerber zip for #{folder}")
+                    throw err
         if file? then color = yaml.safeLoad(file).color
         boardBuilder stackupData, color || 'green', (error, stackup) ->
             if error?
