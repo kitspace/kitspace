@@ -21,7 +21,7 @@
   },
   {
     "repo": "https://github.com/kasbah/nomech",
-    "hash": "3dea9ad93c0c08bf2aab3cba80c681ad285b1e9e"
+    "hash": "e4e29bbbf9bc6cd26adc4460bd722370e526d062"
   },
   {
     "repo": "https://github.com/kasbah/push-on-hold-off",
@@ -42,5 +42,9 @@
   {
     "repo": "https://github.com/dvdfreitag/Signal-Detector",
     "hash": "6978ba247948e1a5631f9671909d77d109ff48ec"
+  },
+  {
+    "repo": "https://github.com/robotsrulz/SP_Adapter",
+    "hash": "397d4bfd3e779e85f7762d1a394c641584834dbb"
   }
 ]
