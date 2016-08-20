@@ -41,12 +41,13 @@
   "license": "CPAL-1.0",
   "dependencies": {
     "1-click-bom": "github:monostable/nodejs-1-click-bom",
+    "babel-polyfill": "^6.13.0",
     "browser-version": "^1.0.0",
-    "react-double-scrollbar": "0.0.9",
-    "react-hyperscript-helpers": "^1.1.0",
     "react": "^15.3.0",
     "react-document-title": "^2.0.1",
     "react-dom": "^15.3.0",
+    "react-double-scrollbar": "0.0.9",
+    "react-hyperscript-helpers": "^1.1.0",
     "react-search-input": "~0.10.1"
   },
   "sasslintConfig": "./src/.sass-lint.yml"

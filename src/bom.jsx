@@ -3,6 +3,9 @@ const React           = require('react');
 const DoubleScrollbar = require('react-double-scrollbar');
 const hyper           = require('react-hyperscript-helpers');
 
+//for react-double-scrollbar in IE11
+require('babel-polyfill');
+
 const table = hyper.table;
 const thead = hyper.thead;
 const tbody = hyper.tbody;
