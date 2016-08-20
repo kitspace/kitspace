@@ -23,7 +23,7 @@ function tsvToTable(tsv) {
   const markPink = (index) => {
     return ['Manufacturer', 'MPN', 'Description']
       .indexOf(headings[index]) < 0;
-  }
+  };
   const bodyJSX = tbody(lines.slice(1).map((line, rowIndex) => {
     line = line.split('\t');
     return tr(`.tr${rowIndex % 2}`, line.map((text, columnIndex) => {

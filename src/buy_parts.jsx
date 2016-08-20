@@ -29,7 +29,9 @@ const StoreButtons = React.createClass({
 
     for (let retailer of oneClickBOM.lineData.retailer_list) {
       adding[retailer] = undefined;
-      let retailerItems = this.props.items.map((item) => item.retailers[retailer]);
+      let retailerItems = this.props.items.map((item) => {
+        return item.retailers[retailer];
+      });
       let partCount = retailerItems.reduce((carry, val) => {
         if (val)
           carry++;
@@ -43,7 +45,7 @@ const StoreButtons = React.createClass({
         summary = 'No parts specified';
         partsSpecified[retailer] = 'noPartsSpecified';
       } else {
-        summary = partCount + '/' + this.props.items.length + ' parts specified';
+        summary = `${partCount}/${this.props.items.length} parts specified`;
         partsSpecified[retailer] = 'somePartsSpecified';
       }
 
@@ -166,47 +168,55 @@ const StoreButtons = React.createClass({
   },
 
   _getMultiplier: function () {
-        const multi = this.state.buyMultiplier;
-        const percent = this.state.buyAddPercent;
-        return multi + (multi * (percent/100));
+    const multi = this.state.buyMultiplier;
+    const percent = this.state.buyAddPercent;
+    return multi + (multi * (percent / 100));
   },
 
   _quantity: function () {
-        return (
-          <form id='quantityContainer' noValidate>
-            <div>
-              <span className='notSelectable' style={{fontWeight:'bold', marginRight:5}}>{'x'}</span>
-              <input
-              type='number'
-              min={1}
-              value={this.state.buyMultiplier}
-              onChange={(e) => {
-                var v = parseFloat(e.target.value);
-                if (isNaN(v) || v < 1) {
-                  v = 1;
-                }
-                this.setState({buyMultiplier: v})
-              }}
-              />
-            </div>
-            <span className='notSelectable' style={{fontSize:'2em', marginLeft:10, marginRight:10}}>{' + '}</span>
-            <div>
-              <input
-              type='number'
-              min={0}
-              step={10}
-              value={this.state.buyAddPercent}
-              onChange={(e) =>{
-                var v = parseFloat(e.target.value);
-                if (isNaN(v) || v < 0) {
-                  v = 0;
-                }
-                this.setState({buyAddPercent: v})
-              }}
-              />
-              <span className='notSelectable' style={{marginLeft:5}}>{'%'}</span>
-            </div>
-          </form>);
+    return (
+      <form id='quantityContainer' noValidate>
+        <div>
+          <span
+          className='notSelectable'
+          style={{fontWeight:'bold', marginRight:5}}>
+            {'x'}
+          </span>
+          <input
+          type='number'
+          min={1}
+          value={this.state.buyMultiplier}
+          onChange={(e) => {
+            var v = parseFloat(e.target.value);
+            if (isNaN(v) || v < 1) {
+              v = 1;
+            }
+            this.setState({buyMultiplier: v});
+          }}
+          />
+        </div>
+        <span
+        className='notSelectable'
+        style={{fontSize:'2em', marginLeft:10, marginRight:10}}>
+          {' + '}
+        </span>
+        <div>
+          <input
+          type='number'
+          min={0}
+          step={10}
+          value={this.state.buyAddPercent}
+          onChange={(e) =>{
+            var v = parseFloat(e.target.value);
+            if (isNaN(v) || v < 0) {
+              v = 0;
+            }
+            this.setState({buyAddPercent: v});
+          }}
+          />
+          <span className='notSelectable' style={{marginLeft:5}}>{'%'}</span>
+        </div>
+      </form>);
   },
 
   render: function() {
@@ -224,7 +234,9 @@ const StoreButtons = React.createClass({
         <ExtensionCompatibilityPrompt
         compatibleBrowser={this.state.compatibleBrowser} />
         {this._quantity()}
-        <DirectStores multiplier={this._getMultiplier()} items={this.props.items} />
+        <DirectStores
+        multiplier={this._getMultiplier()}
+        items={this.props.items} />
         <div className='storeButtons'>
           {this.storeButtons()}
         </div>

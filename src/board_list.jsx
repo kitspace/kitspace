@@ -58,34 +58,30 @@ var BoardList = React.createClass({
 
           </p><p>
 
-            To quickly purchase the parts from various
-            retailers you should <a
-            className='clickableLink'
-            onClick={onClick}>install</a> the
-             1-click BOM extension.
-            It's pretty useful on it's own too and can be used on other sites.
-            Read more about it <a
-            className='clickableLink'
-            href='http://1clickBOM.com'
-            >here</a>.
+            To quickly purchase the parts from various retailers you should <a
+            className='clickableLink' onClick={onClick}>install</a> the 1-click
+            BOM extension. It's pretty useful on it's own too and can be used
+            on other sites. Read more about it <a className='clickableLink'
+            href='http://1clickBOM.com' >here</a>.
 
           </p><p>
 
-            <a href='https://github.com/monostable/kitnic/#submitting-your-project'>
-            Submit</a> your own project to have it listed here! Follow this project
-            on <a href='https://twitter.com/kitnic_it'>Twitter</a>
-            , <a href='https://hackaday.io/project/11871-kitnic'>Hackaday.io
-            </a> or <a href='https://github.com/monostable/kitnic'>GitHub</a> to get updates
-            as we progress and add content.
+          <a
+          href='https://github.com/monostable/kitnic/#submitting-your-project'>
+          Submit</a> your own project to have it listed here! Follow this
+          project on <a href='https://twitter.com/kitnic_it'>Twitter</a>, <a
+          href='https://hackaday.io/project/11871-kitnic'>Hackaday.io
+          </a> or <a href='https://github.com/monostable/kitnic'>GitHub</a> to get
+          updates as we progress and add content.
 
           </p><p>
 
             <i>
 
-            We are giving away 20 free PCB manufacturing vouchers with <
-              a href='http://dangerousprototypes.com/store/pcbs'>Dangerous
-            Prototypes</a> for the first 20 projects
-            that register. Current status: 15/20 left.
+            We are giving away 20 free PCB manufacturing vouchers with <a
+            href='http://dangerousprototypes.com/store/pcbs'>Dangerous
+            Prototypes</a> for the first 20 projects that register. Current
+            status: 15/20 left.
 
             </i>
 

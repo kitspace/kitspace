@@ -10,11 +10,11 @@ const ExtensionCompatibilityPrompt = React.createClass({
     return (
       <div className='extensionCompatibilityPrompt'>
 
-        Sorry, the <a className='bomPromptLink' href='https://1clickbom.com/'>1-click BOM extension</a> is
-        not yet available for your browser. Only the Digikey add-to-cart links
-          work fully, Farnell and Newark should work but the references will
-        not be added as line-notes.
+        Sorry, the <a className='bomPromptLink'
+        href='https://1clickbom.com/'>1-click BOM extension</a> is not yet
+        available for your browser. Only the Digikey add-to-cart links work
+          fully, Farnell and Newark should work but the references will not be
+        added as line-notes.
 
-      </div>); }
-});
+      </div>); } });
 module.exports = ExtensionCompatibilityPrompt;

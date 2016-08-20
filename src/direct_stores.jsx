@@ -49,7 +49,7 @@ const getLocation = function(callback) {
   const url = 'https://freegeoip.kitnic.it';
   return get(url, {
     timeout: 5000
-  }, (function(_this) {
+  }, (function() {
     return function(event) {
       var response;
       response = JSON.parse(event.target.responseText);
@@ -80,12 +80,14 @@ const DirectStores = React.createClass({
       });
     }
     return {
-        countryCode: 'Other'
+      countryCode: 'Other'
     };
   },
   getParts: function (retailer) {
     let parts = this.props.items;
-    parts = parts.filter( part => retailer in part.retailers && part.retailers[retailer] != '');
+    parts = parts.filter(part => {
+      return retailer in part.retailers && part.retailers[retailer] != '';
+    });
     parts = parts.map( part => {
       return {
         sku: part.retailers[retailer],
