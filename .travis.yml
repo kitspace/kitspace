@@ -12,6 +12,7 @@ addons:
     packages:
       - g++-4.8
 script:
+  - export NODE_ENV=production
   - ./scripts/plug_versions.coffee
   - ./scripts/get_boards.coffee production
   - ./configure.coffee production
