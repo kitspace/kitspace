@@ -162,5 +162,5 @@ file-saves and re-build when you change a source file.
 [4]: https://help.github.com/articles/create-a-repo/
 [5]: https://help.github.com/articles/adding-a-file-to-a-repository/
 [6]: http://www.yaml.org/start.html
-[7]: https://github.com/monostable/1clickBOM
+[7]: http://www.yamllint.com
 [8]: https://img.shields.io/badge/mailing--list-kitnic--discuss-green.svg
