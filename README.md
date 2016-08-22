@@ -3,12 +3,15 @@
 projects that register. Just follow [the instructions
 below](#submitting-your-project). Current status: 15/20 left.**
 
-[![build status][1]](https://travis-ci.org/monostable/kitnic) 
+[![build status][travis-status]](https://travis-ci.org/monostable/kitnic) 
 
-Kitnic is a registry of open source hardware electronics projects that are ready to order and build. The most important elements of a Kitnic project page are: 
+Kitnic is a registry of open source hardware electronics projects that are
+ready to order and build. The most important elements of a Kitnic project page
+are: 
 
 - A prominent link to download the Gerber files and a preview rendering of the board
-- The ability to quickly add the required components to a retailer shopping cart (using clever magic in the form of our [browser extension][7]) 
+- The ability to quickly add the required components to a retailer shopping
+  cart (using clever magic in the form of our [browser extension][1clickbom]) 
 
 
 ## Get in touch
@@ -27,11 +30,11 @@ default the path `gerbers/` will be searched. If this is not where they are
 stored, please add this info in the kitnic.yaml file (see below).
 
 **2. Create the 1-click-bom file.**
-Download the extension and see [the guide on exporting a 1-click-bom from your design](https://1clickbom.com/#making-a-1-click-bom). This format will allow people to quickly purchase the
-components. 
-By default this file is expected to be a `1-click-bom.tsv` in the root of the
-project, if the file has a different name or is in a different location, please
-add this info in the kitnic.yaml file (see below).
+Download the extension and see [the guide on exporting a 1-click-bom from your
+design][1clickbom#making]. This format will allow people to quickly purchase
+the components.  By default this file is expected to be a `1-click-bom.tsv` in
+the root of the project, if the file has a different name or is in a different
+location, please add this info in the kitnic.yaml file (see below).
 
 **3. (Optional) Create the YAML project description file.** The `kitnic.yaml`
 file allows you to specify a website you would like to link to, give a summary
@@ -51,11 +54,14 @@ use Git then *don't worry*! - you can easily [create a repo on GitHub][4] and
 To add your project to Kitnic, edit the [boards.txt](boards.txt) file, by
 appending the full public URL to your repo (including `https://`, `http://`
 or`git@` ). Then submit a pull request and Travis CI should confirm that it
-builds ok.  If any of the requirements above are not met then this process will likely fail.
+builds ok.  If any of the requirements above are not met then this process will
+likely fail.
 
 We will then preview your page and merge it so it appears on [kitnic.it](http://kitnic.it).
 
-If you run into any problems please get in touch via [Gitter chat](https://gitter.im/monostable/kitnic), IRC (freenode#kitnic) or the [mailing-list](https://groups.google.com/forum/#!forum/kitnic-discuss).
+If you run into any problems please get in touch via [Gitter
+chat](https://gitter.im/monostable/kitnic), IRC (freenode#kitnic) or the
+[mailing-list](https://groups.google.com/forum/#!forum/kitnic-discuss).
 
 
 ### Kitnic.yaml format
@@ -78,11 +84,15 @@ bom: A path to your 1-click-bom in case it isn't `1-click-bom.tsv`.
 gerbers: A path to your folder of gerbers in case it isn't `gerbers/`.
 
 ```
-Paths should be in UNIX style (i.e. use `/` not `\`) and relative to the root of your
-repository. The YAML format is pretty straight forward but if you need to know more check the example below and [the YAML website][6]. Use [this YAML validator][7] to be extra sure that your `kitnic.yaml` is valid.
+Paths should be in UNIX style (i.e. use `/` not `\`) and relative to the root
+of your repository. The YAML format is pretty straight forward but if you need
+to know more check the example below and [the YAML website][6]. Use [this YAML
+validator][yamllint] to be extra sure that your `kitnic.yaml` is valid.
 
 ### Some examples
-Check out the repo links of the projects listed on [kitnic.it](https://kitnic.it) already. The minimum required file tree is something like :
+Check out the repo links of the projects listed on
+[kitnic.it](https://kitnic.it) already. The minimum required file tree is
+something like :
 
 ```
 .
@@ -156,11 +166,12 @@ file-saves and re-build when you change a source file.
 
 
 [viewer]: http://viewer.tracespace.io
-[1]: https://travis-ci.org/monostable/kitnic.svg?branch=master
-[2]: https://badges.gitter.im/monostable/kitnic.svg
-[3]: https://github.com/monostable/1clickBOM#usage
+[1clickbom]: https://1clickBOM.com
+[yamllint]: http://www.yamllint.com
+[1clickbom#making]: https://1clickbom.com/#making-a-1-click-bom
+[travis-status]: https://travis-ci.org/monostable/kitnic.svg?branch=master
+
 [4]: https://help.github.com/articles/create-a-repo/
 [5]: https://help.github.com/articles/adding-a-file-to-a-repository/
 [6]: http://www.yaml.org/start.html
-[7]: http://www.yamllint.com
 [8]: https://img.shields.io/badge/mailing--list-kitnic--discuss-green.svg
