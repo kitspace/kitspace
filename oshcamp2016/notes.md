@@ -1,0 +1,121 @@
+1.
+    - Here to talk about a website I made called Kitnic which is for sharing electronic projects.
+    - Slides are available at the address printed there .
+1.
+    - My work in this  idea began quite a few years ago now. 
+    - I was working for a startup making a strange musical device.
+    - As with startups often, and me being straight out of Uni I wasn't being paid that well
+    - I was designing PCBs and wanted my colleagues to buy the parts
+    - Retailers all have separate ways to add parts but I wanted to give my colleague a list of parts and they could buy it at whatever retailer
+1.
+    - How hard could it be?
+1. 
+    - Well it turns out the retailer websites don't really have APIs and are really not geared towards automating this process.
+    - This is a request you have to send to add something to the Mouser cart.
+    - I wanted to make a browser extension that could drive these sites. 
+    - I thought, well this is never going to work, but it might. 
+1.
+    - The only way it will work is if I thoroughly test it across countries and retailers.
+    - Turns out this was a good approach and I am able to keep up with changes the retailers make to their sites fairly easily. 
+1.
+    - This was the result.
+    - An extension that links a spreadsheet with your retailer shopping cart.
+    - You copy and paste into it. 
+    - And you copy out of it back into your spreadsheet. 
+    - You can drive the retailer sites this way
+1.
+    - I called it the 1-click BOM extension
+    - It's available for Chrome and Firefox
+    - Takes in tab-separated values, this is the clipboard format of spreadsheets
+    - Supports 5 retailers
+    - Add and remove from shopping cart
+    - Can have a guess at what part you mean by searching Octopart and Findchips
+    - Open source under CPAL license
+    - About 250 users
+    - At this point I had strayed from the original use-case.
+    - I had long left the startup.
+    - But I realised I had developed a unified format that allows people to share their purchasing across retailers and across all the countries where these retailers have a presence. 
+1.
+    - People do share electronics projects online
+    - GitHub
+        - 3000 Kicad Projects
+        - 7000 Eagle Projects
+    - Over 9000 shared projects shared on OshPark
+    - And that's not counting the Hackaday.io projects, the blogs and forums
+1. 
+    - We look enviously at the software world
+1.
+    - With software you run your package manager or build automation
+1.
+    - With hardware, we are at a level of someone explaining the project, and there may be links to files here and there. 
+    - Sure you want to understand the project but, first you want to be able to order the right parts
+1. 
+    - To sum this up a bit
+    - We want to process all these different ways of sharing making and sharing electronic projects 
+1. 
+    - And we want to get a board out of it
+1.
+    - And we want the right parts ordered
+1. 
+    - So to make a start I decided on some defaults
+    - A git repository, for now as everyone can get some hosting for that
+    - Tab separated values
+         - the format that works with the extension
+         - it displays nicely on github
+         - we'll require the bare minimum to allow someone to potentially re-purchase
+    - RS274-X Gerbers and Excellon drills, because this is what every PCB fab accepts
+    - IPC-2581, ODB++ look like interesting formats that try and capture more information, but for now hardly anyone seems to be using them
+
+1. 
+    - Since the extension is Javascript, and the front-end will need to be Javascript, I am just continuing to write more and more javascript, for better or worse
+    - Of course it hooks up with the extension
+    - There is actually some surprising amount of functionality without the extension
+        - I found some undocumented ways to add things to retailer carts
+        - For full functionality we still need the extension
+    - We make heavy use of build automation throught Travis CI
+    - And the static site hosting that GitHub provides
+    - The registry is currenly a simple text file in the root of the source code repository
+    - People put things into the right format and send me a request to append their git URL
+    - Everytime a new project is added the whole site is re-built
+    - This definitely won't scale well with projects added, but does scale well with traffic, uptime of the website has been absolutely flawless
+    - I found a really neat project by Michael Cousins that converts gerbers to SVG and is able to make these beautiful previews of a board
+    - This way everyone can immediately see what a project is about from the board, and you don't have to add a picture
+1.
+    - So let's take a look at the site
+    - We have all the previews of the boards and short descriptions
+    - We can search
+    - We have a prominent link to the Gerbers
+    - And we can easily buy the right parts
+    - We get an indication here, with the color button if all the parts have been specified for a retailer
+    - I recently added a README rendering, which makes a project much more approachable
+1.
+    - We will have to move away from this client side only approach
+    - Hardware engineers don't really like to use git necessarily, so we should realy provide an alternative way to add projects
+    - Tagged versions would be useful for any project though, so you can select between version 1 or 2 etc
+    - We could actually skip the download step and connect up the PCB services directly
+    - Another cool idea would be to help people more in puttting the boards together
+
+1.
+    - This is a mock-up of that idea
+    - You hover over the part in your BOM and it shows you where to place it
+1. 
+    - There has been some interest from assemblers to hook up direct links to get things manufactured and that could get really interesting for validated designs
+    - A lot can be done to help people make bills of materials and add all the right SKUs
+    - Live pricing data, so you can estimate total cost easily would be useful
+
+1.
+    - How can you help?
+    - Add your project!
+    - I am running a promotion at the moment as well, so if you add your project you get $25 dollars PCB manufacturing voucher
+    - We have a long list of possible features, if you can do web-dev or want to learn, pick a feature and work on it
+    - Spread the word, this is going to be really useful if everyone uses this, let's get everyone involved
+
+    - If you want to keep in touch, you can check on the website itself
+    - I made a twitter account for the site, and it's on other social media as well, Reddit, Facebook, Hackaday.io etc
+    - Of course GitHub is the best way if you wanto get involved in the development side
+
+1.
+    
+    - Any questions?
+    
+

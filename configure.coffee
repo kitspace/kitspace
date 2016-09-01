@@ -182,6 +182,11 @@ for taskFile in globule.find('tasks/*.coffee')
     else
         addEdge(task)
 
+if config == 'production'
+    presentation_files = globule.find('oshcamp2016/**/*', {filter:'isFile'})
+    for f in presentation_files
+        ninja.edge(path.join('build', f)).from(f).using('copy')
+
 
 ninja.edge('clean').from('build/').using('remove')
 
@@ -200,6 +205,7 @@ ninja.byDefault('all')
 
 
 ninja.save('build.ninja')
+
 
 
 console.log("generated ./build.ninja with '#{config}' config")
