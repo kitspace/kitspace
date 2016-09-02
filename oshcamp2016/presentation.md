@@ -4,16 +4,48 @@ class: center, middle
 <img class=fullscreen src=images/logo.png />
 
 ---
-# The Idea
 
-How can I get someone else to buy the parts I need?
+- GitHub
+  - 3000 KiCAD Projects
+  - 7000 Eagle Projects
 
-![](images/nexus-main.jpg)
+- OshPark
+  - Over 9000 shared projects
+
+- Hackaday.io, EEVblog Forums, etc
 
 ---
-#How hard could it be?
+<br>
+<br>
+<br>
+<center><img src=images/pease.jpg /></center>
+---
+<img class=fullscreen src=images/meat1.jpg />
 
+---
+<img class=fullscreen src=images/meat2.jpg />
+---
+<img class=fullscreen src=images/meat3.jpg />
 
+---
+<h1><li>1-click BOM browser extension</li></h1>
+<h1><li>kitnic.it</li></h1>
+<center>
+<img src=images/apart1.jpg>
+</center>
+---
+# 1-click BOM extension 
+
+- Replicate the web requests that are sent when you use retailer sites.
+  - Digikey 
+  - Mouser 
+  - RS
+  - Newark
+  - Farnell/Element14
+---
+#Same origin policy
+
+"The same-origin policy restricts how a document or script loaded from one origin can interact with a resource from another origin." - MDN
 ---
 ```
 curl
@@ -62,12 +94,6 @@ PNsPfrOeY6REXhUiEV1...
 # 1-click BOM extension
 
 - Available for Chrome and Firefox
-- Supports:
-  - Digikey 
-  - Mouser 
-  - RS
-  - Newark
-  - Farnell/Element14
 - Takes in tab separated values
 - Able to add/remove to cart 
 - Can have a guess at what part you mean
@@ -75,43 +101,16 @@ PNsPfrOeY6REXhUiEV1...
 - About 250 users
 
 ---
-
-- GitHub
-  - 3000 KiCAD Projects
-  - 7000 Eagle Projects
-
-- OshPark
-  - Over 9000 shared projects
-
----
-
-<img class=fullscreen src=images/greener.jpg />
-
----
-
-<img class=fullscreen src=images/greener2.jpg />
-
----
-
-<img class=fullscreen src=images/greener3.jpg />
-
----
-<img class=fullscreen src=images/meat1.jpg />
-
----
-<img class=fullscreen src=images/meat2.jpg />
----
 <img class=fullscreen src=images/meat3.jpg />
+
 ---
+#Kitnic.it
 - Git repository
 - Tab separated values
   - 1-click-bom.tsv
   - At minumum: References, Quantity and MPN
 - RS274-X Gerbers and Excellon drills
 
-<center>
-<img src=images/apart1.jpg>
-</center>
 ---
 
 - NodeJS & React
@@ -143,6 +142,10 @@ https://github.com/dvdfreitag/Signal-Detector
 <center><h1><a href=https://kitnic.it>kitnic.it</a><h1></center>
 
 ---
+# The Virtual Kit
+<img src=images/kit.jpg />
+
+---
 
 # Planned Features
 
@@ -168,6 +171,9 @@ https://github.com/dvdfreitag/Signal-Detector
   - 15/20 left
 - Web development
 - Spread the word
+<br />
+<br />
+<img width=200 src=images/divide.gif />
 
 </font>
 ---
@@ -175,17 +181,15 @@ https://github.com/dvdfreitag/Signal-Detector
 - [kitnic.it](https://kitnic.it)
 - [@kitnic_it](https://twitter.com/kitnic_it)
 - [github.com/monostable/kitnic](https://github.com/monostable/kitnic)
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-
 <font size=3>
+<br />
+<br />
+<br />
+<br />
 
 Image credits
-<li>Brown Sod, Green Sod - CC-BY 2.0 https://www.flickr.com/photos/mukluk/</li>
 
 <li>Meat grinder & Disassembled hand-powered grinder - CC-BY-SA 3.0 - Wikipedia - Photos taken by de:user:Kku. Modified by de:user:Rainer Zenz</li>
+<li>Bleep Drum Kit with MIDI - CC-BY-SA 2.0 - SparkFun Electronics</li>
+<li> GFP-tagged Cln2 - CC-BY - Jean Peccoud - https://www.youtube.com/watch?v=sG2Zd3vRdvQ
 

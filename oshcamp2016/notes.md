@@ -110,12 +110,11 @@
     - We have a long list of possible features, if you can do web-dev or want to learn, pick a feature and work on it
     - Spread the word, this is going to be really useful if everyone uses this, let's get everyone involved
 
+1.
+    
+    - Any questions?
     - If you want to keep in touch, you can check on the website itself
     - I made a twitter account for the site, and it's on other social media as well, Reddit, Facebook, Hackaday.io etc
     - Of course GitHub is the best way if you wanto get involved in the development side
 
-1.
-    
-    - Any questions?
-    
 
