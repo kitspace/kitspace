@@ -1,50 +1,12 @@
 <ol style="list-style-type: decimal">
 <li><ul>
 <li>Here to talk about a website I made called Kitnic which is for sharing electronic projects.</li>
-<li>Slides are available at the address printed there .</li>
+<li>Slides are available at the address printed there</li>
 </ul></li>
 <li><ul>
-<li>My work in this idea began quite a few years ago now.</li>
-<li>I was working for a startup making a strange musical device.</li>
-<li>As with startups often, and me being straight out of Uni I wasn't being paid that well</li>
-<li>I was designing PCBs and wanted my colleagues to buy the parts</li>
-<li>Retailers all have separate ways to add parts but I wanted to give my colleague a list of parts and they could buy it at whatever retailer</li>
-</ul></li>
-<li><ul>
-<li>How hard could it be?</li>
-</ul></li>
-<li><ul>
-<li>Well it turns out the retailer websites don't really have APIs and are really not geared towards automating this process.</li>
-<li>This is a request you have to send to add something to the Mouser cart.</li>
-<li>I wanted to make a browser extension that could drive these sites.</li>
-<li>I thought, well this is never going to work, but it might.</li>
-</ul></li>
-<li><ul>
-<li>The only way it will work is if I thoroughly test it across countries and retailers.</li>
-<li>Turns out this was a good approach and I am able to keep up with changes the retailers make to their sites fairly easily.</li>
-</ul></li>
-<li><ul>
-<li>This was the result.</li>
-<li>An extension that links a spreadsheet with your retailer shopping cart.</li>
-<li>You copy and paste into it.</li>
-<li>And you copy out of it back into your spreadsheet.</li>
-<li>You can drive the retailer sites this way</li>
-</ul></li>
-<li><ul>
-<li>I called it the 1-click BOM extension</li>
-<li>It's available for Chrome and Firefox</li>
-<li>Takes in tab-separated values, this is the clipboard format of spreadsheets</li>
-<li>Supports 5 retailers</li>
-<li>Add and remove from shopping cart</li>
-<li>Can have a guess at what part you mean by searching Octopart and Findchips</li>
-<li>Open source under CPAL license</li>
-<li>About 250 users</li>
-<li>At this point I had strayed from the original use-case.</li>
-<li>I had long left the startup.</li>
-<li>But I realised I had developed a unified format that allows people to share their purchasing across retailers and across all the countries where these retailers have a presence.</li>
-</ul></li>
-<li><ul>
-<li>People do share electronics projects online</li>
+<li>It seems like we are living in the beginnings of a golden age of open hardware<br />
+</li>
+<li>People are sharing more and more projects online</li>
 <li>GitHub
 <ul>
 <li>3000 Kicad Projects</li>
@@ -52,26 +14,61 @@
 </ul></li>
 <li>Over 9000 shared projects shared on OshPark</li>
 <li>And that's not counting the Hackaday.io projects, the blogs and forums</li>
-</ul></li>
-<li><ul>
-<li>We look enviously at the software world</li>
-</ul></li>
-<li><ul>
-<li>With software you run your package manager or build automation</li>
-</ul></li>
-<li><ul>
-<li>With hardware, we are at a level of someone explaining the project, and there may be links to files here and there.</li>
-<li>Sure you want to understand the project but, first you want to be able to order the right parts</li>
-</ul></li>
-<li><ul>
-<li>To sum this up a bit</li>
 <li>We want to process all these different ways of sharing making and sharing electronic projects</li>
+</ul></li>
+<li><ul>
+<li>But some of the most interesting projects are simultaneously brilliant and useless.</li>
+</ul></li>
+<li><ul>
+<li>We have all these different ways of making and sharing things</li>
 </ul></li>
 <li><ul>
 <li>And we want to get a board out of it</li>
 </ul></li>
 <li><ul>
 <li>And we want the right parts ordered</li>
+</ul></li>
+<li><ul>
+<li>So this is my primitive meat grinder.</li>
+<li>A browser extension that allows you to easily purchase an re-purchase electronic parts</li>
+<li>And a site to share your complete projects with others</li>
+</ul></li>
+<li><ul>
+<li>The extension's purpose is to automate what you do on these retailer sites when you buy parts</li>
+<li>So far it works with Digikey, Mouser, RS, Newark, Farnell/Element14</li>
+</ul></li>
+<li><ul>
+<li>The reason this has to be a browser extension is that it's generally accepted good practice to not allow other websites to change things in your shopping carts.</li>
+</ul></li>
+<li><ul>
+<li>It turns out the retailer websites don't really have APIs and are really not geared towards automating this process.</li>
+<li>This is a request you have to send to add something to the Mouser cart.</li>
+<li>I thought, well this is never going to work, but it might.</li>
+</ul></li>
+<li><ul>
+<li>The only way it will work is if I thoroughly test it across countries and retailers.</li>
+<li>Turns out this was a good approach and I am able to keep up with changes the retailers make to their sites fairly easily.</li>
+</ul></li>
+<li><ul>
+<li>This is what working with the extension looks like</li>
+<li>An extension that links a spreadsheet with your retailer shopping cart.</li>
+<li>You copy and paste into it.</li>
+<li>And you copy out of it back into your spreadsheet.</li>
+<li>You can drive the retailer sites this way</li>
+</ul></li>
+<li><ul>
+<li>It's available for Chrome and Firefox</li>
+<li>Takes in tab-separated values, this is the clipboard format of spreadsheets</li>
+<li>Supports 5 retailers</li>
+<li>Add and remove from shopping cart</li>
+<li>Can have a guess at what part you mean by searching Octopart and Findchips</li>
+<li>Open source under CPAL license</li>
+<li>About 250 users</li>
+</ul></li>
+<li><ul>
+<li>Getting back to the meat-grinder, we are not quite there yet.</li>
+<li>We have a way of sharing a list of part with people</li>
+<li>I wanted to make a place where people could share a more complete project, still with these two elements</li>
 </ul></li>
 <li><ul>
 <li>So to make a start I decided on some defaults</li>
@@ -132,12 +129,12 @@
 <li>Add your project!</li>
 <li>I am running a promotion at the moment as well, so if you add your project you get $25 dollars PCB manufacturing voucher</li>
 <li>We have a long list of possible features, if you can do web-dev or want to learn, pick a feature and work on it</li>
-<li><p>Spread the word, this is going to be really useful if everyone uses this, let's get everyone involved</p></li>
-<li>If you want to keep in touch, you can check on the website itself</li>
-<li>I made a twitter account for the site, and it's on other social media as well, Reddit, Facebook, Hackaday.io etc</li>
-<li><p>Of course GitHub is the best way if you wanto get involved in the development side</p></li>
+<li>Spread the word, this is going to be really useful if everyone uses this, let's get everyone involved</li>
 </ul></li>
 <li><ul>
 <li>Any questions?</li>
+<li>If you want to keep in touch, you can check on the website itself</li>
+<li>I made a twitter account for the site, and it's on other social media as well, Reddit, Facebook, Hackaday.io etc</li>
+<li>Of course GitHub is the best way if you wanto get involved in the development side</li>
 </ul></li>
 </ol>

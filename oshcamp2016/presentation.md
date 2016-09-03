@@ -95,6 +95,7 @@ PNsPfrOeY6REXhUiEV1...
 
 - Available for Chrome and Firefox
 - Takes in tab separated values
+- Can load a on-line BOM 
 - Able to add/remove to cart 
 - Can have a guess at what part you mean
 - Open source (CPAL)
@@ -108,13 +109,26 @@ PNsPfrOeY6REXhUiEV1...
 - Git repository
 - Tab separated values
   - 1-click-bom.tsv
-  - At minumum: References, Quantity and MPN
+  - At minumum: References, Quantity and Part Number
 - RS274-X Gerbers and Excellon drills
+
+```
+.
+├── 1-click-bom.tsv
+└── gerbers
+    ├── board.cmp
+    ├── board.drd
+    ├── board.dri
+    ├── board.gko
+    ├── board.gpi
+    ├── board.gto
+    ├── board.stc
+    └── board.sts
+```
 
 ---
 
 - NodeJS & React
-- 1-click BOM extension
 - GitHub Pages & Travis CI
   - The boards.txt file
 
@@ -129,7 +143,7 @@ https://github.com/dvdfreitag/Signal-Detector
 
 - tracespace/pcb-stackup 
 
-<p align=middle><img src=https://camo.githubusercontent.com/a93fc9e232decf64f3816dada7a7593bb1ed76ae/68747470733a2f2f747261636573706163652e6769746875622e696f2f7063622d737461636b75702f6578616d706c652f61726475696e6f2d746f702e737667></p>
+<p align=middle><img src=images/stackup.svg></p>
 
 ---
 

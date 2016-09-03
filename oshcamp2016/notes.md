@@ -1,30 +1,46 @@
 1.
     - Here to talk about a website I made called Kitnic which is for sharing electronic projects.
-    - Slides are available at the address printed there .
-1.
-    - My work in this  idea began quite a few years ago now. 
-    - I was working for a startup making a strange musical device.
-    - As with startups often, and me being straight out of Uni I wasn't being paid that well
-    - I was designing PCBs and wanted my colleagues to buy the parts
-    - Retailers all have separate ways to add parts but I wanted to give my colleague a list of parts and they could buy it at whatever retailer
-1.
-    - How hard could it be?
+    - Slides are available at the address printed there
 1. 
-    - Well it turns out the retailer websites don't really have APIs and are really not geared towards automating this process.
+    - It seems like we are living in the beginnings of a golden age of open hardware  
+    - People are sharing  more and more projects online
+    - GitHub
+        - 3000 Kicad Projects
+        - 7000 Eagle Projects
+    - Over 9000 shared projects shared on OshPark
+    - And that's not counting the Hackaday.io projects, the blogs and forums
+    - We want to process all these different ways of sharing making and sharing electronic projects 
+1. 
+    - But some of the most interesting projects are simultaneously brilliant and useless.
+1. 
+    - We have all these different ways of making and sharing things
+1. 
+    - And we want to get a board out of it
+1.
+    - And we want the right parts ordered
+1.
+    - So this is my primitive meat grinder. 
+    - A browser extension that allows you to easily purchase an re-purchase electronic parts
+    - And a site to share your complete projects with others
+1. 
+    - The extension's purpose is to automate what you do on these retailer sites when you buy parts
+    - So far it works with Digikey, Mouser, RS, Newark, Farnell/Element14
+1. 
+    - The reason this has to be a browser extension is that it's generally accepted good practice to not allow other websites to change things in your shopping carts.
+1.
+    - It turns out the retailer websites don't really have APIs and are really not geared towards automating this process.
     - This is a request you have to send to add something to the Mouser cart.
-    - I wanted to make a browser extension that could drive these sites. 
     - I thought, well this is never going to work, but it might. 
 1.
     - The only way it will work is if I thoroughly test it across countries and retailers.
     - Turns out this was a good approach and I am able to keep up with changes the retailers make to their sites fairly easily. 
 1.
-    - This was the result.
+    - This is what working with the extension looks like
     - An extension that links a spreadsheet with your retailer shopping cart.
     - You copy and paste into it. 
     - And you copy out of it back into your spreadsheet. 
     - You can drive the retailer sites this way
 1.
-    - I called it the 1-click BOM extension
     - It's available for Chrome and Firefox
     - Takes in tab-separated values, this is the clipboard format of spreadsheets
     - Supports 5 retailers
@@ -32,30 +48,10 @@
     - Can have a guess at what part you mean by searching Octopart and Findchips
     - Open source under CPAL license
     - About 250 users
-    - At this point I had strayed from the original use-case.
-    - I had long left the startup.
-    - But I realised I had developed a unified format that allows people to share their purchasing across retailers and across all the countries where these retailers have a presence. 
-1.
-    - People do share electronics projects online
-    - GitHub
-        - 3000 Kicad Projects
-        - 7000 Eagle Projects
-    - Over 9000 shared projects shared on OshPark
-    - And that's not counting the Hackaday.io projects, the blogs and forums
 1. 
-    - We look enviously at the software world
-1.
-    - With software you run your package manager or build automation
-1.
-    - With hardware, we are at a level of someone explaining the project, and there may be links to files here and there. 
-    - Sure you want to understand the project but, first you want to be able to order the right parts
-1. 
-    - To sum this up a bit
-    - We want to process all these different ways of sharing making and sharing electronic projects 
-1. 
-    - And we want to get a board out of it
-1.
-    - And we want the right parts ordered
+    - Getting back to the meat-grinder, we are not quite there yet.
+    - We have a way of sharing a list of part with people
+    - I wanted to make a place where people could share a more complete project, still with these two elements 
 1. 
     - So to make a start I decided on some defaults
     - A git repository, for now as everyone can get some hosting for that
