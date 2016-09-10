@@ -37,7 +37,7 @@
   },
   {
     "repo": "https://github.com/8BitMixtape/NextLevelEdition",
-    "hash": "21c7b48ebf11cdd2a9a331e8359d4ad8da1cd8cf"
+    "hash": "54f0189c0046d2634315b0cae8343417b84a1024"
   },
   {
     "repo": "https://github.com/dvdfreitag/Signal-Detector",
@@ -45,6 +45,10 @@
   },
   {
     "repo": "https://github.com/robotsrulz/SP_Adapter",
-    "hash": "0718d78a36ec3ee43a9e71607ad8c25c58b652e1"
+    "hash": "c091296137bbae25b0fe83bde2850f5b4db0b34d"
+  },
+  {
+    "repo": "https://github.com/pcbsz/SimpleAmp",
+    "hash": "317a68d0951749ead2fe9649ddbb67bfffeaa6fd"
   }
 ]

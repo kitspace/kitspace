@@ -10,3 +10,4 @@ https://github.com/JarrettR/USBvil
 https://github.com/8BitMixtape/NextLevelEdition
 https://github.com/dvdfreitag/Signal-Detector
 https://github.com/robotsrulz/SP_Adapter
+https://github.com/pcbsz/SimpleAmp
