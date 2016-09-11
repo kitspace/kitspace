@@ -49,6 +49,10 @@
   },
   {
     "repo": "https://github.com/pcbsz/SimpleAmp",
-    "hash": "317a68d0951749ead2fe9649ddbb67bfffeaa6fd"
+    "hash": "191814ff027424dacb2dcb6338dcb106aabb6e34"
+  },
+  {
+    "repo": "https://github.com/pcbsz/AtariSynth",
+    "hash": "01f1a8f3757f1df6ac006d43ca73025f4823716d"
   }
 ]
