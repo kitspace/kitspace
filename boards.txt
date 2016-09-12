@@ -13,3 +13,4 @@ https://github.com/robotsrulz/SP_Adapter
 https://github.com/pcbsz/SimpleAmp
 https://github.com/pcbsz/AtariSynth
 https://git.defproc.co.uk/DefProc/piezo-sensor
+https://github.com/pcbsz/LM386

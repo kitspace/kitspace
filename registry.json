@@ -54,5 +54,13 @@
   {
     "repo": "https://github.com/pcbsz/AtariSynth",
     "hash": "01f1a8f3757f1df6ac006d43ca73025f4823716d"
+  },
+  {
+    "repo": "https://git.defproc.co.uk/DefProc/piezo-sensor",
+    "hash": "1ef4e9e30e43871aa7bf8f66e8445466eba78b1f"
+  },
+  {
+    "repo": "https://github.com/pcbsz/LM386",
+    "hash": "4357cd14d514eb6f87ac8fccb7892a4360037be4"
   }
 ]
