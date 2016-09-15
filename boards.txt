@@ -14,4 +14,4 @@ https://github.com/pcbsz/SimpleAmp
 https://github.com/pcbsz/AtariSynth
 https://git.defproc.co.uk/DefProc/piezo-sensor
 https://github.com/pcbsz/LM386
-https://github.com/kitnic/aaduino
+https://github.com/kanflo/aaduino
