@@ -45,7 +45,7 @@
   },
   {
     "repo": "https://github.com/robotsrulz/SP_Adapter",
-    "hash": "c091296137bbae25b0fe83bde2850f5b4db0b34d"
+    "hash": "0f76825a347973de49074b2fb78a44b4214a5d0d"
   },
   {
     "repo": "https://github.com/pcbsz/SimpleAmp",
@@ -62,5 +62,9 @@
   {
     "repo": "https://github.com/pcbsz/LM386",
     "hash": "4357cd14d514eb6f87ac8fccb7892a4360037be4"
+  },
+  {
+    "repo": "https://github.com/kitnic/aaduino",
+    "hash": "207e6d3db7b0bb1bcbf99214c3de1b8ec2d447e3"
   }
 ]
