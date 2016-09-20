@@ -66,9 +66,11 @@ var BoardList = React.createClass({
 
           </p><p>
 
-          <a
+
+          Help us build an open hardware repository of useful electronics
+          projects! <a
           href='https://github.com/monostable/kitnic/#submitting-your-project'>
-          Submit</a> your own project to have it listed here! Follow this
+          Submit</a> your own project to have it listed here. Follow this
           project on <a href='https://twitter.com/kitnic_it'>Twitter</a>, <a
           href='https://hackaday.io/project/11871-kitnic'>Hackaday.io
           </a> or <a href='https://github.com/monostable/kitnic'>GitHub</a> to get
@@ -78,10 +80,10 @@ var BoardList = React.createClass({
 
             <i>
 
-            We are giving away 20 free PCB manufacturing vouchers with <a
+            We are giving away free PCB manufacturing vouchers with <a
             href='http://dangerousprototypes.com/store/pcbs'>Dangerous
             Prototypes</a> for the first 20 projects that register. Current
-            status: 11/20 left.
+            status: 10/20 left.
 
             </i>
 
