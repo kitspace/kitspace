@@ -45,7 +45,7 @@
   },
   {
     "repo": "https://github.com/robotsrulz/SP_Adapter",
-    "hash": "0f76825a347973de49074b2fb78a44b4214a5d0d"
+    "hash": "6b99eca25df653e15e164b062c7be3f97c045be2"
   },
   {
     "repo": "https://github.com/pcbsz/SimpleAmp",
@@ -65,6 +65,6 @@
   },
   {
     "repo": "https://github.com/kanflo/aaduino",
-    "hash": "49ca4831e2f550d0c9cccb2301b42fd510ba3c3a"
+    "hash": "a09faa8c1dcbb7944aba4db3a4acab33e76fe9b3"
   }
 ]

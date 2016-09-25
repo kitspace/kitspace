@@ -67,7 +67,7 @@ var BoardList = React.createClass({
           </p><p>
 
 
-          Help us build an open hardware repository of useful electronics
+          Help build an open hardware repository of useful electronics
           projects! <a
           href='https://github.com/monostable/kitnic/#submitting-your-project'>
           Submit</a> your own project to have it listed here. Follow this
