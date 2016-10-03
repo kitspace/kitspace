@@ -86,7 +86,7 @@ var BoardList = React.createClass({
             We are giving away free PCB manufacturing vouchers with <a
             href='http://dangerousprototypes.com/store/pcbs'>Dangerous
             Prototypes</a> for the first 20 projects that register. Current
-            status: 10/20 left.
+            status: 9/20 left.
 
             </i>
 

@@ -45,7 +45,7 @@
   },
   {
     "repo": "https://github.com/robotsrulz/SP_Adapter",
-    "hash": "c79f76c0306ce4f5f284cbd1b1810c73e8c4f0b3"
+    "hash": "c5af1c14d171bd1ae10acbdaaad8bf75ce4195d8"
   },
   {
     "repo": "https://github.com/pcbsz/SimpleAmp",
@@ -66,5 +66,9 @@
   {
     "repo": "https://github.com/kanflo/aaduino",
     "hash": "a09faa8c1dcbb7944aba4db3a4acab33e76fe9b3"
+  },
+  {
+    "repo": "https://github.com/descampsa/DynamixelShield",
+    "hash": "1755337eb2cda4fcaf26d9289a484b0efe9e5173"
   }
 ]
