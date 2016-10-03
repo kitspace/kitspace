@@ -15,3 +15,4 @@ https://github.com/pcbsz/AtariSynth
 https://git.defproc.co.uk/DefProc/piezo-sensor
 https://github.com/pcbsz/LM386
 https://github.com/kanflo/aaduino
+https://github.com/descampsa/DynamixelShield
