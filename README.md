@@ -17,8 +17,7 @@ Help us build a open hardware repository of useful electronics projects!
 
 ## Get in touch
 
- - [Join gitter.im chat](https://gitter.im/monostable/kitnic) 
- - IRC freenode#kitnic
+ - [Join Riot.im chat][riot.im] or IRC freenode#kitnic
  - [Post on our Google Groups mailing list](https://groups.google.com/forum/#!forum/kitnic-discuss)
 
 ##Submitting your project
@@ -61,7 +60,7 @@ likely fail.
 We will then preview your page and merge it so it appears on [kitnic.it](http://kitnic.it).
 
 If you run into any problems please get in touch via [Gitter
-chat](https://gitter.im/monostable/kitnic), IRC (freenode#kitnic) or the
+chat][riot.im], IRC (freenode#kitnic) or the
 [mailing-list](https://groups.google.com/forum/#!forum/kitnic-discuss).
 
 
@@ -171,6 +170,7 @@ file-saves and re-build when you change a source file.
 [yamllint]: http://www.yamllint.com
 [1clickbom#making]: https://1clickbom.com/#making-a-1-click-bom
 [travis-status]: https://travis-ci.org/monostable/kitnic.svg?branch=master
+[riot.im]: https://riot.im/app/#/room/#kitnic:matrix.org
 
 [4]: https://help.github.com/articles/create-a-repo/
 [5]: https://help.github.com/articles/adding-a-file-to-a-repository/
