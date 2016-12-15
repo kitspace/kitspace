@@ -1,7 +1,7 @@
-'use strict';
-const React            = require('react');
-const BoardCard        = require('./board_card');
-const InstallExtension = require('./install_extension');
+'use strict'
+const React            = require('react')
+const BoardCard        = require('./board_card')
+const InstallExtension = require('./install_extension')
 
 const style = {
   introContainer: function (show) {
@@ -11,7 +11,7 @@ const style = {
       marginTop:32,
       marginBottom: 32,
       display:(show ? 'inherit' : 'none')
-    };
+    }
   },
   intro: {
     backgroundColor: '#FAFAFA',
@@ -20,15 +20,15 @@ const style = {
     textAlign:'left',
     maxWidth:700
   }
-};
+}
 var BoardList = React.createClass({
   propTypes: {
     data: React.PropTypes.array,
     searching: React.PropTypes.bool
   },
   render: function () {
-    let onClick = InstallExtension;
-    var initialLoad = !(this.props.searching);
+    let onClick = InstallExtension
+    var initialLoad = !(this.props.searching)
     if (this.props.data.length === 0) {
       return (
         <div>
@@ -37,14 +37,14 @@ var BoardList = React.createClass({
                 No results
           </div>
         </div>
-      );
+      )
     }
     var cardNodes = this.props.data.map(function(data, index) {
       return (
         <BoardCard data={data} key={data.id + index}
           lazyLoad={ true }/>
-      );
-    });
+      )
+    })
     var intro = (
       <center>
       <div style={style.introContainer(initialLoad)}>
@@ -95,7 +95,7 @@ var BoardList = React.createClass({
         </div>
       </div>
       </center>
-    );
+    )
     return (
       <div>
           {intro}
@@ -103,8 +103,8 @@ var BoardList = React.createClass({
           {cardNodes}
         </div>
       </div>
-    );
+    )
   }
-});
+})
 
-module.exports = BoardList;
+module.exports = BoardList

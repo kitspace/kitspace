@@ -1,12 +1,12 @@
-'use strict';
-const React            = require('react');
-const oneClickBOM      = require('1-click-bom');
-const browserVersion   = require('browser-version');
-const BomInstallPrompt = require('./bom_install_prompt');
+'use strict'
+const React            = require('react')
+const oneClickBOM      = require('1-click-bom')
+const browserVersion   = require('browser-version')
+const BomInstallPrompt = require('./bom_install_prompt')
 const ExtensionCompatibilityPrompt  =
-require('./extension_compatibility_prompt');
-const InstallExtension = require('./install_extension');
-const DirectStores     = require('./direct_stores');
+require('./extension_compatibility_prompt')
+const InstallExtension = require('./install_extension')
+const DirectStores     = require('./direct_stores')
 
 
 const StoreButtons = React.createClass({
@@ -15,38 +15,38 @@ const StoreButtons = React.createClass({
   },
   isExtensionCompatible: function(version) {
     if (typeof navigator == 'undefined')
-      return true;
+      return true
     if (/Mobile/i.test(navigator.userAgent))
-      return false;
-    return (/Chrome/.test(version) || /Firefox/.test(version));
+      return false
+    return (/Chrome/.test(version) || /Firefox/.test(version))
   },
   getInitialState: function() {
-    let adding = {};
-    let partsSpecified = {};
-    let parts = {};
-    const version = browserVersion();
-    var onClick = InstallExtension;
+    let adding = {}
+    let partsSpecified = {}
+    let parts = {}
+    const version = browserVersion()
+    var onClick = InstallExtension
 
     for (let retailer of oneClickBOM.lineData.retailer_list) {
-      adding[retailer] = undefined;
+      adding[retailer] = undefined
       let retailerItems = this.props.items.map((item) => {
-        return item.retailers[retailer];
-      });
+        return item.retailers[retailer]
+      })
       let partCount = retailerItems.reduce((carry, val) => {
         if (val)
-          carry++;
-        return carry;
-      }, 0);
-      let summary;
+          carry++
+        return carry
+      }, 0)
+      let summary
       if (this.props.items.length == partCount){
-        summary = 'All parts specified';
-        partsSpecified[retailer] = 'allPartsSpecified';
+        summary = 'All parts specified'
+        partsSpecified[retailer] = 'allPartsSpecified'
       } else if (partCount == 0) {
-        summary = 'No parts specified';
-        partsSpecified[retailer] = 'noPartsSpecified';
+        summary = 'No parts specified'
+        partsSpecified[retailer] = 'noPartsSpecified'
       } else {
-        summary = `${partCount}/${this.props.items.length} parts specified`;
-        partsSpecified[retailer] = 'somePartsSpecified';
+        summary = `${partCount}/${this.props.items.length} parts specified`
+        partsSpecified[retailer] = 'somePartsSpecified'
       }
 
       parts[retailer] =
@@ -54,7 +54,7 @@ const StoreButtons = React.createClass({
         count: partCount,
         total: this.props.items.length,
         summary: summary
-      };
+      }
 
     }
     //waiting to avoid flashing on page load
@@ -63,8 +63,8 @@ const StoreButtons = React.createClass({
         this.setState({
           extensionPresence:
             !this.state.extensionWaiting ? 'present' : 'not_present'
-        });
-      },2000);
+        })
+      },2000)
     }
     return {
       compatibleBrowser: this.isExtensionCompatible(version),
@@ -77,17 +77,17 @@ const StoreButtons = React.createClass({
       extensionPresence: 'unknown',
       buyMultiplier: 1,
       buyAddPercent: 10
-    };
+    }
   },
   componentDidMount: function () {
     //extension communication
     window.addEventListener('message', (event) => {
       if (event.source != window)
-        return;
+        return
       if (event.data.from == 'extension'){
         this.setState({
           extensionWaiting: false
-        });
+        })
         switch (event.data.message) {
         case 'register':
           this.setState({
@@ -98,46 +98,46 @@ const StoreButtons = React.createClass({
                 value:{
                   retailer: retailer,
                   multiplier: this._getMultiplier()
-                }}, '*');
+                }}, '*')
             }
-          });
-          break;
+          })
+          break
         case 'updateAddingState':
           this.setState({
             adding: event.data.value
-          });
-          break;
+          })
+          break
         }
       }
-    }, false);
+    }, false)
   },
   storeIcon: function(adding, retailer, disabled) {
-    const imgHref = `/images/${retailer}${disabled ? '-grey' : ''}.ico`;
+    const imgHref = `/images/${retailer}${disabled ? '-grey' : ''}.ico`
     if (adding)
-      return (<i className='icon-spin1 animateSpin'></i>);
+      return (<i className='icon-spin1 animateSpin'></i>)
     return (
       <img
       className='storeIcons'
       key={retailer}
       src={imgHref}
-      alt={retailer} />);
+      alt={retailer} />)
   },
   storeButtons: function() {
-    const retailers = oneClickBOM.lineData.retailer_list;
+    const retailers = oneClickBOM.lineData.retailer_list
     let storeButtons = retailers.map((retailer) => {
       let storeButtonInnerClass =
-        'storeButtonInner ' + this.state.partsSpecified[retailer];
-      let storeButtonClass  = 'storeButton';
-      let retailerIconClass = 'retailerIcon';
-      let retailerTextClass = 'retailerText';
+        'storeButtonInner ' + this.state.partsSpecified[retailer]
+      let storeButtonClass  = 'storeButton'
+      let retailerIconClass = 'retailerIcon'
+      let retailerTextClass = 'retailerText'
       let anySpecified =
         this.state.partsSpecified[retailer] === 'allPartsSpecified'
-        || this.state.partsSpecified[retailer] === 'somePartsSpecified';
-      let onClick;
+        || this.state.partsSpecified[retailer] === 'somePartsSpecified'
+      let onClick
       if (anySpecified) {
-        onClick = this.state.onClick.bind(null,retailer);
+        onClick = this.state.onClick.bind(null,retailer)
       }
-      let partsInfo = this.state.parts[retailer];
+      let partsInfo = this.state.parts[retailer]
 
       //if the extension is not here fallback to direct submissions
       if ((!this.state.compatibleBrowser
@@ -145,8 +145,8 @@ const StoreButtons = React.createClass({
         && typeof document !== 'undefined'
         && document.getElementById(retailer + 'Form') !== null) {
         onClick = () => {
-          document.getElementById(retailer + 'Form').submit();
-        };
+          document.getElementById(retailer + 'Form').submit()
+        }
       }
 
       return (
@@ -161,16 +161,16 @@ const StoreButtons = React.createClass({
             <div className={retailerTextClass}>{retailer}</div>
           </div>
         </span>
-      );
-    });
-    storeButtons.unshift();
-    return storeButtons;
+      )
+    })
+    storeButtons.unshift()
+    return storeButtons
   },
 
   _getMultiplier: function () {
-    const multi = this.state.buyMultiplier;
-    const percent = this.state.buyAddPercent;
-    return multi + (multi * (percent / 100));
+    const multi = this.state.buyMultiplier
+    const percent = this.state.buyAddPercent
+    return multi + (multi * (percent / 100))
   },
 
   _quantity: function () {
@@ -187,11 +187,11 @@ const StoreButtons = React.createClass({
           min={1}
           value={this.state.buyMultiplier}
           onChange={(e) => {
-            var v = parseFloat(e.target.value);
+            var v = parseFloat(e.target.value)
             if (isNaN(v) || v < 1) {
-              v = 1;
+              v = 1
             }
-            this.setState({buyMultiplier: v});
+            this.setState({buyMultiplier: v})
           }}
           />
         </div>
@@ -207,16 +207,16 @@ const StoreButtons = React.createClass({
           step={10}
           value={this.state.buyAddPercent}
           onChange={(e) =>{
-            var v = parseFloat(e.target.value);
+            var v = parseFloat(e.target.value)
             if (isNaN(v) || v < 0) {
-              v = 0;
+              v = 0
             }
-            this.setState({buyAddPercent: v});
+            this.setState({buyAddPercent: v})
           }}
           />
           <span className='notSelectable' style={{marginLeft:5}}>{'%'}</span>
         </div>
-      </form>);
+      </form>)
   },
 
   render: function() {
@@ -241,8 +241,8 @@ const StoreButtons = React.createClass({
           {this.storeButtons()}
         </div>
       </div>
-    );
+    )
   }
-});
+})
 
-module.exports = StoreButtons;
+module.exports = StoreButtons
