@@ -13,7 +13,9 @@ module.exports = function(el, distance) {
   var pageHeight = (window.innerHeight || document.documentElement.clientHeight)
   var pageWidth = (window.innerWidth || document.documentElement.clientWidth)
 
-  var isOnPage = (paddedRect.top >= 0 && paddedRect.left >= 0)
-  var isUnderPage = (paddedRect.bottom <= pageHeight && paddedRect.right <= pageWidth)
+  var isOnPage =
+    (paddedRect.top >= 0 && paddedRect.left >= 0)
+  var isUnderPage =
+    (paddedRect.bottom <= pageHeight && paddedRect.right <= pageWidth)
   return (isOnPage && isUnderPage)
 }
