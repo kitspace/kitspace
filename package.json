@@ -34,7 +34,8 @@
   "scripts": {
     "watch": "./scripts/watch.sh",
     "start": "./scripts/get_boards.coffee && npm run server & npm run watch",
-    "update-registry": "./scripts/update_registry.coffee",
+    "update-reg": "./scripts/update_registry.coffee",
+    "plug-reg": "./scripts/plug_versions.coffee",
     "server": "http-server build/",
     "lint": "eslint src"
   },

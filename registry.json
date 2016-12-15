@@ -74,5 +74,9 @@
   {
     "repo": "https://github.com/jpralves/cseduino",
     "hash": "90bdaf2c963632af5cb1a259b1a54bcab692f932"
+  },
+  {
+    "repo": "https://github.com/kitnic-forks/neo",
+    "hash": "e63789db15326b731d3a0c2d6c4563297c5a9ee7"
   }
 ]
