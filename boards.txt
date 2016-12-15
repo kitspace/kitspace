@@ -17,3 +17,4 @@ https://github.com/pcbsz/LM386
 https://github.com/kanflo/aaduino
 https://github.com/descampsa/DynamixelShield
 https://github.com/jpralves/cseduino
+https://github.com/kitnic-forks/neo
