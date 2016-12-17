@@ -1,4 +1,4 @@
-var React = require('react');
+var React = require('react')
 
 var FadeImage = React.createClass({
   propTypes: {
@@ -7,18 +7,18 @@ var FadeImage = React.createClass({
     src: React.PropTypes.string.isRequired
   },
   getInitialState: function() {
-    return {opacity: 0};
+    return {opacity: 0}
   },
 
   fadeIn: function() {
-    this.setState({opacity: 1});
+    this.setState({opacity: 1})
   },
 
   render: function (){
     //this vs including an Object.assign polyfill
-    var style = this.props.style || {};
-    style.transition = 'opacity ' + (this.props.speed || 1) + 's';
-    style.opacity = this.state.opacity;
+    var style = this.props.style || {}
+    style.transition = 'opacity ' + (this.props.speed || 1) + 's'
+    style.opacity = this.state.opacity
 
     return (
       <img
@@ -27,8 +27,8 @@ var FadeImage = React.createClass({
         src={this.props.src}
         onLoad={this.fadeIn}
       />
-    );
+    )
   }
-});
+})
 
-module.exports = FadeImage;
+module.exports = FadeImage

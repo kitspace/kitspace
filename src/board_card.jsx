@@ -1,28 +1,28 @@
-'use strict';
-const React    = require('react');
-const LazyLoad = require('./lazy_load');
-const FadeImage    = require('./fade_image');
+'use strict'
+const React    = require('react')
+const LazyLoad = require('./lazy_load')
+const FadeImage    = require('./fade_image')
 
 function reverse(s){
-  return s.split('').reverse().join('');
+  return s.split('').reverse().join('')
 }
 
 function truncate(input, len, fromStart) {
-  var str = input;
+  var str = input
   if (fromStart) {
-    str = reverse(str);
+    str = reverse(str)
   }
   if (str.length > len) {
-    str = str.substr(0,len);
+    str = str.substr(0,len)
     if (str[len] !== ' ') {
-      str = str.concat(' ');
+      str = str.concat(' ')
     }
-    str = str.concat('...');
+    str = str.concat('...')
   }
   if (fromStart) {
-    str = reverse(str);
+    str = reverse(str)
   }
-  return str;
+  return str
 }
 let BoardCard = React.createClass({
   propTypes: {
@@ -30,7 +30,7 @@ let BoardCard = React.createClass({
     data: React.PropTypes.object
   },
   render: function () {
-    var image;
+    var image
     if (this.props.lazyLoad) {
       image =
           <LazyLoad once={true}
@@ -38,11 +38,11 @@ let BoardCard = React.createClass({
             distance={300}>
             <FadeImage src={'boards/' + this.props.data.id + '/images/top.svg'}
               className='img' />
-          </LazyLoad>;
+          </LazyLoad>
     } else {
       image =
           <img src={'boards/' + this.props.data.id + '/images/top.svg'}
-             className = 'img' />;
+             className = 'img' />
     }
     return (
       <div className='boardCard'>
@@ -65,8 +65,8 @@ let BoardCard = React.createClass({
             </div>
         </a>
       </div>
-    );
+    )
   }
-});
+})
 
-module.exports = BoardCard;
+module.exports = BoardCard

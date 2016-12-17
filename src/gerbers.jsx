@@ -1,6 +1,6 @@
-'use strict';
-const React = require('react');
-const zipPath = require('./zip-info.json');
+'use strict'
+const React = require('react')
+const zipPath = require('./zip-info.json')
 
 let Gerbers = React.createClass({
   render: function() {
@@ -13,8 +13,8 @@ let Gerbers = React.createClass({
           </div>
         </a>
       </div>
-    );
+    )
   }
-});
+})
 
-module.exports = Gerbers;
+module.exports = Gerbers

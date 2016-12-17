@@ -1,40 +1,40 @@
-'use strict';
-const React           = require('react');
-const DoubleScrollbar = require('react-double-scrollbar');
-const hyper           = require('react-hyperscript-helpers');
+'use strict'
+const React           = require('react')
+const DoubleScrollbar = require('react-double-scrollbar')
+const hyper           = require('react-hyperscript-helpers')
 
 //for react-double-scrollbar in IE11
-require('babel-polyfill');
+require('babel-polyfill')
 
-const table = hyper.table;
-const thead = hyper.thead;
-const tbody = hyper.tbody;
-const tr    = hyper.tr;
-const th    = hyper.th;
-const td    = hyper.td;
+const table = hyper.table
+const thead = hyper.thead
+const tbody = hyper.tbody
+const tr    = hyper.tr
+const th    = hyper.th
+const td    = hyper.td
 
 function tsvToTable(tsv) {
-  const lines = tsv.split('\n').slice(0, -1);
-  const headings = lines[0].split('\t');
+  const lines = tsv.split('\n').slice(0, -1)
+  const headings = lines[0].split('\t')
   let headingJSX = headings.map((text) => {
-    return th(text);
-  });
-  headingJSX = thead([tr(headingJSX)]);
+    return th(text)
+  })
+  headingJSX = thead([tr(headingJSX)])
   const markPink = (index) => {
     return ['Manufacturer', 'MPN', 'Description']
-      .indexOf(headings[index]) < 0;
-  };
+      .indexOf(headings[index]) < 0
+  }
   const bodyJSX = tbody(lines.slice(1).map((line, rowIndex) => {
-    line = line.split('\t');
+    line = line.split('\t')
     return tr(`.tr${rowIndex % 2}`, line.map((text, columnIndex) => {
-      let style = {};
+      let style = {}
       if (markPink(columnIndex) && text == '') {
-        style = {backgroundColor:'pink'};
+        style = {backgroundColor:'pink'}
       }
-      return td({style: style}, text);
-    }));
-  }));
-  return table('.bomTable', [headingJSX, bodyJSX]);
+      return td({style: style}, text)
+    }))
+  }))
+  return table('.bomTable', [headingJSX, bodyJSX])
 }
 
 let BOM = React.createClass({
@@ -45,7 +45,7 @@ let BOM = React.createClass({
     //get rid of this once proper BOMs are made a requirement and enforced
     //much earlier
     if (this.props.data.lines.length === 0) {
-      return (<div>{'no BOM yet'}</div>);
+      return (<div>{'no BOM yet'}</div>)
     }
     return (
       <div className='bom'>
@@ -55,8 +55,8 @@ let BOM = React.createClass({
           </DoubleScrollbar>
           </div>
       </div>
-    );
+    )
   }
-});
+})
 
-module.exports = BOM;
+module.exports = BOM

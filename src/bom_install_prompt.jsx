@@ -1,4 +1,4 @@
-const React = require('react');
+const React = require('react')
 
 const bomInstallPrompt = React.createClass({
   propTypes: {
@@ -16,9 +16,9 @@ const bomInstallPrompt = React.createClass({
         onClick={this.props.bomInstallLink}>install the 1-click BOM
         extension</a> to make full use of this feature.
 
-      </div>);
+      </div>)
     }
-    return (<div></div>);
+    return (<div></div>)
   }
-});
-module.exports = bomInstallPrompt;
+})
+module.exports = bomInstallPrompt

@@ -32,11 +32,7 @@
     }],
     "space-infix-ops": ["error", {
       "int32Hint": false
-    }],
-    "semi": [
-      "error",
-      "always"
-    ]
+    }]
   },
   "extends": ["eslint:recommended", "plugin:react/recommended"]
 }

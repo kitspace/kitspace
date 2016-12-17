@@ -1,34 +1,34 @@
-'use strict';
-const React     = require('react');
-const Gerbers   = require('./gerbers');
-const LazyLoad  = require('./lazy_load');
-const FadeImage = require('./fade_image');
+'use strict'
+const React     = require('react')
+const Gerbers   = require('./gerbers')
+const LazyLoad  = require('./lazy_load')
+const FadeImage = require('./fade_image')
 
 var BoardShowcase = React.createClass({
   getInitialState: function() {
     return {
       viewFrontBoard: true
-    };
+    }
   },
   frontBoardView: function(e) {
-    e.preventDefault();
+    e.preventDefault()
     this.setState({
       viewFrontBoard: true
-    });
+    })
   },
   backBoardView: function(e) {
-    e.preventDefault();
+    e.preventDefault()
     this.setState({
       viewFrontBoard: false
-    });
+    })
   },
   render: function () {
-    var frontBoardClass = 'frontBoard boardDiagram ';
-    var backBoardClass = 'backBoard boardDiagram ';
+    var frontBoardClass = 'frontBoard boardDiagram '
+    var backBoardClass = 'backBoard boardDiagram '
     if (this.state.viewFrontBoard) {
-      frontBoardClass += ' selectedBoard';
+      frontBoardClass += ' selectedBoard'
     } else {
-      backBoardClass += ' selectedBoard';
+      backBoardClass += ' selectedBoard'
     }
     return (
       <div className="boardShowcaseContainer">
@@ -61,8 +61,8 @@ var BoardShowcase = React.createClass({
           </LazyLoad>
         </div>
       </div>
-    );
+    )
   }
-});
+})
 
-module.exports = BoardShowcase;
+module.exports = BoardShowcase

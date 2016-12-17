@@ -1,4 +1,4 @@
-const React = require('react');
+const React = require('react')
 
 var TitleBar = React.createClass({
   propTypes: {
@@ -35,8 +35,8 @@ var TitleBar = React.createClass({
           </a>
         </div>
       </div>
-    );
+    )
   }
-});
+})
 
-module.exports = TitleBar;
+module.exports = TitleBar

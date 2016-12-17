@@ -34,8 +34,10 @@
   "scripts": {
     "watch": "./scripts/watch.sh",
     "start": "./scripts/get_boards.coffee && npm run server & npm run watch",
-    "update": "./scripts/update_registry.coffee",
-    "server": "http-server build/"
+    "update-reg": "./scripts/update_registry.coffee",
+    "plug-reg": "./scripts/plug_versions.coffee",
+    "server": "http-server build/",
+    "lint": "eslint src"
   },
   "author": "Kaspar Emanuel",
   "license": "CPAL-1.0",
