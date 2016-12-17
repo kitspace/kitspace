@@ -163,9 +163,20 @@ ninja.edge('build/page.css').from('src/page.scss')
     .need(sassSrc).assign('path', 'src/')
     .using('sass');
 
+
+ninja.edge('build/submit/submit.css').from('src/submit.scss')
+    .need(sassSrc).assign('path', 'src/')
+    .using('sass');
+
+
 ninja.edge('build/app.js').from('build/.temp/render.jsx')
     .need(jsMainTargets)
     .need('build/.temp/boards.json')
+    .using('browserify');
+
+
+ninja.edge('build/submit/app.js').from('build/.temp/render_submit.jsx')
+    .need(jsMainTargets)
     .using('browserify');
 
 
