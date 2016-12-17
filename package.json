@@ -48,6 +48,7 @@
     "react-dom": "^15.3.0",
     "react-double-scrollbar": "0.0.9",
     "react-hyperscript-helpers": "^1.1.0",
+    "react-markdown": "^2.4.2",
     "react-search-input": "~0.10.1"
   },
   "sasslintConfig": "./src/.sass-lint.yml"
