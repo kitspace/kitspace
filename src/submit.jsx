@@ -10,7 +10,7 @@ var Submit = React.createClass({
       <div>
         <TitleBar>
             <div className='titleText'>
-              submit
+              Register a project
             </div>
         </TitleBar>
       </div>
