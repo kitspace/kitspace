@@ -61,6 +61,7 @@
     justify-content: space-between;
     padding: 10px;
     z-index: 1;
+    min-width:140px;
 
     @include breakpoint(mobile) {
         width: 45%;

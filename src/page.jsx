@@ -33,7 +33,7 @@ var Page = React.createClass({
       <div>
         <div className='page'>
           <TitleBar>
-            <div className='titleText'>
+            <div className='titleText' submissionButton={true}>
               {titleTxt}
             </div>
             <div className='subtitleText'>

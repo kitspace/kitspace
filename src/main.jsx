@@ -17,7 +17,7 @@ var Main = React.createClass({
   render: function () {
     return (
       <div>
-        <TitleBar>
+        <TitleBar submissionButton={true}>
           <div className='searchContainer'>
             <div className='searchBackground'>
               <div className='searchInputIcon'>
