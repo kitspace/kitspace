@@ -9,7 +9,6 @@ if require.main != module
             return {deps, targets, moduleDep: true}
         else if config == 'dev'
             deps = ['src/submit.html']
-            targets = ["build/#{folder}/index.html"]
             return {deps, targets, moduleDep: false}
 
 
@@ -24,7 +23,7 @@ else
         html = deps[1]
         utils.reactRender(jsx, html, index)
     else if config == 'dev'
-        #just copy the page.html to index.html
-        html = deps[1]
+        #just copy the submit.html to index.html
+        html = deps[0]
         fs.createReadStream(html).pipe(fs.createWriteStream(index))
 

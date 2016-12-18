@@ -1,13 +1,13 @@
 const Markdown = require('react-markdown')
 const Redux    = require('redux')
-const React     = require('react')
-const { Input, Icon, Step, Container } = require('semantic-ui-react')
+const React    = require('react')
+const { Input, Icon, Step, Container, Form} = require('semantic-ui-react')
 
 const TitleBar  = require('./title_bar')
 
 const initial_state = {
   activeStep: 0,
-  urlSent: false,
+  waitingForResponse: false,
 }
 
 function reducer(state = initial_state, action) {
@@ -63,24 +63,29 @@ function Steps(props) {
 }
 
 function UrlSubmit(props) {
-  function onClick(event) {
+  const placeholder = 'https://github.com/kitnic-forks/arduino-uno'
+  function onSubmit(event, {formData}) {
+    event.preventDefault()
     if (props.urlSent) {
       return
     }
-    console.log(event.target.parentElement.value)
+    if (formData.url === '') {
+      formData.url = placeholder
+    }
+    store.dispatch({type:'setUrlSent', value: formData.url})
   }
-  return (<div className='previewContainer'>
+  return (
+    <Form onSubmit={onSubmit} className='previewContainer'>
     <Input
-    loading
     fluid
+    name = 'url'
     action = {{
       color   : 'green',
       content : 'preview',
       loading : props.urlSent,
-      onClick,
     }}
-    placeholder = 'https://github.com/kitnic-forks/arduino-uno' />
-  </div>)
+    placeholder = {placeholder} />
+    </Form>)
 }
 
 const Submit = React.createClass({
