@@ -13,7 +13,7 @@ var TitleBar = React.createClass({
             className='uploadContainer'
             href='/submit'>
               <div className='submissionButton'>
-                <span>Register a project</span>
+                <span>Submit a project</span>
               </div>
             </a>);
     }

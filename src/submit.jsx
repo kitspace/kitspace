@@ -26,7 +26,7 @@ Preview your board by entering the repository URL below.
       <div>
         <TitleBar>
             <div className='titleText'>
-              Register a project
+              Submit a project
             </div>
         </TitleBar>
         <Markdown className='instructions' source={input} />
