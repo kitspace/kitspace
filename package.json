@@ -22,6 +22,7 @@
     "jszip": "^3.1.1",
     "marky-markdown": "kasbah/marky-markdown#fix-default-anchors-2",
     "ninja-build-gen": "^0.2.1",
+    "node-sass": "^4.0.0",
     "pcb-stackup": "^2.0.0",
     "reactify": "^1.1.1",
     "source-map-support": "^0.4.0",
@@ -49,7 +50,9 @@
     "react-double-scrollbar": "0.0.9",
     "react-hyperscript-helpers": "^1.1.0",
     "react-markdown": "^2.4.2",
-    "react-search-input": "~0.10.1"
+    "react-search-input": "~0.10.1",
+    "semantic-ui-css": "^2.2.4",
+    "semantic-ui-react": "^0.62.3"
   },
   "sasslintConfig": "./src/.sass-lint.yml"
 }

@@ -45,7 +45,6 @@
 
 .logoImg {
     height: 46px;
-    width: 100%;
 
     @include breakpoint(mobile) {
         height: 92px;
@@ -63,9 +62,6 @@
     z-index: 1;
     min-width:140px;
 
-    @include breakpoint(mobile) {
-        width: 45%;
-    }
 
     .submissionButton {
         align-items: center;

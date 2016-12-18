@@ -39,7 +39,7 @@ if (config === 'dev') {
     browserify += ' -g uglifyify';
 }
 
-const dependencies = Object.keys(require('./package.json').dependencies);
+const dependencies = Object.keys(require('./package.json').dependencies).filter(name => name !== 'semantic-ui-css');
 const excludes = `-x ${dependencies.join(' -x ')}`;
 const requires = `-r ${dependencies.join(' -r ')}`;
 
@@ -113,7 +113,7 @@ if (config === 'production') {
 }
 
 
-ninja.rule('sass').run('sass --sourcemap=none --load-path $path $in $out');
+ninja.rule('sass').run('node-sass --sourcemap=none --load-path $path $in $out');
 
 
 // - Edges - #
@@ -229,6 +229,8 @@ if (config === 'production') {
 
 
 ninja.edge('clean').from('build/').using('remove');
+
+ninja.edge('build/semantic.min.css').from('node_modules/semantic-ui-css/semantic.min.css').using('copy');
 
 
 const all = ninja.edges.filter(c => !c.targets.includes('clean'))
