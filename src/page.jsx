@@ -32,8 +32,8 @@ var Page = React.createClass({
       <DocumentTitle title={`${titleTxt} - kitnic.it`}>
       <div>
         <div className='page'>
-          <TitleBar>
-            <div className='titleText' submissionButton={true}>
+          <TitleBar submissionButton={true}>
+            <div className='titleText'>
               {titleTxt}
             </div>
             <div className='subtitleText'>

@@ -6,6 +6,7 @@ var TitleBar = React.createClass({
     submissionButton: React.PropTypes.bool,
   },
   render: function () {
+    let button
     if (this.props.submissionButton) {
       button =
             (<a
