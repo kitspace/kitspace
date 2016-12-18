@@ -1,17 +1,10 @@
 'use strict'
 const React           = require('react')
 const DoubleScrollbar = require('react-double-scrollbar')
-const hyper           = require('react-hyperscript-helpers')
+const {table, thead, tbody, tr, th, td} = require('react-hyperscript-helpers')
 
 //for react-double-scrollbar in IE11
 require('babel-polyfill')
-
-const table = hyper.table
-const thead = hyper.thead
-const tbody = hyper.tbody
-const tr    = hyper.tr
-const th    = hyper.th
-const td    = hyper.td
 
 function tsvToTable(tsv) {
   const lines = tsv.split('\n').slice(0, -1)
