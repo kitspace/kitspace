@@ -14,6 +14,7 @@ code {
 .ui.input {
     margin-top:50px;
     max-width: 500px;
+    flex-grow: 1;
 }
 .step {
     font-weight:normal;
@@ -31,4 +32,9 @@ code {
     display: flex;
     justify-content: center;
     overflow-x: hidden;
+}
+
+.previewContainer {
+    display: flex;
+    justify-content: center;
 }
