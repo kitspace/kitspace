@@ -7,16 +7,19 @@ const TitleBar  = require('./title_bar')
 
 const initial_state = {
   activeStep: 0,
-  waitingForResponse: false,
+  url: {
+    sent: false,
+    reply: null,
+  },
 }
 
 function reducer(state = initial_state, action) {
-  console.log(action)
   switch(action.type) {
     case 'setStep':
       return Object.assign(state, {activeStep: action.value})
     case 'setUrlSent':
-      return Object.assign(state, {urlSent: action.value})
+      const url = Object.assign(state.url, {sent: action.value})
+      return Object.assign(state, {url})
   }
   return state
 }
@@ -69,10 +72,7 @@ function UrlSubmit(props) {
     if (props.urlSent) {
       return
     }
-    if (formData.url === '') {
-      formData.url = placeholder
-    }
-    store.dispatch({type:'setUrlSent', value: formData.url})
+    store.dispatch({type:'setUrlSent', value: true})
   }
   return (
     <Form onSubmit={onSubmit} className='previewContainer'>
@@ -104,14 +104,16 @@ const Submit = React.createClass({
       <div className='content'>
         <Steps active={state.activeStep} />
         <Markdown className='instructions' source={instructionTexts[state.activeStep]} />
-        <UrlSubmit urlSent={state.urlSent} />
+        <UrlSubmit urlSent={state.url.sent} />
       </div>
     </div>
     )
   },
   componentDidMount: function () {
     store.subscribe(() => {
-      this.setState(store.getState())
+      const state = store.getState()
+      console.log(state)
+      this.setState(state)
     })
   }
 })
