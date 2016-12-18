@@ -1,4 +1,6 @@
 @import 'colors';
+@import 'colors';
+@import '/semantic.min.css';
 
 .titleBar {
     align-items: center;
@@ -158,6 +160,13 @@
         }
     }
 }
+
+.ui.button {
+    @include breakpoint(mobile) {
+        font-size: 32px;
+    }
+}
+
 
 .middleContainer {
     flex-grow: 2;

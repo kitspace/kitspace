@@ -1,4 +1,5 @@
 const React = require('react')
+const { Button } = require('semantic-ui-react')
 
 var TitleBar = React.createClass({
   propTypes: {
@@ -9,13 +10,7 @@ var TitleBar = React.createClass({
     let button
     if (this.props.submissionButton) {
       button =
-            (<a
-            className='uploadContainer'
-            href='/submit'>
-              <div className='submissionButton'>
-                <span>Submit a project</span>
-              </div>
-            </a>);
+            (<Button color='green' fluid>Submit a project</Button>);
     }
     else {
       button = null
