@@ -7,6 +7,7 @@ const TitleBar  = require('./title_bar')
 
 const initial_state = {
   activeStep: 0,
+  urlSent: false,
 }
 
 function reducer(state = initial_state, action) {
@@ -14,6 +15,8 @@ function reducer(state = initial_state, action) {
   switch(action.type) {
     case 'setStep':
       return Object.assign(state, {activeStep: action.value})
+    case 'setUrlSent':
+      return Object.assign(state, {urlSent: action.value})
   }
   return state
 }
@@ -59,12 +62,33 @@ function Steps(props) {
   )
 }
 
+function UrlSubmit(props) {
+  function onClick(event) {
+    if (props.urlSent) {
+      return
+    }
+    console.log(event.target.parentElement.value)
+  }
+  return (<div className='previewContainer'>
+    <Input
+    loading
+    fluid
+    action = {{
+      color   : 'green',
+      content : 'preview',
+      loading : props.urlSent,
+      onClick,
+    }}
+    placeholder = 'https://github.com/kitnic-forks/arduino-uno' />
+  </div>)
+}
+
 const Submit = React.createClass({
   getInitialState: function() {
     return store.getState()
   },
   render: function () {
-    const activeStep = this.state.activeStep
+    const state = this.state
     return (
     <div className='Submit'>
       <TitleBar>
@@ -73,11 +97,9 @@ const Submit = React.createClass({
         </div>
       </TitleBar>
       <div className='content'>
-        <Steps active={activeStep} />
-        <Markdown className='instructions' source={instructionTexts[activeStep]} />
-        <div className='previewContainer'>
-          <Input fluid action={{color:'green', content:'preview'}} placeholder='https://github.com/kitnic-forks/arduino-uno' />
-        </div>
+        <Steps active={state.activeStep} />
+        <Markdown className='instructions' source={instructionTexts[state.activeStep]} />
+        <UrlSubmit urlSent={state.urlSent} />
       </div>
     </div>
     )
@@ -93,6 +115,10 @@ function handleClick(step) {
    return () => {
       store.dispatch({type:'setStep', value:step})
    }
+}
+
+function submitUrl() {
+  store.dispatch({type:'setUrlSent', value:true})
 }
 
 
