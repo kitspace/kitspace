@@ -1,7 +1,7 @@
 const Markdown = require('react-markdown')
 
 const React     = require('react')
-const { Input, Icon, Step } = require('semantic-ui-react')
+const { Input, Icon, Step, Container } = require('semantic-ui-react')
 
 const TitleBar  = require('./title_bar')
 
@@ -19,9 +19,9 @@ Preview your board by entering the repository URL below.
 `
 
 const Steps = () => (
-  <div className='Steps'>
-    <Step.Group ordered>
-      <Step active={true} onClick={(event) => console.log(event)}>
+  <div className='stepsContainer'>
+    <Step.Group ordered stackable='tablet'>
+      <Step className='Step' active={true} onClick={(event) => console.log(event)}>
         Preview the board
       </Step>
       <Step onClick={(event) => console.log(event)}>
@@ -41,7 +41,7 @@ var Submit = React.createClass({
   },
   render: function () {
     return (
-    <div>
+    <div className='Submit'>
       <TitleBar>
         <div className='titleText'>
           Submit a project

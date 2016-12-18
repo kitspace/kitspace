@@ -1,5 +1,6 @@
 @import 'page';
 @import 'colors';
+@import 'common';
 @import '/semantic.min.css';
 
 .content {
@@ -16,12 +17,18 @@ code {
 }
 .step {
     font-weight:normal;
+    @include breakpoint(mobile) {
+        font-size:27px !important;
+    }
 }
 
 .step:hover {
    text-decoration: none;
 }
 
-.Steps {
+.stepsContainer {
     margin-bottom: 50px;
+    display: flex;
+    justify-content: center;
+    overflow-x: hidden;
 }
