@@ -30,6 +30,10 @@ Preview your board by entering the repository URL below.
             </div>
         </TitleBar>
         <Markdown className='instructions' source={input} />
+        <form>
+          <input id='urlInput' type='url' />
+          <input type='submit' value='preview'/>
+        </form>
       </div>
     )
   },
