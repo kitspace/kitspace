@@ -10,8 +10,8 @@ const placeholder = 'https://github.com/kitnic-forks/arduino-uno'
 const initial_state = {
   activeStep: 0,
   request: {
+    status: 'not sent',
     url: placeholder,
-    sent: false,
     reply: null,
   },
 }
@@ -21,7 +21,7 @@ function reducer(state = initial_state, action) {
     case 'setStep':
       return Object.assign(state, {activeStep: action.value})
     case 'setUrlSent':
-      const request = Object.assign(state.request, {url: action.value, sent: true})
+      const request = Object.assign(state.request, {url: action.value, status: 'sent'})
       return Object.assign(state, {request})
   }
   return state
@@ -88,7 +88,7 @@ function UrlSubmit(props) {
       action = {{
         color   : 'green',
         content : 'preview',
-        loading : props.urlSent,
+        loading : props.status === 'sent',
       }}
       placeholder = {placeholder}
     />
@@ -111,7 +111,7 @@ const Submit = React.createClass({
       <div className='content'>
         <Steps active={state.activeStep} />
         <Markdown className='instructions' source={instructionTexts[state.activeStep]} />
-        <UrlSubmit urlSent={state.request.sent} />
+        <UrlSubmit status={state.request.status} />
       </div>
     </div>
     )
@@ -130,10 +130,5 @@ function handleClick(step) {
       store.dispatch({type:'setStep', value:step})
    }
 }
-
-function submitUrl() {
-  store.dispatch({type:'setUrlSent', value:true})
-}
-
 
 module.exports = Submit
