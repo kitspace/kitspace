@@ -11,9 +11,9 @@ var Submit = React.createClass({
     var input =
 `# Step 1
 
-- Plot Gerbers & drill data from you CAD program.
+- Plot Gerbers & drill data from your CAD program.
 - Put the files into a \`gerbers/\` directory.
-- Add this directory to a publicly accessible git repository.
+- Add this directory to a publicly accessible git repository (like on [GitLab](https://gitlab.com) or [GitHub](https://github.com)).
 
 If you would like to put them somewhere else in your repository please also add a
 kitnic.yaml with a field \`gerbers:\` followed by the path to the directory
