@@ -1,11 +1,12 @@
 const Markdown = require('react-markdown')
 const Redux    = require('redux')
-
 const React     = require('react')
 const { Input, Icon, Step, Container } = require('semantic-ui-react')
 
+const TitleBar  = require('./title_bar')
+
 const initial_state = {
-  activeStep: 1,
+  activeStep: 0,
 }
 
 function reducer(state = initial_state, action) {
@@ -19,9 +20,8 @@ function reducer(state = initial_state, action) {
 
 const store = Redux.createStore(reducer)
 
-const TitleBar  = require('./title_bar')
 
-const instructionText =
+const instructionTexts = [
 `
 - Plot Gerbers (RS274-X) & drill data from your CAD program.
 - Put the files into a \`gerbers/\` directory in a publicly accessible git repository
@@ -32,36 +32,39 @@ kitnic.yaml with a field \`gerbers:\` followed by the path to the directory so K
 Use forward slashes as path seperators, e.g. \`gerbers: hardware/gerbers\`.
 
 Preview your board by entering the repository URL below.
-`
+`,
+'',
+'',
+'',
+]
 
-const Steps = React.createClass({
-  render: function () {
+function Steps(props) {
     return (
       <div className='stepsContainer'>
         <Step.Group ordered stackable='tablet'>
-          <Step active={this.props.active === 1} onClick={handleClick(1)}>
+          <Step active={props.active === 0} onClick={handleClick(0)}>
             Preview the board
           </Step>
-          <Step active={this.props.active === 2} onClick={handleClick(2)}>
+          <Step active={props.active === 1} onClick={handleClick(1)}>
             Preview the bill of materials
           </Step>
-          <Step active={this.props.active === 3} onClick={handleClick(3)}>
+          <Step active={props.active === 2} onClick={handleClick(2)}>
             Preview the readme
           </Step>
-          <Step active={this.props.active === 4} onClick={handleClick(4)}>
+          <Step active={props.active === 3} onClick={handleClick(3)}>
             Send us a pull-request to add your board
           </Step>
         </Step.Group>
       </div>
-    )
-  }
-})
+  )
+}
 
 const Submit = React.createClass({
   getInitialState: function() {
     return store.getState()
   },
   render: function () {
+    const activeStep = this.state.activeStep
     return (
     <div className='Submit'>
       <TitleBar>
@@ -70,8 +73,8 @@ const Submit = React.createClass({
         </div>
       </TitleBar>
       <div className='content'>
-        <Steps active={this.state.activeStep} />
-        <Markdown className='instructions' source={instructionText} />
+        <Steps active={activeStep} />
+        <Markdown className='instructions' source={instructionTexts[activeStep]} />
         <div className='previewContainer'>
           <Input fluid action={{color:'green', content:'preview'}} placeholder='https://github.com/kitnic-forks/arduino-uno' />
         </div>
@@ -81,7 +84,7 @@ const Submit = React.createClass({
   },
   componentDidMount: function () {
     store.subscribe(() => {
-        this.setState(store.getState())
+      this.setState(store.getState())
     })
   }
 })
