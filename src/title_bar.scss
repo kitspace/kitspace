@@ -27,9 +27,8 @@
 
 .logoContainer {
     background-color: $mine-shaft;
-    flex-grow: 1;
     padding: 10px;
-    width: 140px;
+    min-width: 210px;
     z-index: 1;
 
     @include breakpoint(mobile) {
@@ -58,11 +57,10 @@
     background-color: $mine-shaft;
     color: $white;
     display: flex;
-    flex-grow: 1;
     justify-content: space-around;
     padding: 10px;
     z-index: 1;
-    min-width:140px;
+    min-width: 210px;
 
 
     .submissionButton {
@@ -139,26 +137,6 @@
 
 .submitImage {
     width: 60%;
-}
-
-.page {
-    .middleContainer {
-        left: 0;
-        position: absolute;
-        top: 0;
-        width: 100%;
-        z-index: 0;
-
-        @include breakpoint(mobile_or_small_width) {
-            order: 0;
-            position: static;
-            width: auto;
-        }
-
-        @include breakpoint(mobile) {
-            padding: 40px;
-        }
-    }
 }
 
 .ui.button {

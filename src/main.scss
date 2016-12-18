@@ -9,7 +9,10 @@
     display: flex;
     height: 61px;
     padding-top: 10px;
-    margin-left:10px;
+    padding-right: 40px;
+    @include breakpoint(mobile_or_small_width) {
+        padding-right: 10px;
+    }
 }
 
 .searchBackground {
