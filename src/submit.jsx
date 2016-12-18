@@ -5,9 +5,12 @@ const { Input, Icon, Step, Container, Form} = require('semantic-ui-react')
 
 const TitleBar  = require('./title_bar')
 
+const placeholder = 'https://github.com/kitnic-forks/arduino-uno'
+
 const initial_state = {
   activeStep: 0,
-  url: {
+  request: {
+    url: placeholder,
     sent: false,
     reply: null,
   },
@@ -18,8 +21,8 @@ function reducer(state = initial_state, action) {
     case 'setStep':
       return Object.assign(state, {activeStep: action.value})
     case 'setUrlSent':
-      const url = Object.assign(state.url, {sent: action.value})
-      return Object.assign(state, {url})
+      const request = Object.assign(state.request, {url: action.value, sent: true})
+      return Object.assign(state, {request})
   }
   return state
 }
@@ -66,25 +69,29 @@ function Steps(props) {
 }
 
 function UrlSubmit(props) {
-  const placeholder = 'https://github.com/kitnic-forks/arduino-uno'
   function onSubmit(event, {formData}) {
     event.preventDefault()
     if (props.urlSent) {
       return
     }
-    store.dispatch({type:'setUrlSent', value: true})
+    if (formData.url === '') {
+      formData.url = placeholder
+    }
+    store.dispatch({type:'setUrlSent', value: formData.url})
   }
   return (
     <Form onSubmit={onSubmit} className='previewContainer'>
     <Input
-    fluid
-    name = 'url'
-    action = {{
-      color   : 'green',
-      content : 'preview',
-      loading : props.urlSent,
-    }}
-    placeholder = {placeholder} />
+      fluid
+      name = 'url'
+      onChange = {() => console.log('hey')}
+      action = {{
+        color   : 'green',
+        content : 'preview',
+        loading : props.urlSent,
+      }}
+      placeholder = {placeholder}
+    />
     </Form>)
 }
 
@@ -104,7 +111,7 @@ const Submit = React.createClass({
       <div className='content'>
         <Steps active={state.activeStep} />
         <Markdown className='instructions' source={instructionTexts[state.activeStep]} />
-        <UrlSubmit urlSent={state.url.sent} />
+        <UrlSubmit urlSent={state.request.sent} />
       </div>
     </div>
     )
