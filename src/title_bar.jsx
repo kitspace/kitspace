@@ -10,7 +10,9 @@ var TitleBar = React.createClass({
     let button
     if (this.props.submissionButton) {
       button =
-            (<Button color='green' fluid>Submit a project</Button>);
+            (<Button color='green' onClick={() => location.href='/submit'} >
+                Submit a project
+            </Button>);
     }
     else {
       button = null

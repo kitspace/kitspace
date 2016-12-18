@@ -27,7 +27,7 @@
 
 .logoContainer {
     background-color: $mine-shaft;
-    flex-shrink: 0;
+    flex-grow: 1;
     padding: 10px;
     width: 140px;
     z-index: 1;
@@ -58,8 +58,8 @@
     background-color: $mine-shaft;
     color: $white;
     display: flex;
-    flex-shrink: 0;
-    justify-content: space-between;
+    flex-grow: 1;
+    justify-content: space-around;
     padding: 10px;
     z-index: 1;
     min-width:140px;
@@ -169,7 +169,7 @@
 
 
 .middleContainer {
-    flex-grow: 2;
+    flex-grow: 8;
 
     @include breakpoint(mobile) {
         padding: 10px 10px 40px;
