@@ -2,7 +2,7 @@
 @import 'colors';
 @import '/semantic.min.css';
 
-.instructions {
+.content {
     margin: 50px 10% 0 10%;
 }
 
@@ -11,9 +11,6 @@ code {
 }
 
 .ui.input {
+    margin-top:50px;
     max-width: 500px;
-}
-
-.previewContainer {
-    margin: 50px 10% 0 10%;
 }
