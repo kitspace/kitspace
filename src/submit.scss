@@ -3,19 +3,17 @@
 @import '/semantic.min.css';
 
 .instructions {
-    margin: 50px 10% 10% 10%;
+    margin: 50px 10% 0 10%;
 }
 
 code {
     background-color:$lightlightgray;
 }
 
-form {
-    #urlInput {
-        width: 70%;
-        height: 50px;
-        font-size:40px;
-        line-height: 50px;
-    }
+.ui.input {
+    max-width: 500px;
+}
+
+.previewContainer {
     margin: 50px 10% 0 10%;
 }

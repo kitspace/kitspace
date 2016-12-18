@@ -1,7 +1,9 @@
 const Markdown = require('react-markdown')
 
-const React         = require('react')
-const TitleBar      = require('./title_bar')
+const React     = require('react')
+const { Input } = require('semantic-ui-react')
+
+const TitleBar  = require('./title_bar')
 
 var Submit = React.createClass({
   getInitialState: function() {
@@ -30,10 +32,9 @@ Preview your board by entering the repository URL below.
             </div>
         </TitleBar>
         <Markdown className='instructions' source={input} />
-        <form>
-          <input id='urlInput' type='url' />
-          <input type='submit' value='preview'/>
-        </form>
+        <div className='previewContainer'>
+            <Input fluid action={{color:'green', content:'preview'}} placeholder='https://github.com/kitnic-forks/arduino-uno' />
+        </div>
       </div>
     )
   },
