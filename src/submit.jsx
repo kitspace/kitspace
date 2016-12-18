@@ -19,11 +19,18 @@ Preview your board by entering the repository URL below.
 `
 
 const Steps = () => (
-  <div>
+  <div className='Steps'>
     <Step.Group ordered>
-      <Step active={true}>Preview the board</Step>
-      <Step>Preview the bill of materials</Step>
-      <Step>Preview the readme</Step>
+      <Step active={true} onClick={(event) => console.log(event)}>
+        Preview the board
+      </Step>
+      <Step onClick={(event) => console.log(event)}>
+        Preview the bill of materials
+      </Step>
+      <Step onClick={(event) => console.log(event)}>Preview the readme</Step>
+      <Step onClick={(event) => console.log(event)}>
+        Send us a pull-request to add your board
+      </Step>
     </Step.Group>
   </div>
 )
