@@ -8,13 +8,12 @@ const request = require('superagent');
 const TitleBar      = require('./title_bar')
 const BoardShowcase = require('./board_showcase')
 
-const placeholder = 'https://github.com/kitnic-forks/arduino-uno'
 
 const initial_state = {
   activeStep: 0,
   request: {
     status: 'not sent',
-    url: placeholder,
+    url: '',
     reply: null,
   },
 }
@@ -76,14 +75,19 @@ function Steps(props) {
   )
 }
 
-function UrlSubmit(props) {
-  function onSubmit(event, {formData}) {
+const placeholder = 'https://github.com/kitnic-forks/arduino-uno'
+const UrlSubmit = React.createClass({
+  getInitialState() {
+    return {url: ''}
+  },
+  onSubmit(event, {formData}) {
     event.preventDefault()
-    if (props.request.status === 'sent') {
+    if (this.props.request.status === 'sent') {
       return
     }
     if (formData.url === '') {
       formData.url = placeholder
+      this.setState({url: placeholder})
     }
     store.dispatch({type:'setUrlSent', value: formData.url})
     request.post('https://git-clone-server.kitnic.it')
@@ -91,30 +95,33 @@ function UrlSubmit(props) {
        .end((err, res) => {
          store.dispatch({type: 'setUrlResponse', value: res.body.data.files})
        })
-  }
-  let buttonText = props.request.status === 'replied' ? 'Refresh' : 'Preview'
-  function onChange(event, input) {
-    if (props.request.status === 'replied' && (input.value !== props.request.url)) {
-      console.log('hey')
-      buttonText = 'Preview'
-    }
-  }
-  return (
-    <Form onSubmit={onSubmit} id='submitForm'>
-    <Input
-      fluid
-      name = 'url'
-      onChange = {onChange}
-      action = {{
-        color   : 'green',
-        content : buttonText,
-        loading : props.request.status === 'sent',
-      }}
-      defaultValue = {props.request.url}
-      placeholder = {placeholder}
-    />
-    </Form>)
-}
+  },
+  onChange(event, input) {
+    this.setState({url: input.value})
+  },
+  render() {
+    const state = this.state
+    const requestedUrl = this.props.request.url
+    const requested = (state.url !== '') && (requestedUrl === state.url)
+    const buttonText = requested ? 'Refresh' : 'Preview'
+    const color = requested ? 'blue' : 'green'
+    return (
+      <Form onSubmit={this.onSubmit} id='submitForm'>
+      <Input
+        fluid
+        name = 'url'
+        onChange = {this.onChange}
+        action = {{
+          color,
+          content : buttonText,
+          loading : this.props.request.status === 'sent',
+        }}
+        placeholder = {placeholder}
+        value = {state.url}
+      />
+      </Form>)
+  },
+})
 
 const Submit = React.createClass({
   getInitialState() {
