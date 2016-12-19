@@ -2,6 +2,7 @@ const Markdown = require('react-markdown')
 const Redux    = require('redux')
 const React    = require('react')
 const { Input, Icon, Step, Container, Form} = require('semantic-ui-react')
+const request = require('superagent');
 
 const TitleBar  = require('./title_bar')
 
@@ -20,9 +21,14 @@ function reducer(state = initial_state, action) {
   switch(action.type) {
     case 'setStep':
       return Object.assign(state, {activeStep: action.value})
-    case 'setUrlSent':
+    case 'setUrlSent': {
       const request = Object.assign(state.request, {url: action.value, status: 'sent'})
       return Object.assign(state, {request})
+    }
+    case 'setUrlResponse': {
+      const request = Object.assign(state.request, {status: 'replied', reply: action.value})
+      return Object.assign(state, {request})
+    }
   }
   return state
 }
@@ -71,25 +77,36 @@ function Steps(props) {
 function UrlSubmit(props) {
   function onSubmit(event, {formData}) {
     event.preventDefault()
-    if (props.urlSent) {
+    if (props.request.status === 'sent') {
       return
     }
     if (formData.url === '') {
       formData.url = placeholder
     }
     store.dispatch({type:'setUrlSent', value: formData.url})
+    request.post('http://localhost:4000')
+       .send({url: formData.url})
+       .end((err, res) => {
+         store.dispatch({type: 'setUrlResponse', value: res.body.data.files})
+       })
   }
+  function onChange(event, ) {
+    console.log()
+  }
+  const buttonText = props.request.status === 'replied' ? 'Refresh' : 'Preview'
+
   return (
     <Form onSubmit={onSubmit} className='previewContainer'>
     <Input
       fluid
       name = 'url'
-      onChange = {() => console.log('hey')}
+      onChange = {onChange}
       action = {{
         color   : 'green',
-        content : 'preview',
-        loading : props.status === 'sent',
+        content : buttonText,
+        loading : props.request.status === 'sent',
       }}
+      defaultValue = {props.request.url}
       placeholder = {placeholder}
     />
     </Form>)
@@ -111,7 +128,7 @@ const Submit = React.createClass({
       <div className='content'>
         <Steps active={state.activeStep} />
         <Markdown className='instructions' source={instructionTexts[state.activeStep]} />
-        <UrlSubmit status={state.request.status} />
+        <UrlSubmit request={state.request} />
       </div>
     </div>
     )
