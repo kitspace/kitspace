@@ -4,7 +4,8 @@ const React    = require('react')
 const { Input, Icon, Step, Container, Form} = require('semantic-ui-react')
 const request = require('superagent');
 
-const TitleBar  = require('./title_bar')
+const TitleBar      = require('./title_bar')
+const BoardShowcase = require('./board_showcase')
 
 const placeholder = 'https://github.com/kitnic-forks/arduino-uno'
 
@@ -131,6 +132,7 @@ const Submit = React.createClass({
         <Steps active={state.activeStep} />
         <Markdown className='instructions' source={instructionTexts[state.activeStep]} />
         <UrlSubmit request={state.request} />
+        <BoardShowcase />
       </Container>
     </div>
     )
