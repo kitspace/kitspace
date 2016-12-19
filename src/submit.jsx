@@ -84,17 +84,19 @@ function UrlSubmit(props) {
       formData.url = placeholder
     }
     store.dispatch({type:'setUrlSent', value: formData.url})
-    request.post('http://localhost:4000')
+    request.post('https://git-clone-server.kitnic.it')
        .send({url: formData.url})
        .end((err, res) => {
          store.dispatch({type: 'setUrlResponse', value: res.body.data.files})
        })
   }
-  function onChange(event, ) {
-    console.log()
+  let buttonText = props.request.status === 'replied' ? 'Refresh' : 'Preview'
+  function onChange(event, input) {
+    if (props.request.status === 'replied' && (input.value !== props.request.url)) {
+      console.log('hey')
+      buttonText = 'Preview'
+    }
   }
-  const buttonText = props.request.status === 'replied' ? 'Refresh' : 'Preview'
-
   return (
     <Form onSubmit={onSubmit} className='previewContainer'>
     <Input
