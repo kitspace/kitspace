@@ -17,6 +17,10 @@ code {
     flex-grow: 1;
 }
 
+.submitButton {
+   min-width: 94px;
+}
+
 .step {
     font-weight:normal;
     @include breakpoint(mobile) {

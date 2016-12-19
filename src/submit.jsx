@@ -13,7 +13,7 @@ const initial_state = {
   activeStep: 0,
   request: {
     status: 'not sent',
-    url: '',
+    url: null,
     reply: null,
   },
 }
@@ -100,11 +100,11 @@ const UrlSubmit = React.createClass({
     this.setState({url: input.value})
   },
   render() {
-    const state = this.state
-    const requestedUrl = this.props.request.url
-    const requested = (state.url !== '') && (requestedUrl === state.url)
+    const state      = this.state
+    const requested  = state.url === this.props.request.url
     const buttonText = requested ? 'Refresh' : 'Preview'
-    const color = requested ? 'blue' : 'green'
+    const color      = requested ? 'blue' : 'green'
+    const loading    = this.props.request.status === 'sent'
     return (
       <Form onSubmit={this.onSubmit} id='submitForm'>
       <Input
@@ -113,8 +113,9 @@ const UrlSubmit = React.createClass({
         onChange = {this.onChange}
         action = {{
           color,
+          loading,
           content : buttonText,
-          loading : this.props.request.status === 'sent',
+          className: 'submitButton',
         }}
         placeholder = {this.placeholder}
         value = {state.url}
