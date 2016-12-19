@@ -1,7 +1,8 @@
 const Markdown = require('react-markdown')
 const Redux    = require('redux')
 const React    = require('react')
-const { Input, Icon, Step, Container, Form} = require('semantic-ui-react')
+const {h}      = require('react-hyperscript-helpers')
+const {Input, Icon, Step, Container, Form} = require('semantic-ui-react')
 const request = require('superagent');
 
 const TitleBar      = require('./title_bar')
@@ -99,7 +100,7 @@ function UrlSubmit(props) {
     }
   }
   return (
-    <Form onSubmit={onSubmit} className='previewContainer'>
+    <Form onSubmit={onSubmit} id='submitForm'>
     <Input
       fluid
       name = 'url'

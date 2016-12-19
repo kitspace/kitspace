@@ -13,10 +13,10 @@ code {
 }
 
 .ui.input {
-    margin-top:50px;
     max-width: 500px;
     flex-grow: 1;
 }
+
 .step {
     font-weight:normal;
     @include breakpoint(mobile) {
@@ -34,8 +34,9 @@ code {
     justify-content: center;
 }
 
-.previewContainer {
+#submitForm {
+    margin-top:50px;
+    margin-bottom: 50px;
     display: flex;
     justify-content: center;
-    margin-bottom: 50px;
 }
