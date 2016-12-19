@@ -127,11 +127,11 @@ const Submit = React.createClass({
           Submit a project
         </div>
       </TitleBar>
-      <div className='content'>
+      <Container>
         <Steps active={state.activeStep} />
         <Markdown className='instructions' source={instructionTexts[state.activeStep]} />
         <UrlSubmit request={state.request} />
-      </div>
+      </Container>
     </div>
     )
   },

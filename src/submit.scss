@@ -3,8 +3,9 @@
 @import 'common';
 @import '/semantic.min.css';
 
-.content {
-    margin: 50px 10% 0 10%;
+.ui.container {
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 
 code {
