@@ -75,8 +75,8 @@ function Steps(props) {
   )
 }
 
-const placeholder = 'https://github.com/kitnic-forks/arduino-uno'
 const UrlSubmit = React.createClass({
+  placeholder: 'https://github.com/kitnic-forks/arduino-uno',
   getInitialState() {
     return {url: ''}
   },
@@ -86,8 +86,8 @@ const UrlSubmit = React.createClass({
       return
     }
     if (formData.url === '') {
-      formData.url = placeholder
-      this.setState({url: placeholder})
+      formData.url = this.placeholder
+      this.setState({url: this.placeholder})
     }
     store.dispatch({type:'setUrlSent', value: formData.url})
     request.post('https://git-clone-server.kitnic.it')
@@ -116,7 +116,7 @@ const UrlSubmit = React.createClass({
           content : buttonText,
           loading : this.props.request.status === 'sent',
         }}
-        placeholder = {placeholder}
+        placeholder = {this.placeholder}
         value = {state.url}
       />
       </Form>)
