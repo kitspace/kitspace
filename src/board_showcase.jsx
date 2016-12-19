@@ -1,6 +1,5 @@
 'use strict'
 const React     = require('react')
-const Gerbers   = require('./gerbers')
 const LazyLoad  = require('./lazy_load')
 const FadeImage = require('./fade_image')
 
@@ -32,7 +31,6 @@ var BoardShowcase = React.createClass({
     }
     return (
       <div className="boardShowcaseContainer">
-        <Gerbers />
         <div className="toggleBoardView responsiveTabs">
           <button
           disabled={this.state.viewFrontBoard}

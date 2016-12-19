@@ -6,6 +6,7 @@ const BoardShowcase = require('./board_showcase')
 const StoreButtons  = require('./buy_parts')
 const info          = require('./info.json')
 const Readme        = require('./readme')
+const Gerbers       = require('./gerbers')
 
 var Page = React.createClass({
   render: function () {
@@ -50,6 +51,7 @@ var Page = React.createClass({
                 </div>
               </div>
             </div>
+            <Gerbers />
             <BoardShowcase />
             <StoreButtons items={ info.bom.lines ? info.bom.lines : [] } />
             <Readme />
