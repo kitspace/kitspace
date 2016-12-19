@@ -117,10 +117,10 @@ function UrlSubmit(props) {
 }
 
 const Submit = React.createClass({
-  getInitialState: function() {
+  getInitialState() {
     return store.getState()
   },
-  render: function () {
+  render() {
     const state = this.state
     return (
     <div className='Submit'>
@@ -138,7 +138,7 @@ const Submit = React.createClass({
     </div>
     )
   },
-  componentDidMount: function () {
+  componentDidMount() {
     store.subscribe(() => {
       const state = store.getState()
       console.log(state)
