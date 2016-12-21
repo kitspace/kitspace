@@ -16,10 +16,14 @@ const GIT_CLONE_SERVER = 'https://git-clone-server.kitnic.it'
 
 const initial_state = {
   activeStep: 0,
-  request: {
+  response: {
     status: 'not sent',
     url: null,
     files: null,
+    svg: {
+      top: null,
+      bottom: null,
+    },
   },
 }
 
@@ -28,12 +32,12 @@ function reducer(state = initial_state, action) {
     case 'setStep':
       return Object.assign(state, {activeStep: action.value})
     case 'setUrlSent': {
-      const request = Object.assign(state.request, {url: action.value, status: 'sent'})
-      return Object.assign(state, {request})
+      const response = Object.assign(state.response, {url: action.value, status: 'sent'})
+      return Object.assign(state, {response})
     }
     case 'setUrlResponse': {
-      const request = Object.assign(state.request, {status: 'replied', files: action.value})
-      return Object.assign(state, {request})
+      const response = Object.assign(state.response, {status: 'replied', files: action.value})
+      return Object.assign(state, {response})
     }
   }
   return state
@@ -105,7 +109,7 @@ const UrlSubmit = React.createClass({
   },
   onSubmit(event, {formData}) {
     event.preventDefault()
-    if (this.props.request.status === 'sent') {
+    if (this.props.response.status === 'sent') {
       return
     }
     if (formData.url === '') {
@@ -138,10 +142,10 @@ const UrlSubmit = React.createClass({
   },
   render() {
     const state      = this.state
-    const requested  = state.url === this.props.request.url
+    const requested  = state.url === this.props.response.url
     const buttonText = requested ? 'Refresh' : 'Preview'
     const color      = requested ? 'blue' : 'green'
-    const loading    = this.props.request.status === 'sent'
+    const loading    = this.props.response.status === 'sent'
     return (
       <Form onSubmit={this.onSubmit} id='submitForm'>
       <Input
@@ -177,7 +181,7 @@ const Submit = React.createClass({
       <Container>
         <Steps active={state.activeStep} />
         <Markdown className='instructions' source={instructionTexts[state.activeStep]} />
-        <UrlSubmit request={state.request} />
+        <UrlSubmit response={state.response} />
         <BoardShowcase />
       </Container>
     </div>
