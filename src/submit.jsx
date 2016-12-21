@@ -117,18 +117,14 @@ const UrlSubmit = React.createClass({
        .send({url: formData.url})
        .withCredentials()
        .end((err, res) => {
-         const files   = res.body.data.files
-         const gerbers = gerberFiles(files)
-         const promises = gerbers.map(f => {
-           return new Promise((resolve, reject) => {
-             request.get(url.resolve(GIT_CLONE_SERVER, f))
-               .withCredentials()
-               .end((err, res) => {
-                  resolve({gerber: res.text, filename: f})
-             })
-           })
+         const files    = res.body.data.files
+         const gerbers  = gerberFiles(files)
+         const requests = gerbers.map(f => {
+           return request.get(url.resolve(GIT_CLONE_SERVER, f))
+             .withCredentials()
+             .then(res => ({gerber: res.text, filename: f}))
          })
-         Promise.all(promises).then(layers => {
+         Promise.all(requests).then(layers => {
            pcbStackup(layers, (err, stackup) => {
              console.log(stackup.top.svg)
              console.log(stackup.bottom.svg)
