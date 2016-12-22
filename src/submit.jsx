@@ -9,7 +9,10 @@ const whatsThatGerber = require('whats-that-gerber')
 const url = require('url')
 const {Input, Icon, Step, Container, Form} = require('semantic-ui-react')
 
-const DOMURL = window.URL || window.webkitURL || window;
+let DOMURL
+if (typeof(window) !== 'undefined') {
+  DOMURL = window.URL || window.webkitURL || window;
+}
 
 const TitleBar      = require('./title_bar')
 const BoardShowcase = require('./board_showcase')
