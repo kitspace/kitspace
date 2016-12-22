@@ -52,7 +52,7 @@ var Page = React.createClass({
               </div>
             </div>
             <Gerbers />
-            <BoardShowcase />
+            <BoardShowcase topSrc='images/top.svg' bottomSrc='images/bottom.svg'/>
             <StoreButtons items={ info.bom.lines ? info.bom.lines : [] } />
             <Readme />
             <BOM data={ info.bom ? info.bom : [] } />

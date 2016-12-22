@@ -50,11 +50,11 @@ var BoardShowcase = React.createClass({
             component={React.createElement('div', {className:'img'})}
             distance={300}>
             <div className="boardContainer">
-              <FadeImage className={frontBoardClass} src='images/top.svg' />
+              <FadeImage className={frontBoardClass} src={this.props.topSrc} />
               <div className="circuitBorderContainer">
                 <div className="circuitBorder"></div>
               </div>
-              <FadeImage className={backBoardClass} src='images/bottom.svg' />
+              <FadeImage className={backBoardClass} src={this.props.bottomSrc} />
             </div>
           </LazyLoad>
         </div>
