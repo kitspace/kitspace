@@ -9,6 +9,8 @@ const whatsThatGerber = require('whats-that-gerber')
 const url = require('url')
 const {Input, Icon, Step, Container, Form} = require('semantic-ui-react')
 
+const DOMURL = window.URL || window.webkitURL || window;
+
 const TitleBar      = require('./title_bar')
 const BoardShowcase = require('./board_showcase')
 
@@ -20,10 +22,7 @@ const initial_state = {
     status: 'not sent',
     url: null,
     files: null,
-    svg: {
-      top: null,
-      bottom: null,
-    },
+    svgs: null,
   },
 }
 
@@ -37,6 +36,10 @@ function reducer(state = initial_state, action) {
     }
     case 'setFileListing': {
       const response = Object.assign(state.response, {status: 'replied', files: action.value})
+      return Object.assign(state, {response})
+    }
+    case 'setSvgs': {
+      const response = Object.assign(state.response, {status: 'done', svgs: action.value})
       return Object.assign(state, {response})
     }
   }
@@ -101,7 +104,11 @@ function gerberFiles(files, info) {
 }
 
 function isLoading(status) {
-  return (status !== 'done') || (status !== 'not sent')
+  return (status !== 'done') && (status !== 'not sent')
+}
+
+function createSvgDataUrl(string) {
+  return DOMURL.createObjectURL(new Blob([string], {type: 'image/svg+xml'}))
 }
 
 const UrlSubmit = React.createClass({
@@ -132,8 +139,9 @@ const UrlSubmit = React.createClass({
          })
          Promise.all(requests).then(layers => {
            pcbStackup(layers, (err, stackup) => {
-             console.log(stackup.top.svg)
-             console.log(stackup.bottom.svg)
+             const top    = createSvgDataUrl(stackup.top.svg)
+             const bottom = createSvgDataUrl(stackup.bottom.svg)
+             store.dispatch({type: 'setSvgs', value: {top, bottom}})
            })
          })
          store.dispatch({type: 'setFileListing', value: files})
@@ -173,6 +181,11 @@ const Submit = React.createClass({
   },
   render() {
     const state = this.state
+    let showcase = (<BoardShowcase />)
+    if (state.response.svgs) {
+      const {top, bottom} = state.response.svgs
+      showcase = (<BoardShowcase topSrc={top} bottomSrc={bottom}/>)
+    }
     return (
     <div className='Submit'>
       <TitleBar>
@@ -184,7 +197,7 @@ const Submit = React.createClass({
         <Steps active={state.activeStep} />
         <Markdown className='instructions' source={instructionTexts[state.activeStep]} />
         <UrlSubmit response={state.response} />
-        <BoardShowcase />
+        {showcase}
       </Container>
     </div>
     )
