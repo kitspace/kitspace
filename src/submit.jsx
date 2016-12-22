@@ -35,7 +35,7 @@ function reducer(state = initial_state, action) {
       const response = Object.assign(state.response, {url: action.value, status: 'sent'})
       return Object.assign(state, {response})
     }
-    case 'setUrlResponse': {
+    case 'setFileListing': {
       const response = Object.assign(state.response, {status: 'replied', files: action.value})
       return Object.assign(state, {response})
     }
@@ -100,7 +100,9 @@ function gerberFiles(files, info) {
     .map(f => path.join(prefix, f))
 }
 
-
+function isLoading(status) {
+  return (status !== 'done') || (status !== 'not sent')
+}
 
 const UrlSubmit = React.createClass({
   placeholder: 'https://github.com/kitnic-forks/arduino-uno',
@@ -109,7 +111,7 @@ const UrlSubmit = React.createClass({
   },
   onSubmit(event, {formData}) {
     event.preventDefault()
-    if (this.props.response.status === 'sent') {
+    if (isLoading(this.props.response.status)) {
       return
     }
     if (formData.url === '') {
@@ -134,7 +136,7 @@ const UrlSubmit = React.createClass({
              console.log(stackup.bottom.svg)
            })
          })
-         store.dispatch({type: 'setUrlResponse', value: files})
+         store.dispatch({type: 'setFileListing', value: files})
        })
   },
   onChange(event, input) {
@@ -145,7 +147,7 @@ const UrlSubmit = React.createClass({
     const requested  = state.url === this.props.response.url
     const buttonText = requested ? 'Refresh' : 'Preview'
     const color      = requested ? 'blue' : 'green'
-    const loading    = this.props.response.status === 'sent'
+    const loading    = isLoading(this.props.response.status)
     return (
       <Form onSubmit={this.onSubmit} id='submitForm'>
       <Input
