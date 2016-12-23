@@ -159,8 +159,8 @@ gerbers: manufacture/gerbers-and-drills
 ### Running a local dev server
 
 - Get requirements above and make sure executables are on your path
-- `npm install`
-- `npm start`
+- `npm install` (or `yarn install`)
+- `npm start` (or `yarn start`)
 - Point your browser at `http://127.0.0.1:8080`. The script should watch for
 file-saves and re-build when you change a source file.
 
