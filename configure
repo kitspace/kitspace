@@ -52,7 +52,7 @@ if (config === 'production') {
     //write to $out.d depfile in makefile format for ninja to keep track of deps
     rule.run(`browserify --list $taskFile > $out.d \
 && if [ '$jsMain' != '' ]; then ${browserify} --list $jsMain >> $out.d; fi \
-&& coffee ./scripts/depfileify.coffee $out $out.d \
+&& ./scripts/depfileify $out $out.d \
 && node -- $in -- ${config} $targetFiles`)
     .depfile('$out.d')
     .description(`node -- $in -- ${config} $targetFiles`);
@@ -98,7 +98,7 @@ if (config === 'production') {
     rule.run(`${browserify} ${excludes} $in | ${uglifyjs} > $out`);
 } else {
     rule.run(`${browserify} ${excludes} --list $in > $out.d \
-&& coffee ./scripts/depfileify.coffee $out $out.d \
+&& ./scripts/depfileify $out $out.d \
 && ${browserify} ${excludes} $in -o $out`
     )
     .depfile('$out.d')
