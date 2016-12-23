@@ -10,8 +10,6 @@
     "babel-register": "^6.3.13",
     "babelify": "^7.2.0",
     "browserify": "^13.1.0",
-    "coffee-script": "^1.10.0",
-    "coffeeify": "^2.0.1",
     "eslint": "^3.3.1",
     "eslint-plugin-react": "^6.1.2",
     "glob": "^7.0.5",
@@ -33,9 +31,9 @@
   },
   "scripts": {
     "watch": "./scripts/watch.sh",
-    "start": "./scripts/get_boards.coffee && npm run server & npm run watch",
-    "update-reg": "./scripts/update_registry.coffee",
-    "plug-reg": "./scripts/plug_versions.coffee",
+    "start": "./scripts/get_boards && npm run server & npm run watch",
+    "update-reg": "./scripts/update_registry",
+    "plug-reg": "./scripts/plug_versions",
     "server": "http-server build/",
     "lint": "eslint src"
   },

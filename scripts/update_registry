@@ -1,0 +1,19 @@
+#!/usr/bin/env node
+const fs = require('fs');
+const utils = require('./utils');
+
+const repos = utils.readRepos();
+const registry = [];
+let n_repos = repos.length;
+for (let index = 0; index < repos.length; index++) {
+    const repo = repos[index];
+    utils.getVersion(repo, (function(repo, index, hash) {
+        registry[index] = {repo, hash};
+        n_repos -= 1;
+        if (n_repos === 0) {
+            return fs.writeFile('./registry.json', JSON.stringify(registry, undefined, 2));
+        }
+    }).bind(undefined, repo, index)
+    );
+}
+
