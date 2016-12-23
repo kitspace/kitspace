@@ -30,7 +30,7 @@
     "uglifyjs": "^2.4.10"
   },
   "scripts": {
-    "watch": "./scripts/watch.sh",
+    "watch": "./scripts/watch",
     "start": "./scripts/get_boards && npm run server & npm run watch",
     "update-reg": "./scripts/update_registry",
     "plug-reg": "./scripts/plug_versions",

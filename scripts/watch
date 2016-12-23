@@ -17,7 +17,7 @@ build() {
     ninja && echo '* build succeeded *' || echo 'BUILD FAILED'
 }
 
-./configure.coffee $1
+./configure $1
 
 build $1
 
