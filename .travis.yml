@@ -15,7 +15,7 @@ script:
   - export NODE_ENV=production
   - ./scripts/plug_versions.coffee
   - ./scripts/get_boards.coffee production
-  - ./configure.coffee production
+  - ./configure production
   - wget https://github.com/ninja-build/ninja/releases/download/v1.6.0/ninja-linux.zip
   - unzip ninja-linux.zip
   - ./ninja && ./scripts/deploy.sh

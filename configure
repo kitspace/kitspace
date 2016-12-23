@@ -1,0 +1,238 @@
+#!/usr/bin/env node
+let config, uglifyjs;
+const ninjaBuildGen = require('ninja-build-gen');
+const globule       = require('globule');
+const path          = require('path');
+
+
+if (process.argv[2] === 'production') {
+    config = 'production';
+} else {
+    config = 'dev';
+}
+
+
+const ninja = ninjaBuildGen('1.5.1', 'build/');
+
+
+ninja.header(`#generated from ${path.basename(module.filename)} \
+with '${config}' config`);
+
+
+// - Rules - #
+
+ninja.rule('copy').run('cp $in $out')
+    .description('$command');
+
+
+ninja.rule('remove').run('rm -rf $in')
+    .description('$command');
+
+
+let browserify = `browserify --extension='.jsx' --transform [ babelify \
+--presets [ react es2015 ] ]`;
+
+
+if (config === 'dev') {
+    browserify += ' --debug';
+} else {
+    browserify += ' -g uglifyify';
+}
+
+const dependencies = Object.keys(require('./package.json').dependencies);
+const excludes = `-x ${dependencies.join(' -x ')}`;
+const requires = `-r ${dependencies.join(' -r ')}`;
+
+
+
+let rule = ninja.rule('node-task');
+if (config === 'production') {
+    rule.run(`node -- $in -- ${config} $out`);
+} else {
+    //write to $out.d depfile in makefile format for ninja to keep track of deps
+    rule.run(`browserify --list $taskFile > $out.d \
+&& if [ '$jsMain' != '' ]; then ${browserify} --list $jsMain >> $out.d; fi \
+&& coffee ./scripts/depfileify.coffee $out $out.d \
+&& node -- $in -- ${config} $targetFiles`)
+    .depfile('$out.d')
+    .description(`node -- $in -- ${config} $targetFiles`);
+}
+
+
+
+rule = ninja.rule('browserify');
+if (config === 'production') {
+    let compress_opts = {
+        sequences     : true,  // join consecutive statemets with the “comma operator”
+        properties    : true,  // optimize property access: a["foo"] → a.foo
+        dead_code     : true,  // discard unreachable code
+        drop_debugger : true,  // discard “debugger” statements
+        unsafe        : false, // some unsafe optimizations (see below)
+        conditionals  : true,  // optimize if-s and conditional expressions
+        comparisons   : true,  // optimize comparisons
+        evaluate      : true,  // evaluate constant expressions
+        booleans      : true,  // optimize boolean expressions
+        loops         : true,  // optimize loops
+        unused        : false, // drop unused variables/functions
+        hoist_funs    : true,  // hoist function declarations
+        hoist_vars    : false, // hoist variable declarations
+        if_return     : true,  // optimize if-s followed by return/continue
+        join_vars     : true,  // join var declarations
+        cascade       : true,  // try to cascade `right` into `left` in sequences
+        side_effects  : true,  // drop side-effect-free statements
+        warnings      : true
+    };
+
+    compress_opts = [(() => {
+        const result = [];
+        for (let o in compress_opts) {
+            const s = compress_opts[o];
+            result.push(o + '=' + s);
+        }
+        return result;
+    })()];
+
+    uglifyjs = `uglifyjs --mangle --reserved '${dependencies}' \
+--compress '${compress_opts}'`;
+
+    rule.run(`${browserify} ${excludes} $in | ${uglifyjs} > $out`);
+} else {
+    rule.run(`${browserify} ${excludes} --list $in > $out.d \
+&& coffee ./scripts/depfileify.coffee $out $out.d \
+&& ${browserify} ${excludes} $in -o $out`
+    )
+    .depfile('$out.d')
+    .description(`browserify ${excludes} $in -o $out`);
+}
+
+rule = ninja.rule('browserify-require');
+if (config === 'production') {
+    rule.run(`${browserify} ${requires} $in | ${uglifyjs} > $out`);
+} else {
+    rule.run(`${browserify} ${requires} $in -o $out`);
+}
+
+
+ninja.rule('sass').run('sass --sourcemap=none --load-path $path $in $out');
+
+
+// - Edges - #
+
+ninja.edge('build/vendor.js').using('browserify-require');
+
+
+const images = globule.find('src/images/*');
+for (var f of images) {
+    ninja.edge(f.replace('src','build')).from(f).using('copy');
+}
+
+
+const boardFolders = globule.find('boards/*/*/*', {filter:'isDirectory'});
+
+
+const jsSrc = globule.find(['src/*.js', 'src/*.jsx']);
+
+
+const jsMainTargets = jsSrc.map(function(f) {
+    const temp = f.replace('src', 'build/.temp');
+    ninja.edge(temp).from(f).using('copy');
+    return temp;
+});
+
+
+const jsPageTargets = {};
+for (var folder of boardFolders) {
+    jsPageTargets[folder] = [];
+    jsSrc.map(function(f) {
+        const temp = f.replace('src', `build/.temp/${folder}`);
+        jsPageTargets[folder].push(temp);
+        return ninja.edge(temp).from(f).using('copy');
+    });
+}
+
+
+const sassSrc = globule.find('src/*.scss');
+
+
+ninja.edge('build/index.css').from('src/main.scss')
+    .need(sassSrc).assign('path', 'src/')
+    .using('sass');
+
+
+ninja.edge('build/page.css').from('src/page.scss')
+    .need(sassSrc).assign('path', 'src/')
+    .using('sass');
+
+ninja.edge('build/app.js').from('build/.temp/render.jsx')
+    .need(jsMainTargets)
+    .need('build/.temp/boards.json')
+    .using('browserify');
+
+
+for (folder of boardFolders) {
+    ninja.edge(`build/${folder}/app.js`)
+        .need(`build/.temp/${folder}/info.json`)
+        .need(`build/.temp/${folder}/zip-info.json`)
+        .need(`build/.temp/${folder}/readme.jsx`)
+        .need(jsPageTargets[folder])
+        .from(`build/.temp/${folder}/render_page.jsx`)
+        .using('browserify');
+}
+
+
+for (var taskFile of globule.find('tasks/*.js')) {
+    var task = require(`./${path.dirname(taskFile)}/${path.basename(taskFile)}`);
+    const addEdge = function(t) {
+        if (config === 'production') {
+            return ninja.edge(t.targets)
+                .from([taskFile].concat(t.deps))
+                .using('node-task');
+        } else {
+            const edge = ninja.edge(t.targets[0])
+                .from([taskFile].concat(t.deps))
+                .assign('taskFile', taskFile)
+                .assign('targetFiles', t.targets.join(' '))
+                .using('node-task');
+            if (task.moduleDep) {
+                edge.assign('jsMain', t.deps[0]);
+            }
+            return t.targets.slice(1).map((target) =>
+                ninja.edge(target).from(t.targets[0]));
+        }
+    };
+    if (typeof task === 'function') {
+        for (folder of boardFolders) {
+            addEdge(task(folder, config));
+        }
+    } else {
+        addEdge(task);
+    }
+}
+
+if (config === 'production') {
+    const presentation_files = globule.find('oshcamp2016/**/*', {filter:'isFile'});
+    for (f of presentation_files) {
+        ninja.edge(path.join('build', f)).from(f).using('copy');
+    }
+}
+
+
+ninja.edge('clean').from('build/').using('remove');
+
+
+const all = ninja.edges.filter(c => !c.targets.includes('clean'))
+.reduce((prev, c) => prev.concat(c.targets)
+, []);
+
+
+ninja.edge('all').from(all);
+
+
+ninja.byDefault('all');
+
+
+ninja.save('build.ninja');
+
+
+
+console.log(`generated ./build.ninja with '${config}' config`);
