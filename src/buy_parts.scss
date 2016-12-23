@@ -1,6 +1,9 @@
 @import 'colors';
 
 .storeButtonContainer {
+    .animateSpin {
+        line-height: 0;
+    }
     background: $alto;
     border-bottom: 1px solid $silver;
     border-radius: 3px;
