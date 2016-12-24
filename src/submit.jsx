@@ -4,8 +4,7 @@ const React           = require('react')
 const {h}             = require('react-hyperscript-helpers')
 const request         = require('superagent')
 const path            = require('path')
-const pcbStackup      = require('pcb-stackup')
-const whatsThatGerber = require('whats-that-gerber')
+const boardBuilder    = require('./board_builder')
 const url = require('url')
 const {Input, Icon, Step, Container, Form} = require('semantic-ui-react')
 
@@ -21,11 +20,13 @@ const GIT_CLONE_SERVER = 'https://git-clone-server.kitnic.it'
 
 const initial_state = {
   activeStep: 0,
-  response: {
+  board: {
     status: 'not sent',
+    color: 'green',
     url: null,
     files: null,
     svgs: null,
+    stackup: null,
   },
 }
 
@@ -34,16 +35,17 @@ function reducer(state = initial_state, action) {
     case 'setStep':
       return Object.assign(state, {activeStep: action.value})
     case 'setUrlSent': {
-      const response = Object.assign(state.response, {url: action.value, status: 'sent'})
-      return Object.assign(state, {response})
+      const board = Object.assign(state.board, {url: action.value, status: 'sent'})
+      return Object.assign(state, {board})
     }
     case 'setFileListing': {
-      const response = Object.assign(state.response, {status: 'replied', files: action.value})
-      return Object.assign(state, {response})
+      const board = Object.assign(state.board, {status: 'replied', files: action.value})
+      return Object.assign(state, {board})
     }
     case 'setSvgs': {
-      const response = Object.assign(state.response, {status: 'done', svgs: action.value})
-      return Object.assign(state, {response})
+      const {top, bottom, stackup} = action.value
+      const board = Object.assign(state.board, {status: 'done', svgs: {top, bottom}, stackup})
+      return Object.assign(state, {board})
     }
   }
   return state
@@ -121,7 +123,7 @@ const UrlSubmit = React.createClass({
   },
   onSubmit(event, {formData}) {
     event.preventDefault()
-    if (isLoading(this.props.response.status)) {
+    if (isLoading(this.props.board.status)) {
       return
     }
     if (formData.url === '') {
@@ -141,10 +143,10 @@ const UrlSubmit = React.createClass({
              .then(res => ({gerber: res.text, filename: f}))
          })
          Promise.all(requests).then(layers => {
-           pcbStackup(layers, (err, stackup) => {
+           boardBuilder(layers, this.props.board.color, (err, stackup) => {
              const top    = createSvgDataUrl(stackup.top.svg)
              const bottom = createSvgDataUrl(stackup.bottom.svg)
-             store.dispatch({type: 'setSvgs', value: {top, bottom}})
+             store.dispatch({type: 'setSvgs', value: {top, bottom, stackup}})
            })
          })
          store.dispatch({type: 'setFileListing', value: files})
@@ -155,10 +157,10 @@ const UrlSubmit = React.createClass({
   },
   render() {
     const state      = this.state
-    const requested  = state.url === this.props.response.url
+    const requested  = state.url === this.props.board.url
     const buttonText = requested ? 'Refresh' : 'Preview'
     const color      = requested ? 'blue' : 'green'
-    const loading    = isLoading(this.props.response.status)
+    const loading    = isLoading(this.props.board.status)
     return (
       <Form onSubmit={this.onSubmit} id='submitForm'>
       <Input
@@ -185,8 +187,8 @@ const Submit = React.createClass({
   render() {
     const state = this.state
     let showcase = (<BoardShowcase />)
-    if (state.response.svgs) {
-      const {top, bottom} = state.response.svgs
+    if (state.board.svgs) {
+      const {top, bottom} = state.board.svgs
       showcase = (<BoardShowcase topSrc={top} bottomSrc={bottom}/>)
     }
     return (
@@ -199,7 +201,7 @@ const Submit = React.createClass({
       <Container>
         <Steps active={state.activeStep} />
         <Markdown className='instructions' source={instructionTexts[state.activeStep]} />
-        <UrlSubmit response={state.response} />
+        <UrlSubmit board={state.board} />
         {showcase}
       </Container>
     </div>
