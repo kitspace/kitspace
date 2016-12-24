@@ -131,7 +131,6 @@ function createSvgDataUrl(string) {
 
 function buildBoard(layers, color) {
     boardBuilder(layers, color, (err, stackup) => {
-      console.log(stackup.top)
       if (err) {
         console.error(err)
       } else {
