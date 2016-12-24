@@ -4,7 +4,7 @@ const path         = require('path');
 const yaml         = require('js-yaml');
 const Svgo         = require('svgo');
 const utils        = require('./utils/utils');
-const boardBuilder = require('./utils/boardBuilder');
+const boardBuilder = require('../src/board_builder');
 const cp           = require('child_process');
 const Jszip        = require('jszip');
 
