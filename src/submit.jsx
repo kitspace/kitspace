@@ -6,7 +6,15 @@ const request         = require('superagent')
 const path            = require('path')
 const boardBuilder    = require('./board_builder')
 const url = require('url')
-const {Input, Icon, Step, Container, Form, Segment} = require('semantic-ui-react')
+const {
+  Input,
+  Icon,
+  Step,
+  Container,
+  Form,
+  Segment,
+  Button
+} = require('semantic-ui-react')
 
 let DOMURL
 if (typeof(window) !== 'undefined') {
@@ -45,6 +53,10 @@ function reducer(state = initial_state, action) {
     case 'setSvgs': {
       const {top, bottom, stackup} = action.value
       const board = Object.assign(state.board, {status: 'done', svgs: {top, bottom}, stackup})
+      return Object.assign(state, {board})
+    }
+    case 'setColor': {
+      const board = Object.assign(state.board, {color: action.value})
       return Object.assign(state, {board})
     }
   }
@@ -118,7 +130,21 @@ function createSvgDataUrl(string) {
 }
 
 function ColorSelector(props) {
-  return (<Segment>{props.active}</Segment>)
+  function onClick(color) {
+    return () => store.dispatch({type: 'setColor', value: color})
+  }
+  return (
+    <Segment>
+      <Button circular onClick={onClick('green')} id='greenButton' />
+      <Button circular onClick={onClick('red')} id='redButton' />
+      <Button circular onClick={onClick('blue')} id='blueButton' />
+      <Button circular onClick={onClick('black')} id='blackButton' />
+      <Button circular onClick={onClick('white')} id='whiteButton' />
+      <Button circular onClick={onClick('orange')} id='orangeButton' />
+      <Button circular onClick={onClick('purple')} id='purpleButton' />
+      <Button circular onClick={onClick('yellow')} id='yellowButton' />
+    </Segment>
+  )
 }
 
 const UrlSubmit = React.createClass({

@@ -21,6 +21,13 @@ code {
    min-width: 94px;
 }
 
+#greenButton {
+   background-color: rgba(19, 80, 18, 0.9);
+}
+
+#redButton {
+}
+
 .step {
     font-weight:normal;
     @include breakpoint(mobile) {
