@@ -6,7 +6,7 @@ const request         = require('superagent')
 const path            = require('path')
 const boardBuilder    = require('./board_builder')
 const url = require('url')
-const {Input, Icon, Step, Container, Form} = require('semantic-ui-react')
+const {Input, Icon, Step, Container, Form, Segment} = require('semantic-ui-react')
 
 let DOMURL
 if (typeof(window) !== 'undefined') {
@@ -117,6 +117,10 @@ function createSvgDataUrl(string) {
   return DOMURL.createObjectURL(new Blob([string], {type: 'image/svg+xml'}))
 }
 
+function ColorSelector(props) {
+  return (<Segment>{props.active}</Segment>)
+}
+
 const UrlSubmit = React.createClass({
   placeholder: 'https://github.com/kitnic-forks/arduino-uno',
   getInitialState() {
@@ -203,6 +207,7 @@ const Submit = React.createClass({
         <Steps active={state.activeStep} />
         <Markdown className='instructions' source={instructionTexts[state.activeStep]} />
         <UrlSubmit board={state.board} />
+        <ColorSelector active={this.state.board.color}/>
         {showcase}
       </Container>
     </div>
