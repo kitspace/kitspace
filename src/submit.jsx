@@ -129,17 +129,36 @@ function createSvgDataUrl(string) {
   return DOMURL.createObjectURL(new Blob([string], {type: 'image/svg+xml'}))
 }
 
+function buildBoard(layers, color) {
+    boardBuilder(layers, color, (err, stackup) => {
+      console.log(stackup.top)
+      if (err) {
+        console.error(err)
+      } else {
+        const top    = createSvgDataUrl(stackup.top.svg)
+        const bottom = createSvgDataUrl(stackup.bottom.svg)
+        store.dispatch({type: 'setSvgs', value: {top, bottom, stackup}})
+      }
+    })
+}
+
 function ColorSelector(props) {
   function onClick(color) {
-    return () => store.dispatch({type: 'setColor', value: color})
+    return () => {
+      const stackup = store.getState().board.stackup
+      if (stackup != null) {
+        buildBoard(stackup.layers, color)
+      }
+      store.dispatch({type: 'setColor', value: color})
+    }
   }
   return (
     <Segment>
-      <Button circular onClick={onClick('green')} id='greenButton' />
-      <Button circular onClick={onClick('red')} id='redButton' />
-      <Button circular onClick={onClick('blue')} id='blueButton' />
-      <Button circular onClick={onClick('black')} id='blackButton' />
-      <Button circular onClick={onClick('white')} id='whiteButton' />
+      <Button circular onClick={onClick('green')}  id='greenButton' />
+      <Button circular onClick={onClick('red')}    id='redButton' />
+      <Button circular onClick={onClick('blue')}   id='blueButton' />
+      <Button circular onClick={onClick('black')}  id='blackButton' />
+      <Button circular onClick={onClick('white')}  id='whiteButton' />
       <Button circular onClick={onClick('orange')} id='orangeButton' />
       <Button circular onClick={onClick('purple')} id='purpleButton' />
       <Button circular onClick={onClick('yellow')} id='yellowButton' />
@@ -173,13 +192,7 @@ const UrlSubmit = React.createClass({
              .withCredentials()
              .then(res => ({gerber: res.text, filename: f}))
          })
-         Promise.all(requests).then(layers => {
-           boardBuilder(layers, this.props.board.color, (err, stackup) => {
-             const top    = createSvgDataUrl(stackup.top.svg)
-             const bottom = createSvgDataUrl(stackup.bottom.svg)
-             store.dispatch({type: 'setSvgs', value: {top, bottom, stackup}})
-           })
-         })
+         Promise.all(requests).then(layers => buildBoard(layers, this.props.board.color))
          store.dispatch({type: 'setFileListing', value: files})
        })
   },

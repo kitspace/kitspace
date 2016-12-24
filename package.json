@@ -23,7 +23,7 @@
     "marky-markdown": "kasbah/marky-markdown#fix-default-anchors-2",
     "ninja-build-gen": "^0.2.1",
     "node-sass": "^4.0.0",
-    "pcb-stackup": "^2.0.0",
+    "pcb-stackup": "tracespace/pcb-stackup#test-determinism",
     "reactify": "^1.1.1",
     "source-map-support": "^0.4.0",
     "svgo": "^0.6.6",
