@@ -151,13 +151,13 @@ function buildBoard(layers) {
         const svgs = {}
         board_colors.forEach(color => {
           const style = (<defs><style>{boardBuilder.getStyle(color)}</style></defs>)
-          const top_children = top.props.children
-          top_children[2] = style
-          const bottom_children = bottom.props.children
-          bottom_children[2] = style
+          const top_children = top.props.children.slice()
+          top_children.push(style)
+          const bottom_children = bottom.props.children.slice()
+          bottom_children.push(style)
           svgs[color] = {}
-          svgs[color].top = React.cloneElement(top, {}, top_children.slice())
-          svgs[color].bottom = React.cloneElement(bottom, {}, bottom_children.slice())
+          svgs[color].top = React.cloneElement(top, {}, top_children)
+          svgs[color].bottom = React.cloneElement(bottom, {}, bottom_children)
         })
         store.dispatch({type: 'setSvgs', value: {svgs}})
       }
