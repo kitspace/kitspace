@@ -30,7 +30,7 @@ ninja.rule('remove').run('rm -rf $in')
 
 
 let browserify = `browserify --extension='.jsx' --transform [ babelify \
---presets [ react es2015 ] ]`;
+    --presets [ react es2015 ] ]`;
 
 
 if (config === 'dev') {
@@ -39,7 +39,8 @@ if (config === 'dev') {
     browserify += ' -g uglifyify';
 }
 
-const dependencies = Object.keys(require('./package.json').dependencies).filter(name => name !== 'semantic-ui-css');
+const dependencies = Object.keys(require('./package.json').dependencies)
+    .filter(name => name !== 'semantic-ui-css');
 const excludes = `-x ${dependencies.join(' -x ')}`;
 const requires = `-r ${dependencies.join(' -r ')}`;
 
@@ -51,9 +52,9 @@ if (config === 'production') {
 } else {
     //write to $out.d depfile in makefile format for ninja to keep track of deps
     rule.run(`browserify --list $taskFile > $out.d \
-&& if [ '$jsMain' != '' ]; then ${browserify} --list $jsMain >> $out.d; fi \
-&& ./scripts/depfileify $out $out.d \
-&& node -- $in -- ${config} $targetFiles`)
+        && if [ '$jsMain' != '' ]; then ${browserify} --list $jsMain >> $out.d; fi \
+        && ./scripts/depfileify $out $out.d \
+        && node -- $in -- ${config} $targetFiles`)
     .depfile('$out.d')
     .description(`node -- $in -- ${config} $targetFiles`);
 }
@@ -63,7 +64,7 @@ if (config === 'production') {
 rule = ninja.rule('browserify');
 if (config === 'production') {
     let compress_opts = {
-        sequences     : true,  // join consecutive statemets with the “comma operator”
+        sequences     : true,//join consecutive statements with the “comma operator”
         properties    : true,  // optimize property access: a["foo"] → a.foo
         dead_code     : true,  // discard unreachable code
         drop_debugger : true,  // discard “debugger” statements
@@ -83,23 +84,18 @@ if (config === 'production') {
         warnings      : true
     };
 
-    compress_opts = [(() => {
-        const result = [];
-        for (let o in compress_opts) {
-            const s = compress_opts[o];
-            result.push(o + '=' + s);
-        }
-        return result;
-    })()];
+    compress_opts = Object.keys(compress_opts).map(key => {
+        return `${key}=${compress_opts[key]}`
+    })
 
     uglifyjs = `uglifyjs --mangle --reserved '${dependencies}' \
---compress '${compress_opts}'`;
+                    --compress '${compress_opts}'`;
 
     rule.run(`${browserify} ${excludes} $in | ${uglifyjs} > $out`);
 } else {
     rule.run(`${browserify} ${excludes} --list $in > $out.d \
-&& ./scripts/depfileify $out $out.d \
-&& ${browserify} ${excludes} $in -o $out`
+        && ./scripts/depfileify $out $out.d \
+        && ${browserify} ${excludes} $in -o $out`
     )
     .depfile('$out.d')
     .description(`browserify ${excludes} $in -o $out`);
@@ -220,6 +216,7 @@ for (var taskFile of globule.find('tasks/*.js')) {
     }
 }
 
+
 if (config === 'production') {
     const presentation_files = globule.find('oshcamp2016/**/*', {filter:'isFile'});
     for (f of presentation_files) {
@@ -228,24 +225,21 @@ if (config === 'production') {
 }
 
 
-ninja.edge('clean').from('build/').using('remove');
-
 ninja.edge('build/semantic.min.css').from('node_modules/semantic-ui-css/semantic.min.css').using('copy');
 
 
-const all = ninja.edges.filter(c => !c.targets.includes('clean'))
-.reduce((prev, c) => prev.concat(c.targets)
-, []);
+ninja.edge('clean').from('build/').using('remove');
 
+
+const all = ninja.edges.filter(c => !c.targets.includes('clean'))
+    .reduce((prev, c) => prev.concat(c.targets), []);
 
 ninja.edge('all').from(all);
-
 
 ninja.byDefault('all');
 
 
 ninja.save('build.ninja');
-
 
 
 console.log(`generated ./build.ninja with '${config}' config`);
