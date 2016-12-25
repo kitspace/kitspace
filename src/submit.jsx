@@ -27,6 +27,17 @@ const BoardShowcase = require('./board_showcase')
 
 const GIT_CLONE_SERVER = 'https://git-clone-server.kitnic.it'
 
+const board_colors = [
+  'green',
+  'red',
+  'blue',
+  'black',
+  'white',
+  'orange',
+  'purple',
+  'yellow',
+]
+
 const initial_state = {
   activeStep: 0,
   board: {
@@ -52,8 +63,8 @@ function reducer(state = initial_state, action) {
       return Object.assign(state, {board})
     }
     case 'setSvgs': {
-      const {top, bottom, stackup} = action.value
-      const board = Object.assign(state.board, {status: 'done', svgs: {top, bottom}, stackup})
+      const {svgs} = action.value
+      const board = Object.assign(state.board, {status: 'done', svgs})
       return Object.assign(state, {board})
     }
     case 'setColor': {
@@ -137,7 +148,18 @@ function buildBoard(layers) {
       } else {
         const top    = stackup.top.svg
         const bottom = stackup.bottom.svg
-        store.dispatch({type: 'setSvgs', value: {top, bottom, stackup}})
+        const svgs = {}
+        board_colors.forEach(color => {
+          const style = (<defs><style>{boardBuilder.getStyle(color)}</style></defs>)
+          const top_children = top.props.children
+          top_children[2] = style
+          const bottom_children = bottom.props.children
+          bottom_children[2] = style
+          svgs[color] = {}
+          svgs[color].top = React.cloneElement(top, {}, top_children.slice())
+          svgs[color].bottom = React.cloneElement(bottom, {}, bottom_children.slice())
+        })
+        store.dispatch({type: 'setSvgs', value: {svgs}})
       }
     }, createElement)
 }
@@ -260,15 +282,10 @@ const Submit = React.createClass({
     //}
     let top, bottom
     if (this.state.board.svgs) {
-      top = this.state.board.svgs.top
-      bottom = this.state.board.svgs.bottom
-      const style = (<defs><style>{boardBuilder.getStyle(this.state.board.color)}</style></defs>)
-      const top_children = top.props.children
-      top_children[2] = style
-      const bottom_children = bottom.props.children
-      bottom_children[2] = style
-      top = React.cloneElement(top, {}, top_children)
-      bottom = React.cloneElement(bottom, {}, bottom_children)
+      console.log(this.state.board.svgs)
+      console.log(this.state.board.color)
+      top = this.state.board.svgs[this.state.board.color].top
+      bottom = this.state.board.svgs[this.state.board.color].bottom
     }
     return (
     <div className='Submit'>
