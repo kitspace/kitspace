@@ -1,6 +1,5 @@
 const pcbStackup = require('pcb-stackup')
-const React      = require('react')
-const camelCase  = require('lodash.camelcase')
+const xmlElementString = require('xml-element-string')
 
 const options = {
   // copper finish
@@ -88,33 +87,30 @@ const colorToStyle = {
   }
 }
 
-function createElement(type, props, children) {
-  Object.keys(props).forEach(key => {
-    let newKey
-    if (key === 'xmlns:xlink') {
-      newKey = 'xmlnsXlink'
-    }
-    else if (key === 'xlink:href') {
-      newKey = 'xlinkHref'
-    }
-    else if (key === 'class') {
-      newKey = 'className'
-    }
-    else if (/-/.test(key)) {
-      newKey = camelCase(key)
-    }
-    if (newKey && newKey !== key) {
-      props[newKey] = props[key]
-      delete props[key]
-    }
-  })
-  return React.createElement(type, props, children)
+function styleString(options) {
+  return `/* <![CDATA[ */.pcb-stackup_fr4 {color: ${options.fr4};}
+  .pcb-stackup_cu {color: ${options.cu};}
+  .pcb-stackup_cf {color: ${options.cf};}
+  .pcb-stackup_sm {color: ${options.sm};}
+  .pcb-stackup_ss {color: ${options.ss};}
+  .pcb-stackup_sp {color: ${options.sp};}
+  .pcb-stackup_out {color: ${options.out};}/* ]]> */`
 }
 
-module.exports = (layers, color, callback) => {
+
+module.exports = (layers, color, callback, createElement) => {
   return pcbStackup(layers, {
     color: styleToOption(colorToStyle[color]),
     outlineGapFill: 0.011,
-    createElement,
+    id: 'pcb-stackup',
+    createElement: createElement || xmlElementString,
   }, callback)
+}
+
+module.exports.getStyle = function getStyle(color) {
+  return styleString(styleToOption(colorToStyle[color]))
+}
+
+function hash(str) {
+    return crypto.createHash('sha1').update(str).digest('hex').slice(0, 7)
 }

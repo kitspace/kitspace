@@ -5,6 +5,7 @@ const {h}             = require('react-hyperscript-helpers')
 const request         = require('superagent')
 const path            = require('path')
 const boardBuilder    = require('./board_builder')
+const camelCase  = require('lodash.camelcase')
 const url = require('url')
 const {
   Input,
@@ -129,8 +130,8 @@ function createSvgDataUrl(string) {
   return DOMURL.createObjectURL(new Blob([string], {type: 'image/svg+xml'}))
 }
 
-function buildBoard(layers, color) {
-    boardBuilder(layers, color, (err, stackup) => {
+function buildBoard(layers) {
+    boardBuilder(layers, 'green', (err, stackup) => {
       if (err) {
         console.error(err)
       } else {
@@ -138,16 +139,39 @@ function buildBoard(layers, color) {
         const bottom = stackup.bottom.svg
         store.dispatch({type: 'setSvgs', value: {top, bottom, stackup}})
       }
-    })
+    }, createElement)
 }
+
+function createElement(type, props, children) {
+  if (type === 'style') {
+    return
+  }
+  Object.keys(props).forEach(key => {
+    let newKey
+    if (key === 'xmlns:xlink') {
+      newKey = 'xmlnsXlink'
+    }
+    else if (key === 'xlink:href') {
+      newKey = 'xlinkHref'
+    }
+    else if (key === 'class') {
+      newKey = 'className'
+    }
+    else if (/-/.test(key)) {
+      newKey = camelCase(key)
+    }
+    if (newKey && newKey !== key) {
+      props[newKey] = props[key]
+      delete props[key]
+    }
+  })
+  return React.createElement(type, props, children)
+}
+
 
 function ColorSelector(props) {
   function onClick(color) {
     return () => {
-      const stackup = store.getState().board.stackup
-      if (stackup != null) {
-        buildBoard(stackup.layers, color)
-      }
       store.dispatch({type: 'setColor', value: color})
     }
   }
@@ -191,7 +215,7 @@ const UrlSubmit = React.createClass({
              .withCredentials()
              .then(res => ({gerber: res.text, filename: f}))
          })
-         Promise.all(requests).then(layers => buildBoard(layers, this.props.board.color))
+         Promise.all(requests).then(buildBoard)
          store.dispatch({type: 'setFileListing', value: files})
        })
   },
@@ -237,7 +261,14 @@ const Submit = React.createClass({
     let top, bottom
     if (this.state.board.svgs) {
       top = this.state.board.svgs.top
-      bottom = this.state.board.svgs.top
+      bottom = this.state.board.svgs.bottom
+      const style = (<defs><style>{boardBuilder.getStyle(this.state.board.color)}</style></defs>)
+      const top_children = top.props.children
+      top_children[2] = style
+      const bottom_children = bottom.props.children
+      bottom_children[2] = style
+      top = React.cloneElement(top, {}, top_children)
+      bottom = React.cloneElement(bottom, {}, bottom_children)
     }
     return (
     <div className='Submit'>
