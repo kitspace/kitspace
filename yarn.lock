@@ -2652,6 +2652,10 @@ lodash.assign@^4.0.2, lodash.assign@^4.0.3, lodash.assign@^4.0.6, lodash.assign@
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/lodash.assign/-/lodash.assign-4.2.0.tgz#0d99f3ccd7a6d261d19bdaeb9245005d285808e7"
 
+lodash.camelcase@^4.3.0:
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/lodash.camelcase/-/lodash.camelcase-4.3.0.tgz#b28aa6288a2b9fc651035c7711f65ab6190331a6"
+
 lodash.clonedeep@^4.3.2:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/lodash.clonedeep/-/lodash.clonedeep-4.5.0.tgz#e23f3f9c4f8fbdde872529c1071857a086e5ccef"
@@ -3204,15 +3208,6 @@ pcb-stackup-core@^2.0.1:
     lodash.isstring "^4.0.1"
     viewbox "^1.0.0"
     xml-element-string "^1.0.0"
-
-pcb-stackup@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/pcb-stackup/-/pcb-stackup-2.0.0.tgz#b5dd8524064a1f14f7510ebd69bf5506ba86d333"
-  dependencies:
-    gerber-to-svg "^2.1.0"
-    pcb-stackup-core "^2.0.1"
-    shortid "^2.2.6"
-    whats-that-gerber "^2.0.1"
 
 pcb-stackup@tracespace/pcb-stackup#test-determinism:
   version "2.0.0"
@@ -4183,7 +4178,7 @@ webidl-conversions@^3.0.0, webidl-conversions@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/webidl-conversions/-/webidl-conversions-3.0.1.tgz#24534275e2a7bc6be7bc86611cc16ae0a5654871"
 
-whats-that-gerber@^2.0.1, whats-that-gerber@^2.1.0:
+whats-that-gerber@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/whats-that-gerber/-/whats-that-gerber-2.1.0.tgz#d06939c74c5fee28252a5f2e060b7b4b755abcb2"
 

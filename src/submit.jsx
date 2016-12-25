@@ -134,8 +134,8 @@ function buildBoard(layers, color) {
       if (err) {
         console.error(err)
       } else {
-        const top    = createSvgDataUrl(stackup.top.svg)
-        const bottom = createSvgDataUrl(stackup.bottom.svg)
+        const top    = stackup.top.svg
+        const bottom = stackup.bottom.svg
         store.dispatch({type: 'setSvgs', value: {top, bottom, stackup}})
       }
     })
@@ -166,7 +166,7 @@ function ColorSelector(props) {
 }
 
 const UrlSubmit = React.createClass({
-  placeholder: 'https://github.com/kitnic-forks/arduino-uno',
+  placeholder: 'https://github.com/kitnic-forks/Bus_Pirate',
   getInitialState() {
     return {url: ''}
   },
@@ -230,9 +230,14 @@ const Submit = React.createClass({
   render() {
     const state = this.state
     let showcase = (<BoardShowcase />)
-    if (state.board.svgs) {
-      const {top, bottom} = state.board.svgs
-      showcase = (<BoardShowcase topSrc={top} bottomSrc={bottom}/>)
+    //if (state.board.svgs) {
+    //  const {top, bottom} = state.board.svgs
+    //  showcase = (<BoardShowcase topSrc={top} bottomSrc={bottom}/>)
+    //}
+    let top, bottom
+    if (this.state.board.svgs) {
+      top = this.state.board.svgs.top
+      bottom = this.state.board.svgs.top
     }
     return (
     <div className='Submit'>
@@ -246,7 +251,8 @@ const Submit = React.createClass({
         <Markdown className='instructions' source={instructionTexts[state.activeStep]} />
         <UrlSubmit board={state.board} />
         <ColorSelector active={this.state.board.color}/>
-        {showcase}
+        {top}
+        {bottom}
       </Container>
     </div>
     )

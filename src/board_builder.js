@@ -1,4 +1,6 @@
 const pcbStackup = require('pcb-stackup')
+const React      = require('react')
+const camelCase  = require('lodash.camelcase')
 
 const options = {
   // copper finish
@@ -86,9 +88,33 @@ const colorToStyle = {
   }
 }
 
+function createElement(type, props, children) {
+  Object.keys(props).forEach(key => {
+    let newKey
+    if (key === 'xmlns:xlink') {
+      newKey = 'xmlnsXlink'
+    }
+    else if (key === 'xlink:href') {
+      newKey = 'xlinkHref'
+    }
+    else if (key === 'class') {
+      newKey = 'className'
+    }
+    else if (/-/.test(key)) {
+      newKey = camelCase(key)
+    }
+    if (newKey && newKey !== key) {
+      props[newKey] = props[key]
+      delete props[key]
+    }
+  })
+  return React.createElement(type, props, children)
+}
+
 module.exports = (layers, color, callback) => {
   return pcbStackup(layers, {
     color: styleToOption(colorToStyle[color]),
-    outlineGapFill: 0.011
+    outlineGapFill: 0.011,
+    createElement,
   }, callback)
 }
