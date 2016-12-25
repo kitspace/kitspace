@@ -77,3 +77,56 @@ code {
     display: flex;
     justify-content: center;
 }
+
+.pcb-stackup_fr4 {color: #4D542C;}
+.pcb-stackup_cu {color: lightgrey;}
+.pcb-stackup_sp {color: rgba(0, 0, 0, 0.0);}
+.pcb-stackup_out {color: black;}
+
+.pcb-green {
+     .pcb-stackup_cf {color: goldenrod;}
+     .pcb-stackup_sm {color: rgba(  0,  68,   0, 0.90);}
+     .pcb-stackup_ss {color: white;}
+}
+
+.pcb-red {
+     .pcb-stackup_cf {color: goldenrod;}
+     .pcb-stackup_sm {color: rgba(139,   0,   0, 0.90);}
+     .pcb-stackup_ss {color: white;}
+}
+
+.pcb-blue {
+     .pcb-stackup_cf {color: silver;}
+     .pcb-stackup_sm {color: rgba(  0,  30, 104, 0.90);}
+     .pcb-stackup_ss {color: white;}
+}
+
+.pcb-black {
+     .pcb-stackup_cf {color: silver;}
+     .pcb-stackup_sm {color: rgba(  0,   0,   0, 0.90);}
+     .pcb-stackup_ss {color: white;}
+}
+
+.pcb-white {
+     .pcb-stackup_cf {color: goldenrod;}
+     .pcb-stackup_sm {color: rgba(255, 255, 255, 0.90);}
+     .pcb-stackup_ss {color: black;}
+}
+
+.pcb-orange {
+     .pcb-stackup_cf {color: silver;}
+     .pcb-stackup_sm {color: rgba(195, 107,   0, 0.90);}
+     .pcb-stackup_ss {color: white;}
+}
+
+.pcb-purple {
+     .pcb-stackup_cf {color: goldenrod;}
+     .pcb-stackup_sm {color: rgba( 46,   0,  81, 0.90);}
+     .pcb-stackup_ss {color: white;}
+}
+
+.pcb-yellow {
+     .pcb-stackup_cf {color: goldenrod;}
+     .pcb-stackup_sm {color: rgba(255, 255, 102, 0.50);}
+     .pcb-stackup_ss {color: black;}
+}

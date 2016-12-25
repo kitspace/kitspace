@@ -148,17 +148,7 @@ function buildBoard(layers) {
       } else {
         const top    = stackup.top.svg
         const bottom = stackup.bottom.svg
-        const svgs = {}
-        board_colors.forEach(color => {
-          const style = (<defs><style>{boardBuilder.getStyle(color)}</style></defs>)
-          const top_children = top.props.children.slice()
-          top_children.push(style)
-          const bottom_children = bottom.props.children.slice()
-          bottom_children.push(style)
-          svgs[color] = {}
-          svgs[color].top = React.cloneElement(top, {}, top_children)
-          svgs[color].bottom = React.cloneElement(bottom, {}, bottom_children)
-        })
+        const svgs = {top, bottom}
         store.dispatch({type: 'setSvgs', value: {svgs}})
       }
     }, createElement)
@@ -282,10 +272,8 @@ const Submit = React.createClass({
     //}
     let top, bottom
     if (this.state.board.svgs) {
-      console.log(this.state.board.svgs)
-      console.log(this.state.board.color)
-      top = this.state.board.svgs[this.state.board.color].top
-      bottom = this.state.board.svgs[this.state.board.color].bottom
+      top = <div className={`pcb-${state.board.color}`}>{this.state.board.svgs.top}</div>
+      bottom = <div className={`pcb-${state.board.color}`}>{this.state.board.svgs.bottom}</div>
     }
     return (
     <div className='Submit'>
