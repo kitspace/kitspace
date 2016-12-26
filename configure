@@ -126,7 +126,7 @@ for (var f of images) {
 const boardFolders = globule.find('boards/*/*/*', {filter:'isDirectory'})
 
 
-const jsSrc = globule.find(['src/*.js', 'src/*.jsx'])
+const jsSrc = globule.find(['src/**/*.js', 'src/**/*.jsx'])
 
 
 const jsMainTargets = jsSrc.map(function(f) {
@@ -160,7 +160,7 @@ ninja.edge('build/page.css').from('src/page.scss')
     .using('sass')
 
 
-ninja.edge('build/submit/submit.css').from('src/submit.scss')
+ninja.edge('build/submit/submit.css').from('src/submit/submit.scss')
     .need(sassSrc).assign('path', 'src/')
     .using('sass')
 
@@ -171,7 +171,7 @@ ninja.edge('build/app.js').from('build/.temp/render.jsx')
     .using('browserify')
 
 
-ninja.edge('build/submit/app.js').from('build/.temp/render_submit.jsx')
+ninja.edge('build/submit/app.js').from('build/.temp/submit/render_submit.jsx')
     .need(jsMainTargets)
     .using('browserify')
 

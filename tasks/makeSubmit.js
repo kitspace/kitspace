@@ -6,10 +6,10 @@ if (require.main !== module) {
         let deps;
         const targets = ['build/submit/index.html'];
         if (config === 'production') {
-            deps = ['build/.temp/submit.jsx', 'src/submit.html'];
+            deps = ['build/.temp/submit/submit.jsx', 'src/submit/submit.html'];
             return {deps, targets, moduleDep: true};
         } else if (config === 'dev') {
-            deps = ['src/submit.html'];
+            deps = ['src/submit/submit.html'];
             return {deps, targets, moduleDep: false};
         }
     };

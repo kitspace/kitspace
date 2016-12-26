@@ -4,7 +4,6 @@ const React           = require('react')
 const {h}             = require('react-hyperscript-helpers')
 const request         = require('superagent')
 const path            = require('path')
-const boardBuilder    = require('./board_builder')
 const camelCase  = require('lodash.camelcase')
 const url = require('url')
 const {
@@ -22,8 +21,9 @@ if (typeof(window) !== 'undefined') {
   DOMURL = window.URL || window.webkitURL || window;
 }
 
-const TitleBar      = require('./title_bar')
-const BoardShowcase = require('./board_showcase')
+const TitleBar      = require('../title_bar')
+const BoardShowcase = require('../board_showcase')
+const boardBuilder    = require('../board_builder')
 
 const GIT_CLONE_SERVER = 'https://git-clone-server.kitnic.it'
 
