@@ -2,22 +2,20 @@ const fs    = require('fs');
 const utils = require('./utils/utils');
 
 if (require.main !== module) {
-    module.exports = function(folder, config) {
+    module.exports = function(config) {
         let deps;
         const targets = ['build/submit/index.html'];
         if (config === 'production') {
             deps = ['build/.temp/submit/submit.jsx', 'src/submit/submit.html'];
             return {deps, targets, moduleDep: true};
-        } else if (config === 'dev') {
+        }
+        else if (config === 'dev') {
             deps = ['src/submit/submit.html'];
             return {deps, targets, moduleDep: false};
         }
-    };
-
-
-    exports.moduleDep = true;
-
-} else {
+    }
+}
+else {
     let html;
     const {config, deps, targets} = utils.processArgs(process.argv);
     const index = targets[0];

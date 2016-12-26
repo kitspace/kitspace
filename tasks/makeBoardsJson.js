@@ -8,19 +8,22 @@ const cp          = require('child_process');
 const boardDir = 'boards';
 
 if (require.main !== module) {
-
-    exports.deps = [boardDir];
-    exports.targets = ['build/.temp/boards.json'];
-    exports.moduleDep = false;
-
-} else {
-
+    module.exports = function () {
+      const deps = [boardDir];
+      const targets = ['build/.temp/boards.json'];
+      const moduleDep = false;
+      return {deps, targets, moduleDep}
+    }
+}
+else {
     const getGithubInfo = function(id) {
         let text;
         const url =  `https://api.github.com/repos${id.replace(/^github.com/,'')}`;
-        if (__guard__(__guard__(process, x1 => x1.env), x => x.GH_TOKEN) != null) { //we use this avoid being rate-limited
+        //we use this avoid being rate-limited
+        if (process.env.GH_TOKEN != null)  {
             text = cp.execSync(`curl -u kasbah:${process.env.GH_TOKEN} ${url}`);
-        } else {
+        }
+        else {
             console.warn('Using un-authenticated access to GitHub API');
             text = cp.execSync(`curl ${url}`);
         }

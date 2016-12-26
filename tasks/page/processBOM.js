@@ -2,12 +2,12 @@ const fs          = require('fs');
 const globule     = require('globule');
 const path        = require('path');
 const yaml        = require('js-yaml');
-const utils       = require('./utils/utils');
+const utils       = require('../utils/utils');
 const oneClickBOM = require('1-click-bom');
 const cp = require('child_process');
 
 if (require.main !== module) {
-    module.exports = function(folder) {
+    module.exports = function(config, folder) {
         let bom, file, info;
         try {
             file = fs.readFileSync(`${folder}/kitnic.yaml`);

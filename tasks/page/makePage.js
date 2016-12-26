@@ -1,8 +1,8 @@
 const fs    = require('fs');
-const utils = require('./utils/utils');
+const utils = require('../utils/utils');
 
 if (require.main !== module) {
-    module.exports = function(folder, config) {
+    module.exports = function(config, folder) {
         let deps;
         let targets = [`build/${folder}/index.html`];
         if (config === 'production') {

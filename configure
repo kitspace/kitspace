@@ -186,35 +186,35 @@ for (folder of boardFolders) {
         .using('browserify')
 }
 
-
-for (var taskFile of globule.find('tasks/*.js')) {
-    var task = require(`./${path.dirname(taskFile)}/${path.basename(taskFile)}`)
-    const addEdge = function(t) {
-        if (config === 'production') {
-            return ninja.edge(t.targets)
-                .from([taskFile].concat(t.deps))
-                .using('node-task')
-        } else {
-            const edge = ninja.edge(t.targets[0])
-                .from([taskFile].concat(t.deps))
-                .assign('taskFile', taskFile)
-                .assign('targetFiles', t.targets.join(' '))
-                .using('node-task')
-            if (task.moduleDep) {
-                edge.assign('jsMain', t.deps[0])
-            }
-            return t.targets.slice(1).map((target) =>
-                ninja.edge(target).from(t.targets[0]))
-        }
-    }
-    if (typeof task === 'function') {
-        for (folder of boardFolders) {
-            addEdge(task(folder, config))
-        }
+function addEdge(taskFile, task) {
+    if (config === 'production') {
+        return ninja.edge(task.targets)
+            .from([taskFile].concat(task.deps))
+            .using('node-task')
     } else {
-        addEdge(task)
+        const edge = ninja.edge(task.targets[0])
+            .from([taskFile].concat(task.deps))
+            .assign('taskFile', taskFile)
+            .assign('targetFiles', task.targets.join(' '))
+            .using('node-task')
+        if (task.moduleDep) {
+            edge.assign('jsMain', task.deps[0])
+        }
+        task.targets.slice(1).map((target) =>
+            ninja.edge(target).from(task.targets[0]))
     }
 }
+
+globule.find('tasks/*.js').forEach(taskFile => {
+    const task = require(`./${path.dirname(taskFile)}/${path.basename(taskFile)}`)
+    addEdge(taskFile, task(config))
+})
+
+
+globule.find('tasks/page/*.js').forEach(taskFile => {
+    const task = require(`./${path.dirname(taskFile)}/${path.basename(taskFile)}`)
+    boardFolders.forEach(folder => addEdge(taskFile, task(config, folder)))
+})
 
 
 if (config === 'production') {
