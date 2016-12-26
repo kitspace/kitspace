@@ -1,5 +1,5 @@
-@import 'common';
-@import 'colors';
+@import '../common';
+@import '../colors';
 
 @include breakpoint(mobile) {
     .boardShowcaseContainer {

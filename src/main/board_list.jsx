@@ -1,7 +1,7 @@
 'use strict'
 const React            = require('react')
 const BoardCard        = require('./board_card')
-const InstallExtension = require('./install_extension')
+const InstallExtension = require('../install_extension')
 
 const style = {
   introContainer: function (show) {

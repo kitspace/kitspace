@@ -22,7 +22,7 @@ if (typeof(window) !== 'undefined') {
 }
 
 const TitleBar      = require('../title_bar')
-const BoardShowcase = require('../board_showcase')
+const BoardShowcase = require('../page/board_showcase')
 const boardBuilder    = require('../board_builder')
 
 const GIT_CLONE_SERVER = 'https://git-clone-server.kitnic.it'

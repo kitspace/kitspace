@@ -5,7 +5,7 @@ const browserVersion   = require('browser-version')
 const BomInstallPrompt = require('./bom_install_prompt')
 const ExtensionCompatibilityPrompt  =
 require('./extension_compatibility_prompt')
-const InstallExtension = require('./install_extension')
+const InstallExtension = require('../install_extension')
 const DirectStores     = require('./direct_stores')
 
 

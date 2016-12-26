@@ -1,6 +1,6 @@
 'use strict'
 const React = require('react')
-const zipPath = require('./zip-info.json')
+const zipPath = require('../zip-info.json')
 
 let Gerbers = React.createClass({
   render: function() {

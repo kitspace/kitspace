@@ -165,7 +165,7 @@ ninja.edge('build/submit/submit.css').from('src/submit/submit.scss')
     .using('sass')
 
 
-ninja.edge('build/app.js').from('build/.temp/render.jsx')
+ninja.edge('build/app.js').from('build/.temp/main/render_main.jsx')
     .need(jsMainTargets)
     .need('build/.temp/boards.json')
     .using('browserify')
@@ -182,7 +182,7 @@ for (folder of boardFolders) {
         .need(`build/.temp/${folder}/zip-info.json`)
         .need(`build/.temp/${folder}/readme.jsx`)
         .need(jsPageTargets[folder])
-        .from(`build/.temp/${folder}/render_page.jsx`)
+        .from(`build/.temp/${folder}/page/render_page.jsx`)
         .using('browserify')
 }
 

@@ -1,7 +1,7 @@
 'use strict'
 const React     = require('react')
-const LazyLoad  = require('./lazy_load')
-const FadeImage = require('./fade_image')
+const LazyLoad  = require('../lazy_load')
+const FadeImage = require('../fade_image')
 
 var BoardShowcase = React.createClass({
   getInitialState: function() {

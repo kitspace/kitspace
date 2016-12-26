@@ -1,12 +1,12 @@
 @import '../colors';
 @import '../common';
 @import '../title_bar';
-@import '../bom';
-@import '../board_showcase';
-@import '../gerbers';
-@import '../buy_parts';
-@import '../bom_install_prompt';
-@import '../extension_compatibility_prompt';
+@import 'bom';
+@import 'board_showcase';
+@import 'gerbers';
+@import 'buy_parts';
+@import 'bom_install_prompt';
+@import 'extension_compatibility_prompt';
 
     @include breakpoint(mobile) {
         .octicon {

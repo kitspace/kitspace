@@ -1,6 +1,7 @@
-@import 'colors';
+@import '../colors';
+@import '../common';
 
-.extensionCompatibilityPrompt {
+.bomInstallPrompt {
     background-color: $pearl-lusta;
     border: 2px solid $champagne;
     color: $potters-clay;
@@ -12,7 +13,7 @@
         padding: 16px;
     }
 
-    .bomPromptLink {
+    .bomInstallAnchor {
         color: $black;
         cursor: pointer;
     }
