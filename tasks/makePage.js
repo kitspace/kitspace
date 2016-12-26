@@ -7,15 +7,15 @@ if (require.main !== module) {
         let targets = [`build/${folder}/index.html`];
         if (config === 'production') {
             deps = [
-                `build/.temp/${folder}/page.jsx`,
-                'src/page.html',
+                `build/.temp/${folder}/page/page.jsx`,
+                'src/page/page.html',
                 `build/.temp/${folder}/info.json`,
                 `build/.temp/${folder}/readme.jsx`,
                 `build/.temp/${folder}/zip-info.json`
             ];
             return {deps, targets, moduleDep: true};
         } else if (config === 'dev') {
-            deps = ['src/page.html'];
+            deps = ['src/page/page.html'];
             targets = [`build/${folder}/index.html`];
             return {deps, targets, moduleDep: false};
         }

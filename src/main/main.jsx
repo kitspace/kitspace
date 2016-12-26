@@ -1,8 +1,8 @@
-const React       = require('react')
+const React            = require('react')
 const ReactSearchInput = require('react-search-input')
-const TitleBar    = require('./title_bar')
-const BoardList   = require('./board_list')
-const boards      = require('./boards.json')
+const TitleBar  = require('../title_bar')
+const BoardList = require('../board_list')
+const boards    = require('../boards.json')
 
 const SearchInput = ReactSearchInput.default
 

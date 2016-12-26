@@ -147,15 +147,15 @@ for (var folder of boardFolders) {
 }
 
 
-const sassSrc = globule.find('src/*.scss')
+const sassSrc = globule.find('src/**/*.scss')
 
 
-ninja.edge('build/index.css').from('src/main.scss')
+ninja.edge('build/index.css').from('src/main/main.scss')
     .need(sassSrc).assign('path', 'src/')
     .using('sass')
 
 
-ninja.edge('build/page.css').from('src/page.scss')
+ninja.edge('build/page.css').from('src/page/page.scss')
     .need(sassSrc).assign('path', 'src/')
     .using('sass')
 
