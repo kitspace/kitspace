@@ -1,8 +1,8 @@
 const React    = require('react')
 const ReactDOM = require('react-dom')
-const Main     = require('./main')
+const Index    = require('./index')
 
 ReactDOM.render(
-  <Main />,
+  <Index />,
   document.getElementById('content')
 )
