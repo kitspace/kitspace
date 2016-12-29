@@ -4,7 +4,8 @@ const React           = require('react')
 const {h}             = require('react-hyperscript-helpers')
 const request         = require('superagent')
 const path            = require('path')
-const camelCase  = require('lodash.camelcase')
+const camelCase       = require('lodash.camelcase')
+const whatsThatGerber = require('whats-that-gerber')
 const url = require('url')
 const {
   Input,
@@ -119,18 +120,7 @@ function Steps(props) {
 
 
 function gerberFiles(files, info) {
-  if (files.length < 1) {
-    return []
-  }
-  const prefix = files[0].split('/').slice(0, 3).join('/')
-  const relative = files.map(f => path.relative(prefix, f))
-  let folder = 'gerbers'
-  if (info != null) {
-    folder = info.gerbers || folder
-  }
-  folder = path.join(folder, '/')
-  return relative.filter(f => RegExp(`^${folder}`).test(f))
-    .map(f => path.join(prefix, f))
+  return files.filter(f => whatsThatGerber(f) !== 'drw')
 }
 
 function isLoading(status) {
