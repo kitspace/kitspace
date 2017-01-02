@@ -64,7 +64,7 @@ const StoreButtons = React.createClass({
           extensionPresence:
             !this.state.extensionWaiting ? 'present' : 'not_present'
         })
-      },2000)
+      }, 2000)
     }
     return {
       compatibleBrowser: this.isExtensionCompatible(version),
@@ -87,7 +87,7 @@ const StoreButtons = React.createClass({
       if (event.data.from == 'extension'){
         this.setState({
           extensionWaiting: false,
-          extensionPresence: true
+          extensionPresence: 'present',
         })
         switch (event.data.message) {
         case 'register':
@@ -141,9 +141,8 @@ const StoreButtons = React.createClass({
       let partsInfo = this.state.parts[retailer]
 
       //if the extension is not here fallback to direct submissions
-      if ((!this.state.compatibleBrowser
-        || (this.state.extensionPresence != 'present' && !this.state.extensionWaiting))
-        && typeof document !== 'undefined'
+      if ((this.state.extensionPresence !== 'present')
+        && (typeof document !== 'undefined')
         && document.getElementById(retailer + 'Form') !== null) {
         onClick = () => {
           document.getElementById(retailer + 'Form').submit()
