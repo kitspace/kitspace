@@ -64,7 +64,7 @@ const StoreButtons = React.createClass({
           extensionPresence:
             !this.state.extensionWaiting ? 'present' : 'not_present'
         })
-      }, 2000)
+      }, 3000)
     }
     return {
       compatibleBrowser: this.isExtensionCompatible(version),
