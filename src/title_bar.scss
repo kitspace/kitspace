@@ -1,6 +1,4 @@
 @import 'colors';
-@import 'colors';
-@import '/semantic.min.css';
 
 .titleBar {
     align-items: center;
@@ -27,8 +25,9 @@
 
 .logoContainer {
     background-color: $mine-shaft;
+    flex-shrink: 0;
     padding: 10px;
-    min-width: 210px;
+    width: 140px;
     z-index: 1;
 
     @include breakpoint(mobile) {
@@ -46,6 +45,7 @@
 
 .logoImg {
     height: 46px;
+    width: 100%;
 
     @include breakpoint(mobile) {
         height: 92px;
@@ -57,12 +57,14 @@
     background-color: $mine-shaft;
     color: $white;
     display: flex;
-    justify-content: space-around;
+    flex-shrink: 0;
+    justify-content: space-between;
     padding: 10px;
     z-index: 1;
-    min-width: 210px;
-    padding-left: 20px;
 
+    @include breakpoint(mobile) {
+        width: 45%;
+    }
 
     .submissionButton {
         align-items: center;
@@ -140,15 +142,28 @@
     width: 60%;
 }
 
-.ui.button {
-    @include breakpoint(mobile) {
-        font-size: 32px;
+.page {
+    .middleContainer {
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        z-index: 0;
+
+        @include breakpoint(mobile_or_small_width) {
+            order: 0;
+            position: static;
+            width: auto;
+        }
+
+        @include breakpoint(mobile) {
+            padding: 40px;
+        }
     }
 }
 
-
 .middleContainer {
-    flex-grow: 8;
+    flex-grow: 2;
 
     @include breakpoint(mobile) {
         padding: 10px 10px 40px;

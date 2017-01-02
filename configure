@@ -160,21 +160,10 @@ ninja.edge('build/page.css').from('src/page/page.scss')
     .using('sass')
 
 
-ninja.edge('build/submit/submit.css').from('src/submit/submit.scss')
-    .need(sassSrc).assign('path', 'src/')
-    .using('sass')
-
-
 ninja.edge('build/app.js').from('build/.temp/index/render_index.jsx')
     .need(jsMainTargets)
     .need('build/.temp/boards.json')
     .using('browserify')
-
-
-ninja.edge('build/submit/app.js').from('build/.temp/submit/render_submit.jsx')
-    .need(jsMainTargets)
-    .using('browserify')
-
 
 for (folder of boardFolders) {
     ninja.edge(`build/${folder}/app.js`)
@@ -223,10 +212,6 @@ if (config === 'production') {
         ninja.edge(path.join('build', f)).from(f).using('copy')
     }
 }
-
-
-ninja.edge('build/semantic.min.css').from('node_modules/semantic-ui-css/semantic.min.css').using('copy')
-
 
 ninja.edge('clean').from('build/').using('remove')
 
