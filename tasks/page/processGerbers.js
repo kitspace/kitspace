@@ -3,8 +3,8 @@ const globule      = require('globule');
 const path         = require('path');
 const yaml         = require('js-yaml');
 const Svgo         = require('svgo');
-const utils        = require('./utils/utils');
-const boardBuilder = require('./utils/boardBuilder');
+const utils        = require('../utils/utils');
+const boardBuilder = require('../../src/board_builder');
 const cp           = require('child_process');
 const Jszip        = require('jszip');
 
@@ -55,7 +55,7 @@ const svgo = new Svgo({
     ]});
 
 if (require.main !== module) {
-    module.exports = function(folder) {
+    module.exports = function(config, folder) {
         let file, gerbers, info;
         try {
             file = fs.readFileSync(`${folder}/kitnic.yaml`);

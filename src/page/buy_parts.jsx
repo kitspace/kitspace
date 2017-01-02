@@ -5,7 +5,7 @@ const browserVersion   = require('browser-version')
 const BomInstallPrompt = require('./bom_install_prompt')
 const ExtensionCompatibilityPrompt  =
 require('./extension_compatibility_prompt')
-const InstallExtension = require('./install_extension')
+const InstallExtension = require('../install_extension')
 const DirectStores     = require('./direct_stores')
 
 
@@ -21,18 +21,18 @@ const StoreButtons = React.createClass({
     return (/Chrome/.test(version) || /Firefox/.test(version))
   },
   getInitialState: function() {
-    let adding = {}
-    let partsSpecified = {}
-    let parts = {}
+    const adding = {}
+    const partsSpecified = {}
+    const parts = {}
     const version = browserVersion()
-    var onClick = InstallExtension
+    const onClick = InstallExtension
 
     for (let retailer of oneClickBOM.lineData.retailer_list) {
       adding[retailer] = undefined
-      let retailerItems = this.props.items.map((item) => {
+      const retailerItems = this.props.items.map((item) => {
         return item.retailers[retailer]
       })
-      let partCount = retailerItems.reduce((carry, val) => {
+      const partCount = retailerItems.reduce((carry, val) => {
         if (val)
           carry++
         return carry
@@ -86,7 +86,8 @@ const StoreButtons = React.createClass({
         return
       if (event.data.from == 'extension'){
         this.setState({
-          extensionWaiting: false
+          extensionWaiting: false,
+          extensionPresence: true
         })
         switch (event.data.message) {
         case 'register':
@@ -141,7 +142,7 @@ const StoreButtons = React.createClass({
 
       //if the extension is not here fallback to direct submissions
       if ((!this.state.compatibleBrowser
-        || this.state.extensionPresence != 'present')
+        || (this.state.extensionPresence != 'present' && !this.state.extensionWaiting))
         && typeof document !== 'undefined'
         && document.getElementById(retailer + 'Form') !== null) {
         onClick = () => {

@@ -1,69 +1,70 @@
 #!/usr/bin/env node
-let config, uglifyjs;
-const ninjaBuildGen = require('ninja-build-gen');
-const globule       = require('globule');
-const path          = require('path');
+let config, uglifyjs
+const ninjaBuildGen = require('ninja-build-gen')
+const globule       = require('globule')
+const path          = require('path')
 
 
 if (process.argv[2] === 'production') {
-    config = 'production';
+    config = 'production'
 } else {
-    config = 'dev';
+    config = 'dev'
 }
 
 
-const ninja = ninjaBuildGen('1.5.1', 'build/');
+const ninja = ninjaBuildGen('1.5.1', 'build/')
 
 
 ninja.header(`#generated from ${path.basename(module.filename)} \
-with '${config}' config`);
+with '${config}' config`)
 
 
 // - Rules - #
 
 ninja.rule('copy').run('cp $in $out')
-    .description('$command');
+    .description('$command')
 
 
 ninja.rule('remove').run('rm -rf $in')
-    .description('$command');
+    .description('$command')
 
 
 let browserify = `browserify --extension='.jsx' --transform [ babelify \
---presets [ react es2015 ] ]`;
+    --presets [ react es2015 ] ]`
 
 
 if (config === 'dev') {
-    browserify += ' --debug';
+    browserify += ' --debug'
 } else {
-    browserify += ' -g uglifyify';
+    browserify += ' -g uglifyify'
 }
 
-const dependencies = Object.keys(require('./package.json').dependencies);
-const excludes = `-x ${dependencies.join(' -x ')}`;
-const requires = `-r ${dependencies.join(' -r ')}`;
+const dependencies = Object.keys(require('./package.json').dependencies)
+    .filter(name => name !== 'semantic-ui-css')
+const excludes = `-x ${dependencies.join(' -x ')}`
+const requires = `-r ${dependencies.join(' -r ')}`
 
 
 
-let rule = ninja.rule('node-task');
+let rule = ninja.rule('node-task')
 if (config === 'production') {
-    rule.run(`node -- $in -- ${config} $out`);
+    rule.run(`node -- $in -- ${config} $out`)
 } else {
     //write to $out.d depfile in makefile format for ninja to keep track of deps
     rule.run(`browserify --list $taskFile > $out.d \
-&& if [ '$jsMain' != '' ]; then ${browserify} --list $jsMain >> $out.d; fi \
-&& ./scripts/depfileify $out $out.d \
-&& node -- $in -- ${config} $targetFiles`)
+        && if [ '$jsMain' != '' ]; then ${browserify} --list $jsMain >> $out.d; fi \
+        && ./scripts/depfileify $out $out.d \
+        && node -- $in -- ${config} $targetFiles`)
     .depfile('$out.d')
-    .description(`node -- $in -- ${config} $targetFiles`);
+    .description(`node -- $in -- ${config} $targetFiles`)
 }
 
 
 
-rule = ninja.rule('browserify');
+rule = ninja.rule('browserify')
 if (config === 'production') {
     let compress_opts = {
-        sequences     : true,  // join consecutive statemets with the “comma operator”
+        sequences     : true,//join consecutive statements with the “comma operator”
         properties    : true,  // optimize property access: a["foo"] → a.foo
         dead_code     : true,  // discard unreachable code
         drop_debugger : true,  // discard “debugger” statements
@@ -81,93 +82,88 @@ if (config === 'production') {
         cascade       : true,  // try to cascade `right` into `left` in sequences
         side_effects  : true,  // drop side-effect-free statements
         warnings      : true
-    };
+    }
 
-    compress_opts = [(() => {
-        const result = [];
-        for (let o in compress_opts) {
-            const s = compress_opts[o];
-            result.push(o + '=' + s);
-        }
-        return result;
-    })()];
+    compress_opts = Object.keys(compress_opts).map(key => {
+        return `${key}=${compress_opts[key]}`
+    })
 
     uglifyjs = `uglifyjs --mangle --reserved '${dependencies}' \
---compress '${compress_opts}'`;
+                    --compress '${compress_opts}'`
 
-    rule.run(`${browserify} ${excludes} $in | ${uglifyjs} > $out`);
+    rule.run(`${browserify} ${excludes} $in | ${uglifyjs} > $out`)
 } else {
     rule.run(`${browserify} ${excludes} --list $in > $out.d \
-&& ./scripts/depfileify $out $out.d \
-&& ${browserify} ${excludes} $in -o $out`
+        && ./scripts/depfileify $out $out.d \
+        && ${browserify} ${excludes} $in -o $out`
     )
     .depfile('$out.d')
-    .description(`browserify ${excludes} $in -o $out`);
+    .description(`browserify ${excludes} $in -o $out`)
 }
 
-rule = ninja.rule('browserify-require');
+rule = ninja.rule('browserify-require')
 if (config === 'production') {
-    rule.run(`${browserify} ${requires} $in | ${uglifyjs} > $out`);
+    rule.run(`${browserify} ${requires} $in | ${uglifyjs} > $out`)
 } else {
-    rule.run(`${browserify} ${requires} $in -o $out`);
+    rule.run(`${browserify} ${requires} $in -o $out`)
 }
 
 
-ninja.rule('sass').run('sass --sourcemap=none --load-path $path $in $out');
+ninja.rule('sass').run('node-sass --sourcemap=none --load-path $path $in $out')
 
 
 // - Edges - #
 
-ninja.edge('build/vendor.js').using('browserify-require');
+ninja.edge('build/vendor.js').using('browserify-require')
 
 
-const images = globule.find('src/images/*');
+const images = globule.find('src/images/*')
 for (var f of images) {
-    ninja.edge(f.replace('src','build')).from(f).using('copy');
+    ninja.edge(f.replace('src','build')).from(f).using('copy')
 }
 
 
-const boardFolders = globule.find('boards/*/*/*', {filter:'isDirectory'});
+const boardFolders = globule.find('boards/*/*/*', {filter:'isDirectory'})
 
 
-const jsSrc = globule.find(['src/*.js', 'src/*.jsx']);
+const jsSrc = globule.find(['src/**/*.js', 'src/**/*.jsx'])
 
 
 const jsMainTargets = jsSrc.map(function(f) {
-    const temp = f.replace('src', 'build/.temp');
-    ninja.edge(temp).from(f).using('copy');
-    return temp;
-});
+    const temp = f.replace('src', 'build/.temp')
+    ninja.edge(temp).from(f).using('copy')
+    return temp
+})
 
 
-const jsPageTargets = {};
+const jsPageTargets = {}
 for (var folder of boardFolders) {
-    jsPageTargets[folder] = [];
+    jsPageTargets[folder] = []
     jsSrc.map(function(f) {
-        const temp = f.replace('src', `build/.temp/${folder}`);
-        jsPageTargets[folder].push(temp);
-        return ninja.edge(temp).from(f).using('copy');
-    });
+        const temp = f.replace('src', `build/.temp/${folder}`)
+        jsPageTargets[folder].push(temp)
+        return ninja.edge(temp).from(f).using('copy')
+    })
 }
 
 
-const sassSrc = globule.find('src/*.scss');
+const sassSrc = globule.find('src/**/*.scss')
 
 
-ninja.edge('build/index.css').from('src/main.scss')
+ninja.edge('build/index.css').from('src/index/index.scss')
     .need(sassSrc).assign('path', 'src/')
-    .using('sass');
+    .using('sass')
 
 
-ninja.edge('build/page.css').from('src/page.scss')
+ninja.edge('build/page.css').from('src/page/page.scss')
     .need(sassSrc).assign('path', 'src/')
-    .using('sass');
+    .using('sass')
 
-ninja.edge('build/app.js').from('build/.temp/render.jsx')
+
+ninja.edge('build/app.js').from('build/.temp/index/render_index.jsx')
     .need(jsMainTargets)
     .need('build/.temp/boards.json')
-    .using('browserify');
-
+    .using('browserify')
 
 for (folder of boardFolders) {
     ninja.edge(`build/${folder}/app.js`)
@@ -175,64 +171,56 @@ for (folder of boardFolders) {
         .need(`build/.temp/${folder}/zip-info.json`)
         .need(`build/.temp/${folder}/readme.jsx`)
         .need(jsPageTargets[folder])
-        .from(`build/.temp/${folder}/render_page.jsx`)
-        .using('browserify');
+        .from(`build/.temp/${folder}/page/render_page.jsx`)
+        .using('browserify')
 }
 
-
-for (var taskFile of globule.find('tasks/*.js')) {
-    var task = require(`./${path.dirname(taskFile)}/${path.basename(taskFile)}`);
-    const addEdge = function(t) {
-        if (config === 'production') {
-            return ninja.edge(t.targets)
-                .from([taskFile].concat(t.deps))
-                .using('node-task');
-        } else {
-            const edge = ninja.edge(t.targets[0])
-                .from([taskFile].concat(t.deps))
-                .assign('taskFile', taskFile)
-                .assign('targetFiles', t.targets.join(' '))
-                .using('node-task');
-            if (task.moduleDep) {
-                edge.assign('jsMain', t.deps[0]);
-            }
-            return t.targets.slice(1).map((target) =>
-                ninja.edge(target).from(t.targets[0]));
-        }
-    };
-    if (typeof task === 'function') {
-        for (folder of boardFolders) {
-            addEdge(task(folder, config));
-        }
+function addEdge(taskFile, task) {
+    if (config === 'production') {
+        return ninja.edge(task.targets)
+            .from([taskFile].concat(task.deps))
+            .using('node-task')
     } else {
-        addEdge(task);
+        const edge = ninja.edge(task.targets[0])
+            .from([taskFile].concat(task.deps))
+            .assign('taskFile', taskFile)
+            .assign('targetFiles', task.targets.join(' '))
+            .using('node-task')
+        if (task.moduleDep) {
+            edge.assign('jsMain', task.deps[0])
+        }
+        task.targets.slice(1).map((target) =>
+            ninja.edge(target).from(task.targets[0]))
     }
 }
+
+globule.find('tasks/*.js').forEach(taskFile => {
+    const task = require(`./${path.dirname(taskFile)}/${path.basename(taskFile)}`)
+    addEdge(taskFile, task(config))
+})
+
+
+globule.find('tasks/page/*.js').forEach(taskFile => {
+    const task = require(`./${path.dirname(taskFile)}/${path.basename(taskFile)}`)
+    boardFolders.forEach(folder => addEdge(taskFile, task(config, folder)))
+})
+
 
 if (config === 'production') {
-    const presentation_files = globule.find('oshcamp2016/**/*', {filter:'isFile'});
+    const presentation_files = globule.find('oshcamp2016/**/*', {filter:'isFile'})
     for (f of presentation_files) {
-        ninja.edge(path.join('build', f)).from(f).using('copy');
+        ninja.edge(path.join('build', f)).from(f).using('copy')
     }
 }
 
-
-ninja.edge('clean').from('build/').using('remove');
+ninja.edge('clean').from('build/').using('remove')
 
 
 const all = ninja.edges.filter(c => !c.targets.includes('clean'))
-.reduce((prev, c) => prev.concat(c.targets)
-, []);
+    .reduce((prev, c) => prev.concat(c.targets), [])
+ninja.edge('all').from(all)
+ninja.byDefault('all')
 
 
-ninja.edge('all').from(all);
-
-
-ninja.byDefault('all');
-
-
-ninja.save('build.ninja');
-
-
-
-console.log(`generated ./build.ninja with '${config}' config`);
+ninja.save('build.ninja')
+console.log(`generated ./build.ninja with '${config}' config`)

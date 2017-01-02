@@ -1,6 +1,6 @@
-@import 'colors';
-@import 'common';
-@import 'title_bar';
+@import '../colors';
+@import '../common';
+@import '../title_bar';
 @import 'bom';
 @import 'board_showcase';
 @import 'gerbers';
@@ -8,7 +8,6 @@
 @import 'bom_install_prompt';
 @import 'extension_compatibility_prompt';
 
-.page {
     @include breakpoint(mobile) {
         .octicon {
             font-size: 48px;
@@ -127,4 +126,3 @@
     .readme img {
         max-width:100%;
     }
-}

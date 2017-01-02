@@ -1,8 +1,8 @@
 const React    = require('react')
 const ReactDOM = require('react-dom')
-const Main     = require('./main')
+const Submit   = require('./submit')
 
 ReactDOM.render(
-  <Main />,
+  <Submit />,
   document.getElementById('content')
 )

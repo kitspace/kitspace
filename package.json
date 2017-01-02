@@ -22,7 +22,8 @@
     "jszip": "^3.1.1",
     "marky-markdown": "kasbah/marky-markdown#fix-default-anchors-2",
     "ninja-build-gen": "^0.2.1",
-    "pcb-stackup": "^2.0.0",
+    "node-sass": "^4.0.0",
+    "pcb-stackup": "tracespace/pcb-stackup#test-determinism",
     "reactify": "^1.1.1",
     "source-map-support": "^0.4.0",
     "svgo": "^0.6.6",
@@ -43,12 +44,18 @@
     "1-click-bom": "github:monostable/nodejs-1-click-bom",
     "babel-polyfill": "^6.13.0",
     "browser-version": "^1.0.0",
+    "lodash.camelcase": "^4.3.0",
     "react": "^15.3.0",
     "react-document-title": "^2.0.1",
     "react-dom": "^15.3.0",
     "react-double-scrollbar": "0.0.9",
     "react-hyperscript-helpers": "^1.1.0",
-    "react-search-input": "~0.10.1"
+    "react-markdown": "^2.4.2",
+    "react-search-input": "~0.10.1",
+    "redux": "^3.6.0",
+    "superagent": "^3.3.1",
+    "whats-that-gerber": "^2.1.0",
+    "xml-element-string": "^1.0.0"
   },
   "sasslintConfig": "./src/.sass-lint.yml"
 }

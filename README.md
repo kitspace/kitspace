@@ -153,7 +153,6 @@ gerbers: manufacture/gerbers-and-drills
 - [Nodejs](https://nodejs.org) >= 4
 - [fswatch](http://emcrisostomo.github.io/fswatch/) on OSX/Windows or inotify-tools on Linux
 - [Ninja Build](https://github.com/ninja-build/ninja/releases) >= 1.5.1
-- [Sass](http://sass-lang.com/install) >= 3.2.12
 - The rest of the dependencies can be retrieved via `npm install`
 
 ### Running a local dev server

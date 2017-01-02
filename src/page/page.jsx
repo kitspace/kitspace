@@ -1,11 +1,12 @@
 const React         = require('react')
 const DocumentTitle = require('react-document-title')
-const TitleBar      = require('./title_bar')
+const TitleBar      = require('../title_bar')
 const BOM           = require('./bom')
 const BoardShowcase = require('./board_showcase')
 const StoreButtons  = require('./buy_parts')
-const info          = require('./info.json')
-const Readme        = require('./readme')
+const info          = require('../info.json')
+const Readme        = require('../readme')
+const Gerbers       = require('./gerbers')
 
 var Page = React.createClass({
   render: function () {
@@ -32,7 +33,7 @@ var Page = React.createClass({
       <DocumentTitle title={`${titleTxt} - kitnic.it`}>
       <div>
         <div className='page'>
-          <TitleBar>
+          <TitleBar submissionButton={true}>
             <div className='titleText'>
               {titleTxt}
             </div>
@@ -50,7 +51,8 @@ var Page = React.createClass({
                 </div>
               </div>
             </div>
-            <BoardShowcase />
+            <Gerbers />
+            <BoardShowcase topSrc='images/top.svg' bottomSrc='images/bottom.svg'/>
             <StoreButtons items={ info.bom.lines ? info.bom.lines : [] } />
             <Readme />
             <BOM data={ info.bom ? info.bom : [] } />
