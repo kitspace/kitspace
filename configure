@@ -220,10 +220,12 @@ globule.find('tasks/page/*.js').forEach(taskFile => {
 
 
 if (config === 'production') {
-    const presentation_files = globule.find('oshcamp2016/**/*', {filter:'isFile'})
-    for (f of presentation_files) {
-        ninja.edge(path.join('build', f)).from(f).using('copy')
-    }
+    const presentation_folders = globule.find(path.join(__dirname, 'presentations/*'), {filter:'isDirectory'})
+    presentation_folders.forEach(folder => {
+        globule.find(path.join(folder, '**/*'), {filter: 'isFile'}).forEach(f => {
+            ninja.edge(path.join('build', path.relative('presentations', f))).from(f).using('copy')
+        })
+    })
 }
 
 
