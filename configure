@@ -111,6 +111,8 @@ if (config === 'production') {
 
 ninja.rule('sass').run('node-sass --sourcemap=none --load-path $path $in $out')
 
+ninja.rule('autoprefix').run('postcss --use autoprefixer $in -o $out')
+
 
 // - Edges - #
 
@@ -150,14 +152,22 @@ for (var folder of boardFolders) {
 const sassSrc = globule.find('src/**/*.scss')
 
 
-ninja.edge('build/index.css').from('src/index/index.scss')
+ninja.edge('build/.temp/index.css').from('src/index/index.scss')
     .need(sassSrc).assign('path', 'src/')
     .using('sass')
 
 
-ninja.edge('build/page.css').from('src/page/page.scss')
+ninja.edge('build/.temp/page.css').from('src/page/page.scss')
     .need(sassSrc).assign('path', 'src/')
     .using('sass')
+
+
+ninja.edge('build/index.css').from('build/.temp/index.css')
+    .using('autoprefix')
+
+
+ninja.edge('build/page.css').from('build/.temp/page.css')
+    .using('autoprefix')
 
 
 ninja.edge('build/app.js').from('build/.temp/index/render_index.jsx')

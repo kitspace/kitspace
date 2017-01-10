@@ -8,7 +8,7 @@ const style = {
     return {
       marginLeft:'10%',
       marginRight:'10%',
-      marginTop:32,
+      marginTop: 32,
       marginBottom: 32,
       display:(show ? 'inherit' : 'none')
     }
@@ -42,7 +42,7 @@ var BoardList = React.createClass({
     var cardNodes = this.props.data.map(function(data, index) {
       return (
         <BoardCard data={data} key={data.id + index}
-          lazyLoad={ true }/>
+          lazyLoad={true}/>
       )
     })
     var intro = (
@@ -99,7 +99,7 @@ var BoardList = React.createClass({
     return (
       <div>
           {intro}
-        <div style={{margin: 32, textAlign:'center'}}>
+        <div className='boardList'>
           {cardNodes}
         </div>
       </div>
