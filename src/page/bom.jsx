@@ -21,14 +21,11 @@ function tsvToTable(tsv) {
   const bodyJSX = tbody(lines.slice(1).map((line, rowIndex) => {
     line = line.split('\t')
     return tr(`.tr${rowIndex % 2}`, line.map((text, columnIndex) => {
-      let style = {}
-      if (markPink(columnIndex) && text == '') {
-        style = {backgroundColor:'pink'}
-      }
-      return td({style: style}, text)
+      const error = markPink(columnIndex) && text == ''
+      return h(Table.Cell, {error}, text)
     }))
   }))
-  const tableProps = {unstackable: true, singleline: true}
+  const tableProps = {unstackable: true, singleline: true, selectable: true}
   return h(Table, tableProps, [headingJSX, bodyJSX])
 }
 
