@@ -52,8 +52,7 @@ if (require.main !== module) {
 
     const tsv = fs.readFileSync(bomPath, {encoding:'utf8'});
     const bom = oneClickBOM.parseTSV(tsv);
-    info.bom = {};
-    info.bom.lines = bom.lines;
+    info.bom = {lines: bom.lines};
     info.bom.tsv = oneClickBOM.writeTSV(bom.lines);
 
     let repo = cp.execSync(`cd ${folder} && git remote -v`, {encoding:'utf8'});

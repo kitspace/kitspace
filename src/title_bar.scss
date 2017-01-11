@@ -21,125 +21,151 @@
     @include breakpoint(mobile) {
         padding-top: 10px;
     }
-}
 
-.logoContainer {
-    background-color: $mine-shaft;
-    flex-shrink: 0;
-    padding: 10px;
-    width: 140px;
-    z-index: 1;
+    .logoContainer {
+        background-color: $mine-shaft;
+        flex-shrink: 0;
+        margin: 10px;
+        width: 140px;
+        z-index: 1;
 
-    @include breakpoint(mobile) {
-        width: 50%;
-    }
-}
-
-.logoImgContainer {
-    width: 90%;
-
-    @include breakpoint(mobile) {
-        width: 70%;
-    }
-}
-
-.logoImg {
-    height: 46px;
-    width: 100%;
-
-    @include breakpoint(mobile) {
-        height: 92px;
-    }
-}
-
-.submitContainer {
-    align-items: center;
-    background-color: $mine-shaft;
-    color: $white;
-    display: flex;
-    flex-shrink: 0;
-    justify-content: space-between;
-    padding: 10px;
-    z-index: 1;
-
-    @include breakpoint(mobile) {
-        width: 45%;
+        @include breakpoint(mobile) {
+            width: 50%;
+        }
     }
 
-    .submissionButton {
+    .logoImgContainer {
+        width: 90%;
+
+        @include breakpoint(mobile) {
+            width: 70%;
+        }
+    }
+
+    .logoImg {
+        height: 46px;
+        width: 100%;
+
+        @include breakpoint(mobile) {
+            height: 92px;
+        }
+    }
+
+    .submitContainer {
         align-items: center;
-        background: $fruit-salad;
-        border: 0;
-        border-radius: 3px;
-        box-sizing: border-box;
+        background-color: $mine-shaft;
         color: $white;
-        cursor: pointer;
         display: flex;
-        font-family: 'Noto Sans','Helvetica', 'Arial', sans-serif;
-        font-size: 16px;
-        font-weight: bold;
-        line-height: 0;
-        margin-right: 8px;
-        min-width: 174px;
-        padding: 20px 15px;
-        white-space: nowrap;
+        flex-shrink: 0;
+        justify-content: space-between;
+        padding: 10px;
+        z-index: 1;
 
         @include breakpoint(mobile) {
+            width: 45%;
+        }
+
+        .submissionButton {
+            align-items: center;
+            background: $fruit-salad;
+            border: 0;
+            border-radius: 3px;
+            box-sizing: border-box;
+            color: $white;
+            cursor: pointer;
+            display: flex;
+            font-family: 'Noto Sans','Helvetica', 'Arial', sans-serif;
+            font-size: 16px;
+            font-weight: bold;
+            line-height: 0;
+            margin-right: 8px;
+            min-width: 174px;
+            padding: 20px 15px;
+            white-space: nowrap;
+
+            @include breakpoint(mobile) {
+                font-size: 32px;
+                height: auto;
+                min-width: 307px;
+                padding: 30px 40px;
+            }
+        }
+
+        .submissionButton:hover {
+            background: $emerald;
+        }
+
+        .octicon.uploadIcon,
+        .octicon.githubIcon {
+            display: block;
             font-size: 32px;
-            height: auto;
-            min-width: 307px;
-            padding: 30px 40px;
+            height: 32px;
+            width: 32px;
+
+            @include breakpoint(mobile) {
+                font-size: 64px;
+                height: 64px;
+                width: 64px;
+            }
+        }
+
+        .contributeButton {
+            align-items: center;
+            border: 0;
+            border-radius: 3px;
+            color: $gray;
+            cursor: pointer;
+            display: flex;
+            font-family: 'Noto Sans','Helvetica', 'Arial', sans-serif;
+            font-size: 16px;
+            font-weight: bold;
+            justify-content: space-around;
+            padding: 5px;
+            white-space: nowrap;
+
+            @include breakpoint(mobile) {
+                font-size: 24px;
+            }
+        }
+
+        .contributeButton:hover {
+            color: $silver-chalice;
+        }
+
+        .uploadContainer:hover {
+            text-decoration: none;
         }
     }
 
-    .submissionButton:hover {
-        background: $emerald;
+    .submitImage {
+        width: 60%;
     }
 
-    .octicon.uploadIcon,
-    .octicon.githubIcon {
-        display: block;
-        font-size: 32px;
-        height: 32px;
-        width: 32px;
+    .middleContainer {
+        flex-grow: 2;
 
         @include breakpoint(mobile) {
-            font-size: 64px;
-            height: 64px;
-            width: 64px;
+            padding: 10px 10px 40px;
+        }
+
+        @include breakpoint(mobile_or_small_width) {
+            margin: 10px;
+            order: 3;
+            width: 100%;
         }
     }
 
-    .contributeButton {
-        align-items: center;
-        border: 0;
-        border-radius: 3px;
-        color: $gray;
-        cursor: pointer;
-        display: flex;
-        font-family: 'Noto Sans','Helvetica', 'Arial', sans-serif;
-        font-size: 16px;
-        font-weight: bold;
-        justify-content: space-around;
-        padding: 5px;
-        white-space: nowrap;
-
-        @include breakpoint(mobile) {
-            font-size: 24px;
-        }
-    }
-
-    .contributeButton:hover {
-        color: $silver-chalice;
-    }
-
-    .uploadContainer:hover {
+    .contributeContainer:hover {
+        color: $white;
         text-decoration: none;
     }
-}
 
-.submitImage {
-    width: 60%;
+    .contributeContainer {
+        align-items: center;
+        color: $gray;
+        display: flex;
+    }
+
 }
 
 .page {
@@ -162,28 +188,4 @@
     }
 }
 
-.middleContainer {
-    flex-grow: 2;
-
-    @include breakpoint(mobile) {
-        padding: 10px 10px 40px;
-    }
-
-    @include breakpoint(mobile_or_small_width) {
-        margin: 10px;
-        order: 3;
-        width: 100%;
-    }
-}
-
-.contributeContainer:hover {
-    color: $white;
-    text-decoration: none;
-}
-
-.contributeContainer {
-    align-items: center;
-    color: $gray;
-    display: flex;
-}
 

@@ -1,100 +1,35 @@
+@import '/semantic.min.css';
 @import 'animation';
 @import '../common';
 @import '../colors';
 @import '../fontello';
 
 .bom {
-    thead {
-        background-color: $dove-gray;
-        color: $white;
-        font-weight: bold;
+    td.marked.orange {
+        border-left: 13px solid #FF9E39 !important;
     }
 
-    .tr0 {
-        background: $alto;
-        border-bottom: 2px solid $silver;
-        border-top: 2px solid $gallery;
+    td.marked.green {
+        border-left: 13px solid #62B9A4 !important;
     }
 
-    .tr1 {
-        background-color: $white;
+    td.marked.purple {
+        border-left: 13px solid #985DFF !important;
     }
 
-    .retailerHeading:hover {
-        background-color: $gray;
+    td.marked.yellow {
+        border-left: 13px solid #F2EF11 !important;
     }
 
-    .bomTable {
-        border-spacing: 0;
-        font-size: 14px;
-        min-width: 100%;
-
-        @include breakpoint(mobile) {
-            th,
-            td {
-                font-size: 48px;
-                padding: 8px;
-            }
-        }
-
-        td {
-            border-bottom: 1px solid $dusty-gray;
-            border-right: 1px solid $dusty-gray;
-            overflow: hidden;
-            padding: 9px 10px;
-            text-align: left;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-
-        th {
-            border-bottom: 1px solid $dusty-gray;
-            border-right: 1px solid $dusty-gray;
-            box-sizing: border-box;
-            height: 40px;
-            padding: 0 10px;
-            text-align: left;
-        }
+    td.marked.black {
+        border-left: 13px solid #000000 !important;
     }
 
-    .bomTableEdge {
-        width: 10%;
-
-        @include breakpoint(mobile_or_small_width) {
-            display: none;
-        }
+    td.marked.blue {
+        border-left: 13px solid #181887 !important;
     }
 
-    .bomToggle {
-        background: $dove-gray;
-        border: 0;
-        border-bottom: 1px solid $mine-shaft;
-        border-radius: 5px;
-        color: $white;
-        cursor: pointer;
-        font-size: 16px;
-        margin-bottom: 16px;
-        padding: 8px 16px;
-
-        @include breakpoint(mobile) {
-            font-size: 48px;
-            padding: 32px;
-        }
-    }
-
-    .columnVisibility {
-        font-size: 8px;
-        font-weight: normal;
-    }
-
-    .thContainer {
-        display: flex;
-        justify-content: space-between;
-    }
-
-    .tickApproval {
-        color: $crete;
-        padding-left: 3.2px;
-        text-shadow: 0 -1px 0 $malachite;
+    td.marked.lightblue {
+        border-left: 13px solid lightblue !important;
     }
 }
