@@ -35,11 +35,6 @@ let BOM = React.createClass({
     data: React.PropTypes.object.isRequired
   },
   render: function () {
-    //get rid of this once proper BOMs are made a requirement and enforced
-    //much earlier
-    if (this.props.data.lines.length === 0) {
-      return (<div>{'no BOM yet'}</div>)
-    }
     return (
       <div className='bom'>
         <div className='bomTableContainer'>
