@@ -223,6 +223,10 @@ if (config === 'production') {
     }
 }
 
+
+ninja.edge('build/semantic.min.css').from('node_modules/semantic-ui-css/semantic.min.css').using('copy')
+
+
 ninja.edge('clean').from('build/').using('remove')
 
 
