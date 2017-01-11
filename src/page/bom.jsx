@@ -1,7 +1,8 @@
 'use strict'
 const React           = require('react')
 const DoubleScrollbar = require('react-double-scrollbar')
-const {table, thead, tbody, tr, th, td} = require('react-hyperscript-helpers')
+const {h, table, thead, tbody, tr, th, td} = require('react-hyperscript-helpers')
+const {Table} = require('semantic-ui-react')
 
 //for react-double-scrollbar in IE11
 require('babel-polyfill')
@@ -27,7 +28,8 @@ function tsvToTable(tsv) {
       return td({style: style}, text)
     }))
   }))
-  return table('.bomTable', [headingJSX, bodyJSX])
+  const tableProps = {unstackable: true, singleline: true}
+  return h(Table, tableProps, [headingJSX, bodyJSX])
 }
 
 let BOM = React.createClass({
