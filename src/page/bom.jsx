@@ -12,13 +12,16 @@ function markerColor(ref) {
     return 'orange'
   }
   if (/^R\d/.test(ref)) {
-    return 'green'
+    return 'lightblue'
   }
   if (/^IC\d/.test(ref) || /^U\d/.test(ref)) {
     return 'blue'
   }
   if (/^L\d/.test(ref)) {
     return 'black'
+  }
+  if (/^D\d/.test(ref)) {
+    return 'green'
   }
   if (/^LED\d/.test(ref)) {
     return 'yellow'
