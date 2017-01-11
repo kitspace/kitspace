@@ -11,9 +11,9 @@ function tsvToTable(tsv) {
   const lines = tsv.split('\n').slice(0, -1)
   const headings = lines[0].split('\t')
   let headingJSX = headings.map((text) => {
-    return th(text)
+    return h(Table.HeaderCell, text)
   })
-  headingJSX = thead([tr(headingJSX)])
+  headingJSX = h(Table.Header, [h(Table.Row, headingJSX)])
   const markPink = (index) => {
     return ['Manufacturer', 'MPN', 'Description']
       .indexOf(headings[index]) < 0
