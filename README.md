@@ -59,7 +59,7 @@ likely fail.
 
 We will then preview your page and merge it so it appears on [kitnic.it](http://kitnic.it).
 
-If you run into any problems please get in touch via [Gitter
+If you run into any problems please get in touch via [Riot.im
 chat][riot.im], IRC (freenode#kitnic) or the
 [mailing-list](https://groups.google.com/forum/#!forum/kitnic-discuss).
 
@@ -150,7 +150,7 @@ gerbers: manufacture/gerbers-and-drills
 ## Development
 ### Requirements
 
-- [Nodejs](https://nodejs.org) >= 4
+- [Nodejs](https://nodejs.org) >= 6
 - [fswatch](http://emcrisostomo.github.io/fswatch/) on OSX/Windows or inotify-tools on Linux
 - [Ninja Build](https://github.com/ninja-build/ninja/releases) >= 1.5.1
 - The rest of the dependencies can be retrieved via `npm install`
