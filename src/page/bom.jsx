@@ -7,6 +7,25 @@ const {Table} = require('semantic-ui-react')
 //for react-double-scrollbar in IE11
 require('babel-polyfill')
 
+function markerColor(ref) {
+  if (/^C\d/.test(ref)) {
+    return 'orange'
+  }
+  if (/^R\d/.test(ref)) {
+    return 'green'
+  }
+  if (/^IC\d/.test(ref) || /^U\d/.test(ref)) {
+    return 'blue'
+  }
+  if (/^L\d/.test(ref)) {
+    return 'black'
+  }
+  if (/^LED\d/.test(ref)) {
+    return 'yellow'
+  }
+  return 'purple'
+}
+
 function tsvToTable(tsv) {
   const lines = tsv.split('\n').slice(0, -1)
   const headings = lines[0].split('\t')
@@ -22,7 +41,8 @@ function tsvToTable(tsv) {
     line = line.split('\t')
     return tr(`.tr${rowIndex % 2}`, line.map((text, columnIndex) => {
       const error = markPink(columnIndex) && text == ''
-      return h(Table.Cell, {error}, text)
+      const className = columnIndex === 0 ? 'marked ' + markerColor(text) : ''
+      return h(Table.Cell, {error, className}, text)
     }))
   }))
   const tableProps = {sortable: true, celled: true, unstackable: true, singleline: true, selectable: true}

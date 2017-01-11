@@ -5,46 +5,31 @@
 @import '../fontello';
 
 .bom {
-    thead {
-        background-color: $dove-gray;
-        color: $white;
-        font-weight: bold;
+    td.marked.orange {
+        border-left: 13px solid #FF9E39 !important;
     }
 
-    .bomTable {
-        min-width: 100%;
+    td.marked.green {
+        border-left: 13px solid #62B9A4 !important;
     }
 
-    .bomToggle {
-        background: $dove-gray;
-        border: 0;
-        border-bottom: 1px solid $mine-shaft;
-        border-radius: 5px;
-        color: $white;
-        cursor: pointer;
-        font-size: 16px;
-        margin-bottom: 16px;
-        padding: 8px 16px;
-
-        @include breakpoint(mobile) {
-            font-size: 48px;
-            padding: 32px;
-        }
+    td.marked.purple {
+        border-left: 13px solid #985DFF !important;
     }
 
-    .columnVisibility {
-        font-size: 8px;
-        font-weight: normal;
+    td.marked.yellow {
+        border-left: 13px solid #F2EF11 !important;
     }
 
-    .thContainer {
-        display: flex;
-        justify-content: space-between;
+    td.marked.black {
+        border-left: 13px solid #000000 !important;
     }
 
-    .tickApproval {
-        color: $crete;
-        padding-left: 3.2px;
-        text-shadow: 0 -1px 0 $malachite;
+    td.marked.blue {
+        border-left: 13px solid #181887 !important;
+    }
+
+    td.marked.lightblue {
+        border-left: 13px solid lightblue !important;
     }
 }
