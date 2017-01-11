@@ -3,6 +3,22 @@ class: center, middle
 
 <img class=fullscreen src=images/logo.png />
 
+
+---
+
+
+![](images/bls_125_banner.gif)
+
+US Beureau of Labor Statistics: 
+
+- 1,114,000 Software Developers
+- 315,900 Electrical and Electronic Engineers
+
+![](images/reddit.jpg)
+
+Reddit.com:
+- /r/programming 720,000 subscribers
+- /r/electronics 66,000 subscribers
 ---
 
 - GitHub
@@ -99,7 +115,7 @@ PNsPfrOeY6REXhUiEV1...
 - Able to add/remove to cart 
 - Can have a guess at what part you mean
 - Open source (CPAL)
-- About 250 users
+- About 400 users
 
 ---
 <img class=fullscreen src=images/meat3.jpg />
