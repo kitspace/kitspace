@@ -11,7 +11,7 @@ function tsvToTable(tsv) {
   const lines = tsv.split('\n').slice(0, -1)
   const headings = lines[0].split('\t')
   let headingJSX = headings.map((text) => {
-    return h(Table.HeaderCell, text)
+    return h(Table.HeaderCell, {selectable: true}, text)
   })
   headingJSX = h(Table.Header, [h(Table.Row, headingJSX)])
   const markPink = (index) => {
@@ -25,7 +25,7 @@ function tsvToTable(tsv) {
       return h(Table.Cell, {error}, text)
     }))
   }))
-  const tableProps = {unstackable: true, singleline: true, selectable: true}
+  const tableProps = {sortable: true, celled: true, unstackable: true, singleline: true, selectable: true}
   return h(Table, tableProps, [headingJSX, bodyJSX])
 }
 
