@@ -34,10 +34,10 @@
   },
   "scripts": {
     "watch": "./scripts/watch",
-    "start": "./scripts/get_boards && npm run server & npm run watch",
+    "start": "./scripts/get_boards && npm run serve & npm run watch",
     "update-reg": "./scripts/update_registry",
     "plug-reg": "./scripts/plug_versions",
-    "server": "http-server build/",
+    "serve": "http-server build/",
     "lint": "eslint src"
   },
   "author": "Kaspar Emanuel",
