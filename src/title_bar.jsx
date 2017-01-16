@@ -1,10 +1,22 @@
 const React = require('react')
+const { Button } = require('semantic-ui-react')
 
 var TitleBar = React.createClass({
   propTypes: {
-    children: React.PropTypes.any
+    children: React.PropTypes.any,
+    submissionButton: React.PropTypes.bool,
   },
   render: function () {
+    let button
+    if (this.props.submissionButton) {
+      button =
+            (<Button color='green' onClick={() => location.href='/submit'} >
+                Submit a project
+            </Button>);
+    }
+    else {
+      button = null
+    }
     return (
       <div className='titleBar'>
         <div className='logoContainer'>
@@ -16,13 +28,7 @@ var TitleBar = React.createClass({
           {this.props.children}
         </div>
         <div className='submitContainer'>
-          <a
-          className='uploadContainer'
-          href='https://github.com/monostable/kitnic/#submitting-your-project'>
-            <div className='submissionButton'>
-              <span>Register a project</span>
-            </div>
-          </a>
+          {button}
           <a
           className='contributeContainer'
           title='Contribute to Kitnic'
