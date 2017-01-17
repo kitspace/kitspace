@@ -18,7 +18,7 @@ $mobile-summary-h: $summary-h * 3 + 48;
     border: 1px solid $alto;
     border-radius: 4px;
     cursor: pointer;
-    display: inline-block;
+    display: inline-table;
     margin: 8px;
     overflow: hidden;
     width: $card-w + 32px + 16px;
