@@ -131,7 +131,15 @@ if (require.main !== module) {
                     console.error(err);
                     return process.exit(1);
                 }
-                cp.exec(`inkscape '${unOptimizedSvgPath}' -e '${topPngPath}' -z -w 720`, (err) =>  {
+                let cmd = `inkscape --without-gui '${unOptimizedSvgPath}'`
+                cmd += ` --export-png='${topPngPath}'`
+                if (stackup.top.width > stackup.top.height) {
+                    cmd += ' --export-width=240'
+                }
+                else {
+                    cmd += ' --export-height=180'
+                }
+                cp.exec(cmd, (err) =>  {
                     if (err) {
                         console.error(err);
                         return process.exit(1);
