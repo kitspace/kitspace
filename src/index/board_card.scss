@@ -45,16 +45,23 @@ $mobile-summary-h: $summary-h * 3 + 48;
         background-color: $mine-shaft;
         padding-bottom: 16px;
         padding-top: 16px;
-    }
-
-    .img {
         height: $card-h;
-        width: $card-w;
-
+        display: flex;
+        align-content: center;
+        justify-content: center;
+        align-items: center;
         @include breakpoint(mobile) {
             height: $mobile-card-h;
             width: $mobile-card-w;
         }
+    }
+
+    .img {
+        width: $card-w;
+        @include breakpoint(mobile) {
+            width: $mobile-card-w - 64;
+        }
+
     }
 
     .title {

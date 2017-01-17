@@ -48,9 +48,7 @@ let BoardCard = React.createClass({
       <div className='boardCard'>
         <a href={'/boards/' + this.props.data.id}>
             <div className='imgContainer'>
-              <center>
                 { image }
-              </center>
             </div>
             <div className='title'>
               {truncate(this.props.data.id.split('/').slice(2).join(' / '),
