@@ -134,7 +134,7 @@ if (require.main !== module) {
                 }
                 let cmd = `inkscape --without-gui '${unOptimizedSvgPath}'`
                 cmd += ` --export-png='${topPngPath}'`
-                if (stackup.top.width > stackup.top.height) {
+                if (stackup.top.width > (stackup.top.height + 0.05)) {
                     cmd += ' --export-width=240'
                 }
                 else {
@@ -148,7 +148,7 @@ if (require.main !== module) {
                 })
                 let cmd_large = `inkscape --without-gui '${unOptimizedSvgPath}'`
                 cmd_large += ` --export-png='${topLargePngPath}'`
-                if (stackup.top.width > stackup.top.height) {
+                if (stackup.top.width > (stackup.top.height + 0.05)) {
                     cmd_large += ` --export-width=${240 * 3 - 128}`
                 }
                 else {

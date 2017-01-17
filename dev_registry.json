@@ -1,10 +1,6 @@
 [
   {
-    "repo": "https://github.com/mattvenn/esp8266-breakout",
-    "hash": "fcb3107c66670035c7cb330f5d98eddde5d17f56"
-  },
-  {
-    "repo": "https://github.com/kitnic-forks/HACK",
-    "hash": "9ce81027df5e860ee78c101ade40bf73724c5ed6"
+    "repo": "https://github.com/dvdfreitag/Signal-Detector",
+    "hash": "6978ba247948e1a5631f9671909d77d109ff48ec"
   }
 ]
