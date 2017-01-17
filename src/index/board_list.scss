@@ -1,9 +1,5 @@
 @import 'board_card';
 
 .boardList {
-    display: -webkit-flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
+    text-align: center;
 }
