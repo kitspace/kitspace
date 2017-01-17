@@ -40,16 +40,21 @@ $mobile-summary-h: $summary-h * 3 + 48;
         padding-bottom: 16px;
         padding-top: 16px;
         height: $card-h;
-        display: flex;
-        align-content: center;
-        justify-content: center;
-        align-items: center;
+        align-text: center;
+        vertical-align: middle;
+        position: relative;
         @include breakpoint(mobile) {
             height: $mobile-card-h;
         }
     }
 
     .img {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
         max-width: $card-w;
         max-height: $card-h;
         @include breakpoint(mobile) {
