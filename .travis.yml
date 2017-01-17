@@ -9,6 +9,7 @@ addons:
       - ubuntu-toolchain-r-test
     packages:
       - g++-4.8
+      - inkscape
 script:
   - export NODE_ENV=production
   - ./scripts/plug_versions

@@ -19,21 +19,13 @@ $mobile-summary-h: $summary-h * 3 + 48;
     border-radius: 4px;
     cursor: pointer;
     display: inline-table;
-    height: $card-h + $caption-h + $summary-h + 16px + 5px + 16px + 5px;
-    margin-bottom: 8px;
-    margin-left: 8px;
-    margin-right: 8px;
-    margin-top: 8px;
+    margin: 8px;
     overflow: hidden;
     width: $card-w + 32px + 16px;
 
     @include breakpoint(mobile) {
         border-radius: 12px;
-        height: $mobile-card-h + $mobile-caption-h + $mobile-summary-h + 16px + 5px + 16px + 5px;
-        margin-bottom: 24px;
-        margin-left: 24px;
-        margin-right: 24px;
-        margin-top: 24px;
+        margin: 24px;
         width: $mobile-card-w + 32px + 16px;
     }
 
@@ -45,15 +37,27 @@ $mobile-summary-h: $summary-h * 3 + 48;
         background-color: $mine-shaft;
         padding-bottom: 16px;
         padding-top: 16px;
+        height: $card-h;
+        align-text: center;
+        vertical-align: middle;
+        position: relative;
+        @include breakpoint(mobile) {
+            height: $mobile-card-h;
+        }
     }
 
     .img {
-        height: $card-h;
-        width: $card-w;
-
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        max-width: $card-w;
+        max-height: $card-h;
         @include breakpoint(mobile) {
-            height: $mobile-card-h;
-            width: $mobile-card-w;
+            max-width: $mobile-card-w;
+            max-height: $mobile-card-h;
         }
     }
 

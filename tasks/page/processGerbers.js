@@ -83,7 +83,9 @@ if (require.main !== module) {
             `${buildFolder}/images/bottom.svg`,
             `${buildFolder}/${zip}`,
             `build/.temp/${folder}/zip-info.json`,
-            `${buildFolder}/images/top.png`
+            `build/.temp/${folder}/unoptimized-top.svg`,
+            `${buildFolder}/images/top.png`,
+            `${buildFolder}/images/top-large.png`,
         ];
         return {deps, targets, moduleDep:false};
     };
@@ -92,7 +94,7 @@ if (require.main !== module) {
     const {config, deps, targets} = utils.processArgs(process.argv);
     const folder = deps[0];
     const gerbers = deps.slice(1);
-    const [topSvgPath, bottomSvgPath, zipPath, zipInfoPath, topPngPath] = targets;
+    const [topSvgPath, bottomSvgPath, zipPath, zipInfoPath, unOptimizedSvgPath, topPngPath, topLargePngPath] = targets;
     fs.writeFileSync(zipInfoPath, JSON.stringify(path.basename(zipPath)));
     const zip = new Jszip;
     const folder_name = path.basename(zipPath, '.zip');
@@ -124,7 +126,42 @@ if (require.main !== module) {
             if (error != null) {
                 throw error;
             }
-            svgo.optimize(stackup.top.svg, result =>
+            fs.writeFile(unOptimizedSvgPath, stackup.top.svg, function(err) {
+                if (err != null) {
+                    console.error(`Could not write unoptimized top svg for ${folder}`);
+                    console.error(err);
+                    return process.exit(1);
+                }
+                let cmd = `inkscape --without-gui '${unOptimizedSvgPath}'`
+                cmd += ` --export-png='${topPngPath}'`
+                if (stackup.top.width > (stackup.top.height + 0.05)) {
+                    cmd += ' --export-width=240'
+                }
+                else {
+                    cmd += ' --export-height=180'
+                }
+                cp.exec(cmd, (err) =>  {
+                    if (err) {
+                        console.error(err);
+                        return process.exit(1);
+                    }
+                })
+                let cmd_large = `inkscape --without-gui '${unOptimizedSvgPath}'`
+                cmd_large += ` --export-png='${topLargePngPath}'`
+                if (stackup.top.width > (stackup.top.height + 0.05)) {
+                    cmd_large += ` --export-width=${240 * 3 - 128}`
+                }
+                else {
+                    cmd_large += ` --export-height=${180 * 3 - 128}`
+                }
+                cp.exec(cmd_large, (err) =>  {
+                    if (err) {
+                        console.error(err);
+                        return process.exit(1);
+                    }
+                })
+            })
+            svgo.optimize(stackup.top.svg, result => {
                 fs.writeFile(topSvgPath, result.data, function(err) {
                     if (err != null) {
                         console.error(`Could not write top svg for ${folder}`);
@@ -132,7 +169,7 @@ if (require.main !== module) {
                         return process.exit(1);
                     }
                 })
-            );
+            });
             return svgo.optimize(stackup.bottom.svg, result =>
                 fs.writeFile(bottomSvgPath, result.data, function(err) {
                     if (err != null) {

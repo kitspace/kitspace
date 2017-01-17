@@ -1,11 +1,11 @@
 'use strict'
-const React     = require('react')
-const LazyLoad  = require('../lazy_load')
-const FadeImage = require('../fade_image')
+const React      = require('react')
+const MediaQuery = require('react-responsive');
 
-function reverse(s){
-  return s.split('').reverse().join('')
-}
+const LazyLoad   = require('../lazy_load')
+const FadeImage  = require('../fade_image')
+
+const query = 'only screen and (min-device-width: 320px) and (max-device-width: 480px), (handheld)'
 
 function truncate(input, len, fromStart) {
   var str = input
@@ -36,8 +36,18 @@ let BoardCard = React.createClass({
           <LazyLoad once={true}
             component={React.createElement('div', {className:'img'})}
             distance={300}>
-            <FadeImage src={'boards/' + this.props.data.id + '/images/top.svg'}
-              className='img' />
+            <MediaQuery query={query}>
+            {(matches) => {
+              if (matches) {
+                return <FadeImage src={'boards/' + this.props.data.id + '/images/top-large.png'}
+                  className='img' />
+              }
+              else  {
+                return <FadeImage src={'boards/' + this.props.data.id + '/images/top.png'}
+                  className='img' />
+              }
+            }}
+            </MediaQuery>
           </LazyLoad>
     } else {
       image =
@@ -48,9 +58,7 @@ let BoardCard = React.createClass({
       <div className='boardCard'>
         <a href={'/boards/' + this.props.data.id}>
             <div className='imgContainer'>
-              <center>
                 { image }
-              </center>
             </div>
             <div className='title'>
               {truncate(this.props.data.id.split('/').slice(2).join(' / '),
@@ -68,5 +76,10 @@ let BoardCard = React.createClass({
     )
   }
 })
+
+function reverse(s){
+  return s.split('').reverse().join('')
+}
+
 
 module.exports = BoardCard
