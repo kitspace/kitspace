@@ -3544,21 +3544,21 @@ pbkdf2@^3.0.3:
   dependencies:
     create-hmac "^1.1.2"
 
-"pcb-stackup-core@github:tracespace/pcb-stackup-core":
-  version "2.0.1"
-  resolved "https://codeload.github.com/tracespace/pcb-stackup-core/tar.gz/35c461d19bd4b8b90f4a631c8e65ee6db5af8efd"
+pcb-stackup-core@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/pcb-stackup-core/-/pcb-stackup-core-3.0.0.tgz#7f63388da1f0274fc5f6408700e73e8e71904428"
   dependencies:
     color-string "^1.4.0"
     lodash.isstring "^4.0.1"
     viewbox "^1.0.0"
     xml-element-string "^1.0.0"
 
-"pcb-stackup@github:tracespace/pcb-stackup#upgrade-core":
-  version "2.0.0"
-  resolved "https://codeload.github.com/tracespace/pcb-stackup/tar.gz/9519dc67ddf00f3d008117a61144a1582033e067"
+pcb-stackup@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/pcb-stackup/-/pcb-stackup-3.0.0.tgz#d766d2170944891ad47d12630751d183ccf65465"
   dependencies:
     gerber-to-svg "^2.1.0"
-    pcb-stackup-core "github:tracespace/pcb-stackup-core"
+    pcb-stackup-core "^3.0.0"
     shortid "^2.2.6"
     whats-that-gerber "^2.1.0"
 
