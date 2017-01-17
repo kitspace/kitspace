@@ -35,11 +35,7 @@
         justify-content: center;
         margin: 16px 10px;
         padding: 0;
-        -webkit-touch-callout: none; // iOS Safari
-        -khtml-user-select: none;    // Konqueror
-        -moz-user-select: none;      // Firefox
-        -ms-user-select: none;       // Internet Explorer/Edge
-        -webkit-user-select: none;   // Chrome/Safari/Opera
+        user-select:none;
         @include breakpoint(mobile) {
             font-size: 38px;
             min-width: 233px;
