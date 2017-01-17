@@ -55,6 +55,15 @@ $mobile-summary-h: $summary-h * 3 + 48;
         }
     }
 
+    .img {
+        max-width: $card-w;
+        max-height: $card-h;
+        @include breakpoint(mobile) {
+            max-width: $mobile-card-w;
+            max-height: $mobile-card-h;
+        }
+    }
+
     .title {
         background-color: $alabaster;
         color: $mine-shaft;
