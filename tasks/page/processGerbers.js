@@ -124,15 +124,21 @@ if (require.main !== module) {
             if (error != null) {
                 throw error;
             }
-            svgo.optimize(stackup.top.svg, result =>
+            svgo.optimize(stackup.top.svg, result => {
                 fs.writeFile(topSvgPath, result.data, function(err) {
                     if (err != null) {
                         console.error(`Could not write top svg for ${folder}`);
                         console.error(err);
                         return process.exit(1);
                     }
+                    cp.exec(`inkscape '${topSvgPath}' -e '${topPngPath}' -z -w 240`, (err) =>  {
+                        if (err) {
+                            console.error(err);
+                            return process.exit(1);
+                        }
+                    })
                 })
-            );
+            });
             return svgo.optimize(stackup.bottom.svg, result =>
                 fs.writeFile(bottomSvgPath, result.data, function(err) {
                     if (err != null) {
