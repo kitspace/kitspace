@@ -34,7 +34,7 @@ var BoardList = React.createClass({
         <div>
           <div style={{height:'40%'}}></div>
           <div style={{width:'100%', textAlign:'center'}}>
-                No results
+                Sorry, no results.
           </div>
         </div>
       )
