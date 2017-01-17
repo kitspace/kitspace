@@ -52,7 +52,6 @@ $mobile-summary-h: $summary-h * 3 + 48;
         align-items: center;
         @include breakpoint(mobile) {
             height: $mobile-card-h;
-            width: $mobile-card-w;
         }
     }
 

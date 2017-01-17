@@ -682,7 +682,7 @@ babel-register@^6.18.0, babel-register@^6.3.13:
     mkdirp "^0.5.1"
     source-map-support "^0.4.2"
 
-babel-runtime@^6.0.0, babel-runtime@^6.11.6, babel-runtime@^6.9.0, babel-runtime@^6.9.1:
+babel-runtime@^6.0.0, babel-runtime@^6.11.6, babel-runtime@^6.18.0, babel-runtime@^6.9.0, babel-runtime@^6.9.1:
   version "6.18.0"
   resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.18.0.tgz#0f4177ffd98492ef13b9f823e9994a02584c9078"
   dependencies:
@@ -1108,6 +1108,17 @@ coffee-script@1.9.0:
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/coffee-script/-/coffee-script-1.9.0.tgz#7492cbbc3f0361cc5d8865aff7237552ff33e1f7"
 
+color-name@^1.0.0:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/color-name/-/color-name-1.1.1.tgz#4b1415304cf50028ea81643643bd82ea05803689"
+
+color-string@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/color-string/-/color-string-1.4.0.tgz#2b47f8565fb0eb52f9f77c801992b8ca55d6e898"
+  dependencies:
+    color-name "^1.0.0"
+    simple-swizzle "^0.2.2"
+
 colors@1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/colors/-/colors-1.0.3.tgz#0433f44d809680fdeb60ed260f1b0c262e82a40b"
@@ -1293,6 +1304,10 @@ cson-parser@1.0.9:
   resolved "https://registry.yarnpkg.com/cson-parser/-/cson-parser-1.0.9.tgz#b79fc1b82a775743680f0effb8bfad31134dac74"
   dependencies:
     coffee-script "1.9.0"
+
+css-mediaquery@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/css-mediaquery/-/css-mediaquery-0.1.2.tgz#6a2c37344928618631c54bd33cedd301da18bea0"
 
 css-select@~1.2.0:
   version "1.2.0"
@@ -2335,6 +2350,10 @@ https-browserify@~0.0.0:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/https-browserify/-/https-browserify-0.0.1.tgz#3f91365cabe60b77ed0ebba24b454e3e09d95a82"
 
+hyphenate-style-name@^1.0.0:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/hyphenate-style-name/-/hyphenate-style-name-1.0.2.tgz#31160a36930adaf1fc04c6074f7eb41465d4ec4b"
+
 iconv-lite@0.4.13:
   version "0.4.13"
   resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.13.tgz#1f88aba4ab0b1508e8312acc39345f36e992e2f2"
@@ -2446,6 +2465,10 @@ invert-kv@^1.0.0:
 is-arrayish@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/is-arrayish/-/is-arrayish-0.2.1.tgz#77c99840527aa8ecb1a8ba697b80645a7a926a9d"
+
+is-arrayish@^0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/is-arrayish/-/is-arrayish-0.3.1.tgz#c2dfc386abaa0c3e33c48db3fe87059e69065efd"
 
 is-binary-path@^1.0.0:
   version "1.0.1"
@@ -3066,6 +3089,12 @@ marky-markdown@kasbah/marky-markdown#fix-default-anchors-2:
     sanitize-html "^1.6.1"
     similarity "^1.0.1"
 
+matchmedia@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/matchmedia/-/matchmedia-0.1.2.tgz#cfd47f2bf68fbc7f5ea1bd3a3cf1715ecba3c1bd"
+  dependencies:
+    css-mediaquery "^0.1.2"
+
 mdurl@^1.0.1, "mdurl@~ 1.0.1":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/mdurl/-/mdurl-1.0.1.tgz#fe85b2ec75a59037f2adfec100fd6c601761152e"
@@ -3515,10 +3544,11 @@ pbkdf2@^3.0.3:
   dependencies:
     create-hmac "^1.1.2"
 
-pcb-stackup-core@^2.0.1:
+"pcb-stackup-core@github:tracespace/pcb-stackup-core":
   version "2.0.1"
-  resolved "https://registry.yarnpkg.com/pcb-stackup-core/-/pcb-stackup-core-2.0.1.tgz#1ce6fab59292f7f21c439e206bed82c14e94b69d"
+  resolved "https://codeload.github.com/tracespace/pcb-stackup-core/tar.gz/35c461d19bd4b8b90f4a631c8e65ee6db5af8efd"
   dependencies:
+    color-string "^1.4.0"
     lodash.isstring "^4.0.1"
     viewbox "^1.0.0"
     xml-element-string "^1.0.0"
@@ -3731,6 +3761,14 @@ react-markdown@^2.4.2:
     commonmark "^0.24.0"
     commonmark-react-renderer "^4.2.4"
     in-publish "^2.0.0"
+
+react-responsive@^1.2.5:
+  version "1.2.5"
+  resolved "https://registry.yarnpkg.com/react-responsive/-/react-responsive-1.2.5.tgz#8a64ff989ab5cd8ac1a191dd6ed107e8e349f1d4"
+  dependencies:
+    babel-runtime "^6.18.0"
+    hyphenate-style-name "^1.0.0"
+    matchmedia "^0.1.2"
 
 react-search-input@~0.10.1:
   version "0.10.3"
@@ -4133,6 +4171,12 @@ similarity@^1.0.1:
   resolved "https://registry.yarnpkg.com/similarity/-/similarity-1.1.0.tgz#aa3de5be51b49ef67b12257eab25c8dcff107237"
   dependencies:
     leven "^2.0.0"
+
+simple-swizzle@^0.2.2:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/simple-swizzle/-/simple-swizzle-0.2.2.tgz#a4da6b635ffcccca33f70d17cb92592de95e557a"
+  dependencies:
+    is-arrayish "^0.3.1"
 
 slash@^1.0.0:
   version "1.0.0"

@@ -84,7 +84,8 @@ if (require.main !== module) {
             `${buildFolder}/${zip}`,
             `build/.temp/${folder}/zip-info.json`,
             `build/.temp/${folder}/unoptimized-top.svg`,
-            `${buildFolder}/images/top.png`
+            `${buildFolder}/images/top.png`,
+            `${buildFolder}/images/top-large.png`,
         ];
         return {deps, targets, moduleDep:false};
     };
@@ -93,7 +94,7 @@ if (require.main !== module) {
     const {config, deps, targets} = utils.processArgs(process.argv);
     const folder = deps[0];
     const gerbers = deps.slice(1);
-    const [topSvgPath, bottomSvgPath, zipPath, zipInfoPath, unOptimizedSvgPath, topPngPath] = targets;
+    const [topSvgPath, bottomSvgPath, zipPath, zipInfoPath, unOptimizedSvgPath, topPngPath, topLargePngPath] = targets;
     fs.writeFileSync(zipInfoPath, JSON.stringify(path.basename(zipPath)));
     const zip = new Jszip;
     const folder_name = path.basename(zipPath, '.zip');
@@ -140,6 +141,20 @@ if (require.main !== module) {
                     cmd += ' --export-height=180'
                 }
                 cp.exec(cmd, (err) =>  {
+                    if (err) {
+                        console.error(err);
+                        return process.exit(1);
+                    }
+                })
+                let cmd_large = `inkscape --without-gui '${unOptimizedSvgPath}'`
+                cmd_large += ` --export-png='${topLargePngPath}'`
+                if (stackup.top.width > stackup.top.height) {
+                    cmd_large += ` --export-width=${240 * 3 - 128}`
+                }
+                else {
+                    cmd_large += ` --export-height=${180 * 3 - 128}`
+                }
+                cp.exec(cmd_large, (err) =>  {
                     if (err) {
                         console.error(err);
                         return process.exit(1);
