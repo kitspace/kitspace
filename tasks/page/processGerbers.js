@@ -83,6 +83,7 @@ if (require.main !== module) {
             `${buildFolder}/images/bottom.svg`,
             `${buildFolder}/${zip}`,
             `build/.temp/${folder}/zip-info.json`,
+            `build/.temp/${folder}/unoptimized-top.svg`,
             `${buildFolder}/images/top.png`
         ];
         return {deps, targets, moduleDep:false};
@@ -92,7 +93,7 @@ if (require.main !== module) {
     const {config, deps, targets} = utils.processArgs(process.argv);
     const folder = deps[0];
     const gerbers = deps.slice(1);
-    const [topSvgPath, bottomSvgPath, zipPath, zipInfoPath, topPngPath] = targets;
+    const [topSvgPath, bottomSvgPath, zipPath, zipInfoPath, unOptimizedSvgPath, topPngPath] = targets;
     fs.writeFileSync(zipInfoPath, JSON.stringify(path.basename(zipPath)));
     const zip = new Jszip;
     const folder_name = path.basename(zipPath, '.zip');
@@ -124,6 +125,19 @@ if (require.main !== module) {
             if (error != null) {
                 throw error;
             }
+            fs.writeFile(unOptimizedSvgPath, stackup.top.svg, function(err) {
+                if (err != null) {
+                    console.error(`Could not write unoptimized top svg for ${folder}`);
+                    console.error(err);
+                    return process.exit(1);
+                }
+                cp.exec(`inkscape '${unOptimizedSvgPath}' -e '${topPngPath}' -z -w 720`, (err) =>  {
+                    if (err) {
+                        console.error(err);
+                        return process.exit(1);
+                    }
+                })
+            })
             svgo.optimize(stackup.top.svg, result => {
                 fs.writeFile(topSvgPath, result.data, function(err) {
                     if (err != null) {
@@ -131,12 +145,6 @@ if (require.main !== module) {
                         console.error(err);
                         return process.exit(1);
                     }
-                    cp.exec(`inkscape '${topSvgPath}' -e '${topPngPath}' -z -w 720`, (err) =>  {
-                        if (err) {
-                            console.error(err);
-                            return process.exit(1);
-                        }
-                    })
                 })
             });
             return svgo.optimize(stackup.bottom.svg, result =>
