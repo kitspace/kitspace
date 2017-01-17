@@ -111,7 +111,8 @@ if (config === 'production') {
 
 ninja.rule('sass').run('node-sass --sourcemap=none --load-path $path $in $out')
 
-ninja.rule('autoprefix').run('postcss --use autoprefixer $in -o $out')
+ninja.rule('autoprefix')
+    .run('postcss --use autoprefixer --autoprefixer.browsers "> 5%" $in -o $out')
 
 
 // - Edges - #
