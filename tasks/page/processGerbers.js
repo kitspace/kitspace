@@ -131,7 +131,7 @@ if (require.main !== module) {
                         console.error(err);
                         return process.exit(1);
                     }
-                    cp.exec(`inkscape '${topSvgPath}' -e '${topPngPath}' -z -w 240`, (err) =>  {
+                    cp.exec(`inkscape '${topSvgPath}' -e '${topPngPath}' -z -w 720`, (err) =>  {
                         if (err) {
                             console.error(err);
                             return process.exit(1);
