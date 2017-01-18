@@ -29,6 +29,15 @@
     }
 }
 
+@include breakpoint(mobile) {
+    .boardContainer {
+        min-height: 540px;
+    }
+    .boardShowcase {
+        min-height: 540px;
+    }
+}
+
 @include breakpoint(mobile_or_small_width) {
     .boardContainer {
         border: 5px solid $dove-gray;
