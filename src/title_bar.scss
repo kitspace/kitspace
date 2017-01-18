@@ -168,24 +168,3 @@
 
 }
 
-.page {
-    .middleContainer {
-        left: 0;
-        position: absolute;
-        top: 0;
-        width: 100%;
-        z-index: 0;
-
-        @include breakpoint(mobile_or_small_width) {
-            order: 0;
-            position: static;
-            width: auto;
-        }
-
-        @include breakpoint(mobile) {
-            padding: 40px;
-        }
-    }
-}
-
-
