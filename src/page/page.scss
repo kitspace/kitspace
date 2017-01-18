@@ -65,6 +65,7 @@
     .infoBarSummary {
         margin-bottom: 10px;
         margin-top: 5px;
+        line-height: 1em;
         @include breakpoint(mobile) {
             margin: 30px;
         }
