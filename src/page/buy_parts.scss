@@ -19,8 +19,8 @@
         width: 16px;
 
         @include breakpoint(mobile) {
-            height: 32px;
-            width: 32px;
+            min-height: 32px;
+            min-width: 32px;
         }
     }
 
@@ -58,10 +58,10 @@
         display: flex;
         justify-content: center;
         padding: 9.6px 14.4px;
-        width: 22px;
 
         @include breakpoint(mobile) {
-            width: 32px;
+            min-width: 64px;
+            min-height: 64px;
         }
     }
 
@@ -98,6 +98,9 @@
 
         .retailerText {
             box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             flex: 1;
             font-weight: bold;
             min-width: 80px;
