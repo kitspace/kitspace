@@ -1,6 +1,6 @@
 'use strict'
 const React      = require('react')
-const MediaQuery = require('react-responsive');
+const ReactResponsive = require('react-responsive');
 
 const LazyLoad     = require('../lazy_load')
 const FadeImage    = require('../fade_image')
@@ -35,18 +35,20 @@ let BoardCard = React.createClass({
           <LazyLoad once={true}
             component={React.createElement('div', {className:'img'})}
             distance={300}>
-            <MediaQuery query={mediaQueries.mobile}>
-            {(matches) => {
-              if (matches) {
-                return <FadeImage src={'boards/' + this.props.data.id + '/images/top-large.png'}
-                  className='img' />
-              }
-              else  {
-                return <FadeImage src={'boards/' + this.props.data.id + '/images/top.png'}
-                  className='img' />
-              }
-            }}
-            </MediaQuery>
+            <ReactResponsive query={mediaQueries.mobile}>
+              {(matches) => {
+                if (matches) {
+                  return <FadeImage
+                    src={'boards/' + this.props.data.id + '/images/top-large.png'}
+                    className='img' />
+                }
+                else  {
+                  return <FadeImage
+                    src={'boards/' + this.props.data.id + '/images/top.png'}
+                    className='img' />
+                }
+              }}
+            </ReactResponsive>
           </LazyLoad>
     } else {
       image =
