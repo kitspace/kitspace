@@ -26,4 +26,8 @@
     .gerbers:hover {
         background: $emerald;
     }
+
+    @include breakpoint('mobile') {
+        margin: 48px;
+    }
 }

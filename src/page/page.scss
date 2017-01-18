@@ -65,6 +65,9 @@
     .infoBarSummary {
         margin-bottom: 10px;
         margin-top: 5px;
+        @include breakpoint(mobile) {
+            margin: 30px;
+        }
     }
 
     .infoBarInner {
@@ -79,6 +82,9 @@
         flex-grow: 2;
         justify-content: space-around;
         margin-top: 5px;
+        @include breakpoint(mobile) {
+            margin: 30px;
+        }
     }
 
     .infoBarLinks {
