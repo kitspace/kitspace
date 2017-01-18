@@ -99,6 +99,7 @@
             padding: 0;
         }
     }
+
     .readme {
         margin: 15px 5px 5px 5px;
         padding: 20px;
@@ -127,6 +128,14 @@
             background-color: rgba(0,0,0,0.04);
             border-radius: 3px;
     }
+
     .readme img {
         max-width:100%;
+    }
+
+    //semantic ui tries to fix this at 1em
+    pre {
+        @include breakpoint(mobile) {
+            font-size: 38px !important;
+        }
     }
