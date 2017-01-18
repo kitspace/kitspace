@@ -1,12 +1,12 @@
 @import '../colors';
 @import '../common';
 
-$card-w: 240px;
-$card-h: 180px;
+$image-w: 240px;
+$image-h: 180px;
 $caption-h: 40px;
 $summary-h: 96px;
-$mobile-card-w: $card-w * 3;
-$mobile-card-h: $card-h * 3;
+$mobile-image-w: $image-w * 3;
+$mobile-image-h: $image-h * 3;
 $mobile-caption-h: $caption-h * 3;
 $mobile-summary-h: $summary-h * 3 + 48;
 
@@ -21,12 +21,12 @@ $mobile-summary-h: $summary-h * 3 + 48;
     display: inline-table;
     margin: 8px;
     overflow: hidden;
-    width: $card-w + 32px + 16px;
+    width: $image-w + 32px + 16px;
 
     @include breakpoint(mobile) {
         border-radius: 12px;
         margin: 24px;
-        width: $mobile-card-w + 32px + 16px;
+        width: $mobile-image-w + 32px + 16px;
     }
 
     a:hover {
@@ -37,12 +37,12 @@ $mobile-summary-h: $summary-h * 3 + 48;
         background-color: $mine-shaft;
         padding-bottom: 16px;
         padding-top: 16px;
-        height: $card-h;
+        height: $image-h;
         align-text: center;
         vertical-align: middle;
         position: relative;
         @include breakpoint(mobile) {
-            height: $mobile-card-h;
+            height: $mobile-image-h;
         }
     }
 
@@ -53,11 +53,11 @@ $mobile-summary-h: $summary-h * 3 + 48;
         left: 0;
         right: 0;
         margin: auto;
-        max-width: $card-w;
-        max-height: $card-h;
+        max-width: $image-w;
+        max-height: $image-h;
         @include breakpoint(mobile) {
-            max-width: $mobile-card-w;
-            max-height: $mobile-card-h;
+            max-width: $mobile-image-w;
+            max-height: $mobile-image-h;
         }
     }
 

@@ -5,7 +5,7 @@
         and (max-device-width: 480px)
         , (orientation: landscape) and (max-device-width: 810px)
         , (handheld) {
-                @content;
+            @content;
         }
     } @else if $point == mobile_or_small_width {
         @media only screen and (min-device-width: 320px)
@@ -13,11 +13,11 @@
         , (orientation: landscape) and (max-device-width: 810px)
         , (handheld)
         , (max-width: 810px) {
-                @content;
+            @content;
         }
     } @else if $point == small_width {
         @media (max-width: 810px) {
-                @content;
+            @content;
         }
     }
 }
