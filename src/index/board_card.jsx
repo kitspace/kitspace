@@ -2,10 +2,9 @@
 const React      = require('react')
 const MediaQuery = require('react-responsive');
 
-const LazyLoad   = require('../lazy_load')
-const FadeImage  = require('../fade_image')
-
-const query = 'only screen and (min-device-width: 320px) and (max-device-width: 480px), (handheld)'
+const LazyLoad     = require('../lazy_load')
+const FadeImage    = require('../fade_image')
+const mediaQueries = require('../media_queries')
 
 function truncate(input, len, fromStart) {
   var str = input
@@ -36,7 +35,7 @@ let BoardCard = React.createClass({
           <LazyLoad once={true}
             component={React.createElement('div', {className:'img'})}
             distance={300}>
-            <MediaQuery query={query}>
+            <MediaQuery query={mediaQueries.mobile}>
             {(matches) => {
               if (matches) {
                 return <FadeImage src={'boards/' + this.props.data.id + '/images/top-large.png'}
