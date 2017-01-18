@@ -74,7 +74,6 @@
     display: flex;
     flex-direction: column;
     margin-bottom: 16px;
-    height: 320px;
     border-radius: 3px;
     background: $mine-shaft;
     @include breakpoint(mobile_or_small_width) {
@@ -93,9 +92,13 @@
     box-sizing: border-box;
     display: flex;
     justify-content: space-around;
-    max-height: 320px;
+    overflow: hidden;
     padding: 2rem;
     width: 100%;
+
+    img {
+        max-height: 540px;
+    }
 
     @include breakpoint(mobile_or_small_width) {
         border-radius: 0;
