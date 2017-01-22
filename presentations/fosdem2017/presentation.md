@@ -53,10 +53,12 @@ Reddit:
 <img class=fullscreen src=images/meat3.jpg />
 
 ---
-<h1><li>1-click BOM browser extension</li></h1>
-<h1><li>kitnic.it</li></h1>
+<img src=images/1_click_logo.png />1-click BOM browser extension
+
+<img src=images/kitnic_logo.png />kitnic.it
+
 <center>
-<img src=images/apart1.jpg>
+<img class=fullscreen src=images/meat_apart.jpg>
 </center>
 ---
 # 1-click BOM extension 
@@ -186,10 +188,29 @@ PNsPfrOeY6REXhUiEV1...
 - Connect to assembly services
 - Better tools for making BOMs
 - Live pricing data
-
+---
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+ <center><h1>Show me the code!<h1><center>
+---
+<br/>
+<br/>
+<center><img src=images/javascript_everywhere.jpg /></center>
 ---
 
-- NodeJS & React
+##Javascript in the browser
+- No more Coffeescript
+- But we still compile from ES6 -> ES5!
+
+##node.js on the server
+- React front-end
+- Started implementing services using Express.js
+
+---
+--
 - GitHub Pages & Travis CI
   - The boards.txt file
 
