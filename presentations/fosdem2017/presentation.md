@@ -9,7 +9,7 @@ class: center, middle
 
 ![](images/bls_125_banner.gif)
 
-US Beureau of Labor Statistics: 
+US Bureau of Labor Statistics: 
 
 - 1,114,000 Software Developers
 - 315,900 Electrical and Electronic Engineers
@@ -19,6 +19,7 @@ US Beureau of Labor Statistics:
 Reddit.com:
 - /r/programming 720,000 subscribers
 - /r/electronics 66,000 subscribers
+
 ---
 
 - GitHub
@@ -35,6 +36,7 @@ Reddit.com:
 <br>
 <br>
 <center><img src=images/pease.jpg /></center>
+
 ---
 <img class=fullscreen src=images/meat1.jpg />
 
@@ -99,7 +101,7 @@ PNsPfrOeY6REXhUiEV1...
 ```
 ---
 
-<img src=images/unit_test.png />
+<img class=fullscreen src=images/unit_test.png />
 
 ---
 
@@ -144,25 +146,6 @@ PNsPfrOeY6REXhUiEV1...
 
 ---
 
-- NodeJS & React
-- GitHub Pages & Travis CI
-  - The boards.txt file
-
-```
-https://github.com/kasbah/push-on-hold-off
-https://github.com/kitnic/BQ25570_Harvester
-https://github.com/JarrettR/USBvil
-https://github.com/8BitMixtape/NextLevelEdition
-https://github.com/dvdfreitag/Signal-Detector
-
-```
-
-- tracespace/pcb-stackup 
-
-<p align=middle><img src=images/stackup.svg></p>
-
----
-
 <br>
 <br>
 <br>
@@ -180,8 +163,8 @@ https://github.com/dvdfreitag/Signal-Detector
 # Planned Features
 
 - Accounts
-- Non git-backed projects
-- Interface to versioning
+- File upload and user project management
+- Tagged releases and versioning
 - Connect to PCB batching services
 - Assembly aide
 ---
@@ -192,6 +175,26 @@ https://github.com/dvdfreitag/Signal-Detector
 - Connect to assembly services
 - Better tools for making BOMs
 - Live pricing data
+
+---
+
+- NodeJS & React
+- GitHub Pages & Travis CI
+  - The boards.txt file
+
+```
+https://github.com/kasbah/push-on-hold-off
+https://github.com/kitnic/BQ25570_Harvester
+https://github.com/JarrettR/USBvil
+https://github.com/8BitMixtape/NextLevelEdition
+https://github.com/dvdfreitag/Signal-Detector
+
+```
+
+- tracespace/pcb-stackup 
+
+<p align=middle><img src=images/stackup.svg></p>
+
 
 ---
 
@@ -219,6 +222,7 @@ https://github.com/dvdfreitag/Signal-Detector
 
 Image credits
 
+<li> Cover of Troubleshooting Analog Circuits by Robert A. Pease
 <li>Meat grinder & Disassembled hand-powered grinder - CC-BY-SA 3.0 - Wikipedia - Photos taken by de:user:Kku. Modified by de:user:Rainer Zenz</li>
 <li>Bleep Drum Kit with MIDI - CC-BY-SA 2.0 - SparkFun Electronics</li>
 <li> GFP-tagged Cln2 - CC-BY - Jean Peccoud - https://www.youtube.com/watch?v=sG2Zd3vRdvQ
