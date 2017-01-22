@@ -3,25 +3,32 @@ class: center, middle
 
 <img class=fullscreen src=images/logo.png />
 
-
 ---
+
 
 
 ![](images/bls_125_banner.gif)
 
-US Bureau of Labor Statistics: 
-
+In the US: 
 - 1,114,000 Software Developers
 - 315,900 Electrical and Electronic Engineers
 
+
 ![](images/reddit.jpg)
 
-Reddit.com:
+Reddit: 
 - /r/programming 720,000 subscribers
 - /r/electronics 66,000 subscribers
 
 ---
 
+# Where is the Linux of electronics?
+
+<img style="height:400px;float:right" src=images/ohr_logo.svg />
+
+---
+
+# We do share projects 
 - GitHub
   - 3000 KiCAD Projects
   - 7000 Eagle Projects
@@ -58,12 +65,16 @@ Reddit.com:
   - Digikey 
   - Mouser 
   - RS
-  - Newark
-  - Farnell/Element14
+  - Newark / Farnell / Element14
 ---
 #Same origin policy
 
 "The same-origin policy restricts how a document or script loaded from one origin can interact with a resource from another origin." - MDN
+
+---
+
+<img class=fullheight src=images/cors.jpeg />
+
 ---
 ```
 curl
@@ -199,14 +210,12 @@ https://github.com/dvdfreitag/Signal-Detector
 ---
 
 # How to get involved?
-- Add your project 
-  - Running a promotion where you get a $25 voucher with Dangerous Prototypes' PCB service
-  - 15/20 left
+- Add your project and you'll get free PCB manufacturing (8/20 left)
 - Web development
 - Spread the word
 <br />
 <br />
-<img width=200 src=images/divide.gif />
+<img style="float:right" width=200 src=images/divide.gif />
 
 </font>
 ---
@@ -222,7 +231,8 @@ https://github.com/dvdfreitag/Signal-Detector
 
 Image credits
 
-<li> Cover of Troubleshooting Analog Circuits by Robert A. Pease
+<li>  ohwr.org logo - CC-BY-SA 4.0, CERN, 2014
+<li> Cover of Troubleshooting Analog Circuits by Robert A. Pease - © 1991 by Butterworth-Heinemann
 <li>Meat grinder & Disassembled hand-powered grinder - CC-BY-SA 3.0 - Wikipedia - Photos taken by de:user:Kku. Modified by de:user:Rainer Zenz</li>
 <li>Bleep Drum Kit with MIDI - CC-BY-SA 2.0 - SparkFun Electronics</li>
 <li> GFP-tagged Cln2 - CC-BY - Jean Peccoud - https://www.youtube.com/watch?v=sG2Zd3vRdvQ
