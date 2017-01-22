@@ -99,7 +99,7 @@ PNsPfrOeY6REXhUiEV1...
 ```
 ---
 
-<img class=fullscreen src=images/unit_test.png />
+<img src=images/unit_test.png />
 
 ---
 
@@ -115,7 +115,7 @@ PNsPfrOeY6REXhUiEV1...
 - Able to add/remove to cart 
 - Can have a guess at what part you mean
 - Open source (CPAL)
-- About 400 users
+- About 500 users
 
 ---
 <img class=fullscreen src=images/meat3.jpg />
