@@ -182,12 +182,37 @@ PNsPfrOeY6REXhUiEV1...
 - Assembly aide
 ---
 <img class=fullscreen src=images/aide.png />
+- GitHub Pages & Travis CI
+  - The boards.txt file
+
 ---
 
 # More Planned Features
 - Connect to assembly services
 - Better tools for making BOMs
 - Live pricing data
+
+---
+<br/>
+<br/>
+<center><img class=fullscreen src=images/bicyle_incremental.jpg /></center>
+---
+<img style="left:0;" height=150px src=images/travis_pipeline.png />
+- Static site hosting on Netlify and AWS
+- Travis CI builds every branch
+- All branches are deployed to `*.preview.kitnic.it` sub-domains
+- Master branch is deployed to `kitnic.it`
+- Register by editing the boards.txt file
+
+```
+https://github.com/kasbah/push-on-hold-off
+https://github.com/kitnic/BQ25570_Harvester
+https://github.com/JarrettR/USBvil
+https://github.com/8BitMixtape/NextLevelEdition
+https://github.com/dvdfreitag/Signal-Detector
+
+```
+
 ---
 <br/>
 <br/>
@@ -201,34 +226,89 @@ PNsPfrOeY6REXhUiEV1...
 <center><img src=images/javascript_everywhere.jpg /></center>
 ---
 
-##Javascript in the browser
+##1-click BOM
 - No more Coffeescript
-- But we still compile from ES6 -> ES5!
+- But we still compile from ES6 to ES5!
 
-##node.js on the server
+##Kitnic 
 - React front-end
-- Started implementing services using Express.js
+- Services using node.js and Express
+  - e.g a service to clone git repos and serve the files
+  - [github.com/kasbah/git-clone-server](https://github.com/kasbah/git-clone-server)
 
 ---
---
-- GitHub Pages & Travis CI
-  - The boards.txt file
+<svg width=400px viewBox="0 0 18 7">
+  	<path fill="#CB3837" d="M0,0v6h5v1h4v-1h9v-6"></path>
+  	<path fill="#FFF" d="M1,1v4h2v-3h1v3h1v-4h1v5h2v-4h1v2h-1v1h2v-4h1v4h2v-3h1v3h1v-3h1v3h1v-4"></path>
+</svg>
 
+Over 350,000 javascript packages
+
+e.g. left-pad:
+
+```js
+module.exports = leftpad;
+function leftpad (str, len, ch) {
+  str = String(str);
+  var i = -1;
+  if (!ch && ch !== 0) ch = ' ';
+  len = len - str.length;
+  while (++i < len) {
+    str = ch + str;
+  }
+  return str;
+}
 ```
-https://github.com/kasbah/push-on-hold-off
-https://github.com/kitnic/BQ25570_Harvester
-https://github.com/JarrettR/USBvil
-https://github.com/8BitMixtape/NextLevelEdition
-https://github.com/dvdfreitag/Signal-Detector
+---
+# [tracespace/pcb-stackup](https://github.com/tracespace/pcb-stackup)
 
-```
-
-- tracespace/pcb-stackup 
-
-<p align=middle><img src=images/stackup.svg></p>
-
+<p align=middle><img width=80% src=images/stackup.svg></p>
+---
+## Let's build an equality function for resistor descriptions!
+<img style="max-width:300px;float:right;" src=images/resistors.jpg />
+E.g.
+  - 100 Ohm
+  - 100R
+  - 1k5
+  - 1M Ω
 
 ---
+
+```sh
+npm install js-quantities resistor-data
+```
+
+```js
+const Qty          = require('js-quantities')
+const resistorData = require('resistor-data')
+
+function extract(R) {
+    //"1 Ohm" style
+    const match1 = /\d+\.?\d* ?(ohm|Ω|Ω)/i.exec(R)
+    if (match1) {
+        return Qty(match1[0])
+    }
+    //"1k5" style
+    const match2 = /\d+(k|m)\d+/i.exec(R)
+    if (match2) {
+        const v = resistorData.notationToValue(match2[0]) + ' ohm'
+        return Qty(v)
+    }
+}
+
+function equal(R1, R2) {
+    return extract(R1) === extract(R2)
+}
+
+```
+[Common Parts Library - CC-By Octopart in YAML format](https://github.com/octopart/cpl-data)
+---
+
+<video controls=true class=fullscreen src=images/demo.mp4 />
+
+---
+
+
 
 # How to get involved?
 - Add your project and you'll get free PCB manufacturing (8/20 left)
@@ -252,9 +332,10 @@ https://github.com/dvdfreitag/Signal-Detector
 
 Image credits
 
-<li>  ohwr.org logo - CC-BY-SA 4.0, CERN, 2014
-<li> Cover of Troubleshooting Analog Circuits by Robert A. Pease - © 1991 by Butterworth-Heinemann
+<li>ohwr.org logo - CC-BY-SA 4.0, CERN, 2014
+<li>Cover of Troubleshooting Analog Circuits by Robert A. Pease - © 1991 by Butterworth-Heinemann
 <li>Meat grinder & Disassembled hand-powered grinder - CC-BY-SA 3.0 - Wikipedia - Photos taken by de:user:Kku. Modified by de:user:Rainer Zenz</li>
 <li>Bleep Drum Kit with MIDI - CC-BY-SA 2.0 - SparkFun Electronics</li>
+<li>3 Resistors - CC-BY-SA https://commons.wikimedia.org/wiki/User:Afrank99 
 <li> GFP-tagged Cln2 - CC-BY - Jean Peccoud - https://www.youtube.com/watch?v=sG2Zd3vRdvQ
 
