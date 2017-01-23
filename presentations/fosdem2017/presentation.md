@@ -13,13 +13,21 @@ In the US:
 - 1,114,000 Software Developers
 - 315,900 Electrical and Electronic Engineers
 
-
 ![](images/reddit.jpg)
 
 Reddit: 
-- /r/programming 720,000 subscribers
-- /r/electronics 66,000 subscribers
+- `/r/programming` 720,000 subscribers
+- `/r/electronics` 66,000 subscribers
 
+---
+
+# On the other hand
+
+- there is about __one__ EE to every __three__ programmers
+- 10% of software devlopers know C  (maybe, according to TIOBE)
+
+- `/r/electronics` 66,000 subscribers
+- `/r/c_programming` 30,000 subscribers  
 ---
 
 # Where is the Linux of electronics?
@@ -169,7 +177,8 @@ PNsPfrOeY6REXhUiEV1...
 
 ---
 # The Virtual Kit
-<img src=images/kit.jpg />
+
+<img height=500px src=images/kit.jpg />
 
 ---
 
@@ -233,8 +242,8 @@ https://github.com/dvdfreitag/Signal-Detector
 ##Kitnic 
 - React front-end
 - Services using node.js and Express
-  - e.g a service to clone git repos and serve the files
-  - [github.com/kasbah/git-clone-server](https://github.com/kasbah/git-clone-server)
+  - e.g. a service to clone git repos and serve the files:
+  [github.com/kasbah/git-clone-server](https://github.com/kasbah/git-clone-server)
 
 ---
 <svg width=400px viewBox="0 0 18 7">
@@ -289,7 +298,7 @@ function extract(R) {
         return Qty(match1[0])
     }
     //"1k5" style
-    const match2 = /\d+(k|m)\d+/i.exec(R)
+    const match2 = /\d+(k|m)\d*/i.exec(R)
     if (match2) {
         const v = resistorData.notationToValue(match2[0]) + ' ohm'
         return Qty(v)
@@ -297,11 +306,11 @@ function extract(R) {
 }
 
 function equal(R1, R2) {
-    return extract(R1) === extract(R2)
+    return extract(R1).eq(extract(R2))
 }
 
 ```
-[Common Parts Library - CC-By Octopart in YAML format](https://github.com/octopart/cpl-data)
+Combine this with: [Common Parts Library - CC-By Octopart in YAML format](https://github.com/octopart/cpl-data)
 ---
 
 <video controls=true class=fullscreen src=images/demo.mp4 />
@@ -334,8 +343,9 @@ Image credits
 
 <li>ohwr.org logo - CC-BY-SA 4.0, CERN, 2014
 <li>Cover of Troubleshooting Analog Circuits by Robert A. Pease - © 1991 by Butterworth-Heinemann
-<li>Meat grinder & Disassembled hand-powered grinder - CC-BY-SA 3.0 - Wikipedia - Photos taken by de:user:Kku. Modified by de:user:Rainer Zenz</li>
-<li>Bleep Drum Kit with MIDI - CC-BY-SA 2.0 - SparkFun Electronics</li>
+<li>Meat grinder & Disassembled hand-powered grinder - CC-BY-SA 3.0 - Wikipedia - Photos taken by de:user:Kku. Modified by de:user:Rainer Zenz
+<li>Bleep Drum Kit with MIDI - CC-BY-SA 2.0 - SparkFun Electronics
+<li>Iterative development - Amended version of Henrik Kniberg's drawing, http://blog.crisp.se/2016/01/25/henrikkniberg/making-sense-of-mvp
 <li>3 Resistors - CC-BY-SA https://commons.wikimedia.org/wiki/User:Afrank99 
 <li> GFP-tagged Cln2 - CC-BY - Jean Peccoud - https://www.youtube.com/watch?v=sG2Zd3vRdvQ
 
