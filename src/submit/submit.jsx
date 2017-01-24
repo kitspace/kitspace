@@ -44,12 +44,13 @@ const board_colors = [
 const initial_state = {
   activeStep: 0,
   board: {
-    status: 'not sent',
-    color: 'green',
-    url: null,
-    files: null,
-    svgs: null,
-    stackup: null,
+    status  : 'not sent',
+    color   : 'green',
+    yamlColor: 'green',
+    url     : null,
+    files   : null,
+    svgs    : null,
+    stackup : null,
   },
 }
 
@@ -169,14 +170,12 @@ function createElement(type, props, children) {
 
 
 function ColorSelector(props) {
-  const colors = ['green', 'red', 'blue', 'black', 'white',
-    'orange', 'purple', 'yellow']
   function changeColor(color) {
     return () => {
       store.dispatch({type: 'setColor', value: color})
     }
   }
-  const buttons = colors.map(color => {
+  const buttons = board_colors.map(color => {
       const selected = props.active === color ? 'selected' : ''
       return h(Label, {
         circular: true,
