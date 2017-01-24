@@ -44,13 +44,13 @@ const board_colors = [
 const initial_state = {
   activeStep: 0,
   board: {
-    status  : 'not sent',
-    color   : 'green',
-    yamlColor: 'green',
-    url     : null,
-    files   : null,
-    svgs    : null,
-    stackup : null,
+    status    : 'not sent',
+    color     : 'green',
+    yamlColor : 'green',
+    url       : null,
+    files     : null,
+    svgs      : null,
+    stackup   : null,
   },
 }
 
@@ -184,12 +184,17 @@ function ColorSelector(props) {
         id        : `${color}Button`
       })
   })
+  let yamlInfo
+  if (props.active !== props.yamlColor) {
+    yamlInfo = <Label attached='bottom right'>{`Add a kitnic.yaml with "color: ${props.active}" to your repo to use this color.`}</Label>
+  }
   return (
     <Segment className='colorSelector'>
       <Label>
         Select a color:
       </Label>
       {buttons}
+      {yamlInfo}
     </Segment>
   )
 }
@@ -264,7 +269,7 @@ const Submit = React.createClass({
       const top = state.board.svgs.top
       const bottom = state.board.svgs.bottom
       showcase = <div className={`pcb-${state.board.color}`}> <BoardShowcase>{top}{bottom}</BoardShowcase></div>
-      colorSelector = <ColorSelector active={state.board.color}/>
+      colorSelector = <ColorSelector active={state.board.color} yamlColor={state.board.yamlColor} />
     }
     return (
     <div className='Submit'>
