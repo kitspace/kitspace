@@ -46,7 +46,7 @@ const initial_state = {
   board: {
     status    : 'not sent',
     color     : 'green',
-    yamlColor : 'green',
+    yamlColor : null,
     url       : null,
     files     : null,
     svgs      : null,
@@ -184,8 +184,19 @@ function ColorSelector(props) {
       })
   })
   let yamlInfo
-  if (props.active !== props.yamlColor) {
-    yamlInfo = <Label attached='bottom right'>{`Add a kitnic.yaml with "color: ${props.active}" to your repo to use this color`}</Label>
+  if (props.yamlColor == null) {
+    if (props.active !== 'green') {
+      yamlInfo =
+        <Label attached='bottom right'>
+          {`Add a kitnic.yaml with "color: ${props.active}" to your repo to use this color`}
+        </Label>
+    }
+  }
+  else if (props.yamlColor !== props.active) {
+    yamlInfo =
+      <Label attached='bottom right'>
+        {`Change the color in your kitnic.yaml to "color: ${props.active}" to use this color`}
+      </Label>
   }
   return (
     <Segment className='colorSelector'>
