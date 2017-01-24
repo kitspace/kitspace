@@ -93,10 +93,6 @@
     padding: 2rem;
     width: 100%;
 
-    img {
-        max-height: 540px;
-    }
-
     @include breakpoint(mobile_or_small_width) {
         border-radius: 0;
     }
@@ -107,9 +103,12 @@
 }
 
 .boardDiagram {
-    img {
-        height: 240px;
+    img, svg {
+        min-height: 240px;
+        max-height: 540px;
+        width: 100%
     }
+    width: 100%;
     display: flex;
     justify-content: center;
 }

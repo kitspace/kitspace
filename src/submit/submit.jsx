@@ -6,7 +6,7 @@ const request         = require('superagent')
 const path            = require('path')
 const camelCase       = require('lodash.camelcase')
 const whatsThatGerber = require('whats-that-gerber')
-const url = require('url')
+const url             = require('url')
 const {
   Input,
   Icon,
@@ -172,27 +172,27 @@ function createElement(type, props, children) {
 
 
 function ColorSelector(props) {
-  function onClick(color) {
+  function changeColor(color) {
     return () => {
       store.dispatch({type: 'setColor', value: color})
     }
   }
   return (
     <Segment>
-      <Button circular onClick={onClick('green')}  id='greenButton' />
-      <Button circular onClick={onClick('red')}    id='redButton' />
-      <Button circular onClick={onClick('blue')}   id='blueButton' />
-      <Button circular onClick={onClick('black')}  id='blackButton' />
-      <Button circular onClick={onClick('white')}  id='whiteButton' />
-      <Button circular onClick={onClick('orange')} id='orangeButton' />
-      <Button circular onClick={onClick('purple')} id='purpleButton' />
-      <Button circular onClick={onClick('yellow')} id='yellowButton' />
+      <Button circular onClick={changeColor('green')}  id='greenButton' />
+      <Button circular onClick={changeColor('red')}    id='redButton' />
+      <Button circular onClick={changeColor('blue')}   id='blueButton' />
+      <Button circular onClick={changeColor('black')}  id='blackButton' />
+      <Button circular onClick={changeColor('white')}  id='whiteButton' />
+      <Button circular onClick={changeColor('orange')} id='orangeButton' />
+      <Button circular onClick={changeColor('purple')} id='purpleButton' />
+      <Button circular onClick={changeColor('yellow')} id='yellowButton' />
     </Segment>
   )
 }
 
 const UrlSubmit = React.createClass({
-  placeholder: 'https://github.com/kitnic-forks/Bus_Pirate',
+  placeholder: 'https://github.com/kitnic-forks/arduino-uno',
   getInitialState() {
     return {url: ''}
   },
@@ -256,14 +256,11 @@ const Submit = React.createClass({
   render() {
     const state = this.state
     let showcase = (<BoardShowcase />)
-    //if (state.board.svgs) {
-    //  const {top, bottom} = state.board.svgs
-    //  showcase = (<BoardShowcase topSrc={top} bottomSrc={bottom}/>)
-    //}
     let top, bottom
-    if (this.state.board.svgs) {
-      top = <div className={`pcb-${state.board.color}`}>{this.state.board.svgs.top}</div>
-      bottom = <div className={`pcb-${state.board.color}`}>{this.state.board.svgs.bottom}</div>
+    if (state.board.svgs) {
+      top = state.board.svgs.top
+      bottom = state.board.svgs.bottom
+      showcase= <div className={`pcb-${state.board.color}`}> <BoardShowcase>{top}{bottom}</BoardShowcase></div>
     }
     return (
     <div className='Submit'>
@@ -277,8 +274,7 @@ const Submit = React.createClass({
         <Markdown className='instructions' source={instructionTexts[state.activeStep]} />
         <UrlSubmit board={state.board} />
         <ColorSelector active={this.state.board.color}/>
-        {top}
-        {bottom}
+        {showcase}
       </Container>
     </div>
     )
@@ -286,7 +282,6 @@ const Submit = React.createClass({
   componentDidMount() {
     store.subscribe(() => {
       const state = store.getState()
-      console.log(state)
       this.setState(state)
     })
   }
