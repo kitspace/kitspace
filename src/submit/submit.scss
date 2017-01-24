@@ -39,12 +39,7 @@ code {
 
 #whiteButton {
    background-color: white;
-   border: 1px solid lightgrey;
 
-}
-
-#whiteButton.selected {
-   border: 2px solid lightgrey;
 }
 
 #orangeButton {
@@ -136,13 +131,23 @@ code {
      .pcb-stackup_ss {color: black;}
 }
 
+.colorSelector {
+   display:flex;
+   align-items: center;
+}
+
 .colorSelect {
    width: 32px;
    height: 32px;
+   margin: 4px;
+   border: 1px solid lightgrey;
+}
+#whiteButton {
+   border: 1px solid lightgrey;
 }
 
-.colorSelect.selected {
-   border: 3px solid grey;
-   width: 35px;
-   height: 35px;
+.colorSelect.selected, #whiteButton.selected {
+   border: 3px solid lightgrey;
 }
+
+

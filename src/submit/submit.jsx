@@ -16,6 +16,7 @@ const {
   Segment,
   Button,
   Label,
+  Checkbox,
 } = require('semantic-ui-react')
 
 let DOMURL
@@ -168,7 +169,8 @@ function createElement(type, props, children) {
 
 
 function ColorSelector(props) {
-  const colors = ['green', 'red', 'blue', 'black', 'white', 'orange', 'purple', 'yellow']
+  const colors = ['green', 'red', 'blue', 'black', 'white',
+    'orange', 'purple', 'yellow']
   function changeColor(color) {
     return () => {
       store.dispatch({type: 'setColor', value: color})
@@ -176,15 +178,15 @@ function ColorSelector(props) {
   }
   const buttons = colors.map(color => {
       const selected = props.active === color ? 'selected' : ''
-      const inverted = ['green', 'red', 'blue', 'black', 'purple'].indexOf(color) >= 0
       return h(Label, {
+        circular: true,
         className : `colorSelect ${selected}`,
         onClick   : changeColor(color),
         id        : `${color}Button`
       })
   })
   return (
-    <Segment textAlign='center'>
+    <Segment className='colorSelector'>
       <Label>
         Select a color:
       </Label>
@@ -259,11 +261,11 @@ const Submit = React.createClass({
     const state = this.state
     let showcase
     let colorSelector
-    colorSelector = <ColorSelector active={state.board.color}/>
     if (state.board.svgs) {
       const top = state.board.svgs.top
       const bottom = state.board.svgs.bottom
       showcase = <div className={`pcb-${state.board.color}`}> <BoardShowcase>{top}{bottom}</BoardShowcase></div>
+      colorSelector = <ColorSelector active={state.board.color}/>
     }
     return (
     <div className='Submit'>
