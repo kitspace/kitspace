@@ -17,6 +17,7 @@ const {
   Button,
   Label,
   Checkbox,
+  Grid,
 } = require('semantic-ui-react')
 
 let DOMURL
@@ -97,7 +98,7 @@ entering the repository URL below.
 function Steps(props) {
     return (
       <div className='stepsContainer'>
-        <Step.Group ordered stackable>
+        <Step.Group ordered>
           <Step active={props.active === 0} onClick={handleClick(0)}>
             {'Preview the board'}
           </Step>
@@ -107,7 +108,7 @@ function Steps(props) {
           <Step active={props.active === 2} onClick={handleClick(2)}>
             {'Preview the readme'}
           </Step>
-          <Step active={props.active === 3} onClick={handleClick(3)}>
+          <Step completed active={props.active === 3} onClick={handleClick(3)}>
             {'Submit'}
           </Step>
         </Step.Group>
@@ -277,24 +278,29 @@ const Submit = React.createClass({
     const state = this.state
     let showcase
     let colorSelector
-    if (state.board.svgs) {
+    let nextButton
+    if (state.activeStep === 0 && state.board.svgs) {
       const top = state.board.svgs.top
       const bottom = state.board.svgs.bottom
       showcase = <div className={`pcb-${state.board.color}`}> <BoardShowcase>{top}{bottom}</BoardShowcase></div>
       colorSelector = <ColorSelector active={state.board.color} yamlColor={state.board.yamlColor} />
+      nextButton = <Button color='green'>Looks good, next!</Button>
     }
     return (
     <div className='Submit'>
       <TitleBar>
         <div className='titleText'>
-          Submit a project
+          {'Submit a project'}
         </div>
       </TitleBar>
       <Container>
         <Steps active={state.activeStep} />
         <Markdown className='instructions' source={instructionTexts[state.activeStep]} />
-        <UrlSubmit board={state.board} />
-        {colorSelector}
+        <Segment className='userInputSegment'>
+          <UrlSubmit board={state.board} />
+          {colorSelector}
+          {nextButton}
+        </Segment>
         {showcase}
       </Container>
     </div>

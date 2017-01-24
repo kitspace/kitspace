@@ -19,7 +19,7 @@
             @content;
         }
     } @else if $point == semantic_container{
-        @media (max-width: 991px)
+        @media (max-width: 1199px)
         {
             @content;
         }

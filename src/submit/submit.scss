@@ -14,7 +14,8 @@ code {
 
 .ui.input {
     max-width: 500px;
-    flex-grow: 1;
+    flex-grow: 2;
+    width:100%;
 }
 
 .submitButton {
@@ -75,7 +76,9 @@ code {
     margin-top:50px;
     margin-bottom: 50px;
     display: flex;
+    width:100%;
     justify-content: center;
+    flex-grow: 2;
 }
 
 .pcb-stackup_fr4 {color: #4D542C;}
@@ -134,11 +137,22 @@ code {
 .colorSelector {
    display:flex;
    align-items: center;
+   flex-grow: 1;
+   margin-right: 16px !important;
    @include breakpoint(semantic_container) {
       align-items: flex-start;
       min-height: 90px;
    }
 }
+
+.userInputSegment {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: space-around;
+   align-items:center;
+}
+
+
 
 .colorSelect {
    width: 32px;
