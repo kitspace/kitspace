@@ -134,6 +134,10 @@ code {
 .colorSelector {
    display:flex;
    align-items: center;
+   @include breakpoint(semantic_tablet) {
+      align-items: flex-start;
+      min-height: 90px;
+   }
 }
 
 .colorSelect {

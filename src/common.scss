@@ -18,6 +18,11 @@
         {
             @content;
         }
+    } @else if $point == semantic_tablet {
+        @media (max-width: 990px)
+        {
+            @content;
+        }
     }
 }
 

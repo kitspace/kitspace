@@ -86,9 +86,8 @@ const instructionTexts = [
 `
 Plot Gerbers (RS274-X) & drill data from your CAD program. Put the files in a
 publicly accessible Git repository (you could use [GitHub](https://github.com)
-or [GitLab](https://gitlab.com) for instance).
-
-Preview your board by entering the repository URL below.
+or [GitLab](https://gitlab.com) for instance) then preview your board by
+entering the repository URL below.
 `,
 '',
 '',
