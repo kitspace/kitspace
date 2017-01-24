@@ -202,9 +202,7 @@ PNsPfrOeY6REXhUiEV1...
 - Live pricing data
 
 ---
-<br/>
-<br/>
-<center><img class=fullscreen src=images/bicyle_incremental.jpg /></center>
+<center><img class=fullscreen src=images/bicyle_incremental.png /></center>
 ---
 <img style="left:0;" height=150px src=images/travis_pipeline.png />
 - Static site hosting on Netlify and AWS
@@ -284,21 +282,25 @@ E.g.
 ---
 
 ```sh
-npm install js-quantities resistor-data
+# creates a package.json file
+npm init
+# installs dependencies and saves to package.json
+npm install --save js-quantities resistor-data
 ```
 
+`index.js`
 ```js
-const Qty          = require('js-quantities')
+const Qty = require('js-quantities')
 const resistorData = require('resistor-data')
 
 function extract(R) {
-    //"1 Ohm" style
+    //"100 Ohm" or "100 Ω" style
     const match1 = /\d+\.?\d* ?(ohm|Ω|Ω)/i.exec(R)
     if (match1) {
         return Qty(match1[0])
     }
-    //"1k5" style
-    const match2 = /\d+(k|m)\d*/i.exec(R)
+    //"1k5", "1M" or "100R" style
+    const match2 = /\d+(k|m|r)\d*/i.exec(R)
     if (match2) {
         const v = resistorData.notationToValue(match2[0]) + ' ohm'
         return Qty(v)
@@ -310,7 +312,45 @@ function equal(R1, R2) {
 }
 
 ```
-Combine this with: [Common Parts Library - CC-By Octopart in YAML format](https://github.com/octopart/cpl-data)
+
+---
+
+`index.js`
+
+```diff
+-function equal(R1, R2) {
++module.exports = function equal(R1, R2) {
+     return extract(R1).eq(extract(R2))
+ }
+```
+`package.json`
+```json
+{
+  "name": "r-equal",
+  "version": "1.0.0",
+  "description": "Function to test if resistor values are equal",
+  "main": "index.js",
+  "license": "ISC",
+  "dependencies": {
+    "js-quantities": "^1.6.5",
+    "resistor-data": "^1.0.0"
+  }
+}
+```
+
+```sh
+npm publish
+```
+
+
+---
+
+# Extend and combine this with: 
+- Octopart and Findchips search 
+- The Common Parts Library ([CC-By Octopart in YAML format](https://github.com/octopart/cpl-data))
+
+<img width=100% src=images/cpl_data.png />
+
 ---
 
 <video controls=true class=fullscreen src=images/demo.mp4 />
@@ -333,8 +373,8 @@ Combine this with: [Common Parts Library - CC-By Octopart in YAML format](https:
 - [kitnic.it](https://kitnic.it)
 - [@kitnic_it](https://twitter.com/kitnic_it)
 - [github.com/monostable/kitnic](https://github.com/monostable/kitnic)
+- slides: kitnic.it/fosdem2017
 <font size=3>
-<br />
 <br />
 <br />
 <br />
@@ -345,7 +385,7 @@ Image credits
 <li>Cover of Troubleshooting Analog Circuits by Robert A. Pease - © 1991 by Butterworth-Heinemann
 <li>Meat grinder & Disassembled hand-powered grinder - CC-BY-SA 3.0 - Wikipedia - Photos taken by de:user:Kku. Modified by de:user:Rainer Zenz
 <li>Bleep Drum Kit with MIDI - CC-BY-SA 2.0 - SparkFun Electronics
-<li>Iterative development - Amended version of Henrik Kniberg's drawing, http://blog.crisp.se/2016/01/25/henrikkniberg/making-sense-of-mvp
+<li>Iterative development drawing - Henrik Kniberg, http://blog.crisp.se/2016/01/25/henrikkniberg/making-sense-of-mvp
 <li>3 Resistors - CC-BY-SA https://commons.wikimedia.org/wiki/User:Afrank99 
 <li> GFP-tagged Cln2 - CC-BY - Jean Peccoud - https://www.youtube.com/watch?v=sG2Zd3vRdvQ
 
