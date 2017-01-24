@@ -14,7 +14,8 @@ const {
   Container,
   Form,
   Segment,
-  Button
+  Button,
+  Label,
 } = require('semantic-ui-react')
 
 let DOMURL
@@ -167,21 +168,27 @@ function createElement(type, props, children) {
 
 
 function ColorSelector(props) {
+  const colors = ['green', 'red', 'blue', 'black', 'white', 'orange', 'purple', 'yellow']
   function changeColor(color) {
     return () => {
       store.dispatch({type: 'setColor', value: color})
     }
   }
+  const buttons = colors.map(color => {
+      const selected = props.active === color ? 'selected' : ''
+      const inverted = ['green', 'red', 'blue', 'black', 'purple'].indexOf(color) >= 0
+      return h(Label, {
+        className : `colorSelect ${selected}`,
+        onClick   : changeColor(color),
+        id        : `${color}Button`
+      })
+  })
   return (
-    <Segment>
-      <Button circular onClick={changeColor('green')}  id='greenButton' />
-      <Button circular onClick={changeColor('red')}    id='redButton' />
-      <Button circular onClick={changeColor('blue')}   id='blueButton' />
-      <Button circular onClick={changeColor('black')}  id='blackButton' />
-      <Button circular onClick={changeColor('white')}  id='whiteButton' />
-      <Button circular onClick={changeColor('orange')} id='orangeButton' />
-      <Button circular onClick={changeColor('purple')} id='purpleButton' />
-      <Button circular onClick={changeColor('yellow')} id='yellowButton' />
+    <Segment textAlign='center'>
+      <Label>
+        Select a color:
+      </Label>
+      {buttons}
     </Segment>
   )
 }
@@ -250,12 +257,13 @@ const Submit = React.createClass({
   },
   render() {
     const state = this.state
-    let showcase = (<BoardShowcase />)
-    let top, bottom
+    let showcase
+    let colorSelector
+    colorSelector = <ColorSelector active={state.board.color}/>
     if (state.board.svgs) {
-      top = state.board.svgs.top
-      bottom = state.board.svgs.bottom
-      showcase= <div className={`pcb-${state.board.color}`}> <BoardShowcase>{top}{bottom}</BoardShowcase></div>
+      const top = state.board.svgs.top
+      const bottom = state.board.svgs.bottom
+      showcase = <div className={`pcb-${state.board.color}`}> <BoardShowcase>{top}{bottom}</BoardShowcase></div>
     }
     return (
     <div className='Submit'>
@@ -268,7 +276,7 @@ const Submit = React.createClass({
         <Steps active={state.activeStep} />
         <Markdown className='instructions' source={instructionTexts[state.activeStep]} />
         <UrlSubmit board={state.board} />
-        <ColorSelector active={this.state.board.color}/>
+        {colorSelector}
         {showcase}
       </Container>
     </div>

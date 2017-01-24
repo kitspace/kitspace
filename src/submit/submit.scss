@@ -40,6 +40,11 @@ code {
 #whiteButton {
    background-color: white;
    border: 1px solid lightgrey;
+
+}
+
+#whiteButton.selected {
+   border: 2px solid lightgrey;
 }
 
 #orangeButton {
@@ -129,4 +134,15 @@ code {
      .pcb-stackup_cf {color: goldenrod;}
      .pcb-stackup_sm {color: rgba(255, 255, 102, 0.50);}
      .pcb-stackup_ss {color: black;}
+}
+
+.colorSelect {
+   width: 32px;
+   height: 32px;
+}
+
+.colorSelect.selected {
+   border: 3px solid grey;
+   width: 35px;
+   height: 35px;
 }
