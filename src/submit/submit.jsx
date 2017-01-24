@@ -86,7 +86,7 @@ const instructionTexts = [
 `
 Plot Gerbers (RS274-X) & drill data from your CAD program. Put the files in a
 publicly accessible Git repository (you could use [GitHub](https://github.com)
-or [GitLab](https://gitlab.com) for instance) then preview your board by
+or [GitLab](https://gitlab.com) for instance). Preview your board by
 entering the repository URL below.
 `,
 '',
@@ -185,12 +185,12 @@ function ColorSelector(props) {
   })
   let yamlInfo
   if (props.active !== props.yamlColor) {
-    yamlInfo = <Label attached='bottom right'>{`Add a kitnic.yaml with "color: ${props.active}" to your repo to use this color.`}</Label>
+    yamlInfo = <Label attached='bottom right'>{`Add a kitnic.yaml with "color: ${props.active}" to your repo to use this color`}</Label>
   }
   return (
     <Segment className='colorSelector'>
       <Label>
-        Select a color:
+        {'Select a color:'}
       </Label>
       {buttons}
       {yamlInfo}
