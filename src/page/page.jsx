@@ -7,6 +7,7 @@ const StoreButtons  = require('./buy_parts')
 const info          = require('../info.json')
 const Readme        = require('../readme')
 const Gerbers       = require('./gerbers')
+const FadeImage     = require('../fade_image')
 
 var Page = React.createClass({
   render: function () {
@@ -52,7 +53,10 @@ var Page = React.createClass({
               </div>
             </div>
             <Gerbers />
-            <BoardShowcase topSrc='images/top.svg' bottomSrc='images/bottom.svg'/>
+            <BoardShowcase>
+              <FadeImage src='images/top.svg' />
+              <FadeImage src='images/bottom.svg'/>
+            </BoardShowcase>
             <StoreButtons items={ info.bom.lines ? info.bom.lines : [] } />
             <Readme />
             <BOM data={ info.bom ? info.bom : [] } />

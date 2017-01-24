@@ -1,7 +1,6 @@
 'use strict'
 const React     = require('react')
 const LazyLoad  = require('../lazy_load')
-const FadeImage = require('../fade_image')
 
 var BoardShowcase = React.createClass({
   getInitialState: function() {
@@ -29,6 +28,7 @@ var BoardShowcase = React.createClass({
     } else {
       backBoardClass += ' selectedBoard'
     }
+    const children = this.props.children || [<div />, <div />]
     return (
       <div className="boardShowcaseContainer">
         <div className="toggleBoardView responsiveTabs">
@@ -50,11 +50,15 @@ var BoardShowcase = React.createClass({
             component={React.createElement('div', {className:'img'})}
             distance={300}>
             <div className="boardContainer">
-              <FadeImage className={frontBoardClass} src={this.props.topSrc} />
+              <div className={frontBoardClass}>
+                {children[0]}
+              </div>
               <div className="circuitBorderContainer">
                 <div className="circuitBorder"></div>
               </div>
-              <FadeImage className={backBoardClass} src={this.props.bottomSrc} />
+              <div className={backBoardClass}>
+                {children[1]}
+              </div>
             </div>
           </LazyLoad>
         </div>

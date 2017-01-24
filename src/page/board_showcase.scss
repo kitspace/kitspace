@@ -7,9 +7,6 @@
             font-size: 48px;
         }
 
-        .boardDiagram {
-            height: 100%;
-        }
 
         .octicon {
             font-size: 48px;
@@ -62,7 +59,7 @@
     }
 
     .boardContainer .selectedBoard.boardDiagram {
-        display: block;
+        display: flex;
     }
 
     .circuitBorderContainer {
@@ -110,8 +107,11 @@
 }
 
 .boardDiagram {
-    height: 240px;
-    width: 50%;
+    img {
+        height: 240px;
+    }
+    display: flex;
+    justify-content: center;
 }
 
 .circuitBorderContainer {
