@@ -97,18 +97,18 @@ entering the repository URL below.
 function Steps(props) {
     return (
       <div className='stepsContainer'>
-        <Step.Group ordered stackable='tablet'>
+        <Step.Group ordered stackable>
           <Step active={props.active === 0} onClick={handleClick(0)}>
-            Preview the board
+            {'Preview the board'}
           </Step>
           <Step active={props.active === 1} onClick={handleClick(1)}>
-            Preview the bill of materials
+            {'Preview the bill of materials'}
           </Step>
           <Step active={props.active === 2} onClick={handleClick(2)}>
-            Preview the readme
+            {'Preview the readme'}
           </Step>
           <Step active={props.active === 3} onClick={handleClick(3)}>
-            Send us a pull-request to add your board
+            {'Submit'}
           </Step>
         </Step.Group>
       </div>
@@ -188,14 +188,16 @@ function ColorSelector(props) {
     if (props.active !== 'green') {
       yamlInfo =
         <Label attached='bottom right'>
-          {`Add a kitnic.yaml with "color: ${props.active}" to your repo to use this color`}
+          {`Add a kitnic.yaml with "color: ${props.active}" to\
+            your repo to use this color`}
         </Label>
     }
   }
   else if (props.yamlColor !== props.active) {
     yamlInfo =
       <Label attached='bottom right'>
-        {`Change the color in your kitnic.yaml to "color: ${props.active}" to use this color`}
+        {`Change the color in your kitnic.yaml to "color: \
+          ${props.active}" to use this color`}
       </Label>
   }
   return (
