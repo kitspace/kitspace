@@ -49,7 +49,7 @@ const initial_state = immutable.Map({
   board: immutable.Map({
     status    : 'not sent',
     color     : 'green',
-    yamlColor : null,
+    yaml      : immutable.Map({}),
     url       : null,
     files     : null,
     svgs      : null,
@@ -83,8 +83,16 @@ function reducer(state = initial_state, action) {
       const board = state.get('board').set('color', action.value)
       return state.set('board', board)
     }
-    case 'setYamlColor': {
-      const board = state.get('board').set('color', action.value).set('yamlColor', action.value)
+    case 'setYaml': {
+      const info = action.value
+      let board = state.get('board').set('yaml', immutable.Map(info))
+      if (info.color) {
+        if (board_colors.indexOf(info.color) >= 0) {
+          board = board.set('color', info.color)
+        } else {
+          //TODO: warning
+        }
+      }
       return state.set('board', board)
     }
     case 'setBoardError': {
@@ -271,13 +279,8 @@ const UrlSubmit = React.createClass({
              .withCredentials()
              .then(res => {
                const info = jsYaml.safeLoad(res.text)
-               if (info && info.color) {
-                 if (board_colors.indexOf(info.color) >= 0) {
-                   store.dispatch({type: 'setYamlColor', value: info.color})
-                 }
-                 else {
-                   //TODO: warning
-                 }
+               if (info)  {
+                 store.dispatch({type: 'setYaml', value: info})
                }
              })
          }
@@ -353,7 +356,7 @@ const Submit = React.createClass({
       const top = state.board.svgs.top
       const bottom = state.board.svgs.bottom
       showcase = <div className={`pcb-${state.board.color}`}> <BoardShowcase>{top}{bottom}</BoardShowcase></div>
-      colorSelector = <ColorSelector active={state.board.color} yamlColor={state.board.yamlColor} />
+      colorSelector = <ColorSelector active={state.board.color} yamlColor={state.board.yaml.color} />
       nextButton = <Button content='Next' icon='right arrow' labelPosition='right' color='green' onClick={setStep(1)} />
     }
     return (
