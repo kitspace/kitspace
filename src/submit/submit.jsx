@@ -99,16 +99,16 @@ function Steps(props) {
     return (
       <div className='stepsContainer'>
         <Step.Group ordered>
-          <Step active={props.active === 0} onClick={handleClick(0)}>
+          <Step active={props.active === 0} onClick={setStep(0)}>
             {'Preview the board'}
           </Step>
-          <Step active={props.active === 1} onClick={handleClick(1)}>
+          <Step active={props.active === 1} onClick={setStep(1)}>
             {'Preview the bill of materials'}
           </Step>
-          <Step active={props.active === 2} onClick={handleClick(2)}>
+          <Step active={props.active === 2} onClick={setStep(2)}>
             {'Preview the readme'}
           </Step>
-          <Step completed active={props.active === 3} onClick={handleClick(3)}>
+          <Step completed active={props.active === 3} onClick={setStep(3)}>
             {'Submit'}
           </Step>
         </Step.Group>
@@ -284,7 +284,7 @@ const Submit = React.createClass({
       const bottom = state.board.svgs.bottom
       showcase = <div className={`pcb-${state.board.color}`}> <BoardShowcase>{top}{bottom}</BoardShowcase></div>
       colorSelector = <ColorSelector active={state.board.color} yamlColor={state.board.yamlColor} />
-      nextButton = <Button color='green'>Looks good, next!</Button>
+      nextButton = <Button content='Next' icon='right arrow' labelPosition='right' color='green' onClick={setStep(1)} />
     }
     return (
     <div className='Submit'>
@@ -296,11 +296,11 @@ const Submit = React.createClass({
       <Container>
         <Steps active={state.activeStep} />
         <Markdown className='instructions' source={instructionTexts[state.activeStep]} />
-        <Segment className='userInputSegment'>
+        <div className='userInputSegment'>
           <UrlSubmit board={state.board} />
           {colorSelector}
           {nextButton}
-        </Segment>
+        </div>
         {showcase}
       </Container>
     </div>
@@ -314,7 +314,7 @@ const Submit = React.createClass({
   }
 })
 
-function handleClick(step) {
+function setStep(step) {
    return () => {
       store.dispatch({type:'setStep', value:step})
    }
