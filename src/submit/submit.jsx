@@ -23,11 +23,6 @@ const {
   Message,
 } = require('semantic-ui-react')
 
-let DOMURL
-if (typeof(window) !== 'undefined') {
-  DOMURL = window.URL || window.webkitURL || window;
-}
-
 const TitleBar      = require('../title_bar')
 const BoardShowcase = require('../page/board_showcase')
 const boardBuilder    = require('../board_builder')
@@ -180,10 +175,6 @@ function kitnicYaml(files) {
 
 function isLoading(status) {
   return (status !== 'done') && (status !== 'not sent') && (status !== 'failed')
-}
-
-function createSvgDataUrl(string) {
-  return DOMURL.createObjectURL(new Blob([string], {type: 'image/svg+xml'}))
 }
 
 function buildBoard(layers) {
