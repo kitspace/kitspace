@@ -142,7 +142,24 @@ function Steps(props) {
 
 
 function gerberFiles(files, info) {
-  return files.filter(f => whatsThatGerber(f) !== 'drw')
+  const possibleGerbers = files.filter(f => whatsThatGerber(f) !== 'drw')
+  const folders = possibleGerbers.reduce((prev, f) => {
+    const dir = path.dirname(f)
+    if (Object.keys(prev).indexOf(dir) === -1) {
+      prev[dir] = 1
+    }
+    else {
+      prev[dir] += 1
+    }
+    return prev
+  }, {})
+  const gerberFolder = Object.keys(folders).reduce((prev, f) => {
+    if (folders[f] > folders[prev]) {
+      return f
+    }
+    return prev
+  })
+  return possibleGerbers.filter(f => path.dirname(f) === gerberFolder)
 }
 
 function kitnicYaml(files) {
