@@ -154,15 +154,10 @@ function gerberFiles(files, info) {
   }
   //if we have duplicates we reduce it down to the folder with the most
   //gerbers
-  const folders = possibleGerbers.reduce((prev, f) => {
-    const dir = path.dirname(f)
-    if (Object.keys(prev).indexOf(dir) === -1) {
-      prev[dir] = 1
-    }
-    else {
-      prev[dir] += 1
-    }
-    return prev
+  const folders = possibleGerbers.reduce((folders, f) => {
+    const name = path.dirname(f)
+    folders[name] = (folders[name] || 0) + 1
+    return folders
   }, {})
   const gerberFolder = Object.keys(folders).reduce((prev, f) => {
     if (folders[f] > folders[prev]) {
