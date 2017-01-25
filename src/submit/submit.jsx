@@ -262,11 +262,24 @@ const UrlSubmit = React.createClass({
   render() {
     const state      = this.state
     const requested  = state.url === this.props.board.url
-    const buttonText = requested ? 'Refresh' : 'Preview'
     const color      = requested ? 'blue' : 'green'
     const loading    = isLoading(this.props.board.status)
     const failed     = this.props.board.status === 'failed'
-    const message    = failed ? <Message error header='Preview Failed' content={this.props.board.messages[0]} /> : undefined
+    let message
+    if (failed) {
+      message =
+        <Message
+          error
+          header='Preview Failed'
+          content={this.props.board.messages[0]} />
+    }
+    let buttonText = 'Preview'
+    if (requested) {
+      buttonText = 'Refresh'
+    }
+    if (requested && failed) {
+      buttonText = 'Retry'
+    }
     return (
       <Form error={failed} onSubmit={this.onSubmit} id='submitForm'>
       <div style={{display:'flex', justifyContent:'center', alignItems:'center'}}>

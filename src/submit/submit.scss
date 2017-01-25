@@ -78,6 +78,12 @@ code {
     flex-grow: 2;
 }
 
+button {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
 .pcb-stackup_fr4 {color: #4D542C;}
 .pcb-stackup_cu {color: lightgrey;}
 .pcb-stackup_sp {color: rgba(0, 0, 0, 0.0);}
