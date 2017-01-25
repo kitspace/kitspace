@@ -7,6 +7,7 @@ const path            = require('path')
 const camelCase       = require('lodash.camelcase')
 const whatsThatGerber = require('whats-that-gerber')
 const url             = require('url')
+const immutable       = require('immutable')
 const {
   Input,
   Icon,
@@ -42,9 +43,9 @@ const board_colors = [
   'yellow',
 ]
 
-const initial_state = {
+const initial_state = immutable.Map({
   activeStep: 0,
-  board: {
+  board: immutable.Map({
     status    : 'not sent',
     color     : 'green',
     yamlColor : null,
@@ -53,37 +54,38 @@ const initial_state = {
     svgs      : null,
     stackup   : null,
     messages  : [],
-  },
-}
+  }),
+})
 
 function reducer(state = initial_state, action) {
   console.log(action)
   switch(action.type) {
     case 'setStep':
-      return Object.assign(state, {activeStep: action.value})
+      return state.set('activeStep', action.value)
     case 'setUrlSent': {
-      const new_state = JSON.parse(JSON.stringify(initial_state))
-      new_state.activeStep = state.activeStep
-      new_state.board.status = 'sent'
-      new_state.board.url = action.value
-      return state
+      const board = initial_state.get('board').set('status', 'sent')
+        .set('url', action.value)
+      return state.set('board', board)
     }
     case 'setFileListing': {
-      const board = Object.assign(state.board, {status: 'replied', files: action.value})
-      return Object.assign(state, {board})
+      const board = state.get('board').set('status', 'replied')
+        .set('files', action.value)
+      return state.set('board', board)
     }
     case 'setSvgs': {
       const {svgs} = action.value
-      const board = Object.assign(state.board, {status: 'done', svgs})
-      return Object.assign(state, {board})
+      const board = state.get('board').set('status', 'done')
+        .set('svgs', svgs)
+      return state.set('board', board)
     }
     case 'setColor': {
-      const board = Object.assign(state.board, {color: action.value})
-      return Object.assign(state, {board})
+      const board = state.get('board').set('color', action.value)
+      return state.set('board', board)
     }
     case 'setBoardError': {
-      const board = Object.assign(state.board, {status: 'failed', messages: state.board.messages.concat([action.value])})
-      return Object.assign(state, {board})
+      const board = state.get('board').set('status', 'failed')
+        .set('messages', [action.value])
+      return state.set('board', board)
     }
   }
   return state
@@ -306,7 +308,7 @@ const UrlSubmit = React.createClass({
 
 const Submit = React.createClass({
   getInitialState() {
-    return store.getState()
+    return store.getState().toJS()
   },
   render() {
     const state = this.state
@@ -342,7 +344,7 @@ const Submit = React.createClass({
   },
   componentDidMount() {
     store.subscribe(() => {
-      const state = store.getState()
+      const state = store.getState().toJS()
       console.log(state)
       this.setState(state)
     })
