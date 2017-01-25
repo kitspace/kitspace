@@ -127,7 +127,7 @@ function gerberFiles(files, info) {
 }
 
 function isLoading(status) {
-  return (status !== 'done') && (status !== 'not sent')
+  return (status !== 'done') && (status !== 'not sent') && (status !== 'failed')
 }
 
 function createSvgDataUrl(string) {
@@ -220,7 +220,7 @@ function ColorSelector(props) {
 }
 
 const UrlSubmit = React.createClass({
-  placeholder: 'https://github.com/kitnic-forks/arduino-uno',
+  placeholder: 'https://github.com/kasbah/test-repo',
   getInitialState() {
     return {url: ''}
   },
@@ -269,20 +269,22 @@ const UrlSubmit = React.createClass({
     const message    = failed ? <Message error header='Preview Failed' content={this.props.board.messages[0]} /> : undefined
     return (
       <Form error={failed} onSubmit={this.onSubmit} id='submitForm'>
-      <Input
-        fluid
-        name = 'url'
-        onChange = {this.onChange}
-        error = {failed}
-        action = {{
-          color,
-          loading,
-          content : buttonText,
-          className: 'submitButton',
-        }}
-        placeholder = {this.placeholder}
-        value = {state.url}
-      />
+      <div style={{display:'flex', justifyContent:'center', alignItems:'center'}}>
+        <Input
+          fluid
+          name = 'url'
+          onChange = {this.onChange}
+          error = {failed}
+          action = {{
+            color,
+            loading,
+            content : buttonText,
+            className: 'submitButton',
+          }}
+          placeholder = {this.placeholder}
+          value = {state.url}
+        />
+      </div>
       {message}
       </Form>)
   },
