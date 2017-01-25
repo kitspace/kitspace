@@ -53,7 +53,7 @@ const initial_state = immutable.Map({
     files     : null,
     svgs      : null,
     stackup   : null,
-    messages  : [],
+    message   : '',
   }),
 })
 
@@ -84,7 +84,7 @@ function reducer(state = initial_state, action) {
     }
     case 'setBoardError': {
       const board = state.get('board').set('status', 'failed')
-        .set('messages', [action.value])
+        .set('message', action.value)
       return state.set('board', board)
     }
   }
@@ -96,7 +96,7 @@ const store = Redux.createStore(reducer)
 
 const instructionTexts = [
 `
-Plot Gerbers (RS274-X) & drill data from your CAD program. Put the files in a
+Plot Gerbers (RS274-X) and drill data from your CAD program. Put the files in a
 publicly accessible Git repository (you could use [GitHub](https://github.com)
 or [GitLab](https://gitlab.com) for instance). Preview your board by
 entering the repository URL below.
@@ -244,9 +244,14 @@ const UrlSubmit = React.createClass({
        .send({url: formData.url})
        .withCredentials()
        .end((err, res) => {
+         if (err) {
+           return store.dispatch({type: 'setBoardError', value: err})
+         }
+         if (res.body.error) {
+           return store.dispatch({type: 'setBoardError', value: res.body.error})
+         }
          const files    = res.body.data.files
          const gerbers  = gerberFiles(files)
-         console.log(gerbers)
          if (gerbers.length === 0) {
            console.log('setBoardError')
            store.dispatch({type: 'setBoardError', value:'No Gerber files found in repository'})
@@ -277,7 +282,7 @@ const UrlSubmit = React.createClass({
         <Message
           error
           header='Preview Failed'
-          content={this.props.board.messages[0]} />
+          content={this.props.board.message} />
     }
     let buttonText = 'Preview'
     if (requested) {
