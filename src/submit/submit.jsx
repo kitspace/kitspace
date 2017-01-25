@@ -9,6 +9,7 @@ const whatsThatGerber = require('whats-that-gerber')
 const url             = require('url')
 const immutable       = require('immutable')
 const jsYaml          = require('js-yaml');
+const {Router, Route, Link, browserHistory} = require('react-router')
 const {
   Input,
   Icon,
@@ -418,4 +419,14 @@ function setStep(step) {
    }
 }
 
-module.exports = Submit
+const SubmitRouter = React.createClass({
+  render() {
+    return (
+      <Router history={hashHistory}>
+        <Route path='/' component={Submit} />
+      </Router>
+    )
+  },
+})
+
+module.exports = SubmitRouter
