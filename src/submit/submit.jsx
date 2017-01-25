@@ -57,12 +57,16 @@ const initial_state = {
 }
 
 function reducer(state = initial_state, action) {
+  console.log(action)
   switch(action.type) {
     case 'setStep':
       return Object.assign(state, {activeStep: action.value})
     case 'setUrlSent': {
-      const board = Object.assign(state.board, {url: action.value, status: 'sent', messages: []})
-      return Object.assign(state, {board})
+      const new_state = JSON.parse(JSON.stringify(initial_state))
+      new_state.activeStep = state.activeStep
+      new_state.board.status = 'sent'
+      new_state.board.url = action.value
+      return state
     }
     case 'setFileListing': {
       const board = Object.assign(state.board, {status: 'replied', files: action.value})
@@ -275,10 +279,7 @@ const UrlSubmit = React.createClass({
     }
     let buttonText = 'Preview'
     if (requested) {
-      buttonText = 'Refresh'
-    }
-    if (requested && failed) {
-      buttonText = 'Retry'
+      buttonText = failed ? 'Retry' : 'Refresh'
     }
     return (
       <Form error={failed} onSubmit={this.onSubmit} id='submitForm'>
