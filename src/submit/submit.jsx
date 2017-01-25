@@ -8,6 +8,7 @@ const camelCase       = require('lodash.camelcase')
 const whatsThatGerber = require('whats-that-gerber')
 const url             = require('url')
 const immutable       = require('immutable')
+const jsYaml          = require('js-yaml');
 const {
   Input,
   Icon,
@@ -82,6 +83,10 @@ function reducer(state = initial_state, action) {
       const board = state.get('board').set('color', action.value)
       return state.set('board', board)
     }
+    case 'setYamlColor': {
+      const board = state.get('board').set('color', action.value).set('yamlColor', action.value)
+      return state.set('board', board)
+    }
     case 'setBoardError': {
       const board = state.get('board').set('status', 'failed')
         .set('message', action.value)
@@ -130,6 +135,14 @@ function Steps(props) {
 
 function gerberFiles(files, info) {
   return files.filter(f => whatsThatGerber(f) !== 'drw')
+}
+
+function kitnicYaml(files) {
+  const yaml = files.filter(f => RegExp('/.*?/.*?/kitnic.yaml').test(f))
+  if (yaml.length > 0) {
+    return yaml[0]
+  }
+  return null
 }
 
 function isLoading(status) {
@@ -226,7 +239,7 @@ function ColorSelector(props) {
 }
 
 const UrlSubmit = React.createClass({
-  placeholder: 'https://github.com/kasbah/test-repo',
+  placeholder: 'https://github.com/kitnic-forks/arduino-uno',
   getInitialState() {
     return {url: ''}
   },
@@ -252,6 +265,22 @@ const UrlSubmit = React.createClass({
          }
          const files    = res.body.data.files
          const gerbers  = gerberFiles(files)
+         const yaml     = kitnicYaml(files)
+         if (yaml) {
+           request.get(url.resolve(GIT_CLONE_SERVER, yaml))
+             .withCredentials()
+             .then(res => {
+               const info = jsYaml.safeLoad(res.text)
+               if (info && info.color) {
+                 if (board_colors.indexOf(info.color) >= 0) {
+                   store.dispatch({type: 'setYamlColor', value: info.color})
+                 }
+                 else {
+                   //TODO: warning
+                 }
+               }
+             })
+         }
          if (gerbers.length === 0) {
            console.log('setBoardError')
            store.dispatch({type: 'setBoardError', value:'No Gerber files found in repository'})
