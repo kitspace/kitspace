@@ -119,26 +119,18 @@ function Steps(props) {
     return (
       <div className='stepsContainer'>
         <Step.Group ordered>
-          <Link to='/'>
-            <Step active={props.active === 0}>
-              {'Preview the board'}
-            </Step>
-          </Link>
-          <Link to='/2'>
-            <Step active={props.active === 1}>
-              {'Preview the bill of materials'}
-            </Step>
-          </Link>
-          <Link to='/3'>
-            <Step active={props.active === 2}>
-              {'Preview the readme'}
-            </Step>
-          </Link>
-          <Link to='/4'>
-            <Step completed active={props.active === 3}>
-              {'Submit'}
-            </Step>
-          </Link>
+          <Step active={props.active === 0} onClick={setStep(0)}>
+            {'Preview the board'}
+          </Step>
+          <Step active={props.active === 1} onClick={setStep(1)}>
+            {'Preview the bill of materials'}
+          </Step>
+          <Step active={props.active === 2} onClick={setStep(2)}>
+            {'Preview the readme'}
+          </Step>
+          <Step completed active={props.active === 3} onClick={setStep(3)}>
+            {'Submit'}
+          </Step>
         </Step.Group>
       </div>
   )
@@ -327,11 +319,11 @@ const UrlSubmit = React.createClass({
     this.setState({url: input.value})
   },
   render() {
-    const state     = this.state
-    const requested = state.url === this.props.board.url
-    const color     = requested ? 'blue' : 'green'
-    const loading   = isLoading(this.props.board.status)
-    const failed    = this.props.board.status === 'failed'
+    const state      = this.state
+    const requested  = state.url === this.props.board.url
+    const color      = requested ? 'blue' : 'green'
+    const loading    = isLoading(this.props.board.status)
+    const failed     = this.props.board.status === 'failed'
     let message
     if (failed) {
       message =
@@ -470,7 +462,10 @@ const Step4 = React.createClass({
 
 function setStep(step) {
    return () => {
-      store.dispatch({type:'setStep', value:step})
+     if (step === 0) {
+       return hashHistory.push('/')
+     }
+     return hashHistory.push(`/${step + 1}`)
    }
 }
 
