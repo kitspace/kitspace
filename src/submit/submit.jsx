@@ -9,7 +9,7 @@ const whatsThatGerber = require('whats-that-gerber')
 const url             = require('url')
 const immutable       = require('immutable')
 const jsYaml          = require('js-yaml');
-const {Router, Route, Link, browserHistory} = require('react-router')
+const {Router, Route, Link, hashHistory} = require('react-router')
 const {
   Input,
   Icon,
@@ -359,34 +359,31 @@ const UrlSubmit = React.createClass({
   },
 })
 
-const Submit = React.createClass({
-  getInitialState() {
-    return store.getState().toJS()
-  },
+const Step1 = React.createClass({
   render() {
-    const state = this.state
+    const board = this.props.board
     let showcase = (<div style={{height:450}} />)
     let colorSelector
     let nextButton
-    if (state.activeStep === 0 && state.board.svgs) {
-      const top = state.board.svgs.top
-      const bottom = state.board.svgs.bottom
-      showcase = <div className={`pcb-${state.board.color}`}> <BoardShowcase>{top}{bottom}</BoardShowcase></div>
-      colorSelector = <ColorSelector active={state.board.color} yamlColor={state.board.yaml.color} />
+    if (board.svgs) {
+      const top = board.svgs.top
+      const bottom = board.svgs.bottom
+      showcase = <div className={`pcb-${board.color}`}> <BoardShowcase>{top}{bottom}</BoardShowcase></div>
+      colorSelector = <ColorSelector active={board.color} yamlColor={board.yaml.color} />
       nextButton = <Button content='Next' icon='right arrow' labelPosition='right' color='green' onClick={setStep(1)} />
     }
     return (
-    <div className='Submit'>
+    <div className='Step1'>
       <TitleBar>
         <div className='titleText'>
           {'Submit a project'}
         </div>
       </TitleBar>
       <Container>
-        <Steps active={state.activeStep} />
-        <Markdown className='instructions' source={instructionTexts[state.activeStep]} />
+        <Steps active={0}/>
+        <Markdown className='instructions' source={instructionTexts[0]} />
         <div className='userInputSegment'>
-          <UrlSubmit board={state.board} />
+          <UrlSubmit board={board} />
           {colorSelector}
           {nextButton}
         </div>
@@ -395,13 +392,6 @@ const Submit = React.createClass({
     </div>
     )
   },
-  componentDidMount() {
-    store.subscribe(() => {
-      const state = store.getState().toJS()
-      console.log(state)
-      this.setState(state)
-    })
-  }
 })
 
 function setStep(step) {
@@ -411,13 +401,23 @@ function setStep(step) {
 }
 
 const SubmitRouter = React.createClass({
+  getInitialState() {
+    return store.getState().toJS()
+  },
   render() {
     return (
       <Router history={hashHistory}>
-        <Route path='/' component={Submit} />
+        <Route path='/' component={() => <Step1 board={this.state.board} />} />
       </Router>
     )
   },
+  componentDidMount() {
+    store.subscribe(() => {
+      const state = store.getState().toJS()
+      console.log(state)
+      this.setState(state)
+    })
+  }
 })
 
 module.exports = SubmitRouter
