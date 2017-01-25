@@ -142,7 +142,18 @@ function Steps(props) {
 
 
 function gerberFiles(files, info) {
-  const possibleGerbers = files.filter(f => whatsThatGerber(f) !== 'drw')
+  const layers = files.map(f => ({path: f, type: whatsThatGerber(f)}))
+    .filter(({type}) => type !== 'drw')
+  const possibleGerbers = layers.map(({path}) => path)
+  const possibleTypes = layers.map(({type}) => type)
+  const duplicates = possibleTypes.reduce((prev, t) => {
+    return prev || (possibleTypes.indexOf(t) !== possibleTypes.lastIndexOf(t))
+  }, false)
+  if (! duplicates) {
+    return possibleGerbers
+  }
+  //if we have duplicates we reduce it down to the folder with the most
+  //gerbers
   const folders = possibleGerbers.reduce((prev, f) => {
     const dir = path.dirname(f)
     if (Object.keys(prev).indexOf(dir) === -1) {
@@ -161,6 +172,7 @@ function gerberFiles(files, info) {
   })
   return possibleGerbers.filter(f => path.dirname(f) === gerberFolder)
 }
+
 
 function kitnicYaml(files) {
   const yaml = files.filter(f => RegExp('/.*?/.*?/kitnic.yaml').test(f))
