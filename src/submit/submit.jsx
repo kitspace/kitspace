@@ -119,18 +119,26 @@ function Steps(props) {
     return (
       <div className='stepsContainer'>
         <Step.Group ordered>
-          <Step active={props.active === 0} onClick={setStep(0)}>
-            {'Preview the board'}
-          </Step>
-          <Step active={props.active === 1} onClick={setStep(1)}>
-            {'Preview the bill of materials'}
-          </Step>
-          <Step active={props.active === 2} onClick={setStep(2)}>
-            {'Preview the readme'}
-          </Step>
-          <Step completed active={props.active === 3} onClick={setStep(3)}>
-            {'Submit'}
-          </Step>
+          <Link to='/'>
+            <Step active={props.active === 0}>
+              {'Preview the board'}
+            </Step>
+          </Link>
+          <Link to='/2'>
+            <Step active={props.active === 1}>
+              {'Preview the bill of materials'}
+            </Step>
+          </Link>
+          <Link to='/3'>
+            <Step active={props.active === 2}>
+              {'Preview the readme'}
+            </Step>
+          </Link>
+          <Link to='/4'>
+            <Step completed active={props.active === 3}>
+              {'Submit'}
+            </Step>
+          </Link>
         </Step.Group>
       </div>
   )
@@ -319,11 +327,11 @@ const UrlSubmit = React.createClass({
     this.setState({url: input.value})
   },
   render() {
-    const state      = this.state
-    const requested  = state.url === this.props.board.url
-    const color      = requested ? 'blue' : 'green'
-    const loading    = isLoading(this.props.board.status)
-    const failed     = this.props.board.status === 'failed'
+    const state     = this.state
+    const requested = state.url === this.props.board.url
+    const color     = requested ? 'blue' : 'green'
+    const loading   = isLoading(this.props.board.status)
+    const failed    = this.props.board.status === 'failed'
     let message
     if (failed) {
       message =
@@ -394,6 +402,72 @@ const Step1 = React.createClass({
   },
 })
 
+const Step2 = React.createClass({
+  render() {
+    const board = this.props.board
+    return (
+    <div className='Step1'>
+      <TitleBar>
+        <div className='titleText'>
+          {'Submit a project'}
+        </div>
+      </TitleBar>
+      <Container>
+        <Steps active={1}/>
+        <Markdown className='instructions' source={instructionTexts[1]} />
+        <div className='userInputSegment'>
+          <UrlSubmit board={board} />
+        </div>
+      </Container>
+    </div>
+    )
+  },
+})
+
+const Step3 = React.createClass({
+  render() {
+    const board = this.props.board
+    return (
+    <div className='Step1'>
+      <TitleBar>
+        <div className='titleText'>
+          {'Submit a project'}
+        </div>
+      </TitleBar>
+      <Container>
+        <Steps active={2}/>
+        <Markdown className='instructions' source={instructionTexts[1]} />
+        <div className='userInputSegment'>
+          <UrlSubmit board={board} />
+        </div>
+      </Container>
+    </div>
+    )
+  },
+})
+
+const Step4 = React.createClass({
+  render() {
+    const board = this.props.board
+    return (
+    <div className='Step1'>
+      <TitleBar>
+        <div className='titleText'>
+          {'Submit a project'}
+        </div>
+      </TitleBar>
+      <Container>
+        <Steps active={3}/>
+        <Markdown className='instructions' source={instructionTexts[1]} />
+        <div className='userInputSegment'>
+          <UrlSubmit board={board} />
+        </div>
+      </Container>
+    </div>
+    )
+  },
+})
+
 function setStep(step) {
    return () => {
       store.dispatch({type:'setStep', value:step})
@@ -408,6 +482,9 @@ const SubmitRouter = React.createClass({
     return (
       <Router history={hashHistory}>
         <Route path='/' component={() => <Step1 board={this.state.board} />} />
+        <Route path='/2' component={() => <Step2 board={this.state.board} />} />
+        <Route path='/3' component={() => <Step3 board={this.state.board} />} />
+        <Route path='/4' component={() => <Step4 board={this.state.board} />} />
       </Router>
     )
   },
