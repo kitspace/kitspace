@@ -180,6 +180,11 @@ function createElement(type, props, children) {
   if (type === 'style') {
     return
   }
+  //don't transform the cu, not sure why check
+  //https://github.com/kitnic-forks/BQ25570_Harvester gerbers
+  if (props.transform && type === 'g' && /_cu$/.test(props.id)) {
+    return
+  }
   Object.keys(props).forEach(key => {
     let newKey
     if (key === 'xmlns:xlink') {
