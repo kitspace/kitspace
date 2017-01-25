@@ -17,7 +17,7 @@ const {
   Button,
   Label,
   Checkbox,
-  Grid,
+  Message,
 } = require('semantic-ui-react')
 
 let DOMURL
@@ -52,6 +52,7 @@ const initial_state = {
     files     : null,
     svgs      : null,
     stackup   : null,
+    messages  : [],
   },
 }
 
@@ -60,7 +61,7 @@ function reducer(state = initial_state, action) {
     case 'setStep':
       return Object.assign(state, {activeStep: action.value})
     case 'setUrlSent': {
-      const board = Object.assign(state.board, {url: action.value, status: 'sent'})
+      const board = Object.assign(state.board, {url: action.value, status: 'sent', messages: []})
       return Object.assign(state, {board})
     }
     case 'setFileListing': {
@@ -74,6 +75,10 @@ function reducer(state = initial_state, action) {
     }
     case 'setColor': {
       const board = Object.assign(state.board, {color: action.value})
+      return Object.assign(state, {board})
+    }
+    case 'setBoardError': {
+      const board = Object.assign(state.board, {status: 'failed', messages: state.board.messages.concat([action.value])})
       return Object.assign(state, {board})
     }
   }
@@ -133,7 +138,9 @@ function buildBoard(layers) {
     boardBuilder(layers, 'green', (err, stackup) => {
       if (err) {
         console.error(err)
-      } else {
+        store.dispatch({type: 'setBoardError', value:err})
+      }
+      else {
         const top    = stackup.top.svg
         const bottom = stackup.bottom.svg
         const svgs = {top, bottom}
@@ -233,13 +240,20 @@ const UrlSubmit = React.createClass({
        .end((err, res) => {
          const files    = res.body.data.files
          const gerbers  = gerberFiles(files)
-         const requests = gerbers.map(f => {
-           return request.get(url.resolve(GIT_CLONE_SERVER, f))
-             .withCredentials()
-             .then(res => ({gerber: res.text, filename: f}))
-         })
-         Promise.all(requests).then(buildBoard)
-         store.dispatch({type: 'setFileListing', value: files})
+         console.log(gerbers)
+         if (gerbers.length === 0) {
+           console.log('setBoardError')
+           store.dispatch({type: 'setBoardError', value:'No Gerber files found in repository'})
+         }
+         else {
+           const requests = gerbers.map(f => {
+             return request.get(url.resolve(GIT_CLONE_SERVER, f))
+               .withCredentials()
+               .then(res => ({gerber: res.text, filename: f}))
+           })
+           Promise.all(requests).then(buildBoard)
+           store.dispatch({type: 'setFileListing', value: files})
+         }
        })
   },
   onChange(event, input) {
@@ -251,12 +265,15 @@ const UrlSubmit = React.createClass({
     const buttonText = requested ? 'Refresh' : 'Preview'
     const color      = requested ? 'blue' : 'green'
     const loading    = isLoading(this.props.board.status)
+    const failed     = this.props.board.status === 'failed'
+    const message    = failed ? <Message error header='Preview Failed' content={this.props.board.messages[0]} /> : undefined
     return (
-      <Form onSubmit={this.onSubmit} id='submitForm'>
+      <Form error={failed} onSubmit={this.onSubmit} id='submitForm'>
       <Input
         fluid
         name = 'url'
         onChange = {this.onChange}
+        error = {failed}
         action = {{
           color,
           loading,
@@ -266,6 +283,7 @@ const UrlSubmit = React.createClass({
         placeholder = {this.placeholder}
         value = {state.url}
       />
+      {message}
       </Form>)
   },
 })
@@ -309,6 +327,7 @@ const Submit = React.createClass({
   componentDidMount() {
     store.subscribe(() => {
       const state = store.getState()
+      console.log(state)
       this.setState(state)
     })
   }
