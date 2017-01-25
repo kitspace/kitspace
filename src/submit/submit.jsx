@@ -317,7 +317,7 @@ const Submit = React.createClass({
   },
   render() {
     const state = this.state
-    let showcase
+    let showcase = (<div style={{height:450}} />)
     let colorSelector
     let nextButton
     if (state.activeStep === 0 && state.board.svgs) {
