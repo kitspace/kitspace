@@ -1,41 +1,7 @@
 @import '../common';
 @import '../colors';
 
-@include breakpoint(mobile) {
-    .boardShowcaseContainer {
-        .circuitToggleBtn {
-            font-size: 48px;
-        }
-
-
-        .octicon {
-            font-size: 48px;
-        }
-
-        .toggleBoardView {
-            height: 128px;
-        }
-
-        .backBoard {
-            padding-left: 16px;
-        }
-
-        .frontBoard {
-            padding-right: 16px;
-        }
-    }
-}
-
-@include breakpoint(mobile) {
-    .boardContainer {
-        min-height: 540px;
-    }
-    .boardShowcase {
-        min-height: 540px;
-    }
-}
-
-@include breakpoint(mobile_or_small_width) {
+@include breakpoint(small_width) {
     .boardContainer {
         border: 5px solid $dove-gray;
         border-radius: 0 0 5px 5px;
@@ -73,7 +39,7 @@
     margin-bottom: 16px;
     border-radius: 3px;
     background: $mine-shaft;
-    @include breakpoint(mobile_or_small_width) {
+    @include breakpoint(small_width) {
         border-radius: 0;
         background: none;
     }
@@ -93,7 +59,7 @@
     padding: 2rem;
     width: 100%;
 
-    @include breakpoint(mobile_or_small_width) {
+    @include breakpoint(small_width) {
         border-radius: 0;
     }
 }
@@ -106,11 +72,6 @@
     img, svg {
         height: 240px;
         width: 100%
-    }
-    @include breakpoint(mobile) {
-        img, svg {
-            height: 540px;
-        }
     }
     width: 100%;
     display: flex;
