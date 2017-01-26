@@ -41,7 +41,6 @@ const board_colors = [
 ]
 
 const initial_state = immutable.Map({
-  activeStep: 0,
   board: immutable.Map({
     status    : 'not sent',
     color     : 'green',
@@ -55,7 +54,6 @@ const initial_state = immutable.Map({
 })
 
 function reducer(state = initial_state, action) {
-  console.log(action)
   switch(action.type) {
     case 'setStep':
       return state.set('activeStep', action.value)
@@ -265,7 +263,7 @@ function ColorSelector(props) {
 const UrlSubmit = React.createClass({
   placeholder: 'https://github.com/kitnic-forks/arduino-uno',
   getInitialState() {
-    return {url: ''}
+    return {url: this.props.board.url || ''}
   },
   onSubmit(event, {formData}) {
     event.preventDefault()
@@ -301,7 +299,6 @@ const UrlSubmit = React.createClass({
              })
          }
          if (gerbers.length === 0) {
-           console.log('setBoardError')
            store.dispatch({type: 'setBoardError', value:'No Gerber files found in repository'})
          }
          else {
@@ -486,7 +483,6 @@ const SubmitRouter = React.createClass({
   componentDidMount() {
     store.subscribe(() => {
       const state = store.getState().toJS()
-      console.log(state)
       this.setState(state)
     })
   }
