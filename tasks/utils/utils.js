@@ -1,3 +1,5 @@
+const {RouterContext} = require('react-router')
+
 exports.processArgs = function(argv) {
     if (argv.length < 5) {
         console.error('not enough arguments');
@@ -29,7 +31,7 @@ exports.reactRender = function(jsx, html, output) {
     require('babel-register')({presets: ['react']});
     const Main = require(process.cwd() + '/' + jsx);
 
-    const react = ReactDOMServer.renderToString(React.createElement(Main));
+    const react = ReactDOMServer.renderToString(React.createElement(RouterContext, {}, [React.createElement(Main)]));
 
     const title = DocumentTitle.rewind(react);
 
