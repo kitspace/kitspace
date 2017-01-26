@@ -8,7 +8,8 @@ const camelCase       = require('lodash.camelcase')
 const whatsThatGerber = require('whats-that-gerber')
 const url             = require('url')
 const immutable       = require('immutable')
-const jsYaml          = require('js-yaml');
+const jsYaml          = require('js-yaml')
+const marky           = require('marky-markdown')
 const {Router, Route, Link, hashHistory} = require('react-router')
 const {
   Input,
@@ -116,7 +117,7 @@ entering the repository URL below.
 function Steps(props) {
     return (
       <div className='stepsContainer'>
-        <Step.Group ordered>
+        <Step.Group ordered stackable='tablet'>
           <Step active={props.active === 0} onClick={setStep(0)}>
             {'Preview the board'}
           </Step>
