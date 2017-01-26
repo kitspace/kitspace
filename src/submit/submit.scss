@@ -155,9 +155,12 @@ button {
    align-items:center;
 }
 
-
+.colorSelect:hover, #whiteButton.colorSelect:hover {
+   border: 2px solid lightgrey;
+}
 
 .colorSelect {
+   cursor: pointer;
    width: 32px;
    height: 32px;
    margin: 4px;
@@ -168,7 +171,7 @@ button {
 }
 
 .colorSelect.selected, #whiteButton.selected {
-   border: 3px solid lightgrey;
+   border: 4px solid lightgrey !important;
 }
 
 
