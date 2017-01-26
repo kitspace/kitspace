@@ -57,9 +57,6 @@ code {
 
 .step {
     font-weight:normal;
-    @include breakpoint(mobile) {
-        font-size:27px !important;
-    }
 }
 
 .step:hover {

@@ -8,22 +8,6 @@
 @import 'bom_install_prompt';
 @import 'extension_compatibility_prompt';
 
-    @include breakpoint(mobile) {
-        .octicon {
-            font-size: 48px;
-        }
-
-        .infoBarInner {
-            font-size: 40px;
-        }
-
-        .infoBarLinksContainer {
-            background: $alabaster;
-            border-radius: 20px;
-            font-size: 48px;
-        }
-    }
-
     .disabledSite {
         color: $gray;
         cursor: default;
@@ -35,9 +19,6 @@
         font-size: 14px;
         text-align: center;
 
-        @include breakpoint(mobile) {
-            font-size: 32px;
-        }
     }
 
     .titleText {
@@ -49,12 +30,6 @@
         vertical-align: middle;
         width: 100%;
 
-        @include breakpoint(mobile) {
-            font-size: 64px;
-            line-height: 74px;
-            padding-bottom: 20px;
-            padding-top: 5px;
-        }
     }
 
     .infoBar {
@@ -66,9 +41,6 @@
         margin-bottom: 10px;
         margin-top: 5px;
         line-height: 1em;
-        @include breakpoint(mobile) {
-            margin: 30px;
-        }
     }
 
     .infoBarInner {
@@ -83,9 +55,6 @@
         flex-grow: 2;
         justify-content: space-around;
         margin-top: 5px;
-        @include breakpoint(mobile) {
-            margin: 30px;
-        }
     }
 
     .infoBarLinks {
@@ -96,7 +65,7 @@
     .pageContainer {
         padding: 0 10%;
 
-        @include breakpoint(mobile_or_small_width) {
+        @include breakpoint(small_width) {
             padding: 0;
         }
     }
@@ -132,11 +101,4 @@
 
     .readme img {
         max-width:100%;
-    }
-
-    //semantic ui tries to fix this at 1em
-    pre {
-        @include breakpoint(mobile) {
-            font-size: 38px !important;
-        }
     }

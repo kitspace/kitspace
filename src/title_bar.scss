@@ -14,12 +14,8 @@
     position: relative;
     width: 100%;
 
-    @include breakpoint(mobile_or_small_width) {
+    @include breakpoint(small_width) {
         justify-content: space-around;
-    }
-
-    @include breakpoint(mobile) {
-        padding-top: 10px;
     }
 
     .logoContainer {
@@ -29,26 +25,17 @@
         width: 140px;
         z-index: 1;
 
-        @include breakpoint(mobile) {
-            width: 50%;
-        }
     }
 
     .logoImgContainer {
         width: 90%;
 
-        @include breakpoint(mobile) {
-            width: 70%;
-        }
     }
 
     .logoImg {
         height: 46px;
         width: 100%;
 
-        @include breakpoint(mobile) {
-            height: 92px;
-        }
     }
 
     .submitContainer {
@@ -62,9 +49,6 @@
         z-index: 1;
         min-width:140px;
 
-        @include breakpoint(mobile) {
-            width: 45%;
-        }
 
         .submissionButton {
             align-items: center;
@@ -84,12 +68,6 @@
             padding: 20px 15px;
             white-space: nowrap;
 
-            @include breakpoint(mobile) {
-                font-size: 32px;
-                height: auto;
-                min-width: 307px;
-                padding: 30px 40px;
-            }
         }
 
         .submissionButton:hover {
@@ -103,11 +81,7 @@
             height: 32px;
             width: 32px;
 
-            @include breakpoint(mobile) {
-                font-size: 64px;
-                height: 64px;
-                width: 64px;
-            }
+
         }
 
         .contributeButton {
@@ -124,9 +98,6 @@
             padding: 5px;
             white-space: nowrap;
 
-            @include breakpoint(mobile) {
-                font-size: 24px;
-            }
         }
 
         .contributeButton:hover {
@@ -145,11 +116,7 @@
     .middleContainer {
         flex-grow: 2;
 
-        @include breakpoint(mobile) {
-            padding: 10px 10px 40px;
-        }
-
-        @include breakpoint(mobile_or_small_width) {
+        @include breakpoint(small_width) {
             margin: 10px;
             order: 3;
             width: 100%;
