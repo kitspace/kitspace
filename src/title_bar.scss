@@ -19,20 +19,35 @@
     }
 
     .logoContainer {
+        min-width:180px;
+        display:flex;
+        justify-content:center;
         background-color: $mine-shaft;
-        flex-shrink: 0;
         margin: 10px;
-        width: 140px;
         z-index: 1;
-    }
-
-    .logoImgContainer {
-        width: 90%;
-
+        flex-shrink: 2;
     }
 
     .logoImg {
-        height: 46px;
+        max-height: 46px;
+    }
+    .submissionButton {
+        align-items: center;
+        background: $fruit-salad;
+        border: 0;
+        border-radius: 3px;
+        box-sizing: border-box;
+        color: $white;
+        cursor: pointer;
+        display: flex;
+        font-family: 'Noto Sans','Helvetica', 'Arial', sans-serif;
+        font-size: 16px;
+        font-weight: bold;
+        line-height: 0;
+        margin-right: 8px;
+        min-width: 174px;
+        padding: 20px 15px;
+        white-space: nowrap;
     }
 
     .submitContainer {
@@ -41,35 +56,15 @@
         color: $white;
         display: flex;
         flex-shrink: 0;
-        justify-content: space-between;
+        justify-content: space-around;
         padding: 10px;
         z-index: 1;
         min-width:140px;
 
-
-        .submissionButton {
-            align-items: center;
-            background: $fruit-salad;
-            border: 0;
-            border-radius: 3px;
-            box-sizing: border-box;
-            color: $white;
-            cursor: pointer;
-            display: flex;
-            font-family: 'Noto Sans','Helvetica', 'Arial', sans-serif;
-            font-size: 16px;
-            font-weight: bold;
-            line-height: 0;
-            margin-right: 8px;
-            min-width: 174px;
-            padding: 20px 15px;
-            white-space: nowrap;
-
+        @include breakpoint(mobile-m) {
+            width: 100%;
         }
 
-        .submissionButton:hover {
-            background: $emerald;
-        }
 
         .octicon.uploadIcon,
         .octicon.githubIcon {
@@ -77,8 +72,6 @@
             font-size: 32px;
             height: 32px;
             width: 32px;
-
-
         }
 
         .contributeButton {
