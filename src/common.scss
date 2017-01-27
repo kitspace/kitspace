@@ -14,7 +14,7 @@
             @content;
         }
     } @else if $point == small_width {
-        @media (max-width: 699px)
+        @media (max-width: 715px)
         {
             @content;
         }
@@ -24,7 +24,7 @@
             @content;
         }
     } @else if $point == mobile-m {
-        @media (max-width: 409px)
+        @media (max-width: 458px)
         {
             @content;
         }
