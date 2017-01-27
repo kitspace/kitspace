@@ -24,7 +24,7 @@ Reddit:
 # On the other hand
 
 - there is about __one__ EE to every __three__ programmers
-- 10% of software devlopers know C  (maybe, according to TIOBE)
+- __one__ in __ten__ software devlopers know C  (maybe, according to TIOBE)
 
 - `/r/electronics` 66,000 subscribers
 - `/r/c_programming` 30,000 subscribers  
@@ -133,8 +133,8 @@ PNsPfrOeY6REXhUiEV1...
 # 1-click BOM extension
 
 - Available for Chrome and Firefox
-- Takes in tab separated values
-- Can load a on-line BOM 
+- Takes in tab separated values (the clipboard format of spreadsheet programs)
+- Can load a online BOM 
 - Able to add/remove to cart 
 - Can have a guess at what part you mean
 - Open source (CPAL)
