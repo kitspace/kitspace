@@ -23,12 +23,6 @@ $mobile-summary-h: $summary-h * 3 + 48;
     overflow: hidden;
     width: $image-w + 32px + 16px;
 
-    @include breakpoint(mobile) {
-        border-radius: 12px;
-        margin: 24px;
-        width: $mobile-image-w + 32px + 16px;
-    }
-
     a:hover {
         text-decoration: none;
     }
@@ -37,13 +31,9 @@ $mobile-summary-h: $summary-h * 3 + 48;
         background-color: $mine-shaft;
         padding-bottom: 16px;
         padding-top: 16px;
-        height: $image-h;
-        align-text: center;
+        height: $image-h + 32px;
         vertical-align: middle;
         position: relative;
-        @include breakpoint(mobile) {
-            height: $mobile-image-h;
-        }
     }
 
     .img {
@@ -55,10 +45,6 @@ $mobile-summary-h: $summary-h * 3 + 48;
         margin: auto;
         max-width: $image-w;
         max-height: $image-h;
-        @include breakpoint(mobile) {
-            max-width: $mobile-image-w;
-            max-height: $mobile-image-h;
-        }
     }
 
     .title {
@@ -72,13 +58,6 @@ $mobile-summary-h: $summary-h * 3 + 48;
         padding-left: 10px;
         text-align: left;
         vertical-align: bottom;
-
-        @include breakpoint(mobile) {
-            font-size: 54px;
-            height: $mobile-caption-h;
-            line-height: $mobile-caption-h;
-            padding-left: 30px;
-        }
     }
 
     .url {
@@ -89,11 +68,6 @@ $mobile-summary-h: $summary-h * 3 + 48;
         opacity: 1;
         padding-left: 10px;
         text-align: left;
-
-        @include breakpoint(mobile) {
-            font-size: 39px;
-            padding-left: 30px;
-        }
     }
 
     .summary {
@@ -109,11 +83,5 @@ $mobile-summary-h: $summary-h * 3 + 48;
         text-align: left;
         vertical-align: top;
         visibility: visible;
-
-        @include breakpoint(mobile) {
-            font-size: 48px;
-            height: $mobile-summary-h;
-            padding-left: 30px;
-        }
     }
 }

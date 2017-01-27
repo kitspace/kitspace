@@ -9,9 +9,7 @@ var TitleBar = React.createClass({
       <div className='titleBar'>
         <div className='logoContainer'>
           <a href='/'>
-            <center className='logoImgContainer'>
-              <img className='logoImg' src='/images/logo.svg' />
-            </center>
+            <img className='logoImg' src='/images/logo.svg' />
           </a>
         </div>
         <div className='middleContainer'>

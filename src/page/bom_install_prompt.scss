@@ -8,11 +8,6 @@
     padding: 8px 16px;
     width: 100%;
 
-    @include breakpoint(mobile) {
-        font-size: 32px;
-        padding: 16px;
-    }
-
     .bomInstallAnchor {
         color: $black;
         cursor: pointer;

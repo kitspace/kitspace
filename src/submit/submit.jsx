@@ -6,7 +6,11 @@ const request         = require('superagent')
 const path            = require('path')
 const camelCase       = require('lodash.camelcase')
 const whatsThatGerber = require('whats-that-gerber')
-const url = require('url')
+const url             = require('url')
+const immutable       = require('immutable')
+const jsYaml          = require('js-yaml')
+const marky           = require('marky-markdown')
+const {Router, Route, Link, hashHistory} = require('react-router')
 const {
   Input,
   Icon,
@@ -14,13 +18,11 @@ const {
   Container,
   Form,
   Segment,
-  Button
+  Button,
+  Label,
+  Checkbox,
+  Message,
 } = require('semantic-ui-react')
-
-let DOMURL
-if (typeof(window) !== 'undefined') {
-  DOMURL = window.URL || window.webkitURL || window;
-}
 
 const TitleBar      = require('../title_bar')
 const BoardShowcase = require('../page/board_showcase')
@@ -39,38 +41,59 @@ const board_colors = [
   'yellow',
 ]
 
-const initial_state = {
-  activeStep: 0,
-  board: {
-    status: 'not sent',
-    color: 'green',
-    url: null,
-    files: null,
-    svgs: null,
-    stackup: null,
-  },
-}
+const initial_state = immutable.Map({
+  board: immutable.Map({
+    status    : 'not sent',
+    color     : 'green',
+    yaml      : immutable.Map({}),
+    url       : null,
+    files     : null,
+    svgs      : null,
+    stackup   : null,
+    message   : '',
+  }),
+})
 
 function reducer(state = initial_state, action) {
   switch(action.type) {
     case 'setStep':
-      return Object.assign(state, {activeStep: action.value})
+      return state.set('activeStep', action.value)
     case 'setUrlSent': {
-      const board = Object.assign(state.board, {url: action.value, status: 'sent'})
-      return Object.assign(state, {board})
+      const board = initial_state.get('board').set('status', 'sent')
+        .set('url', action.value)
+      return state.set('board', board)
     }
     case 'setFileListing': {
-      const board = Object.assign(state.board, {status: 'replied', files: action.value})
-      return Object.assign(state, {board})
+      const board = state.get('board').set('status', 'replied')
+        .set('files', action.value)
+      return state.set('board', board)
     }
     case 'setSvgs': {
       const {svgs} = action.value
-      const board = Object.assign(state.board, {status: 'done', svgs})
-      return Object.assign(state, {board})
+      const board = state.get('board').set('status', 'done')
+        .set('svgs', svgs)
+      return state.set('board', board)
     }
     case 'setColor': {
-      const board = Object.assign(state.board, {color: action.value})
-      return Object.assign(state, {board})
+      const board = state.get('board').set('color', action.value)
+      return state.set('board', board)
+    }
+    case 'setYaml': {
+      const info = action.value
+      let board = state.get('board').set('yaml', immutable.Map(info))
+      if (info.color) {
+        if (board_colors.indexOf(info.color) >= 0) {
+          board = board.set('color', info.color)
+        } else {
+          //TODO: warning
+        }
+      }
+      return state.set('board', board)
+    }
+    case 'setBoardError': {
+      const board = state.get('board').set('status', 'failed')
+        .set('message', action.value)
+      return state.set('board', board)
     }
   }
   return state
@@ -81,16 +104,10 @@ const store = Redux.createStore(reducer)
 
 const instructionTexts = [
 `
-Plot Gerbers (RS274-X) & drill data from your CAD program. Put the files into a
-\`gerbers/\` directory in a publicly accessible git repository (you could use
-[GitLab](https://gitlab.com) or [GitHub](https://github.com) for instance).
-
-If you would like to put them somewhere else in your repository please also add
-a kitnic.yaml with a field \`gerbers:\` followed by the path to the directory
-so Kitnic can find it.  Use forward slashes as path seperators, e.g. \`gerbers:
-hardware/gerbers\`.
-
-Preview your board by entering the repository URL below.
+Plot Gerbers (RS274-X) and drill data from your CAD program. Put the files in a
+publicly accessible Git repository (you could use [GitHub](https://github.com)
+or [GitLab](https://gitlab.com) for instance). Preview your board by
+entering the repository URL below.
 `,
 '',
 '',
@@ -101,17 +118,17 @@ function Steps(props) {
     return (
       <div className='stepsContainer'>
         <Step.Group ordered stackable='tablet'>
-          <Step active={props.active === 0} onClick={handleClick(0)}>
-            Preview the board
+          <Step active={props.active === 0} onClick={setStep(0)}>
+            {'Preview the board'}
           </Step>
-          <Step active={props.active === 1} onClick={handleClick(1)}>
-            Preview the bill of materials
+          <Step active={props.active === 1} onClick={setStep(1)}>
+            {'Preview the bill of materials'}
           </Step>
-          <Step active={props.active === 2} onClick={handleClick(2)}>
-            Preview the readme
+          <Step active={props.active === 2} onClick={setStep(2)}>
+            {'Preview the readme'}
           </Step>
-          <Step active={props.active === 3} onClick={handleClick(3)}>
-            Send us a pull-request to add your board
+          <Step completed active={props.active === 3} onClick={setStep(3)}>
+            {'Submit'}
           </Step>
         </Step.Group>
       </div>
@@ -120,22 +137,52 @@ function Steps(props) {
 
 
 function gerberFiles(files, info) {
-  return files.filter(f => whatsThatGerber(f) !== 'drw')
+  const layers = files.map(f => ({path: f, type: whatsThatGerber(f)}))
+    .filter(({type}) => type !== 'drw')
+  const possibleGerbers = layers.map(({path}) => path)
+  const possibleTypes = layers.map(({type}) => type)
+  const duplicates = possibleTypes.reduce((prev, t) => {
+    return prev || (possibleTypes.indexOf(t) !== possibleTypes.lastIndexOf(t))
+  }, false)
+  if (! duplicates) {
+    return possibleGerbers
+  }
+  //if we have duplicates we reduce it down to the folder with the most
+  //gerbers
+  const folders = possibleGerbers.reduce((folders, f) => {
+    const name = path.dirname(f)
+    folders[name] = (folders[name] || 0) + 1
+    return folders
+  }, {})
+  const gerberFolder = Object.keys(folders).reduce((prev, f) => {
+    if (folders[f] > folders[prev]) {
+      return f
+    }
+    return prev
+  })
+  return possibleGerbers.filter(f => path.dirname(f) === gerberFolder)
+}
+
+
+function kitnicYaml(files) {
+  const yaml = files.filter(f => RegExp('/.*?/.*?/kitnic.yaml').test(f))
+  if (yaml.length > 0) {
+    return yaml[0]
+  }
+  return null
 }
 
 function isLoading(status) {
-  return (status !== 'done') && (status !== 'not sent')
-}
-
-function createSvgDataUrl(string) {
-  return DOMURL.createObjectURL(new Blob([string], {type: 'image/svg+xml'}))
+  return (status !== 'done') && (status !== 'not sent') && (status !== 'failed')
 }
 
 function buildBoard(layers) {
     boardBuilder(layers, 'green', (err, stackup) => {
       if (err) {
         console.error(err)
-      } else {
+        store.dispatch({type: 'setBoardError', value:err})
+      }
+      else {
         const top    = stackup.top.svg
         const bottom = stackup.bottom.svg
         const svgs = {top, bottom}
@@ -172,29 +219,52 @@ function createElement(type, props, children) {
 
 
 function ColorSelector(props) {
-  function onClick(color) {
+  function changeColor(color) {
     return () => {
       store.dispatch({type: 'setColor', value: color})
     }
   }
+  const buttons = board_colors.map(color => {
+      const selected = props.active === color ? 'selected' : ''
+      return h(Label, {
+        circular: true,
+        className : `colorSelect ${selected}`,
+        onClick   : changeColor(color),
+        id        : `${color}Button`
+      })
+  })
+  let yamlInfo
+  if (props.yamlColor == null) {
+    if (props.active !== 'green') {
+      yamlInfo =
+        <Label attached='bottom right'>
+          {`Add a kitnic.yaml with "color: ${props.active}" to\
+            your repo to use this color`}
+        </Label>
+    }
+  }
+  else if (props.yamlColor !== props.active) {
+    yamlInfo =
+      <Label attached='bottom right'>
+        {`Change the color in your kitnic.yaml to "color: \
+          ${props.active}" to use this color`}
+      </Label>
+  }
   return (
-    <Segment>
-      <Button circular onClick={onClick('green')}  id='greenButton' />
-      <Button circular onClick={onClick('red')}    id='redButton' />
-      <Button circular onClick={onClick('blue')}   id='blueButton' />
-      <Button circular onClick={onClick('black')}  id='blackButton' />
-      <Button circular onClick={onClick('white')}  id='whiteButton' />
-      <Button circular onClick={onClick('orange')} id='orangeButton' />
-      <Button circular onClick={onClick('purple')} id='purpleButton' />
-      <Button circular onClick={onClick('yellow')} id='yellowButton' />
+    <Segment className='colorSelector'>
+      <Label>
+        {'Select a color:'}
+      </Label>
+      {buttons}
+      {yamlInfo}
     </Segment>
   )
 }
 
 const UrlSubmit = React.createClass({
-  placeholder: 'https://github.com/kitnic-forks/Bus_Pirate',
+  placeholder: 'https://github.com/kitnic-forks/arduino-uno',
   getInitialState() {
-    return {url: ''}
+    return {url: this.props.board.url || ''}
   },
   onSubmit(event, {formData}) {
     event.preventDefault()
@@ -210,15 +280,37 @@ const UrlSubmit = React.createClass({
        .send({url: formData.url})
        .withCredentials()
        .end((err, res) => {
+         if (err) {
+           return store.dispatch({type: 'setBoardError', value: err})
+         }
+         if (res.body.error) {
+           return store.dispatch({type: 'setBoardError', value: res.body.error})
+         }
          const files    = res.body.data.files
          const gerbers  = gerberFiles(files)
-         const requests = gerbers.map(f => {
-           return request.get(url.resolve(GIT_CLONE_SERVER, f))
+         const yaml     = kitnicYaml(files)
+         if (yaml) {
+           request.get(url.resolve(GIT_CLONE_SERVER, yaml))
              .withCredentials()
-             .then(res => ({gerber: res.text, filename: f}))
-         })
-         Promise.all(requests).then(buildBoard)
-         store.dispatch({type: 'setFileListing', value: files})
+             .then(res => {
+               const info = jsYaml.safeLoad(res.text)
+               if (info)  {
+                 store.dispatch({type: 'setYaml', value: info})
+               }
+             })
+         }
+         if (gerbers.length === 0) {
+           store.dispatch({type: 'setBoardError', value:'No Gerber files found in repository'})
+         }
+         else {
+           const requests = gerbers.map(f => {
+             return request.get(url.resolve(GIT_CLONE_SERVER, f))
+               .withCredentials()
+               .then(res => ({gerber: res.text, filename: f}))
+           })
+           Promise.all(requests).then(buildBoard)
+           store.dispatch({type: 'setFileListing', value: files})
+         }
        })
   },
   onChange(event, input) {
@@ -227,75 +319,174 @@ const UrlSubmit = React.createClass({
   render() {
     const state      = this.state
     const requested  = state.url === this.props.board.url
-    const buttonText = requested ? 'Refresh' : 'Preview'
     const color      = requested ? 'blue' : 'green'
     const loading    = isLoading(this.props.board.status)
+    const failed     = this.props.board.status === 'failed'
+    let message
+    if (failed) {
+      message =
+        <Message
+          error
+          header='Preview Failed'
+          content={this.props.board.message} />
+    }
+    let buttonText = 'Preview'
+    if (requested) {
+      buttonText = failed ? 'Retry' : 'Refresh'
+    }
     return (
-      <Form onSubmit={this.onSubmit} id='submitForm'>
-      <Input
-        fluid
-        name = 'url'
-        onChange = {this.onChange}
-        action = {{
-          color,
-          loading,
-          content : buttonText,
-          className: 'submitButton',
-        }}
-        placeholder = {this.placeholder}
-        value = {state.url}
-      />
+      <Form error={failed} onSubmit={this.onSubmit} id='submitForm'>
+      <div style={{display:'flex', justifyContent:'center', alignItems:'center'}}>
+        <Input
+          fluid
+          name = 'url'
+          onChange = {this.onChange}
+          error = {failed}
+          action = {{
+            color,
+            loading,
+            content : buttonText,
+            className: 'submitButton',
+          }}
+          placeholder = {this.placeholder}
+          value = {state.url}
+        />
+      </div>
+      {message}
       </Form>)
   },
 })
 
-const Submit = React.createClass({
-  getInitialState() {
-    return store.getState()
-  },
+const Step1 = React.createClass({
   render() {
-    const state = this.state
-    let showcase = (<BoardShowcase />)
-    //if (state.board.svgs) {
-    //  const {top, bottom} = state.board.svgs
-    //  showcase = (<BoardShowcase topSrc={top} bottomSrc={bottom}/>)
-    //}
-    let top, bottom
-    if (this.state.board.svgs) {
-      top = <div className={`pcb-${state.board.color}`}>{this.state.board.svgs.top}</div>
-      bottom = <div className={`pcb-${state.board.color}`}>{this.state.board.svgs.bottom}</div>
+    const board = this.props.board
+    let showcase = (<div style={{height:450}} />)
+    let colorSelector
+    let nextButton
+    if (board.svgs) {
+      const top = board.svgs.top
+      const bottom = board.svgs.bottom
+      showcase = <div className={`pcb-${board.color}`}> <BoardShowcase>{top}{bottom}</BoardShowcase></div>
+      colorSelector = <ColorSelector active={board.color} yamlColor={board.yaml.color} />
+      nextButton = <Button content='Next' icon='right arrow' labelPosition='right' color='green' onClick={setStep(1)} />
     }
     return (
-    <div className='Submit'>
+    <div className='Step1'>
       <TitleBar>
         <div className='titleText'>
-          Submit a project
+          {'Submit a project'}
         </div>
       </TitleBar>
       <Container>
-        <Steps active={state.activeStep} />
-        <Markdown className='instructions' source={instructionTexts[state.activeStep]} />
-        <UrlSubmit board={state.board} />
-        <ColorSelector active={this.state.board.color}/>
-        {top}
-        {bottom}
+        <Steps active={0}/>
+        <Markdown className='instructions' source={instructionTexts[0]} />
+        <div className='userInputSegment'>
+          <UrlSubmit board={board} />
+          {colorSelector}
+          {nextButton}
+        </div>
+        {showcase}
       </Container>
     </div>
     )
   },
+})
+
+const Step2 = React.createClass({
+  render() {
+    const board = this.props.board
+    return (
+    <div className='Step1'>
+      <TitleBar>
+        <div className='titleText'>
+          {'Submit a project'}
+        </div>
+      </TitleBar>
+      <Container>
+        <Steps active={1}/>
+        <Markdown className='instructions' source={instructionTexts[1]} />
+        <div className='userInputSegment'>
+          <UrlSubmit board={board} />
+        </div>
+      </Container>
+    </div>
+    )
+  },
+})
+
+const Step3 = React.createClass({
+  render() {
+    const board = this.props.board
+    return (
+    <div className='Step1'>
+      <TitleBar>
+        <div className='titleText'>
+          {'Submit a project'}
+        </div>
+      </TitleBar>
+      <Container>
+        <Steps active={2}/>
+        <Markdown className='instructions' source={instructionTexts[1]} />
+        <div className='userInputSegment'>
+          <UrlSubmit board={board} />
+        </div>
+      </Container>
+    </div>
+    )
+  },
+})
+
+const Step4 = React.createClass({
+  render() {
+    const board = this.props.board
+    return (
+    <div className='Step1'>
+      <TitleBar>
+        <div className='titleText'>
+          {'Submit a project'}
+        </div>
+      </TitleBar>
+      <Container>
+        <Steps active={3}/>
+        <Markdown className='instructions' source={instructionTexts[1]} />
+        <div className='userInputSegment'>
+          <UrlSubmit board={board} />
+        </div>
+      </Container>
+    </div>
+    )
+  },
+})
+
+function setStep(step) {
+   return () => {
+     if (step === 0) {
+       return hashHistory.push('/')
+     }
+     return hashHistory.push(`/${step + 1}`)
+   }
+}
+
+const SubmitRouter = React.createClass({
+  getInitialState() {
+    return store.getState().toJS()
+  },
+  render() {
+    return (
+      <Router history={hashHistory}>
+        <Route path='/' component={() => <Step1 board={this.state.board} />} />
+        <Route path='/2' component={() => <Step2 board={this.state.board} />} />
+        <Route path='/3' component={() => <Step3 board={this.state.board} />} />
+        <Route path='/4' component={() => <Step4 board={this.state.board} />} />
+      </Router>
+    )
+  },
   componentDidMount() {
     store.subscribe(() => {
-      const state = store.getState()
-      console.log(state)
+      const state = store.getState().toJS()
       this.setState(state)
     })
   }
 })
 
-function handleClick(step) {
-   return () => {
-      store.dispatch({type:'setStep', value:step})
-   }
-}
-
-module.exports = Submit
+module.exports = SubmitRouter

@@ -14,7 +14,8 @@ code {
 
 .ui.input {
     max-width: 500px;
-    flex-grow: 1;
+    flex-grow: 2;
+    width:100%;
 }
 
 .submitButton {
@@ -26,7 +27,7 @@ code {
 }
 
 #redButton {
-   background-color: #a51e1e;
+   background-color: #d41212;
 }
 
 #blueButton {
@@ -39,7 +40,7 @@ code {
 
 #whiteButton {
    background-color: white;
-   border: 1px solid lightgrey;
+
 }
 
 #orangeButton {
@@ -56,9 +57,6 @@ code {
 
 .step {
     font-weight:normal;
-    @include breakpoint(mobile) {
-        font-size:27px !important;
-    }
 }
 
 .step:hover {
@@ -72,10 +70,15 @@ code {
 }
 
 #submitForm {
-    margin-top:50px;
-    margin-bottom: 50px;
-    display: flex;
-    justify-content: center;
+    margin-top:25px;
+    width:100%;
+    flex-grow: 2;
+}
+
+button {
+   display: flex;
+   justify-content: center;
+   align-items: center;
 }
 
 .pcb-stackup_fr4 {color: #4D542C;}
@@ -130,3 +133,42 @@ code {
      .pcb-stackup_sm {color: rgba(255, 255, 102, 0.50);}
      .pcb-stackup_ss {color: black;}
 }
+
+.colorSelector {
+   display:flex;
+   align-items: center;
+   flex-grow: 1;
+   margin-right: 16px !important;
+   @include breakpoint(semantic_container) {
+      align-items: flex-start;
+      min-height: 90px;
+   }
+}
+
+.userInputSegment {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: space-around;
+   align-items:center;
+}
+
+.colorSelect:hover, #whiteButton.colorSelect:hover {
+   border: 2px solid lightgrey;
+}
+
+.colorSelect {
+   cursor: pointer;
+   width: 32px;
+   height: 32px;
+   margin: 4px;
+   border: 1px solid lightgrey;
+}
+#whiteButton {
+   border: 1px solid lightgrey;
+}
+
+.colorSelect.selected, #whiteButton.selected {
+   border: 4px solid lightgrey !important;
+}
+
+

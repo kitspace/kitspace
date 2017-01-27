@@ -230,6 +230,9 @@ if (config === 'production') {
 
 
 ninja.edge('build/semantic.min.css').from('node_modules/semantic-ui-css/semantic.min.css').using('copy')
+globule.find('node_modules/semantic-ui-css/themes/default/assets/fonts/*').forEach(file => {
+    ninja.edge(file.replace('node_modules/semantic-ui-css', 'build')).from(file).using('copy')
+})
 
 
 ninja.edge('clean').from('build/').using('remove')

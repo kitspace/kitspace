@@ -16,18 +16,10 @@
         color: $white;
         cursor: pointer;
         padding: 9.6px 14.4px;
-
-        @include breakpoint('mobile') {
-            font-size: 48px;
-            padding: 19.2px 28.8px;
-        }
     }
 
     .gerbers:hover {
         background: $emerald;
     }
 
-    @include breakpoint('mobile') {
-        margin: 48px;
-    }
 }
