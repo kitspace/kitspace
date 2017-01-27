@@ -5,8 +5,6 @@ class: center, middle
 
 ---
 
-
-
 ![](images/bls_125_banner.gif)
 
 In the US: 
@@ -35,6 +33,14 @@ Reddit:
 <img style="height:400px;float:right" src=images/ohr_logo.svg />
 
 ---
+# Assemblers and compilers
+
+<img style="width:49%;" src=images/soldering_meeblip.jpg />
+<img style="width:49%;float:right;" src=images/pick_and_place.jpg />
+
+---
+<img style="z-index:0; top:0px;height:681px;position:absolute" src=images/circuit_boards.jpg />
+---
 
 # We do share projects 
 - GitHub
@@ -61,7 +67,6 @@ Reddit:
 <img class=fullscreen src=images/meat3.jpg />
 
 ---
-<img src=images/1_click_logo.png />1-click BOM browser extension
 
 <img src=images/kitnic_logo.png />kitnic.it
 
@@ -70,14 +75,16 @@ Reddit:
 </center>
 ---
 # 1-click BOM extension 
+<img style="float:right" src=images/1_click_logo.png />
 
-- Replicate the web requests that are sent when you use retailer sites.
-  - Digikey 
-  - Mouser 
-  - RS
-  - Newark / Farnell / Element14
+Automates purchasing by replicating the web requests that are sent when you use retailer sites.
+- Digikey 
+- Mouser 
+- RS
+- Newark / Farnell / Element14
 ---
-#Same origin policy
+- Q: Why a browser extension?
+- A: Same origin policy
 
 "The same-origin policy restricts how a document or script loaded from one origin can interact with a resource from another origin." - MDN
 
@@ -174,6 +181,7 @@ PNsPfrOeY6REXhUiEV1...
 <br>
 <br>
 <center><h1><a href=https://kitnic.it>kitnic.it</a><h1></center>
+<center><a href=http://localhost:8080>localhost:8080</a><h1></center>
 
 ---
 # The Virtual Kit
@@ -267,7 +275,8 @@ function leftpad (str, len, ch) {
 }
 ```
 ---
-# [tracespace/pcb-stackup](https://github.com/tracespace/pcb-stackup)
+- [pcb-stackup](https://github.com/tracespace/pcb-stackup)
+- [whats-that-gerber](https://github.com/tracespace/whats-that-gerber)
 
 <p align=middle><img width=80% src=images/stackup.svg></p>
 ---
@@ -288,8 +297,8 @@ npm init
 npm install --save js-quantities resistor-data
 ```
 
-`index.js`
 ```js
+//index.js
 const Qty = require('js-quantities')
 const resistorData = require('resistor-data')
 
@@ -371,21 +380,23 @@ npm publish
 ---
 #Questions?
 - [kitnic.it](https://kitnic.it)
-- [@kitnic_it](https://twitter.com/kitnic_it)
-- [github.com/monostable/kitnic](https://github.com/monostable/kitnic)
+- <i class="fa fa-twitter" aria-hidden=true ></i>[@kitnic_it](https://twitter.com/kitnic_it)
+- <i class="fa fa-github" aria-hidden=true ></i> [github.com/monostable/kitnic](https://github.com/monostable/kitnic)
 - slides: kitnic.it/fosdem2017
 <font size=3>
-<br />
 <br />
 <br />
 
 Image credits
 
-<li>ohwr.org logo - CC-BY-SA 4.0, CERN, 2014
-<li>Cover of Troubleshooting Analog Circuits by Robert A. Pease - © 1991 by Butterworth-Heinemann
-<li>Meat grinder & Disassembled hand-powered grinder - CC-BY-SA 3.0 - Wikipedia - Photos taken by de:user:Kku. Modified by de:user:Rainer Zenz
-<li>Bleep Drum Kit with MIDI - CC-BY-SA 2.0 - SparkFun Electronics
-<li>Iterative development drawing - Henrik Kniberg, http://blog.crisp.se/2016/01/25/henrikkniberg/making-sense-of-mvp
-<li>3 Resistors - CC-BY-SA https://commons.wikimedia.org/wiki/User:Afrank99 
-<li> GFP-tagged Cln2 - CC-BY - Jean Peccoud - https://www.youtube.com/watch?v=sG2Zd3vRdvQ
+- ohwr.org logo - CC-BY-SA [CERN](http://www.ohwr.org/documents/3)
+- Eric Archer soldering a MeeBlip 6 - CC-BY-SA [Create Digital Media](https://www.flickr.com/people/21681011@N08)
+- Pick and place internals of surface mount machine - CC-BY [Periptus](jhttps://commons.wikimedia.org/wiki/User:Peripitus)
+- Circuit board evolution - CC-BY [Feesta.com](http://feesta.com/post/102813775604/circuit-board-evolution-3d-is-hard-but-not-as) 
+- Cover of Troubleshooting Analog Circuits by Robert A. Pease - © 1991 by Butterworth-Heinemann
+- Meat grinder & Disassembled hand-powered grinder - CC-BY-SA [Kku](https://commons.wikimedia.org/wiki/de:User:Kku) and [Rainer Zenz](https://commons.wikimedia.org/wiki/de:user:Rainer Zenz)
+- Bleep Drum Kit with MIDI - CC-BY-SA SparkFun Electronics
+- Iterative development drawing - © [Henrik Kniberg](http://blog.crisp.se/2016/01/25/henrikkniberg/making-sense-of-mvp)
+- 3 Resistors - CC-BY-SA [Afrank99](https://commons.wikimedia.org/wiki/User:Afrank99)
+-  GFP-tagged Cln2 - CC-BY - [Jean Peccoud](https://www.youtube.com/watch?v=sG2Zd3vRdvQ)
 
