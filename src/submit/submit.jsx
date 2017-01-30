@@ -99,7 +99,6 @@ function reducer(state = initial_state, action) {
   return state
 }
 
-const store = Redux.createStore(reducer)
 
 
 const instructionTexts = [
@@ -176,7 +175,7 @@ function isLoading(status) {
   return (status !== 'done') && (status !== 'not sent') && (status !== 'failed')
 }
 
-function buildBoard(layers) {
+function buildBoard(store, layers) {
     boardBuilder(layers, 'green', (err, stackup) => {
       if (err) {
         console.error(err)
@@ -221,7 +220,7 @@ function createElement(type, props, children) {
 function ColorSelector(props) {
   function changeColor(color) {
     return () => {
-      store.dispatch({type: 'setColor', value: color})
+      props.store.dispatch({type: 'setColor', value: color})
     }
   }
   const buttons = board_colors.map(color => {
@@ -275,16 +274,16 @@ const UrlSubmit = React.createClass({
       formData.url = this.placeholder
       this.setState({url: this.placeholder})
     }
-    store.dispatch({type:'setUrlSent', value: formData.url})
+    this.props.store.dispatch({type:'setUrlSent', value: formData.url})
     request.post(GIT_CLONE_SERVER)
        .send({url: formData.url})
        .withCredentials()
        .end((err, res) => {
          if (err) {
-           return store.dispatch({type: 'setBoardError', value: err})
+           return this.props.store.dispatch({type: 'setBoardError', value: err})
          }
          if (res.body.error) {
-           return store.dispatch({type: 'setBoardError', value: res.body.error})
+           return this.props.store.dispatch({type: 'setBoardError', value: res.body.error})
          }
          const files    = res.body.data.files
          const gerbers  = gerberFiles(files)
@@ -295,12 +294,12 @@ const UrlSubmit = React.createClass({
              .then(res => {
                const info = jsYaml.safeLoad(res.text)
                if (info)  {
-                 store.dispatch({type: 'setYaml', value: info})
+                 this.props.store.dispatch({type: 'setYaml', value: info})
                }
              })
          }
          if (gerbers.length === 0) {
-           store.dispatch({type: 'setBoardError', value:'No Gerber files found in repository'})
+           this.props.store.dispatch({type: 'setBoardError', value:'No Gerber files found in repository'})
          }
          else {
            const requests = gerbers.map(f => {
@@ -308,8 +307,8 @@ const UrlSubmit = React.createClass({
                .withCredentials()
                .then(res => ({gerber: res.text, filename: f}))
            })
-           Promise.all(requests).then(buildBoard)
-           store.dispatch({type: 'setFileListing', value: files})
+           Promise.all(requests).then(buildBoard.bind(null, this.props.store))
+           this.props.store.dispatch({type: 'setFileListing', value: files})
          }
        })
   },
@@ -367,7 +366,7 @@ const Step1 = React.createClass({
       const top = board.svgs.top
       const bottom = board.svgs.bottom
       showcase = <div className={`pcb-${board.color}`}> <BoardShowcase>{top}{bottom}</BoardShowcase></div>
-      colorSelector = <ColorSelector active={board.color} yamlColor={board.yaml.color} />
+      colorSelector = <ColorSelector store={this.props.store} active={board.color} yamlColor={board.yaml.color} />
       nextButton = <Button content='Next' icon='right arrow' labelPosition='right' color='green' onClick={setStep(1)} />
     }
     return (
@@ -381,7 +380,7 @@ const Step1 = React.createClass({
         <Steps active={0}/>
         <Markdown className='instructions' source={instructionTexts[0]} />
         <div className='userInputSegment'>
-          <UrlSubmit board={board} />
+          <UrlSubmit store={this.props.store} board={board} />
           {colorSelector}
           {nextButton}
         </div>
@@ -468,22 +467,23 @@ function setStep(step) {
 }
 
 const SubmitRouter = React.createClass({
+  store: Redux.createStore(reducer),
   getInitialState() {
-    return store.getState().toJS()
+    return this.store.getState().toJS()
   },
   render() {
     return (
       <Router history={hashHistory}>
-        <Route path='/' component={() => <Step1 board={this.state.board} />} />
-        <Route path='/2' component={() => <Step2 board={this.state.board} />} />
-        <Route path='/3' component={() => <Step3 board={this.state.board} />} />
-        <Route path='/4' component={() => <Step4 board={this.state.board} />} />
+        <Route path='/'  component={() => <Step1 store={this.store} board={this.state.board} />} />
+        <Route path='/2' component={() => <Step2 store={this.store} board={this.state.board} />} />
+        <Route path='/3' component={() => <Step3 store={this.store} board={this.state.board} />} />
+        <Route path='/4' component={() => <Step4 store={this.store} board={this.state.board} />} />
       </Router>
     )
   },
   componentDidMount() {
-    store.subscribe(() => {
-      const state = store.getState().toJS()
+    this.store.subscribe(() => {
+      const state = this.store.getState().toJS()
       this.setState(state)
     })
   }
