@@ -21,10 +21,12 @@ const initial_state = immutable.Map({
     svgs      : null,
     stackup   : null,
     message   : '',
+    bom       : '',
   }),
 })
 
 function reducer(state = initial_state, action) {
+  console.log(action)
   switch(action.type) {
     case 'setStep':
       return state.set('activeStep', action.value)
@@ -46,6 +48,10 @@ function reducer(state = initial_state, action) {
     }
     case 'setColor': {
       const board = state.get('board').set('color', action.value)
+      return state.set('board', board)
+    }
+    case 'setBom': {
+      const board = state.get('board').set('bom', action.value)
       return state.set('board', board)
     }
     case 'setYaml': {

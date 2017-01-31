@@ -59,7 +59,7 @@ var Page = React.createClass({
             </BoardShowcase>
             <StoreButtons items={ info.bom.lines ? info.bom.lines : [] } />
             <Readme />
-            <BOM data={ info.bom ? info.bom : [] } />
+            <BOM tsv={ info.bom ? info.bom.tsv : '' } />
           </div>
         </div>
       </div>

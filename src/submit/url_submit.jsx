@@ -9,11 +9,25 @@ const {
   Form,
   Button,
   Input,
+  Message,
 } = require('semantic-ui-react')
 
 const boardBuilder = require('../board_builder')
 
 const GIT_CLONE_SERVER = 'https://git-clone-server.kitnic.it'
+
+function getBom(bomPath, dispatch) {
+  bomPath = bomPath || '1-click-bom.tsv'
+  console.log('getBom', bomPath)
+  request.get(url.resolve(GIT_CLONE_SERVER, bomPath))
+    .withCredentials()
+    .end((err, res) => {
+      if (err) {
+        return
+      }
+      dispatch({type: 'setBom', value: res.text})
+    })
+}
 
 function isLoading(status) {
   return (status !== 'done') && (status !== 'not sent') && (status !== 'failed')
@@ -133,8 +147,15 @@ const UrlSubmit = React.createClass({
                const info = jsYaml.safeLoad(res.text)
                if (info)  {
                  this.props.store.dispatch({type: 'setYaml', value: info})
+                 console.log(info)
+                 getBom(info.bom, this.props.store.dispatch)
+               }
+               else {
+                 getBom(null, this.props.store.dispatch)
                }
              })
+         } else {
+           getBom(null, this.props.store.dispatch)
          }
          if (gerbers.length === 0) {
            this.props.store.dispatch({type: 'setBoardError', value:'No Gerber files found in repository'})

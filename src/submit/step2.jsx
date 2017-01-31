@@ -6,6 +6,7 @@ const Steps = require('./steps')
 const UrlSubmit = require('./url_submit')
 
 const TitleBar = require('../title_bar')
+const BOM = require('../page/bom')
 
 
 const Step2 = React.createClass({
@@ -14,7 +15,7 @@ const Step2 = React.createClass({
     const instructions = 'Add a [1-click-bom.tsv](https://1clickbom.com/#usage)'
       + ' to the root of your repository.'
       + ' If you would like to put it in a different folder or call it something'
-      + ' else, add it to your kitnic.yaml e.g.:\n\n'
+      + ' else, add it to your kitnic.yaml e.g.\n\n'
       + '```\n'
       + 'bom: path/to/bom.tsv\n'
       + '```\n'
@@ -31,6 +32,7 @@ const Step2 = React.createClass({
           <UrlSubmit store={this.props.store} board={board} />
         </div>
         <Markdown className='instructions' source={instructions} />
+        <BOM tsv={board.bom} />
       </semantic.Container>
     </div>
     )
