@@ -117,24 +117,25 @@ const UrlSubmit = React.createClass({
     return {url: this.props.board.url || ''}
   },
   onSubmit(event, {formData}) {
+    const {board, dispatch} = this.props
     event.preventDefault()
-    if (isLoading(this.props.board.status)) {
+    if (isLoading(board.status)) {
       return
     }
     if (formData.url === '') {
       formData.url = this.placeholder
       this.setState({url: this.placeholder})
     }
-    this.props.dispatch({type:'setUrlSent', value: formData.url})
+    dispatch({type:'setUrlSent', value: formData.url})
     request.post(GIT_CLONE_SERVER)
        .send({url: formData.url})
        .withCredentials()
        .end((err, res) => {
          if (err) {
-           return this.props.dispatch({type: 'setBoardError', value: err})
+           return dispatch({type: 'setBoardError', value: err})
          }
          if (res.body.error) {
-           return this.props.dispatch({type: 'setBoardError', value: res.body.error})
+           return dispatch({type: 'setBoardError', value: res.body.error})
          }
          const files   = res.body.data.files
          const root    = res.body.data.root
@@ -146,18 +147,18 @@ const UrlSubmit = React.createClass({
              .then(res => {
                const info = jsYaml.safeLoad(res.text)
                if (info)  {
-                 this.props.dispatch({type: 'setYaml', value: info})
-                 getBom(root, info.bom, this.props.dispatch)
+                 dispatch({type: 'setYaml', value: info})
+                 getBom(root, info.bom, dispatch)
                }
                else {
-                 getBom(root, null, this.props.dispatch)
+                 getBom(root, null, dispatch)
                }
              })
          } else {
-           getBom(root, null, this.props.dispatch)
+           getBom(root, null, dispatch)
          }
          if (gerbers.length === 0) {
-           this.props.dispatch({type: 'setBoardError', value:'No Gerber files found in repository'})
+           dispatch({type: 'setBoardError', value:'No Gerber files found in repository'})
          }
          else {
            const requests = gerbers.map(f => {
@@ -165,8 +166,8 @@ const UrlSubmit = React.createClass({
                .withCredentials()
                .then(res => ({gerber: res.text, filename: f}))
            })
-           Promise.all(requests).then(buildBoard.bind(null, this.props.dispatch))
-           this.props.dispatch({type: 'setFileListing', value: files})
+           Promise.all(requests).then(buildBoard.bind(null, dispatch))
+           dispatch({type: 'setFileListing', value: files})
          }
        })
   },
