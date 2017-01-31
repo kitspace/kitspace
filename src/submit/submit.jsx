@@ -96,6 +96,7 @@ const SubmitRouter = React.createClass({
   componentDidMount() {
     this.store.subscribe(() => {
       const state = this.store.getState().toJS()
+      console.log(state.board)
       this.setState(state)
     })
   }
