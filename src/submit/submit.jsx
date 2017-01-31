@@ -71,10 +71,10 @@ function reducer(state = initial_state, action) {
 
 function setStep(step) {
    return () => {
-     if (step === 0) {
+     if (step === 1) {
        return hashHistory.push('/')
      }
-     return hashHistory.push(`/${step + 1}`)
+     return hashHistory.push(`/${step}`)
    }
 }
 

@@ -26,7 +26,7 @@ const Step2 = React.createClass({
         </div>
       </TitleBar>
       <semantic.Container>
-        <Steps setStep={this.props.setStep} active={1}/>
+        <Steps setStep={this.props.setStep} active={2}/>
         <div className='userInputSegment'>
           <UrlSubmit store={this.props.store} board={board} />
         </div>

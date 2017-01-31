@@ -41,7 +41,7 @@ const Step1 = React.createClass({
         </div>
       </TitleBar>
       <Container>
-        <Steps setStep={this.props.setStep} active={0}/>
+        <Steps setStep={this.props.setStep} active={1}/>
         <Markdown className='instructions' source={instruction_text} />
         <div className='userInputSegment'>
           <UrlSubmit store={this.props.store} board={board} />
