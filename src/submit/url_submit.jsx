@@ -41,7 +41,7 @@ function buildBoard(dispatch, layers) {
       else {
         const top    = stackup.top.svg
         const bottom = stackup.bottom.svg
-        const svgs = {top, bottom}
+        const svgs   = {top, bottom}
         dispatch({type: 'setSvgs', value: {svgs}})
       }
     }, createElement)
@@ -175,11 +175,11 @@ const UrlSubmit = React.createClass({
     this.setState({url: input.value})
   },
   render() {
-    const state      = this.state
-    const requested  = state.url === this.props.board.url
-    const color      = requested ? 'blue' : 'green'
-    const loading    = isLoading(this.props.board.status)
-    const failed     = this.props.board.status === 'failed'
+    const state     = this.state
+    const requested = state.url === this.props.board.url
+    const color     = requested ? 'blue' : 'green'
+    const loading   = isLoading(this.props.board.status)
+    const failed    = this.props.board.status === 'failed'
     let message
     if (failed) {
       message =

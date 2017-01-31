@@ -27,7 +27,6 @@ const initial_state = immutable.Map({
 })
 
 function reducer(state = initial_state, action) {
-  console.log(action)
   switch(action.type) {
     case 'setStep':
       return state.set('activeStep', action.value)
