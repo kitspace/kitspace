@@ -16,10 +16,10 @@ const boardBuilder = require('../board_builder')
 
 const GIT_CLONE_SERVER = 'https://git-clone-server.kitnic.it'
 
-function getBom(bomPath, dispatch) {
+function getBom(root, bomPath, dispatch) {
   bomPath = bomPath || '1-click-bom.tsv'
   console.log('getBom', bomPath)
-  request.get(url.resolve(GIT_CLONE_SERVER, bomPath))
+  request.get(url.resolve(GIT_CLONE_SERVER, path.join(root, bomPath)))
     .withCredentials()
     .end((err, res) => {
       if (err) {
@@ -104,7 +104,7 @@ function gerberFiles(files, info) {
 
 
 function kitnicYaml(files) {
-  const yaml = files.filter(f => RegExp('/.*?/.*?/kitnic.yaml').test(f))
+  const yaml = files.filter(f => RegExp('^kitnic.yaml$').test(f))
   if (yaml.length > 0) {
     return yaml[0]
   }
@@ -137,32 +137,33 @@ const UrlSubmit = React.createClass({
          if (res.body.error) {
            return this.props.store.dispatch({type: 'setBoardError', value: res.body.error})
          }
-         const files    = res.body.data.files
-         const gerbers  = gerberFiles(files)
-         const yaml     = kitnicYaml(files)
+         const files   = res.body.data.files
+         const root    = res.body.data.root
+         const gerbers = gerberFiles(files)
+         const yaml    = kitnicYaml(files)
          if (yaml) {
-           request.get(url.resolve(GIT_CLONE_SERVER, yaml))
+           request.get(url.resolve(GIT_CLONE_SERVER, path.join(root, yaml)))
              .withCredentials()
              .then(res => {
                const info = jsYaml.safeLoad(res.text)
                if (info)  {
                  this.props.store.dispatch({type: 'setYaml', value: info})
                  console.log(info)
-                 getBom(info.bom, this.props.store.dispatch)
+                 getBom(root, info.bom, this.props.store.dispatch)
                }
                else {
-                 getBom(null, this.props.store.dispatch)
+                 getBom(root, null, this.props.store.dispatch)
                }
              })
          } else {
-           getBom(null, this.props.store.dispatch)
+           getBom(root, null, this.props.store.dispatch)
          }
          if (gerbers.length === 0) {
            this.props.store.dispatch({type: 'setBoardError', value:'No Gerber files found in repository'})
          }
          else {
            const requests = gerbers.map(f => {
-             return request.get(url.resolve(GIT_CLONE_SERVER, f))
+             return request.get(url.resolve(GIT_CLONE_SERVER, path.join(root, f)))
                .withCredentials()
                .then(res => ({gerber: res.text, filename: f}))
            })
