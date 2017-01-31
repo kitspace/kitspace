@@ -1,7 +1,8 @@
-const Redux           = require('redux')
-const React           = require('react')
-const path            = require('path')
-const immutable       = require('immutable')
+const Redux     = require('redux')
+const React     = require('react')
+const {h}       = require('react-hyperscript-helpers')
+const path      = require('path')
+const immutable = require('immutable')
 const {Router, Route, Link, hashHistory} = require('react-router')
 
 const Step1 = require('./step1')
@@ -92,17 +93,48 @@ const SubmitRouter = React.createClass({
   render() {
     return (
       <Router history={hashHistory}>
-        <Route path='/'  component={() => <Step1 setStep={setStep} store={this.store} board={this.state.board} />} />
-        <Route path='/2' component={() => <Step2 setStep={setStep} store={this.store} board={this.state.board} />} />
-        <Route path='/3' component={() => <Step3 setStep={setStep} store={this.store} board={this.state.board} />} />
-        <Route path='/4' component={() => <Step4 setStep={setStep} store={this.store} board={this.state.board} />} />
+        <Route path='/'
+          component = {
+            () => h(Step1, {
+              setStep,
+              dispatch: this.store.dispatch,
+              board: this.state.board,
+            })
+          }
+        />
+        <Route path='/2'
+          component = {
+            () => h(Step2, {
+              setStep,
+              dispatch: this.store.dispatch,
+              board: this.state.board,
+            })
+          }
+        />
+        <Route path='/3'
+          component = {
+            () => h(Step3, {
+              setStep,
+              dispatch: this.store.dispatch,
+              board: this.state.board,
+            })
+          }
+        />
+        <Route path='/4'
+          component = {
+            () => h(Step4, {
+              setStep,
+              dispatch: this.store.dispatch,
+              board: this.state.board,
+            })
+          }
+        />
       </Router>
     )
   },
   componentDidMount() {
     this.store.subscribe(() => {
       const state = this.store.getState().toJS()
-      console.log(state.board)
       this.setState(state)
     })
   }

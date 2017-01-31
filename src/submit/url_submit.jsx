@@ -32,17 +32,17 @@ function isLoading(status) {
   return (status !== 'done') && (status !== 'not sent') && (status !== 'failed')
 }
 
-function buildBoard(store, layers) {
+function buildBoard(dispatch, layers) {
     boardBuilder(layers, 'green', (err, stackup) => {
       if (err) {
         console.error(err)
-        store.dispatch({type: 'setBoardError', value:err})
+        dispatch({type: 'setBoardError', value:err})
       }
       else {
         const top    = stackup.top.svg
         const bottom = stackup.bottom.svg
         const svgs = {top, bottom}
-        store.dispatch({type: 'setSvgs', value: {svgs}})
+        dispatch({type: 'setSvgs', value: {svgs}})
       }
     }, createElement)
 }
@@ -125,16 +125,16 @@ const UrlSubmit = React.createClass({
       formData.url = this.placeholder
       this.setState({url: this.placeholder})
     }
-    this.props.store.dispatch({type:'setUrlSent', value: formData.url})
+    this.props.dispatch({type:'setUrlSent', value: formData.url})
     request.post(GIT_CLONE_SERVER)
        .send({url: formData.url})
        .withCredentials()
        .end((err, res) => {
          if (err) {
-           return this.props.store.dispatch({type: 'setBoardError', value: err})
+           return this.props.dispatch({type: 'setBoardError', value: err})
          }
          if (res.body.error) {
-           return this.props.store.dispatch({type: 'setBoardError', value: res.body.error})
+           return this.props.dispatch({type: 'setBoardError', value: res.body.error})
          }
          const files   = res.body.data.files
          const root    = res.body.data.root
@@ -146,18 +146,18 @@ const UrlSubmit = React.createClass({
              .then(res => {
                const info = jsYaml.safeLoad(res.text)
                if (info)  {
-                 this.props.store.dispatch({type: 'setYaml', value: info})
-                 getBom(root, info.bom, this.props.store.dispatch)
+                 this.props.dispatch({type: 'setYaml', value: info})
+                 getBom(root, info.bom, this.props.dispatch)
                }
                else {
-                 getBom(root, null, this.props.store.dispatch)
+                 getBom(root, null, this.props.dispatch)
                }
              })
          } else {
-           getBom(root, null, this.props.store.dispatch)
+           getBom(root, null, this.props.dispatch)
          }
          if (gerbers.length === 0) {
-           this.props.store.dispatch({type: 'setBoardError', value:'No Gerber files found in repository'})
+           this.props.dispatch({type: 'setBoardError', value:'No Gerber files found in repository'})
          }
          else {
            const requests = gerbers.map(f => {
@@ -165,8 +165,8 @@ const UrlSubmit = React.createClass({
                .withCredentials()
                .then(res => ({gerber: res.text, filename: f}))
            })
-           Promise.all(requests).then(buildBoard.bind(null, this.props.store))
-           this.props.store.dispatch({type: 'setFileListing', value: files})
+           Promise.all(requests).then(buildBoard.bind(null, this.props.dispatch))
+           this.props.dispatch({type: 'setFileListing', value: files})
          }
        })
   },

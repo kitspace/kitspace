@@ -32,7 +32,7 @@ const Step2 = React.createClass({
       <semantic.Container>
         <Steps setStep={this.props.setStep} active={2}/>
         <div className='userInputSegment'>
-          <UrlSubmit store={this.props.store} board={board} />
+          <UrlSubmit dispatch={this.props.dispatch} board={board} />
         </div>
         <Markdown className='instructions' source={instructions} />
         <BOM tsv={board.bom} />

@@ -1,5 +1,5 @@
 const React = require('react')
-const {h}   = require('react-hyperscript-helpers')
+const {h} = require('react-hyperscript-helpers')
 const {
   Label,
   Segment,
@@ -10,7 +10,7 @@ const board_colors = require('./board_colors')
 module.exports = function ColorSelector(props) {
   function changeColor(color) {
     return () => {
-      props.store.dispatch({type: 'setColor', value: color})
+      props.dispatch({type: 'setColor', value: color})
     }
   }
   const buttons = board_colors.map(color => {

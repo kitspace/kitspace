@@ -30,7 +30,7 @@ const Step1 = React.createClass({
       const top = board.svgs.top
       const bottom = board.svgs.bottom
       showcase = <div className={`pcb-${board.color}`}> <BoardShowcase>{top}{bottom}</BoardShowcase></div>
-      colorSelector = <ColorSelector store={this.props.store} active={board.color} yamlColor={board.yaml.color} />
+      colorSelector = <ColorSelector dispatch={this.props.dispatch} active={board.color} yamlColor={board.yaml.color} />
       nextButton = <Button content='Next' icon='right arrow' labelPosition='right' color='green' onClick={this.props.setStep(1)} />
     }
     return (
@@ -44,7 +44,7 @@ const Step1 = React.createClass({
         <Steps setStep={this.props.setStep} active={1}/>
         <Markdown className='instructions' source={instruction_text} />
         <div className='userInputSegment'>
-          <UrlSubmit store={this.props.store} board={board} />
+          <UrlSubmit dispatch={this.props.dispatch} board={board} />
           {colorSelector}
           {nextButton}
         </div>
