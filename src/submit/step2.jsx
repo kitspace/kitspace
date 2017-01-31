@@ -12,13 +12,16 @@ const BOM = require('../page/bom')
 const Step2 = React.createClass({
   render() {
     const board = this.props.board
-    const instructions = 'Add a [1-click-bom.tsv](https://1clickbom.com/#usage)'
-      + ' to the root of your repository.'
-      + ' If you would like to put it in a different folder or call it something'
-      + ' else, add it to your kitnic.yaml e.g.\n\n'
-      + '```\n'
-      + 'bom: path/to/bom.tsv\n'
-      + '```\n'
+    let instructions
+    if (board.bom === '') {
+      instructions = 'Add a [1-click-bom.tsv](https://1clickbom.com/#usage)'
+        + ' to the root of your repository.'
+        + ' If you would like to put it in a different folder or call it something'
+        + ' else, add it to your kitnic.yaml e.g.\n\n'
+        + '```\n'
+        + 'bom: path/to/bom.tsv\n'
+        + '```\n'
+    }
     return (
     <div className='Step Step2'>
       <TitleBar>

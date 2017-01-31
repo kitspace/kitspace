@@ -18,7 +18,6 @@ const GIT_CLONE_SERVER = 'https://git-clone-server.kitnic.it'
 
 function getBom(root, bomPath, dispatch) {
   bomPath = bomPath || '1-click-bom.tsv'
-  console.log('getBom', bomPath)
   request.get(url.resolve(GIT_CLONE_SERVER, path.join(root, bomPath)))
     .withCredentials()
     .end((err, res) => {
@@ -148,7 +147,6 @@ const UrlSubmit = React.createClass({
                const info = jsYaml.safeLoad(res.text)
                if (info)  {
                  this.props.store.dispatch({type: 'setYaml', value: info})
-                 console.log(info)
                  getBom(root, info.bom, this.props.store.dispatch)
                }
                else {
