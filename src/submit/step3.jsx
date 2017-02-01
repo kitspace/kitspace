@@ -13,15 +13,18 @@ const Step3 = React.createClass({
   render() {
     const board = this.props.board
     let nextButton, infoBar
-    if (board.yaml) {
-      const info = board.yaml
-      info.repo = board.url
-      infoBar = (
-        <semantic.Segment>
-          <InfoBar info={info} />
-        </semantic.Segment>
-      )
-    }
+    let text = board.yaml ? '' :  'Add a kitnic.yaml with "summary" and'
+      + ' "site" fields to appear at the top of your page'
+    const info = board.yaml || {}
+    info.repo = board.url
+    infoBar = (
+      <semantic.Segment>
+        <InfoBar info={info} />
+        <semantic.Label attached='top left'>
+        {text}
+        </semantic.Label>
+      </semantic.Segment>
+    )
     if (board.readme) {
       nextButton = <semantic.Button
         content       = 'Next'

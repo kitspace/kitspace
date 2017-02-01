@@ -3,7 +3,7 @@ const React = require('react')
 function InfoBar(props) {
   const info = props.info
   let site
-  if (info.site == '') {
+  if (info.site == null || info.site === '') {
     site =
       (<div className='disabledSite' title='no website info available'>
         <span className="octicon octicon-link" /> website
