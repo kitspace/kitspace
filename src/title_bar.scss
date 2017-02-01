@@ -60,7 +60,7 @@
         justify-content: space-around;
         padding: 10px;
         z-index: 1;
-        min-width:140px;
+        min-width:180px;
 
         @include breakpoint(mobile-m) {
             width: 100%;
