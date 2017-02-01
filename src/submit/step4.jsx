@@ -9,9 +9,14 @@ const UrlSubmit = require('./url_submit')
 
 const TitleBar = require('../title_bar')
 
+
 const Step4 = React.createClass({
   render() {
     const board = this.props.board
+    const url = board.url ? `\`${board.url}\`` : 'your URL';
+    const instructionText = 'Please [edit the boards.txt file on GitHub]'
+    + '(https://github.com/monostable/kitnic/edit/master/boards.txt). Add'
+    + ` ${url} and send us a pull request with your change.`
     return (
     <div className='Step Step4'>
       <TitleBar>
@@ -21,9 +26,11 @@ const Step4 = React.createClass({
       </TitleBar>
       <Container>
         <Steps setStep={this.props.setStep} active={4}/>
-        <Markdown className='instructions' source={''} />
-        <div className='userInputSegment'>
-          <UrlSubmit dispatch={this.props.dispatch} board={board} />
+        <div style={{marginTop:30, display:'flex', justifyContent:'center'}}>
+          <Markdown className='instructions' source={instructionText} />
+        </div>
+        <div style={{marginTop:30, display:'flex', justifyContent:'center'}}>
+          <img style={{height:200}} src='/images/fireworks.png' />
         </div>
       </Container>
     </div>
