@@ -15,7 +15,7 @@ const Step2 = React.createClass({
     const instructionText = 'Add a [1-click-bom.tsv](https://1clickbom.com/#usage)'
       + ' to the root of your repository.'
       + ' If you would like to put it in a different folder or call it something'
-      + ' else, add it to your kitnic.yaml e.g.\n\n'
+      + ' else, add a kitnic.yaml with:\n\n'
       + '```\n'
       + 'bom: path/to/bom.tsv\n'
       + '```\n'

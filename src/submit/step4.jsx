@@ -14,8 +14,9 @@ const Step4 = React.createClass({
   render() {
     const board = this.props.board
     const url = board.url ? `\`${board.url}\`` : 'your URL';
-    const instructionText = 'Please [edit the boards.txt file on GitHub]'
-    + '(https://github.com/monostable/kitnic/edit/master/boards.txt). Add'
+    const instructionText = 'Please [edit the boards.txt]'
+    + '(https://github.com/monostable/kitnic/edit/master/boards.txt)'
+    + ' file on GitHub. Add'
     + ` ${url} and send us a pull request with your change.`
     return (
     <div className='Step Step4'>
