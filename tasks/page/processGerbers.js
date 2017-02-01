@@ -7,6 +7,7 @@ const utils        = require('../utils/utils');
 const boardBuilder = require('../../src/board_builder');
 const cp           = require('child_process');
 const Jszip        = require('jszip');
+const gerberFiles  = require('../../src/gerber_files')
 
 
 const svgo = new Svgo({
@@ -66,7 +67,8 @@ if (require.main !== module) {
         if (__guard__(info, x => x.gerbers) != null) {
             gerbers = globule.find(`${folder}/${info.gerbers}/*`);
         } else {
-            gerbers = globule.find(`${folder}/gerbers/*`);
+            const files = globule.find(`${folder}/**/*`)
+            gerbers = gerberFiles(files)
         }
         if (gerbers.length === 0) {
             console.error(`No gerbers found for ${folder}.`);

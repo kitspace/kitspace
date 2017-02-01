@@ -22,47 +22,7 @@ Help us build a open hardware repository of useful electronics projects!
 
 ##Submitting your project
 
-To submit your project to Kitnic, follow these steps:
-
-**1. Export your plotted gerbers & drill data** and check that they will render
-nicely using [viewer.tracespace.io][viewer]. Put them into a directory - by
-default the path `gerbers/` will be searched. If this is not where they are
-stored, please add this info in the kitnic.yaml file (see below).
-
-**2. Create the 1-click-bom file.**
-Download the extension and see [the guide on exporting a 1-click-bom from your
-design][1clickbom#making]. This format will allow people to quickly purchase
-the components.  By default this file is expected to be a `1-click-bom.tsv` in
-the root of the project, if the file has a different name or is in a different
-location, please add this info in the kitnic.yaml file (see below).
-
-**3. (Optional) Create the YAML project description file.** The `kitnic.yaml`
-file allows you to specify a website you would like to link to, give a summary
-of your project, pick a rendering color or configure custom paths for the two
-requirements above. If you don't have a `kitnic.yaml` with a summary we
-will try and find a summary from your repo. If we can't find one the build
-will fail.  See [the section below](#kitnicyaml-format) for details of the file
-format.
-
-**4. Add your project to a Git repository.**
-To have your project included on Kitnic it needs to be in a publicly accessible
-Git repository (but it doesn't have to be on GitHub). If you don't know how to
-use Git then *don't worry*! - you can easily [create a repo on GitHub][4] and
-[upload your files using the web interface][5].
-
-**5. Add your project to Kitnic's board list.**
-To add your project to Kitnic, edit the [boards.txt](boards.txt) file, by
-appending the full public URL to your repo (including `https://`, `http://`
-or`git@` ). Then submit a pull request and Travis CI should confirm that it
-builds ok.  If any of the requirements above are not met then this process will
-likely fail.
-
-We will then preview your page and merge it so it appears on [kitnic.it](http://kitnic.it).
-
-If you run into any problems please get in touch via [Riot.im
-chat][riot.im], IRC (freenode#kitnic) or the
-[mailing-list](https://groups.google.com/forum/#!forum/kitnic-discuss).
-
+Got to [kitnic.it/submit](https://kitnic.it/submit) which will guide you through the process.
 
 ### Kitnic.yaml format
 

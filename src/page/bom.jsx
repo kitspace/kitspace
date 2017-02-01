@@ -54,14 +54,17 @@ function tsvToTable(tsv) {
 
 let BOM = React.createClass({
   propTypes: {
-    data: React.PropTypes.object.isRequired
+    tsv: React.PropTypes.string.isRequired
   },
   render: function () {
+    if (this.props.tsv === '') {
+      return <div></div>
+    }
     return (
       <div className='bom'>
         <div className='bomTableContainer'>
           <DoubleScrollbar>
-          {tsvToTable(this.props.data.tsv)}
+          {tsvToTable(this.props.tsv)}
           </DoubleScrollbar>
           </div>
       </div>
