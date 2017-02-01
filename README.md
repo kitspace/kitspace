@@ -22,7 +22,7 @@ Help us build a open hardware repository of useful electronics projects!
 
 ##Submitting your project
 
-Got to [kitnic.it/submit](https://kitnic.it/submit) which will guide you through the process.
+Check out [kitnic.it/submit](https://kitnic.it/submit) which will guide you through the process.
 
 ### Kitnic.yaml format
 
