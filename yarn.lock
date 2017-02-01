@@ -2089,7 +2089,7 @@ github-slugger@^1.0.0:
   dependencies:
     emoji-regex "^6.0.0"
 
-github-url-to-object@^2.2.3:
+github-url-to-object@^2.2.3, github-url-to-object@^2.2.6:
   version "2.2.6"
   resolved "https://registry.yarnpkg.com/github-url-to-object/-/github-url-to-object-2.2.6.tgz#ca9250165149748eeeb30bfcc6000c6fe0d242f7"
   dependencies:

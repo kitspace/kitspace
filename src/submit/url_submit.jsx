@@ -7,6 +7,7 @@ const marky           = require('marky-markdown')
 const url             = require('url')
 const jsYaml          = require('js-yaml')
 const htmlToReact     = new (new require('html-to-react')).Parser(React)
+const githubUrlToObject = require('github-url-to-object')
 
 const {
   Form,
@@ -19,6 +20,20 @@ const boardBuilder = require('../board_builder')
 
 const GIT_CLONE_SERVER = 'https://git-clone-server.kitnic.it'
 
+
+function getGithubSummary(repoUrl, dispatch) {
+  const repoInfo = githubUrlToObject(repoUrl)
+  if (repoInfo) {
+    request(repoInfo.api_url)
+      .end((err, res) => {
+        if (err) {
+          return
+        }
+        dispatch({type: 'setSummary', value: res.body.description})
+      })
+  }
+}
+
 function getBom(root, bomPath, dispatch) {
   bomPath = bomPath || '1-click-bom.tsv'
   request.get(url.resolve(GIT_CLONE_SERVER, path.join(root, bomPath)))
@@ -30,6 +45,7 @@ function getBom(root, bomPath, dispatch) {
       dispatch({type: 'setBom', value: res.text})
     })
 }
+
 
 function findReadme(files) {
   const pattern = /^readme(\.markdown|\.mdown|\.mkdn|\.md)$/i
@@ -182,8 +198,13 @@ const UrlSubmit = React.createClass({
                else {
                  getBom(root, null, dispatch)
                }
+               console.log(info)
+               if (! (info && info.summary)) {
+                 getGithubSummary(formData.url, dispatch)
+               }
              })
-         } else {
+         }
+         else {
            getBom(root, null, dispatch)
          }
          if (gerbers.length === 0) {

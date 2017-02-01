@@ -71,6 +71,11 @@ function reducer(state = initial_state, action) {
       const board = state.get('board').set('readme', action.value)
       return state.set('board', board)
     }
+    case 'setSummary': {
+      const yaml = state.get('board').get('yaml').set('summary', action.value)
+      const board = state.get('board').set('yaml', yaml)
+      return state.set('board', board)
+    }
     case 'setBoardError': {
       const board = state.get('board').set('status', 'failed')
         .set('message', action.value)
