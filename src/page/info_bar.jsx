@@ -2,7 +2,7 @@ const React = require('react')
 
 function InfoBar(props) {
   const info = props.info
-  let site
+  let site, repo
   if (info.site == null || info.site === '') {
     site =
       (<div className='disabledSite' title='no website info available'>
@@ -15,10 +15,17 @@ function InfoBar(props) {
         <span className="octicon octicon-link" /> website
       </a>)
   }
-  const repo =
-    <a href={info.repo}>
-      <span className="octicon octicon-repo" /> repo
-    </a>
+  if (info.repo == null || info.repo === '') {
+    repo =
+      (<div className='disabledSite' title='no repo info available'>
+        <span className="octicon octicon-link" /> repo
+      </div>)
+  } else {
+    repo =
+      <a href={info.repo}>
+        <span className="octicon octicon-repo" /> repo
+      </a>
+  }
   return (
     <div className='infoBar' >
       <div className='infoBarInner' >
