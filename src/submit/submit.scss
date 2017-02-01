@@ -69,13 +69,14 @@ code {
 }
 
 #submitForm {
-    flex-grow: 2;
+    flex-grow: 1;
+    width: 50%;
     margin-bottom: 0px;
 }
 
 .Step1 {
    #submitForm {
-      width:100%;
+      width: 100%;
    }
 }
 
@@ -158,17 +159,12 @@ button {
    align-items:center;
 }
 
-.Step2 {
-   .userInputSegment {
-
-   }
-   .nextButtonContainer {
-       flex-grow: 1;
-       flex-shrink: 3;
-       display: flex;
-       align-items: center;
-       justify-content: center;
-   }
+.nextButtonContainer {
+    display: flex;
+    flex-grow: 1;
+    width: 50%;
+    align-items: center;
+    justify-content: center;
 }
 
 .colorSelect:hover, #whiteButton.colorSelect:hover {
