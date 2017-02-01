@@ -26,6 +26,9 @@ const Step3 = React.createClass({
         <div className='userInputSegment'>
           <UrlSubmit dispatch={this.props.dispatch} board={board} />
         </div>
+        <div>
+          {board.readme}
+        </div>
       </Container>
     </div>
     )

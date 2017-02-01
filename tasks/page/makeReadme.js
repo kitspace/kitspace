@@ -1,7 +1,7 @@
 const fs        = require('fs');
 const utils     = require('../utils/utils');
 const glob      = require('glob');
-const marky  = require('marky-markdown');
+const marky     = require('marky-markdown');
 const path      = require('path');
 const htmlToJsx = require('htmltojsx');
 

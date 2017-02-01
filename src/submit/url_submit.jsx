@@ -3,8 +3,11 @@ const request         = require('superagent')
 const path            = require('path')
 const camelCase       = require('lodash.camelcase')
 const whatsThatGerber = require('whats-that-gerber')
+const marky           = require('marky-markdown')
 const url             = require('url')
 const jsYaml          = require('js-yaml')
+const htmlToReact     = new (new require('html-to-react')).Parser(React)
+
 const {
   Form,
   Button,
@@ -26,6 +29,15 @@ function getBom(root, bomPath, dispatch) {
       }
       dispatch({type: 'setBom', value: res.text})
     })
+}
+
+function findReadme(files) {
+  const pattern = /^readme(\.markdown|\.mdown|\.mkdn|\.md)$/i
+  const matches = files.filter(f => pattern.test(f))
+  if (matches.length > 0) {
+    return matches[0]
+  }
+  return null
 }
 
 function isLoading(status) {
@@ -141,12 +153,29 @@ const UrlSubmit = React.createClass({
          const root    = res.body.data.root
          const gerbers = gerberFiles(files)
          const yaml    = kitnicYaml(files)
+         const readme  = findReadme(files)
+         if (readme) {
+           request.get(url.resolve(GIT_CLONE_SERVER, path.join(root, readme)))
+             .withCredentials()
+             .then(res => {
+               const html = marky(res.text).html();
+               const component = htmlToReact.parse(`<div class='readme'>${html}</div>`)
+               dispatch({type: 'setReadme', value: component})
+             })
+             .catch(err => {
+               console.error(err)
+               dispatch({type: 'setBoardError', value: 'README could not be retrieved'})
+             })
+         }
+         else {
+           dispatch({type: 'setBoardError', value: 'No README found in repository'})
+         }
          if (yaml) {
            request.get(url.resolve(GIT_CLONE_SERVER, path.join(root, yaml)))
              .withCredentials()
              .then(res => {
                const info = jsYaml.safeLoad(res.text)
-               if (info)  {
+               if (info) {
                  dispatch({type: 'setYaml', value: info})
                  getBom(root, info.bom, dispatch)
                }
