@@ -2,12 +2,13 @@ const React           = require('react')
 const request         = require('superagent')
 const path            = require('path')
 const camelCase       = require('lodash.camelcase')
-const whatsThatGerber = require('whats-that-gerber')
 const marky           = require('marky-markdown')
 const url             = require('url')
 const jsYaml          = require('js-yaml')
 const htmlToReact     = new (new require('html-to-react')).Parser(React)
 const githubUrlToObject = require('github-url-to-object')
+
+const gerberFiles = require('../gerber_files')
 
 const {
   Form,
@@ -99,34 +100,6 @@ function createElement(type, props, children) {
     }
   })
   return React.createElement(type, props, children)
-}
-
-
-function gerberFiles(files, info) {
-  const layers = files.map(f => ({path: f, type: whatsThatGerber(f)}))
-    .filter(({type}) => type !== 'drw')
-  const possibleGerbers = layers.map(({path}) => path)
-  const possibleTypes = layers.map(({type}) => type)
-  const duplicates = possibleTypes.reduce((prev, t) => {
-    return prev || (possibleTypes.indexOf(t) !== possibleTypes.lastIndexOf(t))
-  }, false)
-  if (! duplicates) {
-    return possibleGerbers
-  }
-  //if we have duplicates we reduce it down to the folder with the most
-  //gerbers
-  const folders = possibleGerbers.reduce((folders, f) => {
-    const name = path.dirname(f)
-    folders[name] = (folders[name] || 0) + 1
-    return folders
-  }, {})
-  const gerberFolder = Object.keys(folders).reduce((prev, f) => {
-    if (folders[f] > folders[prev]) {
-      return f
-    }
-    return prev
-  })
-  return possibleGerbers.filter(f => path.dirname(f) === gerberFolder)
 }
 
 
