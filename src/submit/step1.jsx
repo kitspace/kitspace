@@ -18,6 +18,11 @@ Plot Gerbers (RS274-X) and drill data from your CAD program. Put the files in a
 publicly accessible Git repository (you could use [GitHub](https://github.com)
 or [GitLab](https://gitlab.com) for instance). Preview your board by
 entering the repository URL below.
+
+If you run into any problems please get in touch via [Riot.im
+chat](https://riot.im/app/#/room/#kitnic:matrix.org), IRC (freenode#kitnic) or the
+[mailing-list](https://groups.google.com/forum/#!forum/kitnic-discuss).
+
 `
 
 const Step1 = React.createClass({
