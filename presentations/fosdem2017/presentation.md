@@ -3,6 +3,10 @@ class: center, middle
 
 <img class=fullscreen src=images/logo.png />
 
+???
+- My name is Kaspar
+- Here to talk about a webservice and browser extension that make it easier to replicate electronics projects
+
 ---
 
 ![](images/bls_125_banner.gif)
@@ -17,6 +21,13 @@ Reddit:
 - `/r/programming` 720,000 subscribers
 - `/r/electronics` 66,000 subscribers
 
+???
+- I'd like to give some context for these projects
+- The motivation behind their approach
+- Maybe a million software developers and 300,000 electronic engineers in the US
+- A similiar ratio if you look at these sub-reddits
+- Gives you an idea of the size of our field
+
 ---
 
 # On the other hand
@@ -25,12 +36,26 @@ Reddit:
 - __one__ in __ten__ software devlopers know C  (maybe, according to TIOBE)
 
 - `/r/electronics` 66,000 subscribers
-- `/r/c_programming` 30,000 subscribers  
+- `/r/c_programming` 30,000 subscribers
+
+???
+
+- But if you reduce it down to just C developers
+- There are probably less C developers than electronic engineers
+- Obviously these are just rough figures
+
 ---
 
 # Where is the Linux of electronics?
 
 <img style="height:400px;float:right" src=images/ohr_logo.svg />
+
+???
+
+- But the really interesting question for me is, why are there no hugely collaborative electronic engineering efforts? 
+- Something at the scale of say, Linux
+- This penguin here is actually the logo of the open hardware repository, from our friends at CERN, and there are a few other projects out there looking at this issue
+- I imagine there are quite a few people out there asking this question
 
 ---
 # Assemblers and compilers
@@ -38,8 +63,19 @@ Reddit:
 <img style="width:49%;" src=images/soldering_meeblip.jpg />
 <img style="width:49%;float:right;" src=images/pick_and_place.jpg />
 
+???
+- Despite the numbers of electronic engineers, electronic engineering is not a pure information technology
+- We have to move atoms in physical space
+- Which means money needs to be spent
+- But we do have increased automation and decreased cost
+
 ---
 <img style="z-index:0; top:0px;height:681px;position:absolute" src=images/circuit_boards.jpg />
+
+???
+- The cost reduction in PCB batching services is giving more and more people the opportunity to make professional grade PCBs
+- __it's tantalizingly close__
+
 ---
 
 # We do share projects 
@@ -52,19 +88,42 @@ Reddit:
 
 - Hackaday.io, EEVblog Forums, etc
 
+???
+
+- We do share projects
+- This is a rough survey I did last years on the numbers of projects you can find online
+- This is not including other popular ways to share projects such as Hackaday and forums
+- __So what's the problem?__ 
+
 ---
 <br>
 <br>
 <br>
 <center><img src=images/pease.jpg /></center>
 
+???
+
+- Often it takes considerable effort to understand someone else's work
+- Projects can be simultaneously brilliant but not reproducable
+- There is no clear standard way to present the information that reduces the friction
+
 ---
 <img class=fullscreen src=images/meat1.jpg />
 
+???
+- So what we would like, is something that incorporates all these different ways of doing things
+
 ---
 <img class=fullscreen src=images/meat2.jpg />
+
+???
+- Allows you to make the PCB
+
 ---
 <img class=fullscreen src=images/meat3.jpg />
+
+???
+- And allows you to purchase the parts
 
 ---
 
@@ -73,24 +132,48 @@ Reddit:
 <center>
 <img class=fullscreen src=images/meat_apart.jpg>
 </center>
+
+???
+
+- And this is my approach to try and solve this
+- The Kitnic.it web service
+- and the 1-click BOM browser extension
+
 ---
+
 # 1-click BOM extension 
 <img style="float:right" src=images/1_click_logo.png />
 
-Automates purchasing by replicating the web requests that are sent when you use retailer sites.
+Automates purchasing by replicating the web requests that are sent when you use retailer sites:
 - Digikey 
 - Mouser 
 - RS
 - Newark / Farnell / Element14
+
+???
+
+- The browser extension tries to completely reduce the friction between a BOM and the retailer shopping cart
+- It does this by replicating the web requests that your browser sends when using the site
+- Currently works for these retailers
+
 ---
-- Q: Why a browser extension?
+- Q: Why a browser extension and not just a website?
 - A: Same origin policy
 
 "The same-origin policy restricts how a document or script loaded from one origin can interact with a resource from another origin." - MDN
 
+???
+
+- So you might ask why couldn't you offer this as a webpage?
+- The same origin policy would restrict these interactions
+
 ---
 
 <img class=fullheight src=images/cors.jpeg />
+
+???
+
+- The same origin policy means that retailers would need to open up the endpoints to allow these interactions
 
 ---
 ```
@@ -127,6 +210,10 @@ X6eY%2FQ0eiyT%2FJsDR6vWe4u1sV0sPkLebGRRWfI4chXx3bL9X0CXPlXzEjYBjSMVFvahuPicHdx
 N4QG31f8teVRA4a6JqwXeveNQi8J4yp2Euq3lgQnEjPAWpjeUEq5tXJbII8qczxQBrYBFu7ebLbyl
 PNsPfrOeY6REXhUiEV1...
 ```
+???
+
+- Anyway, these are the kind of requests we are trying 
+
 ---
 
 <img class=fullscreen src=images/unit_test.png />
@@ -189,29 +276,6 @@ PNsPfrOeY6REXhUiEV1...
 <img height=500px src=images/kit.jpg />
 
 ---
-
-# Planned Features
-
-- Accounts
-- File upload and user project management
-- Tagged releases and versioning
-- Connect to PCB batching services
-- Assembly aide
----
-<img class=fullscreen src=images/aide.png />
-- GitHub Pages & Travis CI
-  - The boards.txt file
-
----
-
-# More Planned Features
-- Connect to assembly services
-- Better tools for making BOMs
-- Live pricing data
-
----
-<center><img class=fullscreen src=images/bicyle_incremental.png /></center>
----
 <img style="left:0;" height=150px src=images/travis_pipeline.png />
 - Static site hosting on Netlify and AWS
 - Travis CI builds every branch
@@ -227,6 +291,65 @@ https://github.com/8BitMixtape/NextLevelEdition
 https://github.com/dvdfreitag/Signal-Detector
 
 ```
+
+---
+
+# Planned features
+
+1. Accounts
+1. File upload and user project management
+1. Improved tools for making BOMs
+
+---
+# More features
+
+1. Option to auto-publish user's projects from GitHub and Dropbox
+1. Tagged releases and versioning
+1. Connect to PCB batching services
+1. Connect to assembly services
+
+---
+<img class=fullscreen src=images/aide.png />
+---
+<center><img class=fullscreen src=images/bicyle_incremental.png /></center>
+---
+
+#Is the browser extension the best way? 
+
+CORS endpoints are available for some retailers!
+
+---
+
+###Is the browser extension the best way? 
+
+Pro:
+
+- Flexibility and development speed
+- New retailers can be added at will
+- Web Extensions will allow one codebase for Chrome, Firefox and Microsoft Edge
+
+Con:
+- Does a user _want_ to install an extension?
+- Based on web-scraping, can break at any point
+
+---
+
+# Towards sustainablity?
+
+```
+| Item               | Cost  |
+|--------------------+-------|
+| Google Web Store   | $5    |
+| Contractor's time  | $2500 |
+| Free PCB promotion | $500  |
+| Domain names       | $20   |
+| Hosting            | $0    |
+| Kaspar's time      | ???   |
+```
+
+
+1. Track purchasing referrals?
+1. Paid private accounts?
 
 ---
 <br/>
@@ -245,11 +368,19 @@ https://github.com/dvdfreitag/Signal-Detector
 - No more Coffeescript
 - But we still compile from ES6 to ES5!
 
+---
+
 ##Kitnic 
-- React front-end
-- Services using node.js and Express
-  - e.g. a service to clone git repos and serve the files:
-  [github.com/kasbah/git-clone-server](https://github.com/kasbah/git-clone-server)
+React front-end
+
+Micro services:
+
+- `git-clone-server.kitnic.it`
+    - clone git repos and serve the files
+    - <i class="fa fa-github"></i> [kasbah/git-clone-server](https://github.com/kasbah/git-clone-server)
+- `freegeoip.kitnic.it`
+    - IP geolocation
+    - <i class="fa fa-github"></i> [fiorix/freegeoip](https://github.com/kasbah/git-clone-server)
 
 ---
 <svg width=400px viewBox="0 0 18 7">
@@ -275,8 +406,15 @@ function leftpad (str, len, ch) {
 }
 ```
 ---
-- [pcb-stackup](https://github.com/tracespace/pcb-stackup)
-- [whats-that-gerber](https://github.com/tracespace/whats-that-gerber)
+[pcb-stackup](https://github.com/tracespace/pcb-stackup)
+
+```
+pcb-stackup
+├─┬ gerber-to-svg
+│ ├── gerber-parser
+│ └── gerber-plotter
+└── whats-that-gerber
+```
 
 <p align=middle><img width=80% src=images/stackup.svg></p>
 ---
