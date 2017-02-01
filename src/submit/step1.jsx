@@ -29,8 +29,9 @@ const Step1 = React.createClass({
     if (board.svgs) {
       const top = board.svgs.top
       const bottom = board.svgs.bottom
+      const yamlColor = (board.yaml || {}).color
       showcase = <div className={`pcb-${board.color}`}> <BoardShowcase>{top}{bottom}</BoardShowcase></div>
-      colorSelector = <ColorSelector dispatch={this.props.dispatch} active={board.color} yamlColor={board.yaml.color} />
+      colorSelector = <ColorSelector dispatch={this.props.dispatch} active={board.color} yamlColor={yamlColor} />
       nextButton = <Button content='Next' icon='right arrow' labelPosition='right' color='green' onClick={this.props.setStep(2)} />
     }
     return (

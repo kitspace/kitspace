@@ -199,7 +199,6 @@ const UrlSubmit = React.createClass({
                else {
                  getBom(root, null, dispatch)
                }
-               console.log(info)
                if (! (info && info.summary)) {
                  getGithubSummary(formData.url, dispatch)
                }
