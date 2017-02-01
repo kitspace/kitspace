@@ -174,7 +174,8 @@ const UrlSubmit = React.createClass({
            request.get(url.resolve(GIT_CLONE_SERVER, path.join(root, readme)))
              .withCredentials()
              .then(res => {
-               const html = marky(res.text).html();
+               const pkg = {repository: {url: formData.url}};
+               const html = marky(res.text, {package: pkg}).html();
                const component = htmlToReact.parse(`<div class='readme'>${html}</div>`)
                dispatch({type: 'setReadme', value: component})
              })
