@@ -13,8 +13,9 @@ const Step3 = React.createClass({
   render() {
     const board = this.props.board
     let nextButton, infoBar
-    if (board.status === 'done') {
-      const info = {repo: board.url}
+    if (board.yaml) {
+      const info = board.yaml
+      info.repo = board.url
       infoBar = (
         <semantic.Segment>
           <InfoBar info={info} />
@@ -32,7 +33,11 @@ const Step3 = React.createClass({
     const instructionText = 'Add a README.md to your repository explaining more'
       + ' about the project. This should be written in [Markdown]'
       + '(http://commonmark.org/help/).'
-      + ' You can also add a description and site link to your kitnic.yaml'
+      + ' You can also add a summary and site link to your kitnic.yaml:'
+      + '\n\n```\n'
+      + 'summary: <a summary for your project>\n'
+      + 'site: https://example.com\n'
+      + '```\n'
     return (
     <div className='Step Step3'>
       <TitleBar>

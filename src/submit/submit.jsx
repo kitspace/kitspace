@@ -16,7 +16,7 @@ const initial_state = immutable.Map({
   board: immutable.Map({
     status    : 'not sent',
     color     : 'green',
-    yaml      : immutable.Map({}),
+    yaml      : null,
     url       : null,
     files     : null,
     svgs      : null,
