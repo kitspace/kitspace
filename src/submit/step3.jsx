@@ -22,8 +22,8 @@ const Step3 = React.createClass({
     }
     else if (board.status === 'done' || board.status === 'not sent'){
       instructionText = 'Add a README.md to your repository explaining more about'
-      + ' the project. This should be writtern in [GitHub Flavored Markdown]'
-      + '(https://help.github.com/articles/basic-writing-and-formatting-syntax/).'
+      + ' the project. This should be written in [Markdown]'
+      + '(http://commonmark.org/help/).'
     }
     return (
     <div className='Step Step3'>
