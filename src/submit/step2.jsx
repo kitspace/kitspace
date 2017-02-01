@@ -45,7 +45,9 @@ const Step2 = React.createClass({
         <Steps setStep={this.props.setStep} active={2}/>
         <div className='userInputSegment'>
           <UrlSubmit dispatch={this.props.dispatch} board={board} />
-          {nextButton}
+          <div className='nextButtonContainer'>
+            {nextButton}
+          </div>
         </div>
         {instructions}
         <BOM tsv={board.bom} />

@@ -69,9 +69,14 @@ code {
 }
 
 #submitForm {
-    margin-top:25px;
-    width:100%;
     flex-grow: 2;
+    margin-bottom: 0px;
+}
+
+.Step1 {
+   #submitForm {
+      width:100%;
+   }
 }
 
 button {
@@ -138,6 +143,7 @@ button {
    align-items: center;
    flex-grow: 1;
    margin-right: 16px !important;
+   margin-top: 35px;
    @include breakpoint(semantic_container) {
       align-items: flex-start;
       min-height: 90px;
@@ -145,11 +151,24 @@ button {
 }
 
 .userInputSegment {
-   margin-top:10px;
+   margin-top:40px;
    display: flex;
    flex-wrap: wrap;
    justify-content: space-around;
    align-items:center;
+}
+
+.Step2 {
+   .userInputSegment {
+
+   }
+   .nextButtonContainer {
+       flex-grow: 1;
+       flex-shrink: 3;
+       display: flex;
+       align-items: center;
+       justify-content: center;
+   }
 }
 
 .colorSelect:hover, #whiteButton.colorSelect:hover {
