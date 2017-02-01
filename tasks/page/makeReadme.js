@@ -19,12 +19,11 @@ if (require.main !== module) {
         return {deps, targets, moduleDep: false};
     };
 } else {
-    let readme;
     const {deps, targets} = utils.processArgs(process.argv);
     const readmeJsx = targets[0];
     let html = '';
     const info = require(__dirname + '/../../' + deps[0]);
-    try { readme = deps[1]; } catch (error) {}
+    const readme = deps[1]
     if (readme != null) {
         const pkg = {repository: {url: info.repo}};
         html = marky(fs.readFileSync(readme, 'utf8'), {package: pkg}).html();

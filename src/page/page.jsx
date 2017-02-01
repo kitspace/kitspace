@@ -8,28 +8,12 @@ const info          = require('../info.json')
 const Readme        = require('../readme')
 const Gerbers       = require('./gerbers')
 const FadeImage     = require('../fade_image')
+const InfoBar       = require('./info_bar')
 
 var Page = React.createClass({
   render: function () {
     const titleTxt = info.id.split('/').slice(2).join(' / ')
     const subtitleTxt = info.id.split('/').slice(0,2).join(' / ')
-    var site
-    if (info.site == '') {
-      site =
-        (<div className='disabledSite' title='no website info available'>
-          <span className="octicon octicon-link" />website
-        </div>)
-    }
-    else {
-      site =
-        (<a href={info.site}>
-          <span className="octicon octicon-link" /> website
-        </a>)
-    }
-    const repo =
-      <a href={info.repo}>
-        <span className="octicon octicon-repo" /> repo
-      </a>
     return (
       <DocumentTitle title={`${titleTxt} - kitnic.it`}>
       <div>
@@ -43,15 +27,7 @@ var Page = React.createClass({
             </div>
           </TitleBar>
           <div className="pageContainer">
-            <div className='infoBar'>
-              <div className='infoBarInner'>
-                <div className='infoBarSummary'>{info.summary}</div>
-                <div className='infoBarLinksContainer'>
-                  <div className='infoBarLinks'>{site}</div>
-                  <div className='infoBarLinks'>{repo}</div>
-                </div>
-              </div>
-            </div>
+            <InfoBar info={info} />
             <Gerbers />
             <BoardShowcase>
               <FadeImage src='images/top.svg' />

@@ -7,11 +7,20 @@ const Steps     = require('./steps')
 const UrlSubmit = require('./url_submit')
 
 const TitleBar = require('../title_bar')
+const InfoBar  = require('../page/info_bar')
 
 const Step3 = React.createClass({
   render() {
     const board = this.props.board
-    let nextButton, instructionText
+    let nextButton, infoBar
+    if (board.status === 'done') {
+      const info = {repo: board.url}
+      infoBar = (
+        <semantic.Segment>
+          <InfoBar info={info} />
+        </semantic.Segment>
+      )
+    }
     if (board.readme) {
       nextButton = <semantic.Button
         content       = 'Next'
@@ -20,11 +29,10 @@ const Step3 = React.createClass({
         color         = 'green'
         onClick       = {this.props.setStep(4)} />
     }
-    else if (board.status === 'done' || board.status === 'not sent'){
-      instructionText = 'Add a README.md to your repository explaining more about'
-      + ' the project. This should be written in [Markdown]'
+    const instructionText = 'Add a README.md to your repository explaining more'
+      + ' about the project. This should be written in [Markdown]'
       + '(http://commonmark.org/help/).'
-    }
+      + ' You can also add a description and site link to your kitnic.yaml'
     return (
     <div className='Step Step3'>
       <TitleBar>
@@ -34,13 +42,14 @@ const Step3 = React.createClass({
       </TitleBar>
       <semantic.Container>
         <Steps setStep={this.props.setStep} active={3}/>
+        <Markdown className='instructions' source={instructionText} />
         <div className='userInputSegment'>
           <UrlSubmit dispatch={this.props.dispatch} board={board} />
           <div className='nextButtonContainer'>
             {nextButton}
           </div>
         </div>
-        <Markdown className='instructions' source={instructionText} />
+        {infoBar}
         {board.readme}
       </semantic.Container>
     </div>

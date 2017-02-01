@@ -23,7 +23,7 @@ const initial_state = immutable.Map({
     stackup   : null,
     message   : '',
     bom       : '',
-    readme    : '',
+    readme    : null,
   }),
 })
 
@@ -68,7 +68,6 @@ function reducer(state = initial_state, action) {
       return state.set('board', board)
     }
     case 'setReadme': {
-      console.log(action.value)
       const board = state.get('board').set('readme', action.value)
       return state.set('board', board)
     }

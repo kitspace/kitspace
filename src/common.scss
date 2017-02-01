@@ -35,9 +35,11 @@ a {
     color: $mine-shaft;
     font-weight: bold;
     text-decoration: none;
+    cursor: pointer;
 }
 
 a:hover {
+    color: $mine-shaft;
     text-decoration: underline;
 }
 
