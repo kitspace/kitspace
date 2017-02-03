@@ -212,15 +212,30 @@ PNsPfrOeY6REXhUiEV1...
 ```
 ???
 
-- Anyway, these are the kind of requests we are trying 
+- Anyway, these are the kind of requests we are trying  to replicate
+- It's not a nice API by any means
+- And we need to scrape the site to get some of this information to send
 
 ---
 
 <img class=fullscreen src=images/unit_test.png />
 
+
+???
+- So the only way to make this work 
+- And ensure that it keeps working
+- Is to use a lot of integration tests to test this across all the different sites 
+
 ---
 
 <img class=fullscreen src=images/extension.png />
+
+???
+
+- But this is what the extension looks like
+- You normally use it in addition to a spreadsheet program and copy and paste from it
+- And you can quickly accesss all the retailer functionality from there
+
 
 ---
 
@@ -229,13 +244,21 @@ PNsPfrOeY6REXhUiEV1...
 - Available for Chrome and Firefox
 - Takes in tab separated values (the clipboard format of spreadsheet programs)
 - Can load a online BOM 
-- Able to add/remove to cart 
+- Able to add to and remove from cart 
 - Can have a guess at what part you mean
 - Open source (CPAL)
 - About 500 users
 
+???
+
 ---
 <img class=fullscreen src=images/meat3.jpg />
+
+???
+
+- So this kind of solves one aspect of our goal. 
+- We can replicate  purcheses across the globe 
+- But it doesn't include the PCB and there is no standard way to package a complete project to be replicated
 
 ---
 #Kitnic.it
@@ -259,6 +282,12 @@ PNsPfrOeY6REXhUiEV1...
     └── board.sts
 ```
 
+???
+
+- So this is where kitnic.it comes in. 
+- We combine the BOM with gerber files and put the in a Git repository
+- And kitnic.it makes a page out of this for people to access
+
 ---
 
 <br>
@@ -270,10 +299,18 @@ PNsPfrOeY6REXhUiEV1...
 <center><h1><a href=https://kitnic.it>kitnic.it</a><h1></center>
 <center><a href=http://localhost:8080>localhost:8080</a><h1></center>
 
+??? 
+
 ---
 # The Virtual Kit
 
 <img height=500px src=images/kit.jpg />
+
+??? 
+
+The idea really is that, creators can put together a virtual kit, that others can buy themselves, and we can share open hardware designs that way. With the least amount of friction.
+
+Are there any questions at this point?
 
 ---
 <img style="left:0;" height=150px src=images/travis_pipeline.png />
@@ -291,6 +328,10 @@ https://github.com/8BitMixtape/NextLevelEdition
 https://github.com/dvdfreitag/Signal-Detector
 
 ```
+
+???
+- This is the infrastructure behind kitnic
+- We use static site hosting 
 
 ---
 
