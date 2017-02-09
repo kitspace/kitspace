@@ -22,7 +22,7 @@ entering the repository URL below.
 If you run into any problems please get in touch via [Riot.im
 chat](https://riot.im/app/#/room/#kitnic:matrix.org), IRC (freenode#kitnic) or the
 [mailing-list](https://groups.google.com/forum/#!forum/kitnic-discuss).
-You can alsow use the [Tracespace Viewer](http://viewer.tracespace.io) to try
+You can also use the [Tracespace Viewer](http://viewer.tracespace.io) to try
 and figure out any issues with the board rendering.
 
 `
