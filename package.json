@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "license": "CPAL-1.0",
   "dependencies": {
+    "express": "^4.14.1",
+    "express-graphql": "^0.6.3",
+    "graphql": "^0.9.1",
+    "graphql-tools": "^0.10.0",
     "superagent": "^3.4.3"
   }
 }
