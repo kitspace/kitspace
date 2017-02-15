@@ -1,0 +1,8 @@
+{
+  "name": "kitnic-part-info",
+  "version": "1.0.0",
+  "license": "CPAL-1.0",
+  "dependencies": {
+    "octopart": "^0.1.1"
+  }
+}
