@@ -1,8 +1,11 @@
-const octopart = require('octopart')
-octopart.apikey = require('./secrets').OCTOPART_API_KEY
+const superagent = require('superagent')
+const apikey = require('./secrets').OCTOPART_API_KEY
 
-const queries = [{reference: 1, mpn:'NE555P'}]
+const queries = [{mpn:'NE555P'}]
 
-octopart.parts.match(queries).success((body) => {
-  body.results.forEach(r => console.log(r))
-})
+superagent.get('https://octopart.com/api/v3/parts/match')
+  .query({queries: JSON.stringify(queries), apikey})
+  .set('Accept', 'application/json')
+  .then(res => {
+    console.log(res.body.results)
+  })
