@@ -1,19 +1,36 @@
 const graphqlTools = require('graphql-tools')
 
 const schema = `
-  type Test {
-    test: String
+  input MpnInput {
+     manufacturer: String!
+     mpn: String
+  }
+
+  type Mpn {
+     manufacturer: String!
+     mpn: String
+  }
+
+  input SkuInput {
+    vendor: String!
+    sku: String
+  }
+
+  type Sku {
+    vendor: String!
+    sku: String
   }
 
   type Query {
-    test: Test
+    part(sku: SkuInput!, mpn: MpnInput!): Part
   }
 
   type Part {
-     manufacturer: String
-     mpn: String
+     mpn: Mpn
+     skus: [Sku]
      image: Image
      datasheet: String
+     description: String
   }
 
   type Image {
@@ -25,7 +42,7 @@ const schema = `
 
 const resolverMap = {
   Query: {
-    test(_, {mpn, sku}) {
+    part(_, {mpn, sku}) {
       return {test:''}
     }
   }
