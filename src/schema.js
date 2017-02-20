@@ -1,49 +1,49 @@
 const graphqlTools = require('graphql-tools')
 
+const Mpn = `{
+     manufacturer: String
+     mpn: String!
+}`
+
+const Sku = `{
+    vendor: String!
+    sku: String!
+}`
+
 const schema = `
-  input MpnInput {
-     manufacturer: String!
-     mpn: String
-  }
+  type Mpn ${Mpn}
+  input MpnInput ${Mpn}
 
-  type Mpn {
-     manufacturer: String!
-     mpn: String
-  }
-
-  input SkuInput {
-    vendor: String!
-    sku: String
-  }
-
-  type Sku {
-    vendor: String!
-    sku: String
-  }
+  type Sku ${Sku}
+  input SkuInput ${Sku}
 
   type Query {
-    part(sku: SkuInput!, mpn: MpnInput!): Part
+    fromMpn(mpn: MpnInput): Info!
+    fromSku(sku: SkuInput): Info!
   }
 
-  type Part {
-     mpn: Mpn
-     skus: [Sku]
-     image: Image
-     datasheet: String
-     description: String
+  type Info {
+     mpn: Mpn!
+     image: Image!
+     datasheet: String!
+     description: String!
+     skus: [Sku]!
   }
 
   type Image {
-    url: String
-    credit_string: String
-    credit_url: String
+    url: String!
+    credit_string: String!
+    credit_url: String!
   }
 `
 
 const resolverMap = {
   Query: {
-    part(_, {mpn, sku}) {
-      return {test:''}
+    fromMpn(_, {mpn}) {
+      return
+    },
+    fromSku(_, {sku}) {
+      return
     }
   }
 }
