@@ -1,17 +1,35 @@
 const redux  = require('redux')
 const assert = require('assert')
+const immutable = require('immutable')
 
-const {store, actions} = require('../src/actions')
-
+const {mainReducer} = require('../src/reducers')
+const {makeActions} = require('../src/actions')
 
 describe('actions', () => {
-  it('dispatches', () => {
-    const state1 = store.getState()
+  it('adds queries', () => {
+    const store   = redux.createStore(mainReducer)
+    const actions = makeActions(store)
+    const state1  = store.getState()
     assert(state1.get('queries').size === 0)
-    actions.addQuery({mpn: 'NE555P'})
+    const query = immutable.Map({mpn: 'NE555P'})
+    actions.addQuery(query)
     const state2 = store.getState()
     assert(!state1.equals(state2))
     assert(state1.get('queries').size === 0)
     assert(state2.get('queries').size === 1)
+  })
+  it('removes queries', () => {
+    const store   = redux.createStore(mainReducer)
+    const actions = makeActions(store)
+    const state1  = store.getState()
+    assert(state1.get('queries').size === 0)
+    const query = immutable.Map({mpn: 'NE555P'})
+    actions.addQuery(query)
+    const state2 = store.getState()
+    assert(!state1.equals(state2))
+    assert(state2.get('queries').size === 1)
+    actions.removeQueries(immutable.List.of(query))
+    const state3 = store.getState()
+    assert(state3.get('queries').size === 0)
   })
 })
