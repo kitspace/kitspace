@@ -1,4 +1,5 @@
 const superagent = require('superagent')
+const immutable = require('immutable')
 const apikey = require('./secrets').OCTOPART_API_KEY
 
 
@@ -30,31 +31,40 @@ function image(items) {
   }, null)
 }
 
+const OCTOPART_QUERY_KEYS = immutable.List.of('reference', 'mpn', 'manufacturer')
+
 function octopart(queries) {
-  const indexed = queries.map((q, index) => Object.assign(q, {reference: index}))
+  queries = queries.map(q => {
+    return q.filter((_, k) => {
+      return OCTOPART_QUERY_KEYS.contains(k)
+    })
+  })
   return superagent.get('https://octopart.com/api/v3/parts/match')
     .query('include[]=short_description&include[]=imagesets&include[]=datasheets')
     .query({
       apikey,
-      queries: JSON.stringify(indexed),
+      queries: JSON.stringify(queries.toJS()),
     })
     .set('Accept', 'application/json')
     .then(res => {
       const results = res.body.results
-      return indexed.map(q => {
-        const result = results.find(r => r.reference === q.reference)
+      return queries.map(q => {
+        const result = results.find(r => r.reference === q.get('reference'))
         if (result == null) {
           return q
         }
         const items = result.items
-        return Object.assign(q, {
+        return q.merge({
           description: description(items),
-          image: image(items),
+          image: immutable.Map(image(items)),
           datasheet: datasheet(items),
         })
       })
     })
 }
 
-const queries = [{mpn:'ATMEGA32U4AUR'}, {mpn: 'NE555P'}]
+const queries = immutable.List.of(
+  immutable.Map({reference: 1, mpn:'ATMEGA32U4AUR'}),
+  immutable.Map({reference: 2, mpn: 'NE555P'})
+)
 octopart(queries).then(r => console.log(r))
