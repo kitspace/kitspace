@@ -1,4 +1,6 @@
+const immutable = require('immutable')
 const graphqlTools = require('graphql-tools')
+const {store, actions} = require('./actions')
 
 const Mpn = `{
      manufacturer : String
@@ -40,7 +42,20 @@ const schema = `
 const resolverMap = {
   Query: {
     fromMpn(_, {mpn}) {
-      return
+      const reference = immutable.Map(mpn)
+      const unsubscribe = store.subscribeChanges(['responses', reference], r => {
+        if (r) {
+          unsubscribe()
+          return r.toJS()
+        }
+      })
+      const query = immutable.Map({
+        mpn: mpn.mpn,
+        manufacturer: mpn.manufacturer,
+        time: Date.now(),
+        reference,
+      })
+      actions.addQuery(query)
     },
     fromSku(_, {sku}) {
       return

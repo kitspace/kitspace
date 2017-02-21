@@ -3,7 +3,7 @@ const immutable = require('immutable')
 
 const initial_state = immutable.Map({
   queries: immutable.List(),
-  responses: immutable.List(),
+  responses: immutable.Map(),
 })
 
 
@@ -31,7 +31,10 @@ const reducers = {
 
 
 function mainReducer(state = initial_state, action) {
-  return reducers[action.type](state, action.value)
+  if (Object.keys(reducers).includes(action.type)) {
+    return reducers[action.type](state, action.value)
+  }
+  return state
 }
 
 module.exports = {mainReducer, reducers}

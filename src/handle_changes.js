@@ -7,22 +7,7 @@ const QUERY_MAX_WAIT_MS = 3000 //milliseconds
 //24hrs
 const CACHE_TIMEOUT_MS = 24 * 60 * 60 * 1000 //milliseconds
 
-let prev_state = store.getState()
-store.subscribe(handleChanges)
-
-function changed(state, key) {
-  return !state.get(key).equals(prev_state.get(key))
-}
-
-function handleChanges() {
-    const state = store.getState()
-    if (! state.equals(prev_state)) {
-      if (changed(state, 'queries')) {
-        handleQueries(state.get('queries'))
-      }
-      prev_state = state
-    }
-}
+store.subscribeChanges('queries', handleQueries)
 
 function handleQueries(queries) {
   const now = Date.now()

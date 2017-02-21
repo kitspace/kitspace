@@ -16,4 +16,20 @@ function makeActions(store) {
 const store = redux.createStore(mainReducer)
 const actions = makeActions(store)
 
+let prev_state = store.getState()
+
+function changed(state, key) {
+  return !state.getIn(key).equals(prev_state.getIn(key))
+}
+
+store.subscribeChanges = function subscribeChanges(key, callback) {
+  return state.subscribe(() => {
+    const state = store.getState()
+    if (changed(state, key)) {
+      callback(state.getIn(key))
+    }
+    prev_state = state
+  })
+}
+
 module.exports = {makeActions, actions, store}
