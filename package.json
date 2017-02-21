@@ -2,6 +2,10 @@
   "name": "kitnic-part-info",
   "version": "1.0.0",
   "license": "CPAL-1.0",
+  "scripts": {
+    "start": "node src/server.js",
+    "test" : "mocha"
+  },
   "dependencies": {
     "express": "^4.14.1",
     "express-graphql": "^0.6.3",
@@ -12,7 +16,6 @@
     "superagent": "^3.4.3"
   },
   "devDependencies": {
-    "chai": "^3.5.0",
     "graphql-tester": "^0.0.5",
     "mocha": "^3.2.0"
   }

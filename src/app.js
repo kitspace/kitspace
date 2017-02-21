@@ -5,7 +5,7 @@ const {store} = require('./actions')
 const schema = require('./schema')
 const {handleQueries} = require('./handle_changes')
 
-store.subscribeChanges('queries', handleQueries)
+store.subscribeChanges(['queries'], handleQueries)
 
 const app = express()
 

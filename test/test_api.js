@@ -1,5 +1,4 @@
-const graphqlTester  = require('graphql-tester')
-const {expect}       = require('chai')
+const graphqlTester = require('graphql-tester')
 const createExpressWrapper = require('graphql-tester/lib/main/servers/express.js').create
 
 const app = require('../src/app')
@@ -10,11 +9,11 @@ describe('API', () => {
     url: '/graphql'
   })
   it('responds', done => {
-    test('{fromMpn(mpn: "NE555P")}').then(response => {
-      expect(response.success).to.be.ok
-      expect(response.status).to.equal(200)
-      expect(response.data.fromMpn).to.be.ok
+    test('{ fromMpn(mpn: "NE555P") }').then(response => {
+      assert(response.success)
+      assert(response.status === 200)
+      assert(response.data.fromMpn != null)
       return done()
     })
   })
-}
+})

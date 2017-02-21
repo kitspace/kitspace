@@ -55,7 +55,6 @@ const resolverMap = {
         time: Date.now(),
         reference,
       })
-      console.log(query)
       actions.addQuery(query)
     },
     fromSku(_, {sku}) {

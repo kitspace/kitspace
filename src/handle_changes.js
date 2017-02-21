@@ -9,6 +9,7 @@ const CACHE_TIMEOUT_MS = 24 * 60 * 60 * 1000 //milliseconds
 
 
 function handleQueries(queries) {
+  console.log('queries', queries)
   const now = Date.now()
   const timed_out = queries.reduce((timed_out, query) => {
     return timed_out || ((now - query.time) > QUERY_MAX_WAIT_MS)

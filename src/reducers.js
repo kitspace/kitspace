@@ -40,9 +40,9 @@ const reducers = {
 
 
 function mainReducer(state = initial_state, action) {
-  console.log(action)
   if (Object.keys(reducers).includes(action.type)) {
-    return reducers[action.type](state, action.value)
+    const state2 = reducers[action.type](state, action.value)
+    return state2
   }
   return state
 }

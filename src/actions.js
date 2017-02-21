@@ -17,9 +17,14 @@ const store = redux.createStore(mainReducer)
 const actions = makeActions(store)
 
 let prev_state = store.getState()
-
 function changed(state, key) {
-  return !state.getIn(key).equals(prev_state.getIn(key))
+  const value = state.getIn(key)
+  if (value == null) {
+    return false
+  }
+  const ret = !value.equals(prev_state.getIn(key))
+  prev_state = state
+  return ret
 }
 
 store.subscribeChanges = function subscribeChanges(key, callback) {
@@ -28,7 +33,6 @@ store.subscribeChanges = function subscribeChanges(key, callback) {
     if (changed(state, key)) {
       callback(state.getIn(key))
     }
-    prev_state = state
   })
 }
 
