@@ -3,7 +3,7 @@ const immutable = require('immutable')
 
 const initial_state = immutable.Map({
   queries: immutable.List(),
-  responses: immutable.Map(),
+  responses: immutable.List(),
 })
 
 
