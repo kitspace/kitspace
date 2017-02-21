@@ -19,15 +19,17 @@ const actions = makeActions(store)
 let prev_state = store.getState()
 function changed(state, key) {
   const value = state.getIn(key)
+  console.log(key, value)
   if (value == null) {
     return false
   }
   const ret = !value.equals(prev_state.getIn(key))
-  prev_state = state
+  prev_state = prev_state.setIn(key, value)
   return ret
 }
 
 store.subscribeChanges = function subscribeChanges(key, callback) {
+  console.log('subscribe', key)
   return store.subscribe(() => {
     const state = store.getState()
     if (changed(state, key)) {

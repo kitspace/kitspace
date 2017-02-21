@@ -42,25 +42,31 @@ const schema = `
 const resolverMap = {
   Query: {
     fromMpn(_, {mpn}) {
-      const reference = immutable.Map(mpn)
-      //const unsubscribe = store.subscribeChanges(['responses', reference], r => {
-      //  if (r) {
-      //    unsubscribe()
-      //    return r.toJS()
-      //  }
-      //})
-      const query = immutable.Map({
-        mpn: mpn.mpn,
-        manufacturer: mpn.manufacturer,
-        time: Date.now(),
-        reference,
+      return new Promise((resolve, reject) => {
+        const reference = hash(mpn)
+        const unsubscribe = store.subscribeChanges(['responses', reference], r => {
+          if (r) {
+            unsubscribe()
+            resolve(r.toJS())
+          }
+        })
+        const query = immutable.Map({
+          mpn: mpn.mpn,
+          manufacturer: mpn.manufacturer,
+          time: Date.now(),
+          reference,
+        })
+        actions.addQuery(query)
       })
-      actions.addQuery(query)
     },
     fromSku(_, {sku}) {
       return
     },
   }
+}
+
+function hash(obj) {
+  return String(immutable.Map(obj).hashCode())
 }
 
 module.exports = graphqlTools.makeExecutableSchema({

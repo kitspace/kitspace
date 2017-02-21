@@ -6,6 +6,14 @@ const schema = require('./schema')
 const {handleQueries} = require('./handle_changes')
 
 store.subscribeChanges(['queries'], handleQueries)
+function loop() {
+  setTimeout(() => {
+    const state = store.getState()
+    handleQueries(state.get('queries'))
+    loop()
+  }, 1000)
+}
+loop()
 
 const app = express()
 
