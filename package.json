@@ -4,7 +4,8 @@
   "license": "CPAL-1.0",
   "scripts": {
     "start": "node src/server.js",
-    "test" : "mocha"
+    "test" : "mocha",
+    "test:i" : "mocha --timeout 15000 integration/"
   },
   "dependencies": {
     "express": "^4.14.1",
