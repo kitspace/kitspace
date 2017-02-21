@@ -1,12 +1,9 @@
 const redux     = require('redux')
 const immutable = require('immutable')
 
-//24hrs
-const TIMEOUT_MS = 24 * 60 * 60 * 1000 //milliseconds
-
 const initial_state = immutable.Map({
-  queries: immutable.Map(),
-  responses: immutable.Map(),
+  queries: immutable.List(),
+  responses: immutable.List(),
 })
 
 
@@ -21,9 +18,8 @@ const reducers = {
     })
     return state.set('queries', queries)
   },
-  addResponse(state, response) {
-    const responses = state.get('responses')
-    return state.set('responses', responses.push(response))
+  addResponses(state, responses) {
+    return state.set('responses', state.get('responses').concat(responses))
   },
   removeResponses(state, responsesToRemove) {
     const responses = state.get('responses').filter(q => {
@@ -37,3 +33,5 @@ const reducers = {
 function mainReducer(state = initial_state, action) {
   return reducers[action.type](state, action.value)
 }
+
+module.exports = {mainReducer, reducers}

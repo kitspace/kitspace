@@ -21,9 +21,9 @@ function image(items) {
       }
       if (set.medium_image && set.medium_image.url) {
         return {
-          url: set.medium_image.url,
-          credit_string: set.credit_string,
-          credit_url: set.credit_url
+          url           : set.medium_image.url,
+          credit_string : set.credit_string,
+          credit_url    : set.credit_url
         }
       }
       return null
@@ -63,8 +63,10 @@ function octopart(queries) {
     })
 }
 
+module.exports = octopart
+
 const queries = immutable.List.of(
-  immutable.Map({reference: 1, mpn:'ATMEGA32U4AUR'}),
+  immutable.Map({reference: 1, mpn: 'ATMEGA32U4AUR'}),
   immutable.Map({reference: 2, mpn: 'NE555P'})
 )
 octopart(queries).then(r => console.log(r))

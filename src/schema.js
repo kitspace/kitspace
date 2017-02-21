@@ -1,13 +1,13 @@
 const graphqlTools = require('graphql-tools')
 
 const Mpn = `{
-     manufacturer: String
-     mpn: String!
+     manufacturer : String
+     mpn          : String!
 }`
 
 const Sku = `{
-    vendor: String!
-    sku: String!
+    vendor : String!
+    sku    : String!
 }`
 
 const schema = `
@@ -23,17 +23,17 @@ const schema = `
   }
 
   type Part {
-     mpn: Mpn!
-     image: Image!
-     datasheet: String!
-     description: String!
-     skus: [Sku]!
+     mpn         : Mpn!
+     image       : Image!
+     datasheet   : String!
+     description : String!
+     skus        : [Sku]!
   }
 
   type Image {
-    url: String!
-    credit_string: String!
-    credit_url: String!
+    url           : String!
+    credit_string : String!
+    credit_url    : String!
   }
 `
 
@@ -44,7 +44,7 @@ const resolverMap = {
     },
     fromSku(_, {sku}) {
       return
-    }
+    },
   }
 }
 
