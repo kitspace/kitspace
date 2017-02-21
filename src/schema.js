@@ -18,11 +18,11 @@ const schema = `
   input SkuInput ${Sku}
 
   type Query {
-    fromMpn(mpn: MpnInput): Info!
-    fromSku(sku: SkuInput): Info!
+    fromMpn(mpn: MpnInput!): Part
+    fromSku(sku: SkuInput!): Part
   }
 
-  type Info {
+  type Part {
      mpn: Mpn!
      image: Image!
      datasheet: String!
