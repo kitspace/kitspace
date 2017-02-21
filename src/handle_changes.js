@@ -7,7 +7,6 @@ const QUERY_MAX_WAIT_MS = 3000 //milliseconds
 //24hrs
 const CACHE_TIMEOUT_MS = 24 * 60 * 60 * 1000 //milliseconds
 
-store.subscribeChanges('queries', handleQueries)
 
 function handleQueries(queries) {
   const now = Date.now()
@@ -22,3 +21,5 @@ function handleQueries(queries) {
     })
   }
 }
+
+module.exports = {handleQueries}

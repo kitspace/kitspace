@@ -43,18 +43,19 @@ const resolverMap = {
   Query: {
     fromMpn(_, {mpn}) {
       const reference = immutable.Map(mpn)
-      const unsubscribe = store.subscribeChanges(['responses', reference], r => {
-        if (r) {
-          unsubscribe()
-          return r.toJS()
-        }
-      })
+      //const unsubscribe = store.subscribeChanges(['responses', reference], r => {
+      //  if (r) {
+      //    unsubscribe()
+      //    return r.toJS()
+      //  }
+      //})
       const query = immutable.Map({
         mpn: mpn.mpn,
         manufacturer: mpn.manufacturer,
         time: Date.now(),
         reference,
       })
+      console.log(query)
       actions.addQuery(query)
     },
     fromSku(_, {sku}) {

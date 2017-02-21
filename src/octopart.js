@@ -64,9 +64,3 @@ function octopart(queries) {
 }
 
 module.exports = octopart
-
-const queries = immutable.List.of(
-  immutable.Map({reference: 1, mpn: 'ATMEGA32U4AUR'}),
-  immutable.Map({reference: 2, mpn: 'NE555P'})
-)
-octopart(queries).then(r => console.log(r))

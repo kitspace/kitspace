@@ -23,7 +23,7 @@ function changed(state, key) {
 }
 
 store.subscribeChanges = function subscribeChanges(key, callback) {
-  return state.subscribe(() => {
+  return store.subscribe(() => {
     const state = store.getState()
     if (changed(state, key)) {
       callback(state.getIn(key))
