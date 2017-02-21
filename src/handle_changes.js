@@ -17,7 +17,6 @@ function handleQueries(queries) {
     const batch = queries.take(QUERY_BATCH_SIZE)
     actions.removeQueries(batch)
     octopart(batch).then(results => {
-      console.log('results')
       actions.addResponses(results)
     })
   }

@@ -44,6 +44,11 @@ const resolverMap = {
     fromMpn(_, {mpn}) {
       return new Promise((resolve, reject) => {
         const reference = hash(mpn)
+        const state = store.getState()
+        const response = state.get('responses').get(reference)
+        if (response) {
+          return resolve(response.toJS())
+        }
         const unsubscribe = store.subscribeChanges(['responses', reference], r => {
           if (r) {
             unsubscribe()
