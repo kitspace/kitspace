@@ -3,9 +3,13 @@ const immutable = require('immutable')
 
 const initial_state = immutable.Map({
   queries: immutable.List(),
-  responses: immutable.List(),
+  responses: immutable.Map(),
 })
 
+
+function removeReference(immutableMap) {
+    return immutableMap.filter((_,k) => k !== 'reference')
+}
 
 const reducers = {
   addQuery(state, query) {
@@ -19,11 +23,16 @@ const reducers = {
     return state.set('queries', queries)
   },
   addResponses(state, responses) {
-    return state.set('responses', state.get('responses').concat(responses))
+    responses = responses.reduce((acc, response) => {
+      const reference = response.get('reference')
+      acc[reference] = removeReference(response)
+      return acc
+    }, {})
+    return state.set('responses', state.get('responses').merge(responses))
   },
-  removeResponses(state, responsesToRemove) {
-    const responses = state.get('responses').filter(q => {
-      return !responsesToRemove.contains(q)
+  removeResponses(state, references) {
+    const responses = state.get('responses').filter((_, k) => {
+      references.contains(k)
     })
     return state.set('responses', responses)
   },
