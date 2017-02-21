@@ -1,15 +1,12 @@
 const redux     = require('redux')
 const immutable = require('immutable')
+const util      = require('./util')
 
 const initial_state = immutable.Map({
   queries: immutable.List(),
   responses: immutable.Map(),
 })
 
-
-function removeReference(immutableMap) {
-    return immutableMap.filter((_,k) => k !== 'reference')
-}
 
 const reducers = {
   addQuery(state, query) {
@@ -23,11 +20,6 @@ const reducers = {
     return state.set('queries', queries)
   },
   addResponses(state, responses) {
-    responses = responses.reduce((acc, response) => {
-      const reference = response.get('reference')
-      acc[reference] = removeReference(response)
-      return acc
-    }, {})
     return state.set('responses', state.get('responses').merge(responses))
   },
   removeResponses(state, references) {

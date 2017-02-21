@@ -25,16 +25,16 @@ const schema = `
 
   type Part {
      ${Mpn}
-     image       : Image!
-     datasheet   : String!
-     description : String!
+     image       : Image
+     datasheet   : String
+     description : String
      skus        : [Sku]!
   }
 
   type Image {
-    url           : String!
-    credit_string : String!
-    credit_url    : String!
+    url           : String
+    credit_string : String
+    credit_url    : String
   }
 `
 

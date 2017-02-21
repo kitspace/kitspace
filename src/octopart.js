@@ -1,6 +1,7 @@
 const superagent = require('superagent')
 const immutable = require('immutable')
 const apikey = require('./secrets').OCTOPART_API_KEY
+const util   = require('./util')
 
 
 function description(items) {
@@ -54,19 +55,23 @@ function octopart(queries) {
     .set('Accept', 'application/json')
     .then(res => {
       const results = res.body.results
-      return queries.map(q => {
-        const result = results.find(r => r.reference === q.get('reference'))
+      return queries.reduce((returns, q) => {
+        const reference = q.get('reference')
+        const result = results.find(r => r.reference === reference)
         if (result == null) {
-          return q
+          return returns.set(reference, immutable.Map())
         }
         const items = result.items
-        return q.merge({
-          manufacturer: q.get('manufacturer') || manufacturer(items),
-          description: description(items),
-          image: immutable.Map(image(items)),
-          datasheet: datasheet(items),
-        })
-      })
+        if (items.length === 0) {
+          return returns.set(reference, immutable.Map())
+        }
+        return returns.set(reference, util.removeReference(q).merge({
+          manufacturer : q.get('manufacturer') || manufacturer(items),
+          description  : description(items),
+          image        : immutable.Map(image(items)),
+          datasheet    : datasheet(items),
+        }))
+      }, immutable.Map())
     })
 }
 
