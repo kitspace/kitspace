@@ -61,7 +61,7 @@ function octopart(queries) {
         }
         const items = result.items
         return q.merge({
-          manufacturer: q.manufacturer || manufacturer(items),
+          manufacturer: q.get('manufacturer') || manufacturer(items),
           description: description(items),
           image: immutable.Map(image(items)),
           datasheet: datasheet(items),

@@ -34,4 +34,13 @@ describe('API', () => {
       return done()
     })
   })
+  it('doesn\'t overwrite manufacturer', done => {
+    test('{fromMpn(mpn: {manufacturer: "mock", mpn: "NE555P"}) {manufacturer} }').then(response => {
+      assert(response.success, 'response failed')
+      assert(response.status === 200, 'status is not 200')
+      assert(response.data.fromMpn != null, 'fromMpn data not returned')
+      assert(response.data.fromMpn.manufacturer === 'mock', 'manufacturer changed')
+      return done()
+    })
+  })
 })
