@@ -11,25 +11,26 @@ describe('API', () => {
   })
   it('responds', done => {
     test('{fromMpn(mpn: {mpn: "NE555P"}) {description} }').then(response => {
-      assert(response.success)
-      assert(response.status === 200)
-      assert(response.data.fromMpn != null)
+      assert(response.success, 'response failed')
+      assert(response.status === 200, 'status is not 200')
+      assert(response.data.fromMpn != null, 'fromMpn data not returned')
       return done()
     })
   })
   it('responds twice', done => {
     test('{fromMpn(mpn: {mpn: "NE555P"}) {description} }').then(response => {
-      assert(response.success)
-      assert(response.status === 200)
-      assert(response.data.fromMpn != null)
+      assert(response.success, 'response failed')
+      assert(response.status === 200, 'status is not 200')
+      assert(response.data.fromMpn != null, 'fromMpn data not returned')
       return done()
     })
   })
   it('fills in manufacturer', done => {
     test('{fromMpn(mpn: {mpn: "NE555P"}) {manufacturer} }').then(response => {
-      assert(response.success)
-      assert(response.status === 200)
-      assert(response.data.fromMpn != null)
+      assert(response.success, 'response failed')
+      assert(response.status === 200, 'status is not 200')
+      assert(response.data.fromMpn != null, 'fromMpn data not returned')
+      assert(response.data.fromMpn.manufacturer != null, 'manufacturer is null')
       return done()
     })
   })

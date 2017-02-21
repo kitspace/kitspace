@@ -31,6 +31,12 @@ function image(items) {
   }, null)
 }
 
+function manufacturer(items) {
+  return items.reduce((prev, x) => {
+    return prev || x.brand.name
+  }, null)
+}
+
 const OCTOPART_QUERY_KEYS = immutable.List.of('reference', 'mpn', 'manufacturer')
 
 function octopart(queries) {
@@ -55,6 +61,7 @@ function octopart(queries) {
         }
         const items = result.items
         return q.merge({
+          manufacturer: q.manufacturer || manufacturer(items),
           description: description(items),
           image: immutable.Map(image(items)),
           datasheet: datasheet(items),
