@@ -2,10 +2,10 @@ const immutable = require('immutable')
 const graphqlTools = require('graphql-tools')
 const {store, actions} = require('./actions')
 
-const Mpn = `{
+const Mpn = `
      manufacturer : String
      mpn          : String!
-}`
+`
 
 const Sku = `{
     vendor : String!
@@ -13,8 +13,7 @@ const Sku = `{
 }`
 
 const schema = `
-  type Mpn ${Mpn}
-  input MpnInput ${Mpn}
+  input MpnInput {${Mpn}}
 
   type Sku ${Sku}
   input SkuInput ${Sku}
@@ -25,7 +24,7 @@ const schema = `
   }
 
   type Part {
-     mpn         : Mpn!
+     ${Mpn}
      image       : Image!
      datasheet   : String!
      description : String!

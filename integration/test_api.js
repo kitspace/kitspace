@@ -25,4 +25,12 @@ describe('API', () => {
       return done()
     })
   })
+  it('fills in manufacturer', done => {
+    test('{fromMpn(mpn: {mpn: "NE555P"}) {manufacturer} }').then(response => {
+      assert(response.success)
+      assert(response.status === 200)
+      assert(response.data.fromMpn != null)
+      return done()
+    })
+  })
 })
