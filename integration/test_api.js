@@ -5,7 +5,7 @@ const assert = require('assert')
 
 const app = require('../src/app')
 
-describe('API', () => {
+describe('fromMpn', () => {
   const test = graphqlTester.tester({
     server: createExpressWrapper(app),
     url: '/graphql'
@@ -50,6 +50,21 @@ describe('API', () => {
       assert(response.data.fromMpn != null, 'fromMpn data not returned')
       assert(response.data.fromMpn[0].offers != null, 'offers is null')
       assert(response.data.fromMpn[0].offers.length > 0, 'offers is empty')
+      return done()
+    })
+  })
+})
+
+describe('fromSku', () => {
+  const test = graphqlTester.tester({
+    server: createExpressWrapper(app),
+    url: '/graphql'
+  })
+  it('responds', done => {
+    test('{fromSku(sku: {vendor: "" sku: "NE555P"}) {mpn} }').then(response => {
+      assert(response.success, 'response failed')
+      assert(response.status === 200, 'status is not 200')
+      assert(response.data.fromMpn != null, 'fromSku data not returned')
       return done()
     })
   })

@@ -44,32 +44,34 @@ const schema = `
 const resolverMap = {
   Query: {
     fromMpn(_, {mpn}) {
-      return new Promise((resolve, reject) => {
-        const query_id = hash(mpn)
-        const state = store.getState()
-        const response = state.get('responses').get(query_id)
-        if (response) {
-          return resolve(response.toJS())
-        }
-        const unsubscribe = store.subscribeChanges(['responses', query_id], r => {
-          if (r) {
-            unsubscribe()
-            resolve(r.toJS())
-          }
-        })
-        const query = immutable.Map({
-          mpn: mpn.mpn,
-          manufacturer: mpn.manufacturer,
-          time: Date.now(),
-          query_id,
-        })
-        actions.addQuery(query)
-      })
+      return query(mpn)
     },
     fromSku(_, {sku}) {
-      return
+      return query(sku)
     },
   }
+}
+
+function query (mpn_or_sku) {
+  const query_id = hash(mpn_or_sku)
+  return new Promise((resolve, reject) => {
+    const state = store.getState()
+    const response = state.get('responses').get(query_id)
+    if (response) {
+      return resolve(response.toJS())
+    }
+    const unsubscribe = store.subscribeChanges(['responses', query_id], r => {
+      if (r) {
+        unsubscribe()
+        resolve(r.toJS())
+      }
+    })
+    const q = immutable.Map(mpn_or_sku).merge({
+      time: Date.now(),
+      query_id,
+    })
+    actions.addQuery(q)
+  })
 }
 
 function hash(obj) {
