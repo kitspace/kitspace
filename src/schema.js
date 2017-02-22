@@ -43,10 +43,10 @@ const schema = `
 const resolverMap = {
   Query: {
     parts(_, {mpn, sku}) {
-      if ((mpn || sku) == null) {
+      if (! (mpn || sku)) {
         return Error('Mpn or Sku required')
       }
-      return query(mpn || sku)
+      return query(Object.assign(mpn || {},  sku))
     },
   }
 }
