@@ -1,7 +1,6 @@
 const superagent = require('superagent')
 const immutable = require('immutable')
 const apikey = require('./secrets').OCTOPART_API_KEY
-const util   = require('./util')
 
 function image(item) {
   return item.imagesets.reduce((prev, set) => {
@@ -59,7 +58,7 @@ function octopart(queries) {
           return returns.set(query_id, immutable.List())
         }
         return returns.set(query_id, items.map(item => {
-          return util.removeQueryId(q).merge({
+          return q.remove('query_id').merge({
             manufacturer : item.brand.name,
             description  : item.short_description,
             image        : image(item),

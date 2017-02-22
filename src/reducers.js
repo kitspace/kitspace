@@ -1,6 +1,5 @@
 const redux     = require('redux')
 const immutable = require('immutable')
-const util      = require('./util')
 
 const initial_state = immutable.Map({
   queries: immutable.List(),
@@ -13,9 +12,9 @@ const reducers = {
     const queries = state.get('queries')
     return state.set('queries', queries.push(query))
   },
-  removeQueries(state, queriesToRemove) {
+  removeQueries(state, queries_to_remove) {
     const queries = state.get('queries').filter(q => {
-      return !queriesToRemove.contains(q)
+      return !queries_to_remove.contains(q)
     })
     return state.set('queries', queries)
   },
