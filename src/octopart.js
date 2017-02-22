@@ -3,39 +3,24 @@ const immutable = require('immutable')
 const apikey = require('./secrets').OCTOPART_API_KEY
 const util   = require('./util')
 
-
-function description(items) {
-  return items.reduce((prev, x) => prev || x.short_description, null)
-}
-
-function datasheet(items) {
-  return items.reduce((prev, x) => {
-    return x.datasheets.reduce((prev, d) => prev || d.url, prev)
+function image(item) {
+  return item.imagesets.reduce((prev, set) => {
+    if (prev != null) {
+      return prev
+    }
+    if (set.medium_image && set.medium_image.url) {
+      return immutable.Map({
+        url           : set.medium_image.url,
+        credit_string : set.credit_string,
+        credit_url    : set.credit_url
+      })
+    }
+    return null
   }, null)
 }
 
-function image(items) {
-  return items.reduce((prev, x) => {
-    return prev || x.imagesets.reduce((prev, set) => {
-      if (prev != null) {
-        return prev
-      }
-      if (set.medium_image && set.medium_image.url) {
-        return {
-          url           : set.medium_image.url,
-          credit_string : set.credit_string,
-          credit_url    : set.credit_url
-        }
-      }
-      return null
-    }, null)
-  }, null)
-}
-
-function manufacturer(items) {
-  return items.reduce((prev, x) => {
-    return prev || x.brand.name
-  }, null)
+function datasheet(item) {
+  return item.datasheets.reduce((prev, d) => prev || d.url, null)
 }
 
 const OCTOPART_QUERY_KEYS = immutable.List.of('reference', 'mpn', 'manufacturer')
@@ -59,17 +44,19 @@ function octopart(queries) {
         const reference = q.get('reference')
         const result = results.find(r => r.reference === reference)
         if (result == null) {
-          return returns.set(reference, immutable.Map())
+          return returns.set(reference, immutable.List())
         }
-        const items = result.items
-        if (items.length === 0) {
-          return returns.set(reference, immutable.Map())
+        const items = immutable.List(result.items)
+        if (items.size === 0) {
+          return returns.set(reference, immutable.List())
         }
-        return returns.set(reference, util.removeReference(q).merge({
-          manufacturer : q.get('manufacturer') || manufacturer(items),
-          description  : description(items),
-          image        : immutable.Map(image(items)),
-          datasheet    : datasheet(items),
+        return returns.set(reference, items.map(item => {
+          return util.removeReference(q).merge({
+            manufacturer : item.brand.name,
+            description  : item.short_description,
+            image        : image(item),
+            datasheet    : datasheet(item)
+          })
         }))
       }, immutable.Map())
     })

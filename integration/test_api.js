@@ -1,5 +1,6 @@
 const graphqlTester = require('graphql-tester')
-const createExpressWrapper = require('graphql-tester/lib/main/servers/express.js').create
+const createExpressWrapper = require('graphql-tester/lib/main/servers/express.js')
+  .create
 const assert = require('assert')
 
 const app = require('../src/app')
@@ -35,7 +36,11 @@ describe('API', () => {
     })
   })
   it("doesn't overwrite manufacturer", done => {
-    test('{fromMpn(mpn: {manufacturer: "mock", mpn: "NE555P"}) {manufacturer} }').then(response => {
+    test(`{
+       fromMpn(mpn: {manufacturer: "mock", mpn: "NE555P"}) {
+         manufacturer
+      }
+    }`).then(response => {
       assert(response.success, 'response failed')
       assert(response.status === 200, 'status is not 200')
       assert(response.data.fromMpn != null, 'fromMpn data not returned')

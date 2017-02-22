@@ -7,20 +7,19 @@ const Mpn = `
      mpn          : String!
 `
 
-const Sku = `{
+const Sku = `
     vendor : String!
     sku    : String!
-}`
+`
 
 const schema = `
-  input MpnInput {${Mpn}}
+  input Mpn {${Mpn}}
 
-  type Sku ${Sku}
-  input SkuInput ${Sku}
+  input Sku {${Sku}}
 
   type Query {
-    fromMpn(mpn: MpnInput!): Part
-    fromSku(sku: SkuInput!): Part
+    fromMpn(mpn: Mpn!): [Part]
+    fromSku(sku: Sku!): [Part]
   }
 
   type Part {
@@ -28,7 +27,11 @@ const schema = `
      image       : Image
      datasheet   : String
      description : String
-     skus        : [Sku]!
+     offers      : [Offer]!
+  }
+
+  type Offer {
+    ${Sku}
   }
 
   type Image {
