@@ -71,7 +71,12 @@ function datasheet(item) {
 }
 
 function offers(item) {
-  return immutable.List()
+  return immutable.List(item.offers).map(offer => {
+    return immutable.Map({
+      sku    : offer.sku,
+      vendor : offer.seller.name,
+    })
+  })
 }
 
 

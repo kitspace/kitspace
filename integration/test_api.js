@@ -49,6 +49,7 @@ describe('API', () => {
       assert(response.status === 200, 'status is not 200')
       assert(response.data.fromMpn != null, 'fromMpn data not returned')
       assert(response.data.fromMpn[0].offers != null, 'offers is null')
+      assert(response.data.fromMpn[0].offers.length > 0, 'offers is empty')
       return done()
     })
   })
