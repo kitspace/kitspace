@@ -23,19 +23,27 @@ function datasheet(item) {
   return item.datasheets.reduce((prev, d) => prev || d.url, null)
 }
 
-const OCTOPART_QUERY_KEYS = immutable.List.of('reference', 'mpn', 'manufacturer')
+
+const aliases = immutable.Map({
+  reference: 'reference',
+  manufacturer: 'brand',
+  mpn: 'mpn',
+})
 
 function octopart(queries) {
-  queries = queries.map(q => {
-    return q.filter((_, k) => {
-      return OCTOPART_QUERY_KEYS.contains(k)
-    })
+  const octopart_queries = queries.map(q => {
+    return q.reduce((prev, v, k) => {
+      if (aliases.get(k)) {
+        return prev.set(aliases.get(k), v)
+      }
+      return prev
+    }, immutable.Map())
   })
   return superagent.get('https://octopart.com/api/v3/parts/match')
     .query('include[]=short_description&include[]=imagesets&include[]=datasheets')
     .query({
       apikey,
-      queries: JSON.stringify(queries.toJS()),
+      queries: JSON.stringify(octopart_queries.toJS()),
     })
     .set('Accept', 'application/json')
     .then(res => {
