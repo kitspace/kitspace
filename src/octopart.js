@@ -6,6 +6,8 @@ const aliases = immutable.Map({
   query_id: 'reference',
   manufacturer: 'brand',
   mpn: 'mpn',
+  vendor: 'seller',
+  sku: 'sku',
 })
 
 function octopart(queries) {
@@ -38,7 +40,8 @@ function octopart(queries) {
         }
         return returns.set(query_id, items.map(item => {
           return q.remove('query_id').merge({
-            manufacturer : item.brand.name,
+            mpn          : q.get('mpn') || item.mpn,
+            manufacturer : q.get('manufacturer') || item.brand.name,
             description  : item.short_description,
             image        : image(item),
             datasheet    : datasheet(item),

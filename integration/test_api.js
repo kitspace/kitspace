@@ -68,4 +68,32 @@ describe('from Sku', () => {
       return done()
     })
   })
+  it('returns same part when queried with offers', done => {
+    const mpn = 'NE555P'
+    test(`{
+      parts(mpn: {mpn: "${mpn}"}) {
+        offers {vendor sku}
+      }
+    }`).then(response => {
+      assert(response.success, 'response failed')
+      assert(response.status === 200, 'status is not 200')
+      assert(response.data.parts != null, 'parts data not returned')
+      const part = response.data.parts[0]
+      assert(part.offers != null, 'offers is null')
+      assert(part.offers.length > 0, 'offers is empty')
+      const offer = part.offers[0]
+      test(`{
+        parts(sku: {sku: "${offer.sku}" vendor: "${offer.vendor}"}) {
+           mpn
+        }
+      }`).then(response => {
+        assert(response.success, 'second response failed')
+        assert(response.status === 200, 'second status is not 200')
+        assert(response.data.parts != null, 'second parts data not returned')
+        const part = response.data.parts[0]
+        assert(part.mpn === mpn, 'mpn changed')
+        return done()
+      })
+    })
+  })
 })
