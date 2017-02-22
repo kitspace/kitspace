@@ -2,27 +2,6 @@ const superagent = require('superagent')
 const immutable = require('immutable')
 const apikey = require('./secrets').OCTOPART_API_KEY
 
-function image(item) {
-  return item.imagesets.reduce((prev, set) => {
-    if (prev != null) {
-      return prev
-    }
-    if (set.medium_image && set.medium_image.url) {
-      return immutable.Map({
-        url           : set.medium_image.url,
-        credit_string : set.credit_string,
-        credit_url    : set.credit_url
-      })
-    }
-    return null
-  }, null)
-}
-
-function datasheet(item) {
-  return item.datasheets.reduce((prev, d) => prev || d.url, null)
-}
-
-
 const aliases = immutable.Map({
   query_id: 'reference',
   manufacturer: 'brand',
@@ -62,11 +41,38 @@ function octopart(queries) {
             manufacturer : item.brand.name,
             description  : item.short_description,
             image        : image(item),
-            datasheet    : datasheet(item)
+            datasheet    : datasheet(item),
+            offers       : offers(item),
           })
         }))
       }, immutable.Map())
     })
 }
+
+
+function image(item) {
+  return item.imagesets.reduce((prev, set) => {
+    if (prev != null) {
+      return prev
+    }
+    if (set.medium_image && set.medium_image.url) {
+      return immutable.Map({
+        url           : set.medium_image.url,
+        credit_string : set.credit_string,
+        credit_url    : set.credit_url
+      })
+    }
+    return null
+  }, null)
+}
+
+function datasheet(item) {
+  return item.datasheets.reduce((prev, d) => prev || d.url, null)
+}
+
+function offers(item) {
+  return immutable.List()
+}
+
 
 module.exports = octopart

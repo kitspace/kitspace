@@ -43,4 +43,13 @@ describe('API', () => {
       return done()
     })
   })
+  it('returns offers array', done => {
+    test('{fromMpn(mpn: {mpn: "NE555P"}) {offers {vendor sku}} }').then(response => {
+      assert(response.success, 'response failed')
+      assert(response.status === 200, 'status is not 200')
+      assert(response.data.fromMpn != null, 'fromMpn data not returned')
+      assert(response.data.fromMpn[0].offers != null, 'offers is null')
+      return done()
+    })
+  })
 })

@@ -18,7 +18,7 @@ function handleQueries(queries) {
     actions.removeQueries(batch)
     octopart(batch).then(results => {
       actions.addResponses(results)
-    })
+    }).catch(e => console.error(e))
   }
 }
 
