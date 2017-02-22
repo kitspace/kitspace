@@ -5,66 +5,66 @@ const assert = require('assert')
 
 const app = require('../src/app')
 
-describe('fromMpn', () => {
+describe('from Mpn', () => {
   const test = graphqlTester.tester({
     server: createExpressWrapper(app),
     url: '/graphql'
   })
   it('responds', done => {
-    test('{fromMpn(mpn: {mpn: "NE555P"}) {mpn} }').then(response => {
+    test('{parts(mpn: {mpn: "NE555P"}) {mpn} }').then(response => {
       assert(response.success, 'response failed')
       assert(response.status === 200, 'status is not 200')
-      assert(response.data.fromMpn != null, 'fromMpn data not returned')
+      assert(response.data.parts != null, 'parts data not returned')
       return done()
     })
   })
   it('responds twice', done => {
-    test('{fromMpn(mpn: {mpn: "NE555P"}) {mpn} }').then(response => {
+    test('{parts(mpn: {mpn: "NE555P"}) {mpn} }').then(response => {
       assert(response.success, 'response failed')
       assert(response.status === 200, 'status is not 200')
-      assert(response.data.fromMpn != null, 'fromMpn data not returned')
+      assert(response.data.parts != null, 'parts data not returned')
       return done()
     })
   })
   it('fills in manufacturer', done => {
-    test('{fromMpn(mpn: {mpn: "NE555P"}) {manufacturer} }').then(response => {
+    test('{parts(mpn: {mpn: "NE555P"}) {manufacturer} }').then(response => {
       assert(response.success, 'response failed')
       assert(response.status === 200, 'status is not 200')
-      assert(response.data.fromMpn != null, 'fromMpn data not returned')
-      assert(response.data.fromMpn[0].manufacturer != null, 'manufacturer is null')
+      assert(response.data.parts != null, 'parts data not returned')
+      assert(response.data.parts[0].manufacturer != null, 'manufacturer is null')
       return done()
     })
   })
   it('returns even without results', done => {
-    test('{fromMpn(mpn: {mpn: "not really a part"}) {description} }').then(response => {
+    test('{parts(mpn: {mpn: "not really a part"}) {description} }').then(response => {
       assert(response.success, 'response failed')
       assert(response.status === 200, 'status is not 200')
-      assert(response.data.fromMpn.length === 0, 'got results')
+      assert(response.data.parts.length === 0, 'got results')
       return done()
     })
   })
   it('returns offers array', done => {
-    test('{fromMpn(mpn: {mpn: "NE555P"}) {offers {vendor sku}} }').then(response => {
+    test('{parts(mpn: {mpn: "NE555P"}) {offers {vendor sku}} }').then(response => {
       assert(response.success, 'response failed')
       assert(response.status === 200, 'status is not 200')
-      assert(response.data.fromMpn != null, 'fromMpn data not returned')
-      assert(response.data.fromMpn[0].offers != null, 'offers is null')
-      assert(response.data.fromMpn[0].offers.length > 0, 'offers is empty')
+      assert(response.data.parts != null, 'parts data not returned')
+      assert(response.data.parts[0].offers != null, 'offers is null')
+      assert(response.data.parts[0].offers.length > 0, 'offers is empty')
       return done()
     })
   })
 })
 
-describe('fromSku', () => {
+describe('from Sku', () => {
   const test = graphqlTester.tester({
     server: createExpressWrapper(app),
     url: '/graphql'
   })
   it('responds', done => {
-    test('{fromSku(sku: {vendor: "" sku: "NE555P"}) {mpn} }').then(response => {
+    test('{parts(sku: {vendor:"" sku: "NE555P"}) {offers {vendor sku}} }').then(response => {
       assert(response.success, 'response failed')
       assert(response.status === 200, 'status is not 200')
-      assert(response.data.fromMpn != null, 'fromSku data not returned')
+      assert(response.data.parts != null, 'parts data not returned')
       return done()
     })
   })

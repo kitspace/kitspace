@@ -18,8 +18,7 @@ const schema = `
   input Sku {${Sku}}
 
   type Query {
-    fromMpn(mpn: Mpn!): [Part]
-    fromSku(sku: Sku!): [Part]
+    parts(mpn: Mpn, sku: Sku): [Part]
   }
 
   type Part {
@@ -43,11 +42,11 @@ const schema = `
 
 const resolverMap = {
   Query: {
-    fromMpn(_, {mpn}) {
-      return query(mpn)
-    },
-    fromSku(_, {sku}) {
-      return query(sku)
+    parts(_, {mpn, sku}) {
+      if ((mpn || sku) == null) {
+        return Error('Mpn or Sku required')
+      }
+      return query(mpn || sku)
     },
   }
 }
