@@ -11,7 +11,7 @@ describe('API', () => {
     url: '/graphql'
   })
   it('responds', done => {
-    test('{fromMpn(mpn: {mpn: "NE555P"}) {description} }').then(response => {
+    test('{fromMpn(mpn: {mpn: "NE555P"}) {mpn} }').then(response => {
       assert(response.success, 'response failed')
       assert(response.status === 200, 'status is not 200')
       assert(response.data.fromMpn != null, 'fromMpn data not returned')
@@ -19,7 +19,7 @@ describe('API', () => {
     })
   })
   it('responds twice', done => {
-    test('{fromMpn(mpn: {mpn: "NE555P"}) {description} }').then(response => {
+    test('{fromMpn(mpn: {mpn: "NE555P"}) {mpn} }').then(response => {
       assert(response.success, 'response failed')
       assert(response.status === 200, 'status is not 200')
       assert(response.data.fromMpn != null, 'fromMpn data not returned')
@@ -39,6 +39,7 @@ describe('API', () => {
     test('{fromMpn(mpn: {mpn: "not really a part"}) {description} }').then(response => {
       assert(response.success, 'response failed')
       assert(response.status === 200, 'status is not 200')
+      assert(response.data.fromMpn.length === 0, 'got results')
       return done()
     })
   })
