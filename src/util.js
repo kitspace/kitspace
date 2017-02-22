@@ -1,7 +1,7 @@
 
-function removeReference(immutableMap) {
-    return immutableMap.filter((_,k) => k !== 'reference')
+function removeQueryId(immutableMap) {
+    return immutableMap.filter((_,k) => k !== 'query_id')
 }
 
-module.exports = {removeReference}
+module.exports = {removeQueryId}
 

@@ -22,9 +22,9 @@ const reducers = {
   addResponses(state, responses) {
     return state.set('responses', state.get('responses').merge(responses))
   },
-  removeResponses(state, references) {
+  removeResponses(state, query_ids) {
     const responses = state.get('responses').filter((_, k) => {
-      references.contains(k)
+      query_ids.contains(k)
     })
     return state.set('responses', responses)
   },

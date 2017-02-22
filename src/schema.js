@@ -45,13 +45,13 @@ const resolverMap = {
   Query: {
     fromMpn(_, {mpn}) {
       return new Promise((resolve, reject) => {
-        const reference = hash(mpn)
+        const query_id = hash(mpn)
         const state = store.getState()
-        const response = state.get('responses').get(reference)
+        const response = state.get('responses').get(query_id)
         if (response) {
           return resolve(response.toJS())
         }
-        const unsubscribe = store.subscribeChanges(['responses', reference], r => {
+        const unsubscribe = store.subscribeChanges(['responses', query_id], r => {
           if (r) {
             unsubscribe()
             resolve(r.toJS())
@@ -61,7 +61,7 @@ const resolverMap = {
           mpn: mpn.mpn,
           manufacturer: mpn.manufacturer,
           time: Date.now(),
-          reference,
+          query_id,
         })
         actions.addQuery(query)
       })

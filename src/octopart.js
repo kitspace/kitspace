@@ -25,7 +25,7 @@ function datasheet(item) {
 
 
 const aliases = immutable.Map({
-  reference: 'reference',
+  query_id: 'reference',
   manufacturer: 'brand',
   mpn: 'mpn',
 })
@@ -49,17 +49,17 @@ function octopart(queries) {
     .then(res => {
       const results = res.body.results
       return queries.reduce((returns, q) => {
-        const reference = q.get('reference')
-        const result = results.find(r => r.reference === reference)
+        const query_id = q.get('query_id')
+        const result = results.find(r => r.reference === query_id)
         if (result == null) {
-          return returns.set(reference, immutable.List())
+          return returns.set(query_id, immutable.List())
         }
         const items = immutable.List(result.items)
         if (items.size === 0) {
-          return returns.set(reference, immutable.List())
+          return returns.set(query_id, immutable.List())
         }
-        return returns.set(reference, items.map(item => {
-          return util.removeReference(q).merge({
+        return returns.set(query_id, items.map(item => {
+          return util.removeQueryId(q).merge({
             manufacturer : item.brand.name,
             description  : item.short_description,
             image        : image(item),
