@@ -11,7 +11,11 @@ describe('from Mpn', () => {
     url: '/graphql'
   })
   it('responds', done => {
-    test('{parts(mpn: {mpn: "NE555P"}) {mpn} }').then(response => {
+    test(`{
+       parts(mpn:{number:"NE555P"}) {
+         description
+       }
+    }`).then(response => {
       assert(response.success, 'response failed')
       assert(response.status === 200, 'status is not 200')
       assert(response.data.parts != null, 'parts data not returned')
@@ -19,7 +23,11 @@ describe('from Mpn', () => {
     })
   })
   it('responds twice', done => {
-    test('{parts(mpn: {mpn: "NE555P"}) {mpn} }').then(response => {
+    test(`{
+       parts(mpn:{number:"NE555P"}) {
+         description
+       }
+    }`).then(response => {
       assert(response.success, 'response failed')
       assert(response.status === 200, 'status is not 200')
       assert(response.data.parts != null, 'parts data not returned')
@@ -27,16 +35,28 @@ describe('from Mpn', () => {
     })
   })
   it('fills in manufacturer', done => {
-    test('{parts(mpn: {mpn: "NE555P"}) {manufacturer} }').then(response => {
+    test(`{
+       parts(mpn:{number:"NE555P"}) {
+         mpn {
+           manufacturer
+         }
+       }
+    }`).then(response => {
       assert(response.success, 'response failed')
       assert(response.status === 200, 'status is not 200')
       assert(response.data.parts != null, 'parts data not returned')
-      assert(response.data.parts[0].manufacturer != null, 'manufacturer is null')
+      assert(response.data.parts[0].mpn.manufacturer != null, 'manufacturer is null')
       return done()
     })
   })
   it('returns even without results', done => {
-    test('{parts(mpn: {mpn: "not really a part"}) {description} }').then(response => {
+    test(`{
+       parts(mpn:{number:"not really a part"}) {
+         mpn {
+           manufacturer
+         }
+       }
+    }`).then(response => {
       assert(response.success, 'response failed')
       assert(response.status === 200, 'status is not 200')
       assert(response.data.parts.length === 0, 'got results')
@@ -44,7 +64,16 @@ describe('from Mpn', () => {
     })
   })
   it('returns offers array', done => {
-    test('{parts(mpn: {mpn: "NE555P"}) {offers {vendor sku}} }').then(response => {
+    test(`{
+       parts(mpn:{number:"NE555P"}) {
+         offers {
+           sku {
+             vendor
+             number
+           }
+         }
+       }
+    }`).then(response => {
       assert(response.success, 'response failed')
       assert(response.status === 200, 'status is not 200')
       assert(response.data.parts != null, 'parts data not returned')
@@ -61,7 +90,16 @@ describe('from Sku', () => {
     url: '/graphql'
   })
   it('responds', done => {
-    test('{parts(sku: {vendor:"" sku: "NE555P"}) {offers {vendor sku}} }').then(response => {
+    test(`{
+       parts(sku:{vendor: "", number:"NE555P"}) {
+         offers {
+           sku {
+             vendor
+             number
+           }
+         }
+       }
+    }`).then(response => {
       assert(response.success, 'response failed')
       assert(response.status === 200, 'status is not 200')
       assert(response.data.parts != null, 'parts data not returned')
@@ -71,9 +109,14 @@ describe('from Sku', () => {
   it('returns same part when queried with offers', done => {
     const mpn = 'NE555P'
     test(`{
-      parts(mpn: {mpn: "${mpn}"}) {
-        offers {vendor sku}
-      }
+       parts(mpn:{number:"${mpn}"}) {
+         offers {
+           sku {
+             vendor
+             number
+           }
+         }
+       }
     }`).then(response => {
       assert(response.success, 'response failed')
       assert(response.status === 200, 'status is not 200')
@@ -81,17 +124,19 @@ describe('from Sku', () => {
       const part = response.data.parts[0]
       assert(part.offers != null, 'offers is null')
       assert(part.offers.length > 0, 'offers is empty')
-      const offer = part.offers[0]
+      const sku = part.offers[0].sku
       test(`{
-        parts(sku: {sku: "${offer.sku}" vendor: "${offer.vendor}"}) {
-           mpn
-        }
+         parts(sku:{vendor: "${sku.vendor}", number:"${sku.number}"}) {
+           mpn {
+             number
+           }
+         }
       }`).then(response => {
         assert(response.success, 'second response failed')
         assert(response.status === 200, 'second status is not 200')
         assert(response.data.parts != null, 'second parts data not returned')
         const part = response.data.parts[0]
-        assert(part.mpn === mpn, 'mpn changed')
+        assert(part.mpn.number === mpn, 'mpn changed')
         return done()
       })
     })

@@ -10,15 +10,24 @@ const aliases = immutable.Map({
   sku: 'sku',
 })
 
-function octopart(queries) {
-  const octopart_queries = queries.map(q => {
-    return q.reduce((prev, v, k) => {
-      if (aliases.get(k)) {
-        return prev.set(aliases.get(k), v)
-      }
-      return prev
-    }, immutable.Map())
+function transform(queries) {
+  return queries.map(q => {
+    const ret = {}
+    if (q.get('mpn')) {
+       ret.mpn = q.get('mpn').get('number')
+       ret.brand = q.get('mpn').get('manufacturer')
+    }
+    if (q.get('sku')) {
+      ret.sku = q.get('sku').get('number')
+      ret.seller = q.get('sku').get('vendor')
+    }
+    ret.reference = String(q.hashCode())
+    return ret
   })
+}
+
+function octopart(queries) {
+  const octopart_queries = transform(queries)
   return superagent.get('https://octopart.com/api/v3/parts/match')
     .query('include[]=short_description&include[]=imagesets&include[]=datasheets')
     .query({
@@ -28,20 +37,22 @@ function octopart(queries) {
     .set('Accept', 'application/json')
     .then(res => {
       const results = res.body.results
-      return queries.reduce((returns, q) => {
-        const query_id = q.get('query_id')
+      return queries.reduce((returns, query) => {
+        const query_id = String(query.hashCode())
         const result = results.find(r => r.reference === query_id)
         if (result == null) {
-          return returns.set(query_id, immutable.List())
+          return returns.set(query, immutable.List())
         }
         const items = immutable.List(result.items)
         if (items.size === 0) {
-          return returns.set(query_id, immutable.List())
+          return returns.set(query, immutable.List())
         }
-        return returns.set(query_id, items.map(item => {
-          return q.remove('query_id').merge({
-            mpn          : q.get('mpn') || item.mpn,
-            manufacturer : q.get('manufacturer') || item.brand.name,
+        return returns.set(query, items.map(item => {
+          return immutable.Map({
+            mpn: immutable.Map({
+              number       : item.mpn,
+              manufacturer : item.brand.name,
+            }),
             description  : item.short_description,
             image        : image(item),
             datasheet    : datasheet(item),
@@ -76,8 +87,10 @@ function datasheet(item) {
 function offers(item) {
   return immutable.List(item.offers).map(offer => {
     return immutable.Map({
-      sku    : offer.sku,
-      vendor : offer.seller.name,
+      sku: immutable.Map({
+        number : offer.sku,
+        vendor : offer.seller.name,
+      })
     })
   })
 }

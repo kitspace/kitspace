@@ -16,7 +16,8 @@ function handleQueries(queries) {
   if ((queries.size >= QUERY_BATCH_SIZE) || timed_out) {
     const batch = queries.take(QUERY_BATCH_SIZE)
     actions.removeQueries(batch)
-    octopart(batch).then(results => {
+    const qs = batch.map(q => q.get('query'))
+    octopart(qs).then(results => {
       actions.addResponses(results)
     }).catch(e => console.error(e))
   }

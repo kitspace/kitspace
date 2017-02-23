@@ -2,27 +2,29 @@ const immutable = require('immutable')
 const graphqlTools = require('graphql-tools')
 const {store, actions} = require('./actions')
 
-const Mpn = `
+const Mpn = `{
      manufacturer : String
-     mpn          : String!
-`
+     number       : String!
+}`
 
-const Sku = `
+const Sku = `{
     vendor : String!
-    sku    : String!
-`
+    number : String!
+}`
 
 const schema = `
-  input Mpn {${Mpn}}
+  type Mpn ${Mpn}
+  input MpnInput ${Mpn}
 
-  input Sku {${Sku}}
+  type Sku ${Sku}
+  input SkuInput ${Sku}
 
   type Query {
-    parts(mpn: Mpn, sku: Sku): [Part]
+    parts(mpn: MpnInput, sku: SkuInput): [Part]
   }
 
   type Part {
-     ${Mpn}
+     mpn         : Mpn
      image       : Image
      datasheet   : String
      description : String
@@ -30,7 +32,7 @@ const schema = `
   }
 
   type Offer {
-    ${Sku}
+    sku: Sku
   }
 
   type Image {
@@ -46,30 +48,30 @@ const resolverMap = {
       if (! (mpn || sku)) {
         return Error('Mpn or Sku required')
       }
-      return query(Object.assign(mpn || {},  sku))
+      return run({mpn,sku})
     },
   }
 }
 
-function query (mpn_or_sku) {
-  const query_id = hash(mpn_or_sku)
+function run(query) {
+  query = immutable.fromJS(query)
   return new Promise((resolve, reject) => {
     const state = store.getState()
-    const response = state.get('responses').get(query_id)
+    const response = state.get('responses').get(query)
     if (response) {
       return resolve(response.toJS())
     }
-    const unsubscribe = store.subscribeChanges(['responses', query_id], r => {
+    const unsubscribe = store.subscribeChanges(['responses', query], r => {
       if (r) {
         unsubscribe()
         resolve(r.toJS())
       }
     })
-    const q = immutable.Map(mpn_or_sku).merge({
+    const time_stamped = immutable.Map({
+      query,
       time: Date.now(),
-      query_id,
     })
-    actions.addQuery(q)
+    actions.addQuery(time_stamped)
   })
 }
 
