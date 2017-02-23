@@ -48,7 +48,7 @@ function tsvToTable(tsv) {
       return h(Table.Cell, {error, className}, text)
     }))
   }))
-  const tableProps = {sortable: true, celled: true, unstackable: true, singleline: true, selectable: true}
+  const tableProps = {celled: true, unstackable: true, selectable: true}
   return h(Table, tableProps, [headingJSX, bodyJSX])
 }
 
