@@ -1,6 +1,6 @@
 const superagent = require('superagent')
 const immutable = require('immutable')
-const apikey = require('./secrets').OCTOPART_API_KEY
+const apikey = require('../config').OCTOPART_API_KEY
 
 const aliases = immutable.Map({
   query_id: 'reference',
