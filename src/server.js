@@ -1,4 +1,6 @@
+#!/usr/bin/env node
 const app = require('./app')
 
-app.listen(4000)
-console.log('Running a GraphQL API server at localhost:4000/graphql')
+const port = process.env.PORT || 4001
+app.listen(port)
+console.log(`Running a GrapQL Express server at localhost:${port}`)
