@@ -61,7 +61,7 @@
     "react-search-input": "~0.10.1",
     "redux": "^3.6.0",
     "semantic-ui-css": "^2.2.4",
-    "semantic-ui-react": "^0.62.3",
+    "semantic-ui-react": "^0.66.0",
     "superagent": "^3.3.1",
     "whats-that-gerber": "^2.1.0",
     "xml-element-string": "^1.0.0"
