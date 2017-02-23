@@ -1,8 +1,10 @@
 'use strict'
 const React           = require('react')
 const DoubleScrollbar = require('react-double-scrollbar')
-const {h, table, thead, tbody, tr, th, td} = require('react-hyperscript-helpers')
-const semantic = require('semantic-ui-react')
+const {h, tbody, tr}  = require('react-hyperscript-helpers')
+const semantic        = require('semantic-ui-react')
+
+const MpnPopup = require('./mpn_popup')
 
 //for react-double-scrollbar in IE11
 require('babel-polyfill')
@@ -47,7 +49,7 @@ function tsvToTable(tsv) {
       const className = columnIndex === 0 ? 'marked ' + markerColor(text) : ''
       const cell = h(semantic.Table.Cell, {error, className, selectable:true}, text)
       if (headings[columnIndex] === 'MPN') {
-        return (<semantic.Popup trigger={cell} position='bottom left' content='reaaaaaaaaaaaaaaaally long text and stuff, you could have an image here' />)
+        return (<MpnPopup trigger={cell} />)
       }
       else {
         return cell
