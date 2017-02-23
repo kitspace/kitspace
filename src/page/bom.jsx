@@ -42,7 +42,7 @@ const TsvTable = React.createClass({
   componentWillMount() {
     this.setActiveCell = throttle((rowIndex, columnIndex) => {
       this.setState({activeCell: [rowIndex, columnIndex]})
-    }, 300)
+    }, 20)
   },
   render() {
     const tsv = this.props.tsv
@@ -91,7 +91,7 @@ const TsvTable = React.createClass({
         }
       }))
     }))
-    const tableProps = {celled: true, unstackable: true}
+    const tableProps = {celled: true, unstackable: true, onMouseOut: () => this.setState({activeCell: null})}
     return h(semantic.Table, tableProps, [headingJSX, bodyJSX])
   }
 })
