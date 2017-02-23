@@ -3,7 +3,7 @@ const graphqlTools = require('graphql-tools')
 const {store, actions} = require('./actions')
 
 const Mpn = `{
-     manufacturer : String
+     manufacturer : String!
      number       : String!
 }`
 
@@ -20,7 +20,7 @@ const schema = `
   input SkuInput ${Sku}
 
   type Query {
-    parts(mpn: MpnInput, sku: SkuInput): [Part]
+    part(mpn: MpnInput, sku: SkuInput): Part
   }
 
   type Part {
@@ -44,7 +44,7 @@ const schema = `
 
 const resolverMap = {
   Query: {
-    parts(_, {mpn, sku}) {
+    part(_, {mpn, sku}) {
       if (! (mpn || sku)) {
         return Error('Mpn or Sku required')
       }

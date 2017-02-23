@@ -12,31 +12,31 @@ describe('from Mpn', () => {
   })
   it('responds', done => {
     test(`{
-       parts(mpn:{number:"NE555P"}) {
+       part(mpn:{manufacturer:"Texas Instruments" number:"NE555P"}) {
          description
        }
     }`).then(response => {
       assert(response.success, 'response failed')
       assert(response.status === 200, 'status is not 200')
-      assert(response.data.parts != null, 'parts data not returned')
+      assert(response.data.part != null, 'part data not returned')
       return done()
     })
   })
   it('responds twice', done => {
     test(`{
-       parts(mpn:{number:"NE555P"}) {
+       part(mpn:{manufacturer:"Texas Instruments" number:"NE555P"}) {
          description
        }
     }`).then(response => {
       assert(response.success, 'response failed')
       assert(response.status === 200, 'status is not 200')
-      assert(response.data.parts != null, 'parts data not returned')
+      assert(response.data.part != null, 'part data not returned')
       return done()
     })
   })
   it('fills in manufacturer', done => {
     test(`{
-       parts(mpn:{number:"NE555P"}) {
+       part(mpn:{manufacturer:"Texas Instruments" number:"NE555P"}) {
          mpn {
            manufacturer
          }
@@ -44,14 +44,14 @@ describe('from Mpn', () => {
     }`).then(response => {
       assert(response.success, 'response failed')
       assert(response.status === 200, 'status is not 200')
-      assert(response.data.parts != null, 'parts data not returned')
-      assert(response.data.parts[0].mpn.manufacturer != null, 'manufacturer is null')
+      assert(response.data.part != null, 'part data not returned')
+      assert(response.data.part.mpn.manufacturer != null, 'manufacturer is null')
       return done()
     })
   })
   it('returns even without results', done => {
     test(`{
-       parts(mpn:{number:"not really a part"}) {
+       part(mpn:{manufacturer: "whatever" number:"not really a part"}) {
          mpn {
            manufacturer
          }
@@ -59,13 +59,13 @@ describe('from Mpn', () => {
     }`).then(response => {
       assert(response.success, 'response failed')
       assert(response.status === 200, 'status is not 200')
-      assert(response.data.parts.length === 0, 'got results')
+      assert(response.data.part.mpn == null, 'got results')
       return done()
     })
   })
   it('returns offers array', done => {
     test(`{
-       parts(mpn:{number:"NE555P"}) {
+       part(mpn:{manufacturer:"Texas Instruments" number:"NE555P"}) {
          offers {
            sku {
              vendor
@@ -76,9 +76,9 @@ describe('from Mpn', () => {
     }`).then(response => {
       assert(response.success, 'response failed')
       assert(response.status === 200, 'status is not 200')
-      assert(response.data.parts != null, 'parts data not returned')
-      assert(response.data.parts[0].offers != null, 'offers is null')
-      assert(response.data.parts[0].offers.length > 0, 'offers is empty')
+      assert(response.data.part != null, 'part data not returned')
+      assert(response.data.part.offers != null, 'offers is null')
+      assert(response.data.part.offers.length > 0, 'offers is empty')
       return done()
     })
   })
@@ -91,7 +91,7 @@ describe('from Sku', () => {
   })
   it('responds', done => {
     test(`{
-       parts(sku:{vendor: "", number:"NE555P"}) {
+       part(sku:{vendor: "", number:"NE555P"}) {
          offers {
            sku {
              vendor
@@ -102,14 +102,13 @@ describe('from Sku', () => {
     }`).then(response => {
       assert(response.success, 'response failed')
       assert(response.status === 200, 'status is not 200')
-      assert(response.data.parts != null, 'parts data not returned')
       return done()
     })
   })
   it('returns same part when queried with offers', done => {
     const mpn = 'NE555P'
     test(`{
-       parts(mpn:{number:"${mpn}"}) {
+       part(mpn:{manufacturer: "Texas Instruments" number:"${mpn}"}) {
          offers {
            sku {
              vendor
@@ -120,13 +119,13 @@ describe('from Sku', () => {
     }`).then(response => {
       assert(response.success, 'response failed')
       assert(response.status === 200, 'status is not 200')
-      assert(response.data.parts != null, 'parts data not returned')
-      const part = response.data.parts[0]
+      assert(response.data.part != null, 'part data not returned')
+      const part = response.data.part
       assert(part.offers != null, 'offers is null')
       assert(part.offers.length > 0, 'offers is empty')
       const sku = part.offers[0].sku
       test(`{
-         parts(sku:{vendor: "${sku.vendor}", number:"${sku.number}"}) {
+         part(sku:{vendor: "${sku.vendor}", number:"${sku.number}"}) {
            mpn {
              number
            }
@@ -134,8 +133,8 @@ describe('from Sku', () => {
       }`).then(response => {
         assert(response.success, 'second response failed')
         assert(response.status === 200, 'second status is not 200')
-        assert(response.data.parts != null, 'second parts data not returned')
-        const part = response.data.parts[0]
+        assert(response.data.part != null, 'second part data not returned')
+        const part = response.data.part
         assert(part.mpn.number === mpn, 'mpn changed')
         return done()
       })

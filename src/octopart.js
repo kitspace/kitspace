@@ -41,14 +41,13 @@ function octopart(queries) {
         const query_id = String(query.hashCode())
         const result = results.find(r => r.reference === query_id)
         if (result == null) {
-          return returns.set(query, immutable.List())
+          return returns.set(query, immutable.Map())
         }
-        const items = immutable.List(result.items)
-        if (items.size === 0) {
-          return returns.set(query, immutable.List())
+        if (result.items.length === 0) {
+          return returns.set(query, immutable.Map())
         }
-        return returns.set(query, items.map(item => {
-          return immutable.Map({
+        const item = result.items[0]
+        return returns.set(query, immutable.Map({
             mpn: immutable.Map({
               number       : item.mpn,
               manufacturer : item.brand.name,
@@ -57,7 +56,6 @@ function octopart(queries) {
             image        : image(item),
             datasheet    : datasheet(item),
             offers       : offers(item),
-          })
         }))
       }, immutable.Map())
     })
