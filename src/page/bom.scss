@@ -32,4 +32,7 @@
     td.marked.lightblue {
         border-left: 13px solid lightblue !important;
     }
+    tr.selected {
+       background:rgba(0,0,0,.05)!important
+    }
 }
