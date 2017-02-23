@@ -28,7 +28,7 @@ const schema = `
      image       : Image
      datasheet   : String
      description : String
-     offers      : [Offer]!
+     offers      : [Offer]
   }
 
   type Offer {
