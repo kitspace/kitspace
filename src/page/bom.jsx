@@ -3,6 +3,7 @@ const React           = require('react')
 const DoubleScrollbar = require('react-double-scrollbar')
 const {h, tbody, tr}  = require('react-hyperscript-helpers')
 const semantic        = require('semantic-ui-react')
+const throttle        = require('lodash.throttle')
 
 const MpnPopup = require('./mpn_popup')
 
@@ -38,6 +39,11 @@ const TsvTable = React.createClass({
       activePopup: null,
     }
   },
+  componentWillMount() {
+    this.setActiveCell = throttle((rowIndex, columnIndex) => {
+      this.setState({activeCell: [rowIndex, columnIndex]})
+    }, 300)
+  },
   render() {
     const tsv = this.props.tsv
     const lines = tsv.split('\n').slice(0, -1)
@@ -57,18 +63,15 @@ const TsvTable = React.createClass({
       const rowActivePopup = activePopup && activePopup[0] === rowIndex
       const rowSelected = rowActivePopup || (!activePopup && rowActiveCell)
       line = line.split('\t')
-      return h(semantic.Table.Row, {className: rowSelected ? 'selected' : '' }, line.map((text, columnIndex) => {
+      return h(semantic.Table.Row, {className: rowSelected ? 'selected' : ''}, line.map((text, columnIndex) => {
         const error       = markPink(columnIndex) && text == ''
         const className   = columnIndex === 0 ? 'marked ' + markerColor(text) : ''
         const cellActive  = rowActiveCell && activeCell[1] === columnIndex
         const popupActive = rowActivePopup && activePopup[1] === columnIndex
         const active      = popupActive || (!activePopup && cellActive)
-        const setActiveCell = () => {
-          this.setState({activeCell: [rowIndex, columnIndex]})
-        }
         const setInactiveCell = () => {
           if (cellActive) {
-            this.setState({activeCell: false})
+            this.setState({activeCell: null})
           }
         }
         const setActivePopup = () => {
@@ -76,10 +79,10 @@ const TsvTable = React.createClass({
         }
         const setInactivePopup = () => {
           if (popupActive) {
-            this.setState({activePopup: false})
+            this.setState({activePopup: null})
           }
         }
-        const cell = h(semantic.Table.Cell, {onMouseOver: setActiveCell, onMouseOut: setInactiveCell, error, className, active}, text)
+        const cell = h(semantic.Table.Cell, {onMouseOver: this.setActiveCell.bind(this, rowIndex, columnIndex), error, className, active}, text)
         if (headings[columnIndex] === 'MPN') {
           return (<MpnPopup onOpen={setActivePopup} onClose={setInactivePopup} trigger={cell} />)
         }
