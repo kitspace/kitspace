@@ -3,6 +3,18 @@ const React           = require('react')
 const DoubleScrollbar = require('react-double-scrollbar')
 const {h, tbody, tr}  = require('react-hyperscript-helpers')
 const semantic        = require('semantic-ui-react')
+const redux           = require('redux')
+const immutable       = require('immutable')
+
+const initial_state = immutable.Map({
+  activeCell: null,
+})
+
+function reducer(state = initial_state, action) {
+  return state
+}
+
+const store = redux.createStore(reducer)
 
 const MpnPopup = require('./mpn_popup')
 
@@ -31,36 +43,39 @@ function markerColor(ref) {
   return 'purple'
 }
 
-function tsvToTable(tsv) {
-  const lines = tsv.split('\n').slice(0, -1)
-  const headings = lines[0].split('\t')
-  let headingJSX = headings.map((text) => {
-    return h(semantic.Table.HeaderCell, {selectable: true}, text)
-  })
-  headingJSX = h(semantic.Table.Header, [h(semantic.Table.Row, headingJSX)])
-  function markPink(index) {
-    return ['Manufacturer', 'MPN', 'Description']
-      .indexOf(headings[index]) < 0
-  }
-  const bodyJSX = tbody(lines.slice(1).map((line, rowIndex) => {
-    line = line.split('\t')
-    return tr(`.tr${rowIndex % 2}`, line.map((text, columnIndex) => {
-      const error = markPink(columnIndex) && text == ''
-      const className = columnIndex === 0 ? 'marked ' + markerColor(text) : ''
-      const cell = h(semantic.Table.Cell, {error, className, selectable:true}, text)
-      if (headings[columnIndex] === 'MPN') {
-        return (<MpnPopup trigger={cell} />)
-      }
-      else {
-        return cell
-      }
+const TsvTable = React.createClass({
+  render() {
+    const tsv = this.props.tsv
+    const lines = tsv.split('\n').slice(0, -1)
+    const headings = lines[0].split('\t')
+    let headingJSX = headings.map((text) => {
+      return h(semantic.Table.HeaderCell, {selectable: true}, text)
+    })
+    headingJSX = h(semantic.Table.Header, [h(semantic.Table.Row, headingJSX)])
+    function markPink(index) {
+      return ['Manufacturer', 'MPN', 'Description']
+        .indexOf(headings[index]) < 0
+    }
+    const bodyJSX = tbody(lines.slice(1).map((line, rowIndex) => {
+      line = line.split('\t')
+      return tr(`.tr${rowIndex % 2}`, line.map((text, columnIndex) => {
+        const error = markPink(columnIndex) && text == ''
+        const className = columnIndex === 0 ? 'marked ' + markerColor(text) : ''
+        const cell = h(semantic.Table.Cell, {error, className, selectable:true}, text)
+        if (headings[columnIndex] === 'MPN') {
+          return (<MpnPopup datasheet='test' trigger={cell} />)
+        }
+        else {
+          return cell
+        }
+      }))
     }))
-  }))
-  const tableProps = {celled: true, unstackable: true, selectable: true}
-  return h(semantic.Table, tableProps, [headingJSX, bodyJSX])
-}
+    const tableProps = {celled: true, unstackable: true, selectable: true}
+    return h(semantic.Table, tableProps, [headingJSX, bodyJSX])
+  }
+})
 
-let BOM = React.createClass({
+const BOM = React.createClass({
   propTypes: {
     tsv: React.PropTypes.string.isRequired
   },
@@ -72,7 +87,7 @@ let BOM = React.createClass({
       <div className='bom'>
         <div className='bomTableContainer'>
           <DoubleScrollbar>
-          {tsvToTable(this.props.tsv)}
+          <TsvTable tsv={this.props.tsv} />
           </DoubleScrollbar>
           </div>
       </div>
