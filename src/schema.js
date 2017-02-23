@@ -33,6 +33,12 @@ const schema = `
 
   type Offer {
     sku: Sku
+    prices: Prices
+  }
+
+  type Prices {
+    USD: [[Float]]
+    EUR: [[Float]]
   }
 
   type Image {

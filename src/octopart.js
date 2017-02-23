@@ -88,7 +88,8 @@ function offers(item) {
       sku: immutable.Map({
         number : offer.sku,
         vendor : offer.seller.name,
-      })
+      }),
+      prices: immutable.fromJS(offer.prices)
     })
   })
 }
