@@ -106,7 +106,8 @@ const TsvTable = React.createClass({
 
 const BOM = React.createClass({
   propTypes: {
-    tsv: React.PropTypes.string.isRequired
+    tsv: React.PropTypes.string.isRequired,
+    parts: React.PropTypes.object.isRequired,
   },
   render: function () {
     if (this.props.tsv === '') {

@@ -37,7 +37,7 @@ const Page = React.createClass({
               </BoardShowcase>
               <StoreButtons items={info.bom.lines} />
               <Readme />
-              <BOM tsv={info.bom.tsv} />
+              <BOM parts={info.bom.parts} tsv={info.bom.tsv} />
             </div>
           </div>
         </div>
