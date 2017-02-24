@@ -14,11 +14,11 @@ function transform(queries) {
   return queries.map(q => {
     const ret = {}
     if (q.get('mpn')) {
-       ret.mpn = q.get('mpn').get('number')
+       ret.mpn = q.get('mpn').get('part')
        ret.brand = q.get('mpn').get('manufacturer')
     }
     if (q.get('sku')) {
-      ret.sku = q.get('sku').get('number')
+      ret.sku = q.get('sku').get('part')
       ret.seller = q.get('sku').get('vendor')
     }
     ret.reference = String(q.hashCode())
@@ -49,7 +49,7 @@ function octopart(queries) {
         const item = result.items[0]
         return returns.set(query, immutable.Map({
             mpn: immutable.Map({
-              number       : item.mpn,
+              part       : item.mpn,
               manufacturer : item.brand.name,
             }),
             description  : item.short_description,
@@ -86,7 +86,7 @@ function offers(item) {
   return immutable.List(item.offers).map(offer => {
     return immutable.Map({
       sku: immutable.Map({
-        number : offer.sku,
+        part : offer.sku,
         vendor : offer.seller.name,
       }),
       prices: immutable.fromJS(offer.prices)

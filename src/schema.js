@@ -4,12 +4,12 @@ const {store, actions} = require('./actions')
 
 const Mpn = `{
      manufacturer : String!
-     number       : String!
+     part       : String!
 }`
 
 const Sku = `{
     vendor : String!
-    number : String!
+    part : String!
 }`
 
 const schema = `
