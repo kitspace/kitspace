@@ -4,6 +4,7 @@ const path        = require('path')
 const yaml        = require('js-yaml')
 const oneClickBOM = require('1-click-bom')
 const cp          = require('child_process')
+const ramda       = require('ramda')
 
 const utils       = require('../utils/utils')
 const getPartinfo = require('../utils/get_partinfo.js')
@@ -57,13 +58,17 @@ if (require.main !== module) {
     const tsv = fs.readFileSync(bomPath, {encoding:'utf8'})
     info.bom = oneClickBOM.parseTSV(tsv)
     info.bom.tsv = oneClickBOM.writeTSV(info.bom.lines)
-    info.bom.parts = getPartinfo(info.bom.lines)
 
     let repo = cp.execSync(`cd ${folder} && git remote -v`, {encoding:'utf8'})
     repo = repo.split('\t')[1].split(' ')[0]
     info.repo = repo
 
-    fs.writeFile(infoPath, JSON.stringify(info), function() {})
+    Promise.all(getPartinfo(info.bom.lines)).then(parts => {
+        info.bom.parts = ramda.flatten(parts)
 
-    fs.writeFile(outBomPath, info.bom.tsv, function() {})
+        fs.writeFile(infoPath, JSON.stringify(info), function() {})
+
+        fs.writeFile(outBomPath, info.bom.tsv, function() {})
+    })
+
 }

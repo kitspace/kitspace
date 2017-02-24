@@ -24,6 +24,7 @@
     "ninja-build-gen": "^0.2.1",
     "node-sass": "^4.0.0",
     "postcss-cli": "^2.6.0",
+    "ramda": "^0.23.0",
     "reactify": "^1.1.1",
     "source-map-support": "^0.4.0",
     "svgo": "^0.6.6",

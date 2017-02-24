@@ -69,6 +69,15 @@ const TsvTable = React.createClass({
         const cellActive  = rowActiveCell && activeCell[1] === columnIndex
         const popupActive = rowActivePopup && activePopup[1] === columnIndex
         const active      = popupActive || (!activePopup && cellActive)
+        const datasheet = this.props.parts.reduce((datasheet, part) => {
+          if (datasheet) {
+            return datasheet
+          }
+          if (part && part.mpn && part.mpn.part && part.datasheet) {
+            return part.datasheet
+          }
+          return datasheet
+        }, null)
         const setActivePopup = () => {
           this.setState({activePopup: [rowIndex, columnIndex]})
         }
@@ -87,7 +96,8 @@ const TsvTable = React.createClass({
           return h(MpnPopup, {
             onOpen  : setActivePopup,
             onClose : setInactivePopup,
-            trigger : cell
+            trigger : cell,
+            datasheet,
           })
         }
         else {
@@ -107,7 +117,7 @@ const TsvTable = React.createClass({
 const BOM = React.createClass({
   propTypes: {
     tsv: React.PropTypes.string.isRequired,
-    parts: React.PropTypes.object.isRequired,
+    parts: React.PropTypes.array.isRequired,
   },
   render: function () {
     if (this.props.tsv === '') {
@@ -117,7 +127,7 @@ const BOM = React.createClass({
       <div className='bom'>
         <div className='bomTableContainer'>
           <DoubleScrollbar>
-          <TsvTable tsv={this.props.tsv} />
+          <TsvTable parts={this.props.parts} tsv={this.props.tsv} />
           </DoubleScrollbar>
           </div>
       </div>
