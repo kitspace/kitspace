@@ -12,6 +12,11 @@ query MpnQuery($mpn: MpnInput!) {
       part
     }
     datasheet
+    image {
+      url
+      credit_string
+      credit_url
+    }
   }
 }`
 

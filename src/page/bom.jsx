@@ -69,15 +69,6 @@ const TsvTable = React.createClass({
         const cellActive  = rowActiveCell && activeCell[1] === columnIndex
         const popupActive = rowActivePopup && activePopup[1] === columnIndex
         const active      = popupActive || (!activePopup && cellActive)
-        const datasheet = this.props.parts.reduce((datasheet, part) => {
-          if (datasheet) {
-            return datasheet
-          }
-          if (part && part.mpn && part.mpn.part && part.datasheet) {
-            return part.datasheet
-          }
-          return datasheet
-        }, null)
         const setActivePopup = () => {
           this.setState({activePopup: [rowIndex, columnIndex]})
         }
@@ -93,11 +84,20 @@ const TsvTable = React.createClass({
           active
         }, text)
         if (headings[columnIndex] === 'MPN') {
+          const part = this.props.parts.reduce((prev, part) => {
+            if (prev) {
+              return prev
+            }
+            if (part && part.mpn && part.mpn.part === text) {
+              return part
+            }
+          }, null) || {}
           return h(MpnPopup, {
-            onOpen  : setActivePopup,
-            onClose : setInactivePopup,
-            trigger : cell,
-            datasheet,
+            onOpen    : setActivePopup,
+            onClose   : setInactivePopup,
+            trigger   : cell,
+            datasheet : part.datasheet,
+            image     : part.image,
           })
         }
         else {
