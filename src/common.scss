@@ -1,28 +1,49 @@
-
+//these are also defined in media_queries.js and need to be adjusted there and here
 @mixin breakpoint($point) {
-  @if $point == mobile {
-    @media (max-device-width: 899px)
-    , (max-device-width: 1024px) and (orientation: landscape)
-    , (min-resolution: 300dpi)
-    , handheld
-      { @content; }
-  }
+    @if $point == small_width {
+        @media (max-width: 767px)
+        {
+            @content;
+        }
+    } @else if $point == semantic_container{
+        @media (max-width: 1199px)
+        {
+            @content;
+        }
+    } @else if $point == mobile-m {
+        @media (max-width: 458px)
+        {
+            @content;
+        }
+    }
 }
 
-html, head, body {
+html,
+head,
+body {
     margin: 0;
 }
 
 body {
     font-family: 'Noto Sans','Helvetica', 'Arial', sans-serif;
     font-size: 16px;
-    @include breakpoint(mobile) {
-        font-size: 24px;
-    }
+
+    overflow-y: scroll;
 }
 
 a {
-    color: #373737;
-    text-decoration: none;
+    color: $mine-shaft;
     font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+a:hover {
+    color: $mine-shaft;
+    text-decoration: underline;
+}
+
+.notSelectable {
+    user-select: none;
+    cursor: default;
 }

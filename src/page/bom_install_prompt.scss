@@ -1,0 +1,15 @@
+@import '../colors';
+@import '../common';
+
+.bomInstallPrompt {
+    background-color: $pearl-lusta;
+    border: 2px solid $champagne;
+    color: $potters-clay;
+    padding: 8px 16px;
+    width: 100%;
+
+    .bomInstallAnchor {
+        color: $black;
+        cursor: pointer;
+    }
+}

@@ -1,0 +1,82 @@
+[
+  {
+    "repo": "https://github.com/mattvenn/esp8266-breakout",
+    "hash": "fcb3107c66670035c7cb330f5d98eddde5d17f56"
+  },
+  {
+    "repo": "https://github.com/kitnic-forks/arduino-uno",
+    "hash": "5f10c3e4d9709344153aecf65faaef492ddcb0d1"
+  },
+  {
+    "repo": "https://github.com/kitnic-forks/Bus_Pirate",
+    "hash": "0ca376a0eedd116e3ffdbd5dfd5398a67fdba708"
+  },
+  {
+    "repo": "https://github.com/kitnic-forks/HACK",
+    "hash": "9ce81027df5e860ee78c101ade40bf73724c5ed6"
+  },
+  {
+    "repo": "https://github.com/kitnic-forks/FM_Transmitter",
+    "hash": "c48e218d244a775504b259983271c28342cdec7e"
+  },
+  {
+    "repo": "https://github.com/kasbah/nomech",
+    "hash": "e4e29bbbf9bc6cd26adc4460bd722370e526d062"
+  },
+  {
+    "repo": "https://github.com/kasbah/push-on-hold-off",
+    "hash": "29085bc9666c7f61e2cd6ad68889258931a5d268"
+  },
+  {
+    "repo": "https://github.com/kitnic-forks/BQ25570_Harvester",
+    "hash": "06547ddac9e74a276df7cb6e349f4727b38c2bc0"
+  },
+  {
+    "repo": "https://github.com/JarrettR/USBvil",
+    "hash": "3832f59edf0a5128e121c289e2159ea012fcb84a"
+  },
+  {
+    "repo": "https://github.com/8BitMixtape/NextLevelEdition",
+    "hash": "20b07cdba27d0a22534fc177c74ff1fb37b55839"
+  },
+  {
+    "repo": "https://github.com/dvdfreitag/Signal-Detector",
+    "hash": "6978ba247948e1a5631f9671909d77d109ff48ec"
+  },
+  {
+    "repo": "https://github.com/robotsrulz/SP_Adapter",
+    "hash": "6360d23501dbb5bdc4e2b7d5de1cc552bc9c0472"
+  },
+  {
+    "repo": "https://github.com/pcbsz/SimpleAmp",
+    "hash": "191814ff027424dacb2dcb6338dcb106aabb6e34"
+  },
+  {
+    "repo": "https://github.com/pcbsz/AtariSynth",
+    "hash": "01f1a8f3757f1df6ac006d43ca73025f4823716d"
+  },
+  {
+    "repo": "https://git.defproc.co.uk/DefProc/piezo-sensor",
+    "hash": "1ef4e9e30e43871aa7bf8f66e8445466eba78b1f"
+  },
+  {
+    "repo": "https://github.com/pcbsz/LM386",
+    "hash": "4357cd14d514eb6f87ac8fccb7892a4360037be4"
+  },
+  {
+    "repo": "https://github.com/kanflo/aaduino",
+    "hash": "d8812f3dc57bc0837e9de833a49b8cfec1901f75"
+  },
+  {
+    "repo": "https://github.com/descampsa/DynamixelShield",
+    "hash": "7fc07cc8053b5c36da6a2e1bd77852eb70e16644"
+  },
+  {
+    "repo": "https://github.com/jpralves/cseduino",
+    "hash": "90bdaf2c963632af5cb1a259b1a54bcab692f932"
+  },
+  {
+    "repo": "https://github.com/kitnic-forks/neo",
+    "hash": "536f20e948b22cf6f52f8d071e3d5f4c4be3de60"
+  }
+]

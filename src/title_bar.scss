@@ -1,70 +1,128 @@
+@import 'colors';
+@import '/semantic.min.css';
+
 .titleBar {
-    background-color:#373737;
-    width:100%;
-    box-shadow: 0px 0.1em 0.5em #000;
-    border-bottom-right-radius: 5;
+    align-items: center;
+    background-color: $mine-shaft;
     border-bottom-left-radius: 5;
+    border-bottom-right-radius: 5;
+    box-shadow: 0 .1em .5em $black;
     display: flex;
     flex-wrap: wrap;
-    @include breakpoint(mobile) {
-        padding-top:10px;
+    justify-content: space-between;
+    max-width: 100%;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+
+    @include breakpoint(small_width) {
+        justify-content: space-around;
     }
-}
 
-.logoContainer {
-    padding: 10px 10px 10px 10px;
-    background-color:#373737;
-    width: 140px;
-    top: 50%;
-    left: 50%;
-    @include breakpoint(mobile) {
-        width: 50%;
+    .logoContainer {
+        min-width:180px;
+        display:flex;
+        justify-content:center;
+        background-color: $mine-shaft;
+        margin: 10px;
+        z-index: 1;
+        flex-shrink: 2;
     }
-}
 
-.logoImg {
-    width: 90%;
-    @include breakpoint(mobile) {
-        width: 70%;
+    .logoImg {
+        max-height: 46px;
     }
-}
-
-.middleContainer {
-    padding: 2px;
-    flex-grow: 2;
-    @include breakpoint(mobile) {
-        width: 100%;
-        order:3;
-        padding:10px;
+    .submissionButton {
+        align-items: center;
+        background: $fruit-salad;
+        border: 0;
+        border-radius: 3px;
+        box-sizing: border-box;
+        color: $white;
+        cursor: pointer;
+        display: flex;
+        font-family: 'Noto Sans','Helvetica', 'Arial', sans-serif;
+        font-size: 16px;
+        font-weight: bold;
+        line-height: 0;
+        margin-right: 8px;
+        min-width: 174px;
+        padding: 20px 15px;
+        white-space: nowrap;
     }
-}
 
-.submitContainer {
-    width: 140px;
-    @include breakpoint(mobile) {
-        width:40%;
-        order: 2;
+    .submitContainer {
+        align-items: center;
+        background-color: $mine-shaft;
+        color: $white;
+        display: flex;
+        flex-shrink: 0;
+        justify-content: space-around;
+        padding: 10px;
+        z-index: 1;
+        min-width:180px;
+
+        @include breakpoint(mobile-m) {
+            width: 100%;
+        }
+
+
+        .octicon.uploadIcon,
+        .octicon.githubIcon {
+            display: block;
+            font-size: 32px;
+            height: 32px;
+            width: 32px;
+        }
+
+        .contributeButton {
+            align-items: center;
+            border: 0;
+            border-radius: 3px;
+            color: $gray;
+            cursor: pointer;
+            display: flex;
+            font-family: 'Noto Sans','Helvetica', 'Arial', sans-serif;
+            font-size: 16px;
+            font-weight: bold;
+            justify-content: space-around;
+            padding: 5px;
+            white-space: nowrap;
+
+        }
+
+        .contributeButton:hover {
+            color: $silver-chalice;
+        }
+
+        .uploadContainer:hover {
+            text-decoration: none;
+        }
     }
-}
 
-//centering trick, wtf css
-.submit:before {
-  content: "";
-  display: inline-block;
-  height: 100%;
-  vertical-align: middle;
-}
-
-.submit {
-    text-align: center;
-    background-color: #373737;
-    width: 140px;
-    height:64px;
-    @include breakpoint(mobile) {
-        padding-top:8%;
-        width:100%;
-        font-size: -webkit-xxx-large;
+    .submitImage {
+        width: 60%;
     }
-    color:white;
-}
 
+    .middleContainer {
+        flex-grow: 2;
+
+        @include breakpoint(small_width) {
+            margin: 10px;
+            order: 3;
+            width: 100%;
+        }
+    }
+
+    .contributeContainer:hover {
+        color: $white;
+        text-decoration: none;
+    }
+
+    .contributeContainer {
+        align-items: center;
+        color: $gray;
+        display: flex;
+    }
+
+}

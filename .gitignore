@@ -1,6 +1,8 @@
 build.ninja
 build/*
-elm-stuff/*
 node_modules/*
 *.sw*
 boards/*
+npm-debug.log
+.sass-cache/
+.DS_Store

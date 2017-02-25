@@ -1,0 +1,140 @@
+<ol style="list-style-type: decimal">
+<li><ul>
+<li>Here to talk about a website I made called Kitnic which is for sharing electronic projects.</li>
+<li>Slides are available at the address printed there</li>
+</ul></li>
+<li><ul>
+<li>It seems like we are living in the beginnings of a golden age of open hardware<br />
+</li>
+<li>People are sharing more and more projects online</li>
+<li>GitHub
+<ul>
+<li>3000 Kicad Projects</li>
+<li>7000 Eagle Projects</li>
+</ul></li>
+<li>Over 9000 shared projects shared on OshPark</li>
+<li>And that's not counting the Hackaday.io projects, the blogs and forums</li>
+<li>We want to process all these different ways of sharing making and sharing electronic projects</li>
+</ul></li>
+<li><ul>
+<li>But some of the most interesting projects are simultaneously brilliant and useless.</li>
+</ul></li>
+<li><ul>
+<li>We have all these different ways of making and sharing things</li>
+</ul></li>
+<li><ul>
+<li>And we want to get a board out of it</li>
+</ul></li>
+<li><ul>
+<li>And we want the right parts ordered</li>
+</ul></li>
+<li><ul>
+<li>So this is my primitive meat grinder.</li>
+<li>A browser extension that allows you to easily purchase an re-purchase electronic parts</li>
+<li>And a site to share your complete projects with others</li>
+</ul></li>
+<li><ul>
+<li>The extension's purpose is to automate what you do on these retailer sites when you buy parts</li>
+<li>So far it works with Digikey, Mouser, RS, Newark, Farnell/Element14</li>
+</ul></li>
+<li><ul>
+<li>The reason this has to be a browser extension is that it's generally accepted good practice to not allow other websites to change things in your shopping carts.</li>
+</ul></li>
+<li><ul>
+<li>It turns out the retailer websites don't really have APIs and are really not geared towards automating this process.</li>
+<li>This is a request you have to send to add something to the Mouser cart.</li>
+<li>I thought, well this is never going to work, but it might.</li>
+</ul></li>
+<li><ul>
+<li>The only way it will work is if I thoroughly test it across countries and retailers.</li>
+<li>Turns out this was a good approach and I am able to keep up with changes the retailers make to their sites fairly easily.</li>
+</ul></li>
+<li><ul>
+<li>This is what working with the extension looks like</li>
+<li>An extension that links a spreadsheet with your retailer shopping cart.</li>
+<li>You copy and paste into it.</li>
+<li>And you copy out of it back into your spreadsheet.</li>
+<li>You can drive the retailer sites this way</li>
+</ul></li>
+<li><ul>
+<li>It's available for Chrome and Firefox</li>
+<li>Takes in tab-separated values, this is the clipboard format of spreadsheets</li>
+<li>Supports 5 retailers</li>
+<li>Add and remove from shopping cart</li>
+<li>Can have a guess at what part you mean by searching Octopart and Findchips</li>
+<li>Open source under CPAL license</li>
+<li>About 250 users</li>
+</ul></li>
+<li><ul>
+<li>Getting back to the meat-grinder, we are not quite there yet.</li>
+<li>We have a way of sharing a list of part with people</li>
+<li>I wanted to make a place where people could share a more complete project, still with these two elements</li>
+</ul></li>
+<li><ul>
+<li>So to make a start I decided on some defaults</li>
+<li>A git repository, for now as everyone can get some hosting for that</li>
+<li>Tab separated values
+<ul>
+<li>the format that works with the extension</li>
+<li>it displays nicely on github</li>
+<li>we'll require the bare minimum to allow someone to potentially re-purchase</li>
+</ul></li>
+<li>RS274-X Gerbers and Excellon drills, because this is what every PCB fab accepts</li>
+<li>IPC-2581, ODB++ look like interesting formats that try and capture more information, but for now hardly anyone seems to be using them</li>
+</ul></li>
+<li><ul>
+<li>Since the extension is Javascript, and the front-end will need to be Javascript, I am just continuing to write more and more javascript, for better or worse</li>
+<li>Of course it hooks up with the extension</li>
+<li>There is actually some surprising amount of functionality without the extension
+<ul>
+<li>I found some undocumented ways to add things to retailer carts</li>
+<li>For full functionality we still need the extension</li>
+</ul></li>
+<li>We make heavy use of build automation throught Travis CI</li>
+<li>And the static site hosting that GitHub provides</li>
+<li>The registry is currenly a simple text file in the root of the source code repository</li>
+<li>People put things into the right format and send me a request to append their git URL</li>
+<li>Everytime a new project is added the whole site is re-built</li>
+<li>This definitely won't scale well with projects added, but does scale well with traffic, uptime of the website has been absolutely flawless</li>
+<li>I found a really neat project by Michael Cousins that converts gerbers to SVG and is able to make these beautiful previews of a board</li>
+<li>This way everyone can immediately see what a project is about from the board, and you don't have to add a picture</li>
+</ul></li>
+<li><ul>
+<li>So let's take a look at the site</li>
+<li>We have all the previews of the boards and short descriptions</li>
+<li>We can search</li>
+<li>We have a prominent link to the Gerbers</li>
+<li>And we can easily buy the right parts</li>
+<li>We get an indication here, with the color button if all the parts have been specified for a retailer</li>
+<li>I recently added a README rendering, which makes a project much more approachable</li>
+</ul></li>
+<li><ul>
+<li>We will have to move away from this client side only approach</li>
+<li>Hardware engineers don't really like to use git necessarily, so we should realy provide an alternative way to add projects</li>
+<li>Tagged versions would be useful for any project though, so you can select between version 1 or 2 etc</li>
+<li>We could actually skip the download step and connect up the PCB services directly</li>
+<li>Another cool idea would be to help people more in puttting the boards together</li>
+</ul></li>
+<li><ul>
+<li>This is a mock-up of that idea</li>
+<li>You hover over the part in your BOM and it shows you where to place it</li>
+</ul></li>
+<li><ul>
+<li>There has been some interest from assemblers to hook up direct links to get things manufactured and that could get really interesting for validated designs</li>
+<li>A lot can be done to help people make bills of materials and add all the right SKUs</li>
+<li>Live pricing data, so you can estimate total cost easily would be useful</li>
+</ul></li>
+<li><ul>
+<li>How can you help?</li>
+<li>Add your project!</li>
+<li>I am running a promotion at the moment as well, so if you add your project you get $25 dollars PCB manufacturing voucher</li>
+<li>We have a long list of possible features, if you can do web-dev or want to learn, pick a feature and work on it</li>
+<li>Spread the word, this is going to be really useful if everyone uses this, let's get everyone involved</li>
+</ul></li>
+<li><ul>
+<li>Any questions?</li>
+<li>If you want to keep in touch, you can check on the website itself</li>
+<li>I made a twitter account for the site, and it's on other social media as well, Reddit, Facebook, Hackaday.io etc</li>
+<li>Of course GitHub is the best way if you wanto get involved in the development side</li>
+</ul></li>
+</ol>
