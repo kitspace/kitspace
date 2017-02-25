@@ -18,7 +18,6 @@ function MpnPopup(props) {
     wide            : true,
   }
   const image = props.image || {}
-  console.log(image)
   return h(semantic.Popup, custom, [
     h('div', {className: 'imageContainer'}, [
       h(FadeImage, {src: image.url, className: 'image'})
