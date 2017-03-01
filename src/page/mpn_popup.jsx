@@ -48,10 +48,20 @@ function MpnPopup(props) {
   const image = part.image || {}
   const specs = reorder(part.specs || [])
   return h(semantic.Popup, custom, [
-    div({className: 'imageContainer'}, [
-      h(semantic.Image, {src: image.url}),
+    div({className: 'topAreaContainer'}, [
+      div({style: {fontSize: 10}}, [
+        div({className: 'imageContainer'}, [
+          h(semantic.Image, {src: image.url}),
+        ]),
+        a({href: image.credit_url}, image.credit_string),
+      ]),
+      div({className: 'linkContainer datasheetLinkContainer'}, [
+        div([a({href: part.datasheet}, [
+          h(semantic.Icon, {name: 'file pdf outline'}),
+          'Datasheet'
+        ])])
+      ]),
     ]),
-    a({href: props.datasheet}, 'datasheet'),
     h(semantic.Divider),
     div(part.description),
     h(semantic.Table, {basic: 'very', collapsing: true, celled: true}
@@ -61,7 +71,11 @@ function MpnPopup(props) {
         h(semantic.Table.Cell, spec.value),
       ])
     })),
-    h(semantic.Button, {fluid: true},  '...')
+    h(semantic.Button, {fluid: true},  '...'),
+    h(semantic.Divider),
+    div({className: 'linkContainer octopartLinkContainer'}, [
+      a({href: 'https://octopart.com/'}, 'Powered by Octopart')
+    ]),
   ])
 }
 

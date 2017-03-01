@@ -8,4 +8,19 @@
     .image {
         align-self: center;
     }
+    .topAreaContainer {
+        display: flex;
+        align-items: stretch;
+    }
+    .linkContainer {
+       flex-grow: 1;
+       display: flex;
+       justify-content: flex-end;
+       padding-right: 10px;
+       align-items: flex-end;
+       flex-direction: column;
+    }
+    .octopartLinkContainer {
+       font-size: 10px;
+    }
 }
