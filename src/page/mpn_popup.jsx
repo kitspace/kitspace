@@ -81,10 +81,9 @@ const MpnPopup = React.createClass({
       tableData = specs.slice(0, 4).map(spec => [spec.name, spec.value])
     }
     const table = h(semantic.Table, {
-        basic      : 'very',
-        collapsing : true,
-        celled     : true,
-        compact    : true,
+        basic   : 'very',
+        compact : true,
+        celled  : this.state.expanded,
         tableData,
         renderBodyRow(args) {
           return h(semantic.Table.Row, args.map(text => {
@@ -94,13 +93,11 @@ const MpnPopup = React.createClass({
     })
     return h(semantic.Popup, custom, [
       div({className: 'topAreaContainer'}, [
-        div({style:{display:'flex', flexDirection: 'column', justifyContent: 'space-around'}}, [
-          div([
-            div({className: 'imageContainer'}, [
-              h(semantic.Image, {src: image.url}),
-            ]),
-            a({style:{fontSize:10}, href: image.credit_url}, image.credit_string),
+        div([
+          div({className: 'imageContainer'}, [
+            h(semantic.Image, {src: image.url}),
           ]),
+          a({style:{fontSize:10}, href: image.credit_url}, image.credit_string),
         ]),
         div({style:{marginLeft: 20}}, [
           div({style: {maxWidth:200}}, part.description),
