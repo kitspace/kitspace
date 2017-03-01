@@ -15,7 +15,8 @@ function transform(queries) {
     const ret = {}
     if (q.get('mpn')) {
        ret.mpn = q.get('mpn').get('part')
-       ret.brand = q.get('mpn').get('manufacturer')
+       //octopart has some issue with the slash
+       ret.brand = q.get('mpn').get('manufacturer').replace(' / ', ' ')
     }
     if (q.get('sku')) {
       ret.sku = q.get('sku').get('part')
