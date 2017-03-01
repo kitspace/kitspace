@@ -1,5 +1,5 @@
 const React       = require('react')
-const {h, a, img} = require('react-hyperscript-helpers')
+const {h, a, div} = require('react-hyperscript-helpers')
 const semantic    = require('semantic-ui-react')
 
 const FadeImage = require('../fade_image')
@@ -19,9 +19,10 @@ function MpnPopup(props) {
   }
   const image = props.image || {}
   return h(semantic.Popup, custom, [
-    h('div', {className: 'imageContainer'}, [
+    div({className: 'imageContainer'}, [
       h(FadeImage, {src: image.url, className: 'image'})
     ]),
+    div(props.description),
     a({href: props.datasheet}, 'datasheet'),
   ])
 }

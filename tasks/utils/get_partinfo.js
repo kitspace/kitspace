@@ -2,7 +2,7 @@ const superagent = require('superagent')
 const immutable = require('immutable')
 
 const partinfoURL =
-    'http://ec2-52-50-17-76.eu-west-1.compute.amazonaws.com:8080/graphql'
+    'https://partinfo.kitnic.it/graphql'
 
 const MpnQuery = `
 query MpnQuery($mpn: MpnInput!) {
@@ -12,6 +12,7 @@ query MpnQuery($mpn: MpnInput!) {
       part
     }
     datasheet
+    description
     image {
       url
       credit_string

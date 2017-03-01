@@ -93,11 +93,12 @@ const TsvTable = React.createClass({
             }
           }, null) || {}
           return h(MpnPopup, {
-            onOpen    : setActivePopup,
-            onClose   : setInactivePopup,
-            trigger   : cell,
-            datasheet : part.datasheet,
-            image     : part.image,
+            onOpen      : setActivePopup,
+            onClose     : setInactivePopup,
+            trigger     : cell,
+            datasheet   : part.datasheet,
+            image       : part.image,
+            description : part.description,
           })
         }
         else {
