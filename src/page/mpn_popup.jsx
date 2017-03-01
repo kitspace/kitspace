@@ -12,6 +12,7 @@ const importance = [
   ['dielectric_characteristic'],
   ['resistance_tolerance', 'capacitance_tolerance'],
   ['voltage_rating', 'power_rating'],
+  ['pin_count'],
   ['case_package_si'],
 ]
 
@@ -65,8 +66,7 @@ const MpnPopup = React.createClass({
       trigger         : props.trigger,
       onOpen          : props.onOpen,
       onClose         : props.onClose,
-      wide            : true,
-      flowing         : this.state.expanded,
+      flowing         : true,
     }
     const part      = props.part
     const image     = part.image || {}
@@ -84,6 +84,7 @@ const MpnPopup = React.createClass({
         basic      : 'very',
         collapsing : true,
         celled     : true,
+        compact    : true,
         tableData,
         renderBodyRow(args) {
           return h(semantic.Table.Row, args.map(text => {
@@ -93,30 +94,34 @@ const MpnPopup = React.createClass({
     })
     return h(semantic.Popup, custom, [
       div({className: 'topAreaContainer'}, [
-        div({style: {fontSize: 10}}, [
-          div({className: 'imageContainer'}, [
-            h(semantic.Image, {src: image.url}),
+        div({style:{display:'flex', flexDirection: 'column', justifyContent: 'space-around'}}, [
+          div([
+            div({className: 'imageContainer'}, [
+              h(semantic.Image, {src: image.url}),
+            ]),
+            a({style:{fontSize:10}, href: image.credit_url}, image.credit_string),
           ]),
-          a({href: image.credit_url}, image.credit_string),
         ]),
-        div({className: 'linkContainer'}, [
-          div([a({href: part.datasheet}, [
-            h(semantic.Icon, {name: 'file pdf outline'}),
-            'Datasheet'
-          ])])
+        div({style:{marginLeft: 20}}, [
+          div({style: {maxWidth:200}}, part.description),
+          div({style: {marginTop: 10}, className: 'linkContainer'}, [
+            div([a({href: part.datasheet}, [
+              h(semantic.Icon, {name: 'file pdf outline'}),
+              'Datasheet'
+            ])])
+          ]),
+          h(semantic.Divider),
+          table,
+          h(div, {style:{display: 'flex', justifyContent: 'flex-end'}}, [
+            h(semantic.Button, {
+              onClick: this.toggleExpand,
+              basic: true,
+            }, this.state.expanded ? '⇠' : '...'),
+          ]),
         ]),
       ]),
-      h(semantic.Divider),
-      div(part.description),
-      table,
-      h(semantic.Button, {
-        onClick: this.toggleExpand,
-        fluid: true,
-        basic: true,
-      }, this.state.expanded ? '⇡' : '...'),
-      h(semantic.Divider),
       div({className: 'linkContainer octopartLinkContainer'}, [
-        a({href: 'https://octopart.com/'}, 'Powered by Octopart')
+        a({href: `https://octopart.com/search?q=${part.mpn.part}`}, 'Powered by Octopart')
       ]),
     ])
   },
