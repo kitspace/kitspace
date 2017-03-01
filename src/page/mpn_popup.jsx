@@ -70,16 +70,13 @@ const MpnPopup = React.createClass({
     }
     const part   = props.part || {}
     const image  = part.image || {}
-    const specs  = reorder(part.specs || [])
     const mpn    = part.mpn || {}
     const number = mpn.part
-    let tableData
-    if (this.state.expanded) {
-      tableData = specs.map(spec => [spec.name, spec.value])
+    let specs    = reorder(part.specs || [])
+    if (! this.state.expanded) {
+      tableData = specs.slice(0, 4)
     }
-    else {
-      tableData = specs.slice(0, 4).map(spec => [spec.name, spec.value])
-    }
+    const tableData = specs.map(spec => [spec.name, spec.value])
     const table = h(semantic.Table, {
         basic   : 'very',
         compact : true,
@@ -90,6 +87,16 @@ const MpnPopup = React.createClass({
           }))
         },
     })
+    let button
+    if (props.specs.length > 4) {
+      button = h(div, {style:{display: 'flex', justifyContent: 'center'}}, [
+        h(semantic.Button, {
+          onClick : this.toggleExpand,
+          size    : 'tiny',
+          basic   : true,
+        }, this.state.expanded ? '⇡' : '...'),
+      ])
+    }
     return h(semantic.Popup, custom, [
       div({className: 'topAreaContainer'}, [
         h(div, {style:{display: 'flex', flexDirection:'column', justifyContent: 'space-between'}}, [
@@ -112,13 +119,7 @@ const MpnPopup = React.createClass({
             ])])
           ]),
           table,
-          h(div, {style:{display: 'flex', justifyContent: 'center'}}, [
-            h(semantic.Button, {
-              onClick : this.toggleExpand,
-              size    : 'tiny',
-              basic   : true,
-            }, this.state.expanded ? '⇡' : '...'),
-          ]),
+          button,
         ]),
       ]),
     ])
