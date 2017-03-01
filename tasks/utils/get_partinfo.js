@@ -18,6 +18,11 @@ query MpnQuery($mpn: MpnInput!) {
       credit_string
       credit_url
     }
+    specs {
+      key
+      name
+      value
+    }
   }
 }`
 
