@@ -97,7 +97,7 @@ const MpnPopup = React.createClass({
           div({className: 'imageContainer'}, [
             h(semantic.Image, {src: image.url}),
           ]),
-          a({style:{fontSize:10}, href: image.credit_url}, image.credit_string),
+          a({style:{fontSize:9}, href: image.credit_url}, image.credit_string),
         ]),
         div({style:{marginLeft: 20}}, [
           div({style: {maxWidth:200}}, part.description),
@@ -107,18 +107,17 @@ const MpnPopup = React.createClass({
               'Datasheet'
             ])])
           ]),
-          h(semantic.Divider),
           table,
-          h(div, {style:{display: 'flex', justifyContent: 'flex-end'}}, [
-            h(semantic.Button, {
-              onClick: this.toggleExpand,
-              basic: true,
-            }, this.state.expanded ? '⇠' : '...'),
-          ]),
         ]),
       ]),
-      div({className: 'linkContainer octopartLinkContainer'}, [
-        a({href: `https://octopart.com/search?q=${part.mpn.part}`}, 'Powered by Octopart')
+      h(div, {style:{display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between'}}, [
+        a({style:{fontSize: 10}, href: `https://octopart.com/search?q=${part.mpn.part}`}, 'Powered by Octopart'),
+        h(semantic.Button, {
+          onClick: this.toggleExpand,
+          size: 'tiny',
+          basic: true,
+          style: {marginTop: 5},
+        }, this.state.expanded ? '⇠' : '...'),
       ]),
     ])
   },
