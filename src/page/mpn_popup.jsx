@@ -112,11 +112,11 @@ const MpnPopup = React.createClass({
         ]),
         div({style:{marginLeft: 20}}, [
           div({style: {maxWidth: 200}}, part.description),
-          div({style: {marginTop: 15}, className: 'linkContainer'}, [
-            div([a({href: part.datasheet}, [
+          div({style: {marginTop: 15, display:'flex', justifyContent: 'center'}}, [
+            a({href: part.datasheet}, [
               h(semantic.Icon, {name: 'file pdf outline'}),
               'Datasheet'
-            ])])
+            ])
           ]),
           table,
           button,
