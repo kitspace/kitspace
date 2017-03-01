@@ -15,6 +15,14 @@ const importance = [
   ['case_package_si'],
 ]
 
+function chunkArray(arr, chunkSize) {
+    var groups = [], i;
+    for (i = 0; i < arr.length; i += chunkSize) {
+        groups.push(arr.slice(i, i + chunkSize));
+    }
+    return groups;
+}
+
 function reorder(specs) {
   const groups = specs.reduce((acc, spec) => {
     let index = importance.reduce((prev, keys, index) => {
@@ -58,17 +66,31 @@ const MpnPopup = React.createClass({
       onOpen          : props.onOpen,
       onClose         : props.onClose,
       wide            : true,
+      flowing         : this.state.expanded,
     }
-    const part = props.part
-    const image = part.image || {}
-    const specs = reorder(part.specs || [])
-    let tableRows
+    const part      = props.part
+    const image     = part.image || {}
+    const specs     = reorder(part.specs || [])
+    let tableData
     if (this.state.expanded) {
-      tableRows = specs.map(specRow)
+      tableData = chunkArray(specs, 4).map(group => {
+        return ramda.flatten(group.map(spec => ['', spec.name, spec.value]))
+      })
     }
     else {
-      tableRows = specs.slice(0,4).map(specRow)
+      tableData = specs.slice(0, 4).map(spec => [spec.name, spec.value])
     }
+    const table = h(semantic.Table, {
+        basic      : 'very',
+        collapsing : true,
+        celled     : true,
+        tableData,
+        renderBodyRow(args) {
+          return h(semantic.Table.Row, args.map(text => {
+            return h(semantic.Table.Cell, text)
+          }))
+        },
+    })
     return h(semantic.Popup, custom, [
       div({className: 'topAreaContainer'}, [
         div({style: {fontSize: 10}}, [
@@ -86,16 +108,12 @@ const MpnPopup = React.createClass({
       ]),
       h(semantic.Divider),
       div(part.description),
-      h(semantic.Table, {
-        basic: 'very',
-        collapsing: true,
-        celled: true
-      }, tableRows),
+      table,
       h(semantic.Button, {
         onClick: this.toggleExpand,
         fluid: true,
         basic: true,
-      },  this.state.expanded ? '⇡' : '...'),
+      }, this.state.expanded ? '⇡' : '...'),
       h(semantic.Divider),
       div({className: 'linkContainer octopartLinkContainer'}, [
         a({href: 'https://octopart.com/'}, 'Powered by Octopart')
