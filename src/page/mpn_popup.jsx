@@ -82,7 +82,7 @@ const MpnPopup = React.createClass({
         compact : true,
         tableData,
         renderBodyRow(args) {
-          return h(semantic.Table.Row, args.map(text => {
+          return h(semantic.Table.Row, {key: String(args)}, args.map(text => {
             return h(semantic.Table.Cell, text)
           }))
         },
