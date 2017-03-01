@@ -7,7 +7,7 @@ const FadeImage = require('../fade_image')
 
 
 const importance = [
-  ['capacitance', 'resistance'],
+  ['color', 'capacitance', 'resistance'],
   ['case_package'],
   ['dielectric_characteristic'],
   ['resistance_tolerance', 'capacitance_tolerance'],
@@ -74,7 +74,7 @@ const MpnPopup = React.createClass({
     const number = mpn.part
     let specs    = reorder(part.specs || [])
     if (! this.state.expanded) {
-      tableData = specs.slice(0, 4)
+      specs = specs.slice(0, 4)
     }
     const tableData = specs.map(spec => [spec.name, spec.value])
     const table = h(semantic.Table, {
@@ -88,7 +88,7 @@ const MpnPopup = React.createClass({
         },
     })
     let button
-    if (props.specs.length > 4) {
+    if ((part.specs || []).length > 4) {
       button = h(div, {style:{display: 'flex', justifyContent: 'center'}}, [
         h(semantic.Button, {
           onClick : this.toggleExpand,
