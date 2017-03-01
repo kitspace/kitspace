@@ -68,9 +68,11 @@ const MpnPopup = React.createClass({
       onClose         : props.onClose,
       flowing         : true,
     }
-    const part      = props.part
-    const image     = part.image || {}
-    const specs     = reorder(part.specs || [])
+    const part   = props.part || {}
+    const image  = part.image || {}
+    const specs  = reorder(part.specs || [])
+    const mpn    = part.mpn || {}
+    const number = mpn.part
     let tableData
     if (this.state.expanded) {
       tableData = specs.map(spec => [spec.name, spec.value])
@@ -99,7 +101,7 @@ const MpnPopup = React.createClass({
             a({style:{fontSize:9}, href: image.credit_url}, image.credit_string),
           ]),
           h(div, {style:{display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-start'}}, [
-            a({style:{fontSize: 10}, href: `https://octopart.com/search?q=${part.mpn.part}`}, 'Powered by Octopart'),
+            a({style:{fontSize: 10}, href: number ? `https://octopart.com/search?q=${number}` : 'https://octopart.com/'}, 'Powered by Octopart'),
           ]),
         ]),
         div({style:{marginLeft: 20}}, [
