@@ -73,9 +73,7 @@ const MpnPopup = React.createClass({
     const specs     = reorder(part.specs || [])
     let tableData
     if (this.state.expanded) {
-      tableData = chunkArray(specs, 4).map(group => {
-        return ramda.flatten(group.map(spec => ['', spec.name, spec.value]))
-      })
+      tableData = specs.map(spec => [spec.name, spec.value])
     }
     else {
       tableData = specs.slice(0, 4).map(spec => [spec.name, spec.value])
@@ -93,31 +91,34 @@ const MpnPopup = React.createClass({
     })
     return h(semantic.Popup, custom, [
       div({className: 'topAreaContainer'}, [
-        div([
-          div({className: 'imageContainer'}, [
-            h(semantic.Image, {src: image.url}),
+        h(div, {style:{display: 'flex', flexDirection:'column', justifyContent: 'space-between'}}, [
+          div([
+            div({className: 'imageContainer'}, [
+              h(semantic.Image, {src: image.url}),
+            ]),
+            a({style:{fontSize:9}, href: image.credit_url}, image.credit_string),
           ]),
-          a({style:{fontSize:9}, href: image.credit_url}, image.credit_string),
+          h(div, {style:{display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-start'}}, [
+            a({style:{fontSize: 10}, href: `https://octopart.com/search?q=${part.mpn.part}`}, 'Powered by Octopart'),
+          ]),
         ]),
         div({style:{marginLeft: 20}}, [
-          div({style: {maxWidth:200}}, part.description),
-          div({style: {marginTop: 10}, className: 'linkContainer'}, [
+          div({style: {maxWidth: 200}}, part.description),
+          div({style: {marginTop: 15}, className: 'linkContainer'}, [
             div([a({href: part.datasheet}, [
               h(semantic.Icon, {name: 'file pdf outline'}),
               'Datasheet'
             ])])
           ]),
           table,
+          h(div, {style:{display: 'flex', justifyContent: 'center'}}, [
+            h(semantic.Button, {
+              onClick : this.toggleExpand,
+              size    : 'tiny',
+              basic   : true,
+            }, this.state.expanded ? '⇡' : '...'),
+          ]),
         ]),
-      ]),
-      h(div, {style:{display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between'}}, [
-        a({style:{fontSize: 10}, href: `https://octopart.com/search?q=${part.mpn.part}`}, 'Powered by Octopart'),
-        h(semantic.Button, {
-          onClick: this.toggleExpand,
-          size: 'tiny',
-          basic: true,
-          style: {marginTop: 5},
-        }, this.state.expanded ? '⇠' : '...'),
       ]),
     ])
   },
