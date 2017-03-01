@@ -37,6 +37,9 @@ function octopart(queries) {
     })
     .set('Accept', 'application/json')
     .then(res => {
+      if (res.status !== 200) {
+        console.error(res.status, queries)
+      }
       const results = res.body.results
       return queries.reduce((returns, query) => {
         const query_id = String(query.hashCode())
@@ -55,10 +58,15 @@ function octopart(queries) {
             value: spec.display_value,
           })
         }).toList()
+        const number = query.get('mpn') ? query.get('mpn').get('part') : item.mpn
+        let manufacturer = item.brand.name
+        if (query.get('mpn') && query.get('mpn').get('manufacturer') !== '') {
+          manufacturer = query.get('mpn').get('manufacturer')
+        }
         return returns.set(query, immutable.Map({
             mpn: immutable.Map({
-              part       : item.mpn,
-              manufacturer : item.brand.name,
+              part : number,
+              manufacturer,
             }),
             description  : item.short_description,
             image        : image(item),
@@ -67,7 +75,7 @@ function octopart(queries) {
             specs
         }))
       }, immutable.Map())
-    })
+    }).catch(err => console.error(err))
 }
 
 
