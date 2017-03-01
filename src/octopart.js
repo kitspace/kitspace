@@ -29,7 +29,7 @@ function transform(queries) {
 function octopart(queries) {
   const octopart_queries = transform(queries)
   return superagent.get('https://octopart.com/api/v3/parts/match')
-    .query('include[]=short_description&include[]=imagesets&include[]=datasheets')
+    .query('include[]=specs&include[]=short_description&include[]=imagesets&include[]=datasheets')
     .query({
       apikey,
       queries: JSON.stringify(octopart_queries.toJS()),
@@ -47,6 +47,13 @@ function octopart(queries) {
           return returns.set(query, immutable.Map())
         }
         const item = result.items[0]
+        const specs = immutable.Map(item.specs).map((spec, key) => {
+          return immutable.Map({
+            key,
+            name: spec.metadata.name,
+            value: spec.display_value,
+          })
+        }).toList()
         return returns.set(query, immutable.Map({
             mpn: immutable.Map({
               part       : item.mpn,
@@ -56,6 +63,7 @@ function octopart(queries) {
             image        : image(item),
             datasheet    : datasheet(item),
             offers       : offers(item),
+            specs
         }))
       }, immutable.Map())
     })

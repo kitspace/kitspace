@@ -29,6 +29,7 @@ const schema = `
      datasheet   : String
      description : String
      offers      : [Offer]
+     specs       : [Spec]
   }
 
   type Offer {
@@ -45,6 +46,12 @@ const schema = `
     url           : String
     credit_string : String
     credit_url    : String
+  }
+
+  type Spec {
+    key: String
+    name: String
+    value: String
   }
 `
 
