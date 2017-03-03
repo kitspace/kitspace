@@ -35,14 +35,8 @@ function markerColor(ref) {
 const TsvTable = React.createClass({
   getInitialState() {
     return {
-      activeCell: null,
       activePopup: null,
     }
-  },
-  componentWillMount() {
-    this.setActiveCell = throttle((rowIndex, columnIndex) => {
-      this.setState({activeCell: [rowIndex, columnIndex]})
-    }, 30)
   },
   render() {
     const tsv      = this.props.tsv
@@ -56,32 +50,26 @@ const TsvTable = React.createClass({
       return ['Manufacturer', 'MPN', 'Description']
         .indexOf(headings[index]) < 0
     }
-    const activeCell  = this.state.activeCell
     const activePopup = this.state.activePopup
     const bodyJSX = tbody(lines.slice(1).map((line, rowIndex) => {
-      const rowActiveCell  = activeCell && activeCell[0] === rowIndex
       const rowActivePopup = activePopup && activePopup[0] === rowIndex
-      const rowSelected    = rowActivePopup || (!activePopup && rowActiveCell)
-      const className      = rowSelected ? 'selected' : ''
+      const className      = rowActivePopup ? 'selected' : ''
       return h(semantic.Table.Row, {className}, line.map((text, columnIndex) => {
-        const error       = markPink(columnIndex) && text == ''
-        const className   = columnIndex === 0 ? 'marked ' + markerColor(text) : ''
-        const cellActive  = rowActiveCell && activeCell[1] === columnIndex
-        const popupActive = rowActivePopup && activePopup[1] === columnIndex
-        const active      = popupActive || (!activePopup && cellActive)
+        const error     = markPink(columnIndex) && text == ''
+        const className = columnIndex === 0 ? 'marked ' + markerColor(text) : ''
+        const active    = rowActivePopup && activePopup[1] === columnIndex
         const setActivePopup = () => {
           this.setState({activePopup: [rowIndex, columnIndex]})
         }
         const setInactivePopup = () => {
-          if (popupActive) {
+          if (active) {
             this.setState({activePopup: null})
           }
         }
         const cell = h(semantic.Table.Cell, {
-          onMouseOver: this.setActiveCell.bind(this, rowIndex, columnIndex),
           error,
           className,
-          active
+          active,
         }, text)
         if (headings[columnIndex] === 'MPN') {
           const part = this.props.parts.reduce((prev, part) => {
@@ -105,6 +93,7 @@ const TsvTable = React.createClass({
       }))
     }))
     const tableProps = {
+      selectable: !activePopup,
       celled: true,
       unstackable: true,
       onMouseOut: () => this.setState({activeCell: null})
