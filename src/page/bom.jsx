@@ -39,11 +39,12 @@ const TsvTable = React.createClass({
     }
   },
   mpnCells(contents, rowIndex, columnIndex) {
-    const activePopup    = this.state.activePopup
-    const rowActivePopup = activePopup && activePopup[0] === rowIndex
-    const active         = rowActivePopup && activePopup[1] === columnIndex
-    const cells          = contents.map(t => h(semantic.Table.Cell, {active}, t))
-    const number         = contents[1]
+    const activePopup = this.state.activePopup
+    const active = activePopup
+      && activePopup[0] === rowIndex
+      && activePopup[1] === columnIndex
+    const cells  = contents.map(t => h(semantic.Table.Cell, {active}, t))
+    const number = contents[1]
     if (number !== '') {
       const setActivePopup = () => {
         this.setState({activePopup: [rowIndex, columnIndex]})
