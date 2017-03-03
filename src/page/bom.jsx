@@ -55,19 +55,10 @@ const TsvTable = React.createClass({
     const activePopup = this.state.activePopup
     const bodyJSX = tbody(bodyLines.map((line, rowIndex) => {
       const rowActivePopup = activePopup && activePopup[0] === rowIndex
-      const className      = rowActivePopup ? 'selected' : ''
-      return h(semantic.Table.Row, {className}, line.map((text, columnIndex) => {
+      const bodyCells = line.map((text, columnIndex) => {
         const error     = markPink(columnIndex) && text === ''
         const className = columnIndex === 0 ? 'marked ' + markerColor(text) : ''
         const active    = rowActivePopup && activePopup[1] === columnIndex
-        const setActivePopup = () => {
-          this.setState({activePopup: [rowIndex, columnIndex]})
-        }
-        const setInactivePopup = () => {
-          if (active) {
-            this.setState({activePopup: null})
-          }
-        }
         const cell = h(semantic.Table.Cell, {
           error,
           className,
@@ -75,6 +66,14 @@ const TsvTable = React.createClass({
         }, text)
         const heading = headings[columnIndex]
         if (heading === 'MPN' || heading === 'Manufacturer') {
+          const setActivePopup = () => {
+            this.setState({activePopup: [rowIndex, columnIndex]})
+          }
+          const setInactivePopup = () => {
+            if (active) {
+              this.setState({activePopup: null})
+            }
+          }
           let number
           if (heading === 'MPN') {
             number = text
@@ -100,7 +99,9 @@ const TsvTable = React.createClass({
         else {
           return cell
         }
-      }))
+      })
+      const className = rowActivePopup ? 'selected' : ''
+      return h(semantic.Table.Row, {className}, bodyCells)
     }))
     const tableProps = {
       selectable: !activePopup,
