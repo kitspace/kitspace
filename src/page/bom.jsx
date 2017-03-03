@@ -42,35 +42,34 @@ const TsvTable = React.createClass({
     const activePopup    = this.state.activePopup
     const rowActivePopup = activePopup && activePopup[0] === rowIndex
     const active         = rowActivePopup && activePopup[1] === columnIndex
-    const setActivePopup = () => {
-      this.setState({activePopup: [rowIndex, columnIndex]})
+    const cells          = contents.map(t => h(semantic.Table.Cell, {active}, t))
+    const number         = contents[1]
+    if (number !== '') {
+      const setActivePopup = () => {
+        this.setState({activePopup: [rowIndex, columnIndex]})
+      }
+      const setInactivePopup = () => {
+        if (active) {
+          this.setState({activePopup: null})
+        }
+      }
+      const part = this.props.parts.reduce((prev, part) => {
+        if (prev) {
+          return prev
+        }
+        if (part && part.mpn && part.mpn.part === number) {
+          return part
+        }
+      }, null) || {}
+      return cells.map(cell => {
+        return h(MpnPopup, {
+          onOpen  : setActivePopup,
+          onClose : setInactivePopup,
+          trigger : cell,
+          part    : part,
+        })
+      })
     }
-    const setInactivePopup = () => {
-      if (active) {
-        this.setState({activePopup: null})
-      }
-    }
-    const part = this.props.parts.reduce((prev, part) => {
-      if (prev) {
-        return prev
-      }
-      if (part && part.mpn && part.mpn.part === contents[1]) {
-        return part
-      }
-    }, null) || {}
-    const cells = []
-    cells[0] = h(MpnPopup, {
-      onOpen  : setActivePopup,
-      onClose : setInactivePopup,
-      trigger : h(semantic.Table.Cell, {active}, contents[0]),
-      part    : part,
-    })
-    cells[1] = h(MpnPopup, {
-      onOpen  : setActivePopup,
-      onClose : setInactivePopup,
-      trigger : h(semantic.Table.Cell, {active}, contents[1]),
-      part    : part,
-    })
     return cells
   },
   render() {
