@@ -19,3 +19,4 @@ https://github.com/descampsa/DynamixelShield
 https://github.com/jpralves/cseduino
 https://github.com/kitnic-forks/neo
 https://github.com/InaneCoding/KOS01_IdealDiode20A
+https://github.com/UDXS/Arduitsy
