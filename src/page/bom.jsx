@@ -3,7 +3,7 @@ const React           = require('react')
 const DoubleScrollbar = require('react-double-scrollbar')
 const {h, tbody, tr}  = require('react-hyperscript-helpers')
 const semantic        = require('semantic-ui-react')
-const throttle        = require('lodash.throttle')
+const ramda           = require('ramda')
 
 const MpnPopup = require('./mpn_popup')
 
@@ -38,76 +38,86 @@ const TsvTable = React.createClass({
       activePopup: null,
     }
   },
+  mpnCells(contents, rowIndex, columnIndex) {
+    const activePopup    = this.state.activePopup
+    const rowActivePopup = activePopup && activePopup[0] === rowIndex
+    const active         = rowActivePopup && activePopup[1] === columnIndex
+    const setActivePopup = () => {
+      this.setState({activePopup: [rowIndex, columnIndex]})
+    }
+    const setInactivePopup = () => {
+      if (active) {
+        this.setState({activePopup: null})
+      }
+    }
+    const part = this.props.parts.reduce((prev, part) => {
+      if (prev) {
+        return prev
+      }
+      if (part && part.mpn && part.mpn.part === contents[1]) {
+        return part
+      }
+    }, null) || {}
+    const cells = []
+    cells[0] = h(MpnPopup, {
+      onOpen  : setActivePopup,
+      onClose : setInactivePopup,
+      trigger : h(semantic.Table.Cell, {}, contents[0]),
+      part    : part
+    })
+    cells[1] = h(semantic.Table.Cell, {}, contents[1])
+    return cells
+  },
   render() {
     const tsv       = this.props.tsv
     const lines     = tsv.split('\n').slice(0, -1).map(line => line.split('\t'))
     const headings  = lines[0]
     const bodyLines = lines.slice(1)
-    function markPink(columnIndex) {
-      //mark pink empty cells in all columns except these three
-      return ['Manufacturer', 'MPN', 'Description']
-        .indexOf(headings[columnIndex]) < 0
-    }
     let headingJSX = headings.map(text => {
       return h(semantic.Table.HeaderCell, text)
     })
     headingJSX = h(semantic.Table.Header, [h(semantic.Table.Row, headingJSX)])
-    const activePopup = this.state.activePopup
     const bodyJSX = tbody(bodyLines.map((line, rowIndex) => {
-      const rowActivePopup = activePopup && activePopup[0] === rowIndex
-      const bodyCells = line.map((text, columnIndex) => {
-        const error     = markPink(columnIndex) && text === ''
-        const className = columnIndex === 0 ? 'marked ' + markerColor(text) : ''
-        const active    = rowActivePopup && activePopup[1] === columnIndex
+      const grouped = line.reduce((grouped, text, columnIndex) => {
+        const heading = headings[columnIndex]
+        if (heading === 'Manufacturer') {
+          grouped.push([text])
+          return grouped
+        }
+        if (heading === 'MPN') {
+          grouped[grouped.length - 1].push(text)
+          return grouped
+        }
+        grouped.push(text)
+        return grouped
+      }, [])
+      const groupedHeadings = headings.filter(h => h !== 'Manufacturer')
+      function markPink(columnIndex) {
+        //mark pink empty cells in all columns except these
+        return ['Description']
+          .indexOf(groupedHeadings[columnIndex]) < 0
+      }
+      const bodyCells = grouped.map((contents, columnIndex) => {
+        if (typeof(contents) === 'object') {
+          return this.mpnCells(contents, rowIndex, columnIndex)
+        }
+        const error     = markPink(columnIndex) && contents === ''
+        const className = columnIndex === 0 ? 'marked ' + markerColor(contents) : ''
         const cell = h(semantic.Table.Cell, {
           error,
           className,
-          active,
-        }, text)
-        const heading = headings[columnIndex]
-        if (heading === 'MPN' || heading === 'Manufacturer') {
-          const setActivePopup = () => {
-            this.setState({activePopup: [rowIndex, columnIndex]})
-          }
-          const setInactivePopup = () => {
-            if (active) {
-              this.setState({activePopup: null})
-            }
-          }
-          let number
-          if (heading === 'MPN') {
-            number = text
-          }
-          else if (heading === 'Manufacturer') {
-            number = bodyLines[rowIndex][columnIndex + 1]
-          }
-          const part = this.props.parts.reduce((prev, part) => {
-            if (prev) {
-              return prev
-            }
-            if (part && part.mpn && part.mpn.part === number) {
-              return part
-            }
-          }, null) || {}
-          return h(MpnPopup, {
-            onOpen  : setActivePopup,
-            onClose : setInactivePopup,
-            trigger : cell,
-            part    : part
-          })
-        }
-        else {
-          return cell
-        }
+        }, contents)
+        return cell
       })
+      const activePopup    = this.state.activePopup
+      const rowActivePopup = activePopup && activePopup[0] === rowIndex
       const className = rowActivePopup ? 'selected' : ''
-      return h(semantic.Table.Row, {className}, bodyCells)
+      return h(semantic.Table.Row, {className}, ramda.flatten(bodyCells))
     }))
     const tableProps = {
-      selectable: !activePopup,
-      celled: true,
-      unstackable: true,
-      onMouseOut: () => this.setState({activeCell: null})
+      selectable  : !this.state.activePopup,
+      celled      : true,
+      unstackable : true,
     }
     return h(semantic.Table, tableProps, [headingJSX, bodyJSX])
   }
