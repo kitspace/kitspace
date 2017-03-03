@@ -39,9 +39,10 @@ const TsvTable = React.createClass({
     }
   },
   render() {
-    const tsv      = this.props.tsv
-    const lines    = tsv.split('\n').slice(0, -1).map(line => line.split('\t'))
-    const headings = lines[0]
+    const tsv       = this.props.tsv
+    const lines     = tsv.split('\n').slice(0, -1).map(line => line.split('\t'))
+    const headings  = lines[0]
+    const bodyLines = lines.slice(1)
     function markPink(columnIndex) {
       //mark pink empty cells in all columns except these three
       return ['Manufacturer', 'MPN', 'Description']
@@ -52,7 +53,7 @@ const TsvTable = React.createClass({
     })
     headingJSX = h(semantic.Table.Header, [h(semantic.Table.Row, headingJSX)])
     const activePopup = this.state.activePopup
-    const bodyJSX = tbody(lines.slice(1).map((line, rowIndex) => {
+    const bodyJSX = tbody(bodyLines.map((line, rowIndex) => {
       const rowActivePopup = activePopup && activePopup[0] === rowIndex
       const className      = rowActivePopup ? 'selected' : ''
       return h(semantic.Table.Row, {className}, line.map((text, columnIndex) => {
@@ -72,12 +73,20 @@ const TsvTable = React.createClass({
           className,
           active,
         }, text)
-        if (headings[columnIndex] === 'MPN') {
+        const heading = headings[columnIndex]
+        if (heading === 'MPN' || heading === 'Manufacturer') {
+          let number
+          if (heading === 'MPN') {
+            number = text
+          }
+          else if (heading === 'Manufacturer') {
+            number = bodyLines[rowIndex][columnIndex + 1]
+          }
           const part = this.props.parts.reduce((prev, part) => {
             if (prev) {
               return prev
             }
-            if (part && part.mpn && part.mpn.part === text) {
+            if (part && part.mpn && part.mpn.part === number) {
               return part
             }
           }, null) || {}
