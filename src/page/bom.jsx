@@ -42,20 +42,21 @@ const TsvTable = React.createClass({
     const tsv      = this.props.tsv
     const lines    = tsv.split('\n').slice(0, -1).map(line => line.split('\t'))
     const headings = lines[0]
-    let headingJSX = headings.map((text) => {
+    function markPink(columnIndex) {
+      //mark pink empty cells in all columns except these three
+      return ['Manufacturer', 'MPN', 'Description']
+        .indexOf(headings[columnIndex]) < 0
+    }
+    let headingJSX = headings.map(text => {
       return h(semantic.Table.HeaderCell, text)
     })
     headingJSX = h(semantic.Table.Header, [h(semantic.Table.Row, headingJSX)])
-    function markPink(index) {
-      return ['Manufacturer', 'MPN', 'Description']
-        .indexOf(headings[index]) < 0
-    }
     const activePopup = this.state.activePopup
     const bodyJSX = tbody(lines.slice(1).map((line, rowIndex) => {
       const rowActivePopup = activePopup && activePopup[0] === rowIndex
       const className      = rowActivePopup ? 'selected' : ''
       return h(semantic.Table.Row, {className}, line.map((text, columnIndex) => {
-        const error     = markPink(columnIndex) && text == ''
+        const error     = markPink(columnIndex) && text === ''
         const className = columnIndex === 0 ? 'marked ' + markerColor(text) : ''
         const active    = rowActivePopup && activePopup[1] === columnIndex
         const setActivePopup = () => {
