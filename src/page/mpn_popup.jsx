@@ -67,6 +67,7 @@ const MpnPopup = React.createClass({
       onOpen          : props.onOpen,
       onClose         : props.onClose,
       flowing         : true,
+      open            : props.open,
     }
     const part   = props.part || {}
     const image  = part.image || {}

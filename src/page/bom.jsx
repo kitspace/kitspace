@@ -59,13 +59,13 @@ const TsvTable = React.createClass({
       }
     }, null) || {}
     const cells = []
-    cells[0] = h(MpnPopup, {
+    cells[0] = h(semantic.Table.Cell, {active}, contents[0])
+    cells[1] = h(MpnPopup, {
       onOpen  : setActivePopup,
       onClose : setInactivePopup,
-      trigger : h(semantic.Table.Cell, {}, contents[0]),
+      trigger : h(semantic.Table.Cell, {active}, contents[1]),
       part    : part
     })
-    cells[1] = h(semantic.Table.Cell, {}, contents[1])
     return cells
   },
   render() {
