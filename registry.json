@@ -78,5 +78,13 @@
   {
     "repo": "https://github.com/kitnic-forks/neo",
     "hash": "536f20e948b22cf6f52f8d071e3d5f4c4be3de60"
+  },
+  {
+    "repo": "https://github.com/InaneCoding/KOS01_IdealDiode20A",
+    "hash": "61fcdd7f007040bcf7b4e579f6e848b230cee084"
+  },
+  {
+    "repo": "https://github.com/UDXS/Arduitsy",
+    "hash": "da5519f76a7f6f393160ff0374f62a3ccf55d485"
   }
 ]
