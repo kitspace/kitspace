@@ -12,7 +12,7 @@ describe('from Mpn', () => {
   })
   it('responds', done => {
     test(`{
-       part(mpn:{manufacturer:"Texas Instruments" number:"NE555P"}) {
+       part(mpn:{manufacturer:"Texas Instruments" part:"NE555P"}) {
          description
        }
     }`).then(response => {
@@ -24,7 +24,7 @@ describe('from Mpn', () => {
   })
   it('responds twice', done => {
     test(`{
-       part(mpn:{manufacturer:"Texas Instruments" number:"NE555P"}) {
+       part(mpn:{manufacturer:"Texas Instruments" part:"NE555P"}) {
          description
        }
     }`).then(response => {
@@ -36,7 +36,7 @@ describe('from Mpn', () => {
   })
   it('fills in manufacturer', done => {
     test(`{
-       part(mpn:{manufacturer:"Texas Instruments" number:"NE555P"}) {
+       part(mpn:{manufacturer:"Texas Instruments" part:"NE555P"}) {
          mpn {
            manufacturer
          }
@@ -51,7 +51,7 @@ describe('from Mpn', () => {
   })
   it('returns even without results', done => {
     test(`{
-       part(mpn:{manufacturer: "whatever" number:"not really a part"}) {
+       part(mpn:{manufacturer: "whatever" part:"not really a part"}) {
          mpn {
            manufacturer
          }
@@ -65,11 +65,11 @@ describe('from Mpn', () => {
   })
   it('returns offers array', done => {
     test(`{
-       part(mpn:{manufacturer:"Texas Instruments" number:"NE555P"}) {
+       part(mpn:{manufacturer:"Texas Instruments" part:"NE555P"}) {
          offers {
            sku {
              vendor
-             number
+             part
            }
          }
        }
@@ -91,11 +91,11 @@ describe('from Sku', () => {
   })
   it('responds', done => {
     test(`{
-       part(sku:{vendor: "", number:"NE555P"}) {
+       part(sku:{vendor: "", part:"NE555P"}) {
          offers {
            sku {
              vendor
-             number
+             part
            }
          }
        }
@@ -108,11 +108,11 @@ describe('from Sku', () => {
   it('returns same part when queried with offers', done => {
     const mpn = 'NE555P'
     test(`{
-       part(mpn:{manufacturer: "Texas Instruments" number:"${mpn}"}) {
+       part(mpn:{manufacturer: "Texas Instruments" part:"${mpn}"}) {
          offers {
            sku {
              vendor
-             number
+             part
            }
          }
        }
@@ -125,9 +125,9 @@ describe('from Sku', () => {
       assert(part.offers.length > 0, 'offers is empty')
       const sku = part.offers[0].sku
       test(`{
-         part(sku:{vendor: "${sku.vendor}", number:"${sku.number}"}) {
+         part(sku:{vendor: "${sku.vendor}", part:"${sku.part}"}) {
            mpn {
-             number
+             part
            }
          }
       }`).then(response => {
@@ -135,7 +135,7 @@ describe('from Sku', () => {
         assert(response.status === 200, 'second status is not 200')
         assert(response.data.part != null, 'second part data not returned')
         const part = response.data.part
-        assert(part.mpn.number === mpn, 'mpn changed')
+        assert(part.mpn.part === mpn, 'mpn changed')
         return done()
       })
     })

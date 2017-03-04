@@ -2,14 +2,6 @@ const superagent = require('superagent')
 const immutable = require('immutable')
 const apikey = require('../config').OCTOPART_API_KEY
 
-const aliases = immutable.Map({
-  query_id: 'reference',
-  manufacturer: 'brand',
-  mpn: 'mpn',
-  vendor: 'seller',
-  sku: 'sku',
-})
-
 function transform(queries) {
   return queries.map(q => {
     const ret = {}
