@@ -4,13 +4,16 @@ projects that register. Just follow the steps in the [submission preview](https:
 
 [![build status][travis-status]](https://travis-ci.org/monostable/kitnic) 
 
+[![video](image_src/fosdem2017.jpg)](https://video.fosdem.org/2017/AW1.120/kitnic_it.vp8.webm)
+
 Kitnic is a registry of open source hardware electronics projects that are
 ready to order and build. The most important elements of a Kitnic project page
 are: 
 
 - A prominent link to download the Gerber files and a preview rendering of the board
 - The ability to quickly add the required components to a retailer shopping
-  cart (using clever magic in the form of our [browser extension][1clickbom]) 
+  cart (using clever magic in the form of our [browser extension][1clickbom])
+  
 
 Help us build a open hardware repository of useful electronics projects!
 
