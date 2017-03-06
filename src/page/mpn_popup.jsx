@@ -52,7 +52,7 @@ const MpnPopup = React.createClass({
   getInitialState() {
     return {expanded: false}
   },
-  toggleExpand() {
+  toggleExpanded() {
     this.setState({expanded: !this.state.expanded})
   },
   render() {
@@ -70,7 +70,10 @@ const MpnPopup = React.createClass({
       open            : props.open,
       offset          : props.offset,
     }
-    const part   = props.part || {}
+    const part = props.part
+    if (Object.keys(part).length === 0) {
+      return h(semantic.Popup, custom, 'Sorry, no further part information found.')
+    }
     const image  = part.image || {}
     const mpn    = part.mpn || {}
     const number = mpn.part
@@ -93,7 +96,7 @@ const MpnPopup = React.createClass({
     if ((part.specs || []).length > 4) {
       button = h(div, {style:{display: 'flex', justifyContent: 'center'}}, [
         h(semantic.Button, {
-          onClick : this.toggleExpand,
+          onClick : this.toggleExpanded,
           size    : 'tiny',
           basic   : true,
         }, this.state.expanded ? '⇡' : '...'),
