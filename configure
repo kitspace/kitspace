@@ -239,6 +239,7 @@ if (config === 'production') {
             ninja.edge(path.join('build', path.relative('presentations', f))).from(f).using('copy')
         })
     })
+    ninja.edge('build/_redirects').from('src/_redirects').using('copy')
 }
 
 
