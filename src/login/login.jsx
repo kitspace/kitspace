@@ -3,6 +3,7 @@ const React     = require('react')
 const {h}       = require('react-hyperscript-helpers')
 const path      = require('path')
 const immutable = require('immutable')
+const semantic  = require('semantic-ui-react')
 
 const TitleBar = require('../title_bar')
 

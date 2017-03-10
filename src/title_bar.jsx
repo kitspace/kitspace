@@ -1,5 +1,5 @@
 const React = require('react')
-const { Button } = require('semantic-ui-react')
+const semantic = require('semantic-ui-react')
 
 var TitleBar = React.createClass({
   propTypes: {
@@ -7,16 +7,31 @@ var TitleBar = React.createClass({
     submissionButton: React.PropTypes.bool,
   },
   render: function () {
-    let button
-    if (this.props.submissionButton) {
-      button =
-            (<Button color='green' onClick={() => location.href='/submit'} >
-                Submit a project
-            </Button>);
-    }
-    else {
-      button = null
-    }
+    const menu = (
+        <semantic.Sidebar
+          as={semantic.Menu}
+          animation='overlay'
+          width='thin'
+          direction='right'
+          visible={true}
+          icon='labeled'
+          vertical
+          inverted
+        >
+          <semantic.Menu.Item name='home'>
+            <semantic.Icon name='home' />
+            Home
+          </semantic.Menu.Item>
+          <semantic.Menu.Item name='gamepad'>
+            <semantic.Icon name='gamepad' />
+            Games
+          </semantic.Menu.Item>
+          <semantic.Menu.Item name='camera'>
+            <semantic.Icon name='camera' />
+            Channels
+          </semantic.Menu.Item>
+        </semantic.Sidebar>
+    )
     return (
       <div className='titleBar'>
         <div className='logoContainer'>
@@ -28,15 +43,7 @@ var TitleBar = React.createClass({
           {this.props.children}
         </div>
         <div className='submitContainer'>
-          {button}
-          <a
-          className='contributeContainer'
-          title='Contribute to Kitnic'
-          href='https://github.com/monostable/kitnic/'>
-            <div className='contributeButton'>
-              <span className='octicon octicon-mark-github githubIcon'></span>
-            </div>
-          </a>
+          {menu}
         </div>
       </div>
     )
