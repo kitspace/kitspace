@@ -9,6 +9,7 @@ const PreviewGerbers = require('./preview_gerbers')
 const PreviewBom     = require('./preview_bom')
 const PreviewReadme  = require('./preview_readme')
 const Finish         = require('./finish')
+const TitleBar       = require('../title_bar')
 
 const board_colors = require('./board_colors')
 

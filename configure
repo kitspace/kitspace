@@ -168,6 +168,10 @@ ninja.edge('build/.temp/submit.css').from('src/submit/submit.scss')
     .need(sassSrc).assign('path', 'src/')
     .using('sass')
 
+ninja.edge('build/.temp/login.css').from('src/login/login.scss')
+    .need(sassSrc).assign('path', 'src/')
+    .using('sass')
+
 ninja.edge('build/index.css').from('build/.temp/index.css')
     .using('autoprefix')
 
@@ -179,12 +183,19 @@ ninja.edge('build/page.css').from('build/.temp/page.css')
 ninja.edge('build/submit.css').from('build/.temp/submit.css')
     .using('autoprefix')
 
+ninja.edge('build/login.css').from('build/.temp/login.css')
+    .using('autoprefix')
+
 
 ninja.edge('build/app.js').from('build/.temp/index/render_index.jsx')
     .need(jsMainTargets)
     .need('build/.temp/boards.json')
     .using('browserify')
 
+
+ninja.edge('build/login/app.js').from('build/.temp/login/render_login.jsx')
+    .need(jsMainTargets)
+    .using('browserify')
 
 ninja.edge('build/submit/app.js').from('build/.temp/submit/render_submit.jsx')
     .need(jsMainTargets)
