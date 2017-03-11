@@ -7,31 +7,7 @@ var TitleBar = React.createClass({
     submissionButton: React.PropTypes.bool,
   },
   render: function () {
-    const menu = (
-        <semantic.Sidebar
-          as={semantic.Menu}
-          animation='overlay'
-          width='thin'
-          direction='right'
-          visible={true}
-          icon='labeled'
-          vertical
-          inverted
-        >
-          <semantic.Menu.Item name='home'>
-            <semantic.Icon name='home' />
-            Home
-          </semantic.Menu.Item>
-          <semantic.Menu.Item name='gamepad'>
-            <semantic.Icon name='gamepad' />
-            Games
-          </semantic.Menu.Item>
-          <semantic.Menu.Item name='camera'>
-            <semantic.Icon name='camera' />
-            Channels
-          </semantic.Menu.Item>
-        </semantic.Sidebar>
-    )
+    const menu = null
     return (
       <div className='titleBar'>
         <div className='logoContainer'>

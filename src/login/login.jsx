@@ -20,6 +20,33 @@ const Login = React.createClass({
             {'Login'}
           </div>
         </TitleBar>
+        <semantic.Sidebar.Pushable>
+          <semantic.Sidebar
+            as={semantic.Menu}
+            animation='overlay'
+            width='thin'
+            direction='right'
+            visible={true}
+            icon='labeled'
+            vertical
+            inverted
+          >
+            <semantic.Menu.Item name='collapse'>
+              <semantic.Icon name='content' />
+            </semantic.Menu.Item>
+            <semantic.Menu.Item name='gamepad'>
+              <semantic.Icon name='gamepad' />
+              Games
+            </semantic.Menu.Item>
+            <semantic.Menu.Item name='camera'>
+              <semantic.Icon name='camera' />
+              Channels
+            </semantic.Menu.Item>
+          </semantic.Sidebar>
+          <semantic.Sidebar.Pusher>
+            <div>hey</div>
+          </semantic.Sidebar.Pusher>
+        </semantic.Sidebar.Pushable>
       </div>
     )
   }
