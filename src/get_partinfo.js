@@ -1,8 +1,6 @@
 const superagent = require('superagent')
-const immutable = require('immutable')
 
-const partinfoURL =
-    'https://partinfo.kitnic.it/graphql'
+const partinfoURL = 'https://partinfo.kitnic.it/graphql'
 
 const MpnQuery = `
 query MpnQuery($mpn: MpnInput!) {

@@ -7,9 +7,16 @@ const UrlSubmit = require('./url_submit')
 
 const TitleBar = require('../title_bar')
 const BOM = require('../page/bom')
+const getPartinfo = require('../get_partinfo.js')
 
 
 const Step2 = React.createClass({
+  getInitialState() {
+    return {parts: {}}
+  },
+  componentWillMount() {
+    //this.setState({parts: getPartinfo(this.props.board.bom.lines)})
+  },
   render() {
     const board = this.props.board
     const instructionText = 'Add a [1-click-bom.tsv](https://1clickbom.com/#usage)'
@@ -31,6 +38,7 @@ const Step2 = React.createClass({
         color         = 'green'
         onClick       = {this.props.setStep(3)} />
     }
+    console.log(board)
     return (
     <div className='Step Step2'>
       <TitleBar>

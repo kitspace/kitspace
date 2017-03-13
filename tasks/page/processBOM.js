@@ -7,7 +7,7 @@ const cp          = require('child_process')
 const ramda       = require('ramda')
 
 const utils       = require('../utils/utils')
-const getPartinfo = require('../utils/get_partinfo.js')
+const getPartinfo = require('../../src/get_partinfo.js')
 
 if (require.main !== module) {
     module.exports = function(config, folder) {
