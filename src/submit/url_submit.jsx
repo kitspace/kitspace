@@ -1,13 +1,13 @@
-const React           = require('react')
-const request         = require('superagent')
-const path            = require('path')
-const camelCase       = require('lodash.camelcase')
-const marky           = require('marky-markdown')
-const url             = require('url')
-const jsYaml          = require('js-yaml')
-const htmlToReact     = new (new require('html-to-react')).Parser(React)
+const React             = require('react')
+const superagent        = require('superagent')
+const path              = require('path')
+const camelCase         = require('lodash.camelcase')
+const marky             = require('marky-markdown')
+const url               = require('url')
+const jsYaml            = require('js-yaml')
+const htmlToReact       = new (new require('html-to-react')).Parser(React)
 const githubUrlToObject = require('github-url-to-object')
-const oneClickBOM     = require('1-click-bom')
+const oneClickBOM       = require('1-click-bom')
 
 const gerberFiles = require('../gerber_files')
 const getPartinfo = require('../get_partinfo')
@@ -27,7 +27,7 @@ const GIT_CLONE_SERVER = 'https://git-clone-server.kitnic.it'
 function getGithubSummary(repoUrl, dispatch) {
   const repoInfo = githubUrlToObject(repoUrl)
   if (repoInfo) {
-    request(repoInfo.api_url)
+    superagent(repoInfo.api_url)
       .end((err, res) => {
         if (err) {
           return
@@ -39,7 +39,7 @@ function getGithubSummary(repoUrl, dispatch) {
 
 function getBom(root, bomPath, dispatch) {
   bomPath = bomPath || '1-click-bom.tsv'
-  request.get(url.resolve(GIT_CLONE_SERVER, path.join(root, bomPath)))
+  superagent.get(url.resolve(GIT_CLONE_SERVER, path.join(root, bomPath)))
     .withCredentials()
     .end((err, res) => {
       if (err) {
@@ -136,7 +136,7 @@ const UrlSubmit = React.createClass({
       this.setState({url: this.placeholder})
     }
     dispatch({type:'setUrlSent', value: gitUrl})
-    request.post(GIT_CLONE_SERVER)
+    superagent.post(GIT_CLONE_SERVER)
        .send({url: gitUrl})
        .withCredentials()
        .end((err, res) => {
@@ -152,7 +152,7 @@ const UrlSubmit = React.createClass({
          const yaml    = kitnicYaml(files)
          const readme  = findReadme(files)
          if (readme) {
-           request.get(url.resolve(GIT_CLONE_SERVER, path.join(root, readme)))
+           superagent.get(url.resolve(GIT_CLONE_SERVER, path.join(root, readme)))
              .withCredentials()
              .then(res => {
                const pkg = {repository: {url: gitUrl}};
@@ -169,7 +169,7 @@ const UrlSubmit = React.createClass({
            dispatch({type: 'setBoardError', value: 'No README found in repository'})
          }
          if (yaml) {
-           request.get(url.resolve(GIT_CLONE_SERVER, path.join(root, yaml)))
+           superagent.get(url.resolve(GIT_CLONE_SERVER, path.join(root, yaml)))
              .withCredentials()
              .then(res => {
                const info = jsYaml.safeLoad(res.text)
@@ -193,7 +193,7 @@ const UrlSubmit = React.createClass({
          }
          else {
            const requests = gerbers.map(f => {
-             return request.get(url.resolve(GIT_CLONE_SERVER, path.join(root, f)))
+             return superagent.get(url.resolve(GIT_CLONE_SERVER, path.join(root, f)))
                .withCredentials()
                .then(res => ({gerber: res.text, filename: f}))
            })
@@ -229,9 +229,9 @@ const UrlSubmit = React.createClass({
       <div style={{display:'flex', justifyContent:'center', alignItems:'center'}}>
         <Input
           fluid
-          name = 'url'
+          name     = 'url'
           onChange = {this.onChange}
-          error = {failed}
+          error    = {failed}
           action = {{
             color,
             loading,
@@ -239,7 +239,7 @@ const UrlSubmit = React.createClass({
             className: 'submitButton',
           }}
           placeholder = {this.placeholder}
-          value = {state.url}
+          value       = {state.url}
         />
       </div>
       {message}
