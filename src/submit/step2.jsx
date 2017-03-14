@@ -11,12 +11,6 @@ const getPartinfo = require('../get_partinfo.js')
 
 
 const Step2 = React.createClass({
-  getInitialState() {
-    return {parts: {}}
-  },
-  componentWillMount() {
-    //this.setState({parts: getPartinfo(this.props.board.bom.lines)})
-  },
   render() {
     const board = this.props.board
     const instructionText = 'Add a [1-click-bom.tsv](https://1clickbom.com/#usage)'
@@ -38,7 +32,7 @@ const Step2 = React.createClass({
         color         = 'green'
         onClick       = {this.props.setStep(3)} />
     }
-    console.log(board)
+    console.log(board.parts)
     return (
     <div className='Step Step2'>
       <TitleBar>
@@ -55,7 +49,7 @@ const Step2 = React.createClass({
             {nextButton}
           </div>
         </div>
-        <BOM tsv={board.bom} />
+        <BOM parts={board.parts} tsv={board.bom} />
       </semantic.Container>
     </div>
     )

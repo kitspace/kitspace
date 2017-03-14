@@ -7,8 +7,10 @@ const url             = require('url')
 const jsYaml          = require('js-yaml')
 const htmlToReact     = new (new require('html-to-react')).Parser(React)
 const githubUrlToObject = require('github-url-to-object')
+const oneClickBOM     = require('1-click-bom')
 
 const gerberFiles = require('../gerber_files')
+const getPartinfo = require('../get_partinfo')
 
 const {
   Form,
@@ -43,7 +45,10 @@ function getBom(root, bomPath, dispatch) {
       if (err) {
         return
       }
-      dispatch({type: 'setBom', value: res.text})
+      const {lines, errors, warnings} = oneClickBOM.parseTSV(res.text)
+      getPartinfo(lines).then(parts => {
+        dispatch({type: 'setBom', value: {parts, bom: res.text}})
+      })
     })
 }
 

@@ -23,6 +23,7 @@ const initial_state = immutable.Map({
     stackup   : null,
     message   : '',
     bom       : '',
+    parts     : [],
     readme    : null,
   }),
 })
@@ -52,7 +53,11 @@ function reducer(state = initial_state, action) {
       return state.set('board', board)
     }
     case 'setBom': {
-      const board = state.get('board').set('bom', action.value)
+      const board = state.get('board').merge(action.value)
+      return state.set('board', board)
+    }
+    case 'setParts': {
+      const board = state.get('board').set('parts', action.value)
       return state.set('board', board)
     }
     case 'setYaml': {
