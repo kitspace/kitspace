@@ -124,19 +124,20 @@ const UrlSubmit = React.createClass({
   getInitialState() {
     return {url: this.props.board.url || ''}
   },
-  onSubmit(event, {formData}) {
+  onSubmit(event) {
     const {board, dispatch} = this.props
     event.preventDefault()
     if (isLoading(board.status)) {
       return
     }
-    if (formData.url === '') {
-      formData.url = this.placeholder
+    let gitUrl = this.state.url
+    if (gitUrl === '') {
+      gitUrl = this.placeholder
       this.setState({url: this.placeholder})
     }
-    dispatch({type:'setUrlSent', value: formData.url})
+    dispatch({type:'setUrlSent', value: gitUrl})
     request.post(GIT_CLONE_SERVER)
-       .send({url: formData.url})
+       .send({url: gitUrl})
        .withCredentials()
        .end((err, res) => {
          if (err) {
@@ -154,7 +155,7 @@ const UrlSubmit = React.createClass({
            request.get(url.resolve(GIT_CLONE_SERVER, path.join(root, readme)))
              .withCredentials()
              .then(res => {
-               const pkg = {repository: {url: formData.url}};
+               const pkg = {repository: {url: gitUrl}};
                const html = marky(res.text, {package: pkg}).html();
                const component = htmlToReact.parse(`<div class='readme'>${html}</div>`)
                dispatch({type: 'setReadme', value: component})
@@ -180,7 +181,7 @@ const UrlSubmit = React.createClass({
                  getBom(root, null, dispatch)
                }
                if (! (info && info.summary)) {
-                 getGithubSummary(formData.url, dispatch)
+                 getGithubSummary(gitUrl, dispatch)
                }
              })
          }
