@@ -124,13 +124,13 @@ const UrlSubmit = React.createClass({
   getInitialState() {
     return {url: this.props.board.url || ''}
   },
-  onSubmit(event, {formData = {}}) {
+  onSubmit(event, {formData}) {
     const {board, dispatch} = this.props
     event.preventDefault()
     if (isLoading(board.status)) {
       return
     }
-    if (formData.url == null || formData.url === '') {
+    if (formData.url === '') {
       formData.url = this.placeholder
       this.setState({url: this.placeholder})
     }
