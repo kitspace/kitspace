@@ -46,8 +46,9 @@ function getBom(root, bomPath, dispatch) {
         return
       }
       const {lines, errors, warnings} = oneClickBOM.parseTSV(res.text)
+      const bom = oneClickBOM.writeTSV(lines)
       getPartinfo(lines).then(parts => {
-        dispatch({type: 'setBom', value: {parts, bom: res.text}})
+        dispatch({type: 'setBom', value: {parts, bom}})
       })
     })
 }

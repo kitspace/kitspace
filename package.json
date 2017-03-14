@@ -42,7 +42,7 @@
   "author": "Kaspar Emanuel",
   "license": "CPAL-1.0",
   "dependencies": {
-    "1-click-bom": "github:monostable/nodejs-1-click-bom",
+    "1-click-bom": "^1.1.1",
     "babel-polyfill": "^6.13.0",
     "browser-version": "^1.0.0",
     "github-url-to-object": "^2.2.6",

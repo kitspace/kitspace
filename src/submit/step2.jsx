@@ -32,7 +32,6 @@ const Step2 = React.createClass({
         color         = 'green'
         onClick       = {this.props.setStep(3)} />
     }
-    console.log(board.parts)
     return (
     <div className='Step Step2'>
       <TitleBar>
