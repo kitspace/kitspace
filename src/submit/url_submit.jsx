@@ -213,11 +213,12 @@ const UrlSubmit = React.createClass({
     const failed    = this.props.board.status === 'failed'
     let message
     if (failed) {
-      message =
-        <Message
-          error
-          header='Preview Failed'
-          content={this.props.board.message} />
+      message = (
+        <Message error>
+          <Message.Header>{'Preview Failed'}</Message.Header>
+          <p>{this.props.board.message}</p>
+        </Message>
+      )
     }
     let buttonText = 'Preview'
     if (requested) {
