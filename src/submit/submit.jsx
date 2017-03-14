@@ -82,7 +82,6 @@ function reducer(state = initial_state, action) {
       return state.set('board', board)
     }
     case 'setBoardError': {
-      console.log('setBoardError', action.value)
       const board = state.get('board').set('status', 'failed')
         .set('message', action.value)
       return state.set('board', board)
