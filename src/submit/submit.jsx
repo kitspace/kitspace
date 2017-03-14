@@ -53,7 +53,7 @@ function reducer(state = initial_state, action) {
       return state.set('board', board)
     }
     case 'setBom': {
-      const board = state.get('board').merge(action.value)
+      const board = state.get('board').set('bom', action.value)
       return state.set('board', board)
     }
     case 'setParts': {
