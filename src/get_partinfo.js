@@ -1,4 +1,5 @@
 const superagent = require('superagent')
+const ramda      = require('ramda')
 
 const partinfoURL = 'https://partinfo.kitnic.it/graphql'
 
@@ -25,7 +26,7 @@ query MpnQuery($mpn: MpnInput!) {
 }`
 
 function getPartinfo(lines) {
-    return lines.map(line => {
+  const requests = lines.map(line => {
         return Promise.all(line.partNumbers.map(mpn => {
             return superagent
                 .post(partinfoURL)
@@ -39,6 +40,7 @@ function getPartinfo(lines) {
                 })
         }))
     })
+  return Promise.all(requests).then(ramda.flatten)
 }
 
 module.exports = getPartinfo

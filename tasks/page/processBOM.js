@@ -4,7 +4,6 @@ const path        = require('path')
 const yaml        = require('js-yaml')
 const oneClickBOM = require('1-click-bom')
 const cp          = require('child_process')
-const ramda       = require('ramda')
 
 const utils       = require('../utils/utils')
 const getPartinfo = require('../../src/get_partinfo.js')
@@ -63,12 +62,12 @@ if (require.main !== module) {
     repo = repo.split('\t')[1].split(' ')[0]
     info.repo = repo
 
-    Promise.all(getPartinfo(info.bom.lines)).then(parts => {
-        info.bom.parts = ramda.flatten(parts)
+    getPartinfo(info.bom.lines).then(parts => {
+        info.bom.parts = parts
 
-        fs.writeFile(infoPath, JSON.stringify(info), function() {})
+        fs.writeFile(infoPath, JSON.stringify(info))
 
-        fs.writeFile(outBomPath, info.bom.tsv, function() {})
+        fs.writeFile(outBomPath, info.bom.tsv)
     })
 
 }
