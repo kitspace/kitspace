@@ -1,5 +1,6 @@
 const expressGraphql = require('express-graphql')
 const express        = require('express')
+const cors           = require('cors')
 
 const {store}         = require('./actions')
 const schema          = require('./schema')
@@ -18,8 +19,10 @@ loop()
 
 const app = express()
 
+app.options('/graphql', cors())
+
 //allow enabled cross origin requests
-app.use((req, res, next) =>  {
+app.use('/graphql', (req, res, next) =>  {
     const origin = req.get('origin')
     if (config.ALLOWED_CORS_DOMAINS.indexOf(origin) >= 0) {
         res.header('Access-Control-Allow-Origin', origin)
