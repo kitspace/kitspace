@@ -1,70 +1,29 @@
-'use strict'
-const React = require('react')
+const React      = require('react')
+const superagent = require('superagent')
 
 const digikey_data   = require('1-click-bom/lib/data/digikey.json')
 const farnell_data   = require('1-click-bom/lib/data/farnell.json')
 const countries_data = require('1-click-bom/lib/data/countries.json')
 
-const get = function(url, arg, callback, error_callback) {
-  var line, notify, timeout, xhr
-  line = arg.line, notify = arg.notify, timeout = arg.timeout
-  if (line == null) {
-    line = null
-  }
-  if (notify == null) {
-    notify = false
-  }
-  if (timeout == null) {
-    timeout = 60000
-  }
-  xhr = new XMLHttpRequest
-  xhr.line = line
-  xhr.open('GET', url, true)
-  xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
-  xhr.url = url
-  xhr.onreadystatechange = function(event) {
-    if (event.target.readyState === 4) {
-      if (event.target.status === 200) {
-        return callback(event)
-      } else {
-        return error_callback(event)
-      }
-    }
-  }
-  xhr.timeout = timeout
-  xhr.ontimedout = function(event) {
-    return error_callback(event)
-  }
-  return xhr.send()
-}
-
-
-const getLocation = function(callback) {
-  var code
-  var used_country_codes = []
-  for (let key in countries_data) {
-    code = countries_data[key]
-    used_country_codes.push(code)
-  }
+function getLocation() {
+  const used_country_codes = Object.keys(countries_data).map(key => {
+    return countries_data[key]
+  })
   const url = 'https://freegeoip.kitnic.it'
-  return get(url, {
-    timeout: 5000
-  }, (function() {
-    return function(event) {
-      var response
-      response = JSON.parse(event.target.responseText)
-      code = response.country_code
+  return superagent.get(url)
+    .then(res => {
+      let code = res.body.country_code
       if (code === 'GB') {
         code = 'UK'
       }
       if (used_country_codes.indexOf(code) < 0) {
         code = 'Other'
       }
-      return callback(code)
-    }
-  })(this), function() {
-    return callback('Other')
-  })
+      return code
+    }).catch(err => {
+      console.error(err)
+      return 'Other'
+    })
 }
 
 
@@ -75,7 +34,7 @@ const DirectStores = React.createClass({
   },
   getInitialState: function () {
     if (typeof window != 'undefined'){
-      getLocation((code) => {
+      getLocation().then(code => {
         this.setState({countryCode: code})
       })
     }
