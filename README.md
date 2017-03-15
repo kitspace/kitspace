@@ -1,9 +1,10 @@
 # https://kitnic.it
 **We are giving away free PCB manufacturing vouchers to the first 20
-projects that register. Just follow [the instructions
-below](#submitting-your-project). Current status: 8/20 left.**
+projects that register. Just follow the steps in the [submission preview](https://kitnic.it/submit). Current status: 6/20 left.**
 
 [![build status][travis-status]](https://travis-ci.org/monostable/kitnic) 
+
+[![video](image_src/fosdem2017.jpg)](https://video.fosdem.org/2017/AW1.120/kitnic_it.vp8.webm)
 
 Kitnic is a registry of open source hardware electronics projects that are
 ready to order and build. The most important elements of a Kitnic project page
@@ -11,7 +12,8 @@ are:
 
 - A prominent link to download the Gerber files and a preview rendering of the board
 - The ability to quickly add the required components to a retailer shopping
-  cart (using clever magic in the form of our [browser extension][1clickbom]) 
+  cart (using clever magic in the form of our [browser extension][1clickbom])
+  
 
 Help us build a open hardware repository of useful electronics projects!
 
@@ -22,47 +24,7 @@ Help us build a open hardware repository of useful electronics projects!
 
 ##Submitting your project
 
-To submit your project to Kitnic, follow these steps:
-
-**1. Export your plotted gerbers & drill data** and check that they will render
-nicely using [viewer.tracespace.io][viewer]. Put them into a directory - by
-default the path `gerbers/` will be searched. If this is not where they are
-stored, please add this info in the kitnic.yaml file (see below).
-
-**2. Create the 1-click-bom file.**
-Download the extension and see [the guide on exporting a 1-click-bom from your
-design][1clickbom#making]. This format will allow people to quickly purchase
-the components.  By default this file is expected to be a `1-click-bom.tsv` in
-the root of the project, if the file has a different name or is in a different
-location, please add this info in the kitnic.yaml file (see below).
-
-**3. (Optional) Create the YAML project description file.** The `kitnic.yaml`
-file allows you to specify a website you would like to link to, give a summary
-of your project, pick a rendering color or configure custom paths for the two
-requirements above. If you don't have a `kitnic.yaml` with a summary we
-will try and find a summary from your repo. If we can't find one the build
-will fail.  See [the section below](#kitnicyaml-format) for details of the file
-format.
-
-**4. Add your project to a Git repository.**
-To have your project included on Kitnic it needs to be in a publicly accessible
-Git repository (but it doesn't have to be on GitHub). If you don't know how to
-use Git then *don't worry*! - you can easily [create a repo on GitHub][4] and
-[upload your files using the web interface][5].
-
-**5. Add your project to Kitnic's board list.**
-To add your project to Kitnic, edit the [boards.txt](boards.txt) file, by
-appending the full public URL to your repo (including `https://`, `http://`
-or`git@` ). Then submit a pull request and Travis CI should confirm that it
-builds ok.  If any of the requirements above are not met then this process will
-likely fail.
-
-We will then preview your page and merge it so it appears on [kitnic.it](http://kitnic.it).
-
-If you run into any problems please get in touch via [Gitter
-chat][riot.im], IRC (freenode#kitnic) or the
-[mailing-list](https://groups.google.com/forum/#!forum/kitnic-discuss).
-
+Check out [kitnic.it/submit](https://kitnic.it/submit) which will guide you through the process.
 
 ### Kitnic.yaml format
 
@@ -150,17 +112,16 @@ gerbers: manufacture/gerbers-and-drills
 ## Development
 ### Requirements
 
-- [Nodejs](https://nodejs.org) >= 4
+- [Nodejs](https://nodejs.org) >= 6
 - [fswatch](http://emcrisostomo.github.io/fswatch/) on OSX/Windows or inotify-tools on Linux
 - [Ninja Build](https://github.com/ninja-build/ninja/releases) >= 1.5.1
-- [Sass](http://sass-lang.com/install) >= 3.2.12
 - The rest of the dependencies can be retrieved via `npm install`
 
 ### Running a local dev server
 
 - Get requirements above and make sure executables are on your path
-- `npm install`
-- `npm start`
+- `npm install` (or `yarn install`)
+- `npm start` (or `yarn start`)
 - Point your browser at `http://127.0.0.1:8080`. The script should watch for
 file-saves and re-build when you change a source file.
 

@@ -1,0 +1,104 @@
+@import '../colors';
+@import '../common';
+@import '../title_bar';
+@import 'bom';
+@import 'board_showcase';
+@import 'gerbers';
+@import 'buy_parts';
+@import 'bom_install_prompt';
+@import 'extension_compatibility_prompt';
+
+    .disabledSite {
+        color: $gray;
+        cursor: default;
+        user-select: none;
+    }
+
+    .subtitleText {
+        color: $gray;
+        font-size: 14px;
+        text-align: center;
+
+    }
+
+    .titleText {
+        border-radius: 5px;
+        color: $white;
+        font-size: 24px;
+        line-height: 40px;
+        text-align: center;
+        vertical-align: middle;
+        width: 100%;
+
+    }
+
+    .infoBar {
+        margin-top: 10px;
+        padding: 20px;
+    }
+
+    .infoBarSummary {
+        margin-bottom: 10px;
+        margin-top: 5px;
+        line-height: 1em;
+    }
+
+    .infoBarInner {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-around;
+    }
+
+    .infoBarLinksContainer {
+        display: flex;
+        flex-flow: row wrap;
+        flex-grow: 2;
+        justify-content: space-around;
+        margin-top: 5px;
+    }
+
+    .infoBarLinks {
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+
+    .pageContainer {
+        padding: 0 10%;
+
+        @include breakpoint(small_width) {
+            padding: 0;
+        }
+    }
+
+    .readme {
+        margin: 15px 5px 5px 5px;
+        padding: 20px;
+        border-radius: 5px;
+        border: 1px solid #EEEEEE;
+    }
+
+    .readme .highlight {
+        overflow-x: auto;
+    }
+
+    .deep-link > a:hover {
+        text-decoration: none;
+    }
+
+    .readme {
+        word-wrap: break-word;
+    }
+
+    .readme code, .readme .highlight {
+            padding: 0;
+            padding-top: 0.2em;
+            padding-bottom: 0.2em;
+            margin: 0;
+            font-size: 85%;
+            background-color: rgba(0,0,0,0.04);
+            border-radius: 3px;
+    }
+
+    .readme img {
+        max-width:100%;
+    }

@@ -1,0 +1,29 @@
+#!/bin/bash
+
+#exit with non-zero exit code if any process fails
+set -e
+
+#  don' do anything on pull-requests
+if [ "${TRAVIS_PULL_REQUEST}" != "false" ]
+then
+    exit 0
+elif  [ "${TRAVIS_BRANCH}" != "master" ]
+then
+    rm -rf build/.temp
+    echo -e "User-agent: *\nDisallow: /\n" > build/robots.txt
+    echo -e "${SSH_KEY}" > key-file
+    chmod 600 key-file
+    ssh -i key-file -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no "ubuntu@preview.kitnic.it" "rm -rf preview/${TRAVIS_BRANCH}"
+    scp -i key-file -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -r build "ubuntu@preview.kitnic.it:preview/${TRAVIS_BRANCH}"
+    rm -f key-file
+else
+    rm -rf build/.temp
+    cd build
+    git init
+    echo "kitnic.it" > CNAME
+    git config user.name "Travis CI"
+    git config user.email "travisCI@monostable.co.uk"
+    git add .
+    git commit -m "Deploy to GitHub Pages" > /dev/null
+    git push --force --quiet "https://${GH_TOKEN}@github.com/monostable/kitnic" master:gh-pages > /dev/null 2>&1
+fi

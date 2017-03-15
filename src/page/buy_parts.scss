@@ -1,0 +1,125 @@
+@import '../colors';
+
+.storeButtonContainer {
+    .animateSpin {
+        line-height: 0;
+    }
+    background: $alto;
+    border-bottom: 1px solid $silver;
+    border-radius: 3px;
+    border-top: 1px solid $gray;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+
+    .storeIcons {
+        height: 16px;
+        margin-top: 1px;
+        width: 16px;
+    }
+
+    .storeButton {
+        align-items: center;
+        border: 0;
+        border-radius: 3px;
+        box-sizing: border-box;
+        color: $white;
+        display: flex;
+        font-size: 16px;
+        justify-content: center;
+        margin: 16px 10px;
+        padding: 0;
+        user-select:none;
+    }
+
+    .storeButtons {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        padding: 0 16px;
+        width: 100%;
+    }
+
+    .retailerIcon {
+        align-items: center;
+        background: $black-10;
+        border-bottom-left-radius: 3px;
+        border-top-left-radius: 3px;
+        display: flex;
+        justify-content: center;
+        padding: 9.6px 14.4px;
+    }
+
+    .noPartsSpecified {
+        background: $silver-chalice;
+
+        .retailerText {
+            cursor: default;
+        }
+    }
+
+    .allPartsSpecified {
+        background: $fruit-salad;
+    }
+
+    .somePartsSpecified:hover {
+        background: $puce;
+        cursor: pointer;
+    }
+
+    .allPartsSpecified:hover {
+        background: $emerald;
+        cursor: pointer;
+    }
+
+    .somePartsSpecified {
+        background: $new-york-pink;
+    }
+
+    .storeButtonInner {
+        border-radius: 3px;
+        display: flex;
+        width: 100%;
+
+        .retailerText {
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+            font-weight: bold;
+            min-width: 80px;
+            padding: 9.6px 0;
+            text-align: center;
+        }
+    }
+
+    .storeContainerLogo {
+        align-items: center;
+        background: $dove-gray;
+        border-bottom: 1px solid $scorpion;
+        border-top: 1px solid $gray;
+        color: $white;
+        display: flex;
+        flex: 1 0 auto;
+        font-size: 20.8px;
+        justify-content: center;
+        margin-right: auto;
+        padding: 3px 0;
+    }
+
+    #quantityContainer {
+        width:100%;
+        display: flex;
+        height: 48px;
+        justify-content: center;
+        align-items: center;
+        background: #d9d9d9;
+    }
+
+    #quantityContainer input {
+        width:50px;
+    }
+
+}

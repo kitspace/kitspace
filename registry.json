@@ -5,7 +5,7 @@
   },
   {
     "repo": "https://github.com/kitnic-forks/arduino-uno",
-    "hash": "9ffdc5d898d92d0799e5ff7173454efe08a0f08c"
+    "hash": "5f10c3e4d9709344153aecf65faaef492ddcb0d1"
   },
   {
     "repo": "https://github.com/kitnic-forks/Bus_Pirate",
@@ -29,7 +29,7 @@
   },
   {
     "repo": "https://github.com/kitnic-forks/BQ25570_Harvester",
-    "hash": "06547ddac9e74a276df7cb6e349f4727b38c2bc0"
+    "hash": "1e97467fce748175536aec1edc8387f0a1b1434c"
   },
   {
     "repo": "https://github.com/JarrettR/USBvil",
@@ -37,7 +37,7 @@
   },
   {
     "repo": "https://github.com/8BitMixtape/NextLevelEdition",
-    "hash": "54f0189c0046d2634315b0cae8343417b84a1024"
+    "hash": "20b07cdba27d0a22534fc177c74ff1fb37b55839"
   },
   {
     "repo": "https://github.com/dvdfreitag/Signal-Detector",
@@ -45,7 +45,7 @@
   },
   {
     "repo": "https://github.com/robotsrulz/SP_Adapter",
-    "hash": "b6d13fab2205358b28e3d8d2ada3d13327a2d972"
+    "hash": "e57372fc9bebe6bc9e3871ea8cea86db02db0620"
   },
   {
     "repo": "https://github.com/pcbsz/SimpleAmp",
@@ -77,6 +77,14 @@
   },
   {
     "repo": "https://github.com/kitnic-forks/neo",
-    "hash": "e63789db15326b731d3a0c2d6c4563297c5a9ee7"
+    "hash": "536f20e948b22cf6f52f8d071e3d5f4c4be3de60"
+  },
+  {
+    "repo": "https://github.com/InaneCoding/KOS01_IdealDiode20A",
+    "hash": "61fcdd7f007040bcf7b4e579f6e848b230cee084"
+  },
+  {
+    "repo": "https://github.com/UDXS/Arduitsy",
+    "hash": "138a0efecf454f352dd32494a29cf3e8583ab19f"
   }
 ]

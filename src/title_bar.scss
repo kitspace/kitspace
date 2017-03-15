@@ -1,4 +1,5 @@
 @import 'colors';
+@import '/semantic.min.css';
 
 .titleBar {
     align-items: center;
@@ -14,58 +15,23 @@
     position: relative;
     width: 100%;
 
-    @include breakpoint(mobile_or_small_width) {
+    @include breakpoint(small_width) {
         justify-content: space-around;
     }
 
-    @include breakpoint(mobile) {
-        padding-top: 10px;
-    }
-}
-
-.logoContainer {
-    background-color: $mine-shaft;
-    flex-shrink: 0;
-    padding: 10px;
-    width: 140px;
-    z-index: 1;
-
-    @include breakpoint(mobile) {
-        width: 50%;
-    }
-}
-
-.logoImgContainer {
-    width: 90%;
-
-    @include breakpoint(mobile) {
-        width: 70%;
-    }
-}
-
-.logoImg {
-    height: 46px;
-    width: 100%;
-
-    @include breakpoint(mobile) {
-        height: 92px;
-    }
-}
-
-.submitContainer {
-    align-items: center;
-    background-color: $mine-shaft;
-    color: $white;
-    display: flex;
-    flex-shrink: 0;
-    justify-content: space-between;
-    padding: 10px;
-    z-index: 1;
-
-    @include breakpoint(mobile) {
-        width: 45%;
+    .logoContainer {
+        min-width:180px;
+        display:flex;
+        justify-content:center;
+        background-color: $mine-shaft;
+        margin: 10px;
+        z-index: 1;
+        flex-shrink: 2;
     }
 
+    .logoImg {
+        max-height: 46px;
+    }
     .submissionButton {
         align-items: center;
         background: $fruit-salad;
@@ -83,107 +49,80 @@
         min-width: 174px;
         padding: 20px 15px;
         white-space: nowrap;
-
-        @include breakpoint(mobile) {
-            font-size: 32px;
-            height: auto;
-            min-width: 307px;
-            padding: 30px 40px;
-        }
     }
 
-    .submissionButton:hover {
-        background: $emerald;
-    }
-
-    .octicon.uploadIcon,
-    .octicon.githubIcon {
-        display: block;
-        font-size: 32px;
-        height: 32px;
-        width: 32px;
-
-        @include breakpoint(mobile) {
-            font-size: 64px;
-            height: 64px;
-            width: 64px;
-        }
-    }
-
-    .contributeButton {
+    .submitContainer {
         align-items: center;
-        border: 0;
-        border-radius: 3px;
-        color: $gray;
-        cursor: pointer;
+        background-color: $mine-shaft;
+        color: $white;
         display: flex;
-        font-family: 'Noto Sans','Helvetica', 'Arial', sans-serif;
-        font-size: 16px;
-        font-weight: bold;
+        flex-shrink: 0;
         justify-content: space-around;
-        padding: 5px;
-        white-space: nowrap;
+        padding: 10px;
+        z-index: 1;
+        min-width:180px;
 
-        @include breakpoint(mobile) {
-            font-size: 24px;
+        @include breakpoint(mobile-m) {
+            width: 100%;
+        }
+
+
+        .octicon.uploadIcon,
+        .octicon.githubIcon {
+            display: block;
+            font-size: 32px;
+            height: 32px;
+            width: 32px;
+        }
+
+        .contributeButton {
+            align-items: center;
+            border: 0;
+            border-radius: 3px;
+            color: $gray;
+            cursor: pointer;
+            display: flex;
+            font-family: 'Noto Sans','Helvetica', 'Arial', sans-serif;
+            font-size: 16px;
+            font-weight: bold;
+            justify-content: space-around;
+            padding: 5px;
+            white-space: nowrap;
+
+        }
+
+        .contributeButton:hover {
+            color: $silver-chalice;
+        }
+
+        .uploadContainer:hover {
+            text-decoration: none;
         }
     }
 
-    .contributeButton:hover {
-        color: $silver-chalice;
+    .submitImage {
+        width: 60%;
     }
 
-    .uploadContainer:hover {
+    .middleContainer {
+        flex-grow: 2;
+
+        @include breakpoint(small_width) {
+            margin: 10px;
+            order: 3;
+            width: 100%;
+        }
+    }
+
+    .contributeContainer:hover {
+        color: $white;
         text-decoration: none;
     }
-}
 
-.submitImage {
-    width: 60%;
-}
-
-.page {
-    .middleContainer {
-        left: 0;
-        position: absolute;
-        top: 0;
-        width: 100%;
-        z-index: 0;
-
-        @include breakpoint(mobile_or_small_width) {
-            order: 0;
-            position: static;
-            width: auto;
-        }
-
-        @include breakpoint(mobile) {
-            padding: 40px;
-        }
-    }
-}
-
-.middleContainer {
-    flex-grow: 2;
-
-    @include breakpoint(mobile) {
-        padding: 10px 10px 40px;
+    .contributeContainer {
+        align-items: center;
+        color: $gray;
+        display: flex;
     }
 
-    @include breakpoint(mobile_or_small_width) {
-        margin: 10px;
-        order: 3;
-        width: 100%;
-    }
 }
-
-.contributeContainer:hover {
-    color: $white;
-    text-decoration: none;
-}
-
-.contributeContainer {
-    align-items: center;
-    color: $gray;
-    display: flex;
-}
-
