@@ -25,20 +25,27 @@ query MpnQuery($mpn: MpnInput!) {
   }
 }`
 
+function post(mpn) {
+  return superagent
+    .post(partinfoURL)
+    .set('Accept', 'application/json')
+    .send({
+      query: MpnQuery,
+      variables: {
+        mpn
+      },
+    }).then(res => {
+      return res.body.data.part
+    }).catch(err => {
+      console.error(err)
+      return {}
+    })
+
+}
+
 function getPartinfo(lines) {
   const requests = lines.map(line => {
-        return Promise.all(line.partNumbers.map(mpn => {
-            return superagent
-                .post(partinfoURL)
-                .send({
-                    query: MpnQuery,
-                    variables: {
-                        mpn
-                    },
-                }).then(res => {
-                    return res.body.data.part
-                })
-        }))
+        return Promise.all(line.partNumbers.map(post))
     })
   return Promise.all(requests).then(ramda.flatten)
 }
