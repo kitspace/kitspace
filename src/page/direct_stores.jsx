@@ -5,27 +5,46 @@ const digikey_data   = require('1-click-bom/lib/data/digikey.json')
 const farnell_data   = require('1-click-bom/lib/data/farnell.json')
 const countries_data = require('1-click-bom/lib/data/countries.json')
 
-function getLocation(callback) {
-  const used_country_codes = Object.keys(countries_data).map(key => {
-    return countries_data[key]
-  })
+function getFreegeoip(code) {
   const url = 'https://freegeoip.kitnic.it'
   return superagent.get(url)
-    .then(res => {
-      let code = res.body.country_code
-      if (code === 'GB') {
-        code = 'UK'
-      }
-      if (used_country_codes.indexOf(code) < 0) {
-        code = 'Other'
-      }
-      return code
-    }).catch(err => {
+    .then(res => res.body.country_code)
+    .catch(err => {
       console.error(err)
       return 'Other'
     })
 }
 
+function queryOSM(position) {
+  const {longitude, latitude} = position.coords
+  const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
+  return superagent.get(url)
+    .then(res => {
+      const code = res.body.address.country_code
+      return code.toUpperCase()
+    }).catch(err => null)
+}
+
+function getNavigator() {
+  return new Promise(resolve => {
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition(pos => {
+        return resolve(queryOSM(pos))
+      }, err => resolve(null))
+    } else {
+      resolve(null)
+    }
+  })
+}
+
+function getLocation() {
+  return getNavigator().then(code => {
+    if (code) {
+      return code
+    }
+    return getFreegeoip()
+  })
+}
 
 const DirectStores = React.createClass({
   propTypes: {
@@ -33,8 +52,17 @@ const DirectStores = React.createClass({
     multiplier: React.PropTypes.number.isRequired
   },
   getInitialState() {
+    const used_country_codes = Object.keys(countries_data).map(key => {
+      return countries_data[key]
+    })
     if (typeof window != 'undefined'){
       getLocation().then(code => {
+        if (code === 'GB') {
+          code = 'UK'
+        }
+        if (used_country_codes.indexOf(code) < 0) {
+          code = 'Other'
+        }
         this.setState({countryCode: code})
       })
     }
