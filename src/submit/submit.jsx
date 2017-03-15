@@ -13,18 +13,30 @@ const Step4 = require('./step4')
 const board_colors = require('./board_colors')
 
 const initial_state = immutable.Map({
-  board: immutable.Map({
+  board: immutable.fromJS({
     status    : 'not sent',
+    message   : '',
     color     : 'green',
     yaml      : null,
     url       : null,
     files     : null,
     svgs      : null,
     stackup   : null,
-    message   : '',
-    bom       : '',
     parts     : [],
-    readme    : null,
+    gerbers: {
+      errors   : [],
+      warnings : [],
+    },
+    bom: {
+      tsv      : '',
+      errors   : [],
+      warnings : [],
+    },
+    readme: {
+      rendered : null,
+      errors   : [],
+      warnings : [],
+    },
   }),
 })
 
@@ -53,11 +65,14 @@ function reducer(state = initial_state, action) {
       return state.set('board', board)
     }
     case 'setBom': {
-      const board = state.get('board').set('bom', action.value)
+      let board = state.get('board')
+      let bom = board.get('bom')
+      bom = bom.set('tsv', action.value)
+      board = board.set('bom', bom)
       return state.set('board', board)
     }
     case 'setParts': {
-      const board = state.get('board').set('parts', action.value)
+      const board = state.get('board').set('parts', immutable.List(action.value))
       return state.set('board', board)
     }
     case 'setYaml': {
@@ -73,7 +88,10 @@ function reducer(state = initial_state, action) {
       return state.set('board', board)
     }
     case 'setReadme': {
-      const board = state.get('board').set('readme', action.value)
+      let board = state.get('board')
+      let readme = board.get('readme')
+      readme = readme.set('rendered', action.value)
+      board = board.set('readme', readme)
       return state.set('board', board)
     }
     case 'setSummary': {
@@ -81,9 +99,25 @@ function reducer(state = initial_state, action) {
       const board = state.get('board').set('yaml', yaml)
       return state.set('board', board)
     }
-    case 'setBoardError': {
+    case 'reportNetworkError': {
       const board = state.get('board').set('status', 'failed')
         .set('message', action.value)
+      return state.set('board', board)
+    }
+    case 'reportError': {
+      const {type, message} = action.value
+      let board = state.get('board')
+      const group = board.get(type)
+      const errors = group.get('errors')
+      board = board.set(type, group.set('errors', errors.push(message)))
+      return state.set('board', board)
+    }
+    case 'reportWarning': {
+      const {type, message} = action.value
+      let board = state.get('board')
+      const group = board.get(type)
+      const warnings = group.get('warnings')
+      board = board.set(type, group.set('warnings', warnings.push(message)))
       return state.set('board', board)
     }
   }

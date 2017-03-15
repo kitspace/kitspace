@@ -46,6 +46,16 @@ function getBom(root, bomPath, dispatch) {
         return
       }
       const {lines, errors, warnings} = oneClickBOM.parseTSV(res.text)
+      if (errors) {
+        errors.forEach(message => {
+          dispatch({type: 'reportError', value: {type: 'bom', message}})
+        })
+      }
+      if (warnings) {
+        warnings.forEach(message => {
+          dispatch({type: 'reportWarning', value: {type: 'bom', message}})
+        })
+      }
       const bom = oneClickBOM.writeTSV(lines)
       dispatch({type: 'setBom', value: bom})
       getPartinfo(lines).then(parts => {
@@ -72,7 +82,7 @@ function buildBoard(dispatch, layers) {
     boardBuilder(layers, 'green', (err, stackup) => {
       if (err) {
         console.error(err)
-        dispatch({type: 'setBoardError', value:err})
+        dispatch({type: 'reportError', value: {type: 'gerbers', message: err}})
       }
       else {
         const top    = stackup.top.svg
@@ -141,10 +151,10 @@ const UrlSubmit = React.createClass({
        .withCredentials()
        .end((err, res) => {
          if (err) {
-           return dispatch({type: 'setBoardError', value: err})
+           return dispatch({type: 'reportNetworkError', value: err})
          }
          if (res.body.error) {
-           return dispatch({type: 'setBoardError', value: res.body.error})
+           return dispatch({type: 'reportNetworkError', value: res.body.error})
          }
          const files   = res.body.data.files
          const root    = res.body.data.root
@@ -162,11 +172,11 @@ const UrlSubmit = React.createClass({
              })
              .catch(err => {
                console.error(err)
-               dispatch({type: 'setBoardError', value: 'README could not be retrieved'})
+               dispatch({type: 'reportError', value: {type: 'readme', message: 'README could not be retrieved'}})
              })
          }
          else {
-           dispatch({type: 'setBoardError', value: 'No README found in repository'})
+           dispatch({type: 'reportError', value: {type: 'readme', message: 'No README found in repository'}})
          }
          if (yaml) {
            superagent.get(url.resolve(GIT_CLONE_SERVER, path.join(root, yaml)))
@@ -189,7 +199,10 @@ const UrlSubmit = React.createClass({
            getBom(root, null, dispatch)
          }
          if (gerbers.length === 0) {
-           dispatch({type: 'setBoardError', value:'No Gerber files found in repository'})
+           dispatch({type: 'reportError', value:{
+             type: 'gerbers',
+             message:'No Gerber files found in repository'
+           }})
          }
          else {
            const requests = gerbers.map(f => {
