@@ -5,7 +5,7 @@ const digikey_data   = require('1-click-bom/lib/data/digikey.json')
 const farnell_data   = require('1-click-bom/lib/data/farnell.json')
 const countries_data = require('1-click-bom/lib/data/countries.json')
 
-function getLocation() {
+function getLocation(callback) {
   const used_country_codes = Object.keys(countries_data).map(key => {
     return countries_data[key]
   })
@@ -32,7 +32,7 @@ const DirectStores = React.createClass({
     items: React.PropTypes.any.isRequired,
     multiplier: React.PropTypes.number.isRequired
   },
-  getInitialState: function () {
+  getInitialState() {
     if (typeof window != 'undefined'){
       getLocation().then(code => {
         this.setState({countryCode: code})
@@ -42,7 +42,7 @@ const DirectStores = React.createClass({
       countryCode: 'Other'
     }
   },
-  getParts: function (retailer) {
+  getParts(retailer) {
     let parts = this.props.items
     parts = parts.filter(part => {
       return retailer in part.retailers && part.retailers[retailer] != ''
@@ -57,7 +57,7 @@ const DirectStores = React.createClass({
     )
     return parts
   },
-  digikeyPartRenderer: function (part, index) {
+  digikeyPartRenderer(part, index) {
     index++
     return (
       <span key={`digikeyRenderer${index}`}>
@@ -67,7 +67,7 @@ const DirectStores = React.createClass({
       </span>
       )
   },
-  digikey: function (countryCode, parts) {
+  digikey(countryCode, parts) {
     const site = digikey_data.sites[digikey_data.lookup[countryCode]]
     return (
       <form
@@ -81,10 +81,10 @@ const DirectStores = React.createClass({
       </form>)
 
   },
-  tildeDelimiter: function (part) {
+  tildeDelimiter(part) {
     return part.sku + '~' + part.quantity
   },
-  farnell: function (countryCode, parts) {
+  farnell(countryCode, parts) {
     const site = farnell_data.sites[farnell_data.lookup[countryCode]]
     const queryString = parts.map(this.tildeDelimiter).join('~')
     return (
@@ -100,7 +100,7 @@ const DirectStores = React.createClass({
       </form>
       )
   },
-  newark: function (parts) {
+  newark(parts) {
     const queryString = parts.map(this.tildeDelimiter).join('~')
     return (
       <form
@@ -116,7 +116,7 @@ const DirectStores = React.createClass({
       )
   },
 
-  render: function () {
+  render() {
     const digikeyParts = this.getParts('Digikey')
     const farnellParts = this.getParts('Farnell')
     const newarkParts  = this.getParts('Newark')
