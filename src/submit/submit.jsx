@@ -65,10 +65,7 @@ function reducer(state = initial_state, action) {
       return state.set('board', board)
     }
     case 'setBom': {
-      let board = state.get('board')
-      let bom = board.get('bom')
-      bom = bom.set('tsv', action.value)
-      board = board.set('bom', bom)
+      const board = state.get('board').setIn(['bom', 'tsv'], action.value)
       return state.set('board', board)
     }
     case 'setParts': {
@@ -88,10 +85,7 @@ function reducer(state = initial_state, action) {
       return state.set('board', board)
     }
     case 'setReadme': {
-      let board = state.get('board')
-      let readme = board.get('readme')
-      readme = readme.set('rendered', action.value)
-      board = board.set('readme', readme)
+      const board = state.get('board').setIn(['readme', 'rendered'], action.value)
       return state.set('board', board)
     }
     case 'setSummary': {
@@ -106,18 +100,12 @@ function reducer(state = initial_state, action) {
     }
     case 'reportError': {
       const {type, message} = action.value
-      let board = state.get('board')
-      const group = board.get(type)
-      const errors = group.get('errors')
-      board = board.set(type, group.set('errors', errors.push(message)))
+      const board = state.get('board').updateIn([type, 'errors'], es => es.push(message))
       return state.set('board', board)
     }
     case 'reportWarning': {
       const {type, message} = action.value
-      let board = state.get('board')
-      const group = board.get(type)
-      const warnings = group.get('warnings')
-      board = board.set(type, group.set('warnings', warnings.push(message)))
+      const board = state.get('board').updateIn([type, 'warnings'], ws => ws.push(message))
       return state.set('board', board)
     }
   }
