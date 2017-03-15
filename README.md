@@ -22,7 +22,7 @@ Help us build a open hardware repository of useful electronics projects!
  - [Join Riot.im chat][riot.im] or IRC freenode#kitnic
  - [Post on our Google Groups mailing list](https://groups.google.com/forum/#!forum/kitnic-discuss)
 
-##Submitting your project
+## Submitting your project
 
 Check out [kitnic.it/submit](https://kitnic.it/submit) which will guide you through the process.
 
