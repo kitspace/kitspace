@@ -6,6 +6,7 @@ const {
 } = require('semantic-ui-react')
 
 
+const util          = require('./util')
 const Steps         = require('./steps')
 const UrlSubmit     = require('./url_submit')
 const ColorSelector = require('./color_selector')
@@ -41,24 +42,33 @@ const Step1 = React.createClass({
       colorSelector = <ColorSelector dispatch={this.props.dispatch} active={board.color} yamlColor={yamlColor} />
       nextButton = <Button content='Next' icon='right arrow' labelPosition='right' color='green' onClick={this.props.setStep(2)} />
     }
+    let messages = board.gerbers.errors.map(message => {
+      return util.message('Error', message)
+    })
+    messages = messages.concat(board.gerbers.warnings.map(message => {
+      return util.message('Warning', message)
+    }))
     return (
-    <div className='Step Step1'>
-      <TitleBar>
-        <div className='titleText'>
-          {'Submit a project'}
-        </div>
-      </TitleBar>
-      <Container>
-        <Steps setStep={this.props.setStep} active={1}/>
-        <Markdown className='instructions' source={instruction_text} />
-        <div className='userInputSegment'>
-          <UrlSubmit dispatch={this.props.dispatch} board={board} />
-          {colorSelector}
-          {nextButton}
-        </div>
-        {showcase}
-      </Container>
-    </div>
+      <div className='Step Step1'>
+        <TitleBar>
+          <div className='titleText'>
+            {'Submit a project'}
+          </div>
+        </TitleBar>
+        <Container>
+          <Steps setStep={this.props.setStep} active={1}/>
+          <Markdown className='instructions' source={instruction_text} />
+          <div className='userInputSegment'>
+            <UrlSubmit dispatch={this.props.dispatch} board={board} />
+            <div className='messageContainer'>
+              {messages}
+            </div>
+            {colorSelector}
+            {nextButton}
+          </div>
+          {showcase}
+        </Container>
+      </div>
     )
   },
 })

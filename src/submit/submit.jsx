@@ -13,17 +13,30 @@ const Step4 = require('./step4')
 const board_colors = require('./board_colors')
 
 const initial_state = immutable.Map({
-  board: immutable.Map({
+  board: immutable.fromJS({
     status    : 'not sent',
+    message   : '',
     color     : 'green',
     yaml      : null,
     url       : null,
     files     : null,
     svgs      : null,
     stackup   : null,
-    message   : '',
-    bom       : '',
-    readme    : null,
+    parts     : [],
+    gerbers: {
+      errors   : [],
+      warnings : [],
+    },
+    bom: {
+      tsv      : '',
+      errors   : [],
+      warnings : [],
+    },
+    readme: {
+      rendered : null,
+      errors   : [],
+      warnings : [],
+    },
   }),
 })
 
@@ -52,7 +65,11 @@ function reducer(state = initial_state, action) {
       return state.set('board', board)
     }
     case 'setBom': {
-      const board = state.get('board').set('bom', action.value)
+      const board = state.get('board').setIn(['bom', 'tsv'], action.value)
+      return state.set('board', board)
+    }
+    case 'setParts': {
+      const board = state.get('board').set('parts', immutable.List(action.value))
       return state.set('board', board)
     }
     case 'setYaml': {
@@ -68,7 +85,7 @@ function reducer(state = initial_state, action) {
       return state.set('board', board)
     }
     case 'setReadme': {
-      const board = state.get('board').set('readme', action.value)
+      const board = state.get('board').setIn(['readme', 'rendered'], action.value)
       return state.set('board', board)
     }
     case 'setSummary': {
@@ -76,9 +93,19 @@ function reducer(state = initial_state, action) {
       const board = state.get('board').set('yaml', yaml)
       return state.set('board', board)
     }
-    case 'setBoardError': {
+    case 'reportNetworkError': {
       const board = state.get('board').set('status', 'failed')
         .set('message', action.value)
+      return state.set('board', board)
+    }
+    case 'reportError': {
+      const {type, message} = action.value
+      const board = state.get('board').updateIn([type, 'errors'], es => es.push(message))
+      return state.set('board', board)
+    }
+    case 'reportWarning': {
+      const {type, message} = action.value
+      const board = state.get('board').updateIn([type, 'warnings'], ws => ws.push(message))
       return state.set('board', board)
     }
   }

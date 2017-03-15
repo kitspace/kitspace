@@ -19,7 +19,8 @@ module.exports = function ColorSelector(props) {
         circular: true,
         className : `colorSelect ${selected}`,
         onClick   : changeColor(color),
-        id        : `${color}Button`
+        id        : `${color}Button`,
+        key       : `${color}Button`,
       })
   })
   let yamlInfo

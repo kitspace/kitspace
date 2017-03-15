@@ -8,7 +8,6 @@
               if (event.source != window)
                 return;
               if (event.data.type && (event.data.type === 'FromExtension')) {
-                console.log("Page received message");
                 window.setExtensionLinks();
               }
             }, false);

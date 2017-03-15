@@ -2,11 +2,13 @@ const React    = require('react')
 const Markdown = require('react-markdown')
 const semantic = require('semantic-ui-react')
 
-const Steps = require('./steps')
+const util      = require('./util')
+const Steps     = require('./steps')
 const UrlSubmit = require('./url_submit')
 
-const TitleBar = require('../title_bar')
-const BOM = require('../page/bom')
+const TitleBar    = require('../title_bar')
+const BOM         = require('../page/bom')
+const getPartinfo = require('../get_partinfo.js')
 
 
 const Step2 = React.createClass({
@@ -31,6 +33,12 @@ const Step2 = React.createClass({
         color         = 'green'
         onClick       = {this.props.setStep(3)} />
     }
+    let messages = board.bom.errors.map(message => {
+      return util.message('Error', message)
+    })
+    messages = messages.concat(board.bom.warnings.map(message => {
+      return util.message('Warning', message)
+    }))
     return (
     <div className='Step Step2'>
       <TitleBar>
@@ -46,8 +54,11 @@ const Step2 = React.createClass({
           <div className='nextButtonContainer'>
             {nextButton}
           </div>
+          <div className='messageContainer'>
+            {messages}
+          </div>
         </div>
-        <BOM tsv={board.bom} />
+        <BOM parts={board.parts} tsv={board.bom.tsv} />
       </semantic.Container>
     </div>
     )

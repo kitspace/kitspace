@@ -3,6 +3,7 @@ const Markdown = require('react-markdown')
 const marky    = require('marky-markdown')
 const semantic = require('semantic-ui-react')
 
+const util      = require('./util')
 const Steps     = require('./steps')
 const UrlSubmit = require('./url_submit')
 
@@ -25,7 +26,7 @@ const Step3 = React.createClass({
         </semantic.Label>
       </semantic.Segment>
     )
-    if (board.readme) {
+    if (board.readme.rendered) {
       nextButton = <semantic.Button
         content       = 'Next'
         icon          = 'right arrow'
@@ -42,6 +43,12 @@ const Step3 = React.createClass({
       + 'summary: <a summary for your project>\n'
       + 'site: https://example.com\n'
       + '```\n'
+    let messages = board.readme.errors.map(message => {
+      return util.message('Error', message)
+    })
+    messages = messages.concat(board.readme.warnings.map(message => {
+      return util.message('Warning', message)
+    }))
     return (
     <div className='Step Step3'>
       <TitleBar>
@@ -57,9 +64,12 @@ const Step3 = React.createClass({
           <div className='nextButtonContainer'>
             {nextButton}
           </div>
+          <div className='messageContainer'>
+            {messages}
+          </div>
         </div>
         {infoBar}
-        {board.readme}
+        {board.readme.rendered}
       </semantic.Container>
     </div>
     )

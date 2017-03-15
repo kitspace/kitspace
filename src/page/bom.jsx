@@ -1,8 +1,11 @@
 'use strict'
 const React           = require('react')
 const DoubleScrollbar = require('react-double-scrollbar')
-const {h, table, thead, tbody, tr, th, td} = require('react-hyperscript-helpers')
-const {Table} = require('semantic-ui-react')
+const {h, tbody, tr}  = require('react-hyperscript-helpers')
+const semantic        = require('semantic-ui-react')
+const ramda           = require('ramda')
+
+const MpnPopup = require('./mpn_popup')
 
 //for react-double-scrollbar in IE11
 require('babel-polyfill')
@@ -29,32 +32,106 @@ function markerColor(ref) {
   return 'purple'
 }
 
-function tsvToTable(tsv) {
-  const lines = tsv.split('\n').slice(0, -1)
-  const headings = lines[0].split('\t')
-  let headingJSX = headings.map((text) => {
-    return h(Table.HeaderCell, {selectable: true}, text)
-  })
-  headingJSX = h(Table.Header, [h(Table.Row, headingJSX)])
-  const markPink = (index) => {
-    return ['Manufacturer', 'MPN', 'Description']
-      .indexOf(headings[index]) < 0
-  }
-  const bodyJSX = tbody(lines.slice(1).map((line, rowIndex) => {
-    line = line.split('\t')
-    return tr(`.tr${rowIndex % 2}`, line.map((text, columnIndex) => {
-      const error = markPink(columnIndex) && text == ''
-      const className = columnIndex === 0 ? 'marked ' + markerColor(text) : ''
-      return h(Table.Cell, {error, className}, text)
+const TsvTable = React.createClass({
+  getInitialState() {
+    return {
+      activePopup: null,
+    }
+  },
+  mpnCells(contents, rowIndex, columnIndex) {
+    const activePopup = this.state.activePopup
+    const active = activePopup
+      && activePopup[0] === rowIndex
+      && activePopup[1] === columnIndex
+    const cells  = contents.map(t => h(semantic.Table.Cell, {active}, t))
+    const number = contents[1]
+    if (number !== '') {
+      const setActivePopup = () => {
+        this.setState({activePopup: [rowIndex, columnIndex]})
+      }
+      const setInactivePopup = () => {
+        if (active) {
+          this.setState({activePopup: null})
+        }
+      }
+      const part = this.props.parts.reduce((prev, part) => {
+        if (prev) {
+          return prev
+        }
+        if (part && part.mpn && part.mpn.part === number) {
+          return part
+        }
+      }, null) || {}
+      return cells.map(cell => {
+        return h(MpnPopup, {
+          onOpen  : setActivePopup,
+          onClose : setInactivePopup,
+          trigger : cell,
+          part    : part,
+        })
+      })
+    }
+    return cells
+  },
+  render() {
+    const tsv       = this.props.tsv
+    const lines     = tsv.split('\n').slice(0, -1).map(line => line.split('\t'))
+    const headings  = lines[0]
+    const bodyLines = lines.slice(1)
+    let headingJSX = headings.map(text => {
+      return h(semantic.Table.HeaderCell, text)
+    })
+    headingJSX = h(semantic.Table.Header, [h(semantic.Table.Row, headingJSX)])
+    const bodyJSX = tbody(bodyLines.map((line, rowIndex) => {
+      const grouped = line.reduce((grouped, text, columnIndex) => {
+        const heading = headings[columnIndex]
+        if (heading === 'Manufacturer') {
+          grouped.push([text])
+          return grouped
+        }
+        if (heading === 'MPN') {
+          grouped[grouped.length - 1].push(text)
+          return grouped
+        }
+        grouped.push(text)
+        return grouped
+      }, [])
+      const groupedHeadings = headings.filter(h => h !== 'Manufacturer')
+      function markPink(columnIndex) {
+        //mark pink empty cells in all columns except these
+        return ['Description']
+          .indexOf(groupedHeadings[columnIndex]) < 0
+      }
+      const bodyCells = grouped.map((contents, columnIndex) => {
+        if (typeof(contents) === 'object') {
+          return this.mpnCells(contents, rowIndex, columnIndex)
+        }
+        const error     = markPink(columnIndex) && contents === ''
+        const className = columnIndex === 0 ? 'marked ' + markerColor(contents) : ''
+        const cell = h(semantic.Table.Cell, {
+          error,
+          className,
+        }, contents)
+        return cell
+      })
+      const activePopup    = this.state.activePopup
+      const rowActivePopup = activePopup && activePopup[0] === rowIndex
+      const className = rowActivePopup ? 'selected' : ''
+      return h(semantic.Table.Row, {className}, ramda.flatten(bodyCells))
     }))
-  }))
-  const tableProps = {sortable: true, celled: true, unstackable: true, singleline: true, selectable: true}
-  return h(Table, tableProps, [headingJSX, bodyJSX])
-}
+    const tableProps = {
+      selectable  : !this.state.activePopup,
+      celled      : true,
+      unstackable : true,
+    }
+    return h(semantic.Table, tableProps, [headingJSX, bodyJSX])
+  }
+})
 
-let BOM = React.createClass({
+const BOM = React.createClass({
   propTypes: {
-    tsv: React.PropTypes.string.isRequired
+    tsv: React.PropTypes.string.isRequired,
+    parts: React.PropTypes.array.isRequired,
   },
   render: function () {
     if (this.props.tsv === '') {
@@ -64,7 +141,7 @@ let BOM = React.createClass({
       <div className='bom'>
         <div className='bomTableContainer'>
           <DoubleScrollbar>
-          {tsvToTable(this.props.tsv)}
+          <TsvTable parts={this.props.parts} tsv={this.props.tsv} />
           </DoubleScrollbar>
           </div>
       </div>

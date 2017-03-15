@@ -2,5 +2,9 @@
   {
     "repo": "https://github.com/dvdfreitag/Signal-Detector",
     "hash": "6978ba247948e1a5631f9671909d77d109ff48ec"
+  },
+  {
+    "repo": "https://github.com/monostable/jelly",
+    "hash": "b57ca047988bc1269afe1b7d609a44dc5ab44b3f"
   }
 ]
