@@ -45,7 +45,7 @@
   },
   {
     "repo": "https://github.com/robotsrulz/SP_Adapter",
-    "hash": "e57372fc9bebe6bc9e3871ea8cea86db02db0620"
+    "hash": "2fd0e5f36a0b373477c3fda90e61d5a0059e05fb"
   },
   {
     "repo": "https://github.com/pcbsz/SimpleAmp",
@@ -86,5 +86,9 @@
   {
     "repo": "https://github.com/UDXS/Arduitsy",
     "hash": "138a0efecf454f352dd32494a29cf3e8583ab19f"
+  },
+  {
+    "repo": "https://github.com/monostable/jelly",
+    "hash": "b57ca047988bc1269afe1b7d609a44dc5ab44b3f"
   }
 ]
