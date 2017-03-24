@@ -21,3 +21,4 @@ https://github.com/kitnic-forks/neo
 https://github.com/InaneCoding/KOS01_IdealDiode20A
 https://github.com/UDXS/Arduitsy
 https://github.com/monostable/jelly
+https://github.com/GenericLab/Gar-Lampli
