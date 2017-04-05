@@ -17,4 +17,4 @@ script:
   - ./configure production
   - wget https://github.com/ninja-build/ninja/releases/download/v1.6.0/ninja-linux.zip
   - unzip ninja-linux.zip
-  - ./ninja && ./scripts/deploy
+  - ./ninja -j 5 && ./scripts/deploy
