@@ -10,23 +10,31 @@ const TitleBar = require('../title_bar')
 
 window.superagent = superagent
 
-superagent.get('/gitlab')
-  .withCredentials()
-  .then(r => {
-    return (new DOMParser).parseFromString(r.text, 'text/html')
-  }).then(doc => {
-    const input = doc.querySelector('input[name=authenticity_token]')
-    if (input == null) {
-      return
-    }
-    const token = input.value
-    console.log(token)
-  })
+
+function getToken() {
+  return superagent.get('/gitlab/users/sign_in')
+    .withCredentials()
+    .then(r => {
+      return (new DOMParser).parseFromString(r.text, 'text/html')
+    }).then(doc => {
+      const input = doc.querySelector('input[name=authenticity_token]')
+      if (input == null) {
+        return ''
+      }
+      return input.value
+    })
+}
+
 
 
 const Login = React.createClass({
   getInitialState() {
-    return {}
+    return {
+      token: '',
+    }
+  },
+  componentWillMount() {
+    getToken().then(token => this.setState({token}))
   },
   render() {
     return (
@@ -60,7 +68,13 @@ const Login = React.createClass({
             </semantic.Menu.Item>
           </semantic.Sidebar>
           <semantic.Sidebar.Pusher>
-            <div>hey</div>
+            <semantic.Form method='post' action='/gitlab/users/sign_in'>
+              <semantic.Form.Input type='hidden'   name='authenticity_token' value={this.state.token} />
+              <semantic.Form.Input type='text'     name='user[login]' />
+              <semantic.Form.Input type='password' name='user[password]' />
+              <semantic.Form.Input type='submit'   name='commit' value='Log in' />
+            </semantic.Form>
+            <div>{this.state.token}</div>
           </semantic.Sidebar.Pusher>
         </semantic.Sidebar.Pushable>
       </div>
