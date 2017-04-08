@@ -45,7 +45,7 @@
   },
   {
     "repo": "https://github.com/robotsrulz/SP_Adapter",
-    "hash": "49402df7c009cf984ade1e73c38aafea937c8ded"
+    "hash": "e0283771f937119427ebd1c8a72600dd4e5fb704"
   },
   {
     "repo": "https://github.com/pcbsz/SimpleAmp",
@@ -93,6 +93,10 @@
   },
   {
     "repo": "https://github.com/GenericLab/Gar-Lampli",
-    "hash": "97758f33250035f04127a760ea452813e3e57d2e"
+    "hash": "0501be40cd2ad619b78eb1ee5e9ec832c1a64403"
+  },
+  {
+    "repo": "https://github.com/GenericLab/Unagi_Gar-Lampli",
+    "hash": "3854367e43380f4bcc5ddf22d270eb6ed4a61435"
   }
 ]
