@@ -1,11 +1,27 @@
-const Redux     = require('redux')
-const React     = require('react')
-const {h}       = require('react-hyperscript-helpers')
-const path      = require('path')
-const immutable = require('immutable')
-const semantic  = require('semantic-ui-react')
+const Redux      = require('redux')
+const React      = require('react')
+const {h}        = require('react-hyperscript-helpers')
+const path       = require('path')
+const immutable  = require('immutable')
+const semantic   = require('semantic-ui-react')
+const superagent = require('superagent')
 
 const TitleBar = require('../title_bar')
+
+window.superagent = superagent
+
+superagent.get('/gitlab')
+  .withCredentials()
+  .then(r => {
+    return (new DOMParser).parseFromString(r.text, 'text/html')
+  }).then(doc => {
+    const input = doc.querySelector('input[name=authenticity_token]')
+    if (input == null) {
+      return
+    }
+    const token = input.value
+    console.log(token)
+  })
 
 
 const Login = React.createClass({
