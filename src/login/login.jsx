@@ -74,7 +74,10 @@ const Login = React.createClass({
               <semantic.Form.Input type='password' name='user[password]' />
               <semantic.Form.Input type='submit'   name='commit' value='Log in' />
             </semantic.Form>
-            <div>{this.state.token}</div>
+            <semantic.Form method='post' action='/gitlab/users/auth/twitter'>
+              <semantic.Form.Input type='hidden'   name='authenticity_token' value={this.state.token} />
+              <semantic.Form.Input type='submit'   name='commit' value='Twitter' />
+            </semantic.Form>
           </semantic.Sidebar.Pusher>
         </semantic.Sidebar.Pushable>
       </div>
