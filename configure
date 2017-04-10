@@ -168,6 +168,10 @@ ninja.edge('build/.temp/submit.css').from('src/submit/submit.scss')
     .need(sassSrc).assign('path', 'src/')
     .using('sass')
 
+ninja.edge('build/.temp/sign_in.css').from('src/sign_in.scss')
+    .need(sassSrc).assign('path', 'src/')
+    .using('sass')
+
 ninja.edge('build/.temp/login.css').from('src/login/login.scss')
     .need(sassSrc).assign('path', 'src/')
     .using('sass')
@@ -181,6 +185,9 @@ ninja.edge('build/page.css').from('build/.temp/page.css')
 
 
 ninja.edge('build/submit.css').from('build/.temp/submit.css')
+    .using('autoprefix')
+
+ninja.edge('build/sign_in.css').from('build/.temp/sign_in.css')
     .using('autoprefix')
 
 ninja.edge('build/login.css').from('build/.temp/login.css')

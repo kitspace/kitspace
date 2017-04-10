@@ -85,6 +85,7 @@ const Login = React.createClass({
             </semantic.Menu.Item>
           </semantic.Sidebar>
           <semantic.Sidebar.Pusher>
+            <iframe src='/sign_in' />
             <semantic.Form method='post' action='/gitlab/users/sign_in'>
               <semantic.Form.Input type='hidden'   name='authenticity_token'  value={this.state.loginToken} />
               <semantic.Form.Input type='text'     name='user[login]' />

@@ -1,0 +1,15 @@
+@import 'common';
+@import 'title_bar';
+
+body {
+    height: 100% !important;
+    overflow: visible;
+}
+
+.signInContainer {
+    margin-top      : 50px;
+    display         : flex;
+    width           : 100%;
+    align-items     : center;
+    justify-content : center;
+}

@@ -173,26 +173,26 @@ button {
 }
 
 .colorSelect:hover, #whiteButton.colorSelect:hover {
-   border: 2px solid lightgrey;
+    border: 2px solid lightgrey;
 }
 
 .colorSelect {
-   cursor: pointer;
-   width: 32px;
-   height: 32px;
-   margin: 4px;
-   border: 1px solid lightgrey;
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    margin: 4px;
+    border: 1px solid lightgrey;
 }
 #whiteButton {
-   border: 1px solid lightgrey;
+    border: 1px solid lightgrey;
 }
 
 .colorSelect.selected, #whiteButton.selected {
-   border: 4px solid lightgrey !important;
+    border: 4px solid lightgrey !important;
 }
 
 .instructions {
-   margin-top:32px;
+    margin-top:32px;
 }
 
 
