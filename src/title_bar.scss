@@ -9,11 +9,11 @@
     box-shadow: 0 .1em .5em $black;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
     max-width: 100%;
     overflow: hidden;
     position: relative;
     width: 100%;
+    justify-content: center;
 
     @include breakpoint(small_width) {
         justify-content: space-around;
