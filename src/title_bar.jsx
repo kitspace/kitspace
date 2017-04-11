@@ -43,10 +43,16 @@ const TitleBar = React.createClass({
   },
   render() {
     const user = this.state.user
-    console.log(user)
-    let button
+    const addProjectButton = (
+      <a className='addProjectButton' href='/submit'>
+        <semantic.Button color='green'>
+          Add a project
+        </semantic.Button>
+      </a>
+    )
+    let userButton
     if (user === false) {
-      button = (
+      userButton = (
         <a href='/sign_in'>
           <semantic.Button basic inverted>
             {'Sign in'}
@@ -55,7 +61,7 @@ const TitleBar = React.createClass({
       )
     }
     else if (user != null) {
-      button = (
+      userButton = (
         <semantic.Popup
           trigger={
             <a>
@@ -87,7 +93,8 @@ const TitleBar = React.createClass({
           {this.props.children}
         </div>
         <div className='submitContainer'>
-          {button}
+          {addProjectButton}
+          {userButton}
         </div>
       </div>
     )
