@@ -45,9 +45,7 @@ const TitleBar = React.createClass({
     const user = this.state.user
     const addProjectButton = (
       <a className='addProjectButton' href='/submit'>
-        <semantic.Button color='green'>
-          Add a project
-        </semantic.Button>
+        <semantic.Button content='Add a project' color='green' icon='plus' labelPosition='left' />
       </a>
     )
     let userButton
