@@ -2,7 +2,7 @@ const React      = require('react')
 const semantic   = require('semantic-ui-react')
 const superagent = require('superagent')
 
-function getLogoutToken() {
+function getSignOutToken() {
   return superagent.get('/gitlab/profile')
     .withCredentials()
     .then(r => {
@@ -10,12 +10,11 @@ function getLogoutToken() {
     }).then(doc => {
       const input = doc.querySelector('input[name=authenticity_token]')
       if (input == null) {
-        return ''
+        throw Error('Could not get token')
       }
       return input.value
     })
 }
-
 
 const TitleBar = React.createClass({
   propTypes: {
@@ -24,8 +23,7 @@ const TitleBar = React.createClass({
   },
   getInitialState() {
     return {
-      user: null,
-      logoutToken: '',
+      user: null
     }
   },
   componentWillMount() {
@@ -33,19 +31,32 @@ const TitleBar = React.createClass({
       .set('Accept', 'application/json')
       .withCredentials()
       .then(r => this.setState({user: r.body}))
-
-    getLogoutToken().then(logoutToken => this.setState({logoutToken}))
+      .catch(e => this.setState({user: false}))
+  },
+  signOut() {
+    return getSignOutToken().then(token => {
+      return superagent.post('/gitlab/users/sign_out')
+        .set('Accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8')
+        .withCredentials()
+        .send('_method=delete')
+        .send(`authenticity_token=${token}`)
+        .then(r => this.setState({user: false}))
+    })
   },
   render() {
     const user = this.state.user
-    let button = (
-      <a href='/sign_in'>
-        <semantic.Button basic inverted>
-          {'Sign in'}
-        </semantic.Button>
-      </a>
-    )
-    if (user != null) {
+    console.log(user)
+    let button
+    if (user === false) {
+      button = (
+        <a href='/sign_in'>
+          <semantic.Button basic inverted>
+            {'Sign in'}
+          </semantic.Button>
+        </a>
+      )
+    }
+    else if (user != null) {
       button = (
         <semantic.Popup
           trigger={
@@ -58,11 +69,7 @@ const TitleBar = React.createClass({
           <semantic.Menu
             vertical
           >
-            <semantic.Form method='post' action='/gitlab/users/sign_out'>
-              <semantic.Form.Input  type='hidden'  name='_method' value='delete' />
-              <semantic.Form.Input  type='hidden'  name='authenticity_token' value={this.state.logoutToken} />
-              <semantic.Form.Input type='submit'   name='commit'             value='Sign out' />
-            </semantic.Form>
+            <semantic.Menu.Item onClick={this.signOut}>Sign out</semantic.Menu.Item>
           </semantic.Menu>
         </semantic.Popup>
       )
