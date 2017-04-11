@@ -15,6 +15,14 @@ function getSignOutToken() {
       return input.value
     })
 }
+function signOut() {
+  return getSignOutToken().then(token => {
+    const auth = document.querySelector('input[name=authenticity_token]')
+    auth.value = token
+    const form = auth.parentElement
+    form.submit()
+  })
+}
 
 const TitleBar = React.createClass({
   propTypes: {
@@ -32,16 +40,6 @@ const TitleBar = React.createClass({
       .withCredentials()
       .then(r => this.setState({user: r.body}))
       .catch(e => this.setState({user: false}))
-  },
-  signOut() {
-    return getSignOutToken().then(token => {
-      return superagent.post('/gitlab/users/sign_out')
-        .set('Accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8')
-        .withCredentials()
-        .send('_method=delete')
-        .send(`authenticity_token=${token}`)
-        .then(r => this.setState({user: false}))
-    })
   },
   render() {
     const user = this.state.user
@@ -69,13 +67,17 @@ const TitleBar = React.createClass({
           <semantic.Menu
             vertical
           >
-            <semantic.Menu.Item onClick={this.signOut}>Sign out</semantic.Menu.Item>
+            <semantic.Menu.Item onClick={signOut}>Sign out</semantic.Menu.Item>
           </semantic.Menu>
         </semantic.Popup>
       )
     }
     return (
       <div className='titleBar'>
+        <form style={{display: 'none'}} method='post' action='/gitlab/users/sign_out'>
+          <input  type='hidden'  name='_method' value='delete' />
+          <input  type='hidden'  name='authenticity_token' />
+        </form>
         <div className='logoContainer'>
           <a href='/'>
             <img className='logoImg' src='/images/logo.svg' />
