@@ -7,8 +7,6 @@ const {
 const Steps     = require('./steps')
 const UrlSubmit = require('./url_submit')
 
-const TitleBar = require('../title_bar')
-
 
 const Step4 = React.createClass({
   render() {
@@ -20,11 +18,6 @@ const Step4 = React.createClass({
     + ` ${url} and send us a pull request with your change.`
     return (
     <div className='Step Step4'>
-      <TitleBar>
-        <div className='titleText'>
-          {'Submit a project'}
-        </div>
-      </TitleBar>
       <Container>
         <Steps setStep={this.props.setStep} active={4}/>
         <div style={{marginTop:30, display:'flex', justifyContent:'center'}}>

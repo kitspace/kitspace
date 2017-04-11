@@ -11,7 +11,6 @@ const Steps         = require('./steps')
 const UrlSubmit     = require('./url_submit')
 const ColorSelector = require('./color_selector')
 
-const TitleBar      = require('../title_bar')
 const BoardShowcase = require('../page/board_showcase')
 
 const instruction_text = `
@@ -50,11 +49,6 @@ const Step1 = React.createClass({
     }))
     return (
       <div className='Step Step1'>
-        <TitleBar>
-          <div className='titleText'>
-            {'Submit a project'}
-          </div>
-        </TitleBar>
         <Container>
           <Steps setStep={this.props.setStep} active={1}/>
           <Markdown className='instructions' source={instruction_text} />

@@ -129,6 +129,12 @@ const SubmitRouter = React.createClass({
   },
   render() {
     return (
+      <div>
+      <TitleBar>
+        <div className='titleText'>
+          {'Submit a project'}
+        </div>
+      </TitleBar>
       <Router history={hashHistory}>
         <Route path='/'
           component = {
@@ -167,6 +173,7 @@ const SubmitRouter = React.createClass({
           }
         />
       </Router>
+      </div>
     )
   },
   componentDidMount() {
