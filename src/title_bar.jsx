@@ -90,9 +90,11 @@ const TitleBar = React.createClass({
         <div className='middleContainer'>
           {this.props.children}
         </div>
-        <div className='submitContainer'>
+        <div className='userMenu'>
           {addProjectButton}
-          {userButton}
+          <div className='userButtonContainer'>
+            {userButton}
+          </div>
         </div>
       </div>
     )

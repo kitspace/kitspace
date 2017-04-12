@@ -51,7 +51,7 @@
         white-space: nowrap;
     }
 
-    .submitContainer {
+    .userMenu {
         align-items: center;
         background-color: $mine-shaft;
         color: $white;
@@ -100,10 +100,6 @@
         }
     }
 
-    .submitImage {
-        width: 60%;
-    }
-
     .middleContainer {
         flex-grow: 2;
 
@@ -114,19 +110,14 @@
         }
     }
 
-    .contributeContainer:hover {
-        color: $white;
-        text-decoration: none;
-    }
-
-    .contributeContainer {
-        align-items: center;
-        color: $gray;
-        display: flex;
-    }
-
     .addProjectButton {
         margin-right: 8px;
+    }
+
+    .userButtonContainer {
+        min-width: 87px;
+        display: flex;
+        justify-content: center;
     }
 
 }
