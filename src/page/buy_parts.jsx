@@ -141,7 +141,8 @@ const StoreButtons = React.createClass({
       let partsInfo = this.state.parts[retailer]
 
       //if the extension is not here fallback to direct submissions
-      if ((this.state.extensionPresence !== 'present')
+      //also made Digikey always use direct to work around 1-click bom bug
+      if (retailer === 'Digikey' || (this.state.extensionPresence !== 'present')
         && (typeof document !== 'undefined')
         && document.getElementById(retailer + 'Form') !== null) {
         onClick = () => {
