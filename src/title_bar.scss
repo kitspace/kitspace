@@ -20,9 +20,9 @@
     }
 
     .logoContainer {
-        min-width:180px;
+        min-width:320px;
         display:flex;
-        justify-content:center;
+        justify-content: flex-start;
         background-color: $mine-shaft;
         margin: 10px;
         z-index: 1;
@@ -52,15 +52,15 @@
     }
 
     .userMenu {
+        min-width: 320px;
         align-items: center;
         background-color: $mine-shaft;
         color: $white;
         display: flex;
         flex-shrink: 0;
-        justify-content: space-around;
+        justify-content: center;
         padding: 10px;
         z-index: 1;
-        min-width:180px;
 
         @include breakpoint(mobile-m) {
             width: 100%;
