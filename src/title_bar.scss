@@ -125,4 +125,15 @@
         border-width: 0px;
     }
 
+    .userDropContainer {
+        display: flex;
+        align-items: center;
+
+    }
+
+    .userDropContainer > i {
+        padding-left: 5px;
+        margin-top: -3px;
+    }
+
 }

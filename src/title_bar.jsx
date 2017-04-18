@@ -7,7 +7,7 @@ const UserMenu = require('./user_menu')
 const TitleBar = React.createClass({
   getInitialState() {
     return {
-      user: null
+      user: null,
     }
   },
   componentWillMount() {
@@ -45,10 +45,14 @@ const TitleBar = React.createClass({
         <semantic.Popup
           trigger={
             <a>
-              <semantic.Image size='mini' shape='rounded' src={user.avatar_url} />
+              <div className='userDropContainer'>
+                <semantic.Image size='mini' shape='rounded' src={user.avatar_url} />
+                <semantic.Icon inverted name='triangle down' />
+              </div>
             </a>
           }
           on='click'
+          offset={-20}
         >
         <UserMenu user={user} />
         </semantic.Popup>
