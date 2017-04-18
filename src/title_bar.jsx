@@ -55,9 +55,19 @@ const TitleBar = React.createClass({
     return (
       <div className='titleBar'>
         <div className='logoContainer'>
-          <a href='/'>
-            <img className='logoImg' src='/images/logo.svg' />
-          </a>
+          <semantic.Menu inverted pointing secondary>
+            <a href='/'>
+              <semantic.Image className='logoImg' src='/images/logo.svg' />
+            </a>
+            <semantic.Menu.Item >
+            </semantic.Menu.Item>
+            <semantic.Menu.Item active={this.props.active === 'Projects'} href='/'>
+              {'Projects'}
+            </semantic.Menu.Item>
+            <semantic.Menu.Item active={this.props.active === 'About'} href='/'>
+              {'About'}
+            </semantic.Menu.Item>
+          </semantic.Menu>
         </div>
         <div className='middleContainer'>
           {this.props.children}
