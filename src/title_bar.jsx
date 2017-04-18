@@ -2,6 +2,8 @@ const React      = require('react')
 const semantic   = require('semantic-ui-react')
 const superagent = require('superagent')
 
+const UserMenu = require('./user_menu')
+
 function getSignOutToken() {
   return superagent.get('/gitlab/profile')
     .withCredentials()
@@ -68,11 +70,7 @@ const TitleBar = React.createClass({
           }
           on='click'
         >
-          <semantic.Menu
-            vertical
-          >
-            <semantic.Menu.Item onClick={signOut}>Sign out</semantic.Menu.Item>
-          </semantic.Menu>
+        <UserMenu />
         </semantic.Popup>
       )
     }
