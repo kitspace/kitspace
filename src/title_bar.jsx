@@ -48,14 +48,17 @@ const TitleBar = React.createClass({
         <semantic.Button content='Add a project' color='green' icon='plus' labelPosition='left' />
       </a>
     )
-    let userButton = (
-      <a href='/sign_in'>
-        <semantic.Button loading={user == null} basic inverted>
-          {'Sign in'}
-        </semantic.Button>
-      </a>
-    )
-    if (user) {
+    let userButton = <semantic.Loader active inline />
+    if (user === false) {
+      userButton = (
+        <a href='/sign_in'>
+          <semantic.Button loading={user == null} basic inverted>
+            {'Sign in'}
+          </semantic.Button>
+        </a>
+      )
+    }
+    else if (user) {
       userButton = (
         <semantic.Popup
           trigger={
