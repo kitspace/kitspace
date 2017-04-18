@@ -27,14 +27,25 @@ function signOut() {
 
 
 function UserMenu(props) {
+  const user = props.user
   return (
-    <semantic.Menu vertical>
-      <form style={{display: 'none'}} method='post' action='/gitlab/users/sign_out'>
-        <input  type='hidden'  name='_method' value='delete' />
-        <input  type='hidden'  name='authenticity_token' />
-      </form>
-      <semantic.Menu.Item onClick={signOut}>Sign out</semantic.Menu.Item>
+    <div className='UserMenu'>
+    <form style={{display: 'none'}} method='post' action='/gitlab/users/sign_out'>
+      <input type='hidden' name='_method' value='delete' />
+      <input type='hidden' name='authenticity_token' />
+    </form>
+    <div className='userName'>{user.username}</div>
+    <semantic.Menu vertical attached>
+      <semantic.Menu.Item href='/'>
+        <semantic.Icon name='grid layout' />
+        Projects
+      </semantic.Menu.Item>
+      <semantic.Menu.Item onClick={signOut}>
+        <semantic.Icon name='sign out' />
+        Sign out
+      </semantic.Menu.Item>
     </semantic.Menu>
+    </div>
   )
 }
 

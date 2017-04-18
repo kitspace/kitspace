@@ -4,28 +4,6 @@ const superagent = require('superagent')
 
 const UserMenu = require('./user_menu')
 
-function getSignOutToken() {
-  return superagent.get('/gitlab/profile')
-    .withCredentials()
-    .then(r => {
-      return (new DOMParser).parseFromString(r.text, 'text/html')
-    }).then(doc => {
-      const input = doc.querySelector('input[name=authenticity_token]')
-      if (input == null) {
-        throw Error('Could not get token')
-      }
-      return input.value
-    })
-}
-function signOut() {
-  return getSignOutToken().then(token => {
-    const auth = document.querySelector('input[name=authenticity_token]')
-    auth.value = token
-    const form = auth.parentElement
-    form.submit()
-  })
-}
-
 const TitleBar = React.createClass({
   propTypes: {
     children: React.PropTypes.any,
@@ -54,7 +32,7 @@ const TitleBar = React.createClass({
     if (user === false) {
       userButton = (
         <a href='/sign_in'>
-          <semantic.Button loading={user == null} basic inverted>
+          <semantic.Button basic inverted>
             {'Sign in'}
           </semantic.Button>
         </a>
@@ -70,16 +48,12 @@ const TitleBar = React.createClass({
           }
           on='click'
         >
-        <UserMenu />
+        <UserMenu user={user} />
         </semantic.Popup>
       )
     }
     return (
       <div className='titleBar'>
-        <form style={{display: 'none'}} method='post' action='/gitlab/users/sign_out'>
-          <input  type='hidden'  name='_method' value='delete' />
-          <input  type='hidden'  name='authenticity_token' />
-        </form>
         <div className='logoContainer'>
           <a href='/'>
             <img className='logoImg' src='/images/logo.svg' />
