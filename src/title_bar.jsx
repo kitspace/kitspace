@@ -5,10 +5,6 @@ const superagent = require('superagent')
 const UserMenu = require('./user_menu')
 
 const TitleBar = React.createClass({
-  propTypes: {
-    children: React.PropTypes.any,
-    submissionButton: React.PropTypes.bool,
-  },
   getInitialState() {
     return {
       user: null
@@ -24,18 +20,24 @@ const TitleBar = React.createClass({
   render() {
     const user = this.state.user
     const addProjectButton = (
-      <a className='addProjectButton' href='/submit'>
-        <semantic.Button content='Add a project' color='green' icon='plus' labelPosition='left' />
-      </a>
+      <semantic.Button
+        className='addProjectButton'
+        href='/submit'
+        content='Add a project'
+        color='green'
+        icon='plus'
+        labelPosition='left'
+        style={{
+          visibility: this.props.hideAddProjectButton ? 'hidden' : 'initial'
+        }}
+      />
     )
     let userButton = <semantic.Loader active inline />
     if (user === false) {
       userButton = (
-        <a href='/sign_in'>
-          <semantic.Button basic inverted>
-            {'Sign in'}
-          </semantic.Button>
-        </a>
+        <semantic.Button basic inverted href='/sign_in'>
+          {'Sign in'}
+        </semantic.Button>
       )
     }
     else if (user) {
