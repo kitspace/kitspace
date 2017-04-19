@@ -38,7 +38,11 @@ function UserMenu(props) {
     <semantic.Menu vertical attached>
       <semantic.Menu.Item href='/'>
         <semantic.Icon name='grid layout' />
-        My projects
+        Your projects
+      </semantic.Menu.Item>
+      <semantic.Menu.Item href='/settings'>
+        <semantic.Icon name='settings' />
+        Settings
       </semantic.Menu.Item>
       <semantic.Menu.Item onClick={signOut}>
         <semantic.Icon name='sign out' />
