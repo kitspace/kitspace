@@ -24,7 +24,7 @@ const TitleBar = React.createClass({
     }, 1000)
   },
   render() {
-    const user = this.state.user
+    const user = this.props.user || this.state.user
     const addProjectButton = (
       <semantic.Button
         className='addProjectButton'
