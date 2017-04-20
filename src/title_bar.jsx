@@ -15,7 +15,13 @@ const TitleBar = React.createClass({
       .set('Accept', 'application/json')
       .withCredentials()
       .then(r => this.setState({user: r.body}))
-      .catch(e => this.setState({user: false}))
+      .catch(e => this.setState({user: 'not signed in'}))
+    //set the state to loading if it hasn't gotten the user info after a second
+    setTimeout(() => {
+      if (this.state.user == null) {
+        this.setState({user: 'loading'})
+      }
+    }, 1000)
   },
   render() {
     const user = this.state.user
@@ -32,8 +38,11 @@ const TitleBar = React.createClass({
         }}
       />
     )
-    let userButton = <semantic.Loader active inline />
-    if (user === false) {
+    let userButton
+    if (user === 'loading') {
+      userButton = <semantic.Loader active inline />
+    }
+    else if (user === 'not signed in') {
       userButton = (
         <semantic.Button basic inverted href='/sign_in'>
           {'Sign in'}
