@@ -15,6 +15,7 @@ const Settings = React.createClass({
     return {
       user: null,
       emails: null,
+      token: '',
     }
   },
   componentWillMount() {
@@ -23,6 +24,17 @@ const Settings = React.createClass({
       .withCredentials()
       .then(r => this.setState({user: r.body}))
       .catch(e => this.setState({user: 'not signed in'}))
+    superagent.get('/gitlab/profile')
+      .withCredentials()
+      .then(r => {
+        const doc   = (new DOMParser).parseFromString(r.text, 'text/html')
+        const token = doc.querySelector('input[name=authenticity_token]').value
+        const email = doc.querySelector('input[name="user[email]"]').value
+        const name  = doc.querySelector('input[name="user[name]"]').value
+        document.querySelector('input[name=authenticity_token]').value = token
+        document.querySelector('input[name="user[email]"]').value      = email
+        document.querySelector('input[name="user[name]"]').value       = name
+      }).catch(e => console.error(e))
     superagent.get('/gitlab/api/v4/user/emails')
       .set('Accept', 'application/json')
       .withCredentials()
@@ -35,18 +47,19 @@ const Settings = React.createClass({
       }
     }, 1000)
   },
+  submitForm(event) {
+    event.preventDefault()
+    const email = document.querySelector('input[name=email]').value
+    superagent.post('/gitlab/api/v4/user/emails')
+      .withCredentials()
+      .set('Content-Type', 'application/json')
+      .set('Accept', 'application/json')
+      .send({email})
+      .then(r => console.log(r.body))
+      .catch(e => console.log(e))
+  },
   render() {
-    function submit(e) {
-      e.preventDefault()
-      const email = document.querySelector('input[name=email]').value
-      superagent.post('/gitlab/api/v4/user/emails')
-        .withCredentials()
-        .set('Content-Type', 'application/json')
-        .set('Accept', 'application/json')
-        .send({email})
-        .then(r => console.log(r.body))
-        .catch(e => console.log(e))
-    }
+    const user = this.state.user || {}
     return (
       <div>
         <TitleBar user={this.state.user}>
@@ -61,9 +74,13 @@ const Settings = React.createClass({
           <pre>
             {JSON.stringify(this.state.emails, null, 2)}
           </pre>
-          <semantic.Form onSubmit={submit} >
-            <semantic.Form.Input name='email' type='text' />
-            <semantic.Form.Input type='submit' />
+          <semantic.Form encType="multipart/form-data" action="/gitlab/profile" acceptCharset="UTF-8" method="post">
+            <input name="utf8" type="hidden" value="✓" />
+            <input type="hidden" name="_method" value="put" />
+            <input name='authenticity_token' type='hidden' />
+            <semantic.Form.Input name='user[name]' type='text' />
+            <semantic.Form.Input name='user[email]' type='text'/>
+            <semantic.Button type='submit'>{'Save'}</semantic.Button>
           </semantic.Form>
         </semantic.Container>
       </div>
