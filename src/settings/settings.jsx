@@ -14,7 +14,7 @@ const Settings = React.createClass({
     }
   },
   componentWillMount() {
-    superagent.get('/gitlab/profile')
+    superagent.get('/accounts/profile')
       .withCredentials()
       .then(r => {
         const doc = (new DOMParser).parseFromString(r.text, 'text/html')
@@ -41,7 +41,7 @@ const Settings = React.createClass({
         <semantic.Container>
           <semantic.Form
             warning={emailWarning && this.state.emailMessage !== ''}
-            encType="multipart/form-data" action="/gitlab/profile"
+            encType="multipart/form-data" action="/accounts/profile"
             acceptCharset="UTF-8"
             method="post"
           >

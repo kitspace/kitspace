@@ -13,7 +13,7 @@ const TitleBar = React.createClass({
     }
   },
   componentWillMount() {
-    superagent.get('/gitlab/api/v4/user')
+    superagent.get('/accounts/api/v4/user')
       .set('Accept', 'application/json')
       .withCredentials()
       .then(r => this.setState({user: r.body}))
@@ -46,7 +46,7 @@ const TitleBar = React.createClass({
     }
     else if (user === 'not signed in') {
       userButton = (
-        <semantic.Button basic inverted href='/sign_in'>
+        <semantic.Button basic inverted href='/accounts/users/sign_in'>
           {'Sign in'}
         </semantic.Button>
       )
