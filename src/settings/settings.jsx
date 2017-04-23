@@ -1,19 +1,31 @@
-const Redux       = require('redux')
-const React       = require('react')
-const superagent  = require('superagent')
-const semantic    = require('semantic-ui-react')
-const htmlToReact = new (new require('html-to-react')).Parser(React).parse
+const Redux           = require('redux')
+const React           = require('react')
+const superagent      = require('superagent')
+const semantic        = require('semantic-ui-react')
+const htmlToReact     = new (new require('html-to-react')).Parser(React).parse
 
 const TitleBar = require('../title_bar')
 
 const defaultMessage = 'We also use email for avatar detection if no avatar is uploaded.'
+
 const Settings = React.createClass({
   getInitialState() {
     return {
-      emailMessage: ''
+      emailMessage: '',
+      user: {},
+      avatar_url: null,
     }
   },
   componentWillMount() {
+    superagent.get('/accounts/api/v4/user')
+      .set('Accept', 'application/json')
+      .withCredentials()
+      .then(r => {
+        if (this.state.avatar_url == null) {
+          this.setState({avatar_url: r.body.avatar_url})
+        }
+      })
+      .catch(e => this.setState({user: 'not signed in'}))
     superagent.get('/accounts/profile')
       .withCredentials()
       .then(r => {
@@ -26,7 +38,19 @@ const Settings = React.createClass({
         copy('input[name="user[name]"]')
         const emailMessage = doc.querySelector('input[name="user[email]"]').nextElementSibling.innerHTML
         this.setState({emailMessage})
+        const image = doc.querySelector('.avatar-image')
+        this.setState({image: image.innerHTML})
       }).catch(e => console.error(e))
+  },
+  setImage(event) {
+    const reader = new FileReader()
+    const file   = document.querySelector('input[type=file]').files[0]
+    reader.addEventListener("load", () => {
+      this.setState({avatar_url: reader.result})
+    }, false)
+    if (file) {
+      reader.readAsDataURL(file);
+    }
   },
   render() {
     const user = this.state.user || {}
@@ -50,6 +74,11 @@ const Settings = React.createClass({
             <input name='authenticity_token' type='hidden' />
             <semantic.Grid>
               <semantic.Grid.Column mobile={14} tablet={10} computer={8}>
+                <label>Avatar</label>
+                <semantic.Segment compact>
+                  <semantic.Image width={80} height={80} as='a' src={this.state.avatar_url} />
+                </semantic.Segment>
+                <input accept="image/*" name="user[avatar]" type="file" onChange={this.setImage} />
                 <label>Name</label>
                 <semantic.Form.Input name='user[name]' type='text' />
                 <label>Email</label>

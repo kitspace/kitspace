@@ -4,8 +4,6 @@ const superagent = require('superagent')
 
 const UserMenu = require('./user_menu')
 
-window.superagent = superagent
-
 const TitleBar = React.createClass({
   getInitialState() {
     return {
