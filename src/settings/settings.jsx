@@ -18,6 +18,7 @@ const Settings = React.createClass({
       newAvatarUrl: null,
       modalOpen: false,
       rawImageBlob: '',
+      message: null,
     }
   },
   getUser() {
@@ -81,6 +82,13 @@ const Settings = React.createClass({
     this.setState({modalOpen: false})
   },
 
+  setMessage(message) {
+    this.setState({message})
+    setTimeout(() => {
+      this.setState({message: null})
+    }, 5000)
+  },
+
   render() {
     const user = this.state.user || {}
     const emailWarning = this.state.emailMessage !== defaultMessage
@@ -100,17 +108,18 @@ const Settings = React.createClass({
             method='post'
             onSubmit={event => {
               event.preventDefault()
-              const formData = new FormData(this.form);
+              const formData = new FormData(this.form)
               if (this.state.newAvatarBlob != null) {
-                formData.append('user[avatar]', this.state.newAvatarBlob, 'avatar.png');
+                formData.append('user[avatar]', this.state.newAvatarBlob, 'avatar.png')
               }
               superagent.post('/accounts/profile')
-              .send(formData)
-              .set('Accept', 'application/json')
-              .then(r => {
-                this.getUser()
-                this.getForm()
-              })
+                .send(formData)
+                .set('Accept', 'application/json')
+                .then(r => {
+                  this.setMessage(r.body.message)
+                  this.getUser()
+                  this.getForm()
+                })
             }}
             ref={form => this.form = form}
           >
@@ -162,6 +171,7 @@ const Settings = React.createClass({
                   {htmlToReact(`<div>${this.state.emailMessage}</div>`)}
                 </semantic.Message>
                 <semantic.Button type='submit'>{'Save'}</semantic.Button>
+                {this.state.message ? <semantic.Message positive>{this.state.message}</semantic.Message> : <div></div>}
               </semantic.Grid.Column>
             </semantic.Grid>
           </form>
