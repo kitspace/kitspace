@@ -45,7 +45,7 @@ const Settings = React.createClass({
   setImage(event) {
     const reader = new FileReader()
     const file   = document.querySelector('input[type=file]').files[0]
-    reader.addEventListener("load", () => {
+    reader.addEventListener('load', () => {
       this.setState({avatar_url: reader.result})
     }, false)
     if (file) {
@@ -65,12 +65,12 @@ const Settings = React.createClass({
         <semantic.Container>
           <semantic.Form
             warning={emailWarning && this.state.emailMessage !== ''}
-            encType="multipart/form-data" action="/accounts/profile"
-            acceptCharset="UTF-8"
-            method="post"
+            encType='multipart/form-data' action='/accounts/profile'
+            acceptCharset='UTF-8'
+            method='post'
           >
-            <input name="utf8" type="hidden" value="✓" />
-            <input type="hidden" name="_method" value="put" />
+            <input name='utf8' type='hidden' value='✓' />
+            <input type='hidden' name='_method' value='put' />
             <input name='authenticity_token' type='hidden' />
             <semantic.Grid>
               <semantic.Grid.Column mobile={14} tablet={10} computer={8}>
@@ -78,7 +78,7 @@ const Settings = React.createClass({
                 <semantic.Segment compact>
                   <semantic.Image width={80} height={80} as='a' src={this.state.avatar_url} />
                 </semantic.Segment>
-                <input accept="image/*" name="user[avatar]" type="file" onChange={this.setImage} />
+                <input accept='image/png' name='user[avatar]' type='file' onChange={this.setImage} />
                 <label>Name</label>
                 <semantic.Form.Input name='user[name]' type='text' />
                 <label>Email</label>
