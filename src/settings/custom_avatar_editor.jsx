@@ -1,5 +1,6 @@
 const React             = require('react')
 const ReactAvatarEditor = require('react-avatar-editor').default
+const semantic          = require('semantic-ui-react')
 
 class CustomAvatarEditor extends React.Component {
   state = {
@@ -56,12 +57,7 @@ class CustomAvatarEditor extends React.Component {
     this.setState({ height })
   }
 
-  logCallback (e) {
-    console.log('callback', e)
-  }
-
   handlePositionChange = position => {
-    console.log('Position set to', position)
     this.setState({ position })
   }
 
@@ -77,15 +73,10 @@ class CustomAvatarEditor extends React.Component {
           onPositionChange={this.handlePositionChange}
           rotate={parseFloat(this.state.rotate)}
           borderRadius={this.state.borderRadius}
-          onLoadFailure={this.logCallback.bind(this, 'onLoadFailed')}
-          onLoadSuccess={this.logCallback.bind(this, 'onLoadSuccess')}
-          onImageReady={this.logCallback.bind(this, 'onImageReady')}
-          onImageLoad={this.logCallback.bind(this, 'onImageLoad')}
-          onDropFile={this.logCallback.bind(this, 'onDropFile')}
           image={this.props.image}
         />
         <br />
-        Zoom:
+        <semantic.Label>{'Zoom:'}</semantic.Label>
         <input
           name='scale'
           type='range'
