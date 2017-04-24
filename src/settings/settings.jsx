@@ -1,8 +1,9 @@
-const Redux           = require('redux')
-const React           = require('react')
-const superagent      = require('superagent')
-const semantic        = require('semantic-ui-react')
-const htmlToReact     = new (new require('html-to-react')).Parser(React).parse
+const Redux        = require('redux')
+const React        = require('react')
+const superagent   = require('superagent')
+const semantic     = require('semantic-ui-react')
+const htmlToReact  = new (new require('html-to-react')).Parser(React).parse
+const CustomAvatarEditor = require('./custom_avatar_editor')
 
 const TitleBar = require('../title_bar')
 
@@ -74,6 +75,15 @@ const Settings = React.createClass({
             <input name='authenticity_token' type='hidden' />
             <semantic.Grid>
               <semantic.Grid.Column mobile={14} tablet={10} computer={8}>
+                <CustomAvatarEditor
+                  image={this.state.avatar_url}
+                  width={250}
+                  height={250}
+                  border={50}
+                  color={[255, 255, 255, 0.6]}
+                  scale={1.2}
+                  rotate={0}
+                />
                 <label>Avatar</label>
                 <semantic.Segment compact>
                   <semantic.Image width={80} height={80} as='a' src={this.state.avatar_url} />

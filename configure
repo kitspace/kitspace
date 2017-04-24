@@ -29,8 +29,7 @@ ninja.rule('remove').run('rm -rf $in')
     .description('$command')
 
 
-let browserify = `browserify --extension='.jsx' --transform [ babelify \
-    --presets [ react es2015 ] ]`
+let browserify = `browserify --extension='.jsx' --transform [ babelify ]`
 
 
 if (config === 'dev') {

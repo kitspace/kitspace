@@ -44,6 +44,9 @@
   "license": "CPAL-1.0",
   "dependencies": {
     "1-click-bom": "^1.1.2",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-function-bind": "^6.22.0",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "babel-polyfill": "^6.13.0",
     "browser-version": "^1.0.0",
     "github-url-to-object": "^2.2.6",
@@ -54,6 +57,7 @@
     "lodash.throttle": "^4.1.1",
     "pcb-stackup": "^3.0.0",
     "react": "^15.3.0",
+    "react-avatar-editor": "^9.1.1",
     "react-document-title": "^2.0.1",
     "react-dom": "^15.3.0",
     "react-double-scrollbar": "0.0.9",
