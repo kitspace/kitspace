@@ -84,6 +84,7 @@ const Settings = React.createClass({
   render() {
     const user = this.state.user || {}
     const emailWarning = this.state.emailMessage !== defaultMessage
+    const warning = emailWarning && this.state.emailMessage !== ''
     return (
       <div className='Settings'>
         <TitleBar user={this.state.user}>
@@ -93,8 +94,7 @@ const Settings = React.createClass({
         </TitleBar>
         <semantic.Container>
           <form
-            className='ui large form'
-            warning={emailWarning && this.state.emailMessage !== ''}
+            className={`ui arge form ${warning ? 'warning' : ''}`}
             encType='multipart/form-data'
             acceptCharset='UTF-8'
             method='post'
