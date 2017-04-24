@@ -75,18 +75,24 @@ const Settings = React.createClass({
             <input name='authenticity_token' type='hidden' />
             <semantic.Grid>
               <semantic.Grid.Column mobile={14} tablet={10} computer={8}>
-                <CustomAvatarEditor
-                  image={this.state.avatar_url}
-                  width={250}
-                  height={250}
-                  border={50}
-                  color={[255, 255, 255, 0.6]}
-                  scale={1.2}
-                  rotate={0}
-                />
                 <label>Avatar</label>
                 <semantic.Segment compact>
-                  <semantic.Image width={80} height={80} as='a' src={this.state.avatar_url} />
+                  <semantic.Modal
+                    trigger={<semantic.Image width={80} height={80} as='a' src={this.state.avatar_url} />}
+                    size='small'
+                  >
+                  <semantic.Modal.Content>
+                    <CustomAvatarEditor
+                      image={this.state.avatar_url}
+                      width={250}
+                      height={250}
+                      border={50}
+                      color={[255, 255, 255, 0.6]}
+                      scale={1.2}
+                      rotate={0}
+                    />
+                  </semantic.Modal.Content>
+                  </semantic.Modal>
                 </semantic.Segment>
                 <input accept='image/png' name='user[avatar]' type='file' onChange={this.setImage} />
                 <label>Name</label>
