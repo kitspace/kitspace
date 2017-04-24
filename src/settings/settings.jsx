@@ -80,8 +80,9 @@ const Settings = React.createClass({
         </TitleBar>
         <semantic.Container>
           <form
+            className='ui large form'
             warning={emailWarning && this.state.emailMessage !== ''}
-            encType='multipart/form-data' action='/accounts/profile'
+            encType='multipart/form-data'
             acceptCharset='UTF-8'
             method='post'
             onSubmit={event => {
@@ -102,23 +103,36 @@ const Settings = React.createClass({
             <input name='authenticity_token' type='hidden' />
             <semantic.Grid>
               <semantic.Grid.Column mobile={14} tablet={10} computer={8}>
-                <label>Avatar</label>
-                <semantic.Segment compact>
-                  <semantic.Image width={80} height={80} as='a' src={this.state.newAvatarUrl || this.state.user.avatar_url} />
-                  <semantic.Modal
-                    open={this.state.modalOpen}
-                    size='small'
-                  >
-                  <semantic.Modal.Content>
-                    <CustomAvatarEditor
-                      ref={customEditor => this.editor = (customEditor || {}).editor}
-                      image={this.state.rawImage}
+                  {'Avatar'}
+                  <semantic.Segment compact>
+                    <label htmlFor='fileInput'>
+                      <semantic.Image width={80} as='a' height={80} src={this.state.newAvatarUrl || this.state.user.avatar_url} />
+                    </label>
+                    <input
+                      style={{
+                        opacity: 0,
+                        position: 'absolute',
+                        zIndex: -1
+                      }}
+                      id='fileInput'
+                      accept='image/png'
+                      type='file'
+                      onChange={this.setRawImage}
                     />
-                  </semantic.Modal.Content>
-                  <semantic.Modal.Actions>
-                    <semantic.Button primary onClick={this.handleSave}>{'Ok'}</semantic.Button>
-                  </semantic.Modal.Actions>
-                </semantic.Modal>
+                    <semantic.Modal
+                      open={this.state.modalOpen}
+                      size='small'
+                    >
+                    <semantic.Modal.Content>
+                      <CustomAvatarEditor
+                        ref={customEditor => this.editor = (customEditor || {}).editor}
+                        image={this.state.rawImage}
+                      />
+                    </semantic.Modal.Content>
+                    <semantic.Modal.Actions>
+                      <semantic.Button primary onClick={this.handleSave}>{'Ok'}</semantic.Button>
+                    </semantic.Modal.Actions>
+                  </semantic.Modal>
                 </semantic.Segment>
                 <label>Name</label>
                 <semantic.Form.Input name='user[name]' type='text' />
@@ -131,7 +145,6 @@ const Settings = React.createClass({
               </semantic.Grid.Column>
             </semantic.Grid>
           </form>
-          <input accept='image/png' type='file' onChange={this.setRawImage} />
         </semantic.Container>
       </div>
     )
