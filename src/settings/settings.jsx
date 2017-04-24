@@ -14,9 +14,10 @@ const Settings = React.createClass({
     return {
       emailMessage: '',
       user: {},
-      avatar_url: null,
-      modal_open: false,
-      raw_image: '',
+      newAvatarBlob: null,
+      newAvatarUrl: null,
+      modalOpen: false,
+      rawImageBlob: '',
     }
   },
   componentWillMount() {
@@ -24,9 +25,7 @@ const Settings = React.createClass({
       .set('Accept', 'application/json')
       .withCredentials()
       .then(r => {
-        if (this.state.avatar_url == null) {
-          this.setState({avatar_url: r.body.avatar_url})
-        }
+        this.setState({user: r.body})
       })
       .catch(e => this.setState({user: 'not signed in'}))
     superagent.get('/accounts/profile')
@@ -41,17 +40,16 @@ const Settings = React.createClass({
         copy('input[name="user[name]"]')
         const emailMessage = doc.querySelector('input[name="user[email]"]').nextElementSibling.innerHTML
         this.setState({emailMessage})
-        const image = doc.querySelector('.avatar-image')
-        this.setState({image: image.innerHTML})
       }).catch(e => console.error(e))
   },
-  setImage(event) {
+
+  setRawImage(event) {
     const reader = new FileReader()
     const file   = document.querySelector('input[type=file]').files[0]
     reader.addEventListener('load', () => {
       this.setState({
-        raw_image: reader.result,
-        modal_open: true,
+        rawImage: reader.result,
+        modalOpen: true,
       })
     }, false)
     if (file) {
@@ -60,13 +58,14 @@ const Settings = React.createClass({
   },
 
   handleSave() {
-    console.log('editor: ', this.editor)
     if (this.editor) {
-      this.setState({
-        avatar_url: this.editor.getImageScaledToCanvas().toDataURL()
+      const image = this.editor.getImage()
+      this.setState({newAvatarUrl: image.toDataURL()})
+      image.toBlob(blob => {
+        this.setState({newAvatarBlob: blob})
       })
     }
-    this.setState({modal_open: false})
+    this.setState({modalOpen: false})
   },
 
   render() {
@@ -80,11 +79,23 @@ const Settings = React.createClass({
           </div>
         </TitleBar>
         <semantic.Container>
-          <semantic.Form
+          <form
             warning={emailWarning && this.state.emailMessage !== ''}
             encType='multipart/form-data' action='/accounts/profile'
             acceptCharset='UTF-8'
             method='post'
+            onSubmit={event => {
+              event.preventDefault()
+              const formData = new FormData(this.form);
+              if (this.state.newAvatarBlob != null) {
+                formData.append('user[avatar]', this.state.newAvatarBlob, 'avatar.png');
+              }
+              superagent.post('/accounts/profile')
+              .send(formData)
+              .set('Accept', 'application/json')
+              .then(r => console.log(r.body))
+            }}
+            ref={form => this.form = form}
           >
             <input name='utf8' type='hidden' value='✓' />
             <input type='hidden' name='_method' value='put' />
@@ -93,23 +104,22 @@ const Settings = React.createClass({
               <semantic.Grid.Column mobile={14} tablet={10} computer={8}>
                 <label>Avatar</label>
                 <semantic.Segment compact>
-                  <semantic.Image width={80} height={80} as='a' src={this.state.avatar_url} />
+                  <semantic.Image width={80} height={80} as='a' src={this.state.newAvatarUrl || this.state.user.avatar_url} />
                   <semantic.Modal
-                    open={this.state.modal_open}
+                    open={this.state.modalOpen}
                     size='small'
                   >
                   <semantic.Modal.Content>
                     <CustomAvatarEditor
                       ref={customEditor => this.editor = (customEditor || {}).editor}
-                      image={this.state.raw_image}
+                      image={this.state.rawImage}
                     />
                   </semantic.Modal.Content>
                   <semantic.Modal.Actions>
                     <semantic.Button primary onClick={this.handleSave}>{'Ok'}</semantic.Button>
                   </semantic.Modal.Actions>
-                  </semantic.Modal>
+                </semantic.Modal>
                 </semantic.Segment>
-                <input accept='image/png' name='user[avatar]' type='file' onChange={this.setImage} />
                 <label>Name</label>
                 <semantic.Form.Input name='user[name]' type='text' />
                 <label>Email</label>
@@ -120,7 +130,8 @@ const Settings = React.createClass({
                 <semantic.Button type='submit'>{'Save'}</semantic.Button>
               </semantic.Grid.Column>
             </semantic.Grid>
-          </semantic.Form>
+          </form>
+          <input accept='image/png' type='file' onChange={this.setRawImage} />
         </semantic.Container>
       </div>
     )
