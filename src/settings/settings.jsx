@@ -122,7 +122,11 @@ const Settings = React.createClass({
                   {'Avatar'}
                   <semantic.Segment compact>
                     <label htmlFor='fileInput'>
-                      <semantic.Image width={80} as='a' height={80} src={this.state.newAvatarUrl || this.state.user.avatar_url} />
+                      <semantic.Image
+                        as='a'
+                        style={{height: 80, width: 80}}
+                        src={this.state.newAvatarUrl || this.state.user.avatar_url}
+                      />
                     </label>
                     <input
                       style={{
