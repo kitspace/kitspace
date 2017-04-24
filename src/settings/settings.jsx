@@ -20,15 +20,23 @@ const Settings = React.createClass({
       rawImageBlob: '',
     }
   },
-  componentWillMount() {
-    superagent.get('/accounts/api/v4/user')
+  getUser() {
+    return superagent.get('/accounts/api/v4/user')
       .set('Accept', 'application/json')
       .withCredentials()
       .then(r => {
-        this.setState({user: r.body})
+        const newUser = r.body
+        //force a re-render of the avatar if it's the same
+        if (this.state.user.avatar_url === newUser.avatar_url) {
+          newUser.avatar_url += '?' + Math.random()
+        }
+        this.setState({user: newUser})
       })
       .catch(e => this.setState({user: 'not signed in'}))
-    superagent.get('/accounts/profile')
+  },
+
+  getForm() {
+    return superagent.get('/accounts/profile')
       .withCredentials()
       .then(r => {
         const doc = (new DOMParser).parseFromString(r.text, 'text/html')
@@ -41,6 +49,11 @@ const Settings = React.createClass({
         const emailMessage = doc.querySelector('input[name="user[email]"]').nextElementSibling.innerHTML
         this.setState({emailMessage})
       }).catch(e => console.error(e))
+  },
+
+  componentDidMount() {
+    this.getUser()
+    this.getForm()
   },
 
   setRawImage(event) {
@@ -73,7 +86,7 @@ const Settings = React.createClass({
     const emailWarning = this.state.emailMessage !== defaultMessage
     return (
       <div className='Settings'>
-        <TitleBar>
+        <TitleBar user={this.state.user}>
           <div className='titleText'>
             {'Settings'}
           </div>
@@ -94,7 +107,10 @@ const Settings = React.createClass({
               superagent.post('/accounts/profile')
               .send(formData)
               .set('Accept', 'application/json')
-              .then(r => console.log(r.body))
+              .then(r => {
+                this.getUser()
+                this.getForm()
+              })
             }}
             ref={form => this.form = form}
           >
@@ -138,7 +154,7 @@ const Settings = React.createClass({
                 <semantic.Form.Input name='user[name]' type='text' />
                 <label>Email</label>
                 <semantic.Form.Input name='user[email]' type='text'/>
-                <semantic.Message warning={emailWarning} id='emailMessage'>
+                <semantic.Message size='tiny' warning={emailWarning} id='emailMessage'>
                   {htmlToReact(`<div>${this.state.emailMessage}</div>`)}
                 </semantic.Message>
                 <semantic.Button type='submit'>{'Save'}</semantic.Button>
