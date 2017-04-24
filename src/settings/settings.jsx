@@ -15,6 +15,8 @@ const Settings = React.createClass({
       emailMessage: '',
       user: {},
       avatar_url: null,
+      modal_open: false,
+      raw_image: '',
     }
   },
   componentWillMount() {
@@ -47,12 +49,26 @@ const Settings = React.createClass({
     const reader = new FileReader()
     const file   = document.querySelector('input[type=file]').files[0]
     reader.addEventListener('load', () => {
-      this.setState({avatar_url: reader.result})
+      this.setState({
+        raw_image: reader.result,
+        modal_open: true,
+      })
     }, false)
     if (file) {
       reader.readAsDataURL(file);
     }
   },
+
+  handleSave() {
+    console.log('editor: ', this.editor)
+    if (this.editor) {
+      this.setState({
+        avatar_url: this.editor.getImageScaledToCanvas().toDataURL()
+      })
+    }
+    this.setState({modal_open: false})
+  },
+
   render() {
     const user = this.state.user || {}
     const emailWarning = this.state.emailMessage !== defaultMessage
@@ -77,21 +93,20 @@ const Settings = React.createClass({
               <semantic.Grid.Column mobile={14} tablet={10} computer={8}>
                 <label>Avatar</label>
                 <semantic.Segment compact>
+                  <semantic.Image width={80} height={80} as='a' src={this.state.avatar_url} />
                   <semantic.Modal
-                    trigger={<semantic.Image width={80} height={80} as='a' src={this.state.avatar_url} />}
+                    open={this.state.modal_open}
                     size='small'
                   >
                   <semantic.Modal.Content>
                     <CustomAvatarEditor
-                      image={this.state.avatar_url}
-                      width={250}
-                      height={250}
-                      border={50}
-                      color={[255, 255, 255, 0.6]}
-                      scale={1.2}
-                      rotate={0}
+                      ref={customEditor => this.editor = (customEditor || {}).editor}
+                      image={this.state.raw_image}
                     />
                   </semantic.Modal.Content>
+                  <semantic.Modal.Actions>
+                    <semantic.Button primary onClick={this.handleSave}>{'Ok'}</semantic.Button>
+                  </semantic.Modal.Actions>
                   </semantic.Modal>
                 </semantic.Segment>
                 <input accept='image/png' name='user[avatar]' type='file' onChange={this.setImage} />
