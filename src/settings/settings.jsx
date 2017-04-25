@@ -170,8 +170,13 @@ const Settings = React.createClass({
                 <semantic.Message size='tiny' warning={emailWarning} id='emailMessage'>
                   {htmlToReact(`<div>${this.state.emailMessage}</div>`)}
                 </semantic.Message>
+                <semantic.Message
+                  style={{visibility: this.state.message ? 'visible' : 'hidden'}}
+                  positive
+                >
+                  {this.state.message || '-'}
+                </semantic.Message>
                 <semantic.Button type='submit'>{'Save'}</semantic.Button>
-                {this.state.message ? <semantic.Message positive>{this.state.message}</semantic.Message> : ''}
               </semantic.Grid.Column>
             </semantic.Grid>
           </form>
