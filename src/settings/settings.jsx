@@ -73,7 +73,7 @@ const Settings = React.createClass({
 
   handleSave() {
     if (this.editor) {
-      const image = this.editor.getImage()
+      const image = this.editor.getImageScaledToCanvas()
       this.setState({newAvatarUrl: image.toDataURL()})
       image.toBlob(blob => {
         this.setState({newAvatarBlob: blob})
@@ -133,7 +133,7 @@ const Settings = React.createClass({
                     <label htmlFor='fileInput'>
                       <semantic.Image
                         as='a'
-                        style={{height: 80, width: 80}}
+                        style={{height: 200, width: 200}}
                         src={this.state.newAvatarUrl || this.state.user.avatar_url}
                       />
                     </label>
