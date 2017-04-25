@@ -63,7 +63,7 @@ class CustomAvatarEditor extends React.Component {
 
   render () {
     return (
-      <div>
+      <div style={{display:'flex', alignItems:'center', justifyContent:'space-around'}}>
         <ReactAvatarEditor
           ref={editor => this.editor = editor}
           scale={parseFloat(this.state.scale)}
@@ -75,8 +75,6 @@ class CustomAvatarEditor extends React.Component {
           borderRadius={this.state.borderRadius}
           image={this.props.image}
         />
-        <br />
-        <semantic.Label>{'Zoom:'}</semantic.Label>
         <input
           name='scale'
           type='range'
@@ -86,7 +84,6 @@ class CustomAvatarEditor extends React.Component {
           step='0.01'
           defaultValue='1'
         />
-        <br />
       </div>
     )
   }

@@ -144,7 +144,7 @@ const Settings = React.createClass({
                         zIndex: -1
                       }}
                       id='fileInput'
-                      accept='image/png'
+                      accept='image/*'
                       type='file'
                       onChange={this.setRawImage}
                     />
@@ -171,7 +171,7 @@ const Settings = React.createClass({
                   {htmlToReact(`<div>${this.state.emailMessage}</div>`)}
                 </semantic.Message>
                 <semantic.Button type='submit'>{'Save'}</semantic.Button>
-                {this.state.message ? <semantic.Message positive>{this.state.message}</semantic.Message> : <div></div>}
+                {this.state.message ? <semantic.Message positive>{this.state.message}</semantic.Message> : ''}
               </semantic.Grid.Column>
             </semantic.Grid>
           </form>
