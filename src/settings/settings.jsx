@@ -116,9 +116,11 @@ const Settings = React.createClass({
                 .send(formData)
                 .set('Accept', 'application/json')
                 .then(r => {
-                  this.setMessage(r.body.message)
+                  this.setMessage({text: r.body.message, type: 'success'})
                   this.getUser()
                   this.getForm()
+                }).catch(e => {
+                  this.setMessage({text: 'Profile update failed.', type: 'failed'})
                 })
             }}
             ref={form => this.form = form}
@@ -172,9 +174,10 @@ const Settings = React.createClass({
                 </semantic.Message>
                 <semantic.Message
                   style={{visibility: this.state.message ? 'visible' : 'hidden'}}
-                  positive
+                  positive={this.state.message && this.state.message.type === 'success'}
+                  negative={this.state.message && this.state.message.type !== 'success'}
                 >
-                  {this.state.message || '-'}
+                  {this.state.message ? this.state.message.text : '-'}
                 </semantic.Message>
                 <semantic.Button type='submit'>{'Save'}</semantic.Button>
               </semantic.Grid.Column>
