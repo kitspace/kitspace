@@ -1,8 +1,8 @@
-const Redux        = require('redux')
-const React        = require('react')
-const superagent   = require('superagent')
-const semantic     = require('semantic-ui-react')
-const htmlToReact  = new (new require('html-to-react')).Parser(React).parse
+const Redux       = require('redux')
+const React       = require('react')
+const superagent  = require('superagent')
+const semantic    = require('semantic-ui-react')
+const htmlToReact = new (new require('html-to-react')).Parser(React).parse
 const CustomAvatarEditor = require('./custom_avatar_editor')
 
 const TitleBar = require('../title_bar')
@@ -17,8 +17,7 @@ const Settings = React.createClass({
       newAvatarBlob: null,
       newAvatarUrl: null,
       modalOpen: false,
-      rawImageBlob: '',
-      message: null,
+      submitMessage: null,
     }
   },
   getUser() {
@@ -27,7 +26,7 @@ const Settings = React.createClass({
       .withCredentials()
       .then(r => {
         const newUser = r.body
-        //force a re-render of the avatar if it's the same
+        //force a re-render of the avatar if it's the same link but likely changed
         if (this.state.user.avatar_url === newUser.avatar_url) {
           newUser.avatar_url += '?' + Math.random()
         }
@@ -82,10 +81,10 @@ const Settings = React.createClass({
     this.setState({modalOpen: false})
   },
 
-  setMessage(message) {
-    this.setState({message})
+  setSubmitMessage(submitMessage) {
+    this.setState({submitMessage})
     setTimeout(() => {
-      this.setState({message: null})
+      this.setState({submitMessage: null})
     }, 5000)
   },
 
@@ -116,11 +115,11 @@ const Settings = React.createClass({
                 .send(formData)
                 .set('Accept', 'application/json')
                 .then(r => {
-                  this.setMessage({text: r.body.message, type: 'success'})
+                  this.setSubmitMessage({text: r.body.message, type: 'success'})
                   this.getUser()
                   this.getForm()
                 }).catch(e => {
-                  this.setMessage({text: 'Profile update failed.', type: 'failed'})
+                  this.setSubmitMessage({text: 'Profile update failed.', type: 'failed'})
                 })
             }}
             ref={form => this.form = form}
@@ -173,11 +172,11 @@ const Settings = React.createClass({
                   {htmlToReact(`<div>${this.state.emailMessage}</div>`)}
                 </semantic.Message>
                 <semantic.Message
-                  style={{visibility: this.state.message ? 'visible' : 'hidden'}}
-                  positive={this.state.message && this.state.message.type === 'success'}
-                  negative={this.state.message && this.state.message.type !== 'success'}
+                  style={{visibility: this.state.submitMessage ? 'visible' : 'hidden'}}
+                  positive={this.state.submitMessage && this.state.submitMessage.type === 'success'}
+                  negative={this.state.submitMessage && this.state.submitMessage.type !== 'success'}
                 >
-                  {this.state.message ? this.state.message.text : '-'}
+                  {this.state.submitMessage ? this.state.submitMessage.text : '-'}
                 </semantic.Message>
                 <semantic.Button type='submit'>{'Save'}</semantic.Button>
               </semantic.Grid.Column>
