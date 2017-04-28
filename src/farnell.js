@@ -8,6 +8,9 @@ const {extract, extractLink} = require('./extract')
 function farnell(results) {
   const completed = results.map((result, query) => {
     const offers =  result.get('offers')
+    if (offers == null) {
+      return Promise.resolve([query, result])
+    }
     const farnellOffers = offers.filter(offer => {
       return offer.get('sku').get('vendor') === 'Farnell'
     })
