@@ -2,16 +2,17 @@ const superagent = require('superagent')
 const immutable = require('immutable')
 const apikey = require('../config').OCTOPART_API_KEY
 
-const retailerMap = immutable.Map({
+const retailer_map = immutable.OrderedMap({
   'Digi-Key'       : 'Digikey',
   'Mouser'         : 'Mouser',
   'RS Components'  : 'RS',
   'Newark'         : 'Newark',
-  'Farnell'        : 'Farnell',
   'element14 APAC' : 'Farnell',
+  'Farnell'        : 'Farnell',
 })
 
-const retailers_used = immutable.Set.fromKeys(retailerMap)
+const retailer_reverse_map = retailer_map.mapEntries(([k,v]) => [v, k])
+const retailers_used       = immutable.Set.fromKeys(retailer_map)
 
 function transform(queries) {
   return queries.map(q => {
@@ -23,7 +24,7 @@ function transform(queries) {
     }
     if (q.get('sku')) {
       ret.sku = q.get('sku').get('part')
-      ret.seller = q.get('sku').get('vendor')
+      ret.seller = retailer_reverse_map.get(q.get('sku').get('vendor'))
     }
     ret.reference = String(q.hashCode())
     return ret
@@ -107,12 +108,12 @@ function offers(item) {
   const offers = immutable.Set(item.offers)
     .filter(o => retailers_used.includes(o.seller.name))
     .map(offer => {
-      return immutable.Map({
-        sku: immutable.Map({
+      return immutable.fromJS({
+        sku: {
           part : offer.sku,
-          vendor : retailerMap.get(offer.seller.name),
-        }),
-        prices: immutable.fromJS(offer.prices)
+          vendor : retailer_map.get(offer.seller.name),
+        },
+        prices: offer.prices
       })
     })
   return mergeOffers(offers)
@@ -121,10 +122,10 @@ function offers(item) {
 function mergeOffers(offers) {
   return offers.reduce((offers, offer) => {
     const sku = offer.get('sku')
-    const existingOffer = offers.find(o => o.get('sku').equals(sku))
-    if (existingOffer) {
-      offers = offers.delete(existingOffer)
-      offer = existingOffer.update('prices', ps => ps.concat(offer.get('prices')))
+    const existing_offer = offers.find(o => o.get('sku').equals(sku))
+    if (existing_offer) {
+      offers = offers.delete(existing_offer)
+      offer = existing_offer.update('prices', ps => ps.concat(offer.get('prices')))
     }
     return offers.add(offer)
   }, immutable.Set())
