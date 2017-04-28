@@ -52,7 +52,7 @@ function octopart(queries) {
         }).toList()
         const number = query.get('mpn') ? query.get('mpn').get('part') : item.mpn
         let manufacturer = item.brand.name
-        if (query.get('mpn') && query.get('mpn').get('manufacturer') !== '') {
+        if (query.get('mpn') && query.get('mpn').get('manufacturer')) {
           manufacturer = query.get('mpn').get('manufacturer')
         }
         return returns.set(query, immutable.Map({
