@@ -14,11 +14,10 @@ function farnell(results) {
     const queries = farnellOffers.map(offer => {
       return runQuery(offer.get('sku').get('part'))
         .then(farnellInfo => {
-          if (offer.get('image') == null) {
-            return offer
-              .set('image', farnellInfo.get('image'))
-              .set('description', farnellInfo.get('description'))
-          }
+          return offer.merge(farnellInfo)
+        })
+        .catch(e => {
+          console.warn(e)
           return offer
         })
     })
@@ -38,13 +37,13 @@ function runQuery(sku) {
     return superagent.get(url)
       .then(r => DOMParser.parseFromString(r.text, 'text/html'))
       .then(extractElements)
-      .catch(e => console.error(e))
 }
 
 function extractElements(doc) {
   return immutable.Map({
-    image: extractImage(doc),
-    description: extractDescription(doc),
+    image       : extractImage(doc),
+    description : extractDescription(doc),
+    specs       : extractSpecs(doc),
   })
 }
 
@@ -54,6 +53,27 @@ function extractImage(doc) {
     url,
     credit_string: 'Farnell',
     credit_url: 'http://uk.farnell.com',
+  })
+}
+
+function extractSpecs(doc) {
+  const names = immutable.List(doc.querySelectorAll('dt[id^=descAttributeName]'))
+  const values = immutable.List(doc.querySelectorAll('dd[id^=descAttributeValue]'))
+  return names.map((name, index) => {
+    try {
+      name = name.innerHTML.trim().slice(0, -1)
+      const valueNode = values.get(index)
+      const valueNodeChild = valueNode.children[0]
+      if (valueNodeChild) {
+        var value = valueNodeChild.innerHTML.trim()
+      } else {
+        var value = valueNode.innerHTML.trim()
+      }
+      return immutable.Map({name, value})
+    }
+    catch (e) {
+      return immutable.Map()
+    }
   })
 }
 
