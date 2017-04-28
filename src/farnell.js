@@ -3,6 +3,8 @@ const superagent = require('superagent')
 const jsdom = new (require('jsdom').JSDOM)
 const DOMParser = new (jsdom.window.DOMParser)
 
+const {extract, extractLink} = require('./extract')
+
 function farnell(results) {
   const completed = results.map((result, query) => {
     const offers =  result.get('offers')
@@ -13,7 +15,9 @@ function farnell(results) {
       return runQuery(offer.get('sku').get('part'))
         .then(farnellInfo => {
           if (offer.get('image') == null) {
-            return offer.set('image', farnellInfo.get('image'))
+            return offer
+              .set('image', farnellInfo.get('image'))
+              .set('description', farnellInfo.get('description'))
           }
           return offer
         })
@@ -40,6 +44,7 @@ function runQuery(sku) {
 function extractElements(doc) {
   return immutable.Map({
     image: extractImage(doc),
+    description: extractDescription(doc),
   })
 }
 
@@ -50,6 +55,10 @@ function extractImage(doc) {
     credit_string: 'Farnell',
     credit_url: 'http://uk.farnell.com',
   })
+}
+
+function extractDescription(doc) {
+    return extract("[itemprop='name']", doc)
 }
 
 module.exports = farnell
