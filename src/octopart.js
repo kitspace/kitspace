@@ -91,16 +91,20 @@ function datasheet(item) {
   return item.datasheets.reduce((prev, d) => prev || d.url, null)
 }
 
+const retailers_used = immutable.List.of('Digi-Key', 'RS Components', 'Farnell', 'element14 APAC', 'Mouser')
+
 function offers(item) {
-  return immutable.List(item.offers).map(offer => {
-    return immutable.Map({
-      sku: immutable.Map({
-        part : offer.sku,
-        vendor : offer.seller.name,
-      }),
-      prices: immutable.fromJS(offer.prices)
+  return immutable.List(item.offers)
+    .filter(o => retailers_used.includes(o.seller.name))
+    .map(offer => {
+      return immutable.Map({
+        sku: immutable.Map({
+          part : offer.sku,
+          vendor : offer.seller.name,
+        }),
+        prices: immutable.fromJS(offer.prices)
+      })
     })
-  })
 }
 
 
