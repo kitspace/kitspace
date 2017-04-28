@@ -91,7 +91,13 @@ function datasheet(item) {
   return item.datasheets.reduce((prev, d) => prev || d.url, null)
 }
 
-const retailers_used = immutable.List.of('Digi-Key', 'RS Components', 'Farnell', 'element14 APAC', 'Mouser')
+const retailers_used = immutable.List([
+  'Digi-Key',
+  'RS Components',
+  'Farnell',
+  'Newark',
+  'Mouser',
+])
 
 function offers(item) {
   return immutable.List(item.offers)
