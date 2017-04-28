@@ -44,6 +44,7 @@ const schema = `
     USD: [[Float]]
     EUR: [[Float]]
     GBP: [[Float]]
+    SGD: [[Float]]
   }
 
   type Image {

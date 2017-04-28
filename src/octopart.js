@@ -2,6 +2,17 @@ const superagent = require('superagent')
 const immutable = require('immutable')
 const apikey = require('../config').OCTOPART_API_KEY
 
+const retailerMap = immutable.Map({
+  'Digi-Key'       : 'Digikey',
+  'Mouser'         : 'Mouser',
+  'RS Components'  : 'RS',
+  'Newark'         : 'Newark',
+  'Farnell'        : 'Farnell',
+  'element14 APAC' : 'Farnell',
+})
+
+const retailers_used = immutable.Set.fromKeys(retailerMap)
+
 function transform(queries) {
   return queries.map(q => {
     const ret = {}
@@ -91,27 +102,34 @@ function datasheet(item) {
   return item.datasheets.reduce((prev, d) => prev || d.url, null)
 }
 
-const retailers_used = immutable.List([
-  'Digi-Key',
-  'RS Components',
-  'Farnell',
-  'Newark',
-  'Mouser',
-])
 
 function offers(item) {
-  return immutable.List(item.offers)
+  const offers = immutable.Set(item.offers)
     .filter(o => retailers_used.includes(o.seller.name))
     .map(offer => {
       return immutable.Map({
         sku: immutable.Map({
           part : offer.sku,
-          vendor : offer.seller.name,
+          vendor : retailerMap.get(offer.seller.name),
         }),
         prices: immutable.fromJS(offer.prices)
       })
     })
+  return mergeOffers(offers)
 }
+
+function mergeOffers(offers) {
+  return offers.reduce((offers, offer) => {
+    const sku = offer.get('sku')
+    const existingOffer = offers.find(o => o.get('sku').equals(sku))
+    if (existingOffer) {
+      offers = offers.delete(existingOffer)
+      offer = existingOffer.update('prices', ps => ps.concat(offer.get('prices')))
+    }
+    return offers.add(offer)
+  }, immutable.Set())
+}
+
 
 
 module.exports = octopart
