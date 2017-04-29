@@ -78,10 +78,8 @@ const TsvTable = React.createClass({
     const lines     = tsv.split('\n').slice(0, -1).map(line => line.split('\t'))
     const headings  = lines[0]
     const bodyLines = lines.slice(1)
-    let headingJSX = headings.map(text => {
-      return h(semantic.Table.HeaderCell, text)
-    })
-    headingJSX = h(semantic.Table.Header, [h(semantic.Table.Row, headingJSX)])
+    let headingJSX = headings.map(text => h(semantic.Table.HeaderCell, text))
+    headingJSX     = h(semantic.Table.Header, [h(semantic.Table.Row, headingJSX)])
     const bodyJSX = tbody(bodyLines.map((line, rowIndex) => {
       const grouped = line.reduce((grouped, text, columnIndex) => {
         const heading = headings[columnIndex]
@@ -141,9 +139,9 @@ const BOM = React.createClass({
       <div className='bom'>
         <div className='bomTableContainer'>
           <DoubleScrollbar>
-          <TsvTable parts={this.props.parts} tsv={this.props.tsv} />
+            <TsvTable parts={this.props.parts} tsv={this.props.tsv} />
           </DoubleScrollbar>
-          </div>
+        </div>
       </div>
     )
   }
