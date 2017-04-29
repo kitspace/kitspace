@@ -16,9 +16,7 @@ function farnell(results) {
     })
     const queries = farnellOffers.map(offer => {
       return runQuery(offer.get('sku').get('part'))
-        .then(farnellInfo => {
-          return offer.merge(farnellInfo)
-        })
+        .then(farnellInfo => offer.merge(farnellInfo))
         .catch(e => {
           console.warn(e)
           return offer
@@ -51,9 +49,12 @@ function extractElements(doc) {
 }
 
 function extractImage(doc) {
-  const url = doc.querySelector('#productMainImage').src
+  const a = doc.querySelector('#productMainImage')
+  if (a == null) {
+    return null
+  }
   return immutable.Map({
-    url,
+    url: a.src,
     credit_string: 'Farnell',
     credit_url: 'http://uk.farnell.com',
   })
