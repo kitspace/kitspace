@@ -1,7 +1,7 @@
-const immutable = require('immutable')
+const immutable  = require('immutable')
 const superagent = require('superagent')
-const jsdom = new (require('jsdom').JSDOM)
-const DOMParser = new (jsdom.window.DOMParser)
+const jsdom      = new (require('jsdom').JSDOM)
+const DOMParser  = new jsdom.window.DOMParser
 
 const {extract, extractLink} = require('./extract')
 
@@ -11,22 +11,22 @@ function farnell(results) {
     if (offers == null) {
       return Promise.resolve([query, result])
     }
-    const farnellOffers = offers.filter(offer => {
+    const farnell_offers = offers.filter(offer => {
       return offer.get('sku').get('vendor') === 'Farnell'
     })
-    const queries = farnellOffers.map(offer => {
+    const queries = farnell_offers.map(offer => {
       return runQuery(offer.get('sku').get('part'))
-        .then(farnellInfo => offer.merge(farnellInfo))
+        .then(farnell_info => offer.merge(farnell_info))
         .catch(e => {
           console.warn(e)
           return offer
         })
     })
-    return Promise.all(queries).then(completedOffers => {
-      const notFarnellOffers = offers.filter(offer => {
+    return Promise.all(queries).then(completed_offers => {
+      const not_farnell_offers = offers.filter(offer => {
         return offer.get('sku').get('vendor') !== 'Farnell'
       })
-      return [query, result.set('offers', notFarnellOffers.concat(completedOffers))]
+      return [query, result.set('offers', not_farnell_offers.concat(completed_offers))]
     })
   })
   return Promise.all(completed.values()).then(immutable.Map)
@@ -54,9 +54,9 @@ function extractImage(doc) {
     return null
   }
   return immutable.Map({
-    url: a.src,
-    credit_string: 'Farnell',
-    credit_url: 'http://uk.farnell.com',
+    url           : a.src,
+    credit_string : 'Farnell',
+    credit_url    : 'http://uk.farnell.com',
   })
 }
 
