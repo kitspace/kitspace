@@ -150,7 +150,10 @@ const Settings = React.createClass({
                       onChange={this.setRawImage}
                     />
                     <semantic.Modal
+                      trigger={<div></div>}
                       open={this.state.modalOpen}
+                      onOpen={() => this.setState({modalOpen: true})}
+                      onClose={this.handleSave}
                       size='small'
                     >
                     <semantic.Modal.Content>
