@@ -29,6 +29,7 @@
     "source-map-support": "^0.4.0",
     "svgo": "^0.6.6",
     "uglifyify": "^3.0.1",
+    "semantic-ui-css": "^2.2.4",
     "uglifyjs": "^2.4.10"
   },
   "scripts": {
@@ -62,7 +63,6 @@
     "react-router": "^3.0.2",
     "react-search-input": "~0.10.1",
     "redux": "^3.6.0",
-    "semantic-ui-css": "^2.2.4",
     "semantic-ui-react": "^0.67.1",
     "superagent": "^3.3.1",
     "whats-that-gerber": "^2.1.0",
