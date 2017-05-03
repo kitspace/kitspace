@@ -33,10 +33,6 @@ function Intro(props) {
 
           </p><p>
 
-          {'*** If you are having issues controlling carts from the Firefox extension, use Chrome for now, a fix will be released as v1.2.8 as soon as Mozilla approves the changes. ***'}
-
-          </p><p>
-
             To quickly purchase the parts from various retailers you should <a
             className='clickableLink' onClick={installExtension}>install</a> the 1-click
             BOM extension. It's pretty useful on it's own too and can be used
