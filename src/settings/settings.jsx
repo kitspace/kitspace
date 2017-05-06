@@ -19,6 +19,7 @@ const Settings = React.createClass({
       modalOpen: false,
       submitMessage: null,
       authenticity_token: '',
+      removingAvatar: false,
     }
   },
   getUser() {
@@ -95,21 +96,31 @@ const Settings = React.createClass({
     const emailWarning = this.state.emailMessage !== defaultMessage
     const warning = emailWarning && this.state.emailMessage !== ''
     const notGravatar = /\/accounts\/uploads\/user\/avatar/.test(this.state.user.avatar_url)
+    let avatarImage = (
+     <semantic.Image
+       as='a'
+       style={{height: 80, width: 80}}
+       src={this.state.newAvatarUrl || this.state.user.avatar_url}
+     />
+    )
+    if (this.state.removingAvatar) {
+      avatarImage = <div style={{height: 80, width: 80}} />
+    }
     let removeAvatarLink = <a></a>
-    if (notGravatar) {
+    if ((! this.state.removingAvatar) &&  notGravatar) {
       removeAvatarLink = (
         <a
           className='removeAvatarLink'
           onClick={event => {
             const confirmation = window.confirm('Are you sure you want to remove the avatar picture?')
             if (confirmation) {
+              this.setState({removingAvatar: true})
               superagent.post('/accounts/profile/avatar')
-                 .withCredentials()
                  .field('authenticity_token', this.state.authenticity_token)
                  .field('_method', 'delete')
                  .then(r => {
-                   this.getUser()
                    this.getForm()
+                   this.getUser().then(() => this.setState({removingAvatar: false}))
                  }).catch(e => {
                    console.error(e)
                  })
@@ -162,11 +173,7 @@ const Settings = React.createClass({
                   <div style={{display: 'flex', alignItems:'center'}} >
                     <semantic.Segment compact>
                       <label htmlFor='fileInput'>
-                        <semantic.Image
-                          as='a'
-                          style={{height: 80, width: 80}}
-                          src={this.state.newAvatarUrl || this.state.user.avatar_url}
-                        />
+                        {avatarImage}
                       </label>
                       <input
                         style={{
