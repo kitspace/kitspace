@@ -18,6 +18,7 @@ const Settings = React.createClass({
       newAvatarUrl: null,
       modalOpen: false,
       submitMessage: null,
+      authenticity_token: '',
     }
   },
   getUser() {
@@ -30,7 +31,7 @@ const Settings = React.createClass({
         if (this.state.user.avatar_url === newUser.avatar_url) {
           newUser.avatar_url += '?' + Math.random()
         }
-        this.setState({user: newUser})
+        this.setState({user: newUser, newAvatarUrl: null})
       })
       .catch(e => this.setState({user: 'not signed in'}))
   },
@@ -43,11 +44,11 @@ const Settings = React.createClass({
         function copy(selector) {
           document.querySelector(selector).value = doc.querySelector(selector).value
         }
-        copy('input[name=authenticity_token]')
         copy('input[name="user[email]"]')
         copy('input[name="user[name]"]')
+        const authenticity_token = doc.querySelector('input[name=authenticity_token]').value
         const emailMessage = doc.querySelector('input[name="user[email]"]').nextElementSibling.innerHTML
-        this.setState({emailMessage})
+        this.setState({emailMessage, authenticity_token})
       }).catch(e => console.error(e))
   },
 
@@ -66,7 +67,7 @@ const Settings = React.createClass({
       })
     }, false)
     if (file) {
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(file)
     }
   },
 
@@ -92,6 +93,27 @@ const Settings = React.createClass({
     const user = this.state.user || {}
     const emailWarning = this.state.emailMessage !== defaultMessage
     const warning = emailWarning && this.state.emailMessage !== ''
+    const notGravatar = /\/accounts\/uploads\/user\/avatar/.test(this.state.user.avatar_url)
+    if (notGravatar) {
+      var removeAvatarLink = (
+        <a
+          onClick={event => {
+            superagent.post('/accounts/profile/avatar')
+               .withCredentials()
+               .field('authenticity_token', this.state.authenticity_token)
+               .field('_method', 'delete')
+               .then(r => {
+                 this.getUser()
+                 this.getForm()
+               }).catch(e => {
+                 console.error(e)
+               })
+          }}
+        >
+          {'remove'}
+        </a>
+      )
+    }
     return (
       <div className='Settings'>
         <TitleBar user={this.state.user}>
@@ -126,47 +148,50 @@ const Settings = React.createClass({
           >
             <input name='utf8' type='hidden' value='✓' />
             <input type='hidden' name='_method' value='put' />
-            <input name='authenticity_token' type='hidden' />
+            <input name='authenticity_token' type='hidden' value={this.state.authenticity_token} />
             <semantic.Grid>
               <semantic.Grid.Column mobile={14} tablet={10} computer={8}>
                   {'Avatar'}
-                  <semantic.Segment compact>
-                    <label htmlFor='fileInput'>
-                      <semantic.Image
-                        as='a'
-                        style={{height: 80, width: 80}}
-                        src={this.state.newAvatarUrl || this.state.user.avatar_url}
+                  <div style={{display: 'flex', alignItems:'center'}} >
+                    <semantic.Segment compact>
+                      <label htmlFor='fileInput'>
+                        <semantic.Image
+                          as='a'
+                          style={{height: 80, width: 80}}
+                          src={this.state.newAvatarUrl || this.state.user.avatar_url}
+                        />
+                      </label>
+                      <input
+                        style={{
+                          opacity: 0,
+                          position: 'absolute',
+                          zIndex: -1
+                        }}
+                        id='fileInput'
+                        accept='image/*'
+                        type='file'
+                        onChange={this.setRawImage}
                       />
-                    </label>
-                    <input
-                      style={{
-                        opacity: 0,
-                        position: 'absolute',
-                        zIndex: -1
-                      }}
-                      id='fileInput'
-                      accept='image/*'
-                      type='file'
-                      onChange={this.setRawImage}
-                    />
-                    <semantic.Modal
-                      trigger={<div></div>}
-                      open={this.state.modalOpen}
-                      onOpen={() => this.setState({modalOpen: true})}
-                      onClose={this.handleSave}
-                      size='small'
-                    >
-                    <semantic.Modal.Content>
-                      <CustomAvatarEditor
-                        ref={customEditor => this.editor = (customEditor || {}).editor}
-                        image={this.state.rawImage}
-                      />
-                    </semantic.Modal.Content>
-                    <semantic.Modal.Actions>
-                      <semantic.Button primary onClick={this.handleSave}>{'Ok'}</semantic.Button>
-                    </semantic.Modal.Actions>
-                  </semantic.Modal>
-                </semantic.Segment>
+                      <semantic.Modal
+                        trigger={<div></div>}
+                        open={this.state.modalOpen}
+                        onOpen={() => this.setState({modalOpen: true})}
+                        onClose={this.handleSave}
+                        size='small'
+                      >
+                        <semantic.Modal.Content>
+                          <CustomAvatarEditor
+                            ref={customEditor => this.editor = (customEditor || {}).editor}
+                            image={this.state.rawImage}
+                          />
+                        </semantic.Modal.Content>
+                        <semantic.Modal.Actions>
+                          <semantic.Button primary onClick={this.handleSave}>{'Ok'}</semantic.Button>
+                        </semantic.Modal.Actions>
+                      </semantic.Modal>
+                  </semantic.Segment>
+                  {removeAvatarLink}
+                </div>
                 <label>Name</label>
                 <semantic.Form.Input name='user[name]' type='text' />
                 <label>Email</label>
