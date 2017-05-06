@@ -101,16 +101,19 @@ const Settings = React.createClass({
         <a
           className='removeAvatarLink'
           onClick={event => {
-            superagent.post('/accounts/profile/avatar')
-               .withCredentials()
-               .field('authenticity_token', this.state.authenticity_token)
-               .field('_method', 'delete')
-               .then(r => {
-                 this.getUser()
-                 this.getForm()
-               }).catch(e => {
-                 console.error(e)
-               })
+            const confirmation = window.confirm('Are you sure you want to remove the avatar picture?')
+            if (confirmation) {
+              superagent.post('/accounts/profile/avatar')
+                 .withCredentials()
+                 .field('authenticity_token', this.state.authenticity_token)
+                 .field('_method', 'delete')
+                 .then(r => {
+                   this.getUser()
+                   this.getForm()
+                 }).catch(e => {
+                   console.error(e)
+                 })
+            }
           }}
         >
           <semantic.Icon name='trash' />
