@@ -9,6 +9,10 @@ const TitleBar = require('../title_bar')
 
 const defaultMessage = 'We also use email for avatar detection if no avatar is uploaded.'
 
+function checkGravater(url) {
+  return /\/accounts\/uploads\/user\/avatar/.test(url)
+}
+
 const Settings = React.createClass({
   getInitialState() {
     return {
@@ -27,15 +31,14 @@ const Settings = React.createClass({
       .set('Accept', 'application/json')
       .withCredentials()
       .then(r => {
-        const newUser = r.body
-        const notGravatar = /\/accounts\/uploads\/user\/avatar/.test(this.state.user.avatar_url)
+        const newUser     = r.body
+        const notGravatar = checkGravater(this.state.user.avatar_url)
         //force a re-render of the avatar if it's the same link but likely changed
         if (notGravatar && this.state.user.avatar_url === newUser.avatar_url) {
           newUser.avatar_url += '?' + Math.random()
         }
         this.setState({user: newUser, newAvatarUrl: null})
-      })
-      .catch(e => this.setState({user: 'not signed in'}))
+      }).catch(e => window.location='/accounts/users/sign_in')
   },
 
   getForm() {
@@ -92,10 +95,10 @@ const Settings = React.createClass({
   },
 
   render() {
-    const user = this.state.user || {}
+    const user         = this.state.user || {}
     const emailWarning = this.state.emailMessage !== defaultMessage
-    const warning = emailWarning && this.state.emailMessage !== ''
-    const notGravatar = /\/accounts\/uploads\/user\/avatar/.test(this.state.user.avatar_url)
+    const warning      = emailWarning && this.state.emailMessage !== ''
+    const notGravatar  = checkGravater(this.state.user.avatar_url)
     let avatarImage = (
      <semantic.Image
        as='a'
@@ -140,35 +143,36 @@ const Settings = React.createClass({
           </div>
         </TitleBar>
         <semantic.Container>
-          <form
-            className={`ui arge form ${warning ? 'warning' : ''}`}
-            encType='multipart/form-data'
-            acceptCharset='UTF-8'
-            method='post'
-            onSubmit={event => {
-              event.preventDefault()
-              const formData = new FormData(this.form)
-              if (this.state.newAvatarBlob != null) {
-                formData.append('user[avatar]', this.state.newAvatarBlob, 'avatar.png')
-              }
-              superagent.post('/accounts/profile')
-                .send(formData)
-                .set('Accept', 'application/json')
-                .then(r => {
-                  this.setSubmitMessage({text: r.body.message, type: 'success'})
-                  this.getUser()
-                  this.getForm()
-                }).catch(e => {
-                  this.setSubmitMessage({text: 'Profile update failed.', type: 'failed'})
-                })
-            }}
-            ref={form => this.form = form}
-          >
-            <input name='utf8' type='hidden' value='✓' />
-            <input type='hidden' name='_method' value='put' />
             <input name='authenticity_token' type='hidden' value={this.state.authenticity_token} />
             <semantic.Grid>
               <semantic.Grid.Column mobile={14} tablet={10} computer={8}>
+                <semantic.Header as='h3' dividing >{'Profile'}</semantic.Header>
+                <form
+                  className={`ui arge form ${warning ? 'warning' : ''}`}
+                  encType='multipart/form-data'
+                  acceptCharset='UTF-8'
+                  method='post'
+                  onSubmit={event => {
+                    event.preventDefault()
+                    const formData = new FormData(this.form)
+                    if (this.state.newAvatarBlob != null) {
+                      formData.append('user[avatar]', this.state.newAvatarBlob, 'avatar.png')
+                    }
+                    superagent.post('/accounts/profile')
+                      .send(formData)
+                      .set('Accept', 'application/json')
+                      .then(r => {
+                        this.setSubmitMessage({text: r.body.message, type: 'success'})
+                        this.getUser()
+                        this.getForm()
+                      }).catch(e => {
+                        this.setSubmitMessage({text: 'Profile update failed.', type: 'failed'})
+                      })
+                  }}
+                  ref={form => this.form = form}
+                >
+                  <input name='utf8' type='hidden' value='✓' />
+                  <input type='hidden' name='_method' value='put' />
                   {'Avatar'}
                   <div style={{display: 'flex', alignItems:'center'}} >
                     <semantic.Segment compact>
@@ -206,13 +210,14 @@ const Settings = React.createClass({
                   </semantic.Segment>
                   {removeAvatarLink}
                 </div>
-                <label>Name</label>
+                <label>{'Real Name'}</label>
                 <semantic.Form.Input name='user[name]' type='text' />
                 <label>Email</label>
                 <semantic.Form.Input name='user[email]' type='text'/>
                 <semantic.Message size='tiny' warning={emailWarning} id='emailMessage'>
                   {htmlToReact(`<div>${this.state.emailMessage}</div>`)}
                 </semantic.Message>
+                <semantic.Button type='submit'>{'Save'}</semantic.Button>
                 <semantic.Message
                   style={{visibility: this.state.submitMessage ? 'visible' : 'hidden'}}
                   positive={this.state.submitMessage && this.state.submitMessage.type === 'success'}
@@ -220,10 +225,38 @@ const Settings = React.createClass({
                 >
                   {this.state.submitMessage ? this.state.submitMessage.text : '-'}
                 </semantic.Message>
-                <semantic.Button type='submit'>{'Save'}</semantic.Button>
+                <semantic.Header as='h3' dividing >{'Password'}</semantic.Header>
+            </form>
+            <form
+              className={`ui form ${warning ? 'warning' : ''}`}
+              encType='multipart/form-data'
+              acceptCharset='UTF-8'
+              method='post'
+              onSubmit={event => {
+                event.preventDefault()
+                const formData = new FormData(this.passwordForm)
+                superagent.post('/accounts/profile/password')
+                  .send(formData)
+                  .set('Accept', 'application/json')
+                  .then(r => {
+                    window.location='/accounts/users/sign_in'
+                  }).catch(e => {
+                    console.error(e)
+                  })
+              }}
+              ref={form => this.passwordForm = form}
+            >
+              <label>{'Current Password'}</label>
+              <semantic.Form.Input required="required" type="password" name="user[current_password]" />
+              <label>{'New Password'}</label>
+              <semantic.Form.Input required="required" type="password" name="user[password]" />
+              <label>{'Confirm New Password'}</label>
+              <semantic.Form.Input required="required" type="password" name="user[password_confirmation]" />
+              <input name='authenticity_token' type='hidden' value={this.state.authenticity_token} />
+              <semantic.Button type='submit'>{'Change password'}</semantic.Button>
+            </form>
               </semantic.Grid.Column>
             </semantic.Grid>
-          </form>
         </semantic.Container>
       </div>
     )
