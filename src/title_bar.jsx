@@ -55,7 +55,12 @@ const TitleBar = React.createClass({
           trigger={
             <a>
               <div className='userDropContainer'>
-                <semantic.Image size='mini' shape='rounded' src={user.avatar_url} />
+                <semantic.Image
+                  style={{background: 'white'}}
+                  size='mini'
+                  shape='rounded'
+                  src={user.avatar_url}
+                />
                 <semantic.Icon inverted name='triangle down' />
               </div>
             </a>
