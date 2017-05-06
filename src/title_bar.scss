@@ -59,21 +59,12 @@
         color: $white;
         display: flex;
         flex-shrink: 0;
-        justify-content: center;
+        justify-content: flex-end;
         padding: 10px;
         z-index: 1;
 
         @include breakpoint(mobile-m) {
             width: 100%;
-        }
-
-
-        .octicon.uploadIcon,
-        .octicon.githubIcon {
-            display: block;
-            font-size: 32px;
-            height: 32px;
-            width: 32px;
         }
 
         .contributeButton {
