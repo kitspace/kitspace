@@ -27,8 +27,9 @@ const Settings = React.createClass({
       .withCredentials()
       .then(r => {
         const newUser = r.body
+        const notGravatar = /\/accounts\/uploads\/user\/avatar/.test(this.state.user.avatar_url)
         //force a re-render of the avatar if it's the same link but likely changed
-        if (this.state.user.avatar_url === newUser.avatar_url) {
+        if (notGravatar && this.state.user.avatar_url === newUser.avatar_url) {
           newUser.avatar_url += '?' + Math.random()
         }
         this.setState({user: newUser, newAvatarUrl: null})
@@ -94,9 +95,11 @@ const Settings = React.createClass({
     const emailWarning = this.state.emailMessage !== defaultMessage
     const warning = emailWarning && this.state.emailMessage !== ''
     const notGravatar = /\/accounts\/uploads\/user\/avatar/.test(this.state.user.avatar_url)
+    let removeAvatarLink = <a></a>
     if (notGravatar) {
-      var removeAvatarLink = (
+      removeAvatarLink = (
         <a
+          className='removeAvatarLink'
           onClick={event => {
             superagent.post('/accounts/profile/avatar')
                .withCredentials()
@@ -110,6 +113,7 @@ const Settings = React.createClass({
                })
           }}
         >
+          <semantic.Icon name='trash' />
           {'remove'}
         </a>
       )
