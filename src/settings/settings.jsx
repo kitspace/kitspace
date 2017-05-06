@@ -22,6 +22,7 @@ const Settings = React.createClass({
       newAvatarUrl: null,
       modalOpen: false,
       submitMessage: null,
+      passwordMessage: null,
       authenticity_token: '',
       removingAvatar: false,
     }
@@ -93,6 +94,14 @@ const Settings = React.createClass({
       this.setState({submitMessage: null})
     }, 5000)
   },
+
+  setPasswordMessage(passwordMessage) {
+    this.setState({passwordMessage})
+    setTimeout(() => {
+      this.setState({passwordMessage: null})
+    }, 5000)
+  },
+
 
   render() {
     const user         = this.state.user || {}
@@ -228,7 +237,7 @@ const Settings = React.createClass({
                 <semantic.Header as='h3' dividing >{'Password'}</semantic.Header>
             </form>
             <form
-              className={`ui form ${warning ? 'warning' : ''}`}
+              className={`ui form warning`}
               encType='multipart/form-data'
               acceptCharset='UTF-8'
               method='post'
@@ -241,7 +250,7 @@ const Settings = React.createClass({
                   .then(r => {
                     window.location='/accounts/users/sign_in'
                   }).catch(e => {
-                    console.error(e)
+                    this.setPasswordMessage('Changing password failed')
                   })
               }}
               ref={form => this.passwordForm = form}
@@ -254,6 +263,12 @@ const Settings = React.createClass({
               <semantic.Form.Input required="required" type="password" name="user[password_confirmation]" />
               <input name='authenticity_token' type='hidden' value={this.state.authenticity_token} />
               <semantic.Button type='submit'>{'Change password'}</semantic.Button>
+              <semantic.Message
+                style={{visibility: this.state.passwordMessage ? 'visible' : 'hidden'}}
+                negative
+              >
+                {this.state.passwordMessage ? this.state.passwordMessage : '-'}
+              </semantic.Message>
             </form>
               </semantic.Grid.Column>
             </semantic.Grid>
