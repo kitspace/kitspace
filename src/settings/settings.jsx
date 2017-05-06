@@ -21,7 +21,7 @@ const Settings = React.createClass({
       newAvatarBlob: null,
       newAvatarUrl: null,
       modalOpen: false,
-      submitMessage: null,
+      profileMessage: null,
       passwordMessage: null,
       authenticity_token: '',
       removingAvatar: false,
@@ -88,10 +88,10 @@ const Settings = React.createClass({
     this.setState({modalOpen: false})
   },
 
-  setSubmitMessage(submitMessage) {
-    this.setState({submitMessage})
+  setProfileMessage(profileMessage) {
+    this.setState({profileMessage})
     setTimeout(() => {
-      this.setState({submitMessage: null})
+      this.setState({profileMessage: null})
     }, 5000)
   },
 
@@ -163,7 +163,7 @@ const Settings = React.createClass({
                   method='post'
                   onSubmit={event => {
                     event.preventDefault()
-                    const formData = new FormData(this.form)
+                    const formData = new FormData(this.profileForm)
                     if (this.state.newAvatarBlob != null) {
                       formData.append('user[avatar]', this.state.newAvatarBlob, 'avatar.png')
                     }
@@ -171,14 +171,14 @@ const Settings = React.createClass({
                       .send(formData)
                       .set('Accept', 'application/json')
                       .then(r => {
-                        this.setSubmitMessage({text: r.body.message, type: 'success'})
+                        this.setProfileMessage({text: r.body.message, type: 'success'})
                         this.getUser()
                         this.getForm()
                       }).catch(e => {
-                        this.setSubmitMessage({text: 'Profile update failed.', type: 'failed'})
+                        this.setProfileMessage({text: 'Profile update failed.', type: 'failed'})
                       })
                   }}
-                  ref={form => this.form = form}
+                  ref={form => this.profileForm = form}
                 >
                   <input name='utf8' type='hidden' value='✓' />
                   <input type='hidden' name='_method' value='put' />
@@ -228,11 +228,11 @@ const Settings = React.createClass({
                 </semantic.Message>
                 <semantic.Button type='submit'>{'Save'}</semantic.Button>
                 <semantic.Message
-                  style={{visibility: this.state.submitMessage ? 'visible' : 'hidden'}}
-                  positive={this.state.submitMessage && this.state.submitMessage.type === 'success'}
-                  negative={this.state.submitMessage && this.state.submitMessage.type !== 'success'}
+                  style={{visibility: this.state.profileMessage ? 'visible' : 'hidden'}}
+                  positive={this.state.profileMessage && this.state.profileMessage.type === 'success'}
+                  negative={this.state.profileMessage && this.state.profileMessage.type !== 'success'}
                 >
-                  {this.state.submitMessage ? this.state.submitMessage.text : '-'}
+                  {this.state.profileMessage ? this.state.profileMessage.text : '-'}
                 </semantic.Message>
                 <semantic.Header as='h3' dividing >{'Password'}</semantic.Header>
             </form>
