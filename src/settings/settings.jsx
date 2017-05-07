@@ -25,6 +25,7 @@ const Settings = React.createClass({
       passwordMessage: null,
       authenticity_token: '',
       removingAvatar: false,
+      emailReSent: false,
     }
   },
   getUser() {
@@ -108,6 +109,26 @@ const Settings = React.createClass({
     const user        = this.state.user || {}
     const warning     = this.state.confirmationEmail != null
     const notGravatar = checkGravater(this.state.user.avatar_url)
+    if (this.state.emailReSent) {
+      var emailReSendMessage = 'Email has been re-sent.'
+    }
+    else {
+      var emailReSendMessage =  (
+        <a
+          onClick={event => {
+            event.preventDefault()
+            superagent.post(`/accounts/users/confirmation?user_email=${this.state.confirmationEmail}`)
+              .field('_method', 'post')
+              .field('authenticity_token', this.state.authenticity_token)
+              .then(r => this.setState({emailReSent: true}))
+              .catch(e => console.error(e))
+          }}
+          href='#'
+         >
+           {'Re-send confirmation email.'}
+         </a>
+      )
+    }
     let avatarImage = (
      <semantic.Image
        as='a'
@@ -221,10 +242,11 @@ const Settings = React.createClass({
                 </div>
                 <semantic.Form.Input label='Real Name' name='user[name]' type='text' />
                 <semantic.Form.Input disabled={!!this.state.confirmationEmail} label='Email' name='user[email]' type='text'/>
-                <semantic.Message size='tiny' warning id='emailMessage'>
+                <semantic.Message size='tiny' warning={!this.state.emailReSent} id='emailMessage'>
                    {'A confirmation email has been sent to '}
                    <strong>{this.state.confirmationEmail}</strong>
-                   {'. Please click the link in the email before continuing.'}
+                   {'. Please click the link in the email before continuing. '}
+                   {emailReSendMessage}
                 </semantic.Message>
                 <semantic.Button type='submit'>{'Save'}</semantic.Button>
                 <semantic.Message
