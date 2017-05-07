@@ -53,8 +53,9 @@ const Settings = React.createClass({
         copy('input[name="user[email]"]')
         copy('input[name="user[name]"]')
         const authenticity_token = doc.querySelector('input[name=authenticity_token]').value
-        const emailMessage = doc.querySelector('input[name="user[email]"]').nextElementSibling.innerHTML
-        this.setState({emailMessage, authenticity_token})
+        const emailMessage = doc.querySelector('input[name="user[email]"]').nextElementSibling
+        const email = (emailMessage.querySelector('strong') || {}).innerHTML
+        this.setState({confirmationEmail: email, authenticity_token})
       }).catch(e => console.error(e))
   },
 
@@ -104,10 +105,9 @@ const Settings = React.createClass({
 
 
   render() {
-    const user         = this.state.user || {}
-    const emailWarning = this.state.emailMessage !== defaultMessage
-    const warning      = emailWarning && this.state.emailMessage !== ''
-    const notGravatar  = checkGravater(this.state.user.avatar_url)
+    const user        = this.state.user || {}
+    const warning     = this.state.confirmationEmail != null
+    const notGravatar = checkGravater(this.state.user.avatar_url)
     let avatarImage = (
      <semantic.Image
        as='a'
@@ -119,7 +119,7 @@ const Settings = React.createClass({
       avatarImage = <div style={{height: 80, width: 80}} />
     }
     let removeAvatarLink = <a></a>
-    if ((! this.state.removingAvatar) &&  notGravatar) {
+    if ((! this.state.removingAvatar) && notGravatar) {
       removeAvatarLink = (
         <a
           className='removeAvatarLink'
@@ -220,9 +220,11 @@ const Settings = React.createClass({
                   {removeAvatarLink}
                 </div>
                 <semantic.Form.Input label='Real Name' name='user[name]' type='text' />
-                <semantic.Form.Input label='Email' name='user[email]' type='text'/>
-                <semantic.Message size='tiny' warning={emailWarning} id='emailMessage'>
-                  {htmlToReact(`<div>${this.state.emailMessage}</div>`)}
+                <semantic.Form.Input disabled={!!this.state.confirmationEmail} label='Email' name='user[email]' type='text'/>
+                <semantic.Message size='tiny' warning id='emailMessage'>
+                   {'A confirmation email has been sent to '}
+                   <strong>{this.state.confirmationEmail}</strong>
+                   {'. Please click the link in the email before continuing.'}
                 </semantic.Message>
                 <semantic.Button type='submit'>{'Save'}</semantic.Button>
                 <semantic.Message
@@ -253,9 +255,9 @@ const Settings = React.createClass({
               }}
               ref={form => this.passwordForm = form}
             >
-              <semantic.Form.Input label='Current Password' required="required" type="password" name="user[current_password]" />
-              <semantic.Form.Input label='New Password'required="required" type="password" name="user[password]" />
-              <semantic.Form.Input label='Confirm New Password' required="required" type="password" name="user[password_confirmation]" />
+              <semantic.Form.Input label='Current Password' required type="password" name="user[current_password]" />
+              <semantic.Form.Input label='New Password'required type="password" name="user[password]" />
+              <semantic.Form.Input label='Confirm New Password' required type="password" name="user[password_confirmation]" />
               <input name='authenticity_token' type='hidden' value={this.state.authenticity_token} />
               <semantic.Button type='submit'>{'Change password'}</semantic.Button>
               <semantic.Message
