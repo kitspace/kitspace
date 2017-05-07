@@ -152,7 +152,6 @@ const Settings = React.createClass({
           </div>
         </TitleBar>
         <semantic.Container>
-            <input name='authenticity_token' type='hidden' value={this.state.authenticity_token} />
             <semantic.Grid>
               <semantic.Grid.Column mobile={14} tablet={10} computer={8}>
                 <semantic.Header as='h3' dividing >{'Profile'}</semantic.Header>
@@ -182,6 +181,7 @@ const Settings = React.createClass({
                 >
                   <input name='utf8' type='hidden' value='✓' />
                   <input type='hidden' name='_method' value='put' />
+                  <input name='authenticity_token' type='hidden' value={this.state.authenticity_token} />
                   {'Avatar'}
                   <div style={{display: 'flex', alignItems:'center'}} >
                     <semantic.Segment compact>
