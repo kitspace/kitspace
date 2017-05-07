@@ -182,7 +182,7 @@ const Settings = React.createClass({
                   <input name='utf8' type='hidden' value='✓' />
                   <input type='hidden' name='_method' value='put' />
                   <input name='authenticity_token' type='hidden' value={this.state.authenticity_token} />
-                  {'Avatar'}
+                  <label style={{fontSize: 13, fontWeight:'bold'}}>{'Avatar'}</label>
                   <div style={{display: 'flex', alignItems:'center'}} >
                     <semantic.Segment compact>
                       <label htmlFor='fileInput'>
@@ -219,10 +219,8 @@ const Settings = React.createClass({
                   </semantic.Segment>
                   {removeAvatarLink}
                 </div>
-                <label>{'Real Name'}</label>
-                <semantic.Form.Input name='user[name]' type='text' />
-                <label>Email</label>
-                <semantic.Form.Input name='user[email]' type='text'/>
+                <semantic.Form.Input label='Real Name' name='user[name]' type='text' />
+                <semantic.Form.Input label='Email' name='user[email]' type='text'/>
                 <semantic.Message size='tiny' warning={emailWarning} id='emailMessage'>
                   {htmlToReact(`<div>${this.state.emailMessage}</div>`)}
                 </semantic.Message>
@@ -255,12 +253,9 @@ const Settings = React.createClass({
               }}
               ref={form => this.passwordForm = form}
             >
-              <label>{'Current Password'}</label>
-              <semantic.Form.Input required="required" type="password" name="user[current_password]" />
-              <label>{'New Password'}</label>
-              <semantic.Form.Input required="required" type="password" name="user[password]" />
-              <label>{'Confirm New Password'}</label>
-              <semantic.Form.Input required="required" type="password" name="user[password_confirmation]" />
+              <semantic.Form.Input label='Current Password' required="required" type="password" name="user[current_password]" />
+              <semantic.Form.Input label='New Password'required="required" type="password" name="user[password]" />
+              <semantic.Form.Input label='Confirm New Password' required="required" type="password" name="user[password_confirmation]" />
               <input name='authenticity_token' type='hidden' value={this.state.authenticity_token} />
               <semantic.Button type='submit'>{'Change password'}</semantic.Button>
               <semantic.Message
