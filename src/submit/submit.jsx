@@ -5,10 +5,10 @@ const path      = require('path')
 const immutable = require('immutable')
 const {Router, Route, Link, hashHistory} = require('react-router')
 
-const Step1 = require('./step1')
-const Step2 = require('./step2')
-const Step3 = require('./step3')
-const Step4 = require('./step4')
+const PreviewGerbers = require('./preview_gerbers')
+const PreviewBom     = require('./preview_bom')
+const PreviewReadme  = require('./preview_readme')
+const Finish         = require('./finish')
 
 const board_colors = require('./board_colors')
 
@@ -131,7 +131,7 @@ const SubmitRouter = React.createClass({
       <Router history={hashHistory}>
         <Route path='/'
           component = {
-            () => h(Step1, {
+            () => h(PreviewGerbers, {
               setStep,
               dispatch: this.store.dispatch,
               board: this.state.board,
@@ -140,7 +140,7 @@ const SubmitRouter = React.createClass({
         />
         <Route path='/2'
           component = {
-            () => h(Step2, {
+            () => h(PreviewBom, {
               setStep,
               dispatch: this.store.dispatch,
               board: this.state.board,
@@ -149,7 +149,7 @@ const SubmitRouter = React.createClass({
         />
         <Route path='/3'
           component = {
-            () => h(Step3, {
+            () => h(PreviewReadme, {
               setStep,
               dispatch: this.store.dispatch,
               board: this.state.board,
@@ -158,7 +158,7 @@ const SubmitRouter = React.createClass({
         />
         <Route path='/4'
           component = {
-            () => h(Step4, {
+            () => h(Finish, {
               setStep,
               dispatch: this.store.dispatch,
               board: this.state.board,
