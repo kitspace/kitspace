@@ -25,7 +25,7 @@
   },
   {
     "repo": "https://github.com/kasbah/push-on-hold-off",
-    "hash": "29085bc9666c7f61e2cd6ad68889258931a5d268"
+    "hash": "b96d65b0d371c7b0e53ebda47f1a057a2beaa5eb"
   },
   {
     "repo": "https://github.com/kitnic-forks/BQ25570_Harvester",
@@ -89,7 +89,7 @@
   },
   {
     "repo": "https://github.com/monostable/jelly",
-    "hash": "1cc56420ca1c39b3bb78d3af7ad7a2ac2349c020"
+    "hash": "d5f777b881ad21577dd4d15ad4d1a35a0c60cd78"
   },
   {
     "repo": "https://github.com/GenericLab/Gar-Lampli",
@@ -101,6 +101,6 @@
   },
   {
     "repo": "https://github.com/kimitobo/Neocococat",
-    "hash": "48b7cf19ae3f5654a3d0a9a12d4b6d7128c24653"
+    "hash": "e909d60495e7f023b0ada96dfd1607028bee75ae"
   }
 ]
