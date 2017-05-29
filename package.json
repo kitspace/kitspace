@@ -26,10 +26,10 @@
     "postcss-cli": "^2.6.0",
     "ramda": "^0.23.0",
     "reactify": "^1.1.1",
+    "semantic-ui-css": "^2.2.4",
     "source-map-support": "^0.4.0",
     "svgo": "^0.6.6",
     "uglifyify": "^3.0.1",
-    "semantic-ui-css": "^2.2.4",
     "uglifyjs": "^2.4.10"
   },
   "scripts": {

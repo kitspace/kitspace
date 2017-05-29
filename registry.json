@@ -101,6 +101,10 @@
   },
   {
     "repo": "https://github.com/kimitobo/Neocococat",
-    "hash": "e909d60495e7f023b0ada96dfd1607028bee75ae"
+    "hash": "e196543bac52d593ff7a17d323c23fb9a040d514"
+  },
+  {
+    "repo": "https://github.com/RoboticsBrno/RB3200-ESP32universal/",
+    "hash": "7933202eb494bd7cb640ea98742f5b0b6ce26423"
   }
 ]

@@ -1,6 +1,6 @@
 # https://kitnic.it
 **We are giving away free PCB manufacturing vouchers to the first 20
-projects that register. Just follow the steps in the [submission preview](https://kitnic.it/submit). Current status: 4/20 left.**
+projects that register. Just follow the steps in the [submission preview](https://kitnic.it/submit). Current status: 3/20 left.**
 
 [![build status][travis-status]](https://travis-ci.org/monostable/kitnic) 
 
@@ -13,7 +13,7 @@ are:
 - A prominent link to download the Gerber files and a preview rendering of the board
 - The ability to quickly add the required components to a retailer shopping
   cart (using clever magic in the form of our [browser extension][1clickbom])
-  
+
 
 Help us build a open hardware repository of useful electronics projects!
 
