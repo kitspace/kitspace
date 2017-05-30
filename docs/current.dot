@@ -1,0 +1,13 @@
+digraph current {
+    edge [style=dotted];
+    user [shape=star];
+    user -> "frontend (/submit)";
+    partinfo -> "frontend (/submit)";
+    "frontend (/submit)" -> "git-clone-server";
+    "frontend (/submit)" -> partinfo [dir=none;style=invisible];
+    "git-clone-server" -> "frontend (/submit)";
+    subgraph cluster_01 {
+        partinfo;
+        "git-clone-server";
+    }
+}

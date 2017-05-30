@@ -110,6 +110,45 @@ gerbers: manufacture/gerbers-and-drills
 
 
 ## Development
+
+### Architecture
+
+#### Current
+This repository is the Kitnic front-end. The contents including all project data are currently pre-compiled into a static site. 
+The only part of the site that requires server side components is the submission preview.
+
+![](docs/current.svg)
+![](docs/key.svg)
+
+We have two services running for the submission preview.
+
+- [git-clone-server](https://github.com/kasbah/git-clone-server) for serving up files from git repositories.
+- [partinfo](https://github.com/monostable/kitnic-partinfo) for getting part information for the BOM.
+
+
+#### Planned
+
+We are using  [GitLab](https://gitlab.com/gitlab-org/gitlab-ce) as an authentication and Git hosting service. 
+
+![](docs/planned.svg)
+![](docs/key.svg)
+
+- [partinfo](https://github.com/monostable/kitnic-partinfo) for getting part information for BOMs.
+
+
+### Roadmap
+
+- [ ] GitLab and Accounts
+   - [x] Modify GitLab and integrate with login in Kitnic frontend
+   - [x] Build frontend for basic account settings 
+   - [ ] Make GitLab source of user projects
+- [ ] Upload submissions and editing
+   - [ ] Allow for file upload to GitLab
+   - [ ] Gerber plotter processing for KiCAD and Eagle
+   - [ ] BOM extraction processing
+   - [ ] BOM Builder
+       - [ ] Get retailer info out of [partinfo](https://github.com/monostable/kitnic-partinfo)
+
 ### Requirements
 
 - [Nodejs](https://nodejs.org) >= 6

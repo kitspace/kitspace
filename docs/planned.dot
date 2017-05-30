@@ -1,0 +1,22 @@
+digraph current {
+    user [shape=star];
+    user -> frontend [dir=both];
+    user -> frontend [dir=both;style=dotted;];
+    frontend -> "gitlab proxy";
+    frontend -> "gitlab proxy" [style=dotted];
+    frontend -> gitlab [style=dashed];
+    "gitlab proxy" -> gitlab;
+    gitlab -> "process project";
+    partinfo -> "process project";
+    "process project" -> "project server";
+    "process project" -> frontend;
+    "project server" -> frontend [style=dotted];
+    subgraph cluster_01 {
+        color=none;
+        user frontend;
+    }
+    subgraph cluster_02 {
+        gitlab partinfo "project server";
+        "gitlab proxy" "process project";
+    }
+}
