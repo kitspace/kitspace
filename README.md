@@ -116,11 +116,7 @@ gerbers: manufacture/gerbers-and-drills
 #### Current
 This repository is the Kitnic front-end. The contents including all project
 data are currently pre-compiled into a static site.  The main part of the site
-that requires server side components is the submission preview (`/submit`).
-Pages also use freegeoip lookup to decide what sites to link to for people that
-do not have the 1-click BOM browser extension.
-
-This roughly illustrates the main data flow when someone is browsing the site.
+that requires server side components is the submission preview (`/submit`). Pages also use freegeoip lookup to decide what sites to link to for people that do not have the 1-click BOM browser extension. This roughly illustrates the main data flow when someone is browsing the site.
 
 ![](docs/current.png)
 
@@ -140,10 +136,12 @@ The graphs get too complicated if we try to add all the possible data-flows but 
 
 ![](docs/planned.png)
 
+Services used are:
+
 - [nginx-config](https://github.com/monostable/kitnic-nginx-config) to configure Nginx to serve the frontend and all services.
 - [partinfo](https://github.com/monostable/kitnic-partinfo) for getting part information for BOMs.
 - [gitlab-config](http://github.com/monostable/kitnic-gitlab-config) configuring GitLab to be used for authentication and Git hosting.
-- [gitlab-proxy](https://github.com/monostable/kitnic-gitlab-proxy) for requests that need to access GitLab API but need any kind of added functionality like unauthenticated access or modifying projects (that need additional hooks for servicing).
+- [gitlab-proxy](https://github.com/monostable/kitnic-gitlab-proxy) for requests that need to access GitLab API but need any kind of added functionality like unauthenticated access or modifying projects (which needs additional hooks to trigger processing).
 
 ### Roadmap
 
