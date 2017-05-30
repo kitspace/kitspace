@@ -1,4 +1,4 @@
-all: planned.png current.png key.png
+all: planned.png current.png
 
 %.png: %.dot
 	dot -Tpng $< -o $@

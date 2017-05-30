@@ -134,9 +134,9 @@ And one for the geo ip lookup on pages.
 #### Planned
 
 We are using [GitLab](https://gitlab.com/gitlab-org/gitlab-ce) as an authentication and Git hosting service. We modify and proxy it to get the functionality we need. 
+The graphs get too complicated if we try to add all the possible data-flows but here is the rough data-flow for authenticated and unauthenticated submission of a project (the unauthenticated user is prompted to create an account after the process completes).
 
 ![](docs/planned.png)
-![](docs/key.png)
 
 - [nginx-config](https://github.com/monostable/kitnic-nginx-config) to configure Nginx to serve the frontend and all services.
 - [partinfo](https://github.com/monostable/kitnic-partinfo) for getting part information for BOMs.
