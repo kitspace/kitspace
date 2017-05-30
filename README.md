@@ -114,27 +114,34 @@ gerbers: manufacture/gerbers-and-drills
 ### Architecture
 
 #### Current
-This repository is the Kitnic front-end. The contents including all project data are currently pre-compiled into a static site. 
-The only part of the site that requires server side components is the submission preview.
+This repository is the Kitnic front-end. The contents including all project
+data are currently pre-compiled into a static site.  The main part of the site
+that requires server side components is the submission preview (`/submit`).
+Pages also use freegeoip lookup to decide what sites to link to for people that
+do not have the 1-click BOM browser extension.
 
 ![](docs/current.png)
-![](docs/key.png)
 
 We have two services running for the submission preview.
 
 - [git-clone-server](https://github.com/kasbah/git-clone-server) for serving up files from git repositories.
 - [partinfo](https://github.com/monostable/kitnic-partinfo) for getting part information for the BOM.
 
+And one for the geo ip lookup on pages.
+
+- [freegeoip](https://github.com/fiorix/freegeoip)
 
 #### Planned
 
-We are using  [GitLab](https://gitlab.com/gitlab-org/gitlab-ce) as an authentication and Git hosting service. 
+We are using [GitLab](https://gitlab.com/gitlab-org/gitlab-ce) as an authentication and Git hosting service. We modify and proxy it to get the functionality we need. 
 
 ![](docs/planned.png)
 ![](docs/key.png)
 
+- [nginx-config](https://github.com/monostable/kitnic-nginx-config) to configure Nginx to serve the frontend and all services.
 - [partinfo](https://github.com/monostable/kitnic-partinfo) for getting part information for BOMs.
-
+- [gitlab-config](http://github.com/monostable/kitnic-gitlab-config) configuring GitLab to be used for authentication and Git hosting.
+- [gitlab-proxy](https://github.com/monostable/kitnic-gitlab-proxy) for requests that need to access GitLab API but need any kind of added functionality like unauthenticated access or modifying projects (that need additional hooks for servicing).
 
 ### Roadmap
 
