@@ -117,8 +117,8 @@ gerbers: manufacture/gerbers-and-drills
 This repository is the Kitnic front-end. The contents including all project data are currently pre-compiled into a static site. 
 The only part of the site that requires server side components is the submission preview.
 
-![](docs/current.svg)
-![](docs/key.svg)
+![](docs/current.png)
+![](docs/key.png)
 
 We have two services running for the submission preview.
 
@@ -130,8 +130,8 @@ We have two services running for the submission preview.
 
 We are using  [GitLab](https://gitlab.com/gitlab-org/gitlab-ce) as an authentication and Git hosting service. 
 
-![](docs/planned.svg)
-![](docs/key.svg)
+![](docs/planned.png)
+![](docs/key.png)
 
 - [partinfo](https://github.com/monostable/kitnic-partinfo) for getting part information for BOMs.
 

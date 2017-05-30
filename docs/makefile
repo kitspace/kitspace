@@ -1,9 +1,9 @@
-all: planned.svg current.svg key.svg
+all: planned.png current.png key.png
 
-%.svg: %.dot
-	dot -Tsvg $< -o $@
+%.png: %.dot
+	dot -Tpng $< -o $@
 
 clean:
-	rm -f *.svg
+	rm -f *.png
 
 .PHONY: all clean
