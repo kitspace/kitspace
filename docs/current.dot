@@ -2,11 +2,13 @@ digraph current {
     edge [style=dotted];
     user [shape=star];
     user -> "frontend (/submit)";
+    "frontend (/submit)" -> user;
     partinfo -> "frontend (/submit)";
-    "frontend (/submit)" -> "git-clone-server";
+    "frontend (/submit)" -> "git-clone-server" [dir=none; style=invisible];
     "frontend (/submit)" -> partinfo [dir=none;style=invisible];
     "git-clone-server" -> "frontend (/submit)";
     subgraph cluster_01 {
+        "Server Side" [shape=none];
         partinfo;
         "git-clone-server";
     }

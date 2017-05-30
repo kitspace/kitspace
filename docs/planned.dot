@@ -16,6 +16,7 @@ digraph current {
         user frontend;
     }
     subgraph cluster_02 {
+        "Server Side" [shape=none];
         gitlab partinfo "project server";
         "gitlab proxy" "process project";
     }
