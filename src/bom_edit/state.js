@@ -1,5 +1,4 @@
 const immutable = require('immutable')
-const React     = require('react')
 const redux     = require('redux')
 
 function getId() {
@@ -32,22 +31,22 @@ function linesReducer(lines = initial_state.lines, action) {
     case 'removeLine': {
       return lines.filter((_,key) => key !== action.value)
     }
-    case: 'addMpn': {
+    case 'addMpn': {
       const {id, mpn} = action.value
       const line = lines.get(id).update('mpns', mpns => mpns.add(mpn))
       return lines.set(id, line)
     }
-    case: 'removeMpn': {
+    case 'removeMpn': {
       const {id, mpn} = action.value
       const line =
         lines.get(id).update('mpns', mpns.filterNot(x => x.equals(mpn)))
       return lines.set(id, line)
     }
-    case: 'sortByReferences': {
+    case 'sortByReferences': {
       return lines.sortBy(line => line.get('references'))
     }
   }
-  return state
+  return lines
 }
 
 const reducer = redux.combineReducers({
@@ -55,3 +54,5 @@ const reducer = redux.combineReducers({
 })
 
 const store = redux.createStore(reducer, initial_state)
+
+module.exports = {initial_state, linesReducer, store, emptyLine}

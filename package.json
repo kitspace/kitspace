@@ -10,6 +10,7 @@
     "babel-preset-react": "^6.3.13",
     "babel-register": "^6.3.13",
     "babelify": "^7.3.0",
+    "better-assert": "^1.0.2",
     "browserify": "^13.1.0",
     "eslint": "^3.3.1",
     "eslint-plugin-react": "^6.1.2",
@@ -21,6 +22,7 @@
     "jsdom": "^9.4.2",
     "jszip": "^3.1.1",
     "marky-markdown": "kasbah/marky-markdown#fix-default-anchors-2",
+    "mocha": "^3.4.2",
     "ninja-build-gen": "^0.2.1",
     "node-sass": "^4.0.0",
     "postcss-cli": "^2.6.0",
@@ -38,7 +40,8 @@
     "update-reg": "./scripts/update_registry",
     "plug-reg": "./scripts/plug_versions",
     "serve": "http-server build/",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "test": "mocha"
   },
   "author": "Kaspar Emanuel",
   "license": "CPAL-1.0",
