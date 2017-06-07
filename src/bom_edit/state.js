@@ -41,6 +41,14 @@ function linesReducer(lines = initial_state.lines, action) {
       )
       return lines.set(id, line)
     }
+    case 'addSku': {
+      const {id, sku} = action.value
+      const line = lines.get(id).setIn(
+        ['retailers', sku.get('vendor')],
+        sku.get('part')
+      )
+      return lines.set(id, line)
+    }
     case 'removePartNumber': {
       const {id, partNumber} = action.value
       const line = lines.get(id).update(
