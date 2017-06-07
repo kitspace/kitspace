@@ -39,7 +39,7 @@ function linesReducer(lines = initial_state.lines, action) {
     case 'removeMpn': {
       const {id, mpn} = action.value
       const line =
-        lines.get(id).update('mpns', mpns.filterNot(x => x.equals(mpn)))
+        lines.get(id).update('mpns', mpns => mpns.filterNot(x => x.equals(mpn)))
       return lines.set(id, line)
     }
     case 'sortByReferences': {
