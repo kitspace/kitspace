@@ -89,6 +89,22 @@ describe('bom_edit lines actions', () => {
       assert(part === sku2.get('part'))
     })
   })
+  describe('TSV', () => {
+    it('lets you set from TSV', () => {
+      const tsv = 'References\tQty\tDigikey\ntest\t1\t8-98-989'
+      const lines = linesReducer(
+        initial_state.lines,
+        {type: 'setFromTsv', value: tsv}
+      )
+      const line      = lines.first()
+      const quantity  = line.get('quantity')
+      const reference = line.get('reference')
+      const digikey   = line.get('retailers').get('Digikey')
+      assert(quantity  === 1)
+      assert(reference === 'test')
+      assert(digikey   === '8-98-989')
+    })
+  })
   describe('sorting', () => {
     const lines1 = initial_state.lines
     let lines2

@@ -1,5 +1,6 @@
-const immutable = require('immutable')
-const redux     = require('redux')
+const immutable   = require('immutable')
+const redux       = require('redux')
+const oneClickBom = require('1-click-bom')
 
 function getId() {
   if (this.id == null) {
@@ -59,6 +60,12 @@ function linesReducer(lines = initial_state.lines, action) {
     }
     case 'sortByReference': {
       return lines.sortBy(line => line.get('reference'))
+    }
+    case 'setFromTsv': {
+      const {lines} = oneClickBom.parseTSV(action.value)
+      return immutable.fromJS(lines).map(line => {
+        return line.update('partNumbers', ps => ps.toSet())
+      })
     }
   }
   return lines
