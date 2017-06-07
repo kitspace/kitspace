@@ -5,15 +5,14 @@ const {initial_state, linesReducer, emptyLine} = require('../src/bom_edit/state'
 
 describe('bom_edit lines actions', () => {
   describe('lines', () => {
-    it('adds a line', done => {
+    it('adds a line', () => {
       const lines1 = initial_state.lines
       assert(lines1.size === 0)
       const lines2 = linesReducer(lines1, {type: 'addLine', value: emptyLine})
       assert(lines1.size === 0)
       assert(lines2.size === 1)
-      return done()
     })
-    it('removes a line', done => {
+    it('removes a line', () => {
       const lines1 = initial_state.lines
       assert(lines1.size === 0)
       const lines2 = linesReducer(lines1, {type: 'addLine', value: emptyLine})
@@ -24,7 +23,6 @@ describe('bom_edit lines actions', () => {
       assert(lines1.size === 0)
       assert(lines2.size === 1)
       assert(lines3.size === 0)
-      return done()
     })
   })
   describe('partNumbers and retailers', () => {
@@ -34,21 +32,19 @@ describe('bom_edit lines actions', () => {
       manufacturer : 'Texas Instruments'
     })
     let lines2, id
-    beforeEach(done => {
+    beforeEach(() => {
       lines2 = linesReducer(lines1, {type: 'addLine', value: emptyLine})
       assert(lines2.first().get('partNumbers').size === 0)
       id = lines2.keys().next().value
-      return done()
     })
-    it('adds a partNumber', done => {
+    it('adds a partNumber', () => {
       const lines3 = linesReducer(
         lines2,
         {type: 'addPartNumber', value: {id, partNumber}}
       )
       assert(lines3.first().get('partNumbers').size === 1)
-      return done()
     })
-    it('removes a partNumber', done => {
+    it('removes a partNumber', () => {
       const lines3 = linesReducer(
         lines2,
         {type: 'addPartNumber', value: {id, partNumber}}
@@ -59,9 +55,8 @@ describe('bom_edit lines actions', () => {
         {type: 'removePartNumber', value: {id, partNumber}}
       )
       assert(lines4.first().get('partNumbers').size === 0)
-      return done()
     })
-    it('sets retailers', done => {
+    it('sets retailers', () => {
       const sku = immutable.Map({
         part   : '2303550',
         vendor : 'Farnell'
@@ -72,9 +67,8 @@ describe('bom_edit lines actions', () => {
       )
       const part = lines3.first().get('retailers').get('Farnell')
       assert(part === sku.get('part'))
-      return done()
     })
-    it('overwrites retailers', done => {
+    it('overwrites retailers', () => {
       const sku1 = immutable.Map({
         part   : '2303550',
         vendor : 'Farnell'
@@ -93,13 +87,12 @@ describe('bom_edit lines actions', () => {
       )
       const part = lines4.first().get('retailers').get('Farnell')
       assert(part === sku2.get('part'))
-      return done()
     })
   })
   describe('sorting', () => {
     const lines1 = initial_state.lines
     let lines2
-    beforeEach('set order', done => {
+    beforeEach('set order', () => {
       lines2 = linesReducer(
         lines2,
         {type: 'addLine', value: emptyLine.set('reference', 'C')}
@@ -115,13 +108,11 @@ describe('bom_edit lines actions', () => {
       assert(lines2.size === 3)
       const order = lines2.toList().map(x => x.get('reference'))
       assert(order.equals(immutable.List.of('C', 'B', 'A')))
-      return done()
     })
-    it('sorts by reference', done => {
+    it('sorts by reference', () => {
       const lines3 = linesReducer(lines2, {type: 'sortByReference'})
       const order = lines3.toList().map(x => x.get('reference'))
       assert(order.equals(immutable.List.of('A', 'B', 'C')))
-      return done()
     })
   })
 })
