@@ -53,3 +53,5 @@ function linesReducer(lines = initial_state.lines, action) {
 const reducer = redux.combineReducers({
   lines: linesReducer,
 })
+
+const store = redux.createStore(reducer, initial_state)
