@@ -42,7 +42,7 @@ describe('bom_edit lines actions', () => {
         lines2,
         {
           type: 'addMpn',
-          value: {id, mpn: immutable.List.of('TI', 'NE555P')}
+          value: {id, mpn}
         }
       )
       assert(lines3.first().get('mpns').size === 1)
@@ -53,11 +53,40 @@ describe('bom_edit lines actions', () => {
         lines2,
         {type: 'addMpn', value: {id, mpn}}
       )
+      assert(lines3.first().get('mpns').size === 1)
       const lines4 = linesReducer(
         lines3,
         {type: 'removeMpn', value: {id, mpn}}
       )
       assert(lines4.first().get('mpns').size === 0)
+      return done()
+    })
+  })
+  describe('sorting', () => {
+    const lines1 = initial_state.lines
+    let lines2
+    beforeEach('set order', done => {
+      lines2 = linesReducer(
+        lines2,
+        {type: 'addLine', value: emptyLine.set('references', 'C')}
+      )
+      lines2 = linesReducer(
+        lines2,
+        {type: 'addLine', value: emptyLine.set('references', 'B')}
+      )
+      lines2 = linesReducer(
+        lines2,
+        {type: 'addLine', value: emptyLine.set('references', 'A')}
+      )
+      assert(lines2.size === 3)
+      const order = lines2.toList().map(x => x.get('references'))
+      assert(order.equals(immutable.List.of('C', 'B', 'A')))
+      return done()
+    })
+    it('sorts by references', done => {
+      const lines3 = linesReducer(lines2, {type: 'sortByReferences'})
+      const order = lines3.toList().map(x => x.get('references'))
+      assert(order.equals(immutable.List.of('A', 'B', 'C')))
       return done()
     })
   })
