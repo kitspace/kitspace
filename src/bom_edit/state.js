@@ -9,14 +9,16 @@ function getId() {
 }
 
 const emptyLine = immutable.Map({
-  references : '',
-  quantity   : '',
-  mpns       : immutable.Set(),
-  Digikey    : '',
-  Mouser     : '',
-  RS         : '',
-  Farnell    : '',
-  Newark     : '',
+  reference   : '',
+  quantity    : '',
+  partNumbers : immutable.Set(),
+  retailers: immutable.Map({
+    Digikey : '',
+    Mouser  : '',
+    RS      : '',
+    Farnell : '',
+    Newark  : '',
+  }),
 })
 
 const initial_state = {
@@ -31,19 +33,24 @@ function linesReducer(lines = initial_state.lines, action) {
     case 'removeLine': {
       return lines.filter((_,key) => key !== action.value)
     }
-    case 'addMpn': {
-      const {id, mpn} = action.value
-      const line = lines.get(id).update('mpns', mpns => mpns.add(mpn))
+    case 'addPartNumber': {
+      const {id, partNumber} = action.value
+      const line = lines.get(id).update(
+        'partNumbers',
+        partNumbers => partNumbers.add(partNumber)
+      )
       return lines.set(id, line)
     }
-    case 'removeMpn': {
-      const {id, mpn} = action.value
-      const line =
-        lines.get(id).update('mpns', mpns => mpns.filterNot(x => x.equals(mpn)))
+    case 'removePartNumber': {
+      const {id, partNumber} = action.value
+      const line = lines.get(id).update(
+        'partNumbers',
+         partNumbers => partNumbers.filterNot(x => x.equals(partNumber))
+      )
       return lines.set(id, line)
     }
-    case 'sortByReferences': {
-      return lines.sortBy(line => line.get('references'))
+    case 'sortByReference': {
+      return lines.sortBy(line => line.get('reference'))
     }
   }
   return lines

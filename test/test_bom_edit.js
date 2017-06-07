@@ -27,38 +27,38 @@ describe('bom_edit lines actions', () => {
       return done()
     })
   })
-  describe('mpns', () => {
+  describe('partNumbers', () => {
     const lines1 = initial_state.lines
-    const mpn = immutable.List.of('TI', 'NE555P')
+    const partNumber = immutable.Map({
+      part         : 'NE555P',
+      manufacturer : 'Texas Instruments'
+    })
     let lines2, id
     beforeEach(done => {
       lines2 = linesReducer(lines1, {type: 'addLine', value: emptyLine})
-      assert(lines2.first().get('mpns').size === 0)
+      assert(lines2.first().get('partNumbers').size === 0)
       id = lines2.keys().next().value
       return done()
     })
-    it('adds an mpn', done => {
+    it('adds a partNumber', done => {
       const lines3 = linesReducer(
         lines2,
-        {
-          type: 'addMpn',
-          value: {id, mpn}
-        }
+        {type: 'addPartNumber', value: {id, partNumber}}
       )
-      assert(lines3.first().get('mpns').size === 1)
+      assert(lines3.first().get('partNumbers').size === 1)
       return done()
     })
-    it('removes an mpn', done => {
+    it('removes a partNumber', done => {
       const lines3 = linesReducer(
         lines2,
-        {type: 'addMpn', value: {id, mpn}}
+        {type: 'addPartNumber', value: {id, partNumber}}
       )
-      assert(lines3.first().get('mpns').size === 1)
+      assert(lines3.first().get('partNumbers').size === 1)
       const lines4 = linesReducer(
         lines3,
-        {type: 'removeMpn', value: {id, mpn}}
+        {type: 'removePartNumber', value: {id, partNumber}}
       )
-      assert(lines4.first().get('mpns').size === 0)
+      assert(lines4.first().get('partNumbers').size === 0)
       return done()
     })
   })
@@ -68,24 +68,24 @@ describe('bom_edit lines actions', () => {
     beforeEach('set order', done => {
       lines2 = linesReducer(
         lines2,
-        {type: 'addLine', value: emptyLine.set('references', 'C')}
+        {type: 'addLine', value: emptyLine.set('reference', 'C')}
       )
       lines2 = linesReducer(
         lines2,
-        {type: 'addLine', value: emptyLine.set('references', 'B')}
+        {type: 'addLine', value: emptyLine.set('reference', 'B')}
       )
       lines2 = linesReducer(
         lines2,
-        {type: 'addLine', value: emptyLine.set('references', 'A')}
+        {type: 'addLine', value: emptyLine.set('reference', 'A')}
       )
       assert(lines2.size === 3)
-      const order = lines2.toList().map(x => x.get('references'))
+      const order = lines2.toList().map(x => x.get('reference'))
       assert(order.equals(immutable.List.of('C', 'B', 'A')))
       return done()
     })
-    it('sorts by references', done => {
-      const lines3 = linesReducer(lines2, {type: 'sortByReferences'})
-      const order = lines3.toList().map(x => x.get('references'))
+    it('sorts by reference', done => {
+      const lines3 = linesReducer(lines2, {type: 'sortByReference'})
+      const order = lines3.toList().map(x => x.get('reference'))
       assert(order.equals(immutable.List.of('A', 'B', 'C')))
       return done()
     })
