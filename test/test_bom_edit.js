@@ -25,7 +25,7 @@ describe('bom_edit lines actions', () => {
       assert(lines3.size === 0)
     })
   })
-  describe('partNumbers and retailers', () => {
+  describe('partNumbers and SKUs', () => {
     const lines1 = initial_state.lines
     const partNumber = immutable.Map({
       part         : 'NE555P',
@@ -56,7 +56,7 @@ describe('bom_edit lines actions', () => {
       )
       assert(lines4.first().get('partNumbers').size === 0)
     })
-    it('sets retailers', () => {
+    it('sets SKUs', () => {
       const sku = immutable.Map({
         part   : '2303550',
         vendor : 'Farnell'
@@ -68,7 +68,7 @@ describe('bom_edit lines actions', () => {
       const part = lines3.first().get('retailers').get('Farnell')
       assert(part === sku.get('part'))
     })
-    it('overwrites retailers', () => {
+    it('overwrites SKUs', () => {
       const sku1 = immutable.Map({
         part   : '2303550',
         vendor : 'Farnell'

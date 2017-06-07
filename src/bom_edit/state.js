@@ -38,7 +38,7 @@ function linesReducer(lines = initial_state.lines, action) {
       const {id, partNumber} = action.value
       const line = lines.get(id).update(
         'partNumbers',
-        partNumbers => partNumbers.add(partNumber)
+        ps => ps.add(partNumber)
       )
       return lines.set(id, line)
     }
@@ -54,7 +54,7 @@ function linesReducer(lines = initial_state.lines, action) {
       const {id, partNumber} = action.value
       const line = lines.get(id).update(
         'partNumbers',
-         partNumbers => partNumbers.filterNot(x => x.equals(partNumber))
+         ps => ps.filterNot(p => p.equals(partNumber))
       )
       return lines.set(id, line)
     }
