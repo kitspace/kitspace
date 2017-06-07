@@ -9,33 +9,47 @@ function getId() {
   return id++
 }
 
-const emptyLine = immutable.fromJS({
-  id         : getId(),
+const emptyLine = immutable.Map({
   references : '',
   quantity   : '',
-  mpns       : [],
+  mpns       : immutable.Set(),
   Digikey    : '',
   Mouser     : '',
-  RS         : ''
+  RS         : '',
   Farnell    : '',
   Newark     : '',
 })
 
-const initial_state = immutable.fromJS({
-  lines: [],
-})
+const initial_state = {
+  lines: immutable.OrderedMap(),
+}
 
-function reducer(state, action) {
+function linesReducer(lines = initial_state.lines, action) {
   switch (action.type) {
     case 'addLine': {
-      const lines = state.get('lines')
-      return state.set('lines', lines.push(action.value))
+      return lines.set(getId(), action.value)
     }
     case 'removeLine': {
-      const lines = state.get('lines')
-        .filter(x => x.get('id') !== action.value)
-      return state.set('lines', lines)
+      return lines.filter((_,key) => key !== action.value)
+    }
+    case: 'addMpn': {
+      const {id, mpn} = action.value
+      const line = lines.get(id).update('mpns', mpns => mpns.add(mpn))
+      return lines.set(id, line)
+    }
+    case: 'removeMpn': {
+      const {id, mpn} = action.value
+      const line =
+        lines.get(id).update('mpns', mpns.filterNot(x => x.equals(mpn)))
+      return lines.set(id, line)
+    }
+    case: 'sortByReferences': {
+      return lines.sortBy(line => line.get('references'))
     }
   }
   return state
 }
+
+const reducer = redux.combineReducers({
+  lines: linesReducer,
+})
