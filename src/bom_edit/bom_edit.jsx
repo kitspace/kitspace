@@ -20,18 +20,12 @@ const BomEdit = React.createClass({
     this.store.dispatch({type: 'setFromTsv', value: this.props.tsv})
     return this.store.getState().toJS()
   },
-  componentDidMount() {
-    this.store.subscribe(() => {
-      const state = this.store.getState().toJS()
-      this.setState(state)
-    })
-  },
   render() {
     if (this.state.view.editable) {
       var bom = <BomEditor lines={this.state.lines} />
     }
     else {
-      var bom = <BomView tsv={this.props.tsv} parts={this.props.parts} />
+      var bom = <BomView lines={this.state.lines} view={this.state.view} tsv={this.props.tsv} parts={this.props.parts} />
     }
     return (
       <div>
@@ -39,6 +33,12 @@ const BomEdit = React.createClass({
         {bom}
       </div>
     )
+  },
+  componentDidMount() {
+    this.store.subscribe(() => {
+      const state = this.store.getState().toJS()
+      this.setState(state)
+    })
   },
 })
 

@@ -33,6 +33,10 @@
         border-left: 13px solid lightblue !important;
     }
     tr.selected {
-       background:rgba(0,0,0,.05)!important
+       background:rgba(0,0,0,.05) !important;
+    }
+
+    th.error {
+        background: rgb(255, 246, 246) !important;
     }
 }

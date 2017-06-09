@@ -26,6 +26,7 @@ const initial_state = immutable.Map({
   lines: immutable.OrderedMap(),
   view: immutable.Map({
     editable: false,
+    collapsed: true,
   }),
 })
 

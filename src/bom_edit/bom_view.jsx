@@ -4,6 +4,7 @@ const DoubleScrollbar = require('react-double-scrollbar')
 const {h, tbody, tr}  = require('react-hyperscript-helpers')
 const semantic        = require('semantic-ui-react')
 const ramda           = require('ramda')
+const oneClickBom     = require('1-click-bom')
 
 const MpnPopup = require('./mpn_popup')
 
@@ -126,14 +127,46 @@ const TsvTable = React.createClass({
   }
 })
 
+function RetailerHeader(props) {
+}
+
 const BomView = React.createClass({
-  render: function () {
-    if (this.props.tsv === '') {
-      return <div></div>
+  render() {
+    const lines = this.props.lines
+    const numberOfEach = {}
+    const retailers = {}
+    const retailer_list = oneClickBom.lineData.retailer_list
+    retailer_list.forEach(r => {
+      retailers[r] = lines.map(l => l.retailers[r])
+      numberOfEach[r] = retailers[r].filter(x => x !== '').length
+    })
+
+    function header(r) {
+      const n = numberOfEach[r]
+      if (n === 0) {
+        return null
+      }
+      const total = retailers[r].length
+      return (
+        <semantic.Table.HeaderCell error={n !== total} key={r}>
+          {r}
+          <p style={{fontSize: 14, fontWeight: 'normal'}}>
+            {`${n}/${total}`}
+          </p>
+        </semantic.Table.HeaderCell>
+      )
     }
     return (
       <div className='bom'>
         <div className='bomTableContainer'>
+          <semantic.Table fixed celled unstackable>
+            <semantic.Table.Header>
+              <semantic.Table.Row>
+                <semantic.Table.Cell>{`${lines.length} lines`}</semantic.Table.Cell>
+                {retailer_list.map(header).filter(x => x)}
+              </semantic.Table.Row>
+            </semantic.Table.Header>
+          </semantic.Table>
           <DoubleScrollbar>
             <TsvTable parts={this.props.parts} tsv={this.props.tsv} />
           </DoubleScrollbar>
