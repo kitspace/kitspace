@@ -29,7 +29,7 @@ const initial_state = immutable.Map({
   }),
 })
 
-function linesReducer(lines = initial_state.lines, action) {
+function linesReducer(lines = initial_state.get('lines'), action) {
   switch (action.type) {
     case 'addLine': {
       return lines.set(getId(), action.value)
@@ -74,7 +74,12 @@ function linesReducer(lines = initial_state.lines, action) {
   return lines
 }
 
-function viewReducer(view, action) {
+function viewReducer(view = initial_state.get('view'), action) {
+  switch(action.type) {
+    case 'setEditable': {
+      return view.set('editable', action.value)
+    }
+  }
   return view
 }
 

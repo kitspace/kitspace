@@ -127,10 +127,6 @@ const TsvTable = React.createClass({
 })
 
 const BOM = React.createClass({
-  propTypes: {
-    tsv: React.PropTypes.string.isRequired,
-    parts: React.PropTypes.array.isRequired,
-  },
   render: function () {
     if (this.props.tsv === '') {
       return <div></div>
