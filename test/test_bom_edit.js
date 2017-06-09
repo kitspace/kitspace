@@ -6,14 +6,14 @@ const {initial_state, linesReducer, emptyLine} = require('../src/bom_edit/state'
 describe('bom_edit lines actions', () => {
   describe('lines', () => {
     it('adds a line', () => {
-      const lines1 = initial_state.lines
+      const lines1 = initial_state.get('lines')
       assert(lines1.size === 0)
       const lines2 = linesReducer(lines1, {type: 'addLine', value: emptyLine})
       assert(lines1.size === 0)
       assert(lines2.size === 1)
     })
     it('removes a line', () => {
-      const lines1 = initial_state.lines
+      const lines1 = initial_state.get('lines')
       assert(lines1.size === 0)
       const lines2 = linesReducer(lines1, {type: 'addLine', value: emptyLine})
       assert(lines1.size === 0)
@@ -26,7 +26,7 @@ describe('bom_edit lines actions', () => {
     })
   })
   describe('partNumbers and SKUs', () => {
-    const lines1 = initial_state.lines
+    const lines1 = initial_state.get('lines')
     const partNumber = immutable.Map({
       part         : 'NE555P',
       manufacturer : 'Texas Instruments'
@@ -63,7 +63,7 @@ describe('bom_edit lines actions', () => {
       })
       const lines3 = linesReducer(
         lines2,
-        {type: 'addSku', value: {id, sku}},
+        {type: 'addSku', value: {id, sku}}
       )
       const part = lines3.first().get('retailers').get('Farnell')
       assert(part === sku.get('part'))
@@ -93,7 +93,7 @@ describe('bom_edit lines actions', () => {
     it('lets you set from TSV', () => {
       const tsv = 'References\tQty\tDigikey\ntest\t1\t8-98-989'
       const lines = linesReducer(
-        initial_state.lines,
+        initial_state.get('lines'),
         {type: 'setFromTsv', value: tsv}
       )
       const line      = lines.first()
@@ -106,7 +106,7 @@ describe('bom_edit lines actions', () => {
     })
   })
   describe('sorting', () => {
-    const lines1 = initial_state.lines
+    const lines1 = initial_state.get('lines')
     let lines2
     beforeEach('set order', () => {
       lines2 = linesReducer(
