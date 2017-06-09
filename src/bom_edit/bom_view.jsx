@@ -141,6 +141,7 @@ const BomView = React.createClass({
       numberOfEach[r] = retailers[r].filter(x => x !== '').length
     })
 
+
     function header(r) {
       const n = numberOfEach[r]
       if (n === 0) {
@@ -149,10 +150,15 @@ const BomView = React.createClass({
       const total = retailers[r].length
       return (
         <semantic.Table.HeaderCell error={n !== total} key={r}>
-          {r}
-          <p style={{fontSize: 14, fontWeight: 'normal'}}>
-            {`${n}/${total}`}
-          </p>
+          <div style={{float: 'left'}}>
+            {r}
+            <p style={{fontSize: 14, fontWeight: 'normal'}}>
+              {`${n}/${total}`}
+            </p>
+          </div>
+          <div style={{float: 'right', margin: 10}}>
+            <i style={{fontSize: 22}} className='icon-basket-3' />
+          </div>
         </semantic.Table.HeaderCell>
       )
     }
