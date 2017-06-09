@@ -1,5 +1,5 @@
-const immutable   = require('immutable')
-const redux       = require('redux')
+const immutable      = require('immutable')
+const reduxImmutable = require('redux-immutable')
 const oneClickBom = require('1-click-bom')
 
 function getId() {
@@ -22,9 +22,12 @@ const emptyLine = immutable.Map({
   }),
 })
 
-const initial_state = {
+const initial_state = immutable.Map({
   lines: immutable.OrderedMap(),
-}
+  view: immutable.Map({
+    editable: false,
+  }),
+})
 
 function linesReducer(lines = initial_state.lines, action) {
   switch (action.type) {
@@ -71,10 +74,13 @@ function linesReducer(lines = initial_state.lines, action) {
   return lines
 }
 
-const reducer = redux.combineReducers({
+function viewReducer(view, action) {
+  return view
+}
+
+const reducer = reduxImmutable.combineReducers({
   lines: linesReducer,
+  view: viewReducer,
 })
 
-const store = redux.createStore(reducer, initial_state)
-
-module.exports = {initial_state, linesReducer, store, emptyLine}
+module.exports = {initial_state, linesReducer, reducer, viewReducer, emptyLine}
