@@ -1,7 +1,7 @@
 const React         = require('react')
 const DocumentTitle = require('react-document-title')
 
-const BOM           = require('./bom')
+const BomEdit       = require('../bom_edit/bom_edit')
 const BoardShowcase = require('./board_showcase')
 const StoreButtons  = require('./buy_parts')
 const Gerbers       = require('./gerbers')
@@ -38,7 +38,7 @@ const Page = React.createClass({
               </BoardShowcase>
               <StoreButtons items={info.bom.lines} />
               <Readme />
-              <BOM parts={info.bom.parts} tsv={info.bom.tsv} />
+              <BomEdit parts={info.bom.parts} tsv={info.bom.tsv} />
             </div>
           </div>
         </div>

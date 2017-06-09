@@ -7,7 +7,7 @@ const Steps     = require('./steps')
 const UrlSubmit = require('./url_submit')
 
 const TitleBar    = require('../title_bar')
-const BOM         = require('../page/bom')
+const BomEdit     = require('../bom_edit/bom_edit')
 const getPartinfo = require('../get_partinfo.js')
 
 
