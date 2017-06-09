@@ -39,4 +39,16 @@
     th.error {
         background: rgb(255, 246, 246) !important;
     }
+
+    th.retailerHeader {
+        cursor: pointer !important;
+    }
+
+    th.retailerHeader:hover {
+        background-color: white;
+    }
+
+    th.retailerHeader.error:hover {
+        background-color: rgba(255, 246, 246, 0.54) !important;
+    }
 }

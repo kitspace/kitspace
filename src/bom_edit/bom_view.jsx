@@ -149,7 +149,11 @@ const BomView = React.createClass({
       }
       const total = retailers[r].length
       return (
-        <semantic.Table.HeaderCell error={n !== total} key={r}>
+        <semantic.Table.HeaderCell
+          className='compact retailerHeader'
+          error={n !== total}
+          key={r}
+        >
           <div style={{float: 'left'}}>
             {r}
             <p style={{fontSize: 14, fontWeight: 'normal'}}>
