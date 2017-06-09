@@ -154,14 +154,16 @@ const BomView = React.createClass({
           error={n !== total}
           key={r}
         >
-          <div style={{float: 'left'}}>
-            {r}
-            <p style={{fontSize: 14, fontWeight: 'normal'}}>
-              {`${n}/${total}`}
-            </p>
-          </div>
-          <div style={{float: 'right', margin: 10}}>
-            <i style={{fontSize: 22}} className='icon-basket-3' />
+          <div style={{display: 'flex'}}>
+            <div style={{flexGrow: 1}}>
+              {r}
+              <p style={{fontSize: 14, fontWeight: 'normal'}}>
+                {`${n}/${total}`}
+              </p>
+            </div>
+            <div style={{flexGrow: 1, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+              <i style={{fontSize: 22}} className='icon-basket-3' />
+            </div>
           </div>
         </semantic.Table.HeaderCell>
       )
