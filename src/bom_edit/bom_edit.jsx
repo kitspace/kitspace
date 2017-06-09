@@ -1,15 +1,15 @@
-const React    = require('react')
-const redux    = require('redux')
-const semantic = require('semantic-ui-react')
-const BomView  = require('./bom_view')
-const {reducer, initial_state} = require('./state')
+const React     = require('react')
+const redux     = require('redux')
+const semantic  = require('semantic-ui-react')
+const BomView   = require('./bom_view')
+const {reducer} = require('./state')
 
 function BomEditor(props) {
   return <div />
 }
 
 const BomEdit = React.createClass({
-  store: redux.createStore(reducer, initial_state),
+  store: redux.createStore(reducer),
   toggleEdit() {
     this.store.dispatch({
       type  : 'setEditable',
