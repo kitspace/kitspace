@@ -126,7 +126,7 @@ const TsvTable = React.createClass({
   }
 })
 
-const BOM = React.createClass({
+const BomView = React.createClass({
   render: function () {
     if (this.props.tsv === '') {
       return <div></div>
@@ -143,4 +143,4 @@ const BOM = React.createClass({
   }
 })
 
-module.exports = BOM
+module.exports = BomView

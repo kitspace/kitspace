@@ -1,7 +1,7 @@
 const React    = require('react')
 const redux    = require('redux')
 const semantic = require('semantic-ui-react')
-const Bom      = require('./bom')
+const BomView  = require('./bom_view')
 const {reducer, initial_state} = require('./state')
 
 function BomEditor(props) {
@@ -11,7 +11,10 @@ function BomEditor(props) {
 const BomEdit = React.createClass({
   store: redux.createStore(reducer, initial_state),
   toggleEdit() {
-    this.store.dispatch({type: 'setEditable', value: !this.state.view.editable})
+    this.store.dispatch({
+      type  : 'setEditable',
+      value : !this.state.view.editable
+    })
   },
   getInitialState() {
     this.store.dispatch({type: 'setFromTsv', value: this.props.tsv})
@@ -28,7 +31,7 @@ const BomEdit = React.createClass({
       var bom = <BomEditor lines={this.state.lines} />
     }
     else {
-      var bom = <Bom tsv={this.props.tsv} parts={this.props.parts} />
+      var bom = <BomView tsv={this.props.tsv} parts={this.props.parts} />
     }
     return (
       <div>
