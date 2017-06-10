@@ -157,14 +157,14 @@ const BomView = React.createClass({
           key={r}
           rowSpan={2}
         >
-          <div style={{display: 'flex'}}>
-            <div style={{flexGrow: 1}}>
+          <div className='headerCell'>
+            <div className='headerCellInner'>
               {r}
               <p style={{fontSize: 14, fontWeight: 'normal'}}>
                 {`${n}/${total}`}
               </p>
             </div>
-            <div style={{flexGrow: 1, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+            <div className='headerCellInner' style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
               <i style={{fontSize: 22}} className='icon-basket-3' />
             </div>
           </div>
@@ -175,8 +175,7 @@ const BomView = React.createClass({
       <div className='bom'>
         <div className='bomTableContainer'>
           <ReactResponsive query={mediaQueries.mobile_m}>
-            {(matches) => {
-              console.log('matches', matches)
+            {function(matches) {
               return (
                 <semantic.Table compact fixed celled unstackable={!matches}>
                   <semantic.Table.Header>

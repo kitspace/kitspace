@@ -51,4 +51,13 @@
     th.retailerHeader.error:hover {
         background-color: rgba(255, 192, 203, 0.58) !important;
     }
+
+    div.headerCell {
+        display: flex;
+    }
+
+    div.headerCellInner {
+        flex-grow: 1;
+        min-width: 60px;
+    }
 }
