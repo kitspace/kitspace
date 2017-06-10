@@ -59,6 +59,8 @@
 
     div.headerCellInner {
         flex-grow: 1;
-        min-width: 60px;
+        @include breakpoint(mobile-m) {
+            min-width: 60px;
+        }
     }
 }
