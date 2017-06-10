@@ -191,9 +191,15 @@ const BomView = React.createClass({
               )
             }}
           </ReactResponsive>
-          <DoubleScrollbar>
-            <TsvTable parts={this.props.parts} tsv={this.props.tsv} />
-          </DoubleScrollbar>
+          {function () {
+            if(this.props.view.collapsed) {
+              return (
+                <DoubleScrollbar>
+                  <TsvTable parts={this.props.parts} tsv={this.props.tsv} />
+                </DoubleScrollbar>
+              )
+            }
+          }}
         </div>
       </div>
     )

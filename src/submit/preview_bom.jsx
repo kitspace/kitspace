@@ -7,7 +7,7 @@ const Steps     = require('./steps')
 const UrlSubmit = require('./url_submit')
 
 const TitleBar    = require('../title_bar')
-const BomEdit     = require('../bom_edit/bom_edit')
+const Bom         = require('../bom/bom')
 const getPartinfo = require('../get_partinfo.js')
 
 
@@ -58,7 +58,7 @@ const Step2 = React.createClass({
             {messages}
           </div>
         </div>
-        <BOM parts={board.parts} tsv={board.bom.tsv} />
+        <Bom parts={board.parts} tsv={board.bom.tsv} />
       </semantic.Container>
     </div>
     )
