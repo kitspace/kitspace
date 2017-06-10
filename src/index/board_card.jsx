@@ -1,5 +1,4 @@
-'use strict'
-const React      = require('react')
+const React           = require('react')
 const ReactResponsive = require('react-responsive');
 
 const LazyLoad     = require('../lazy_load')

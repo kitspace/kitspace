@@ -1,12 +1,15 @@
-'use strict'
 const React           = require('react')
 const DoubleScrollbar = require('react-double-scrollbar')
 const {h, tbody, tr}  = require('react-hyperscript-helpers')
 const semantic        = require('semantic-ui-react')
 const ramda           = require('ramda')
 const oneClickBom     = require('1-click-bom')
+const ReactResponsive = require('react-responsive')
+
+const mediaQueries = require('../media_queries')
 
 const MpnPopup = require('./mpn_popup')
+
 
 //for react-double-scrollbar in IE11
 require('babel-polyfill')
@@ -171,17 +174,24 @@ const BomView = React.createClass({
     return (
       <div className='bom'>
         <div className='bomTableContainer'>
-          <semantic.Table compact fixed celled unstackable>
-            <semantic.Table.Header>
-              <semantic.Table.Row>
-                <semantic.Table.Cell>{`${lines.length} lines`}</semantic.Table.Cell>
-                {retailer_list.map(header).filter(x => x)}
-              </semantic.Table.Row>
-              <semantic.Table.Row>
-                <semantic.Table.Cell>{`${numberOfItems} items`}</semantic.Table.Cell>
-              </semantic.Table.Row>
-            </semantic.Table.Header>
-          </semantic.Table>
+          <ReactResponsive query={mediaQueries.mobile_m}>
+            {(matches) => {
+              console.log('matches', matches)
+              return (
+                <semantic.Table compact fixed celled unstackable={!matches}>
+                  <semantic.Table.Header>
+                    <semantic.Table.Row>
+                      <semantic.Table.Cell>{`${lines.length} lines`}</semantic.Table.Cell>
+                      {retailer_list.map(header).filter(x => x)}
+                    </semantic.Table.Row>
+                    <semantic.Table.Row>
+                      <semantic.Table.Cell>{`${numberOfItems} items`}</semantic.Table.Cell>
+                    </semantic.Table.Row>
+                  </semantic.Table.Header>
+                </semantic.Table>
+              )
+            }}
+          </ReactResponsive>
           <DoubleScrollbar>
             <TsvTable parts={this.props.parts} tsv={this.props.tsv} />
           </DoubleScrollbar>
