@@ -79,11 +79,11 @@ describe('bom_edit lines actions', () => {
       })
       const lines3 = linesReducer(
         lines2,
-        {type: 'addSku', value: {id, sku: sku1}},
+        {type: 'addSku', value: {id, sku: sku1}}
       )
       const lines4 = linesReducer(
         lines3,
-        {type: 'addSku', value: {id, sku: sku2}},
+        {type: 'addSku', value: {id, sku: sku2}}
       )
       const part = lines4.first().get('retailers').get('Farnell')
       assert(part === sku2.get('part'))
