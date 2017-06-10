@@ -140,8 +140,7 @@ const BomView = React.createClass({
       retailers[r] = lines.map(l => l.retailers[r])
       numberOfEach[r] = retailers[r].filter(x => x !== '').length
     })
-
-
+    const numberOfItems = lines.reduce((n, line) => n + line.quantity, 0)
     function header(r) {
       const n = numberOfEach[r]
       if (n === 0) {
@@ -153,6 +152,7 @@ const BomView = React.createClass({
           className='compact retailerHeader'
           error={n !== total}
           key={r}
+          rowSpan={2}
         >
           <div style={{display: 'flex'}}>
             <div style={{flexGrow: 1}}>
@@ -171,11 +171,14 @@ const BomView = React.createClass({
     return (
       <div className='bom'>
         <div className='bomTableContainer'>
-          <semantic.Table fixed celled unstackable>
+          <semantic.Table compact fixed celled unstackable>
             <semantic.Table.Header>
               <semantic.Table.Row>
                 <semantic.Table.Cell>{`${lines.length} lines`}</semantic.Table.Cell>
                 {retailer_list.map(header).filter(x => x)}
+              </semantic.Table.Row>
+              <semantic.Table.Row>
+                <semantic.Table.Cell>{`${numberOfItems} items`}</semantic.Table.Cell>
               </semantic.Table.Row>
             </semantic.Table.Header>
           </semantic.Table>
