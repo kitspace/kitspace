@@ -134,6 +134,9 @@ function RetailerHeader(props) {
 }
 
 const BomView = React.createClass({
+  getInitialState() {
+    return {collapsed: true}
+  },
   render() {
     const lines = this.props.lines
     const numberOfEach = {}
@@ -171,35 +174,52 @@ const BomView = React.createClass({
         </semantic.Table.HeaderCell>
       )
     }
+    const headers = retailer_list.map(header).filter(x => x != null)
     return (
       <div className='bom'>
         <div className='bomTableContainer'>
           <ReactResponsive query={mediaQueries.mobile_m}>
-            {function(matches) {
+            {matches => {
               return (
                 <semantic.Table compact fixed celled unstackable={!matches}>
                   <semantic.Table.Header>
                     <semantic.Table.Row>
                       <semantic.Table.Cell>{`${lines.length} lines`}</semantic.Table.Cell>
-                      {retailer_list.map(header).filter(x => x)}
+                      {headers}
                     </semantic.Table.Row>
                     <semantic.Table.Row>
                       <semantic.Table.Cell>{`${numberOfItems} items`}</semantic.Table.Cell>
                     </semantic.Table.Row>
                   </semantic.Table.Header>
+                  <semantic.Table.Body>
+                    <semantic.Table.Row>
+                      <semantic.Table.Cell
+                        selectable
+                        textAlign='center'
+                        colSpan={headers.length + 1}
+                      >
+                        <a
+                          style={{fontSize: 12, textDecoration: 'none'}}
+                          onClick={() => this.setState({collapsed: false})}
+                        >
+                          View details
+                        </a>
+                      </semantic.Table.Cell>
+                    </semantic.Table.Row>
+                  </semantic.Table.Body>
                 </semantic.Table>
               )
             }}
           </ReactResponsive>
-          {function () {
-            if(this.props.view.collapsed) {
+          {(() =>  {
+            if(!this.state.collapsed) {
               return (
                 <DoubleScrollbar>
                   <TsvTable parts={this.props.parts} tsv={this.props.tsv} />
                 </DoubleScrollbar>
               )
             }
-          }}
+          })()}
         </div>
       </div>
     )
