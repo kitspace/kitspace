@@ -202,7 +202,7 @@ const BomView = React.createClass({
                           style={{fontSize: 12, textDecoration: 'none'}}
                           onClick={() => this.setState({collapsed: !this.state.collapsed})}
                         >
-                          {(() => {
+                          {(() =>  {
                             if (this.state.collapsed) {
                               return 'View details'
                             } else {
@@ -212,20 +212,24 @@ const BomView = React.createClass({
                         </a>
                       </semantic.Table.Cell>
                     </semantic.Table.Row>
+                    {(() => {
+                      if(!this.state.collapsed) {
+                        return (
+                          <semantic.Table.Row>
+                            <semantic.Table.Cell colSpan={headers.length + 1}>
+                              <DoubleScrollbar>
+                                <TsvTable parts={this.props.parts} tsv={this.props.tsv} />
+                              </DoubleScrollbar>
+                            </semantic.Table.Cell>
+                          </semantic.Table.Row>
+                        )
+                      }
+                    })()}
                   </semantic.Table.Body>
                 </semantic.Table>
               )
             }}
           </ReactResponsive>
-          {(() =>  {
-            if(!this.state.collapsed) {
-              return (
-                <DoubleScrollbar>
-                  <TsvTable parts={this.props.parts} tsv={this.props.tsv} />
-                </DoubleScrollbar>
-              )
-            }
-          })()}
         </div>
       </div>
     )
