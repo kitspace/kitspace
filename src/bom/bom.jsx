@@ -181,52 +181,63 @@ const BomView = React.createClass({
           <ReactResponsive query={mediaQueries.mobile_m}>
             {matches => {
               return (
-                <semantic.Table compact fixed celled unstackable={!matches}>
-                  <semantic.Table.Header>
-                    <semantic.Table.Row>
-                      <semantic.Table.Cell>{`${lines.length} lines`}</semantic.Table.Cell>
-                      {headers}
-                    </semantic.Table.Row>
-                    <semantic.Table.Row>
-                      <semantic.Table.Cell>{`${numberOfItems} items`}</semantic.Table.Cell>
-                    </semantic.Table.Row>
-                  </semantic.Table.Header>
-                  <semantic.Table.Body>
-                    <semantic.Table.Row>
-                      <semantic.Table.Cell
-                        selectable
-                        textAlign='center'
-                        colSpan={headers.length + 1}
-                      >
-                        <a
-                          style={{fontSize: 12, textDecoration: 'none'}}
-                          onClick={() => this.setState({collapsed: !this.state.collapsed})}
+                <div>
+                  <semantic.Table compact fixed celled unstackable={!matches}>
+                    <semantic.Table.Header>
+                      <semantic.Table.Row>
+                        <semantic.Table.Cell>{`${lines.length} lines`}</semantic.Table.Cell>
+                        {headers}
+                      </semantic.Table.Row>
+                      <semantic.Table.Row>
+                        <semantic.Table.Cell>{`${numberOfItems} items`}</semantic.Table.Cell>
+                      </semantic.Table.Row>
+                    </semantic.Table.Header>
+                    <semantic.Table.Body>
+                      <semantic.Table.Row>
+                        <semantic.Table.Cell
+                          selectable
+                          textAlign='center'
+                          colSpan={headers.length + 1}
                         >
-                          {(() =>  {
-                            if (this.state.collapsed) {
-                              return 'View details'
-                            } else {
-                              return 'Hide details'
-                            }
-                          })()}
-                        </a>
-                      </semantic.Table.Cell>
-                    </semantic.Table.Row>
-                    {(() => {
-                      if(!this.state.collapsed) {
-                        return (
-                          <semantic.Table.Row>
-                            <semantic.Table.Cell colSpan={headers.length + 1}>
-                              <DoubleScrollbar>
-                                <TsvTable parts={this.props.parts} tsv={this.props.tsv} />
-                              </DoubleScrollbar>
-                            </semantic.Table.Cell>
-                          </semantic.Table.Row>
-                        )
-                      }
-                    })()}
-                  </semantic.Table.Body>
-                </semantic.Table>
+                          <a
+                            style={{fontSize: 12, textDecoration: 'none'}}
+                            onClick={() => this.setState({collapsed: !this.state.collapsed})}
+                          >
+                            {(() =>  {
+                              if (this.state.collapsed) {
+                                return 'View parts details'
+                              } else {
+                                return 'Hide parts details'
+                              }
+                            })()}
+                          </a>
+                        </semantic.Table.Cell>
+                      </semantic.Table.Row>
+                      {(() => {
+                        if(!this.state.collapsed && !matches) {
+                          return (
+                            <semantic.Table.Row>
+                              <semantic.Table.Cell colSpan={headers.length + 1}>
+                                <DoubleScrollbar>
+                                  <TsvTable parts={this.props.parts} tsv={this.props.tsv} />
+                                </DoubleScrollbar>
+                              </semantic.Table.Cell>
+                            </semantic.Table.Row>
+                          )
+                        }
+                      })()}
+                    </semantic.Table.Body>
+                  </semantic.Table>
+                  {(() => {
+                    if(!this.state.collapsed && matches) {
+                      return (
+                        <DoubleScrollbar>
+                          <TsvTable parts={this.props.parts} tsv={this.props.tsv} />
+                        </DoubleScrollbar>
+                      )
+                    }
+                  })()}
+                </div>
               )
             }}
           </ReactResponsive>
