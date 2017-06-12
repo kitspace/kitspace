@@ -200,9 +200,15 @@ const BomView = React.createClass({
                       >
                         <a
                           style={{fontSize: 12, textDecoration: 'none'}}
-                          onClick={() => this.setState({collapsed: false})}
+                          onClick={() => this.setState({collapsed: !this.state.collapsed})}
                         >
-                          View details
+                          {(() => {
+                            if (this.state.collapsed) {
+                              return 'View details'
+                            } else {
+                              return 'Hide details'
+                            }
+                          })()}
                         </a>
                       </semantic.Table.Cell>
                     </semantic.Table.Row>
