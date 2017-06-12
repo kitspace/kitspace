@@ -57,10 +57,15 @@
         flex-wrap: wrap;
     }
 
-    div.headerCellInner {
+    div.headerCellText {
         flex-grow: 1;
-        @include breakpoint(mobile-m) {
-            min-width: 60px;
-        }
+        min-width: 63px;
+    }
+    div.headerCellIcon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-grow: 1;
+        font-size: 22px;
     }
 }

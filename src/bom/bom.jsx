@@ -161,13 +161,13 @@ const BomView = React.createClass({
           rowSpan={2}
         >
           <div className='headerCell'>
-            <div className='headerCellInner'>
+            <div className='headerCellText'>
               {r}
               <p style={{fontSize: 14, fontWeight: 'normal'}}>
                 {`${n}/${total}`}
               </p>
             </div>
-            <div className='headerCellInner' style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+            <div className='headerCellIcon'>
               <i style={{fontSize: 22}} className='icon-basket-3' />
             </div>
           </div>
