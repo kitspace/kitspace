@@ -46,7 +46,7 @@ const BomView = React.createClass({
         switch (event.data.message) {
           case 'register':
             this.setState({
-              onClick: (retailer) => {
+              buyParts: (retailer) => {
                 window.postMessage({
                   from    : 'page',
                   message : 'quickAddToCart',
@@ -115,7 +115,12 @@ const BomView = React.createClass({
               </p>
             </div>
             <div className='headerCellIcon'>
-              <i style={{fontSize: 22}} className='icon-basket-3' />
+              {(() => {
+                if (this.state.adding[r]) {
+                  return <semantic.Loader active inline />
+                }
+                return <i style={{fontSize: 22}} className='icon-basket-3' />
+              })()}
             </div>
           </div>
         </semantic.Table.HeaderCell>
