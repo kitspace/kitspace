@@ -151,11 +151,15 @@ const BomView = React.createClass({
                   <semantic.Table compact fixed celled unstackable={!matches}>
                     <semantic.Table.Header>
                       <semantic.Table.Row>
-                        <semantic.Table.Cell>{`${lines.length} lines`}</semantic.Table.Cell>
+                        <semantic.Table.Cell>
+                          {`${lines.length} lines`}
+                        </semantic.Table.Cell>
                         {headers}
                       </semantic.Table.Row>
                       <semantic.Table.Row>
-                        <semantic.Table.Cell>{`${numberOfItems} items`}</semantic.Table.Cell>
+                        <semantic.Table.Cell style={{borderTop: 'none'}}>
+                          {`${numberOfItems} items`}
+                        </semantic.Table.Cell>
                       </semantic.Table.Row>
                     </semantic.Table.Header>
                     <semantic.Table.Body>
