@@ -161,6 +161,55 @@ const BomView = React.createClass({
                     <semantic.Table.Body>
                       <semantic.Table.Row>
                         <semantic.Table.Cell
+                          textAlign='center'
+                          colSpan={headers.length + 1}
+                        >
+                          <div>
+                            {'Adjust quantity: '}
+                            <semantic.Input
+                              type='number'
+                              size='mini'
+                              min={1}
+                              value={this.state.buyMultiplier}
+                              style={{width: 80}}
+                              error={isNaN(this.state.buyMultiplier) ||  this.state.buyMultiplier < 1}
+                              onBlur={e => {
+                                const v = this.state.buyMultiplier
+                                if (isNaN(v) || v < 1) {
+                                  this.setState({buyMultiplier: 1})
+                                }
+                              }}
+                              onChange={e => {
+                                var v = parseFloat(e.target.value)
+                                this.setState({buyMultiplier: v})
+                              }}
+                            />
+                            <semantic.Icon style={{margin: 10}} name='plus' />
+                              <semantic.Input
+                                type='number'
+                                min={0}
+                                step={10}
+                                value={this.state.buyAddPercent}
+                                size='mini'
+                                style={{width: 80}}
+                                error={isNaN(this.state.buyAddPercent) ||  this.state.buyAddPercent < 0}
+                                onBlur={e => {
+                                  const v = this.state.buyAddPercent
+                                  if (isNaN(v) || v < 0) {
+                                    this.setState({buyAddPercent: 0})
+                                  }
+                                }}
+                                onChange={e => {
+                                  var v = parseFloat(e.target.value)
+                                  this.setState({buyAddPercent: v})
+                                }}
+                              />
+                              <span className='notSelectable' style={{marginLeft:5}}>{'%'}</span>
+                            </div>
+                          </semantic.Table.Cell>
+                        </semantic.Table.Row>
+                      <semantic.Table.Row>
+                        <semantic.Table.Cell
                           selectable
                           textAlign='center'
                           colSpan={headers.length + 1}
