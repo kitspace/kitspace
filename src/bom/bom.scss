@@ -59,7 +59,10 @@
 
     div.headerCellText {
         flex-grow: 1;
-        min-width: 63px;
+        min-width: 102px;
+        @include breakpoint(mobile-m) {
+            width: 224px;
+        }
     }
     div.headerCellIcon {
         display: flex;
@@ -67,5 +70,16 @@
         justify-content: center;
         flex-grow: 1;
         font-size: 22px;
+    }
+
+    .storeIcons {
+        height: 16px;
+        margin-right: 2px;
+        width: 16px;
+    }
+
+    .headerCellName {
+        display: flex;
+        align-items: center;
     }
 }

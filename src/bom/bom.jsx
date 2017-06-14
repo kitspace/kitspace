@@ -74,6 +74,17 @@ const BomView = React.createClass({
       }, 3000)
     }
   },
+  storeIcon(retailer, disabled=false) {
+    const imgHref = `/images/${retailer}${disabled ? '-grey' : ''}.ico`
+    return (
+      <img
+        className='storeIcons'
+        key={retailer}
+        src={imgHref}
+        alt={retailer}
+      />
+    )
+  },
   render() {
     const lines = this.props.lines
     const numberOfEach = {}
@@ -109,7 +120,10 @@ const BomView = React.createClass({
         >
           <div className='headerCell'>
             <div className='headerCellText'>
-              {r}
+              <div className='headerCellName'>
+                {this.storeIcon(r)}
+                {r}
+              </div>
               <p style={{fontSize: 14, fontWeight: 'normal'}}>
                 {`${n}/${total}`}
               </p>

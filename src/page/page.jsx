@@ -36,7 +36,11 @@ const Page = React.createClass({
                 <FadeImage src='images/top.svg' />
                 <FadeImage src='images/bottom.svg'/>
               </BoardShowcase>
-              <Bom lines={info.bom.lines} parts={info.bom.parts} tsv={info.bom.tsv} />
+              <Bom
+                lines={info.bom.lines}
+                parts={info.bom.parts}
+                tsv={info.bom.tsv}
+              />
               <Readme />
             </div>
           </div>
