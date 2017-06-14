@@ -5,8 +5,10 @@ const semantic        = require('semantic-ui-react')
 const ramda           = require('ramda')
 const oneClickBom     = require('1-click-bom')
 const ReactResponsive = require('react-responsive')
+const DirectStores    = require('../page/direct_stores')
 
 const mediaQueries = require('../media_queries')
+const installExtension = require('../install_extension')
 
 const MpnPopup = require('./mpn_popup')
 
@@ -130,12 +132,64 @@ const TsvTable = React.createClass({
   }
 })
 
-function RetailerHeader(props) {
-}
-
 const BomView = React.createClass({
   getInitialState() {
-    return {collapsed: true}
+    return {
+      collapsed         : true,
+      extensionWaiting  : true,
+      extensionPresence : 'unknown',
+      buyParts          : installExtension,
+      buyMultiplier     : 1,
+      buyAddPercent     : 10,
+      adding            : {},
+    }
+  },
+  getMultiplier() {
+    const multi = this.state.buyMultiplier
+    const percent = this.state.buyAddPercent
+    return multi + (multi * (percent / 100))
+  },
+  componentDidMount() {
+    //extension communication
+    window.addEventListener('message', event => {
+      if (event.source != window) {
+        return
+      }
+      if (event.data.from == 'extension'){
+        this.setState({
+          extensionWaiting: false,
+          extensionPresence: 'present',
+        })
+        switch (event.data.message) {
+          case 'register':
+            this.setState({
+              onClick: (retailer) => {
+                window.postMessage({
+                  from    : 'page',
+                  message : 'quickAddToCart',
+                  value: {
+                    retailer,
+                    multiplier: this.getMultiplier()
+                  }}, '*')
+              }
+            })
+            break
+          case 'updateAddingState':
+            this.setState({
+              adding: event.data.value
+            })
+            break
+        }
+      }
+    }, false)
+    if (window != null){
+      setTimeout(() => {
+        this.setState({
+          extensionPresence:
+            !this.state.extensionWaiting ? 'present' : 'not_present'
+        })
+      }, 3000)
+    }
   },
   render() {
     const lines = this.props.lines
@@ -147,10 +201,19 @@ const BomView = React.createClass({
       numberOfEach[r] = retailers[r].filter(x => x !== '').length
     })
     const numberOfItems = lines.reduce((n, line) => n + line.quantity, 0)
-    function header(r) {
+    const header = r => {
       const n = numberOfEach[r]
       if (n === 0) {
         return null
+      }
+      let onClick = this.state.buyParts.bind(null, r)
+      //if the extension is not here fallback to direct submissions
+      if ((this.state.extensionPresence !== 'present')
+        && (typeof document !== 'undefined')
+        && document.getElementById(r + 'Form') !== null) {
+        onClick = () => {
+          document.getElementById(r + 'Form').submit()
+        }
       }
       const total = retailers[r].length
       return (
@@ -159,6 +222,7 @@ const BomView = React.createClass({
           error={n !== total}
           key={r}
           rowSpan={2}
+          onClick={onClick}
         >
           <div className='headerCell'>
             <div className='headerCellText'>
@@ -241,6 +305,10 @@ const BomView = React.createClass({
               )
             }}
           </ReactResponsive>
+          <DirectStores
+            multiplier={this.getMultiplier()}
+            items={this.props.lines}
+          />
         </div>
       </div>
     )
