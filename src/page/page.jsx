@@ -1,13 +1,13 @@
 const React         = require('react')
 const DocumentTitle = require('react-document-title')
 
-const Bom           = require('../bom/bom')
 const BoardShowcase = require('./board_showcase')
 const Gerbers       = require('./gerbers')
 const InfoBar       = require('./info_bar')
 
 const TitleBar      = require('../title_bar')
 const FadeImage     = require('../fade_image')
+const Bom           = require('../bom/bom')
 const Readme        = require('../readme')
 
 const info = require('../info.json')
@@ -38,7 +38,6 @@ const Page = React.createClass({
               <Bom
                 lines={info.bom.lines}
                 parts={info.bom.parts}
-                tsv={info.bom.tsv}
               />
               <Readme />
             </div>

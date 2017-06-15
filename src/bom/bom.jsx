@@ -29,13 +29,6 @@ const BomView = React.createClass({
       adding            : {},
     }
   },
-  isExtensionCompatible(version) {
-    if (typeof navigator == 'undefined')
-      return true
-    if (/Mobile/i.test(navigator.userAgent))
-      return false
-    return (/Chrome/.test(version) || /Firefox/.test(version))
-  },
   getMultiplier() {
     let multi = this.state.buyMultiplier
     if (isNaN(multi) || multi < 1) {
@@ -80,14 +73,6 @@ const BomView = React.createClass({
         }
       }
     }, false)
-    if (window != null){
-      setTimeout(() => {
-        this.setState({
-          extensionPresence:
-          !this.state.extensionWaiting ? 'present' : 'not_present'
-        })
-      }, 3000)
-    }
   },
   storeIcon(retailer, disabled=false) {
     const imgHref = `/images/${retailer}${disabled ? '-grey' : ''}.ico`
@@ -188,13 +173,11 @@ const BomView = React.createClass({
                           {`${numberOfItems} items`}
                         </semantic.Table.Cell>
                       </semantic.Table.Row>
-                          <semantic.Table.Row>
-                            <InstallPrompt
-                              colSpan={headers.length + 1}
-                              extensionPresence={this.state.extensionPresence}
-                              bomInstallLink={installExtension}
-                            />
-                          </semantic.Table.Row>
+                      <InstallPrompt
+                        colSpan={headers.length + 1}
+                        extensionPresence={this.state.extensionPresence}
+                        bomInstallLink={installExtension}
+                      />
                     </semantic.Table.Header>
                     <semantic.Table.Body>
                       <semantic.Table.Row>
