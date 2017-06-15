@@ -227,9 +227,9 @@ const StoreButtons = React.createClass({
           Buy Parts
         </div>
         <BomInstallPrompt
-        extensionPresence={this.state.extensionPresence}
-        bomInstallLink={this.state.extensionInstallLink}
-        compatibleBrowser={this.state.compatibleBrowser}
+          extensionPresence={this.state.extensionPresence}
+          bomInstallLink={this.state.extensionInstallLink}
+          compatibleBrowser={this.state.compatibleBrowser}
         />
         <ExtensionCompatibilityPrompt
         compatibleBrowser={this.state.compatibleBrowser} />

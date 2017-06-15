@@ -3,7 +3,9 @@ const DoubleScrollbar = require('react-double-scrollbar')
 const semantic        = require('semantic-ui-react')
 const oneClickBom     = require('1-click-bom')
 const ReactResponsive = require('react-responsive')
+const browserVersion   = require('browser-version')
 const DirectStores    = require('../page/direct_stores')
+const BomInstallPrompt = require('../page/bom_install_prompt')
 
 const mediaQueries = require('../media_queries')
 const installExtension = require('../install_extension')
@@ -26,6 +28,13 @@ const BomView = React.createClass({
       buyAddPercent     : 0,
       adding            : {},
     }
+  },
+  isExtensionCompatible(version) {
+    if (typeof navigator == 'undefined')
+      return true
+    if (/Mobile/i.test(navigator.userAgent))
+      return false
+    return (/Chrome/.test(version) || /Firefox/.test(version))
   },
   getMultiplier() {
     let multi = this.state.buyMultiplier
@@ -75,7 +84,7 @@ const BomView = React.createClass({
       setTimeout(() => {
         this.setState({
           extensionPresence:
-            !this.state.extensionWaiting ? 'present' : 'not_present'
+          !this.state.extensionWaiting ? 'present' : 'not_present'
         })
       }, 3000)
     }
@@ -140,22 +149,22 @@ const BomView = React.createClass({
             <div className='headerCellText'>
               <div className='headerCellName'>
                 {this.storeIcon(r)}
-                {r}
-              </div>
-              <p style={{fontSize: 14, fontWeight: 'normal'}}>
-                {`${n}/${total}`}
-              </p>
-            </div>
-            <div className='headerCellIcon'>
-              {(() => {
-                if (this.state.adding[r]) {
-                  return <semantic.Loader active inline />
-                }
-                return <i style={{fontSize: 22}} className='icon-basket-3' />
-              })()}
-            </div>
-          </div>
-        </semantic.Table.HeaderCell>
+        {r}
+      </div>
+      <p style={{fontSize: 14, fontWeight: 'normal'}}>
+        {`${n}/${total}`}
+      </p>
+    </div>
+    <div className='headerCellIcon'>
+      {(() => {
+        if (this.state.adding[r]) {
+          return <semantic.Loader active inline />
+        }
+        return <i style={{fontSize: 22}} className='icon-basket-3' />
+      })()}
+    </div>
+  </div>
+</semantic.Table.HeaderCell>
       )
     }
     const headers = retailer_list.map(header).filter(x => x != null)
@@ -179,6 +188,13 @@ const BomView = React.createClass({
                           {`${numberOfItems} items`}
                         </semantic.Table.Cell>
                       </semantic.Table.Row>
+                          <semantic.Table.Row>
+                            <BomInstallPrompt
+                              colSpan={headers.length + 1}
+                              extensionPresence={this.state.extensionPresence}
+                              bomInstallLink={installExtension}
+                            />
+                          </semantic.Table.Row>
                     </semantic.Table.Header>
                     <semantic.Table.Body>
                       <semantic.Table.Row>
@@ -194,7 +210,8 @@ const BomView = React.createClass({
                               min={1}
                               value={this.state.buyMultiplier}
                               style={{width: 80, marginLeft: 10}}
-                              error={isNaN(this.state.buyMultiplier) ||  this.state.buyMultiplier < 1}
+                              error={isNaN(this.state.buyMultiplier)
+                                || (this.state.buyMultiplier < 1)}
                               onBlur={e => {
                                 const v = this.state.buyMultiplier
                                 if (isNaN(v) || v < 1) {
@@ -207,38 +224,38 @@ const BomView = React.createClass({
                               }}
                             />
                             <semantic.Icon style={{margin: 10}} name='plus' />
-                              <semantic.Input
-                                type='number'
-                                min={0}
-                                step={10}
-                                value={this.state.buyAddPercent}
-                                size='mini'
-                                style={{width: 80}}
-                                error={isNaN(this.state.buyAddPercent)
+                            <semantic.Input
+                              type='number'
+                              min={0}
+                              step={10}
+                              value={this.state.buyAddPercent}
+                              size='mini'
+                              style={{width: 80}}
+                              error={isNaN(this.state.buyAddPercent)
                                   || (this.state.buyAddPercent < 0)}
-                                onBlur={e => {
-                                  const v = this.state.buyAddPercent
-                                  if (isNaN(v) || v < 0) {
-                                    this.setState({buyAddPercent: 0})
-                                  }
-                                }}
-                                onChange={e => {
-                                  var v = parseFloat(e.target.value)
-                                  this.setState({buyAddPercent: v})
-                                }}
-                              />
-                              <span
-                                className='notSelectable'
-                                style={{marginLeft:5}}
-                              >
-                                {'%'}
-                              </span>
-                            </div>
-                          </semantic.Table.Cell>
-                        </semantic.Table.Row>
-                      <semantic.Table.Row>
-                        <semantic.Table.Cell
-                          className='expandBom'
+                                  onBlur={e => {
+                                    const v = this.state.buyAddPercent
+                                    if (isNaN(v) || v < 0) {
+                                      this.setState({buyAddPercent: 0})
+                                    }
+                                  }}
+                                  onChange={e => {
+                                    var v = parseFloat(e.target.value)
+                                    this.setState({buyAddPercent: v})
+                                  }}
+                                />
+                                <span
+                                  className='notSelectable'
+                                  style={{marginLeft:5}}
+                                >
+                                  {'%'}
+                                </span>
+                              </div>
+                            </semantic.Table.Cell>
+                          </semantic.Table.Row>
+                          <semantic.Table.Row>
+                            <semantic.Table.Cell
+                            className='expandBom'
                           textAlign='center'
                           colSpan={headers.length + 1}
                           onClick={() => {
