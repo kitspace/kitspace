@@ -23,7 +23,7 @@ const BomView = React.createClass({
       extensionPresence : 'unknown',
       buyParts          : installExtension,
       buyMultiplier     : 1,
-      buyAddPercent     : 10,
+      buyAddPercent     : 0,
       adding            : {},
     }
   },
@@ -193,7 +193,7 @@ const BomView = React.createClass({
                               size='mini'
                               min={1}
                               value={this.state.buyMultiplier}
-                              style={{width: 80}}
+                              style={{width: 80, marginLeft: 10}}
                               error={isNaN(this.state.buyMultiplier) ||  this.state.buyMultiplier < 1}
                               onBlur={e => {
                                 const v = this.state.buyMultiplier
