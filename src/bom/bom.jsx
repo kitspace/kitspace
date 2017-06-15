@@ -3,14 +3,14 @@ const DoubleScrollbar = require('react-double-scrollbar')
 const semantic        = require('semantic-ui-react')
 const oneClickBom     = require('1-click-bom')
 const ReactResponsive = require('react-responsive')
-const browserVersion   = require('browser-version')
-const DirectStores    = require('../page/direct_stores')
-const BomInstallPrompt = require('../page/bom_install_prompt')
+const browserVersion  = require('browser-version')
 
-const mediaQueries = require('../media_queries')
+const mediaQueries     = require('../media_queries')
 const installExtension = require('../install_extension')
 
-const TsvTable = require('./tsv_table')
+const TsvTable      = require('./tsv_table')
+const InstallPrompt = require('./install_prompt')
+const DirectStores  = require('./direct_stores')
 
 
 //for react-double-scrollbar in IE11
@@ -189,7 +189,7 @@ const BomView = React.createClass({
                         </semantic.Table.Cell>
                       </semantic.Table.Row>
                           <semantic.Table.Row>
-                            <BomInstallPrompt
+                            <InstallPrompt
                               colSpan={headers.length + 1}
                               extensionPresence={this.state.extensionPresence}
                               bomInstallLink={installExtension}
@@ -255,21 +255,21 @@ const BomView = React.createClass({
                           </semantic.Table.Row>
                           <semantic.Table.Row>
                             <semantic.Table.Cell
-                            className='expandBom'
-                          textAlign='center'
-                          colSpan={headers.length + 1}
-                          onClick={() => {
-                            this.setState({collapsed: !this.state.collapsed})
-                          }}
-                        >
-                            {(() => {
-                              if (this.state.collapsed) {
-                                return 'View parts details'
-                              } else {
-                                return 'Hide parts details'
-                              }
-                            })()}
-                        </semantic.Table.Cell>
+                              className='expandBom'
+                              textAlign='center'
+                              colSpan={headers.length + 1}
+                              onClick={() => {
+                                this.setState({collapsed: !this.state.collapsed})
+                              }}
+                            >
+                              {(() => {
+                                if (this.state.collapsed) {
+                                  return 'View parts details'
+                                } else {
+                                  return 'Hide parts details'
+                                }
+                              })()}
+                            </semantic.Table.Cell>
                       </semantic.Table.Row>
                       {(() => {
                         if(!this.state.collapsed && !matches) {

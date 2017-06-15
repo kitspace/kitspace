@@ -3,7 +3,6 @@ const DocumentTitle = require('react-document-title')
 
 const Bom           = require('../bom/bom')
 const BoardShowcase = require('./board_showcase')
-const StoreButtons  = require('./buy_parts')
 const Gerbers       = require('./gerbers')
 const InfoBar       = require('./info_bar')
 
