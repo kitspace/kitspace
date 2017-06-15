@@ -91,6 +91,15 @@ const BomView = React.createClass({
       />
     )
   },
+  linesToTsv() {
+    const mult = this.getMultiplier()
+    const lines = this.props.lines.map(line => {
+      return Object.assign({}, line, {
+        quantity: Math.ceil(line.quantity * mult)
+      })
+    })
+    return oneClickBom.writeTSV(lines)
+  },
   render() {
     const lines = this.props.lines
     const numberOfEach = {}
@@ -247,7 +256,10 @@ const BomView = React.createClass({
                             <semantic.Table.Row>
                               <semantic.Table.Cell colSpan={headers.length + 1}>
                                 <DoubleScrollbar>
-                                  <TsvTable parts={this.props.parts} tsv={this.props.tsv} />
+                                  <TsvTable
+                                    parts={this.props.parts}
+                                    tsv={this.linesToTsv()}
+                                  />
                                 </DoubleScrollbar>
                               </semantic.Table.Cell>
                             </semantic.Table.Row>
@@ -260,7 +272,10 @@ const BomView = React.createClass({
                     if(!this.state.collapsed && matches) {
                       return (
                         <DoubleScrollbar>
-                          <TsvTable parts={this.props.parts} tsv={this.props.tsv} />
+                          <TsvTable
+                            parts={this.props.parts}
+                            tsv={this.linesToTsv()}
+                          />
                         </DoubleScrollbar>
                       )
                     }
