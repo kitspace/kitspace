@@ -120,6 +120,7 @@ const BomView = React.createClass({
         onClick = () => {
           document.getElementById(r + 'Form').submit()
         }
+        console.log('onClick', onClick)
       }
       const total = retailers[r].length
       return (
@@ -134,22 +135,22 @@ const BomView = React.createClass({
             <div className='headerCellText'>
               <div className='headerCellName'>
                 {this.storeIcon(r)}
-        {r}
-      </div>
-      <p style={{fontSize: 14, fontWeight: 'normal'}}>
-        {`${n}/${total}`}
-      </p>
-    </div>
-    <div className='headerCellIcon'>
-      {(() => {
-        if (this.state.adding[r]) {
-          return <semantic.Loader active inline />
-        }
-        return <i style={{fontSize: 22}} className='icon-basket-3' />
-      })()}
-    </div>
-  </div>
-</semantic.Table.HeaderCell>
+                {r}
+              </div>
+              <p style={{fontSize: 14, fontWeight: 'normal'}}>
+                {`${n}/${total}`}
+              </p>
+            </div>
+            <div className='headerCellIcon'>
+              {(() => {
+                if (this.state.adding[r]) {
+                  return <semantic.Loader active inline />
+                }
+                return <i style={{fontSize: 22}} className='icon-basket-3' />
+              })()}
+            </div>
+          </div>
+        </semantic.Table.HeaderCell>
       )
     }
     const headers = retailer_list.map(header).filter(x => x != null)
