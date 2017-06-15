@@ -49,7 +49,7 @@ var Main = React.createClass({
   searchUpdated: function (term) {
     const filters = ['id', 'summary']
     const result = boards.filter(ReactSearchInput.createFilter(term, filters))
-    if (term.length > 2) {
+    if (typeof _paq !== 'undefined' && term.length > 2) {
       _paq.push(['trackSiteSearch',
           // Search keyword searched for
           term,
