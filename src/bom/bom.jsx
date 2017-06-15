@@ -28,8 +28,14 @@ const BomView = React.createClass({
     }
   },
   getMultiplier() {
-    const multi = this.state.buyMultiplier
-    const percent = this.state.buyAddPercent
+    let multi = this.state.buyMultiplier
+    if (isNaN(multi) || multi < 1) {
+      multi = 1
+    }
+    let percent = this.state.buyAddPercent
+    if (isNaN(percent) || percent < 1) {
+      percent = 0
+    }
     return multi + (multi * (percent / 100))
   },
   componentDidMount() {
@@ -94,7 +100,10 @@ const BomView = React.createClass({
       retailers[r] = lines.map(l => l.retailers[r])
       numberOfEach[r] = retailers[r].filter(x => x !== '').length
     })
-    const numberOfItems = lines.reduce((n, line) => n + line.quantity, 0)
+    const mult = this.getMultiplier()
+    const numberOfItems = lines.reduce((n, line) => {
+      return n + Math.ceil(line.quantity * mult)
+    }, 0)
     const header = r => {
       const n = numberOfEach[r]
       if (n === 0) {
