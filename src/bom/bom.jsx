@@ -214,7 +214,8 @@ const BomView = React.createClass({
                                 value={this.state.buyAddPercent}
                                 size='mini'
                                 style={{width: 80}}
-                                error={isNaN(this.state.buyAddPercent) ||  this.state.buyAddPercent < 0}
+                                error={isNaN(this.state.buyAddPercent)
+                                  || (this.state.buyAddPercent < 0)}
                                 onBlur={e => {
                                   const v = this.state.buyAddPercent
                                   if (isNaN(v) || v < 0) {
@@ -226,28 +227,31 @@ const BomView = React.createClass({
                                   this.setState({buyAddPercent: v})
                                 }}
                               />
-                              <span className='notSelectable' style={{marginLeft:5}}>{'%'}</span>
+                              <span
+                                className='notSelectable'
+                                style={{marginLeft:5}}
+                              >
+                                {'%'}
+                              </span>
                             </div>
                           </semantic.Table.Cell>
                         </semantic.Table.Row>
                       <semantic.Table.Row>
                         <semantic.Table.Cell
-                          selectable
+                          className='expandBom'
                           textAlign='center'
                           colSpan={headers.length + 1}
+                          onClick={() => {
+                            this.setState({collapsed: !this.state.collapsed})
+                          }}
                         >
-                          <a
-                            style={{fontSize: 12, textDecoration: 'none'}}
-                            onClick={() => this.setState({collapsed: !this.state.collapsed})}
-                          >
-                            {(() =>  {
+                            {(() => {
                               if (this.state.collapsed) {
                                 return 'View parts details'
                               } else {
                                 return 'Hide parts details'
                               }
                             })()}
-                          </a>
                         </semantic.Table.Cell>
                       </semantic.Table.Row>
                       {(() => {
