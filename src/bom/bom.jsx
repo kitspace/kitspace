@@ -123,7 +123,7 @@ const BomView = React.createClass({
       }
       const total = retailers[r].length
       return (
-        <semantic.Table.HeaderCell
+        <semantic.Table.Cell
           className='compact retailerHeader'
           error={n !== total}
           key={r}
@@ -149,7 +149,7 @@ const BomView = React.createClass({
               })()}
             </div>
           </div>
-        </semantic.Table.HeaderCell>
+        </semantic.Table.Cell>
       )
     }
     const headers = retailer_list.map(header).filter(x => x != null)
@@ -161,25 +161,12 @@ const BomView = React.createClass({
               return (
                 <div>
                   <semantic.Table compact fixed celled unstackable={!matches}>
-                    <semantic.Table.Header>
-                      <semantic.Table.Row>
-                        <semantic.Table.Cell>
-                          {`${lines.length} lines`}
-                        </semantic.Table.Cell>
-                        {headers}
-                      </semantic.Table.Row>
-                      <semantic.Table.Row>
-                        <semantic.Table.Cell style={{borderTop: 'none'}}>
-                          {`${numberOfItems} items`}
-                        </semantic.Table.Cell>
-                      </semantic.Table.Row>
+                    <semantic.Table.Body>
                       <InstallPrompt
                         colSpan={headers.length + 1}
                         extensionPresence={this.state.extensionPresence}
                         bomInstallLink={installExtension}
                       />
-                    </semantic.Table.Header>
-                    <semantic.Table.Body>
                       <semantic.Table.Row>
                         <semantic.Table.Cell
                           textAlign='center'
@@ -236,6 +223,17 @@ const BomView = React.createClass({
                               </div>
                             </semantic.Table.Cell>
                           </semantic.Table.Row>
+                      <semantic.Table.Row>
+                        <semantic.Table.Cell>
+                          {`${lines.length} lines`}
+                        </semantic.Table.Cell>
+                        {headers}
+                      </semantic.Table.Row>
+                      <semantic.Table.Row>
+                        <semantic.Table.Cell style={{borderTop: 'none'}}>
+                          {`${numberOfItems} items`}
+                        </semantic.Table.Cell>
+                      </semantic.Table.Row>
                           <semantic.Table.Row>
                             <semantic.Table.Cell
                               className='expandBom'
