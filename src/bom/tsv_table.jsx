@@ -69,8 +69,28 @@ const TsvTable = React.createClass({
     return cells
   },
   render() {
-    const tsv       = this.props.tsv
-    const lines     = tsv.split('\n').slice(0, -1).map(line => line.split('\t'))
+    const tsv = this.props.tsv
+    let lines = tsv.split('\n').slice(0, -1).map(line => line.split('\t'))
+    let columns = lines.slice(1).reduce((prev, line) => {
+      return prev.map((column, index) => {
+        return column.concat([line[index]])
+      })
+    }, lines[0].map(t => [t]))
+
+    //get rid of empty columns
+    columns = columns.filter(column => {
+      if (column[0] === 'Manufacturer') {
+        return true
+      }
+      return column.slice(1).filter(x => x).length
+    })
+
+    lines = columns.slice(1).reduce((prev, column) => {
+      return prev.map((line, index) => {
+        return line.concat([column[index]])
+      })
+    }, columns[0].map(c => [c]))
+
     const headings  = lines[0]
     const bodyLines = lines.slice(1)
     let headingJSX  = headings.map(text => h(semantic.Table.HeaderCell, text))
@@ -79,15 +99,13 @@ const TsvTable = React.createClass({
       const grouped = line.reduce((grouped, text, columnIndex) => {
         const heading = headings[columnIndex]
         if (heading === 'Manufacturer') {
-          grouped.push([text])
-          return grouped
+          return grouped.concat([[text]])
         }
         if (heading === 'MPN') {
           grouped[grouped.length - 1].push(text)
           return grouped
         }
-        grouped.push(text)
-        return grouped
+        return grouped.concat([text])
       }, [])
       const groupedHeadings = headings.filter(h => h !== 'Manufacturer')
       function markPink(columnIndex) {
