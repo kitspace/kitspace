@@ -247,9 +247,9 @@ const BomView = React.createClass({
                             >
                               {(() => {
                                 if (this.state.collapsed) {
-                                  return 'View parts details'
+                                  return 'View part details'
                                 } else {
-                                  return 'Hide parts details'
+                                  return 'Hide part details'
                                 }
                               })()}
                             </semantic.Table.Cell>
