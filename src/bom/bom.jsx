@@ -161,6 +161,16 @@ const BomView = React.createClass({
               return (
                 <div>
                   <semantic.Table compact fixed celled unstackable={!matches}>
+                    <semantic.Table.Header>
+                      <semantic.Table.Row>
+                        <semantic.Table.HeaderCell
+                          textAlign='center'
+                          colSpan={headers.length + 1}
+                        >
+                          Buy Parts
+                        </semantic.Table.HeaderCell>
+                      </semantic.Table.Row>
+                    </semantic.Table.Header>
                     <semantic.Table.Body>
                       <InstallPrompt
                         colSpan={headers.length + 1}
@@ -182,26 +192,26 @@ const BomView = React.createClass({
                               style={{width: 80, marginLeft: 10}}
                               error={isNaN(this.state.buyMultiplier)
                                 || (this.state.buyMultiplier < 1)}
-                              onBlur={e => {
-                                const v = this.state.buyMultiplier
-                                if (isNaN(v) || v < 1) {
-                                  this.setState({buyMultiplier: 1})
-                                }
-                              }}
-                              onChange={e => {
-                                var v = parseFloat(e.target.value)
-                                this.setState({buyMultiplier: v})
-                              }}
-                            />
-                            <semantic.Icon style={{margin: 10}} name='plus' />
-                            <semantic.Input
-                              type='number'
-                              min={0}
-                              step={10}
-                              value={this.state.buyAddPercent}
-                              size='mini'
-                              style={{width: 80}}
-                              error={isNaN(this.state.buyAddPercent)
+                                onBlur={e => {
+                                  const v = this.state.buyMultiplier
+                                  if (isNaN(v) || v < 1) {
+                                    this.setState({buyMultiplier: 1})
+                                  }
+                                }}
+                                onChange={e => {
+                                  var v = parseFloat(e.target.value)
+                                  this.setState({buyMultiplier: v})
+                                }}
+                              />
+                              <semantic.Icon style={{margin: 10}} name='plus' />
+                              <semantic.Input
+                                type='number'
+                                min={0}
+                                step={10}
+                                value={this.state.buyAddPercent}
+                                size='mini'
+                                style={{width: 80}}
+                                error={isNaN(this.state.buyAddPercent)
                                   || (this.state.buyAddPercent < 0)}
                                   onBlur={e => {
                                     const v = this.state.buyAddPercent
@@ -223,17 +233,17 @@ const BomView = React.createClass({
                               </div>
                             </semantic.Table.Cell>
                           </semantic.Table.Row>
-                      <semantic.Table.Row>
-                        <semantic.Table.Cell>
-                          {`${lines.length} lines`}
-                        </semantic.Table.Cell>
-                        {headers}
-                      </semantic.Table.Row>
-                      <semantic.Table.Row>
-                        <semantic.Table.Cell style={{borderTop: 'none'}}>
-                          {`${numberOfItems} items`}
-                        </semantic.Table.Cell>
-                      </semantic.Table.Row>
+                          <semantic.Table.Row>
+                            <semantic.Table.Cell>
+                              {`${lines.length} lines`}
+                            </semantic.Table.Cell>
+                            {headers}
+                          </semantic.Table.Row>
+                          <semantic.Table.Row>
+                            <semantic.Table.Cell style={{borderTop: 'none'}}>
+                              {`${numberOfItems} items`}
+                            </semantic.Table.Cell>
+                          </semantic.Table.Row>
                           <semantic.Table.Row>
                             <semantic.Table.Cell
                               className='expandBom'
@@ -251,39 +261,39 @@ const BomView = React.createClass({
                                 }
                               })()}
                             </semantic.Table.Cell>
-                      </semantic.Table.Row>
+                          </semantic.Table.Row>
+                          {(() => {
+                            if(!this.state.collapsed && !matches) {
+                              return (
+                                <semantic.Table.Row>
+                                  <semantic.Table.Cell colSpan={headers.length + 1}>
+                                    <DoubleScrollbar>
+                                      <TsvTable
+                                        parts={this.props.parts}
+                                        tsv={this.linesToTsv()}
+                                      />
+                                    </DoubleScrollbar>
+                                  </semantic.Table.Cell>
+                                </semantic.Table.Row>
+                              )
+                            }
+                          })()}
+                        </semantic.Table.Body>
+                      </semantic.Table>
                       {(() => {
-                        if(!this.state.collapsed && !matches) {
+                        if(!this.state.collapsed && matches) {
                           return (
-                            <semantic.Table.Row>
-                              <semantic.Table.Cell colSpan={headers.length + 1}>
-                                <DoubleScrollbar>
-                                  <TsvTable
-                                    parts={this.props.parts}
-                                    tsv={this.linesToTsv()}
-                                  />
-                                </DoubleScrollbar>
-                              </semantic.Table.Cell>
-                            </semantic.Table.Row>
+                            <DoubleScrollbar>
+                              <TsvTable
+                                parts={this.props.parts}
+                                tsv={this.linesToTsv()}
+                              />
+                            </DoubleScrollbar>
                           )
                         }
                       })()}
-                    </semantic.Table.Body>
-                  </semantic.Table>
-                  {(() => {
-                    if(!this.state.collapsed && matches) {
-                      return (
-                        <DoubleScrollbar>
-                          <TsvTable
-                            parts={this.props.parts}
-                            tsv={this.linesToTsv()}
-                          />
-                        </DoubleScrollbar>
-                      )
-                    }
-                  })()}
-                </div>
-              )
+                    </div>
+                  )
             }}
           </ReactResponsive>
           <DirectStores
