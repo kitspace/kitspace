@@ -116,11 +116,10 @@ const BomView = React.createClass({
       //if the extension is not here fallback to direct submissions
       if ((this.state.extensionPresence !== 'present')
         && (typeof document !== 'undefined')
-        && document.getElementById(r + 'Form') !== null) {
+        && (document.getElementById(r + 'Form') != null)) {
         onClick = () => {
           document.getElementById(r + 'Form').submit()
         }
-        console.log('onClick', onClick)
       }
       const total = retailers[r].length
       return (
