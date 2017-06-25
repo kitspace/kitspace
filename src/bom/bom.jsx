@@ -107,7 +107,7 @@ const BomView = React.createClass({
     const numberOfItems = lines.reduce((n, line) => {
       return n + Math.ceil(line.quantity * mult)
     }, 0)
-    const header = r => {
+    const retailerButton = r => {
       const n = numberOfEach[r]
       if (n === 0) {
         return null
@@ -130,9 +130,9 @@ const BomView = React.createClass({
           rowSpan={2}
           onClick={onClick}
         >
-          <div className='headerCell'>
-            <div className='headerCellText'>
-              <div className='headerCellName'>
+          <div className='retailerButtonCell'>
+            <div className='retailerButtonCellText'>
+              <div className='retailerButtonCellName'>
                 {this.storeIcon(r)}
                 {r}
               </div>
@@ -140,7 +140,7 @@ const BomView = React.createClass({
                 {`${n}/${total}`}
               </p>
             </div>
-            <div className='headerCellIcon'>
+            <div className='retailerButtonCellIcon'>
               {(() => {
                 if (this.state.adding[r]) {
                   return <semantic.Loader active inline />
@@ -152,7 +152,7 @@ const BomView = React.createClass({
         </semantic.Table.Cell>
       )
     }
-    const headers = retailer_list.map(header).filter(x => x != null)
+    const retailerButtons = retailer_list.map(retailerButton).filter(x => x != null)
     return (
       <div className='bom'>
         <div className='bomTableContainer'>
@@ -162,18 +162,18 @@ const BomView = React.createClass({
                 <div>
                   <semantic.Table compact fixed celled unstackable={!matches}>
                     <semantic.Table.Header>
-                      <Title />
+                      <Title colSpan={retailerButtons.length + 1}/>
                     </semantic.Table.Header>
                     <semantic.Table.Body>
                       <InstallPrompt
-                        colSpan={headers.length + 1}
+                        colSpan={retailerButtons.length + 1}
                         extensionPresence={this.state.extensionPresence}
                         bomInstallLink={installExtension}
                       />
                       <semantic.Table.Row>
                         <semantic.Table.Cell
                           textAlign='center'
-                          colSpan={headers.length + 1}
+                          colSpan={retailerButtons.length + 1}
                         >
                           <div>
                             {'Adjust quantity: '}
@@ -230,7 +230,7 @@ const BomView = React.createClass({
                             <semantic.Table.Cell>
                               {`${lines.length} lines`}
                             </semantic.Table.Cell>
-                            {headers}
+                            {retailerButtons}
                           </semantic.Table.Row>
                           <semantic.Table.Row>
                             <semantic.Table.Cell style={{borderTop: 'none'}}>
@@ -241,7 +241,7 @@ const BomView = React.createClass({
                             <semantic.Table.Cell
                               className='expandBom'
                               textAlign='center'
-                              colSpan={headers.length + 1}
+                              colSpan={retailerButtons.length + 1}
                               onClick={() => {
                                 this.setState({collapsed: !this.state.collapsed})
                               }}
@@ -259,7 +259,7 @@ const BomView = React.createClass({
                             if(!this.state.collapsed && !matches) {
                               return (
                                 <semantic.Table.Row>
-                                  <semantic.Table.Cell colSpan={headers.length + 1}>
+                                  <semantic.Table.Cell colSpan={retailerButtons.length + 1}>
                                     <DoubleScrollbar>
                                       <TsvTable
                                         parts={this.props.parts}
@@ -304,7 +304,7 @@ function Title(props) {
     <semantic.Table.Row>
       <semantic.Table.HeaderCell
         textAlign='center'
-        colSpan={headers.length + 1}
+        colSpan={props.colSpan}
       >
         Buy Parts
       </semantic.Table.HeaderCell>

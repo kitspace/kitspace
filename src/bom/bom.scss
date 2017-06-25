@@ -53,19 +53,19 @@
         background-color: rgba(255, 192, 203, 0.58) !important;
     }
 
-    div.headerCell {
+    div.retailerButtonCell {
         display: flex;
         flex-wrap: wrap;
     }
 
-    div.headerCellText {
+    div.retailerButtonCellText {
         flex-grow: 1;
         min-width: 102px;
         @include breakpoint(mobile-m) {
             width: 224px;
         }
     }
-    div.headerCellIcon {
+    div.retailerButtonCellIcon {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -79,7 +79,7 @@
         width: 16px;
     }
 
-    .headerCellName {
+    .retailerButtonCellName {
         display: flex;
         align-items: center;
     }
