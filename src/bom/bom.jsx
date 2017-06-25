@@ -283,11 +283,15 @@ function RetailerButton(props) {
   let onClick = props.buyParts
   //if the extension is not here fallback to direct submissions
   if ((props.extensionPresence !== 'present')
-    && (typeof document !== 'undefined')
-    && (document.getElementById(r + 'Form') != null)) {
-    onClick = () => {
-      document.getElementById(r + 'Form').submit()
-    }
+    && (typeof document !== 'undefined')) {
+      onClick = () => {
+        const form = document.getElementById(r + 'Form')
+        if (form) {
+          form.submit()
+        } else {
+          props.buyParts()
+        }
+      }
   }
   const total = props.parts.length
   return (
