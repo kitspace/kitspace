@@ -74,17 +74,6 @@ const BomView = React.createClass({
       }
     }, false)
   },
-  storeIcon(retailer, disabled=false) {
-    const imgHref = `/images/${retailer}${disabled ? '-grey' : ''}.ico`
-    return (
-      <img
-        className='storeIcons'
-        key={retailer}
-        src={imgHref}
-        alt={retailer}
-      />
-    )
-  },
   linesToTsv() {
     const mult = this.getMultiplier()
     const lines = this.props.lines.map(line => {
@@ -101,55 +90,17 @@ const BomView = React.createClass({
     const retailer_list = oneClickBom.lineData.retailer_list
     retailer_list.forEach(r => {
       retailers[r] = lines.map(l => l.retailers[r])
-      numberOfEach[r] = retailers[r].filter(x => x !== '').length
     })
     const mult = this.getMultiplier()
-    const retailerButton = r => {
-      const n = numberOfEach[r]
-      if (n === 0) {
-        return null
-      }
-      let onClick = this.state.buyParts.bind(null, r)
-      //if the extension is not here fallback to direct submissions
-      if ((this.state.extensionPresence !== 'present')
-        && (typeof document !== 'undefined')
-        && (document.getElementById(r + 'Form') != null)) {
-        onClick = () => {
-          document.getElementById(r + 'Form').submit()
-        }
-      }
-      const total = retailers[r].length
-      return (
-        <semantic.Table.Cell
-          className='compact retailerHeader'
-          error={n !== total}
-          key={r}
-          rowSpan={2}
-          onClick={onClick}
-        >
-          <div className='retailerButtonCell'>
-            <div className='retailerButtonCellText'>
-              <div className='retailerButtonCellName'>
-                {this.storeIcon(r)}
-                {r}
-              </div>
-              <p style={{fontSize: 14, fontWeight: 'normal'}}>
-                {`${n}/${total}`}
-              </p>
-            </div>
-            <div className='retailerButtonCellIcon'>
-              {(() => {
-                if (this.state.adding[r]) {
-                  return <semantic.Loader active inline />
-                }
-                return <i style={{fontSize: 22}} className='icon-basket-3' />
-              })()}
-            </div>
-          </div>
-        </semantic.Table.Cell>
-      )
-    }
-    const retailerButtons = retailer_list.map(retailerButton).filter(x => x != null)
+    const retailerButtons = retailer_list
+      .map(name => RetailerButton({
+        name,
+        parts: retailers[name],
+        adding: this.state.adding[name],
+        extensionPresence:this.state.extensionPresence,
+        buyParts: this.state.buyParts.bind(null, name)
+      }))
+      .filter(x => x != null)
     return (
       <div className='bom'>
         <div className='bomTableContainer'>
@@ -190,24 +141,11 @@ const BomView = React.createClass({
                               })()}
                             </semantic.Table.Cell>
                           </semantic.Table.Row>
-                          <semantic.Table.Row>
-                            <semantic.Table.Cell
-                              className='expandBom'
-                              textAlign='center'
-                              colSpan={retailerButtons.length + 1}
-                              onClick={() => {
-                                this.setState({collapsed: !this.state.collapsed})
-                              }}
-                            >
-                              {(() => {
-                                if (this.state.collapsed) {
-                                  return 'View part details'
-                                } else {
-                                  return 'Hide part details'
-                                }
-                              })()}
-                            </semantic.Table.Cell>
-                          </semantic.Table.Row>
+                          <ExpandBom
+                            colSpan={retailerButtons.length + 1}
+                            collapsed={this.state.collapsed}
+                            setCollapsed={v => this.setState({collapsed: v})}
+                          />
                           {(() => {
                             if(!this.state.collapsed && !matches) {
                               return (
@@ -251,6 +189,29 @@ const BomView = React.createClass({
     )
   }
 })
+
+function ExpandBom(props) {
+  return (
+    <semantic.Table.Row>
+      <semantic.Table.Cell
+        className='expandBom'
+        textAlign='center'
+        colSpan={props.colSpan}
+        onClick={() => {
+          props.setCollapsed(!props.collapsed)
+        }}
+      >
+        {(() => {
+          if (props.collapsed) {
+            return 'View part details'
+          } else {
+            return 'Hide part details'
+          }
+        })()}
+      </semantic.Table.Cell>
+    </semantic.Table.Row>
+  )
+}
 
 function AdjustQuantity(props) {
   return (
@@ -310,6 +271,65 @@ function AdjustQuantity(props) {
             </div>
           </semantic.Table.Cell>
         </semantic.Table.Row>
+  )
+}
+
+function RetailerButton(props) {
+  const n = props.parts.filter(x => x !== '').length
+  if (n === 0) {
+    return null
+  }
+  const r = props.name
+  let onClick = props.buyParts
+  //if the extension is not here fallback to direct submissions
+  if ((props.extensionPresence !== 'present')
+    && (typeof document !== 'undefined')
+    && (document.getElementById(r + 'Form') != null)) {
+    onClick = () => {
+      document.getElementById(r + 'Form').submit()
+    }
+  }
+  const total = props.parts.length
+  return (
+    <semantic.Table.Cell
+      className='compact retailerHeader'
+      error={n !== total}
+      key={r}
+      rowSpan={2}
+      onClick={onClick}
+    >
+      <div className='retailerButtonCell'>
+        <div className='retailerButtonCellText'>
+          <div className='retailerButtonCellName'>
+            <StoreIcon retailer={r} />
+            {r}
+          </div>
+          <p style={{fontSize: 14, fontWeight: 'normal'}}>
+            {`${n}/${total}`}
+          </p>
+        </div>
+        <div className='retailerButtonCellIcon'>
+          {(() => {
+            if (props.adding) {
+              return <semantic.Loader active inline />
+            }
+            return <i style={{fontSize: 22}} className='icon-basket-3' />
+          })()}
+        </div>
+      </div>
+    </semantic.Table.Cell>
+  )
+}
+
+function StoreIcon(props) {
+  const imgHref = `/images/${props.retailer}${props.disabled ? '-grey' : ''}.ico`
+  return (
+    <img
+      className='storeIcons'
+      key={props.retailer}
+      src={imgHref}
+      alt={props.retailer}
+    />
   )
 }
 
