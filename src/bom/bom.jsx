@@ -162,14 +162,7 @@ const BomView = React.createClass({
                 <div>
                   <semantic.Table compact fixed celled unstackable={!matches}>
                     <semantic.Table.Header>
-                      <semantic.Table.Row>
-                        <semantic.Table.HeaderCell
-                          textAlign='center'
-                          colSpan={headers.length + 1}
-                        >
-                          Buy Parts
-                        </semantic.Table.HeaderCell>
-                      </semantic.Table.Row>
+                      <Title />
                     </semantic.Table.Header>
                     <semantic.Table.Body>
                       <InstallPrompt
@@ -305,5 +298,19 @@ const BomView = React.createClass({
     )
   }
 })
+
+function Title(props) {
+  return (
+    <semantic.Table.Row>
+      <semantic.Table.HeaderCell
+        textAlign='center'
+        colSpan={headers.length + 1}
+      >
+        Buy Parts
+      </semantic.Table.HeaderCell>
+    </semantic.Table.Row>
+
+  )
+}
 
 module.exports = BomView
