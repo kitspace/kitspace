@@ -125,59 +125,59 @@ const BomView = React.createClass({
                         setBuyMultiplier={v => this.setState({buyMultiplier: v})}
                         setBuyAddPercent={v => this.setState({buyAddPercent: v})}
                       />
-                          <semantic.Table.Row>
-                            <semantic.Table.Cell>
-                              {`${lines.length} lines`}
-                            </semantic.Table.Cell>
-                            {retailerButtons}
-                          </semantic.Table.Row>
-                          <semantic.Table.Row>
-                            <semantic.Table.Cell style={{borderTop: 'none'}}>
-                              {(() => {
-                                const n = lines.reduce((n, line) => {
-                                  return n + Math.ceil(line.quantity * mult)
-                                }, 0)
-                                return `${n} items`
-                              })()}
-                            </semantic.Table.Cell>
-                          </semantic.Table.Row>
-                          <ExpandBom
-                            colSpan={retailerButtons.length + 1}
-                            collapsed={this.state.collapsed}
-                            setCollapsed={v => this.setState({collapsed: v})}
-                          />
+                      <semantic.Table.Row>
+                        <semantic.Table.Cell>
+                          {`${lines.length} lines`}
+                        </semantic.Table.Cell>
+                        {retailerButtons}
+                      </semantic.Table.Row>
+                      <semantic.Table.Row>
+                        <semantic.Table.Cell style={{borderTop: 'none'}}>
                           {(() => {
-                            if(!this.state.collapsed && !matches) {
-                              return (
-                                <semantic.Table.Row>
-                                  <semantic.Table.Cell colSpan={retailerButtons.length + 1}>
-                                    <DoubleScrollbar>
-                                      <TsvTable
-                                        parts={this.props.parts}
-                                        tsv={this.linesToTsv()}
-                                      />
-                                    </DoubleScrollbar>
-                                  </semantic.Table.Cell>
-                                </semantic.Table.Row>
-                              )
-                            }
+                            const n = lines.reduce((n, line) => {
+                              return n + Math.ceil(line.quantity * mult)
+                            }, 0)
+                            return `${n} items`
                           })()}
-                        </semantic.Table.Body>
-                      </semantic.Table>
+                        </semantic.Table.Cell>
+                      </semantic.Table.Row>
+                      <ExpandBom
+                        colSpan={retailerButtons.length + 1}
+                        collapsed={this.state.collapsed}
+                        setCollapsed={v => this.setState({collapsed: v})}
+                      />
                       {(() => {
-                        if(!this.state.collapsed && matches) {
+                        if(!this.state.collapsed && !matches) {
                           return (
-                            <DoubleScrollbar>
-                              <TsvTable
-                                parts={this.props.parts}
-                                tsv={this.linesToTsv()}
-                              />
-                            </DoubleScrollbar>
+                            <semantic.Table.Row>
+                              <semantic.Table.Cell colSpan={retailerButtons.length + 1}>
+                                <DoubleScrollbar>
+                                  <TsvTable
+                                    parts={this.props.parts}
+                                    tsv={this.linesToTsv()}
+                                  />
+                                </DoubleScrollbar>
+                              </semantic.Table.Cell>
+                            </semantic.Table.Row>
                           )
                         }
                       })()}
-                    </div>
-                  )
+                    </semantic.Table.Body>
+                  </semantic.Table>
+                  {(() => {
+                    if(!this.state.collapsed && matches) {
+                      return (
+                        <DoubleScrollbar>
+                          <TsvTable
+                            parts={this.props.parts}
+                            tsv={this.linesToTsv()}
+                          />
+                        </DoubleScrollbar>
+                      )
+                    }
+                  })()}
+                </div>
+              )
             }}
           </ReactResponsive>
           <DirectStores
