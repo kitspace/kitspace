@@ -104,9 +104,6 @@ const BomView = React.createClass({
       numberOfEach[r] = retailers[r].filter(x => x !== '').length
     })
     const mult = this.getMultiplier()
-    const numberOfItems = lines.reduce((n, line) => {
-      return n + Math.ceil(line.quantity * mult)
-    }, 0)
     const retailerButton = r => {
       const n = numberOfEach[r]
       if (n === 0) {
@@ -185,7 +182,12 @@ const BomView = React.createClass({
                           </semantic.Table.Row>
                           <semantic.Table.Row>
                             <semantic.Table.Cell style={{borderTop: 'none'}}>
-                              {`${numberOfItems} items`}
+                              {(() => {
+                                const n = lines.reduce((n, line) => {
+                                  return n + Math.ceil(line.quantity * mult)
+                                }, 0)
+                                return `${n} items`
+                              })()}
                             </semantic.Table.Cell>
                           </semantic.Table.Row>
                           <semantic.Table.Row>
