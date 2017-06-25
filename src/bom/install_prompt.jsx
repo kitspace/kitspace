@@ -12,9 +12,11 @@ const InstallPrompt = React.createClass({
   },
   componentDidMount() {
     setTimeout(() => {
-      this.setState({timed_out: true})
+      this.setState({
+        timed_out: true,
+        compatibility: this.getCompatibility(),
+      })
     }, 5000)
-    this.setState({compatibility: this.getCompatibility()})
   },
   render() {
     return (
