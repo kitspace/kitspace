@@ -108,7 +108,7 @@ const BomView = React.createClass({
             {matches => {
               return (
                 <div>
-                  <semantic.Table compact fixed celled unstackable={!matches}>
+                  <semantic.Table compact fixed celled>
                     <semantic.Table.Header>
                       <Title colSpan={retailerButtons.length + 1}/>
                     </semantic.Table.Header>
