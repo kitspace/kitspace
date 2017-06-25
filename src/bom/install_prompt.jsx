@@ -25,7 +25,12 @@ const InstallPrompt = React.createClass({
           }
           else if (this.state.timed_out) {
             if (this.state.compatible) {
-              return (<PleaseInstall colSpan={this.props.colSpan} />)
+              return (
+                <PleaseInstall
+                  bomInstallLink={this.props.bomInstallLink}
+                  colSpan={this.props.colSpan}
+                />
+              )
             } else {
               return (<NotCompatible colSpan={this.props.colSpan} />)
             }
