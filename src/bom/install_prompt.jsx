@@ -47,6 +47,7 @@ const InstallPrompt = React.createClass({
     if (/Mobile/i.test(navigator.userAgent))
       return false
     const version = browserVersion()
+    alert(navigator.userAgent, version)
     return (/Chrome/.test(version) || /Firefox/.test(version))
   },
 })
