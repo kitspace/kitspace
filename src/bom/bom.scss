@@ -53,23 +53,14 @@
         background-color: rgba(255, 192, 203, 0.58) !important;
     }
 
-    div.retailerButtonCell {
-        display: flex;
-        flex-wrap: wrap;
-    }
 
     div.retailerButtonCellText {
-        flex-grow: 1;
         min-width: 102px;
         @include breakpoint(mobile-m) {
             width: 224px;
         }
     }
     div.retailerButtonCellIcon {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-grow: 1;
         font-size: 22px;
     }
 
