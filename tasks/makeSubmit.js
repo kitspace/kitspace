@@ -23,7 +23,7 @@ else {
         //do server-side rendering
         const jsx = deps[0];
         html = deps[1];
-        utils.reactRender(jsx, html, index);
+        utils.reactRender(jsx, html, index, true);
     } else if (config === 'dev') {
         //just copy the submit.html to index.html
         html = deps[0];
