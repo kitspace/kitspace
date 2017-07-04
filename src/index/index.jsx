@@ -1,8 +1,11 @@
 const React            = require('react')
 const ReactSearchInput = require('react-search-input')
-const TitleBar  = require('../title_bar')
+const superagent       = require('superagent')
+
 const BoardList = require('./board_list')
-const boards    = require('../boards.json')
+
+const TitleBar = require('../title_bar')
+const boards   = require('../boards.json')
 
 const SearchInput = ReactSearchInput.default
 
@@ -11,13 +14,29 @@ var Main = React.createClass({
   getInitialState: function() {
     return {
       result: boards,
-      searching: false
+      searching: false,
+      user: null,
     }
+  },
+  componentDidMount() {
+    document.getElementsByClassName('searchInput')[0]
+      .firstElementChild.addEventListener('keydown', this.handleKeydown)
+    superagent.get('/accounts/api/v4/user')
+      .set('Accept', 'application/json')
+      .withCredentials()
+      .then(r => this.setState({user: r.body}))
+      .catch(e => this.setState({user: 'not signed in'}))
+    //set the state to loading if it hasn't gotten the user info after a second
+    setTimeout(() => {
+      if (this.state.user == null) {
+        this.setState({user: 'loading'})
+      }
+    }, 1000)
   },
   render: function () {
     return (
       <div>
-        <TitleBar submissionButton={true}>
+        <TitleBar user={this.state.user} submissionButton={true}>
           <div className='searchContainer'>
             <div className='searchBackground'>
               <div className='searchInputIcon'>
@@ -41,10 +60,6 @@ var Main = React.createClass({
       .firstElementChild.blur()
     }
     return false
-  },
-  componentDidMount: function() {
-    document.getElementsByClassName('searchInput')[0]
-    .firstElementChild.addEventListener('keydown', this.handleKeydown)
   },
   searchUpdated: function (term) {
     const filters = ['id', 'summary']

@@ -1,30 +1,11 @@
-const React      = require('react')
-const semantic   = require('semantic-ui-react')
-const superagent = require('superagent')
+const React    = require('react')
+const semantic = require('semantic-ui-react')
 
 const UserMenu = require('./user_menu')
 
 const TitleBar = React.createClass({
-  getInitialState() {
-    return {
-      user: null,
-    }
-  },
-  componentWillMount() {
-    superagent.get('/accounts/api/v4/user')
-      .set('Accept', 'application/json')
-      .withCredentials()
-      .then(r => this.setState({user: r.body}))
-      .catch(e => this.setState({user: 'not signed in'}))
-    //set the state to loading if it hasn't gotten the user info after a second
-    setTimeout(() => {
-      if (this.state.user == null) {
-        this.setState({user: 'loading'})
-      }
-    }, 1000)
-  },
   render() {
-    const user = this.props.user || this.state.user
+    const user = this.props.user
     const addProjectButton = (
       <semantic.Button
         className='addProjectButton'

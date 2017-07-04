@@ -1,5 +1,6 @@
 const React         = require('react')
 const DocumentTitle = require('react-document-title')
+const superagent    = require('superagent')
 
 const BOM           = require('./bom')
 const BoardShowcase = require('./board_showcase')
@@ -13,6 +14,24 @@ const Readme        = require('../readme')
 
 
 const Page = React.createClass({
+  getInitialState() {
+    return {
+      user: null,
+    }
+  },
+  componentDidMount() {
+    superagent.get('/accounts/api/v4/user')
+      .set('Accept', 'application/json')
+      .withCredentials()
+      .then(r => this.setState({user: r.body}))
+      .catch(e => this.setState({user: 'not signed in'}))
+    //set the state to loading if it hasn't gotten the user info after a second
+    setTimeout(() => {
+      if (this.state.user == null) {
+        this.setState({user: 'loading'})
+      }
+    }, 1000)
+  },
   render() {
     const info         = this.props.info
     const titleText    = info.id.split('/').slice(2).join(' / ')
@@ -20,7 +39,7 @@ const Page = React.createClass({
     return (
       <DocumentTitle title={`${titleText} - kitnic.it`}>
         <div className='page'>
-          <TitleBar submissionButton={true}>
+          <TitleBar user={this.state.user} submissionButton={true}>
             <div className='titleText'>
               {titleText}
             </div>
