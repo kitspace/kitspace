@@ -16,6 +16,11 @@
         {
             @content;
         }
+    } @else if $point == mobile-l {
+        @media (max-width: 632px)
+        {
+            @content;
+        }
     }
 }
 

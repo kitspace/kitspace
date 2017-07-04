@@ -28,6 +28,9 @@
         margin: 10px;
         z-index: 1;
         flex-shrink: 2;
+        @include breakpoint(mobile-l) {
+            width: 100%;
+        }
     }
 
     .logoImg {
@@ -63,7 +66,10 @@
         padding: 10px;
         z-index: 1;
 
-        @include breakpoint(mobile-m) {
+        @include breakpoint(small_width) {
+            min-width: 0px;
+        }
+        @include breakpoint(mobile-l) {
             width: 100%;
         }
 
