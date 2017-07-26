@@ -26,3 +26,4 @@ https://github.com/GenericLab/Unagi_Gar-Lampli
 https://github.com/kimitobo/Neocococat
 https://github.com/RoboticsBrno/RB3200-ESP32universal/
 https://github.com/intajay/uduino
+https://github.com/8BitMixtape/8BitmixtapeNEO_ShenzhenReady
