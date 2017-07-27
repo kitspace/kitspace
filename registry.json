@@ -45,7 +45,7 @@
   },
   {
     "repo": "https://github.com/robotsrulz/SP_Adapter",
-    "hash": "e0283771f937119427ebd1c8a72600dd4e5fb704"
+    "hash": "6cccce11f6ba1ad880d94bb4643c62307dfdd758"
   },
   {
     "repo": "https://github.com/pcbsz/SimpleAmp",
@@ -101,10 +101,18 @@
   },
   {
     "repo": "https://github.com/kimitobo/Neocococat",
-    "hash": "e196543bac52d593ff7a17d323c23fb9a040d514"
+    "hash": "28313d9f904984548275af3fc854a2b7a68fa26a"
   },
   {
     "repo": "https://github.com/RoboticsBrno/RB3200-ESP32universal/",
     "hash": "7933202eb494bd7cb640ea98742f5b0b6ce26423"
+  },
+  {
+    "repo": "https://github.com/intajay/uduino",
+    "hash": "582a52e210c7d4cd203ec8759992d7d8db1b227b"
+  },
+  {
+    "repo": "https://github.com/8BitMixtape/8BitmixtapeNEO_ShenzhenReady",
+    "hash": "cade327a0bc3943a7fb679c7f93a654b8c31d74a"
   }
 ]
