@@ -18,13 +18,13 @@ function transform(queries) {
   return queries.map(q => {
     const ret = {}
     if (q.get('mpn')) {
-       ret.mpn = q.get('mpn').get('part')
+       ret.mpn = q.getIn(['mpn', 'part'])
        //octopart has some issue with the slash
-       ret.brand = q.get('mpn').get('manufacturer').replace(' / ', ' ')
+       ret.brand = q.getIn(['mpn', 'manufacturer']).replace(' / ', ' ')
     }
     if (q.get('sku')) {
-      ret.sku = q.get('sku').get('part')
-      ret.seller = retailer_reverse_map.get(q.get('sku').get('vendor'))
+      ret.sku = q.getIn(['sku', 'part'])
+      ret.seller = retailer_reverse_map.get(q.getIn(['sku', 'vendor']))
     }
     ret.reference = String(q.hashCode())
     return ret
@@ -62,14 +62,11 @@ function octopart(queries) {
             value: spec.display_value,
           })
         }).toList()
-        const number = query.get('mpn') ? query.get('mpn').get('part') : item.mpn
-        let manufacturer = item.brand.name
-        if (query.get('mpn') && query.get('mpn').get('manufacturer')) {
-          manufacturer = query.get('mpn').get('manufacturer')
-        }
+        const number = query.getIn(['mpn', 'part']) || item.mpn
+        const manufacturer = query.getIn(['mpn', 'manufacturer']) || item.brand.name
         return returns.set(query, immutable.Map({
             mpn: immutable.Map({
-              part : number,
+              part: number,
               manufacturer,
             }),
             description  : item.short_description,
