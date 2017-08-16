@@ -16,15 +16,19 @@ const retailers_used       = immutable.Set.fromKeys(retailer_map)
 
 function transform(queries) {
   return queries.map(q => {
-    const ret = {}
+    const ret = {limit: 1}
     if (q.get('mpn')) {
        ret.mpn = q.getIn(['mpn', 'part'])
        //octopart has some issue with the slash
        ret.brand = q.getIn(['mpn', 'manufacturer']).replace(' / ', ' ')
     }
-    if (q.get('sku')) {
+    else if (q.get('sku')) {
       ret.sku = q.getIn(['sku', 'part'])
       ret.seller = retailer_reverse_map.get(q.getIn(['sku', 'vendor']))
+    }
+    else if (q.get('term')) {
+      ret.q = q.get('term')
+      ret.limit = 20
     }
     ret.reference = String(q.hashCode())
     return ret
@@ -54,29 +58,38 @@ function octopart(queries) {
         if (result.items.length === 0) {
           return returns.set(query, immutable.Map())
         }
-        const item = result.items[0]
-        const specs = immutable.Map(item.specs).map((spec, key) => {
-          return immutable.Map({
-            key,
-            name: spec.metadata.name,
-            value: spec.display_value,
-          })
-        }).toList()
-        const number = query.getIn(['mpn', 'part']) || item.mpn
-        const manufacturer = query.getIn(['mpn', 'manufacturer']) || item.brand.name
-        return returns.set(query, immutable.Map({
-            mpn: immutable.Map({
-              part: number,
-              manufacturer,
-            }),
-            description  : item.short_description,
-            image        : image(item),
-            datasheet    : datasheet(item),
-            offers       : offers(item),
-            specs
-        }))
+        let response
+        if (query.get('term')) {
+          response = immutable.List(result.items.map(i => toPart(query, i)))
+        } else {
+          response = toPart(query, result.items[0])
+        }
+        return returns.set(query, response)
       }, immutable.Map())
     }).catch(err => console.error(err))
+}
+
+function toPart(query, item) {
+  const specs = immutable.Map(item.specs).map((spec, key) => {
+    return immutable.Map({
+      key,
+      name: spec.metadata.name,
+      value: spec.display_value,
+    })
+  }).toList()
+  const number = query.getIn(['mpn', 'part']) || item.mpn
+  const manufacturer = query.getIn(['mpn', 'manufacturer']) || item.brand.name
+  return immutable.Map({
+    mpn: immutable.Map({
+      part: number,
+      manufacturer,
+    }),
+    description : item.short_description,
+    image       : image(item),
+    datasheet   : datasheet(item),
+    offers      : offers(item),
+    specs
+  })
 }
 
 

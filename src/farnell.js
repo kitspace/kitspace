@@ -7,9 +7,23 @@ const {extract, extractLink} = require('./extract')
 
 function farnell(results) {
   const completed = results.map((result, query) => {
-    const offers =  result.get('offers')
+    let promise
+    if (immutable.List.isList(result)) {
+      promise = Promise.all(result.map(_farnell)).then(r => {
+        return immutable.List(r)
+      })
+    } else {
+      promise = _farnell(result)
+    }
+    return promise.then(r => [query, r])
+  })
+  return Promise.all(completed.values()).then(immutable.Map)
+}
+
+function _farnell(part) {
+    const offers =  part.get('offers')
     if (offers == null) {
-      return Promise.resolve([query, result])
+      return Promise.resolve(part)
     }
     const farnell_offers = offers.filter(offer => {
       return offer.get('sku').get('vendor') === 'Farnell'
@@ -26,10 +40,8 @@ function farnell(results) {
       const not_farnell_offers = offers.filter(offer => {
         return offer.get('sku').get('vendor') !== 'Farnell'
       })
-      return [query, result.set('offers', not_farnell_offers.concat(completed_offers))]
+      return part.set('offers', not_farnell_offers.concat(completed_offers))
     })
-  })
-  return Promise.all(completed.values()).then(immutable.Map)
 }
 
 function runQuery(sku) {
@@ -76,6 +88,7 @@ function extractSpecs(doc) {
       return immutable.Map({name, value})
     }
     catch (e) {
+      console.error(e)
       return immutable.Map()
     }
   })

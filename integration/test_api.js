@@ -158,4 +158,17 @@ describe('search', () => {
       return done()
     })
   })
+  it('searches', done => {
+    test(`{
+       search(term:"SPI FLASH SOIC") {
+         description
+       }
+    }`).then(response => {
+      assert(response.success, 'response failed')
+      assert(response.status === 200, 'status is not 200')
+      assert(response.data.search != null, 'search data not returned')
+      assert(response.data.search.length > 1, 'less than one result returned')
+      return done()
+    })
+  })
 })

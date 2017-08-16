@@ -67,7 +67,7 @@ const resolverMap = {
       if (! (mpn || sku)) {
         return Error('Mpn or Sku required')
       }
-      return run({mpn,sku})
+      return run({mpn, sku})
     },
     search(_, {term}) {
       if (! term) {
