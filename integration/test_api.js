@@ -141,3 +141,21 @@ describe('from Sku', () => {
     })
   })
 })
+
+describe('search', () => {
+  const test = graphqlTester.tester({
+    server: createExpressWrapper(app),
+    url: '/graphql'
+  })
+  it('responds', done => {
+    test(`{
+       search(term:"") {
+         description
+       }
+    }`).then(response => {
+      assert(response.success, 'response failed')
+      assert(response.status === 200, 'status is not 200')
+      return done()
+    })
+  })
+})

@@ -4,12 +4,12 @@ const {store, actions} = require('./actions')
 
 const Mpn = `{
      manufacturer : String!
-     part       : String!
+     part         : String!
 }`
 
 const Sku = `{
     vendor : String!
-    part : String!
+    part   : String!
 }`
 
 const schema = `
@@ -21,6 +21,7 @@ const schema = `
 
   type Query {
     part(mpn: MpnInput, sku: SkuInput): Part
+    search(term: String!): [Part]
   }
 
   type Part {
@@ -54,9 +55,9 @@ const schema = `
   }
 
   type Spec {
-    key: String
-    name: String
-    value: String
+    key   : String
+    name  : String
+    value : String
   }
 `
 
@@ -67,6 +68,12 @@ const resolverMap = {
         return Error('Mpn or Sku required')
       }
       return run({mpn,sku})
+    },
+    search(_, {term}) {
+      if (! term) {
+        return null
+      }
+      return run({term})
     },
   }
 }
