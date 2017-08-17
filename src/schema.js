@@ -83,13 +83,24 @@ function run(query) {
   query = immutable.fromJS(query)
   return new Promise((resolve, reject) => {
     const state = store.getState()
-    const response = state.get('responses').get(query)
+    let response = state.get('responses').get(query)
     if (response) {
+      if (query.get('term')) {
+        response = response.filter(x => x).filter(x => x.get('mpn'))
+      } else if (!response.get('mpn')) {
+        return resolve()
+      }
       return resolve(response.toJS())
     }
     const unsubscribe = store.subscribeChanges(['responses', query], r => {
       if (r) {
         unsubscribe()
+        //get rid of any empties
+        if (query.get('term')) {
+          r = r.filter(x => x).filter(x => x.get('mpn'))
+        } else if (!r.get('mpn')) {
+          return resolve()
+        }
         resolve(r.toJS())
       }
     })

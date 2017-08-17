@@ -18,7 +18,7 @@ function handleQueries(queries) {
     const batch = queries.take(QUERY_BATCH_SIZE)
     actions.removeQueries(batch)
     const qs = batch.map(q => q.get('query'))
-    octopart(qs).then(farnell).then(results => {
+    octopart(qs).then(results => {
       actions.addResponses(results)
     }).catch(e => console.error(e))
   }
