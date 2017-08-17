@@ -50,13 +50,14 @@ function octopart(queries) {
       }
       const results = res.body.results
       return queries.reduce((returns, query) => {
+        const empty = query.get('term') ? immutable.List() : immutable.Map()
         const query_id = String(query.hashCode())
         const result = results.find(r => r.reference === query_id)
         if (result == null) {
-          return returns.set(query, immutable.Map())
+          return returns.set(query, empty)
         }
         if (result.items.length === 0) {
-          return returns.set(query, immutable.Map())
+          return returns.set(query, empty)
         }
         let response
         if (query.get('term')) {

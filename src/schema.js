@@ -21,7 +21,7 @@ const schema = `
 
   type Query {
     part(mpn: MpnInput, sku: SkuInput): Part
-    search(term: String!): [Part]
+    search(term: String!): [Part]!
   }
 
   type Part {
@@ -71,7 +71,7 @@ const resolverMap = {
     },
     search(_, {term}) {
       if (! term) {
-        return null
+        return []
       }
       return run({term})
     },
@@ -79,6 +79,7 @@ const resolverMap = {
 }
 
 function run(query) {
+  console.log(query)
   query = immutable.fromJS(query)
   return new Promise((resolve, reject) => {
     const state = store.getState()
