@@ -70,14 +70,40 @@ function octopart(queries) {
     }).catch(err => console.error(err))
 }
 
+const specImportance = immutable.fromJS([
+  ['color', 'capacitance', 'resistance'],
+  ['case_package'],
+  ['dielectric_characteristic'],
+  ['resistance_tolerance', 'capacitance_tolerance'],
+  ['voltage_rating', 'power_rating'],
+  ['pin_count'],
+  ['case_package_si'],
+])
+
+function getImportance(spec) {
+  const key = spec.get('key')
+  const importance = specImportance.findIndex(l => l.includes(key))
+  if (importance === -1) {
+    return specImportance.size
+  }
+  return importance
+}
+
+function sortByImportance(specs) {
+  return specs.sort((spec1, spec2) => {
+    return getImportance(spec1) - getImportance(spec2)
+  })
+}
+
 function toPart(query, item) {
-  const specs = immutable.Map(item.specs).map((spec, key) => {
+  let specs = immutable.Map(item.specs).map((spec, key) => {
     return immutable.Map({
       key,
       name: spec.metadata.name,
       value: spec.display_value,
     })
   }).toList()
+  specs = sortByImportance(specs)
   const number = query.getIn(['mpn', 'part']) || item.mpn
   const manufacturer = query.getIn(['mpn', 'manufacturer']) || item.brand.name
   return immutable.Map({
