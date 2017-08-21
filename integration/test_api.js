@@ -82,6 +82,45 @@ describe('from Mpn', () => {
       return done()
     })
   })
+  it('returns farnell offers with image, description and specs', done => {
+    test(`{
+       part(mpn:{manufacturer:"Texas Instruments" part:"NE555P"}) {
+         offers {
+           sku {
+             vendor
+             part
+           }
+           image {
+             url
+             credit_string
+             credit_url
+           }
+           description
+           specs {
+             key
+             name
+             value
+           }
+         }
+       }
+    }`).then(response => {
+      assert(response.success, 'response failed')
+      assert(response.status === 200, 'status is not 200')
+      assert(response.data.part != null, 'part data not returned')
+      assert(response.data.part.offers != null, 'offers is null')
+      assert(response.data.part.offers.length > 0, 'offers is empty')
+      const farnellOffers = response.data.part.offers.filter(offer => (
+        offer.sku.vendor === 'Farnell'
+      ))
+      assert(farnellOffers.length > 0, 'no farnell offers')
+      farnellOffers.forEach(offer => {
+          assert(offer.image != null, 'image is null')
+          assert(offer.description != null, 'description is null')
+          assert(offer.specs != null, 'specs is null')
+      })
+      return done()
+    })
+  })
 })
 
 describe('from Sku', () => {
