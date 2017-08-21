@@ -59,7 +59,7 @@ describe('from Mpn', () => {
     }`).then(response => {
       assert(response.success, 'response failed')
       assert(response.status === 200, 'status is not 200')
-      assert(response.data.part.mpn == null, 'got results')
+      assert(response.data.part == null, 'got results')
       return done()
     })
   })
