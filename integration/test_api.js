@@ -101,6 +101,9 @@ describe('from Mpn', () => {
              name
              value
            }
+           prices {
+             GBP
+           }
          }
        }
     }`).then(response => {
@@ -114,9 +117,12 @@ describe('from Mpn', () => {
       ))
       assert(farnellOffers.length > 0, 'no farnell offers')
       farnellOffers.forEach(offer => {
-          assert(offer.image != null, 'image is null')
-          assert(offer.description != null, 'description is null')
-          assert(offer.specs != null, 'specs is null')
+        assert(offer.image != null, 'image is null')
+        assert(offer.description != null, 'description is null')
+        assert(offer.specs != null, 'specs is null')
+        assert(offer.prices != null, 'prices are null')
+        assert(offer.prices.GBP != null, 'GBP prices are null')
+        assert(offer.prices.GBP.length > 0, 'GBP prices are empty')
       })
       return done()
     })

@@ -28,7 +28,7 @@ function _farnell(part) {
     })
     const queries = farnell_offers.map(offer => {
       return runQuery(offer.get('sku').get('part'))
-        .then(farnell_info => offer.merge(farnell_info))
+        .then(farnell_info => offer.mergeDeep(farnell_info))
         .catch(e => {
           console.error(e)
           return offer
@@ -51,8 +51,10 @@ function runQuery(sku) {
         names       : ['dt[id^=descAttributeName]'],
         values      : ['dd[id^=descAttributeValue]'],
         description : "[itemprop='name']",
+        quantities  : ['td.qty @value'],
+        prices      : ['td.threeColTd'],
       })
-      .data(({url, names, values, description}) => {
+      .data(({url, names, values, description, quantities, prices}) => {
         resolve(immutable.Map({
           image: immutable.Map({
             url,
@@ -62,6 +64,12 @@ function runQuery(sku) {
           description,
           specs: immutable.List(names).zip(values)
             .map(([name, value]) => immutable.Map({name, value})),
+          prices: immutable.Map({
+            GBP: immutable.List(quantities).zip(prices)
+              .map(([qty, price]) => (
+                immutable.List.of(parseInt(qty), parseFloat(price.slice(1)))
+              )),
+          })
         }))
       })
   })
