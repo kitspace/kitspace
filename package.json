@@ -15,6 +15,7 @@
     "graphql-tools": "^0.10.0",
     "immutable": "^3.8.1",
     "osmosis": "^1.1.4",
+    "redis": "^2.8.0",
     "redux": "^3.6.0",
     "superagent": "^3.4.3"
   },
