@@ -1,7 +1,5 @@
-const immutable  = require('immutable')
-const superagent = require('superagent')
-const jsdom      = new (require('jsdom').JSDOM)
-const DOMParser  = new jsdom.window.DOMParser
+const immutable = require('immutable')
+const osmosis   = require('osmosis')
 
 const {extract, extractLink} = require('./extract')
 
@@ -32,7 +30,7 @@ function _farnell(part) {
       return runQuery(offer.get('sku').get('part'))
         .then(farnell_info => offer.merge(farnell_info))
         .catch(e => {
-          console.warn(e)
+          console.error(e)
           return offer
         })
     })
@@ -45,57 +43,28 @@ function _farnell(part) {
 }
 
 function runQuery(sku) {
+  return new Promise((resolve, reject) => {
     const url = `http://uk.farnell.com/${sku}`
-
-    return superagent.get(url)
-      .then(r => DOMParser.parseFromString(r.text, 'text/html'))
-      .then(extractElements)
-}
-
-function extractElements(doc) {
-  return immutable.Map({
-    image       : extractImage(doc),
-    description : extractDescription(doc),
-    specs       : extractSpecs(doc),
+    osmosis.get(url)
+      .set({
+        url         : '#productMainImage @src',
+        names       : ['dt[id^=descAttributeName]'],
+        values      : ['dd[id^=descAttributeValue]'],
+        description : "[itemprop='name']",
+      })
+      .data(({url, names, values, description}) => {
+        resolve(immutable.Map({
+          image: immutable.Map({
+            url,
+            credit_string : 'Farnell',
+            credit_url    : 'http://uk.farnell.com',
+          }),
+          description,
+          specs: immutable.List(names).zip(values)
+            .map(([name, value]) => immutable.Map({name, value})),
+        }))
+      })
   })
-}
-
-function extractImage(doc) {
-  const a = doc.querySelector('#productMainImage')
-  if (a == null) {
-    return null
-  }
-  return immutable.Map({
-    url           : a.src,
-    credit_string : 'Farnell',
-    credit_url    : 'http://uk.farnell.com',
-  })
-}
-
-function extractSpecs(doc) {
-  const names = immutable.List(doc.querySelectorAll('dt[id^=descAttributeName]'))
-  const values = immutable.List(doc.querySelectorAll('dd[id^=descAttributeValue]'))
-  return names.map((name, index) => {
-    try {
-      name = name.innerHTML.trim().slice(0, -1)
-      const valueNode = values.get(index)
-      const valueNodeChild = valueNode.children[0]
-      if (valueNodeChild) {
-        var value = valueNodeChild.innerHTML.trim()
-      } else {
-        var value = valueNode.innerHTML.trim()
-      }
-      return immutable.Map({name, value})
-    }
-    catch (e) {
-      console.error(e)
-      return immutable.Map()
-    }
-  })
-}
-
-function extractDescription(doc) {
-    return extract("[itemprop='name']", doc)
 }
 
 module.exports = farnell
