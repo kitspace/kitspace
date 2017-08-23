@@ -24,28 +24,26 @@ function checkRequests(r) {
   if (r) {
     requests = requests.push(r)
   }
-  const now = Date.now()
-  const timed_out = requests.reduce((timed_out, query) => {
-    return timed_out || ((now - query.get('time')) > QUERY_MAX_WAIT_MS)
-  }, false)
-  if ((requests.size >= QUERY_BATCH_SIZE) || timed_out) {
-    handleQueries(requests.slice(0, QUERY_BATCH_SIZE))
-    requests = requests.slice(QUERY_BATCH_SIZE)
-  }
-}
-
-function handleQueries(queries) {
-  queries = queries.map(q => q.get('query'))
-  return resolveCached(queries).then(requestNew)
+  return resolveCached(requests).then(queries => {
+    requests = queries
+    const now = Date.now()
+    const timed_out = requests.reduce((timed_out, query) => {
+      return timed_out || ((now - query.get('time')) > QUERY_MAX_WAIT_MS)
+    }, false)
+    if ((requests.size >= QUERY_BATCH_SIZE) || timed_out) {
+      requestNew(requests.slice(0, QUERY_BATCH_SIZE))
+      requests = requests.slice(QUERY_BATCH_SIZE)
+    }
+  })
 }
 
 function resolveCached(queries) {
   const uncached = queries.map(q => (
     new Promise((resolve, reject) => {
-      const key = queryToKey(q)
+      const key = queryToKey(q.get('query'))
       redisClient.get(key, (err, response) => {
         if (response) {
-          response_bus.emit(q.get('id'), fromRedis(response))
+          response_bus.emit(q.getIn(['query', 'id']), fromRedis(response))
           return resolve(null)
         }
         return resolve(q)
@@ -59,6 +57,7 @@ function resolveCached(queries) {
 }
 
 function requestNew(queries) {
+  queries = queries.map(q => q.get('query'))
   octopart(queries).then(results => {
     cache(results)
     results.forEach((v, k) => {
@@ -69,7 +68,6 @@ function requestNew(queries) {
 
 function cache(responses) {
   responses.forEach((v, query) => {
-    console.log('caching', query.toJS())
     const key = queryToKey(query)
     const values = toRedis(v)
     redisClient.set(key, values)
@@ -88,4 +86,4 @@ function queryToKey(query) {
   return query.filter((_, k) => k !== 'id').hashCode()
 }
 
-module.exports = {handleQueries}
+module.exports = {}

@@ -2,9 +2,10 @@ const expressGraphql = require('express-graphql')
 const express        = require('express')
 const cors           = require('cors')
 
-const schema          = require('./schema')
-const {handleQueries} = require('./handle_changes')
-const config          = require('../config')
+const schema = require('./schema')
+const config = require('../config')
+
+require('./handle_changes')
 
 const app = express()
 
