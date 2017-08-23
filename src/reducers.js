@@ -23,7 +23,7 @@ const reducers = {
   },
   removeResponses(state, query_ids) {
     const responses = state.get('responses').filter((_, k) => {
-      query_ids.contains(k)
+      query_ids.includes(k)
     })
     return state.set('responses', responses)
   },

@@ -11,6 +11,7 @@
     "cors": "^2.8.1",
     "express": "^4.14.1",
     "express-graphql": "^0.6.3",
+    "flat": "^4.0.0",
     "graphql": "^0.9.1",
     "graphql-tools": "^0.10.0",
     "immutable": "^3.8.1",

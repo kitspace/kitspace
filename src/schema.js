@@ -79,7 +79,6 @@ const resolverMap = {
 }
 
 function run(query) {
-  console.log(query)
   query = immutable.fromJS(query)
   return new Promise((resolve, reject) => {
     const state = store.getState()
@@ -101,6 +100,7 @@ function run(query) {
         } else if (!r.get('mpn')) {
           return resolve()
         }
+        actions.removeResponses([query])
         resolve(r.toJS())
       }
     })
