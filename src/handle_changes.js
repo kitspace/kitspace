@@ -22,18 +22,25 @@ function resolveCached(queries) {
   const responses = queries.map(q => (
     new Promise((resolve, reject) => {
       const key = queryToKey(q.get('query'))
-      redisClient.hgetall(key, (err, response) => {
-        console.log('retrieved', key, response)
-        resolve({query: q.get('query'), response})
+      redisClient.get(key, (err, response) => {
+        resolve({query: q, response})
       })
     })
   ))
   return Promise.all(responses).then(rs => {
-    const cached_respones = immutable.Map(rs.filter(q => q.response)
-      .map(q => [q.query, fromRedis(q.response)]))
-    actions.addResponses(cached_respones)
-    const uncached_queries = rs.filter(q => !q.response).map(q => q.query)
-    return immutable.List(uncached_queries)
+    const cached_responses = immutable.Map(rs.filter(q => q.response)
+      .map(q => {
+        console.log('retrieved', q.query.get('query').toJS())
+        const res = fromRedis(q.response)
+        return [q.query.get('query'), res]
+      }))
+    const cached_keys = cached_responses.keySeq()
+    const cached_queries = queries.filter(q => cached_keys.includes(q.get('query')))
+    actions.removeQueries(cached_queries)
+    actions.addResponses(cached_responses)
+    const uncached = rs.filter(q => !q.response).map(q => q.query)
+    const uncached_queries = queries.filter(q => !cached_keys.includes(q.get('query')))
+    return uncached_queries
   })
 }
 
@@ -55,23 +62,23 @@ function requestNew(queries) {
 
 function cache(responses) {
   responses.forEach((v, query) => {
+    console.log('caching', query.toJS())
     const key = queryToKey(query)
     const values = toRedis(v)
-    console.log('caching', key, values)
-    redisClient.hmset(key, values)
+    redisClient.set(key, values)
   })
 }
 
 function toRedis(response) {
-  return flatten(response.toJS())
+  return JSON.stringify(response.toJS())
 }
 
 function fromRedis(redis_response) {
-  return immutable.fromJS(unflatten(redis_response))
+  return immutable.fromJS(JSON.parse(redis_response))
 }
 
 function queryToKey(query) {
-  return query.hashCode()
+  return query.filter((_, k) => k !== 'id').hashCode()
 }
 
 module.exports = {handleQueries}

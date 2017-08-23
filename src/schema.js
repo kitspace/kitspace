@@ -78,19 +78,17 @@ const resolverMap = {
   }
 }
 
+function makeId() {
+  if (this.id == null) {
+    this.id = 0
+  }
+  return ++this.id
+}
+
 function run(query) {
+  query.id = makeId()
   query = immutable.fromJS(query)
   return new Promise((resolve, reject) => {
-    const state = store.getState()
-    let response = state.get('responses').get(query)
-    if (response) {
-      if (query.get('term')) {
-        response = response.filter(x => x).filter(x => x.get('mpn'))
-      } else if (!response.get('mpn')) {
-        return resolve()
-      }
-      return resolve(response.toJS())
-    }
     const unsubscribe = store.subscribeChanges(['responses', query], r => {
       if (r) {
         unsubscribe()
@@ -101,6 +99,7 @@ function run(query) {
           return resolve()
         }
         actions.removeResponses([query])
+        console.log('responding', query.toJS())
         resolve(r.toJS())
       }
     })
