@@ -1,6 +1,6 @@
 const immutable = require('immutable')
 const graphqlTools = require('graphql-tools')
-const {store, actions} = require('./actions')
+const {request_bus, response_bus} = require('./message_bus')
 
 const Mpn = `{
      manufacturer : String!
@@ -86,28 +86,23 @@ function makeId() {
 }
 
 function run(query) {
-  query.id = makeId()
+  const id = makeId()
+  query.id = id
   query = immutable.fromJS(query)
+  const time_stamped = immutable.Map({
+    query,
+    time: Date.now(),
+  })
   return new Promise((resolve, reject) => {
-    const unsubscribe = store.subscribeChanges(['responses', query], r => {
-      if (r) {
-        unsubscribe()
-        //get rid of any empties
-        if (query.get('term')) {
-          r = r.filter(x => x).filter(x => x.get('mpn'))
-        } else if (!r.get('mpn')) {
-          return resolve()
-        }
-        actions.removeResponses([query])
-        console.log('responding', query.toJS())
-        resolve(r.toJS())
+    response_bus.once(id, r => {
+      if (query.get('term')) {
+        r = r.filter(x => x).filter(x => x.get('mpn'))
+      } else if (!r.get('mpn')) {
+        return resolve()
       }
+      resolve(r.toJS())
     })
-    const time_stamped = immutable.Map({
-      query,
-      time: Date.now(),
-    })
-    actions.addQuery(time_stamped)
+    request_bus.emit('request', time_stamped)
   })
 }
 

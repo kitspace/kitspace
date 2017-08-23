@@ -4,7 +4,8 @@ const {flatten, unflatten} = require('flat')
 
 const octopart = require('./octopart')
 const farnell = require('./farnell')
-const {actions, store} = require('./actions')
+
+const {request_bus, response_bus} = require('./message_bus')
 
 const QUERY_BATCH_SIZE = 20
 const QUERY_MAX_WAIT_MS = 100 //milliseconds
@@ -14,50 +15,56 @@ const CACHE_TIMEOUT_MS = 24 * 60 * 60 * 1000 //milliseconds
 
 const redisClient = redis.createClient()
 
+
+setInterval(checkRequests, 1000)
+request_bus.on('request', checkRequests)
+
+let requests = immutable.List()
+function checkRequests(r) {
+  if (r) {
+    requests = requests.push(r)
+  }
+  const now = Date.now()
+  const timed_out = requests.reduce((timed_out, query) => {
+    return timed_out || ((now - query.get('time')) > QUERY_MAX_WAIT_MS)
+  }, false)
+  if ((requests.size >= QUERY_BATCH_SIZE) || timed_out) {
+    handleQueries(requests.slice(0, QUERY_BATCH_SIZE))
+    requests = requests.slice(QUERY_BATCH_SIZE)
+  }
+}
+
 function handleQueries(queries) {
+  queries = queries.map(q => q.get('query'))
   return resolveCached(queries).then(requestNew)
 }
 
 function resolveCached(queries) {
-  const responses = queries.map(q => (
+  const uncached = queries.map(q => (
     new Promise((resolve, reject) => {
-      const key = queryToKey(q.get('query'))
+      const key = queryToKey(q)
       redisClient.get(key, (err, response) => {
-        resolve({query: q, response})
+        if (response) {
+          response_bus.emit(q.get('id'), fromRedis(response))
+          return resolve(null)
+        }
+        return resolve(q)
       })
     })
   ))
-  return Promise.all(responses).then(rs => {
-    const cached_responses = immutable.Map(rs.filter(q => q.response)
-      .map(q => {
-        console.log('retrieved', q.query.get('query').toJS())
-        const res = fromRedis(q.response)
-        return [q.query.get('query'), res]
-      }))
-    const cached_keys = cached_responses.keySeq()
-    const cached_queries = queries.filter(q => cached_keys.includes(q.get('query')))
-    actions.removeQueries(cached_queries)
-    actions.addResponses(cached_responses)
-    const uncached = rs.filter(q => !q.response).map(q => q.query)
-    const uncached_queries = queries.filter(q => !cached_keys.includes(q.get('query')))
-    return uncached_queries
+  return Promise.all(uncached).then(qs => {
+    qs = qs.filter(q => q)
+    return immutable.List(qs)
   })
 }
 
 function requestNew(queries) {
-  const now = Date.now()
-  const timed_out = queries.reduce((timed_out, query) => {
-    return timed_out || ((now - query.get('time')) > QUERY_MAX_WAIT_MS)
-  }, false)
-  if ((queries.size >= QUERY_BATCH_SIZE) || timed_out) {
-    const batch = queries.take(QUERY_BATCH_SIZE)
-    actions.removeQueries(batch)
-    const qs = batch.map(q => q.get('query'))
-    octopart(qs).then(farnell).then(results => {
-      cache(results)
-      actions.addResponses(results)
-    }).catch(e => console.error(e))
-  }
+  octopart(queries).then(results => {
+    cache(results)
+    results.forEach((v, k) => {
+      response_bus.emit(k.get('id'), v)
+    })
+  }).catch(e => console.error(e))
 }
 
 function cache(responses) {

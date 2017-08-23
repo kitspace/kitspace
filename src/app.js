@@ -2,20 +2,9 @@ const expressGraphql = require('express-graphql')
 const express        = require('express')
 const cors           = require('cors')
 
-const {store}         = require('./actions')
 const schema          = require('./schema')
 const {handleQueries} = require('./handle_changes')
 const config          = require('../config')
-
-store.subscribeChanges(['queries'], handleQueries)
-function loop() {
-  setTimeout(() => {
-    const state = store.getState()
-    handleQueries(state.get('queries'))
-    loop()
-  }, 1000)
-}
-loop()
 
 const app = express()
 
