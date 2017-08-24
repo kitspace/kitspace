@@ -145,10 +145,15 @@ function offers(item) {
   const offers = immutable.Set(item.offers)
     .filter(o => retailers_used.includes(o.seller.name))
     .map(offer => {
+      const vendor = retailer_map.get(offer.seller.name)
+      let part = offer.sku || ''
+      if (vendor !== 'Digikey') {
+        part = part.replace(/-/g, '')
+      }
       return immutable.fromJS({
         sku: {
-          part : offer.sku,
-          vendor : retailer_map.get(offer.seller.name),
+          part,
+          vendor,
         },
         prices: offer.prices
       })

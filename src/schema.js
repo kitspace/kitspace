@@ -67,6 +67,9 @@ const resolverMap = {
       if (! (mpn || sku)) {
         return Error('Mpn or Sku required')
       }
+      if (sku && sku.vendor !== 'Digikey') {
+        sku.part = sku.part.replace(/-/g, '')
+      }
       return run({mpn, sku})
     },
     search(_, {term}) {
@@ -86,6 +89,7 @@ function makeId() {
 }
 
 function run(query) {
+  console.log(query)
   const id = makeId()
   query.id = id
   query = immutable.fromJS(query)
