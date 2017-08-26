@@ -1,8 +1,6 @@
 const immutable = require('immutable')
 const osmosis   = require('osmosis')
 
-const {extract, extractLink} = require('./extract')
-
 function farnell(results) {
   const completed = results.map((result, query) => {
     let promise
