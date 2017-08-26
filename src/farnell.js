@@ -72,6 +72,7 @@ function runQuery(sku) {
           })
         }))
       })
+      .done()
   })
 }
 
