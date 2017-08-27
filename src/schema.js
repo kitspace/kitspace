@@ -39,6 +39,7 @@ const schema = `
     image       : Image
     description : String
     specs       : [Spec]
+    stock_info  : [Spec]
   }
 
   type Prices {
@@ -82,14 +83,11 @@ const resolverMap = {
 }
 
 function makeId() {
-  if (this.id == null) {
-    this.id = 0
-  }
-  return ++this.id
+  this.id = this.id || 1
+  return this.id++
 }
 
 function run(query) {
-  console.log(query)
   const id = makeId()
   query.id = id
   query = immutable.fromJS(query)
