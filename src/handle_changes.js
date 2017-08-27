@@ -3,7 +3,7 @@ const immutable = require('immutable')
 const {flatten, unflatten} = require('flat')
 
 const octopart = require('./octopart')
-const farnell = require('./farnell')
+const runRetailer = require('./retailers')
 
 const {request_bus, response_bus} = require('./message_bus')
 
@@ -59,7 +59,7 @@ function resolveCached(queries) {
 function requestNew(queries) {
   queries = queries.map(q => q.get('query'))
   console.log('requestNew', queries.toJS())
-  octopart(queries).then(farnell).then(results => {
+  octopart(queries).then(r => runRetailer('Farnell', r)).then(results => {
     cache(results)
     results.forEach((v, k) => {
       response_bus.emit(k.get('id'), v)
