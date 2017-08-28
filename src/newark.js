@@ -1,9 +1,10 @@
 const immutable = require('immutable')
 const osmosis   = require('osmosis')
 
-function farnell(sku) {
+function newark(sku) {
+  console.log('newark query', sku)
   return new Promise((resolve, reject) => {
-    const url = `http://uk.farnell.com/${sku}`
+    const url = `http://www.newark.com/${sku}`
     osmosis.get(url)
       .set({
         url         : '#productMainImage @src',
@@ -12,27 +13,46 @@ function farnell(sku) {
         description : "[itemprop='name']",
         quantities  : ['td.qty @value'],
         prices      : ['td.threeColTd'],
-        us_stock    : 'span[id^=internalDirectShipTooltip_] !>',
+        uk_stock    : 'span[id^=internalDirectShipTooltip_] !>',
+        not_normally_stocked: 'span[id^=notNormallyStockedTooltip_] !>',
+        stock: '.availabilityHeading.available',
       })
-      .data(({url, names, values, description, quantities, prices, us_stock}) => {
+      .data(data => {
+        const {
+          url,
+          names,
+          values,
+          description,
+          quantities,
+          prices,
+          uk_stock,
+          not_normally_stocked,
+          stock,
+        } = data
+        console.log('stock', stock)
         resolve(immutable.Map({
           image: immutable.Map({
             url,
-            credit_string : 'Farnell',
-            credit_url    : 'http://uk.farnell.com',
+            credit_string : 'Newark',
+            credit_url    : 'http://www.newark.com',
           }),
           stock_info: immutable.fromJS([
             {
+              key: 'stock',
+              name: 'Stock',
+              value: stock,
+            },
+            {
               key: 'stock_location',
-              name: 'Stock Location',
-              value: us_stock ? 'US' : 'UK/Liege',
+              name: 'Location',
+              value: uk_stock ? 'UK' : 'US',
             },
           ]),
           description,
           specs: immutable.List(names).zip(values)
             .map(([name, value]) => immutable.Map({name, value})),
           prices: immutable.Map({
-            GBP: immutable.List(quantities).zip(prices)
+            USD: immutable.List(quantities).zip(prices)
               .map(([qty, price]) => (
                 immutable.List.of(parseInt(qty), parseFloat(price.slice(1)))
               )),
@@ -40,7 +60,7 @@ function farnell(sku) {
         }))
       })
       .error(e =>  {
-        if (e.status === 404) {
+        if (e.indexOf('404') > -1) {
           resolve(immutable.fromJS({
             stock_info: [
               {
@@ -58,4 +78,4 @@ function farnell(sku) {
   })
 }
 
-module.exports = farnell
+module.exports = newark

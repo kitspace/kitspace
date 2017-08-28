@@ -1,10 +1,20 @@
 const immutable = require('immutable')
 
 const retailers = {
-  Farnell: require('./farnell')
+  Farnell: require('./farnell'),
+  Newark: require('./newark'),
+}
+
+function runRetailers(results) {
+  return Promise.all(Object.keys(retailers).map(name => (
+    runRetailer(name, results)
+  ))).then(newResults => (
+    newResults.reduce((prev, r) => prev.mergeDeep(r), results)
+  ))
 }
 
 function runRetailer(name, results) {
+  console.log('runRetailer', name)
   const completed = results.map((result, query) => {
     let promise
     if (immutable.List.isList(result)) {
@@ -44,4 +54,4 @@ function _run_retailer(name, part) {
 }
 
 
-module.exports = runRetailer
+module.exports = runRetailers
