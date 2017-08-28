@@ -14,7 +14,7 @@ function farnell(sku) {
         prices      : ['td.threeColTd'],
         us_stock    : 'span[id^=internalDirectShipTooltip_] !>',
         not_normally_stocked: 'span[id^=notNormallyStockedTooltip_] !>',
-        stock: '.availabilityHeading.available',
+        stock: '.availabilityHeading',
       })
       .data(data => {
         const {

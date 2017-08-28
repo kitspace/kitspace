@@ -1,12 +1,14 @@
 const immutable = require('immutable')
 const osmosis   = require('osmosis')
+const url       = require('url')
 
 function newark(sku) {
   return new Promise((resolve, reject) => {
-    const url = `http://www.newark.com/${sku}`
-    osmosis.get(url)
+    const site = 'http://www.newark.com/'
+    const sku_url = site + sku
+    osmosis.get(sku_url)
       .set({
-        url         : '#productMainImage @src',
+        image_src   : '#productMainImage @src',
         names       : ['dt[id^=descAttributeName]'],
         values      : ['dd[id^=descAttributeValue]'],
         description : "[itemprop='name']",
@@ -14,11 +16,11 @@ function newark(sku) {
         prices      : ['td.threeColTd'],
         uk_stock    : 'span[id^=internalDirectShipTooltip_] !>',
         not_normally_stocked: 'span[id^=notNormallyStockedTooltip_] !>',
-        stock: '.availabilityHeading.available',
+        stock: '.availabilityHeading',
       })
       .data(data => {
         const {
-          url,
+          image_src,
           names,
           values,
           description,
@@ -28,22 +30,20 @@ function newark(sku) {
           not_normally_stocked,
           stock,
         } = data
+        const stock_location = uk_stock ? 'UK' : 'US'
+        const stock_match = (stock && stock.match(/^(\d|,)+/)) || [0]
+        const stock_number = `${stock_match[0]} (${stock_location})`
         resolve(immutable.Map({
           image: immutable.Map({
-            url,
+            url: image_src && url.resolve(site, image_src),
             credit_string : 'Newark',
-            credit_url    : 'http://www.newark.com',
+            credit_url    : sku_url,
           }),
           stock_info: immutable.fromJS([
             {
               key: 'stock',
               name: 'Stock',
-              value: stock,
-            },
-            {
-              key: 'stock_location',
-              name: 'Location',
-              value: uk_stock ? 'UK' : 'US',
+              value: stock_number,
             },
           ]),
           description,
