@@ -59,7 +59,7 @@ function resolveCached(queries) {
 function requestNew(queries) {
   queries = queries.map(q => q.get('query'))
   console.log('requestNew', queries.toJS())
-  octopart(queries).then(r => runRetailers(r)).then(results => {
+  octopart(queries).then(runRetailers).then(results => {
     cache(results)
     results.forEach((v, k) => {
       response_bus.emit(k.get('id'), v)

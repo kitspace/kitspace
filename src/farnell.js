@@ -13,26 +13,44 @@ function farnell(sku) {
         quantities  : ['td.qty @value'],
         prices      : ['td.threeColTd'],
         us_stock    : 'span[id^=internalDirectShipTooltip_] !>',
+        not_normally_stocked: 'span[id^=notNormallyStockedTooltip_] !>',
+        stock: '.availabilityHeading.available',
       })
-      .data(({url, names, values, description, quantities, prices, us_stock}) => {
+      .data(data => {
+        const {
+          url,
+          names,
+          values,
+          description,
+          quantities,
+          prices,
+          us_stock,
+          not_normally_stocked,
+          stock,
+        } = data
         resolve(immutable.Map({
           image: immutable.Map({
             url,
-            credit_string : 'Farnell',
-            credit_url    : 'http://uk.farnell.com',
+            credit_string : 'Newark',
+            credit_url    : 'http://www.newark.com',
           }),
           stock_info: immutable.fromJS([
             {
+              key: 'stock',
+              name: 'Stock',
+              value: stock,
+            },
+            {
               key: 'stock_location',
-              name: 'Stock Location',
-              value: us_stock ? 'US' : 'UK/Liege',
+              name: 'Location',
+              value: us_stock ? 'US' : 'UK',
             },
           ]),
           description,
           specs: immutable.List(names).zip(values)
             .map(([name, value]) => immutable.Map({name, value})),
           prices: immutable.Map({
-            GBP: immutable.List(quantities).zip(prices)
+            USD: immutable.List(quantities).zip(prices)
               .map(([qty, price]) => (
                 immutable.List.of(parseInt(qty), parseFloat(price.slice(1)))
               )),
@@ -40,7 +58,7 @@ function farnell(sku) {
         }))
       })
       .error(e =>  {
-        if (e.status === 404) {
+        if (e.indexOf('404') > -1) {
           resolve(immutable.fromJS({
             stock_info: [
               {

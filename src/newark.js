@@ -2,7 +2,6 @@ const immutable = require('immutable')
 const osmosis   = require('osmosis')
 
 function newark(sku) {
-  console.log('newark query', sku)
   return new Promise((resolve, reject) => {
     const url = `http://www.newark.com/${sku}`
     osmosis.get(url)
@@ -29,7 +28,6 @@ function newark(sku) {
           not_normally_stocked,
           stock,
         } = data
-        console.log('stock', stock)
         resolve(immutable.Map({
           image: immutable.Map({
             url,

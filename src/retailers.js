@@ -5,53 +5,42 @@ const retailers = {
   Newark: require('./newark'),
 }
 
-function runRetailers(results) {
-  return Promise.all(Object.keys(retailers).map(name => (
-    runRetailer(name, results)
-  ))).then(newResults => (
-    newResults.reduce((prev, r) => prev.mergeDeep(r), results)
-  ))
-}
+const not_yet = immutable.List.of('Digikey', 'Mouser', 'RS')
 
-function runRetailer(name, results) {
-  console.log('runRetailer', name)
-  const completed = results.map((result, query) => {
+function runRetailers(results) {
+  return Promise.all(results.map((result, query) => {
     let promise
     if (immutable.List.isList(result)) {
-      promise = Promise.all(result.map(r => _run_retailer(name, r))).then(r => {
-        return immutable.List(r)
-      })
+      promise = Promise.all(result.map(run)).then(immutable.List)
     } else {
-      promise = _run_retailer(name, result)
+      promise = run(result)
     }
-    return promise.then(r => [query, r])
+    return promise.then(r => {
+      return [query, r]
+    })
+  }).toArray()).then(immutable.Map)
+}
+
+function run(part) {
+  const offers = part.get('offers') || immutable.List()
+  const not_yet_offers = offers.filter(offer => {
+    const vendor = offer.getIn(['sku', 'vendor'])
+    return not_yet.includes(vendor)
   })
-  return Promise.all(completed.values()).then(immutable.Map)
+  return Promise.all(Object.keys(retailers).map(name => {
+    const this_offers = offers.filter(offer => (
+      offer.getIn(['sku', 'vendor']) === name
+    ))
+    return runRetailer(name, this_offers)
+  })).then(newOffers => {
+    return part.set('offers', immutable.List(newOffers).flatten(1).concat(not_yet_offers))
+  })
 }
 
-function _run_retailer(name, part) {
-    const offers =  part.get('offers')
-    if (offers == null) {
-      return Promise.resolve(part)
-    }
-    const this_offers = offers.filter(offer => {
-      return offer.get('sku').get('vendor') === name
-    })
-    const queries = this_offers.map(offer => {
-      return retailers[name](offer.get('sku').get('part'))
-        .then(this_info => offer.mergeDeep(this_info))
-        .catch(e => {
-          console.error(e)
-          return offer
-        })
-    })
-    return Promise.all(queries).then(completed_offers => {
-      const not_this_offers = offers.filter(offer => {
-        return offer.get('sku').get('vendor') !== name
-      })
-      return part.set('offers', not_this_offers.concat(completed_offers))
-    })
+function runRetailer(name, offers) {
+  return Promise.all(offers.map(offer => (
+    retailers[name](offer.getIn(['sku', 'part'])).then(o => offer.mergeDeep(o))
+  ))).then(immutable.List)
 }
-
 
 module.exports = runRetailers
