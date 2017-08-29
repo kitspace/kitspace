@@ -1,7 +1,8 @@
 language: node_js
+services:
+  - redis-server
 node_js:
   - "6"
 script:
   - cp config.js.in config.js
   - yarn test
-  - yarn test:i
