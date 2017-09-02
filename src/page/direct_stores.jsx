@@ -93,7 +93,7 @@ const DirectStores = React.createClass({
       key='FarnellForm'
       id='FarnellForm'
       method='GET'
-      action={`https${site}/jsp/extlink.jsp`} >
+      action={`http://www.anrdoezrs.net/links/8291192/type/dlg/https${site}/jsp/extlink.jsp`} >
         <input type='hidden' name='CMP' value='ref_kitnic' />
         <input type='hidden' name='action' value='buy' />
         <input type='hidden' name='product' value={queryString} />
