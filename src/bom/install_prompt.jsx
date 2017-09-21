@@ -42,10 +42,12 @@ const InstallPrompt = React.createClass({
     )
   },
   getCompatibility() {
-    if (typeof navigator == 'undefined')
+    if (typeof navigator === 'undefined') {
       return true
-    if (/Mobile/i.test(navigator.userAgent))
+    }
+    if (/Mobile/i.test(navigator.userAgent)) {
       return false
+    }
     const version = browserVersion()
     alert(navigator.userAgent, version)
     return (/Chrome/.test(version) || /Firefox/.test(version))
