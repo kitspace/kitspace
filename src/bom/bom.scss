@@ -66,7 +66,7 @@
 
     .storeIcons {
         height: 16px;
-        margin-right: 2px;
+        margin-right: 3px;
         width: 16px;
     }
 
@@ -89,5 +89,17 @@
     .buttonSegment {
         display: flex;
         justify-content: space-around;
+        flex-wrap: wrap;
+    }
+    .buttonText {
+        color: white;
+        display: flex;
+        @include breakpoint(small_width) {
+            flex-wrap: wrap;
+        }
+    }
+    div.retailerButton {
+        min-width: 202px;
+        margin: 10px;
     }
 }

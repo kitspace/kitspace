@@ -109,7 +109,7 @@ const BomView = React.createClass({
               return (
                 <div>
                   <semantic.Header
-                    style={{textAlign: 'center'}}
+                    textAlign='center'
                     as='h3'
                     attached='top'
                   >
@@ -294,16 +294,18 @@ function RetailerButton(props) {
       }
   }
   const total = props.parts.length
-  const color = n === total ? 'green' : 'red'
+  const color = n === total ? 'green' : 'orange'
+  //<StoreIcon retailer={r} />
   return (
     <semantic.Button
       onClick={onClick}
-      color={color}
       loading={props.adding}
+      color={color}
+      content={<div className='buttonText' ><StoreIcon retailer={r} />{r}</div>}
+      label={{as: 'a', color, content: ` ${n}/${total} lines`}}
+      labelPosition='right'
+      className='retailerButton'
     >
-      <StoreIcon retailer={r} />
-      {r}
-      {` ${n}/${total}`}
     </semantic.Button>
   )
 }
