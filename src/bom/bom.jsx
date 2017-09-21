@@ -148,26 +148,26 @@ const BomView = React.createClass({
                     collapsed={this.state.collapsed}
                     setCollapsed={v => this.setState({collapsed: v})}
                   />
-                <div>
                   {(() => {
                     if(!this.state.collapsed && !matches) {
                       return (
-                        <div>
+                        <semantic.Segment attached='bottom'>
                           <div>
-                            <DoubleScrollbar>
-                              <TsvTable
-                                parts={this.props.parts}
-                                tsv={this.linesToTsv()}
-                              />
-                            </DoubleScrollbar>
+                            <div>
+                              <DoubleScrollbar>
+                                <TsvTable
+                                  parts={this.props.parts}
+                                  tsv={this.linesToTsv()}
+                                />
+                              </DoubleScrollbar>
+                            </div>
                           </div>
-                        </div>
+                        </semantic.Segment>
                       )
                     }
                   })()}
-                </div>
-                <div>
-                  {(() => {
+                  <div>
+                    {(() => {
                     if(!this.state.collapsed && matches) {
                       return (
                         <DoubleScrollbar>
@@ -195,24 +195,18 @@ const BomView = React.createClass({
 })
 
 function ExpandBom(props) {
+  const collapsed = props.collapsed
   return (
-    <semantic.Segment attached='bottom'>
-      <div
-        className='expandBom'
+    <semantic.Button
+        attached={collapsed ? 'bottom' : true}
         textAlign='center'
+        icon={collapsed ? 'eye' : ''}
         onClick={() => {
           props.setCollapsed(!props.collapsed)
         }}
-      >
-        {(() => {
-          if (props.collapsed) {
-            return 'View part details'
-          } else {
-            return 'Hide part details'
-          }
-        })()}
-      </div>
-    </semantic.Segment>
+    >
+      {collapsed ? 'View ' : 'Hide '} part details
+    </semantic.Button>
   )
 }
 
