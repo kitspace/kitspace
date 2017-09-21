@@ -108,62 +108,65 @@ const BomView = React.createClass({
             {matches => {
               return (
                 <div>
-                  <semantic.Table compact fixed celled>
-                    <semantic.Table.Header>
-                      <Title colSpan={retailerButtons.length + 1}/>
-                    </semantic.Table.Header>
-                    <semantic.Table.Body>
-                      <InstallPrompt
-                        colSpan={retailerButtons.length + 1}
-                        extensionPresence={this.state.extensionPresence}
-                        bomInstallLink={installExtension}
-                      />
-                      <AdjustQuantity
-                        colSpan={retailerButtons.length + 1}
-                        buyMultiplier={this.state.buyMultiplier}
-                        buyAddPercent={this.state.buyAddPercent}
-                        setBuyMultiplier={v => this.setState({buyMultiplier: v})}
-                        setBuyAddPercent={v => this.setState({buyAddPercent: v})}
-                      />
-                      <semantic.Table.Row>
-                        <semantic.Table.Cell>
-                          {`${lines.length} lines`}
-                        </semantic.Table.Cell>
-                        {retailerButtons}
-                      </semantic.Table.Row>
-                      <semantic.Table.Row>
-                        <semantic.Table.Cell style={{borderTop: 'none'}}>
-                          {(() => {
-                            const n = lines.reduce((n, line) => {
-                              return n + Math.ceil(line.quantity * mult)
-                            }, 0)
-                            return `${n} items`
-                          })()}
-                        </semantic.Table.Cell>
-                      </semantic.Table.Row>
-                      <ExpandBom
-                        colSpan={retailerButtons.length + 1}
-                        collapsed={this.state.collapsed}
-                        setCollapsed={v => this.setState({collapsed: v})}
-                      />
-                      {(() => {
-                        if(!this.state.collapsed && !matches) {
-                          return (
-                            <semantic.Table.Row>
-                              <semantic.Table.Cell colSpan={retailerButtons.length + 1}>
-                                <DoubleScrollbar>
-                                  <TsvTable
-                                    parts={this.props.parts}
-                                    tsv={this.linesToTsv()}
-                                  />
-                                </DoubleScrollbar>
-                              </semantic.Table.Cell>
-                            </semantic.Table.Row>
-                          )
-                        }
-                      })()}
-                    </semantic.Table.Body>
-                  </semantic.Table>
+                  <semantic.Header
+                    style={{textAlign: 'center'}}
+                    as='h3'
+                    attached='top'
+                  >
+                   <i className='icon-basket-3' />
+                    Buy Parts
+                  </semantic.Header>
+                  <InstallPrompt
+                    extensionPresence={this.state.extensionPresence}
+                    bomInstallLink={installExtension}
+                  />
+                  <semantic.Segment attached>
+                    <AdjustQuantity
+                      buyMultiplier={this.state.buyMultiplier}
+                      buyAddPercent={this.state.buyAddPercent}
+                      setBuyMultiplier={v => this.setState({buyMultiplier: v})}
+                      setBuyAddPercent={v => this.setState({buyAddPercent: v})}
+                    />
+                    <div>
+                      <div>
+                        {`${lines.length} lines`}
+                      </div>
+                      <div style={{borderTop: 'none'}}>
+                        {(() => {
+                          const n = lines.reduce((n, line) => {
+                            return n + Math.ceil(line.quantity * mult)
+                          }, 0)
+                          return `${n} items`
+                        })()}
+                      </div>
+                    </div>
+                  </semantic.Segment>
+                  <semantic.Segment className='buttonSegment'attached>
+                    {retailerButtons}
+                  </semantic.Segment>
+                  <ExpandBom
+                    collapsed={this.state.collapsed}
+                    setCollapsed={v => this.setState({collapsed: v})}
+                  />
+                <div>
+                  {(() => {
+                    if(!this.state.collapsed && !matches) {
+                      return (
+                        <div>
+                          <div>
+                            <DoubleScrollbar>
+                              <TsvTable
+                                parts={this.props.parts}
+                                tsv={this.linesToTsv()}
+                              />
+                            </DoubleScrollbar>
+                          </div>
+                        </div>
+                      )
+                    }
+                  })()}
+                </div>
+                <div>
                   {(() => {
                     if(!this.state.collapsed && matches) {
                       return (
@@ -176,6 +179,7 @@ const BomView = React.createClass({
                       )
                     }
                   })()}
+                </div>
                 </div>
               )
             }}
@@ -192,11 +196,10 @@ const BomView = React.createClass({
 
 function ExpandBom(props) {
   return (
-    <semantic.Table.Row>
-      <semantic.Table.Cell
+    <semantic.Segment attached='bottom'>
+      <div
         className='expandBom'
         textAlign='center'
-        colSpan={props.colSpan}
         onClick={() => {
           props.setCollapsed(!props.collapsed)
         }}
@@ -208,69 +211,66 @@ function ExpandBom(props) {
             return 'Hide part details'
           }
         })()}
-      </semantic.Table.Cell>
-    </semantic.Table.Row>
+      </div>
+    </semantic.Segment>
   )
 }
 
 function AdjustQuantity(props) {
   return (
-    <semantic.Table.Row>
-      <semantic.Table.Cell
-        textAlign='center'
-        colSpan={props.colSpan}
-      >
-        <div>
-          {'Adjust quantity: '}
+    <div
+      textAlign='center'
+    >
+      <div>
+        {'Adjust quantity: '}
+        <semantic.Input
+          type='number'
+          size='mini'
+          min={1}
+          value={props.buyMultiplier}
+          style={{width: 80, marginLeft: 10}}
+          error={isNaN(props.buyMultiplier)
+            || (props.buyMultiplier < 1)}
+            onBlur={e => {
+              const v = props.buyMultiplier
+              if (isNaN(v) || v < 1) {
+                props.setBuyMultiplier(1)
+              }
+            }}
+            onChange={e => {
+              var v = parseFloat(e.target.value)
+              props.setBuyMultiplier(v)
+            }}
+          />
+          <semantic.Icon style={{margin: 10}} name='plus' />
           <semantic.Input
             type='number'
+            min={0}
+            step={10}
+            value={props.buyAddPercent}
             size='mini'
-            min={1}
-            value={props.buyMultiplier}
-            style={{width: 80, marginLeft: 10}}
-            error={isNaN(props.buyMultiplier)
-              || (props.buyMultiplier < 1)}
+            style={{width: 80}}
+            error={isNaN(props.buyAddPercent)
+              || (props.buyAddPercent < 0)}
               onBlur={e => {
-                const v = props.buyMultiplier
-                if (isNaN(v) || v < 1) {
-                  props.setBuyMultiplier(1)
+                const v = props.buyAddPercent
+                if (isNaN(v) || v < 0) {
+                  props.setBuyAddPercent(0)
                 }
               }}
               onChange={e => {
                 var v = parseFloat(e.target.value)
-                props.setBuyMultiplier(v)
+                props.setBuyAddPercent(v)
               }}
             />
-            <semantic.Icon style={{margin: 10}} name='plus' />
-            <semantic.Input
-              type='number'
-              min={0}
-              step={10}
-              value={props.buyAddPercent}
-              size='mini'
-              style={{width: 80}}
-              error={isNaN(props.buyAddPercent)
-                || (props.buyAddPercent < 0)}
-                onBlur={e => {
-                  const v = props.buyAddPercent
-                  if (isNaN(v) || v < 0) {
-                    props.setBuyAddPercent(0)
-                  }
-                }}
-                onChange={e => {
-                  var v = parseFloat(e.target.value)
-                  props.setBuyAddPercent(v)
-                }}
-              />
-              <span
-                className='notSelectable'
-                style={{marginLeft:5}}
-              >
-                {'%'}
-              </span>
-            </div>
-          </semantic.Table.Cell>
-        </semantic.Table.Row>
+            <span
+              className='notSelectable'
+              style={{marginLeft:5}}
+            >
+              {'%'}
+            </span>
+          </div>
+      </div>
   )
 }
 
@@ -294,34 +294,17 @@ function RetailerButton(props) {
       }
   }
   const total = props.parts.length
+  const color = n === total ? 'green' : 'red'
   return (
-    <semantic.Table.Cell
-      className='compact retailerHeader'
-      error={n !== total}
-      key={r}
-      rowSpan={2}
+    <semantic.Button
       onClick={onClick}
+      color={color}
+      loading={props.adding}
     >
-      <div className='retailerButtonCell'>
-        <div className='retailerButtonCellText'>
-          <div className='retailerButtonCellName'>
-            <StoreIcon retailer={r} />
-            {r}
-          </div>
-          <p style={{fontSize: 14, fontWeight: 'normal'}}>
-            {`${n}/${total}`}
-          </p>
-        </div>
-        <div className='retailerButtonCellIcon'>
-          {(() => {
-            if (props.adding) {
-              return <semantic.Loader active inline />
-            }
-            return <i style={{fontSize: 22}} className='icon-basket-3' />
-          })()}
-        </div>
-      </div>
-    </semantic.Table.Cell>
+      <StoreIcon retailer={r} />
+      {r}
+      {` ${n}/${total}`}
+    </semantic.Button>
   )
 }
 
@@ -337,19 +320,5 @@ function StoreIcon(props) {
   )
 }
 
-
-function Title(props) {
-  return (
-    <semantic.Table.Row>
-      <semantic.Table.HeaderCell
-        textAlign='center'
-        colSpan={props.colSpan}
-      >
-        Buy Parts
-      </semantic.Table.HeaderCell>
-    </semantic.Table.Row>
-
-  )
-}
 
 module.exports = BomView

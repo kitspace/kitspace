@@ -19,27 +19,17 @@ const InstallPrompt = React.createClass({
     }, 5000)
   },
   render() {
-    return (
-      <semantic.Table.Row>
-        {(() => {
-          if (this.props.extensionPresence === 'present') {
-            return
-          }
-          else if (this.state.timed_out) {
-            if (this.state.compatible) {
-              return (
-                <PleaseInstall
-                  bomInstallLink={this.props.bomInstallLink}
-                  colSpan={this.props.colSpan}
-                />
-              )
-            } else {
-              return (<NotCompatible colSpan={this.props.colSpan} />)
-            }
-          }
-        })()}
-      </semantic.Table.Row>
-    )
+    if (this.props.extensionPresence === 'present') {
+      return <div />
+    }
+    else if (this.state.timed_out) {
+      if (this.state.compatible) {
+        return <PleaseInstall bomInstallLink={this.props.bomInstallLink} />
+      } else {
+        return <NotCompatible />
+      }
+    }
+    return <div />
   },
   getCompatibility() {
     if (typeof navigator === 'undefined') {
@@ -49,31 +39,30 @@ const InstallPrompt = React.createClass({
       return false
     }
     const version = browserVersion()
-    alert(navigator.userAgent, version)
     return (/Chrome/.test(version) || /Firefox/.test(version))
   },
 })
 
 function PleaseInstall(props) {
   return (
-    <semantic.Table.Cell warning colSpan={props.colSpan}>
+    <semantic.Message attached warning>
       <semantic.Icon name='attention' />
       Please <a onClick={props.bomInstallLink}>install the 1-click BOM
         extension</a> to make full use of this feature.
-    </semantic.Table.Cell>
+    </semantic.Message>
   )
 }
 
 function NotCompatible(props) {
   return (
-    <semantic.Table.Cell warning colSpan={props.colSpan} >
+    <semantic.Message attached warning>
       <semantic.Icon name='attention' />
       Sorry, the <a className='bomPromptLink'
         href='https://1clickbom.com/'>1-click BOM extension</a> is not yet
       available for your browser. Only the Digikey add-to-cart links work
       fully, Farnell and Newark should work but the references will not be
       added as line-notes.
-    </semantic.Table.Cell>
+    </semantic.Message>
   )
 }
 
