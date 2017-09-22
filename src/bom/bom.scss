@@ -91,6 +91,7 @@
         justify-content: space-around;
         flex-wrap: wrap;
     }
+
     .buttonText {
         color: white;
         display: flex;
@@ -98,12 +99,27 @@
             flex-wrap: wrap;
         }
     }
+
     div.retailerButton {
         min-width: 202px;
         margin-bottom: 5px;
         margin-top: 5px;
     }
+
     button.retailerButton {
         min-width: 110px;
+    }
+
+    button.retailerButton.pink {
+        background: #da8282 !important;
+    }
+
+    button.retailerButton.pink:hover {
+        background: #dc7c7c !important;
+    }
+
+    .ui.basic.pink.label {
+        border: 1px solid #da8282 !important;
+        color: #da8282 !important;
     }
 }

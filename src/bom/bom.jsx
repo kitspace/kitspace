@@ -293,7 +293,7 @@ function RetailerButton(props) {
       }
   }
   const total = props.parts.length
-  const color = n === total ? 'green' : 'orange'
+  const color = n === total ? 'green' : 'pink'
   //<StoreIcon retailer={r} />
   return (
     <semantic.Button
@@ -303,7 +303,7 @@ function RetailerButton(props) {
       content={<div className='buttonText' ><StoreIcon retailer={r} />{r}</div>}
       label={{as: 'a', color, content: ` ${n}/${total} lines`}}
       labelPosition='right'
-      className='retailerButton'
+      className={'retailerButton ' + color}
     >
     </semantic.Button>
   )
