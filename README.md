@@ -1,14 +1,14 @@
 # https://kitnic.it
 **We are giving away free PCB manufacturing vouchers to the first 20
-projects that register. Just follow the steps in the [submission preview](https://kitnic.it/submit). Current status: 3/20 left.**
+projects that register. Just follow the steps in the [submission preview](https://kitnic.it/submit). Current status: 1/20 left.**
 
-[![build status][travis-status]](https://travis-ci.org/monostable/kitnic) 
+[![build status][travis-status]](https://travis-ci.org/monostable/kitnic)
 
 [![video](image_src/fosdem2017.jpg)](https://video.fosdem.org/2017/AW1.120/kitnic_it.vp8.webm)
 
 Kitnic is a registry of open source hardware electronics projects that are
 ready to order and build. The most important elements of a Kitnic project page
-are: 
+are:
 
 - A prominent link to download the Gerber files and a preview rendering of the board
 - The ability to quickly add the required components to a retailer shopping
@@ -33,14 +33,14 @@ Currently the `kitnic.yaml` makes use of the following fields:
 ```yaml
 summary: A description for your project
 site: A site you would like to link to (include http:// or https://)
-color: The solder resist color of the preview rendering. Can be one of: 
+color: The solder resist color of the preview rendering. Can be one of:
        - green
        - red
        - blue
        - black
        - white
        - orange
-       - purple 
+       - purple
        - yellow
 bom: A path to your 1-click-bom in case it isn't `1-click-bom.tsv`.
 gerbers: A path to your folder of gerbers in case it isn't `gerbers/`.
@@ -110,6 +110,52 @@ gerbers: manufacture/gerbers-and-drills
 
 
 ## Development
+
+### Architecture
+
+#### Current
+This repository is the Kitnic front-end. The contents including all project
+data are currently pre-compiled into a static site.  The main part of the site
+that requires server side components is the submission preview (`/submit`). Pages also use freegeoip lookup to decide what sites to link to for people that do not have the 1-click BOM browser extension. This roughly illustrates the main data flow when someone is browsing the site.
+
+![](docs/current.png)
+
+We have two services running for the submission preview.
+
+- [git-clone-server](https://github.com/kasbah/git-clone-server) for serving up files from git repositories.
+- [partinfo](https://github.com/monostable/kitnic-partinfo) for getting part information for the BOM.
+
+And one for the geo ip lookup on pages.
+
+- [freegeoip](https://github.com/fiorix/freegeoip)
+
+#### Planned
+
+We are using [GitLab](https://gitlab.com/gitlab-org/gitlab-ce) as an authentication and Git hosting service. We modify and proxy it to get the functionality we need.
+The graphs get too complicated if we try to add all the possible data-flows but here is the rough data-flow for submission of a project.
+
+![](docs/planned.png)
+
+Services used are:
+
+- [nginx-config](https://github.com/monostable/kitnic-nginx-config) to configure Nginx to serve the frontend and all services.
+- [partinfo](https://github.com/monostable/kitnic-partinfo) for getting part information for BOMs.
+- [gitlab-config](http://github.com/monostable/kitnic-gitlab-config) configuring GitLab to be used for authentication and Git hosting.
+- [gitlab-proxy](https://github.com/monostable/kitnic-gitlab-proxy) for requests that need to access GitLab API but need any kind of added functionality like unauthenticated access or modifying projects (which needs additional hooks to trigger processing).
+
+### Roadmap
+
+- [ ] GitLab and Accounts
+   - [x] Modify GitLab and integrate with login in Kitnic frontend
+   - [x] Build frontend for basic account settings
+   - [ ] Make GitLab source of user projects
+- [ ] Upload submissions and editing
+   - [ ] Allow for file upload to GitLab
+   - [ ] Gerber plotter processing for KiCAD and Eagle
+   - [ ] BOM extraction processing
+   - [ ] BOM Builder
+       - [ ] Get retailer info out of [partinfo](https://github.com/monostable/kitnic-partinfo)
+
 ### Requirements
 
 - [Nodejs](https://nodejs.org) >= 6

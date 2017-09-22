@@ -45,7 +45,7 @@
   },
   {
     "repo": "https://github.com/robotsrulz/SP_Adapter",
-    "hash": "e0283771f937119427ebd1c8a72600dd4e5fb704"
+    "hash": "6cccce11f6ba1ad880d94bb4643c62307dfdd758"
   },
   {
     "repo": "https://github.com/pcbsz/SimpleAmp",
@@ -101,10 +101,26 @@
   },
   {
     "repo": "https://github.com/kimitobo/Neocococat",
-    "hash": "e196543bac52d593ff7a17d323c23fb9a040d514"
+    "hash": "ef8b3848d6987102525e9a66f1c712a97a38848b"
   },
   {
     "repo": "https://github.com/RoboticsBrno/RB3200-ESP32universal/",
     "hash": "7933202eb494bd7cb640ea98742f5b0b6ce26423"
+  },
+  {
+    "repo": "https://github.com/intajay/uduino",
+    "hash": "17d08f1cbb1c6d841a107b51fcf6f7c8161cde89"
+  },
+  {
+    "repo": "https://github.com/8BitMixtape/8BitmixtapeNEO_ShenzhenReady",
+    "hash": "45b297c4477f407d4511dfe7c09ad870f4325ae8"
+  },
+  {
+    "repo": "https://github.com/julbouln/ice40_eink_controller",
+    "hash": "f55d8756fe21e48bf4d89c285aed2d1c5aa6b4b5"
+  },
+  {
+    "repo": "https://github.com/julbouln/ifusb",
+    "hash": "1b2a002bc89ac2553b43b002c6cbbf2151b77827"
   }
 ]

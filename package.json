@@ -48,6 +48,7 @@
     "1-click-bom": "^1.1.2",
     "babel-polyfill": "^6.13.0",
     "browser-version": "^1.0.0",
+    "gerber-to-svg": "git+https://github.com/kasbah/gerber-to-svg.git#upgrade-parser",
     "github-url-to-object": "^2.2.6",
     "html-to-react": "^1.2.2",
     "immutable": "^3.8.1",

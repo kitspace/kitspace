@@ -2073,6 +2073,16 @@ gerber-parser@^1.0.0:
     lodash.padright "^3.1.3"
     readable-stream "^2.1.2"
 
+"gerber-parser@git+https://github.com/kasbah/gerber-parser#trailing-zero-detection":
+  version "1.0.6"
+  resolved "git+https://github.com/kasbah/gerber-parser#2360b76a2855777430df67b354dfd7e42b4997ec"
+  dependencies:
+    inherits "^2.0.1"
+    lodash.isfinite "^3.3.1"
+    lodash.padleft "^3.1.3"
+    lodash.padright "^3.1.3"
+    readable-stream "^2.1.2"
+
 gerber-plotter@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/gerber-plotter/-/gerber-plotter-1.1.0.tgz#fb6bbfa29aafad2c6c32e72d77e26742d3161a8d"
@@ -2090,6 +2100,23 @@ gerber-to-svg@^2.1.0:
     chalk "^1.1.1"
     escape-html "^1.0.3"
     gerber-parser "^1.0.0"
+    gerber-plotter "^1.1.0"
+    inherits "^2.0.1"
+    lodash.isfinite "^3.2.0"
+    lodash.isstring "^4.0.1"
+    minimist "^1.1.0"
+    mkdirp "^0.5.1"
+    readable-stream "^2.1.2"
+    xml-element-string "^1.0.0"
+    xmlovely "^1.0.0"
+
+"gerber-to-svg@git+https://github.com/kasbah/gerber-to-svg.git#upgrade-parser":
+  version "2.1.0"
+  resolved "git+https://github.com/kasbah/gerber-to-svg.git#cc362fd4486f47dc53c00d34c2289e598c11761f"
+  dependencies:
+    chalk "^1.1.1"
+    escape-html "^1.0.3"
+    gerber-parser "git+https://github.com/kasbah/gerber-parser#trailing-zero-detection"
     gerber-plotter "^1.1.0"
     inherits "^2.0.1"
     lodash.isfinite "^3.2.0"

@@ -58,6 +58,9 @@ $mobile-summary-h: $summary-h * 3 + 48;
         padding-left: 10px;
         text-align: left;
         vertical-align: bottom;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 286px;
     }
 
     .url {
