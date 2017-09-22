@@ -84,25 +84,29 @@ const BuyParts = React.createClass({
   },
   render() {
     const lines = this.props.lines
-    const numberOfEach = {}
-    const retailers = {}
     const retailer_list = oneClickBom.lineData.retailer_list
-    retailer_list.forEach(r => {
-      retailers[r] = lines.map(l => l.retailers[r])
-    })
     const mult = this.getMultiplier()
+    const total = lines.reduce((acc, line) => {
+      return acc + Math.ceil(mult * line.quantity)
+    }, 0)
     const retailerButtons = retailer_list
-      .map(name => RetailerButton({
-        name,
-        parts: retailers[name],
-        adding: this.state.adding[name],
-        extensionPresence:this.state.extensionPresence,
-        buyParts: this.state.buyParts.bind(null, name)
-      }))
+      .map(name => {
+        const numberOfParts = lines.reduce((acc, line) => {
+          if (line.retailers[name]) {
+            return acc + Math.ceil(mult * line.quantity)
+          }
+          return acc
+        }, 0)
+        return RetailerButton({
+          name,
+          adding: this.state.adding[name],
+          extensionPresence:this.state.extensionPresence,
+          buyParts: this.state.buyParts.bind(null, name),
+          numberOfParts,
+          total,
+        })
+      })
       .filter(x => x != null)
-    const numberOfItems = lines.reduce((n, line) => (
-      n + Math.ceil(line.quantity * mult)
-    ), 0)
     return (
       <div className='BuyParts'>
         <semantic.Header
@@ -122,8 +126,6 @@ const BuyParts = React.createClass({
           buyAddPercent={this.state.buyAddPercent}
           setBuyMultiplier={v => this.setState({buyMultiplier: v})}
           setBuyAddPercent={v => this.setState({buyAddPercent: v})}
-          numberOfItems={numberOfItems}
-          numberOfLines={lines.length}
         />
         <semantic.Segment className='buttonSegment'attached>
           {retailerButtons}
@@ -171,15 +173,9 @@ function ExpandBom(props) {
 function AdjustQuantity(props) {
   return (
     <semantic.Segment
-      style={{
-        display: 'flex',
-        justifyContent: 'space-around',
-        borderTop: 0,
-        borderBottom: 0,
-      }}
+      textAlign='center'
       attached
     >
-      <div style={{display: 'flex', alignItems: 'center'}} >
         Adjust quantity:
         <semantic.Input
           type='number'
@@ -233,19 +229,11 @@ function AdjustQuantity(props) {
             >
               %
             </span>
-          </div>
-          <div style={{display: 'flex', alignItems: 'center'}} >
-            {props.numberOfItems} items
-          </div>
         </semantic.Segment>
   )
 }
 
 function RetailerButton(props) {
-  const n = props.parts.filter(x => x !== '').length
-  if (n === 0) {
-    return null
-  }
   const r = props.name
   let onClick = props.buyParts
   //if the extension is not here fallback to direct submissions
@@ -260,16 +248,14 @@ function RetailerButton(props) {
         }
       }
   }
-  const total = props.parts.length
-  const color = n === total ? 'green' : 'pink'
-  //<StoreIcon retailer={r} />
+  const color = props.numberOfParts === props.total ? 'green' : 'pink'
   return (
     <semantic.Button
       onClick={onClick}
       loading={props.adding}
       color={color}
       content={<div className='buttonText' ><StoreIcon retailer={r} />{r}</div>}
-      label={{as: 'a', color, content: ` ${n}/${total} lines`}}
+      label={{as: 'a', color, content: ` ${props.numberOfParts}/${props.total} parts`}}
       labelPosition='right'
       className={'retailerButton ' + color}
     >
