@@ -203,7 +203,12 @@ function ExpandBom(props) {
 function AdjustQuantity(props) {
   return (
     <semantic.Segment
-      style={{display: 'flex', justifyContent: 'space-around'}}
+      style={{
+        display: 'flex',
+        justifyContent: 'space-around',
+        borderTop: 0,
+        borderBottom: 0,
+      }}
       attached
     >
       <div style={{display: 'flex', alignItems: 'center'}} >
@@ -227,7 +232,13 @@ function AdjustQuantity(props) {
               props.setBuyMultiplier(v)
             }}
           />
-          <semantic.Icon style={{margin: 10}} name='plus' />
+          <semantic.Icon
+            style={{
+              margin: 10,
+              marginTop: 0,
+            }}
+            name='plus'
+          />
           <semantic.Input
             type='number'
             min={0}
