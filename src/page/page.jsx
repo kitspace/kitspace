@@ -11,6 +11,7 @@ const FadeImage = require('../fade_image')
 const BuyParts  = require('../buy_parts/buy_parts')
 const Readme    = require('../readme')
 
+const info = require('../info.json')
 
 const Page = React.createClass({
   getInitialState() {
@@ -32,7 +33,6 @@ const Page = React.createClass({
     }, 1000)
   },
   render() {
-    const info         = this.props.info
     const titleText    = info.id.split('/').slice(2).join(' / ')
     const subtitleText = info.id.split('/').slice(0,2).join(' / ')
     return (
