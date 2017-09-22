@@ -40,50 +40,10 @@
         background: rgb(255, 246, 246) !important;
     }
 
-    td.retailerHeader {
-        cursor: pointer !important;
-        color: black !important;
-    }
-
-    td.retailerHeader:hover {
-        background-color: #e6e6e6;
-    }
-
-    td.retailerHeader.error:hover {
-        background-color: rgba(255, 192, 203, 0.58) !important;
-    }
-
-
-    div.retailerButtonCellText {
-        min-width: 102px;
-        @include breakpoint(mobile-m) {
-            width: 224px;
-        }
-    }
-    div.retailerButtonCellIcon {
-        font-size: 22px;
-    }
-
     .storeIcons {
         height: 16px;
         margin-right: 3px;
         width: 16px;
-    }
-
-    .retailerButtonCellName {
-        display: flex;
-        align-items: center;
-    }
-
-    .expandBom {
-        background: rgba(0,0,0,.05) !important;
-        font-size: 12 !important;
-        font-weight: bold !important;
-    }
-
-    .expandBom:hover {
-        cursor: pointer;
-        background: rgba(0,0,0,.08) !important;
     }
 
     .buttonSegment {
@@ -97,6 +57,15 @@
         display: flex;
         @include breakpoint(small_width) {
             flex-wrap: wrap;
+        }
+    }
+
+    button.loading {
+        .buttonText {
+            opacity: 0;
+        }
+        .storeIcon {
+            opacity: 0;
         }
     }
 
