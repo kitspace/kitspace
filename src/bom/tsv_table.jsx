@@ -134,6 +134,8 @@ const TsvTable = React.createClass({
       selectable  : !this.state.activePopup,
       celled      : true,
       unstackable : true,
+      singleLine  : true,
+      size        : 'small',
     }
     return h(semantic.Table, tableProps, [headingJSX, bodyJSX])
   }
