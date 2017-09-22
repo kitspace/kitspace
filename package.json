@@ -40,8 +40,7 @@
     "update-reg": "./scripts/update_registry",
     "plug-reg": "./scripts/plug_versions",
     "serve": "http-server build/",
-    "lint": "eslint src",
-    "test": "mocha"
+    "lint": "eslint src"
   },
   "author": "Kaspar Emanuel",
   "license": "CPAL-1.0",
