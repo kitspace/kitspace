@@ -105,59 +105,49 @@ const BuyParts = React.createClass({
     ), 0)
     return (
       <div className='BuyParts'>
-        <div className='bomTableContainer'>
-          <ReactResponsive query={mediaQueries.mobile_m}>
-            {matches => {
-              return (
-                <div>
-                  <semantic.Header
-                    textAlign='center'
-                    as='h3'
-                    attached='top'
-                  >
-                   <i className='icon-basket-3' />
-                    Buy Parts
-                  </semantic.Header>
-                  <InstallPrompt
-                    extensionPresence={this.state.extensionPresence}
-                    bomInstallLink={installExtension}
-                  />
-                  <AdjustQuantity
-                    buyMultiplier={this.state.buyMultiplier}
-                    buyAddPercent={this.state.buyAddPercent}
-                    setBuyMultiplier={v => this.setState({buyMultiplier: v})}
-                    setBuyAddPercent={v => this.setState({buyAddPercent: v})}
-                    numberOfItems={numberOfItems}
-                    numberOfLines={lines.length}
-                  />
-                  <semantic.Segment className='buttonSegment'attached>
-                    {retailerButtons}
-                  </semantic.Segment>
-                  <ExpandBom
-                    collapsed={this.state.collapsed}
-                    setCollapsed={v => this.setState({collapsed: v})}
-                  />
-                  {(() => {
-                    if (!this.state.collapsed) {
-                      return (
-                        <semantic.Segment attached='bottom'>
-                          <Bom
-                            parts={this.props.parts}
-                            tsv={this.linesToTsv()}
-                          />
-                        </semantic.Segment>
-                      )
-                    }
-                  })()}
-                </div>
-              )
-            }}
-          </ReactResponsive>
-          <DirectStores
-            multiplier={this.getMultiplier()}
-            items={this.props.lines}
-          />
-        </div>
+        <semantic.Header
+          textAlign='center'
+          as='h3'
+          attached='top'
+        >
+          <i className='icon-basket-3' />
+          Buy Parts
+        </semantic.Header>
+        <InstallPrompt
+          extensionPresence={this.state.extensionPresence}
+          bomInstallLink={installExtension}
+        />
+        <AdjustQuantity
+          buyMultiplier={this.state.buyMultiplier}
+          buyAddPercent={this.state.buyAddPercent}
+          setBuyMultiplier={v => this.setState({buyMultiplier: v})}
+          setBuyAddPercent={v => this.setState({buyAddPercent: v})}
+          numberOfItems={numberOfItems}
+          numberOfLines={lines.length}
+        />
+        <semantic.Segment className='buttonSegment'attached>
+          {retailerButtons}
+        </semantic.Segment>
+        <ExpandBom
+          collapsed={this.state.collapsed}
+          setCollapsed={v => this.setState({collapsed: v})}
+        />
+        {(() => {
+          if (!this.state.collapsed) {
+            return (
+              <semantic.Segment attached='bottom'>
+                <Bom
+                  parts={this.props.parts}
+                  tsv={this.linesToTsv()}
+                />
+              </semantic.Segment>
+            )
+          }
+        })()}
+        <DirectStores
+          multiplier={this.getMultiplier()}
+          items={this.props.lines}
+        />
       </div>
     )
   }
