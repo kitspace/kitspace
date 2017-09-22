@@ -1,6 +1,11 @@
 //these are also defined in common.scss and need to be adjusted there and here
-const mobile             = '(max-width: 458px)'
-const small_width        = '(max-width: 949px)'
+const small_width        = '(max-width: 768px)'
 const semantic_container = '(max-width: 1199px)'
+const mobile_m           = '(max-width: 458px)'
 
-module.exports = {mobile, semantic_container, small_width}
+const mobile = `
+  (orientation: portrait) and (max-device-width: 480px)
+  , (orientation: landscape) and (max-device-width: 660px)
+`
+
+module.exports = {mobile, mobile_m, semantic_container, small_width}

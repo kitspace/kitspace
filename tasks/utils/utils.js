@@ -21,7 +21,7 @@ exports.processArgs = function(argv) {
 };
 
 
-exports.reactRender = function(jsx, html, output) {
+exports.reactRender = function(jsx, html, output, router=false) {
     const fs = require('fs');
     const React = require('react');
     const ReactDOMServer = require('react-dom/server');
@@ -31,7 +31,11 @@ exports.reactRender = function(jsx, html, output) {
     require('babel-register')({presets: ['react']});
     const Main = require(process.cwd() + '/' + jsx);
 
-    const react = ReactDOMServer.renderToString(React.createElement(RouterContext, {}, [React.createElement(Main)]));
+    if (router) {
+        var react = ReactDOMServer.renderToString(React.createElement(RouterContext, {}, [React.createElement(Main)]));
+    } else {
+        var react = ReactDOMServer.renderToString(React.createElement(Main));
+    }
 
     const title = DocumentTitle.rewind(react);
 

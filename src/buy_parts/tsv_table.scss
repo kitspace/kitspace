@@ -1,11 +1,6 @@
-@import '/semantic.min.css';
-@import 'animation';
-@import '../common';
-@import '../colors';
-@import '../fontello';
 @import 'mpn_popup';
 
-.bom {
+.TsvTable {
     td.marked.orange {
         border-left: 13px solid #FF9E39 !important;
     }
@@ -34,6 +29,10 @@
         border-left: 13px solid lightblue !important;
     }
     tr.selected {
-       background:rgba(0,0,0,.05)!important
+       background:rgba(0,0,0,.05) !important;
+    }
+
+    td.error {
+        background: rgb(255, 246, 246) !important;
     }
 }

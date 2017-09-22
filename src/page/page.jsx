@@ -2,15 +2,14 @@ const React         = require('react')
 const DocumentTitle = require('react-document-title')
 const superagent    = require('superagent')
 
-const BOM           = require('./bom')
 const BoardShowcase = require('./board_showcase')
-const StoreButtons  = require('./buy_parts')
 const Gerbers       = require('./gerbers')
 const InfoBar       = require('./info_bar')
 
-const TitleBar      = require('../title_bar')
-const FadeImage     = require('../fade_image')
-const Readme        = require('../readme')
+const TitleBar  = require('../title_bar')
+const FadeImage = require('../fade_image')
+const BuyParts  = require('../buy_parts/buy_parts')
+const Readme    = require('../readme')
 
 
 const Page = React.createClass({
@@ -54,9 +53,11 @@ const Page = React.createClass({
               <FadeImage src='images/top.svg' />
               <FadeImage src='images/bottom.svg'/>
             </BoardShowcase>
-            <StoreButtons items={info.bom.lines} />
+            <BuyParts
+              lines={info.bom.lines}
+              parts={info.bom.parts}
+            />
             <Readme />
-            <BOM parts={info.bom.parts} tsv={info.bom.tsv} />
           </div>
         </div>
       </DocumentTitle>
