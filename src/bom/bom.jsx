@@ -129,6 +129,7 @@ const BomView = React.createClass({
                     setBuyMultiplier={v => this.setState({buyMultiplier: v})}
                     setBuyAddPercent={v => this.setState({buyAddPercent: v})}
                     numberOfItems={numberOfItems}
+                    numberOfLines={lines.length}
                   />
                   <semantic.Segment className='buttonSegment'attached>
                     {retailerButtons}
@@ -201,54 +202,62 @@ function ExpandBom(props) {
 
 function AdjustQuantity(props) {
   return (
-    <semantic.Segment attached textAlign='center' >
-      {`${props.numberOfItems} items, adjust quantity: `}
-      <semantic.Input
-        type='number'
-        size='mini'
-        min={1}
-        value={props.buyMultiplier}
-        style={{width: 80, marginLeft: 10}}
-        error={isNaN(props.buyMultiplier)
-          || (props.buyMultiplier < 1)}
-          onBlur={e => {
-            const v = props.buyMultiplier
-            if (isNaN(v) || v < 1) {
-              props.setBuyMultiplier(1)
-            }
-          }}
-          onChange={e => {
-            var v = parseFloat(e.target.value)
-            props.setBuyMultiplier(v)
-          }}
-        />
-        <semantic.Icon style={{margin: 10}} name='plus' />
+    <semantic.Segment
+      style={{display: 'flex', justifyContent: 'space-around'}}
+      attached
+    >
+      <div style={{display: 'flex', alignItems: 'center'}} >
+        Adjust quantity:
         <semantic.Input
           type='number'
-          min={0}
-          step={10}
-          value={props.buyAddPercent}
           size='mini'
-          style={{width: 80}}
-          error={isNaN(props.buyAddPercent)
-            || (props.buyAddPercent < 0)}
+          min={1}
+          value={props.buyMultiplier}
+          style={{width: 80, marginLeft: 10}}
+          error={isNaN(props.buyMultiplier)
+            || (props.buyMultiplier < 1)}
             onBlur={e => {
-              const v = props.buyAddPercent
-              if (isNaN(v) || v < 0) {
-                props.setBuyAddPercent(0)
+              const v = props.buyMultiplier
+              if (isNaN(v) || v < 1) {
+                props.setBuyMultiplier(1)
               }
             }}
             onChange={e => {
               var v = parseFloat(e.target.value)
-              props.setBuyAddPercent(v)
+              props.setBuyMultiplier(v)
             }}
           />
-          <span
-            className='notSelectable'
-            style={{marginLeft:5}}
-          >
-            %
-          </span>
+          <semantic.Icon style={{margin: 10}} name='plus' />
+          <semantic.Input
+            type='number'
+            min={0}
+            step={10}
+            value={props.buyAddPercent}
+            size='mini'
+            style={{width: 80}}
+            error={isNaN(props.buyAddPercent)
+              || (props.buyAddPercent < 0)}
+              onBlur={e => {
+                const v = props.buyAddPercent
+                if (isNaN(v) || v < 0) {
+                  props.setBuyAddPercent(0)
+                }
+              }}
+              onChange={e => {
+                var v = parseFloat(e.target.value)
+                props.setBuyAddPercent(v)
+              }}
+            />
+            <span
+              className='notSelectable'
+              style={{marginLeft:5}}
+            >
+              %
+            </span>
+          </div>
+          <div style={{display: 'flex', alignItems: 'center'}} >
+            {props.numberOfItems} items
+          </div>
         </semantic.Segment>
   )
 }
