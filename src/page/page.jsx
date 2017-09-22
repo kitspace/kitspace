@@ -7,7 +7,7 @@ const InfoBar       = require('./info_bar')
 
 const TitleBar  = require('../title_bar')
 const FadeImage = require('../fade_image')
-const BuyParts  = require('../bom/buy_parts')
+const BuyParts  = require('../buy_parts/buy_parts')
 const Readme    = require('../readme')
 
 const info = require('../info.json')
