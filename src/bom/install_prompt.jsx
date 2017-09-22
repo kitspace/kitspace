@@ -14,7 +14,7 @@ const InstallPrompt = React.createClass({
     setTimeout(() => {
       this.setState({
         timed_out: true,
-        compatibility: this.getCompatibility(),
+        compatible: this.getCompatibility(),
       })
     }, 5000)
   },
