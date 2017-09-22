@@ -180,6 +180,7 @@ function AdjustQuantity(props) {
     <semantic.Segment
       textAlign='center'
       attached
+      className='AdjustQuantity'
     >
         Adjust quantity:
         <semantic.Input
