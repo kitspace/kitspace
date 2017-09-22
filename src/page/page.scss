@@ -1,12 +1,9 @@
 @import '../colors';
 @import '../common';
 @import '../title_bar';
-@import 'bom';
+@import '../buy_parts/buy_parts';
 @import 'board_showcase';
 @import 'gerbers';
-@import 'buy_parts';
-@import 'bom_install_prompt';
-@import 'extension_compatibility_prompt';
 
     .disabledSite {
         color: $gray;
@@ -71,7 +68,7 @@
     }
 
     .readme {
-        margin: 15px 5px 5px 5px;
+        margin-top: 15px;
         padding: 20px;
         border-radius: 5px;
         border: 1px solid #EEEEEE;

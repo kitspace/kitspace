@@ -7,11 +7,11 @@ const Steps     = require('./steps')
 const UrlSubmit = require('./url_submit')
 
 const TitleBar    = require('../title_bar')
-const BOM         = require('../page/bom')
+const Bom         = require('../buy_parts/bom')
 const getPartinfo = require('../get_partinfo.js')
 
 
-const Step2 = React.createClass({
+const PreviewBom = React.createClass({
   render() {
     const board = this.props.board
     const instructionText = 'Add a [1-click-bom.tsv](https://1clickbom.com/#usage)'
@@ -58,11 +58,11 @@ const Step2 = React.createClass({
             {messages}
           </div>
         </div>
-        <BOM parts={board.parts} tsv={board.bom.tsv} />
+        {board.bom.tsv ? <Bom parts={board.parts} tsv={board.bom.tsv} /> : null}
       </semantic.Container>
     </div>
     )
   },
 })
 
-module.exports = Step2
+module.exports = PreviewBom
