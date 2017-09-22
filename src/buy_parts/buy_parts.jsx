@@ -97,14 +97,20 @@ const BuyParts = React.createClass({
           }
           return acc
         }, 0)
-        return RetailerButton({
-          name,
-          adding: this.state.adding[name],
-          extensionPresence:this.state.extensionPresence,
-          buyParts: this.state.buyParts.bind(null, name),
-          numberOfParts,
-          total,
-        })
+        if (numberOfParts === 0) {
+          return null
+        }
+        return (
+          <RetailerButton
+            name={name}
+            adding={this.state.adding[name]}
+            extensionPresence={this.state.extensionPresence}
+            buyParts={this.state.buyParts.bind(null, name)}
+            numberOfParts={numberOfParts}
+            total={total}
+            key={name}
+          />
+        )
       })
       .filter(x => x != null)
     return (
@@ -160,7 +166,6 @@ function ExpandBom(props) {
   return (
     <semantic.Button
         attached={collapsed ? 'bottom' : true}
-        textAlign='center'
         onClick={() => {
           props.setCollapsed(!props.collapsed)
         }}
