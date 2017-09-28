@@ -183,12 +183,19 @@ function AdjustQuantity(props) {
       className='AdjustQuantity'
     >
         Adjust quantity:
+        <semantic.Icon
+          style={{
+            margin: 5,
+            marginTop: 0,
+          }}
+          name='delete'
+        />
         <semantic.Input
           type='number'
           size='mini'
           min={1}
           value={props.buyMultiplier}
-          style={{width: 80, marginLeft: 10}}
+          style={{width: 80}}
           error={isNaN(props.buyMultiplier)
             || (props.buyMultiplier < 1)}
             onBlur={e => {
