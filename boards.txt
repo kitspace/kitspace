@@ -29,4 +29,4 @@ https://github.com/intajay/uduino
 https://github.com/8BitMixtape/8BitmixtapeNEO_ShenzhenReady
 https://github.com/julbouln/ice40_eink_controller
 https://github.com/julbouln/ifusb
-https://github.com/borgel/kitnic
+https://github.com/borgel/sympetrum-v2
