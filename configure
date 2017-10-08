@@ -203,12 +203,12 @@ for (folder of boardFolders) {
 
 function addEdge(taskFile, task) {
     if (config === 'production') {
-        return ninja.edge(task.targets)
-            .from([taskFile].concat(task.deps))
+        return ninja.edge(task.targets.map(ninjaBuildGen.escape))
+            .from([taskFile].concat(task.deps).map(ninjaBuildGen.escape))
             .using('node-task')
     } else {
-        const edge = ninja.edge(task.targets[0])
-            .from([taskFile].concat(task.deps))
+        const edge = ninja.edge(ninjaBuildGen.escape(task.targets[0]))
+            .from([taskFile].concat(task.deps).map(ninjaBuildGen.escape))
             .assign('taskFile', taskFile)
             .assign('targetFiles', task.targets.join(' '))
             .using('node-task')
