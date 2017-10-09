@@ -54,17 +54,6 @@ function Intro(props) {
           href='https://github.com/monostable/kitnic'>GitHub</a> to get
           updates as we progress and add content.
 
-          </p><p>
-
-            <i>
-
-            We are giving away free PCB manufacturing vouchers with <a
-            href='http://dangerousprototypes.com/store/pcbs'>Dangerous
-            Prototypes</a> for the first 20 projects that register. Current
-            status: 1/20 left.
-
-            </i>
-
           </p>
 
         </div>
