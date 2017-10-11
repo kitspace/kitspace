@@ -122,5 +122,9 @@
   {
     "repo": "https://github.com/julbouln/ifusb",
     "hash": "1b2a002bc89ac2553b43b002c6cbbf2151b77827"
+  },
+  {
+    "repo": "https://github.com/borgel/sympetrum-v2",
+    "hash": "00da4278d0a13b21455b1257a441b2d432532efe"
   }
 ]
