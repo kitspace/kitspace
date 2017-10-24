@@ -14,8 +14,8 @@ var BoardList = React.createClass({
     if (this.props.data.length === 0) {
       return (
         <div>
-          <div style={{height:'40%'}}></div>
-          <div style={{width:'100%', textAlign:'center'}}>
+          <div style={{height: '40vh'}}></div>
+          <div style={{width: '100%', textAlign:'center'}}>
                 Sorry, no results.
           </div>
         </div>
