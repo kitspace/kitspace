@@ -36,6 +36,8 @@ function makeImage(projectId, sha, fileName, res) {
         case '.svg':
             res.setHeader('content-type', 'image/svg+xml')
             return makeSvg(projectId, sha, fileName)
+        default:
+            throw Error(`Invalid file extension: ${ext}`)
     }
 }
 
