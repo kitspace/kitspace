@@ -8,7 +8,9 @@
   },
   "author": "",
   "dependencies": {
-    "express": "^4.16.2"
+    "express": "^4.16.2",
+    "gerber-to-svg": "git+https://github.com/kasbah/gerber-to-svg.git#upgrade-parser",
+    "pcb-stackup": "^3.0.0"
   },
   "devDependencies": {
     "mocha": "^4.0.1",
