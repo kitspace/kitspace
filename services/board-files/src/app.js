@@ -2,8 +2,11 @@ const app = require('express')()
 const util = require('util')
 const path = require('path')
 const pcbStackup = util.promisify(require('pcb-stackup'))
-const writeFile = util.promisify(require('fs').writeFile)
+const fs = require('fs')
 const mkdirp = util.promisify(require('mkdirp'))
+const writeFile = util.promisify(fs.writeFile)
+const readFile = util.promisify(fs.readFile)
+const exists = util.promisify(fs.exists)
 
 const config = require('../config')
 const GitlabClient = require('../../../modules/gitlab-client')
@@ -62,6 +65,10 @@ function makeImage(projectId, sha, fileName, res) {
 }
 
 async function makeSvg(projectId, sha, fileName) {
+    const cached = path.join(config.cache_dir, projectId, sha, 'images', fileName)
+    if (await exists(cached)) {
+        return await readFile(cached, 'utf8')
+    }
     const stackup = await getStackup(projectId, sha, fileName)
     switch (fileName) {
         case 'top.svg':
