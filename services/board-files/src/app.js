@@ -7,13 +7,14 @@ const mkdirp = util.promisify(require('mkdirp'))
 const writeFile = util.promisify(fs.writeFile)
 const readFile = util.promisify(fs.readFile)
 const exists = util.promisify(fs.exists)
+const exec = util.promisify(require('child_process').exec)
 
 const config = require('../config')
 const GitlabClient = require('../../../modules/gitlab-client')
 
 const gitlab = new GitlabClient('https://gitlab2.kitnic.it/accounts')
 
-const validFileNames = ['top.svg', 'bottom.svg']
+const validFileNames = ['top.svg', 'bottom.svg', 'top-small.png']
 
 app.get('/board-files/:projectId/:sha/images/:fileName', (req, res) => {
     const { projectId, sha, fileName } = req.params
@@ -70,7 +71,7 @@ async function makeSvg(projectId, sha, fileName) {
     if (await exists(cached)) {
         return await readFile(cached, 'utf8')
     }
-    const stackup = await getStackup(projectId, sha, fileName)
+    const stackup = await getStackup(projectId, sha)
     switch (fileName) {
         case 'top.svg':
             return stackup.top.svg
@@ -85,9 +86,25 @@ function cachedPath(projectId, sha, fileName) {
     return path.join(config.cache_dir, projectId, sha, 'images', fileName)
 }
 
-async function makePng(projectId, sha, fileName) {}
+async function makePng(projectId, sha, fileName) {
+    const pngPath = cachedPath(projectId, sha, fileName)
+    if (await exists(pngPath)) {
+        return await readFile(pngPath, 'utf8')
+    }
+    const svgFileName = /^top/.test(fileName) ? 'top.svg' : 'bottom.svg'
+    const cachedSvg = cachedPath(projectId, sha, svgFileName)
+    if (!await exists(cachedSvg)) {
+        const svgData = await makeSvg(projectId, sha, svgFileName)
+        await cacheImage(projectId, sha, svgFileName, svgData)
+    }
+    await exec(
+        `inkscape --without-gui '${cachedSvg}' \
+        --export-png='${pngPath}' --export-width=240`
+    )
+    return await readFile(pngPath, 'utf8')
+}
 
-async function getStackup(projectId, sha, fileName) {
+async function getStackup(projectId, sha) {
     const files = await gitlab.getProjectFiles(projectId, sha)
     const info = await gitlab.getInfo(projectId, files)
     const layers = await gitlab.getGerberFiles(projectId, files, info)
