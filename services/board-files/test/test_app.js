@@ -30,6 +30,13 @@ describe('app', () => {
         assert(r.header['content-type'] === 'image/svg+xml; charset=utf-8')
         assert(r.body)
     })
+    it('serves bottom.svg', async () => {
+        const r = await supertest(app)
+            .get(`/board-files/${id}/${sha}/images/bottom.svg`)
+            .expect(200)
+        assert(r.header['content-type'] === 'image/svg+xml; charset=utf-8')
+        assert(r.body)
+    })
 })
 
 function trace(x) {

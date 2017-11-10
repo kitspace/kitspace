@@ -7,7 +7,7 @@ const GitlabClient = require('../../../modules/gitlab-client')
 
 const gitlab = new GitlabClient('https://gitlab2.kitnic.it/accounts')
 
-const validFileNames = ['top.svg']
+const validFileNames = ['top.svg', 'bottom.svg']
 
 app.get('/board-files/:projectId/:sha/images/:fileName', (req, res) => {
     const { projectId, sha, fileName } = req.params
