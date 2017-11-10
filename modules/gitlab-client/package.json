@@ -1,0 +1,20 @@
+{
+  "name": "kitspace-gitlab-client",
+  "version": "0.0.0",
+  "description": "",
+  "scripts": {
+    "test": "mocha --timeout=5000"
+  },
+  "author": "",
+  "devDependencies": {
+    "mocha": "^4.0.1",
+    "prettier": "^1.8.2"
+  },
+  "dependencies": {
+    "js-yaml": "^3.10.0",
+    "superagent": "^3.8.1",
+    "url-join": "^2.0.2",
+    "whats-that-gerber": "^2.1.1"
+  },
+  "main": "src/index.js"
+}
