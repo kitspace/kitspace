@@ -34,7 +34,7 @@ describe('app', () => {
             .expect(200)
         assert(r.header['content-type'] === 'image/svg+xml; charset=utf-8')
         assert(r.body)
-        await sleep(1)
+        await sleep(100)
         await readFile(
             path.join(config.cache_dir, String(id), sha, 'images', 'top.svg')
         )

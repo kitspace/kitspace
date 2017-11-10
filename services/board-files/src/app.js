@@ -45,9 +45,10 @@ app.get('/board-files/:projectId/:sha/images/:fileName', (req, res) => {
 })
 
 async function cacheImage(projectId, sha, fileName, imageData) {
-    const dir = path.join(config.cache_dir, projectId, sha, 'images')
+    const cached = cachedPath(projectId, sha, fileName)
+    const dir = path.dirname(cached)
     await mkdirp(dir)
-    return await writeFile(path.join(dir, fileName), imageData)
+    return await writeFile(cached, imageData)
 }
 
 function makeImage(projectId, sha, fileName, res) {
@@ -65,7 +66,7 @@ function makeImage(projectId, sha, fileName, res) {
 }
 
 async function makeSvg(projectId, sha, fileName) {
-    const cached = path.join(config.cache_dir, projectId, sha, 'images', fileName)
+    const cached = cachedPath(projectId, sha, fileName)
     if (await exists(cached)) {
         return await readFile(cached, 'utf8')
     }
@@ -78,6 +79,10 @@ async function makeSvg(projectId, sha, fileName) {
         default:
             throw Error(`Invalid file requested: ${fileName}`)
     }
+}
+
+function cachedPath(projectId, sha, fileName) {
+    return path.join(config.cache_dir, projectId, sha, 'images', fileName)
 }
 
 async function makePng(projectId, sha, fileName) {}
