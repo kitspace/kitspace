@@ -13,12 +13,15 @@ describe('app', () => {
         id = projects[0].id
         sha = gitlab.getProjectHead(id)
     })
+    it('404s on invalid requests', async () => {
+        await supertest(app)
+            .get(`/board-files/xxx`)
+            .expect(404)
+    })
     it('404s on invalid names', async () => {
-        const png = await supertest(app)
+        await supertest(app)
             .get(`/board-files/${id}/${sha}/images/invalid`)
             .expect(404)
-            .then(r => r.text)
-        assert(png === 'Not Found')
     })
     it('serves top-large.png', async () => {
         const png = await supertest(app)
