@@ -7,15 +7,24 @@ const GitlabClient = require('../../../modules/gitlab-client')
 const gitlab = new GitlabClient('https://gitlab2.kitnic.it/accounts')
 
 describe('app', () => {
-    it('serves top-large.png', async () => {
+    let id, sha
+    before(async () => {
         const projects = await gitlab.getProjects()
-        const id = projects[0].id
-        const sha = gitlab.getProjectHead(id)
+        id = projects[0].id
+        sha = gitlab.getProjectHead(id)
+    })
+    it('404s on invalid names', async () => {
+        const png = await supertest(app)
+            .get(`/board-files/${id}/${sha}/images/invalid`)
+            .expect(404)
+            .then(r => r.text)
+        assert(png === 'Not Found')
+    })
+    it('serves top-large.png', async () => {
         const png = await supertest(app)
             .get(`/board-files/${id}/${sha}/images/top-large.png`)
             .expect(200)
             .then(r => r.text)
-        console.log(png)
         assert(png)
     })
 })
