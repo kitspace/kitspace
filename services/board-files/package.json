@@ -10,6 +10,7 @@
   "dependencies": {
     "express": "^4.16.2",
     "gerber-to-svg": "git+https://github.com/kasbah/gerber-to-svg.git#upgrade-parser",
+    "mkdirp": "^0.5.1",
     "pcb-stackup": "^3.0.0"
   },
   "devDependencies": {

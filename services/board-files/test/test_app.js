@@ -1,6 +1,11 @@
 const assert = require('assert')
 const supertest = require('supertest')
+const fs = require('fs')
+const util = require('util')
+const readFile = util.promisify(fs.readFile)
+const path = require('path')
 
+const config = require('../config')
 const app = require('../src/app')
 const GitlabClient = require('../../../modules/gitlab-client')
 
@@ -29,6 +34,10 @@ describe('app', () => {
             .expect(200)
         assert(r.header['content-type'] === 'image/svg+xml; charset=utf-8')
         assert(r.body)
+        await sleep(1)
+        await readFile(
+            path.join(config.cache_dir, String(id), sha, 'images', 'top.svg')
+        )
     })
     it('serves bottom.svg', async () => {
         const r = await supertest(app)
@@ -42,4 +51,8 @@ describe('app', () => {
 function trace(x) {
     console.log(x)
     return x
+}
+
+function sleep(delay, value) {
+    return new Promise(resolve => setTimeout(resolve, delay, value))
 }

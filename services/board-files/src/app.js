@@ -2,7 +2,10 @@ const app = require('express')()
 const util = require('util')
 const path = require('path')
 const pcbStackup = util.promisify(require('pcb-stackup'))
+const writeFile = util.promisify(require('fs').writeFile)
+const mkdirp = util.promisify(require('mkdirp'))
 
+const config = require('../config')
 const GitlabClient = require('../../../modules/gitlab-client')
 
 const gitlab = new GitlabClient('https://gitlab2.kitnic.it/accounts')
@@ -16,7 +19,10 @@ app.get('/board-files/:projectId/:sha/images/:fileName', (req, res) => {
         return res.sendStatus(404)
     }
     makeImage(projectId, sha, fileName, res)
-        .then(r => res.send(r))
+        .then(imageData => {
+            res.send(imageData)
+            return imageData
+        })
         .catch(e => {
             if (e.status) {
                 res.sendStatus(e.status)
@@ -25,7 +31,21 @@ app.get('/board-files/:projectId/:sha/images/:fileName', (req, res) => {
                 res.sendStatus(500)
             }
         })
+        .then(imageData => {
+            if (imageData) {
+                return cacheImage(projectId, sha, fileName, imageData)
+            }
+        })
+        .catch(e => {
+            console.error(e)
+        })
 })
+
+async function cacheImage(projectId, sha, fileName, imageData) {
+    const dir = path.join(config.cache_dir, projectId, sha, 'images')
+    await mkdirp(dir)
+    return await writeFile(path.join(dir, fileName), imageData)
+}
 
 function makeImage(projectId, sha, fileName, res) {
     const ext = path.extname(fileName)
@@ -53,8 +73,7 @@ async function makeSvg(projectId, sha, fileName) {
     }
 }
 
-async function makePng(projectId, sha, fileName) {
-}
+async function makePng(projectId, sha, fileName) {}
 
 async function getStackup(projectId, sha, fileName) {
     const files = await gitlab.getProjectFiles(projectId, sha)
@@ -62,7 +81,6 @@ async function getStackup(projectId, sha, fileName) {
     const layers = await gitlab.getGerberFiles(projectId, files, info)
     return await pcbStackup(layers)
 }
-
 
 module.exports = app
 
