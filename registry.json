@@ -65,7 +65,7 @@
   },
   {
     "repo": "https://github.com/kanflo/aaduino",
-    "hash": "d8812f3dc57bc0837e9de833a49b8cfec1901f75"
+    "hash": "c15edf9b93594ae34dc815a2a9521514c13dbef7"
   },
   {
     "repo": "https://github.com/descampsa/DynamixelShield",
@@ -113,7 +113,7 @@
   },
   {
     "repo": "https://github.com/8BitMixtape/8BitmixtapeNEO_ShenzhenReady",
-    "hash": "45b297c4477f407d4511dfe7c09ad870f4325ae8"
+    "hash": "afeeec78c1f741bbebd9bb7975d529c683a62274"
   },
   {
     "repo": "https://github.com/julbouln/ice40_eink_controller",
