@@ -48,10 +48,10 @@ function Intro(props) {
           href='/submit'>
           Submit</a> your own project to have it listed here. Follow Kitnic
           on <a
-          href='https://twitter.com/kitnic_it'>Twitter</a>, <a
+          href='https://twitter.com/kitspaceorg'>Twitter</a>, <a
           href='https://www.facebook.com/kitnicit'>Facebook</a>, <a
-          href='https://reddit.com/r/kitnic'>Reddit</a>, <a
-          href='https://hackaday.io/project/11871-kitnic'>Hackaday.io</a> or <a
+          href='https://reddit.com/r/kitspace'>Reddit</a>, <a
+          href='https://hackaday.io/project/11871-kitspace'>Hackaday.io</a> or <a
           href='https://github.com/monostable/kitspace'>GitHub</a> to get
           updates as we progress and add content.
 

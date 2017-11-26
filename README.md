@@ -17,7 +17,7 @@ Help us build a open hardware repository of useful electronics projects!
 
 ## Get in touch
 
- - [Join Riot.im chat][riot.im] or IRC freenode#kitnic
+ - [Join Riot.im chat][riot.im] or IRC freenode#kitspace
  - [Post on our Google Groups mailing list](https://groups.google.com/forum/#!forum/kitnic-discuss)
 
 ## Submitting your project
@@ -175,9 +175,8 @@ file-saves and re-build when you change a source file.
 [yamllint]: http://www.yamllint.com
 [1clickbom#making]: https://1clickbom.com/#making-a-1-click-bom
 [travis-status]: https://travis-ci.org/monostable/kitspace.svg?branch=master
-[riot.im]: https://riot.im/app/#/room/#kitnic:matrix.org
+[riot.im]: https://riot.im/app/#/room/#kitspace:matrix.org
 
 [4]: https://help.github.com/articles/create-a-repo/
 [5]: https://help.github.com/articles/adding-a-file-to-a-repository/
 [6]: http://www.yaml.org/start.html
-[8]: https://img.shields.io/badge/mailing--list-kitnic--discuss-green.svg
