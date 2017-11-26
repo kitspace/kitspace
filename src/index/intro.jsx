@@ -26,9 +26,10 @@ function Intro(props) {
         <div className='introText' style={style.intro}>
           <p>
 
-            Kitnic is a registry of open hardware electronics projects that are
-            ready for you to order and build. Click on any project to get
-            further info, download the Gerbers and see the bill of materials.
+            Kitspace (formerly called Kitnic) is a registry of open hardware
+            electronics projects that are ready for you to order and build.
+            Click on any project to get further info, download the Gerbers and
+            see the bill of materials.
 
 
           </p><p>
@@ -42,7 +43,7 @@ function Intro(props) {
           </p><p>
 
 
-          Help build an open hardware repository of useful electronics
+          Help make Kit Space an open hardware repository of useful electronics
           projects! <a
           href='/submit'>
           Submit</a> your own project to have it listed here. Follow Kitnic
@@ -51,7 +52,7 @@ function Intro(props) {
           href='https://www.facebook.com/kitnicit'>Facebook</a>, <a
           href='https://reddit.com/r/kitnic'>Reddit</a>, <a
           href='https://hackaday.io/project/11871-kitnic'>Hackaday.io</a> or <a
-          href='https://github.com/monostable/kitnic'>GitHub</a> to get
+          href='https://github.com/monostable/kitspace'>GitHub</a> to get
           updates as we progress and add content.
 
           </p>
