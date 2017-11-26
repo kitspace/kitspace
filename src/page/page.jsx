@@ -17,7 +17,7 @@ const Page = React.createClass({
     const titleText    = info.id.split('/').slice(2).join(' / ')
     const subtitleText = info.id.split('/').slice(0,2).join(' / ')
     return (
-      <DocumentTitle title={`${titleText} - kitnic.it`}>
+      <DocumentTitle title={`${titleText} - kitspace.org`}>
         <div>
           <div className='page'>
             <TitleBar submissionButton={true}>

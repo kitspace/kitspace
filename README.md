@@ -1,14 +1,12 @@
-# https://kitnic.it
-**We are giving away free PCB manufacturing vouchers to the first 20
-projects that register. Just follow the steps in the [submission preview](https://kitnic.it/submit). Current status: 1/20 left.**
+# https://kitspace.org
 
-[![build status][travis-status]](https://travis-ci.org/monostable/kitnic)
+[![build status][travis-status]](https://travis-ci.org/monostable/kitspace)
 
 [![video](image_src/fosdem2017.jpg)](https://video.fosdem.org/2017/AW1.120/kitnic_it.vp8.webm)
 
-Kitnic is a registry of open source hardware electronics projects that are
-ready to order and build. The most important elements of a Kitnic project page
-are:
+Kit Space (formerly Kitnic) is a registry of open source hardware electronics
+projects that are ready to order and build. The most important elements of a
+Kitnic project page are:
 
 - A prominent link to download the Gerber files and a preview rendering of the board
 - The ability to quickly add the required components to a retailer shopping
@@ -24,7 +22,7 @@ Help us build a open hardware repository of useful electronics projects!
 
 ## Submitting your project
 
-Check out [kitnic.it/submit](https://kitnic.it/submit) which will guide you through the process.
+Check out [kitspace.org/submit](https://kitspace.org/submit) which will guide you through the process.
 
 ### Kitnic.yaml format
 
@@ -53,7 +51,7 @@ validator][yamllint] to be extra sure that your `kitnic.yaml` is valid.
 
 ### Some examples
 Check out the repo links of the projects listed on
-[kitnic.it](https://kitnic.it) already. The minimum required file tree is
+[kitspace.org](https://kitspace.org) already. The minimum required file tree is
 something like :
 
 ```
@@ -176,7 +174,7 @@ file-saves and re-build when you change a source file.
 [1clickbom]: https://1clickBOM.com
 [yamllint]: http://www.yamllint.com
 [1clickbom#making]: https://1clickbom.com/#making-a-1-click-bom
-[travis-status]: https://travis-ci.org/monostable/kitnic.svg?branch=master
+[travis-status]: https://travis-ci.org/monostable/kitspace.svg?branch=master
 [riot.im]: https://riot.im/app/#/room/#kitnic:matrix.org
 
 [4]: https://help.github.com/articles/create-a-repo/
