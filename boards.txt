@@ -1,11 +1,11 @@
 https://github.com/mattvenn/esp8266-breakout
-https://github.com/kitnic-forks/arduino-uno
-https://github.com/kitnic-forks/Bus_Pirate
-https://github.com/kitnic-forks/HACK
-https://github.com/kitnic-forks/FM_Transmitter
+https://github.com/kitspace-forks/arduino-uno
+https://github.com/kitspace-forks/Bus_Pirate
+https://github.com/kitspace-forks/HACK
+https://github.com/kitspace-forks/FM_Transmitter
 https://github.com/kasbah/nomech
 https://github.com/kasbah/push-on-hold-off
-https://github.com/kitnic-forks/BQ25570_Harvester
+https://github.com/kitspace-forks/BQ25570_Harvester
 https://github.com/JarrettR/USBvil
 https://github.com/8BitMixtape/NextLevelEdition
 https://github.com/dvdfreitag/Signal-Detector
@@ -17,7 +17,7 @@ https://github.com/pcbsz/LM386
 https://github.com/kanflo/aaduino
 https://github.com/descampsa/DynamixelShield
 https://github.com/jpralves/cseduino
-https://github.com/kitnic-forks/neo
+https://github.com/kitspace-forks/neo
 https://github.com/InaneCoding/KOS01_IdealDiode20A
 https://github.com/UDXS/Arduitsy
 https://github.com/monostable/jelly
