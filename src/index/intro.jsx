@@ -43,13 +43,13 @@ function Intro(props) {
           </p><p>
 
 
-          Help make Kit Space an open hardware repository of useful electronics
+          Help make an open hardware repository of useful electronics
           projects! <a
           href='/submit'>
-          Submit</a> your own project to have it listed here. Follow Kitnic
+          Submit</a> your own project to have it listed here. Follow Kit Space
           on <a
           href='https://twitter.com/kitspaceorg'>Twitter</a>, <a
-          href='https://www.facebook.com/kitnicit'>Facebook</a>, <a
+          href='https://www.facebook.com/kitspaceorg'>Facebook</a>, <a
           href='https://reddit.com/r/kitspace'>Reddit</a>, <a
           href='https://hackaday.io/project/11871-kitspace'>Hackaday.io</a> or <a
           href='https://github.com/monostable/kitspace'>GitHub</a> to get

@@ -18,7 +18,7 @@ Help us build a open hardware repository of useful electronics projects!
 ## Get in touch
 
  - [Join Riot.im chat][riot.im] or IRC freenode#kitspace
- - [Post on our Google Groups mailing list](https://groups.google.com/forum/#!forum/kitnic-discuss)
+ - [Post on our Google Groups mailing list](https://groups.google.com/forum/#!forum/kitspace)
 
 ## Submitting your project
 

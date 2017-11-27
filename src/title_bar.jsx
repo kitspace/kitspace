@@ -32,7 +32,7 @@ var TitleBar = React.createClass({
           <a
           className='contributeContainer'
           title='Contribute to Kitnic'
-          href='https://github.com/monostable/kitnic/'>
+          href='https://github.com/monostable/kitspace/'>
             <div className='contributeButton'>
               <span className='octicon octicon-mark-github githubIcon'></span>
             </div>
