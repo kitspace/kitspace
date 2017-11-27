@@ -1,2 +1,2 @@
 /jelly /boards/github.com/monostable/jelly
-/boards/github.com/kitnic-forks /boards/github.com/kitspace-forks
+/boards/github.com/kitnic-forks/* /boards/github.com/kitspace-forks/:splat
