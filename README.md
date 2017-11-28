@@ -4,9 +4,9 @@
 
 [![video](image_src/fosdem2017.jpg)](https://video.fosdem.org/2017/AW1.120/kitnic_it.vp8.webm)
 
-Kit Space (formerly Kitnic) is a registry of open source hardware electronics
+Kitspace (formerly Kitnic) is a registry of open source hardware electronics
 projects that are ready to order and build. The most important elements of a
-Kitnic project page are:
+Kit Space project page are:
 
 - A prominent link to download the Gerber files and a preview rendering of the board
 - The ability to quickly add the required components to a retailer shopping
@@ -112,7 +112,7 @@ gerbers: manufacture/gerbers-and-drills
 ### Architecture
 
 #### Current
-This repository is the Kitnic front-end. The contents including all project
+This repository is the Kitspace front-end. The contents including all project
 data are currently pre-compiled into a static site.  The main part of the site
 that requires server side components is the submission preview (`/submit`). Pages also use freegeoip lookup to decide what sites to link to for people that do not have the 1-click BOM browser extension. This roughly illustrates the main data flow when someone is browsing the site.
 
@@ -144,7 +144,7 @@ Services used are:
 ### Roadmap
 
 - [ ] GitLab and Accounts
-   - [x] Modify GitLab and integrate with login in Kitnic frontend
+   - [x] Modify GitLab and integrate with login in Kitspace frontend
    - [x] Build frontend for basic account settings
    - [ ] Make GitLab source of user projects
 - [ ] Upload submissions and editing
