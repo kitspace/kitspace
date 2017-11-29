@@ -10,10 +10,10 @@ Kit Space project page are:
 
 - A prominent link to download the Gerber files and a preview rendering of the board
 - The ability to quickly add the required components to a retailer shopping
-  cart (using clever magic in the form of our [browser extension][1clickbom])
+  cart (using our [browser extension][1clickbom])
 
 
-Help us build a open hardware repository of useful electronics projects!
+Help us build an open hardware repository of useful electronics projects!
 
 ## Get in touch
 
