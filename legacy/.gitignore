@@ -1,8 +1,0 @@
-build.ninja
-build/*
-node_modules/*
-*.sw*
-boards/*
-npm-debug.log
-.sass-cache/
-.DS_Store
