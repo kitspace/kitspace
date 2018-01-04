@@ -15,6 +15,11 @@ Kit Space project page are:
 
 Help us build an open hardware repository of useful electronics projects!
 
+## pcb-stackup
+
+The renderings of the PCB files are made using [pcb-stackup](https://github.com/tracespace/pcb-stackup).
+You can get similar renderings and also inspect invdividual layers, using the [tracespace gerber viewer](http://viewer.tracespace.io).
+
 ## Get in touch
 
  - [Join Riot.im chat][riot.im] or IRC freenode#kitspace
