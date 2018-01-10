@@ -30,3 +30,4 @@ https://github.com/8BitMixtape/8BitmixtapeNEO_ShenzhenReady
 https://github.com/julbouln/ice40_eink_controller
 https://github.com/julbouln/ifusb
 https://github.com/borgel/sympetrum-v2
+https://github.com/im-tomu/tomu-hardware
