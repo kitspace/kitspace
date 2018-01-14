@@ -1,6 +1,6 @@
 const React = require('react')
 const semantic = require('semantic-ui-react')
-const {h, tbody, tr} = require('react-hyperscript-helpers')
+const {h, tbody, tr, td} = require('react-hyperscript-helpers')
 const ramda = require('ramda')
 
 const MpnPopup = require('./mpn_popup')
@@ -72,7 +72,7 @@ const TsvTable = React.createClass({
   },
   render() {
     const tsv = this.props.tsv
-    let lines = tsv
+    const lines = tsv
       .split('\n')
       .slice(0, -1)
       .map(line => line.split('\t'))
@@ -92,14 +92,14 @@ const TsvTable = React.createClass({
     })
 
     const numberOfLines = this.props.collapsed ? 5 : undefined
-    lines = columns.slice(1).reduce((prev, column) => {
+    const reducedLines = columns.slice(1).reduce((prev, column) => {
       return prev.slice(0, numberOfLines).map((line, index) => {
         return line.concat([column[index]])
       })
     }, columns[0].map(c => [c]))
 
-    const headings = lines[0]
-    const bodyLines = lines.slice(1)
+    const headings = reducedLines[0]
+    const bodyLines = reducedLines.slice(1)
     let headingJSX = headings.map(text => h(semantic.Table.HeaderCell, text))
     headingJSX = h(semantic.Table.Header, [h(semantic.Table.Row, headingJSX)])
     const bodyLinesJSX = bodyLines.map((line, rowIndex) => {
@@ -153,6 +153,5 @@ const TsvTable = React.createClass({
     return h(semantic.Table, tableProps, [headingJSX, bodyJSX])
   }
 })
-
 
 module.exports = TsvTable

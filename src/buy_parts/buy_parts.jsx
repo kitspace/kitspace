@@ -143,6 +143,7 @@ const BuyParts = React.createClass({
           attached
           parts={this.props.parts}
           tsv={this.linesToTsv()}
+          length={this.props.lines.length}
           collapsed={this.state.collapsed}
           setCollapsed={v => this.setState({collapsed: v})}
         />
