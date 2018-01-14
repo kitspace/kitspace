@@ -5,19 +5,20 @@ const semantic = require('semantic-ui-react')
 const TsvTable = require('./tsv_table')
 
 module.exports = props => {
+  let diff = props.length - 7
+  let collapsed = props.collapsed
+  if (diff < 2) {
+    diff = 0
+    collapsed = false
+  }
   return (
     <div className="Bom">
       <DoubleScrollbar>
-        <TsvTable
-          parts={props.parts}
-          tsv={props.tsv}
-          collapsed={props.collapsed}
-          setCollapsed={props.setCollapsed}
-        />
+        <TsvTable parts={props.parts} tsv={props.tsv} collapsed={collapsed} />
       </DoubleScrollbar>
       <ExpandBom
-        diff={props.length - 7}
-        collapsed={props.collapsed}
+        diff={diff}
+        collapsed={collapsed}
         setCollapsed={props.setCollapsed}
       />
     </div>
@@ -28,17 +29,15 @@ function ExpandBom(props) {
   if (props.diff > 0) {
     if (props.collapsed) {
       var summary = (
-        <tr className='expandSummary'>
-          <semantic.Table.Cell
-            textAlign="center"
-          >
-            {`... ${props.diff} more line${props.diff > 1 ? 's' : ''}`}
+        <tr className="expandSummary">
+          <semantic.Table.Cell textAlign="center">
+            {`... ${props.diff} more lines`}
           </semantic.Table.Cell>
         </tr>
       )
     }
     return (
-      <div style={{paddingLeft:1, paddingRight:1}}>
+      <div style={{paddingLeft: 1, paddingRight: 1}}>
         <semantic.Table
           className="expandBomTable"
           attached="bottom"
@@ -47,7 +46,7 @@ function ExpandBom(props) {
           unstackable
           style={{
             borderTop: 0,
-            cursor: 'pointer',
+            cursor: 'pointer'
           }}
           onClick={() => props.setCollapsed(!props.collapsed)}
         >
