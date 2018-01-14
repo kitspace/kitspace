@@ -91,12 +91,12 @@ const TsvTable = React.createClass({
       return column.slice(1).filter(x => x).length
     })
 
-    const numberOfLines = this.props.collapsed ? 5 : undefined
+    const numberOfLines = this.props.collapsed ? 8 : undefined
     const reducedLines = columns.slice(1).reduce((prev, column) => {
-      return prev.slice(0, numberOfLines).map((line, index) => {
+      return prev.map((line, index) => {
         return line.concat([column[index]])
       })
-    }, columns[0].map(c => [c]))
+    }, columns[0].slice(0, numberOfLines).map(c => [c]))
 
     const headings = reducedLines[0]
     const bodyLines = reducedLines.slice(1)

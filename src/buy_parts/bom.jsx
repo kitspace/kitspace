@@ -16,7 +16,7 @@ module.exports = props => {
         />
       </DoubleScrollbar>
       <ExpandBom
-        diff={props.length - 4}
+        diff={props.length - 7}
         collapsed={props.collapsed}
         setCollapsed={props.setCollapsed}
       />
