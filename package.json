@@ -26,6 +26,7 @@
     "ninja-build-gen": "^0.2.1",
     "node-sass": "^4.0.0",
     "postcss-cli": "^2.6.0",
+    "prettier": "^1.10.2",
     "ramda": "^0.23.0",
     "reactify": "^1.1.1",
     "semantic-ui-css": "^2.2.4",
@@ -40,7 +41,8 @@
     "update-reg": "./scripts/update_registry",
     "plug-reg": "./scripts/plug_versions",
     "serve": "http-server build/",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "fmt": "prettier --write configure *.js src/**/*.jsx src/**/*.js src/**/*.scss tasks/**/*.js"
   },
   "author": "Kaspar Emanuel",
   "license": "CPAL-1.0",

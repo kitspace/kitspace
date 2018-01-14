@@ -5,58 +5,58 @@
 @import '../fontello';
 
 .searchContainer {
-    box-sizing: border-box;
-    display: flex;
-    height: 61px;
-    padding-top: 10px;
+  box-sizing: border-box;
+  display: flex;
+  height: 61px;
+  padding-top: 10px;
 }
 
 .searchBackground {
-    background: $white;
-    border-radius: 4px;
-    box-sizing: border-box;
-    display: flex;
-    height: 40px;
-    width: 100%;
+  background: $white;
+  border-radius: 4px;
+  box-sizing: border-box;
+  display: flex;
+  height: 40px;
+  width: 100%;
 }
 
 .searchInputIcon {
-    align-items: center;
-    background-color: $white;
-    border-radius: 5px 0 0 5px;
-    display: flex;
-    height: 40px;
-    padding-left: 8px;
-    width: 32px;
+  align-items: center;
+  background-color: $white;
+  border-radius: 5px 0 0 5px;
+  display: flex;
+  height: 40px;
+  padding-left: 8px;
+  width: 32px;
 }
 
 .searchIcon {
-    color: $silver-chalice;
+  color: $silver-chalice;
 }
 
 .clickableLink {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .searchInput {
-    flex-grow: 1;
-    height: 52px;
+  flex-grow: 1;
+  height: 52px;
+  position: relative;
+
+  input {
+    -webkit-appearance: none;
+    background: $white;
+    border: 0;
+    border-radius: 0 3px 3px 0;
+    font-size: 18px;
+    height: 40px;
+    line-height: 22px;
+    padding-right: 16px;
     position: relative;
+    width: 100%;
+  }
 
-    input {
-        -webkit-appearance: none;
-        background: $white;
-        border: 0;
-        border-radius: 0 3px 3px 0;
-        font-size: 18px;
-        height: 40px;
-        line-height: 22px;
-        padding-right: 16px;
-        position: relative;
-        width: 100%;
-    }
-
-    input:focus {
-        outline: none;
-    }
+  input:focus {
+    outline: none;
+  }
 }

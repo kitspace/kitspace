@@ -6,8 +6,7 @@ const board_colors = [
   'white',
   'orange',
   'purple',
-  'yellow',
+  'yellow'
 ]
 
 module.exports = board_colors
-

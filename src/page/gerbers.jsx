@@ -8,8 +8,7 @@ let Gerbers = React.createClass({
       <div className="gerbersContainer">
         <a className="zipPath" href={zipPath}>
           <div className="gerbers">
-            <i className="octicon octicon-circuit-board"></i>
-            {' '}Download Gerbers
+            <i className="octicon octicon-circuit-board" /> Download Gerbers
           </div>
         </a>
       </div>

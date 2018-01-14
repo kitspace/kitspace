@@ -1,6 +1,6 @@
 'use strict'
-const React     = require('react')
-const LazyLoad  = require('../lazy_load')
+const React = require('react')
+const LazyLoad = require('../lazy_load')
 
 var BoardShowcase = React.createClass({
   getInitialState: function() {
@@ -20,7 +20,7 @@ var BoardShowcase = React.createClass({
       viewFrontBoard: false
     })
   },
-  render: function () {
+  render: function() {
     var frontBoardClass = 'frontBoard boardDiagram '
     var backBoardClass = 'backBoard boardDiagram '
     if (this.state.viewFrontBoard) {
@@ -33,32 +33,32 @@ var BoardShowcase = React.createClass({
       <div className="boardShowcaseContainer">
         <div className="toggleBoardView responsiveTabs">
           <button
-          disabled={this.state.viewFrontBoard}
-          className="circuitToggleBtn circuitFrontBtn"
-          onClick={this.frontBoardView}>
+            disabled={this.state.viewFrontBoard}
+            className="circuitToggleBtn circuitFrontBtn"
+            onClick={this.frontBoardView}
+          >
             Front
           </button>
           <button
-          disabled={!this.state.viewFrontBoard}
-          className="circuitToggleBtn circuitBackBtn"
-          onClick={this.backBoardView}>
+            disabled={!this.state.viewFrontBoard}
+            className="circuitToggleBtn circuitBackBtn"
+            onClick={this.backBoardView}
+          >
             Back
           </button>
         </div>
         <div className="boardShowcase">
-          <LazyLoad once={true}
-            component={React.createElement('div', {className:'img'})}
-            distance={300}>
+          <LazyLoad
+            once={true}
+            component={React.createElement('div', {className: 'img'})}
+            distance={300}
+          >
             <div className="boardContainer">
-              <div className={frontBoardClass}>
-                {children[0]}
-              </div>
+              <div className={frontBoardClass}>{children[0]}</div>
               <div className="circuitBorderContainer">
-                <div className="circuitBorder"></div>
+                <div className="circuitBorder" />
               </div>
-              <div className={backBoardClass}>
-                {children[1]}
-              </div>
+              <div className={backBoardClass}>{children[1]}</div>
             </div>
           </LazyLoad>
         </div>

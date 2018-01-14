@@ -1,7 +1,7 @@
-const React    = require('react')
+const React = require('react')
 const semantic = require('semantic-ui-react')
-const {h, tbody, tr}  = require('react-hyperscript-helpers')
-const ramda           = require('ramda')
+const {h, tbody, tr} = require('react-hyperscript-helpers')
+const ramda = require('ramda')
 
 const MpnPopup = require('./mpn_popup')
 
@@ -30,15 +30,16 @@ function markerColor(ref) {
 const TsvTable = React.createClass({
   getInitialState() {
     return {
-      activePopup: null,
+      activePopup: null
     }
   },
   mpnCells(contents, rowIndex, columnIndex) {
     const activePopup = this.state.activePopup
-    const active = activePopup
-      && activePopup[0] === rowIndex
-      && activePopup[1] === columnIndex
-    const cells  = contents.map(t => h(semantic.Table.Cell, {active}, t))
+    const active =
+      activePopup &&
+      activePopup[0] === rowIndex &&
+      activePopup[1] === columnIndex
+    const cells = contents.map(t => h(semantic.Table.Cell, {active}, t))
     const number = contents[1]
     if (number !== '') {
       const setActivePopup = () => {
@@ -49,20 +50,21 @@ const TsvTable = React.createClass({
           this.setState({activePopup: null})
         }
       }
-      const part = this.props.parts.reduce((prev, part) => {
-        if (prev) {
-          return prev
-        }
-        if (part && part.mpn && part.mpn.part === number) {
-          return part
-        }
-      }, null) || {}
+      const part =
+        this.props.parts.reduce((prev, part) => {
+          if (prev) {
+            return prev
+          }
+          if (part && part.mpn && part.mpn.part === number) {
+            return part
+          }
+        }, null) || {}
       return cells.map(cell => {
         return h(MpnPopup, {
-          onOpen  : setActivePopup,
-          onClose : setInactivePopup,
-          trigger : cell,
-          part    : part,
+          onOpen: setActivePopup,
+          onClose: setInactivePopup,
+          trigger: cell,
+          part: part
         })
       })
     }
@@ -70,7 +72,10 @@ const TsvTable = React.createClass({
   },
   render() {
     const tsv = this.props.tsv
-    let lines = tsv.split('\n').slice(0, -1).map(line => line.split('\t'))
+    let lines = tsv
+      .split('\n')
+      .slice(0, -1)
+      .map(line => line.split('\t'))
     let columns = lines.slice(1).reduce((prev, line) => {
       return prev.map((column, index) => {
         return column.concat([line[index]])
@@ -91,52 +96,58 @@ const TsvTable = React.createClass({
       })
     }, columns[0].map(c => [c]))
 
-    const headings  = lines[0]
+    const headings = lines[0]
     const bodyLines = lines.slice(1)
-    let headingJSX  = headings.map(text => h(semantic.Table.HeaderCell, text))
-    headingJSX      = h(semantic.Table.Header, [h(semantic.Table.Row, headingJSX)])
-    const bodyJSX = tbody(bodyLines.map((line, rowIndex) => {
-      const grouped = line.reduce((grouped, text, columnIndex) => {
-        const heading = headings[columnIndex]
-        if (heading === 'Manufacturer') {
-          return grouped.concat([[text]])
+    let headingJSX = headings.map(text => h(semantic.Table.HeaderCell, text))
+    headingJSX = h(semantic.Table.Header, [h(semantic.Table.Row, headingJSX)])
+    const bodyJSX = tbody(
+      bodyLines.map((line, rowIndex) => {
+        const grouped = line.reduce((grouped, text, columnIndex) => {
+          const heading = headings[columnIndex]
+          if (heading === 'Manufacturer') {
+            return grouped.concat([[text]])
+          }
+          if (heading === 'MPN') {
+            grouped[grouped.length - 1].push(text)
+            return grouped
+          }
+          return grouped.concat([text])
+        }, [])
+        const groupedHeadings = headings.filter(h => h !== 'Manufacturer')
+        function markPink(columnIndex) {
+          //mark pink empty cells in all columns except these
+          return ['Description'].indexOf(groupedHeadings[columnIndex]) < 0
         }
-        if (heading === 'MPN') {
-          grouped[grouped.length - 1].push(text)
-          return grouped
-        }
-        return grouped.concat([text])
-      }, [])
-      const groupedHeadings = headings.filter(h => h !== 'Manufacturer')
-      function markPink(columnIndex) {
-        //mark pink empty cells in all columns except these
-        return ['Description']
-          .indexOf(groupedHeadings[columnIndex]) < 0
-      }
-      const bodyCells = grouped.map((contents, columnIndex) => {
-        if (typeof(contents) === 'object') {
-          return this.mpnCells(contents, rowIndex, columnIndex)
-        }
-        const error     = markPink(columnIndex) && contents === ''
-        const className = columnIndex === 0 ? 'marked ' + markerColor(contents) : ''
-        const cell = h(semantic.Table.Cell, {
-          error,
-          className,
-        }, contents)
-        return cell
+        const bodyCells = grouped.map((contents, columnIndex) => {
+          if (typeof contents === 'object') {
+            return this.mpnCells(contents, rowIndex, columnIndex)
+          }
+          const error = markPink(columnIndex) && contents === ''
+          const className =
+            columnIndex === 0 ? 'marked ' + markerColor(contents) : ''
+          const cell = h(
+            semantic.Table.Cell,
+            {
+              error,
+              className
+            },
+            contents
+          )
+          return cell
+        })
+        const activePopup = this.state.activePopup
+        const rowActivePopup = activePopup && activePopup[0] === rowIndex
+        const className = rowActivePopup ? 'selected' : ''
+        return h(semantic.Table.Row, {className}, ramda.flatten(bodyCells))
       })
-      const activePopup    = this.state.activePopup
-      const rowActivePopup = activePopup && activePopup[0] === rowIndex
-      const className = rowActivePopup ? 'selected' : ''
-      return h(semantic.Table.Row, {className}, ramda.flatten(bodyCells))
-    }))
+    )
     const tableProps = {
-      selectable  : !this.state.activePopup,
-      celled      : true,
-      unstackable : true,
-      singleLine  : true,
-      size        : 'small',
-      className   : 'TsvTable',
+      selectable: !this.state.activePopup,
+      celled: true,
+      unstackable: true,
+      singleLine: true,
+      size: 'small',
+      className: 'TsvTable'
     }
     return h(semantic.Table, tableProps, [headingJSX, bodyJSX])
   }
