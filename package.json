@@ -61,7 +61,7 @@
     "react": "^15.3.0",
     "react-document-title": "^2.0.1",
     "react-dom": "^15.3.0",
-    "react-double-scrollbar": "0.0.9",
+    "react-double-scrollbar": "^0.0.15",
     "react-hyperscript-helpers": "^1.1.0",
     "react-markdown": "^2.4.2",
     "react-responsive": "^1.2.5",

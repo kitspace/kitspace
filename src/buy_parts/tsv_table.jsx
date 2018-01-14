@@ -84,14 +84,16 @@ const TsvTable = React.createClass({
 
     //get rid of empty columns
     columns = columns.filter(column => {
+      //always keep Manufacturer though
       if (column[0] === 'Manufacturer') {
         return true
       }
       return column.slice(1).filter(x => x).length
     })
 
+    const numberOfLines = this.props.collapsed ? 5 : undefined
     lines = columns.slice(1).reduce((prev, column) => {
-      return prev.map((line, index) => {
+      return prev.slice(0, numberOfLines).map((line, index) => {
         return line.concat([column[index]])
       })
     }, columns[0].map(c => [c]))
@@ -100,47 +102,46 @@ const TsvTable = React.createClass({
     const bodyLines = lines.slice(1)
     let headingJSX = headings.map(text => h(semantic.Table.HeaderCell, text))
     headingJSX = h(semantic.Table.Header, [h(semantic.Table.Row, headingJSX)])
-    const bodyJSX = tbody(
-      bodyLines.map((line, rowIndex) => {
-        const grouped = line.reduce((grouped, text, columnIndex) => {
-          const heading = headings[columnIndex]
-          if (heading === 'Manufacturer') {
-            return grouped.concat([[text]])
-          }
-          if (heading === 'MPN') {
-            grouped[grouped.length - 1].push(text)
-            return grouped
-          }
-          return grouped.concat([text])
-        }, [])
-        const groupedHeadings = headings.filter(h => h !== 'Manufacturer')
-        function markPink(columnIndex) {
-          //mark pink empty cells in all columns except these
-          return ['Description'].indexOf(groupedHeadings[columnIndex]) < 0
+    const bodyLinesJSX = bodyLines.map((line, rowIndex) => {
+      const grouped = line.reduce((grouped, text, columnIndex) => {
+        const heading = headings[columnIndex]
+        if (heading === 'Manufacturer') {
+          return grouped.concat([[text]])
         }
-        const bodyCells = grouped.map((contents, columnIndex) => {
-          if (typeof contents === 'object') {
-            return this.mpnCells(contents, rowIndex, columnIndex)
-          }
-          const error = markPink(columnIndex) && contents === ''
-          const className =
-            columnIndex === 0 ? 'marked ' + markerColor(contents) : ''
-          const cell = h(
-            semantic.Table.Cell,
-            {
-              error,
-              className
-            },
-            contents
-          )
-          return cell
-        })
-        const activePopup = this.state.activePopup
-        const rowActivePopup = activePopup && activePopup[0] === rowIndex
-        const className = rowActivePopup ? 'selected' : ''
-        return h(semantic.Table.Row, {className}, ramda.flatten(bodyCells))
+        if (heading === 'MPN') {
+          grouped[grouped.length - 1].push(text)
+          return grouped
+        }
+        return grouped.concat([text])
+      }, [])
+      const groupedHeadings = headings.filter(h => h !== 'Manufacturer')
+      function markPink(columnIndex) {
+        //mark pink empty cells in all columns except these
+        return ['Description'].indexOf(groupedHeadings[columnIndex]) < 0
+      }
+      const bodyCells = grouped.map((contents, columnIndex) => {
+        if (typeof contents === 'object') {
+          return this.mpnCells(contents, rowIndex, columnIndex)
+        }
+        const error = markPink(columnIndex) && contents === ''
+        const className =
+          columnIndex === 0 ? 'marked ' + markerColor(contents) : ''
+        const cell = h(
+          semantic.Table.Cell,
+          {
+            error,
+            className
+          },
+          contents
+        )
+        return cell
       })
-    )
+      const activePopup = this.state.activePopup
+      const rowActivePopup = activePopup && activePopup[0] === rowIndex
+      const className = rowActivePopup ? 'selected' : ''
+      return h(semantic.Table.Row, {className}, ramda.flatten(bodyCells))
+    })
+    const bodyJSX = tbody(bodyLinesJSX)
     const tableProps = {
       selectable: !this.state.activePopup,
       celled: true,
@@ -152,5 +153,6 @@ const TsvTable = React.createClass({
     return h(semantic.Table, tableProps, [headingJSX, bodyJSX])
   }
 })
+
 
 module.exports = TsvTable

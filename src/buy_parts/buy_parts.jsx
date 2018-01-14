@@ -90,6 +90,7 @@ const BuyParts = React.createClass({
   },
   render() {
     const lines = this.props.lines
+    const nLinesToDisplay = this.props.nLinesToDisplay
     const retailer_list = oneClickBom.lineData.retailer_list
     const mult = this.getMultiplier()
     const total = lines.reduce((acc, line) => {
@@ -138,19 +139,13 @@ const BuyParts = React.createClass({
         <semantic.Segment className="buttonSegment" attached>
           {retailerButtons}
         </semantic.Segment>
-        <ExpandBom
+        <Bom
+          attached
+          parts={this.props.parts}
+          tsv={this.linesToTsv()}
           collapsed={this.state.collapsed}
           setCollapsed={v => this.setState({collapsed: v})}
         />
-        {(() => {
-          if (!this.state.collapsed) {
-            return (
-              <semantic.Segment attached="bottom">
-                <Bom parts={this.props.parts} tsv={this.linesToTsv()} />
-              </semantic.Segment>
-            )
-          }
-        })()}
         <DirectStores
           multiplier={this.getMultiplier()}
           items={this.props.lines}
@@ -159,20 +154,6 @@ const BuyParts = React.createClass({
     )
   }
 })
-
-function ExpandBom(props) {
-  const collapsed = props.collapsed
-  return (
-    <semantic.Button
-      attached={collapsed ? 'bottom' : true}
-      onClick={() => {
-        props.setCollapsed(!props.collapsed)
-      }}
-    >
-      {collapsed ? 'View ' : 'Hide '} part details
-    </semantic.Button>
-  )
-}
 
 function AdjustQuantity(props) {
   return (
