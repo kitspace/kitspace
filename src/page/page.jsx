@@ -32,11 +32,11 @@ const Page = React.createClass({
             </TitleBar>
             <div className="pageContainer">
               <InfoBar info={info} />
-              <Gerbers />
               <BoardShowcase>
                 <FadeImage src="images/top.svg" />
                 <FadeImage src="images/bottom.svg" />
               </BoardShowcase>
+              <Gerbers />
               <BuyParts lines={info.bom.lines} parts={info.bom.parts} />
               <Readme />
             </div>
