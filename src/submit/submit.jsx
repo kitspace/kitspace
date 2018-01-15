@@ -1,62 +1,68 @@
-const Redux     = require('redux')
-const React     = require('react')
-const {h}       = require('react-hyperscript-helpers')
-const path      = require('path')
+const Redux = require('redux')
+const React = require('react')
+const {h} = require('react-hyperscript-helpers')
+const path = require('path')
 const immutable = require('immutable')
 const {Router, Route, Link, hashHistory} = require('react-router')
 
 const PreviewGerbers = require('./preview_gerbers')
-const PreviewBom     = require('./preview_bom')
-const PreviewReadme  = require('./preview_readme')
-const Finish         = require('./finish')
+const PreviewBom = require('./preview_bom')
+const PreviewReadme = require('./preview_readme')
+const Finish = require('./finish')
 
 const board_colors = require('./board_colors')
 
 const initial_state = immutable.Map({
   board: immutable.fromJS({
-    status    : 'not sent',
-    message   : '',
-    color     : 'green',
-    yaml      : null,
-    url       : null,
-    files     : null,
-    svgs      : null,
-    stackup   : null,
-    parts     : [],
+    status: 'not sent',
+    message: '',
+    color: 'green',
+    yaml: null,
+    url: null,
+    files: null,
+    svgs: null,
+    stackup: null,
+    parts: [],
     gerbers: {
-      errors   : [],
-      warnings : [],
+      errors: [],
+      warnings: []
     },
     bom: {
-      tsv      : '',
-      errors   : [],
-      warnings : [],
+      tsv: '',
+      errors: [],
+      warnings: []
     },
     readme: {
-      rendered : null,
-      errors   : [],
-      warnings : [],
-    },
-  }),
+      rendered: null,
+      errors: [],
+      warnings: []
+    }
+  })
 })
 
 function reducer(state = initial_state, action) {
-  switch(action.type) {
+  switch (action.type) {
     case 'setStep':
       return state.set('activeStep', action.value)
     case 'setUrlSent': {
-      const board = initial_state.get('board').set('status', 'sent')
+      const board = initial_state
+        .get('board')
+        .set('status', 'sent')
         .set('url', action.value)
       return state.set('board', board)
     }
     case 'setFileListing': {
-      const board = state.get('board').set('status', 'replied')
+      const board = state
+        .get('board')
+        .set('status', 'replied')
         .set('files', action.value)
       return state.set('board', board)
     }
     case 'setSvgs': {
       const {svgs} = action.value
-      const board = state.get('board').set('status', 'done')
+      const board = state
+        .get('board')
+        .set('status', 'done')
         .set('svgs', svgs)
       return state.set('board', board)
     }
@@ -69,7 +75,9 @@ function reducer(state = initial_state, action) {
       return state.set('board', board)
     }
     case 'setParts': {
-      const board = state.get('board').set('parts', immutable.List(action.value))
+      const board = state
+        .get('board')
+        .set('parts', immutable.List(action.value))
       return state.set('board', board)
     }
     case 'setYaml': {
@@ -85,27 +93,38 @@ function reducer(state = initial_state, action) {
       return state.set('board', board)
     }
     case 'setReadme': {
-      const board = state.get('board').setIn(['readme', 'rendered'], action.value)
+      const board = state
+        .get('board')
+        .setIn(['readme', 'rendered'], action.value)
       return state.set('board', board)
     }
     case 'setSummary': {
-      const yaml = state.get('board').get('yaml').set('summary', action.value)
+      const yaml = state
+        .get('board')
+        .get('yaml')
+        .set('summary', action.value)
       const board = state.get('board').set('yaml', yaml)
       return state.set('board', board)
     }
     case 'reportNetworkError': {
-      const board = state.get('board').set('status', 'failed')
+      const board = state
+        .get('board')
+        .set('status', 'failed')
         .set('message', action.value)
       return state.set('board', board)
     }
     case 'reportError': {
       const {type, message} = action.value
-      const board = state.get('board').updateIn([type, 'errors'], es => es.push(message))
+      const board = state
+        .get('board')
+        .updateIn([type, 'errors'], es => es.push(message))
       return state.set('board', board)
     }
     case 'reportWarning': {
       const {type, message} = action.value
-      const board = state.get('board').updateIn([type, 'warnings'], ws => ws.push(message))
+      const board = state
+        .get('board')
+        .updateIn([type, 'warnings'], ws => ws.push(message))
       return state.set('board', board)
     }
   }
@@ -113,12 +132,12 @@ function reducer(state = initial_state, action) {
 }
 
 function setStep(step) {
-   return () => {
-     if (step === 1) {
-       return hashHistory.push('/')
-     }
-     return hashHistory.push(`/${step}`)
-   }
+  return () => {
+    if (step === 1) {
+      return hashHistory.push('/')
+    }
+    return hashHistory.push(`/${step}`)
+  }
 }
 
 const SubmitRouter = React.createClass({
@@ -129,39 +148,43 @@ const SubmitRouter = React.createClass({
   render() {
     return (
       <Router history={hashHistory}>
-        <Route path='/'
-          component = {
-            () => h(PreviewGerbers, {
+        <Route
+          path="/"
+          component={() =>
+            h(PreviewGerbers, {
               setStep,
               dispatch: this.store.dispatch,
-              board: this.state.board,
+              board: this.state.board
             })
           }
         />
-        <Route path='/2'
-          component = {
-            () => h(PreviewBom, {
+        <Route
+          path="/2"
+          component={() =>
+            h(PreviewBom, {
               setStep,
               dispatch: this.store.dispatch,
-              board: this.state.board,
+              board: this.state.board
             })
           }
         />
-        <Route path='/3'
-          component = {
-            () => h(PreviewReadme, {
+        <Route
+          path="/3"
+          component={() =>
+            h(PreviewReadme, {
               setStep,
               dispatch: this.store.dispatch,
-              board: this.state.board,
+              board: this.state.board
             })
           }
         />
-        <Route path='/4'
-          component = {
-            () => h(Finish, {
+        <Route
+          path="/4"
+          component={() =>
+            h(Finish, {
               setStep,
               dispatch: this.store.dispatch,
-              board: this.state.board,
+              board: this.state.board
             })
           }
         />
