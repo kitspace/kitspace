@@ -45,7 +45,7 @@
   },
   {
     "repo": "https://github.com/robotsrulz/SP_Adapter",
-    "hash": "6cccce11f6ba1ad880d94bb4643c62307dfdd758"
+    "hash": "c03f6f5270ce8af6db43c767bdad986424108d8f"
   },
   {
     "repo": "https://github.com/pcbsz/SimpleAmp",
@@ -113,7 +113,7 @@
   },
   {
     "repo": "https://github.com/8BitMixtape/8BitmixtapeNEO_ShenzhenReady",
-    "hash": "ff0ad816aac602d3873635274f163b80a29f2548"
+    "hash": "e6685fd9c3d4aa0f0c8f16b9592b0475e5a8e61c"
   },
   {
     "repo": "https://github.com/julbouln/ice40_eink_controller",
@@ -126,5 +126,9 @@
   {
     "repo": "https://github.com/borgel/sympetrum-v2",
     "hash": "adb39f72cde3bd12c6f9a885d8f3a2cded4c36ad"
+  },
+  {
+    "repo": "https://github.com/im-tomu/tomu-hardware",
+    "hash": "1c0450e9391254c72c1c7a7eb9effb653d00cb4f"
   }
 ]
