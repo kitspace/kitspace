@@ -105,7 +105,10 @@ if (require.main !== module) {
     topPngPath,
     topLargePngPath
   ] = targets
-  fs.writeFileSync(zipInfoPath, JSON.stringify(path.basename(zipPath)))
+  const zipInfo = {
+    zipPath: path.basename(zipPath),
+    folder
+  }
   const zip = new Jszip()
   const folder_name = path.basename(zipPath, '.zip')
   try {
@@ -140,6 +143,20 @@ if (require.main !== module) {
       if (error != null) {
         throw error
       }
+      zipInfo.width = Math.max(stackup.top.width, stackup.bottom.width)
+      zipInfo.height = Math.max(stackup.top.height, stackup.bottom.height)
+      if (stackup.top.units === 'in') {
+        if (stackup.bottom.units !== 'in') {
+          console.error('We got a weird board with disparate units:', folder)
+          process.exit(1);
+        }
+        zipInfo.width *= 25.4
+        zipInfo.height *= 25.4
+      }
+      zipInfo.width = Math.ceil(zipInfo.width)
+      zipInfo.height = Math.ceil(zipInfo.height)
+      fs.writeFileSync(zipInfoPath, JSON.stringify(zipInfo))
+
       fs.writeFile(unOptimizedSvgPath, stackup.top.svg, function(err) {
         if (err != null) {
           console.error(`Could not write unoptimized top svg for ${folder}`)

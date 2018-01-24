@@ -3,10 +3,9 @@ const semantic = require('semantic-ui-react')
 const ReactResponsive = require('react-responsive')
 
 const mediaQueries = require('../media_queries')
-const zipPath = require('../zip-info.json')
-const info = require('../info.json')
+const {zipPath, folder, width, height} = require('../zip-info.json')
 
-const zipUrl = `https://kitspace.org/boards/${info.id}/${zipPath}`
+const zipUrl = `https://kitspace.org/${folder}/${zipPath}`
 
 let Gerbers = React.createClass({
   render() {
@@ -19,7 +18,7 @@ let Gerbers = React.createClass({
                 <h4>Order PCBs:</h4>
               </semantic.Menu.Item>
               <semantic.Menu.Item>
-                <a className="zipPath" href={zipPath}>
+                <a href={zipPath}>
                   <semantic.Icon name="download" />
                   Download
                 </a>
@@ -31,9 +30,12 @@ let Gerbers = React.createClass({
               </semantic.Menu.Item>
               <semantic.Menu.Item>
                 <a
-                  href={
-                    'https://www.pcbway.com/orderonline.aspx' +
-                    `?url=${zipUrl}&from=kitspace`
+                  href={zipPath}
+                  onClick={() =>
+                    window.open(
+                      'https://www.pcbway.com/orderonline.aspx' +
+                        `?width=${width}&height=${height}&from=kitspace`
+                    )
                   }
                 >
                   <img style={{minWidth: 100}} src="/images/pcbway.png" />
