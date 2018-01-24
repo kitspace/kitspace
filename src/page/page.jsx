@@ -2,7 +2,7 @@ const React = require('react')
 const DocumentTitle = require('react-document-title')
 
 const BoardShowcase = require('./board_showcase')
-const Gerbers = require('./gerbers')
+const OrderPcbs = require('./order_pcbs')
 const InfoBar = require('./info_bar')
 
 const TitleBar = require('../title_bar')
@@ -32,11 +32,11 @@ const Page = React.createClass({
             </TitleBar>
             <div className="pageContainer">
               <InfoBar info={info} />
-              <Gerbers />
               <BoardShowcase>
                 <FadeImage src="images/top.svg" />
                 <FadeImage src="images/bottom.svg" />
               </BoardShowcase>
+              <OrderPcbs />
               <BuyParts lines={info.bom.lines} parts={info.bom.parts} />
               <Readme />
             </div>

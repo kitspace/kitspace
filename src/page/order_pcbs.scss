@@ -1,0 +1,33 @@
+@import '../colors';
+@import '../common';
+
+.OrderPcbs {
+  display: flex;
+  justify-content: center;
+  padding: 16px 0;
+  margin-bottom: 20px;
+
+  .ui.borderless {
+    border: 0px;
+    box-shadow: 0 0 0 0;
+  }
+
+  i {
+    padding-right: 5px;
+  }
+
+  img {
+    min-width: 100px;
+  }
+
+  @include breakpoint(mobile-m) {
+    .ui.menu {
+      width: 100%;
+    }
+    .item {
+      display: flex !important;
+      justify-content: center !important;
+    }
+  }
+
+}

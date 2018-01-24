@@ -4,7 +4,6 @@ const oneClickBom = require('1-click-bom')
 const ReactResponsive = require('react-responsive')
 const browserVersion = require('browser-version')
 
-const mediaQueries = require('../media_queries')
 const installExtension = require('../install_extension')
 
 const Bom = require('./bom')
