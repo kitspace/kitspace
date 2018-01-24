@@ -12,12 +12,12 @@ const pcbwayUrl =
   'https://www.pcbway.com/orderonline.aspx' +
   `?width=${width}&height=${height}&from=kitspace`
 
-let Gerbers = React.createClass({
+let OrderPcbs = React.createClass({
   render() {
     return (
       <ReactResponsive query={mediaQueries.mobile_m}>
         {matches => (
-          <div className="gerbersContainer">
+          <div className="OrderPcbs">
             <semantic.Menu stackable={matches} compact borderless>
               <semantic.Menu.Item>
                 <h4>Order PCBs:</h4>
@@ -44,4 +44,4 @@ let Gerbers = React.createClass({
   }
 })
 
-module.exports = Gerbers
+module.exports = OrderPcbs
