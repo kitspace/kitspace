@@ -7,6 +7,11 @@ const {zipPath, folder, width, height} = require('../zip-info.json')
 
 const zipUrl = `https://kitspace.org/${folder}/${zipPath}`
 
+const aislerUrl = `https://aisler.net/p/new?url=${zipUrl}&ref=kitspace`
+const pcbwayUrl =
+  'https://www.pcbway.com/orderonline.aspx' +
+  `?width=${width}&height=${height}&from=kitspace`
+
 let Gerbers = React.createClass({
   render() {
     return (
@@ -24,20 +29,12 @@ let Gerbers = React.createClass({
                 </a>
               </semantic.Menu.Item>
               <semantic.Menu.Item>
-                <a href={`https://aisler.net/p/new?url=${zipUrl}&ref=kitspace`}>
+                <a href={aislerUrl}>
                   <img style={{minWidth: 100}} src="/images/aisler.png" />
                 </a>
               </semantic.Menu.Item>
               <semantic.Menu.Item>
-                <a
-                  href={zipPath}
-                  onClick={() =>
-                    window.open(
-                      'https://www.pcbway.com/orderonline.aspx' +
-                        `?width=${width}&height=${height}&from=kitspace`
-                    )
-                  }
-                >
+                <a href={pcbwayUrl} onClick={() => window.open(zipPath)}>
                   <img style={{minWidth: 100}} src="/images/pcbway.png" />
                 </a>
               </semantic.Menu.Item>
