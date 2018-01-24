@@ -18,25 +18,23 @@ let Gerbers = React.createClass({
       <ReactResponsive query={mediaQueries.mobile_m}>
         {matches => (
           <div className="gerbersContainer">
-            <semantic.Menu compact stackable={matches} borderless>
+            <semantic.Menu stackable={matches} compact borderless>
               <semantic.Menu.Item>
                 <h4>Order PCBs:</h4>
               </semantic.Menu.Item>
-              <semantic.Menu.Item>
-                <a href={zipPath}>
-                  <semantic.Icon name="download" />
-                  Download
-                </a>
+              <semantic.Menu.Item as="a" href={zipPath}>
+                <semantic.Icon name="download" />
+                Download
               </semantic.Menu.Item>
-              <semantic.Menu.Item>
-                <a href={aislerUrl}>
-                  <img src="/images/aisler.png" />
-                </a>
+              <semantic.Menu.Item as="a" href={aislerUrl}>
+                <img src="/images/aisler.png" />
               </semantic.Menu.Item>
-              <semantic.Menu.Item>
-                <a href={pcbwayUrl} onClick={() => window.open(zipPath)}>
-                  <img src="/images/pcbway.png" />
-                </a>
+              <semantic.Menu.Item
+                as="a"
+                href={pcbwayUrl}
+                onClick={() => window.open(zipPath)}
+              >
+                <img src="/images/pcbway.png" />
               </semantic.Menu.Item>
             </semantic.Menu>
           </div>
