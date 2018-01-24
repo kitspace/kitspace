@@ -20,12 +20,14 @@
     min-width: 100px;
   }
 
-  a {
-    text-decoration: none;
+  @include breakpoint(mobile-m) {
+    .ui.menu {
+      width: 100%;
+    }
+    .item {
+      display: flex !important;
+      justify-content: center !important;
+    }
   }
 
-  button {
-    width: 142px !important;
-    height: 54px !important;
-  }
 }
