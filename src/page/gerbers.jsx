@@ -30,12 +30,12 @@ let Gerbers = React.createClass({
               </semantic.Menu.Item>
               <semantic.Menu.Item>
                 <a href={aislerUrl}>
-                  <img style={{minWidth: 100}} src="/images/aisler.png" />
+                  <img src="/images/aisler.png" />
                 </a>
               </semantic.Menu.Item>
               <semantic.Menu.Item>
                 <a href={pcbwayUrl} onClick={() => window.open(zipPath)}>
-                  <img style={{minWidth: 100}} src="/images/pcbway.png" />
+                  <img src="/images/pcbway.png" />
                 </a>
               </semantic.Menu.Item>
             </semantic.Menu>
