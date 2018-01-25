@@ -10,7 +10,7 @@ const zipUrl = `https://kitspace.org/${folder}/${zipPath}`
 const aislerUrl = `https://aisler.net/p/new?url=${zipUrl}&ref=kitspace`
 const pcbwayUrl =
   'https://www.pcbway.com/orderonline.aspx' +
-  `?width=${width}&height=${height}&from=kitspace`
+  `?x=${width}&y=${height}&from=kitspace`
 
 let OrderPcbs = React.createClass({
   render() {
