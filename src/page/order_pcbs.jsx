@@ -13,6 +13,9 @@ const pcbwayUrl =
   `?x=${width}&y=${height}&from=kitspace`
 
 let OrderPcbs = React.createClass({
+  getInitialState() {
+    return {downloaded: false}
+  },
   render() {
     return (
       <ReactResponsive query={mediaQueries.mobile_m}>
@@ -22,7 +25,11 @@ let OrderPcbs = React.createClass({
               <semantic.Menu.Item>
                 <h4>Order PCBs:</h4>
               </semantic.Menu.Item>
-              <semantic.Menu.Item as="a" href={zipPath}>
+              <semantic.Menu.Item
+                as="a"
+                href={zipPath}
+                onClick={() => this.setState({downloaded: true})}
+              >
                 <semantic.Icon name="download" />
                 Download
               </semantic.Menu.Item>
@@ -32,7 +39,11 @@ let OrderPcbs = React.createClass({
               <semantic.Menu.Item
                 as="a"
                 href={pcbwayUrl}
-                onClick={() => window.open(zipPath)}
+                onClick={() => {
+                  if (!this.state.downloaded) {
+                    window.open(zipPath)
+                  }
+                }}
               >
                 <img src="/images/pcbway.png" />
               </semantic.Menu.Item>
