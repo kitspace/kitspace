@@ -1,5 +1,6 @@
 const urlJoin = require('url-join')
 const shortid = require('shortid')
+const hostedGitInfo = require('hosted-git-info')
 const url = require('url')
 const superagent = require('superagent')
 const jsYaml = require('js-yaml')
@@ -16,15 +17,15 @@ const defaultInfo = {
 class GitlabClient {
   constructor(gitlab_url) {
     this.url = urlJoin(gitlab_url, 'api/v4/')
+    this.agent = superagent.agent().set('PRIVATE-TOKEN', process.env.GITLAB_TOKEN)
   }
   apiUrl(path) {
     return urlJoin(this.url, path)
   }
   createTempUser() {
     const name = shortid.generate()
-    return superagent
+    return this.agent
       .post(this.apiUrl('users'))
-      .set("PRIVATE-TOKEN", process.env.GITLAB_TOKEN)
       .send({
         username: name,
         name: name,
@@ -37,14 +38,31 @@ class GitlabClient {
       })
       .then(r => r.body)
   }
+  createProject(params, user) {
+    if ('import_url' in params && !('name' in params || 'path' in params)) {
+      params.name = hostedGitInfo.fromUrl(params.import_url).project
+    }
+    let url
+    if (user != null) {
+      url = this.apiUrl(`projects/user/${user}`)
+    } else {
+      url = this.apiUrl('projects')
+    }
+    return this.agent
+      .post(url)
+      .send(params)
+      .then(r => r.body)
+  }
   getProjects() {
     //TODO: projects > 20
-    return superagent.get(this.apiUrl('projects')).then(r => r.body)
+    return this.agent.get(this.apiUrl('projects')).then(r => r.body)
   }
   getProjectHead(projectId) {
-    return superagent
+    return this.agent
       .get(this.apiUrl(`projects/${projectId}/repository/commits`))
-      .then(r => r.body[0].id)
+      .then(r => {
+        return r.body[0].id
+      })
   }
   async getProjectFiles(id, ref) {
     const per_page = 100
@@ -53,7 +71,7 @@ class GitlabClient {
       const params = `recursive=true&per_page=${per_page}&start_page=${page}${
         ref ? `&ref=${ref}` : ''
       }`
-      return superagent
+      return this.agent
         .get(this.apiUrl(`projects/${id}/repository/tree?${params}`))
         .then(r => r.body)
     }
@@ -70,7 +88,7 @@ class GitlabClient {
     return files.filter(f => f.type === 'blob')
   }
   getFile(projectId, blob, base64 = false) {
-    return superagent
+    return this.agent
       .get(
         this.apiUrl(
           `/projects/${projectId}/repository/blobs/${blob}${base64 ? '' : '/raw'}`

@@ -1,24 +1,27 @@
 const assert = require('assert')
+const shortid = require('shortid')
 const GitlabClient = require('../src/index')
+const {promisify} = require('util')
+const delay = promisify(setTimeout)
 
 require('dotenv').config()
 
 describe('user', () => {
   const g = new GitlabClient(process.env.GITLAB_URL)
 
-  it('creates random user', async () => {
+  it('creates random user and imports a project', async () => {
     const user = await g.createTempUser()
     assert(user.id != null)
+    const import_url = 'https://github.com/monostable/jelly'
+    const project = await g.createProject({import_url} , user.id)
+    assert(project.name != null)
   })
+
 })
 
 describe('project', () => {
   const g = new GitlabClient(process.env.GITLAB_URL)
-  let id
-  before(async () => {
-    const projects = await g.getProjects()
-    id = projects[0].id
-  })
+  const id = 1
 
   it('gets project HEAD', () => {
     return g.getProjectHead(id).then(sha => {
