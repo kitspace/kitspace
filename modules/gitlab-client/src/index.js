@@ -1,6 +1,5 @@
 const urlJoin = require('url-join')
 const shortid = require('shortid')
-const hostedGitInfo = require('hosted-git-info')
 const url = require('url')
 const superagent = require('superagent')
 const jsYaml = require('js-yaml')
@@ -39,14 +38,10 @@ class GitlabClient {
       .then(r => r.body)
   }
   createProject(params, user) {
-    if ('import_url' in params && !('name' in params || 'path' in params)) {
-      params.name = hostedGitInfo.fromUrl(params.import_url).project
-    }
-    let url
     if (user != null) {
-      url = this.apiUrl(`projects/user/${user}`)
+      var url = this.apiUrl(`projects/user/${user}`)
     } else {
-      url = this.apiUrl('projects')
+      var url = this.apiUrl('projects')
     }
     return this.agent
       .post(url)

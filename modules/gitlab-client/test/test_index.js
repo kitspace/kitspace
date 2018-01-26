@@ -13,7 +13,7 @@ describe('user', () => {
     const user = await g.createTempUser()
     assert(user.id != null)
     const import_url = 'https://github.com/monostable/jelly'
-    const project = await g.createProject({import_url} , user.id)
+    const project = await g.createProject({name:'jelly', import_url} , user.id)
     assert(project.name != null)
   })
 
