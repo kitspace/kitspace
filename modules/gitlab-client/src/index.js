@@ -1,9 +1,12 @@
 const urlJoin = require('url-join')
+const shortid = require('shortid')
 const url = require('url')
 const superagent = require('superagent')
 const jsYaml = require('js-yaml')
 const path = require('path')
 const whatsThatGerber = require('whats-that-gerber')
+
+require('dotenv').config()
 
 const defaultInfo = {
   color: 'green',
@@ -16,6 +19,23 @@ class GitlabClient {
   }
   apiUrl(path) {
     return urlJoin(this.url, path)
+  }
+  createTempUser() {
+    const name = shortid.generate()
+    return superagent
+      .post(this.apiUrl('users'))
+      .set("PRIVATE-TOKEN", process.env.GITLAB_TOKEN)
+      .send({
+        username: name,
+        name: name,
+        // This is the pattern gitlab uses internally for oauth when it can't
+        // get the email. Using this might prevent it actually trying to send
+        // out emails?
+        email: `temp-email-for-oauth-${name}@gitlab.localhost`,
+        password: shortid.generate(),
+        projects_limit: 10
+      })
+      .then(r => r.body)
   }
   getProjects() {
     //TODO: projects > 20

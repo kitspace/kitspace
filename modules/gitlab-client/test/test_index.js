@@ -1,8 +1,19 @@
 const assert = require('assert')
 const GitlabClient = require('../src/index')
 
+require('dotenv').config()
+
+describe('user', () => {
+  const g = new GitlabClient(process.env.GITLAB_URL)
+
+  it('creates random user', async () => {
+    const user = await g.createTempUser()
+    assert(user.id != null)
+  })
+})
+
 describe('project', () => {
-  const g = new GitlabClient('https://gitlab2.kitnic.it/accounts')
+  const g = new GitlabClient(process.env.GITLAB_URL)
   let id
   before(async () => {
     const projects = await g.getProjects()
