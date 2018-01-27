@@ -45,12 +45,13 @@ describe('project', () => {
     nodeAssert.deepStrictEqual(files1, files2)
   })
 
-  it('creates a file', async () => {
+  it('creates and deletes a file', async () => {
     const content = shortid.generate()
     const path = shortid.generate()
     const r = await g.createFile(id, path, content)
     assert(r.file_path === path)
     assert(r.branch === 'master')
+    await g.deleteFile(id, path)
   })
 
   describe('project files', () => {

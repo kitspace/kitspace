@@ -16,7 +16,10 @@ const defaultInfo = {
 class GitlabClient {
   constructor(gitlab_url) {
     this.url = urlJoin(gitlab_url, 'api/v4/')
-    this.agent = superagent.agent().set('PRIVATE-TOKEN', process.env.GITLAB_TOKEN)
+    this.agent = superagent
+      .agent()
+      .set('PRIVATE-TOKEN', process.env.GITLAB_TOKEN)
+      .set('accept', 'application/json')
   }
   apiUrl(path) {
     return urlJoin(this.url, path)
@@ -94,11 +97,22 @@ class GitlabClient {
   createFile(projectId, path, content, opts = {}) {
     const {
       branch = 'master',
-      commit_message = 'Create file from Kitspace upload'
+      commit_message = 'Create file from Kitspace web interface'
     } = opts
     return this.agent
       .post(this.apiUrl(`/projects/${projectId}/repository/files/${path}`))
       .send({content, branch, commit_message})
+      .then(r => r.body)
+  }
+  deleteFile(projectId, path, opts = {}) {
+    const {
+      branch = 'master',
+      commit_message = 'Delete file from Kitspace web interface'
+    } = opts
+    return this.agent
+      .delete(this.apiUrl(`/projects/${projectId}/repository/files/${path}`))
+      .send({branch, commit_message})
+      .then(trace)
       .then(r => r.body)
       .catch(e => console.error(e))
   }
