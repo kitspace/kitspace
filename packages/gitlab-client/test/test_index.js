@@ -1,4 +1,5 @@
-const assert = require('assert')
+const nodeAssert = require('assert')
+const assert = require('better-assert')
 const shortid = require('shortid')
 const GitlabClient = require('../src/index')
 const {promisify} = require('util')
@@ -41,7 +42,15 @@ describe('project', () => {
     const ref = await g.getProjectHead(id)
     const files1 = await g.getProjectFiles(id)
     const files2 = await g.getProjectFiles(id, ref)
-    assert.deepStrictEqual(files1, files2)
+    nodeAssert.deepStrictEqual(files1, files2)
+  })
+
+  it('creates a file', async () => {
+    const content = shortid.generate()
+    const path = shortid.generate()
+    const r = await g.createFile(id, path, content)
+    assert(r.file_path === path)
+    assert(r.branch === 'master')
   })
 
   describe('project files', () => {

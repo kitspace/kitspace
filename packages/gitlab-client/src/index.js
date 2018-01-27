@@ -91,6 +91,17 @@ class GitlabClient {
       )
       .then(r => (base64 ? r.body : r.text))
   }
+  createFile(projectId, path, content, opts = {}) {
+    const {
+      branch = 'master',
+      commit_message = 'Create file from Kitspace upload'
+    } = opts
+    return this.agent
+      .post(this.apiUrl(`/projects/${projectId}/repository/files/${path}`))
+      .send({content, branch, commit_message})
+      .then(r => r.body)
+      .catch(e => console.error(e))
+  }
   getInfo(projectId, files) {
     const yaml = files.find(f => RegExp('^kitnic.yaml$').test(f.path))
     if (yaml) {
@@ -120,10 +131,10 @@ function filterOutGerbers(files, info) {
     )
   }
   const layers = files
-    .map(f => ({ file: f, type: whatsThatGerber(f.name) }))
-    .filter(({ type }) => type !== 'drw')
-  const possibleGerbers = layers.map(({ file }) => file)
-  const possibleTypes = layers.map(({ type }) => type)
+    .map(f => ({file: f, type: whatsThatGerber(f.name)}))
+    .filter(({type}) => type !== 'drw')
+  const possibleGerbers = layers.map(({file}) => file)
+  const possibleTypes = layers.map(({type}) => type)
   const duplicates = possibleTypes.reduce((prev, t) => {
     return prev || possibleTypes.indexOf(t) !== possibleTypes.lastIndexOf(t)
   }, false)
