@@ -1,0 +1,6 @@
+module.exports = {
+    //domains allowed to make requests (other than the domain this is served on)
+    ALLOWED_CORS_DOMAINS: [/* 'https://example.com' */],
+    //api key for octopart, sign up through https://octopart.com/auth/create
+    OCTOPART_API_KEY: process.env.OCTOPART_API_KEY
+}
