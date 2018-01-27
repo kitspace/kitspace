@@ -54,6 +54,18 @@ describe('project', () => {
     await g.deleteFile(id, path)
   })
 
+  it('overwrites a file', async () => {
+    const content1 = shortid.generate()
+    const content2 = shortid.generate()
+    const path = shortid.generate()
+    let r = await g.createFile(id, path, content1)
+    assert(r.file_path === path)
+    assert(r.branch === 'master')
+    r = await g.createFile(id, path, content1)
+    assert(r.file_path === path)
+    assert(r.branch === 'master')
+  })
+
   describe('project files', () => {
     let files
     before(async () => {

@@ -97,12 +97,24 @@ class GitlabClient {
   createFile(projectId, path, content, opts = {}) {
     const {
       branch = 'master',
-      commit_message = 'Create file from Kitspace web interface'
+      commit_message = 'Upload file from Kitspace web interface'
     } = opts
+    const url = this.apiUrl(`/projects/${projectId}/repository/files/${path}`)
     return this.agent
-      .post(this.apiUrl(`/projects/${projectId}/repository/files/${path}`))
+      .post(url)
       .send({content, branch, commit_message})
       .then(r => r.body)
+      .catch(e => {
+        // 400 means the file already exists so we overwrite it
+        if (e.status === 400) {
+          return this.agent
+            .put(url)
+            .send({content, branch, commit_message})
+            .then(r => r.body)
+        } else {
+          throw e
+        }
+      })
   }
   deleteFile(projectId, path, opts = {}) {
     const {
@@ -112,9 +124,7 @@ class GitlabClient {
     return this.agent
       .delete(this.apiUrl(`/projects/${projectId}/repository/files/${path}`))
       .send({branch, commit_message})
-      .then(trace)
       .then(r => r.body)
-      .catch(e => console.error(e))
   }
   getInfo(projectId, files) {
     const yaml = files.find(f => RegExp('^kitnic.yaml$').test(f.path))
