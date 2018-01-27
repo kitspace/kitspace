@@ -94,36 +94,39 @@ class GitlabClient {
       )
       .then(r => (base64 ? r.body : r.text))
   }
-  createFile(projectId, path, content, opts = {}) {
-    const {
-      branch = 'master',
-      commit_message = 'Upload file from Kitspace web interface'
-    } = opts
+  createFile(projectId, path, content, params) {
+    const defaultParams = {
+      content,
+      branch: 'master',
+      commit_message: 'Upload files from Kitspace web interface'
+    }
+    params = Object.assign(defaultParams, params)
     const url = this.apiUrl(`/projects/${projectId}/repository/files/${path}`)
     return this.agent
       .post(url)
-      .send({content, branch, commit_message})
+      .send(params)
       .then(r => r.body)
       .catch(e => {
         // 400 means the file already exists so we overwrite it
         if (e.status === 400) {
           return this.agent
             .put(url)
-            .send({content, branch, commit_message})
+            .send(params)
             .then(r => r.body)
         } else {
           throw e
         }
       })
   }
-  deleteFile(projectId, path, opts = {}) {
-    const {
-      branch = 'master',
-      commit_message = 'Delete file from Kitspace web interface'
-    } = opts
+  deleteFile(projectId, path, params) {
+    const defaultParams = {
+      branch: 'master',
+      commit_message: 'Upload files from Kitspace web interface'
+    }
+    params = Object.assign(defaultParams, params)
     return this.agent
       .delete(this.apiUrl(`/projects/${projectId}/repository/files/${path}`))
-      .send({branch, commit_message})
+      .send(params)
       .then(r => r.body)
   }
   getInfo(projectId, files) {
