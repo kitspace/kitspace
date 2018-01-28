@@ -2,8 +2,6 @@ const nodeAssert = require('assert')
 const assert = require('better-assert')
 const shortid = require('shortid')
 const GitlabClient = require('../src/index')
-const {promisify} = require('util')
-const delay = promisify(setTimeout)
 
 require('dotenv').config()
 
@@ -14,7 +12,10 @@ describe('user', () => {
     const user = await g.createTempUser()
     assert(user.id != null)
     const import_url = 'https://github.com/monostable/jelly'
-    const project = await g.createProject({name: 'jelly', import_url}, user.id)
+    const project = await g.createProject(
+      {name: 'jelly', import_url, visibility: 'public'},
+      user.id
+    )
     assert(project.name != null)
   })
 })
