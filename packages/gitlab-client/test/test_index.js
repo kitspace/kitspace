@@ -8,7 +8,7 @@ const delay = promisify(setTimeout)
 require('dotenv').config()
 
 describe('user', () => {
-  const g = new GitlabClient(process.env.GITLAB_URL)
+  const g = new GitlabClient(process.env.GITLAB_URL, process.env.GITLAB_TOKEN)
 
   it('creates random user and imports a project', async () => {
     const user = await g.createTempUser()
@@ -20,7 +20,7 @@ describe('user', () => {
 })
 
 describe('project', () => {
-  const g = new GitlabClient(process.env.GITLAB_URL)
+  const g = new GitlabClient(process.env.GITLAB_URL, process.env.GITLAB_TOKEN)
   const id = 1
 
   it('gets project HEAD', () => {

@@ -6,20 +6,18 @@ const jsYaml = require('js-yaml')
 const path = require('path')
 const whatsThatGerber = require('whats-that-gerber')
 
-require('dotenv').config()
-
 const defaultInfo = {
   color: 'green',
   bom: '1-click-bom.tsv'
 }
 
 class GitlabClient {
-  constructor(gitlab_url) {
+  constructor(gitlab_url, token) {
     this.url = urlJoin(gitlab_url, 'api/v4/')
-    this.agent = superagent
-      .agent()
-      .set('PRIVATE-TOKEN', process.env.GITLAB_TOKEN)
-      .set('accept', 'application/json')
+    this.agent = superagent.agent()
+    if (token) {
+      this.agent.set('PRIVATE-TOKEN', token)
+    }
   }
   apiUrl(path) {
     return urlJoin(this.url, path)
