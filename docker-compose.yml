@@ -12,3 +12,9 @@ gitlab:
     - '/srv/gitlab/config:/etc/gitlab'
     - '/srv/gitlab/logs:/var/log/gitlab'
     - '/srv/gitlab/data:/var/opt/gitlab'
+nginx:
+  image: nginx
+  volumes:
+    - ./nginx:/etc/nginx/conf.d
+  ports:
+   - "8080:80"
