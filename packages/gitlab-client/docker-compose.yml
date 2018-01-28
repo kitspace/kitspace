@@ -1,6 +1,10 @@
-web:
+gitlab:
   image: 'gitlab/gitlab-ce:latest'
   restart: always
+  environment:
+    GITLAB_OMNIBUS_CONFIG: |
+      external_url 'http://kitspace-gitlab-dev/gitlab'
+      # Add any other gitlab.rb configuration here, each on its own line
   ports:
     - '8079:80'
     - '8022:22'
