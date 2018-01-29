@@ -5,5 +5,11 @@
     "packages/gitlab-client",
     "services/partinfo",
     "services/board-files"
-  ]
+  ],
+  "scripts": {
+    "nginx": "./nginx/make_conf" ,
+    "docker": "docker-compose up -d",
+    "start:frontend": "cd frontend && yarn start",
+    "start": "yarn run nginx && yarn run docker && yarn start:frontend"
+  }
 }
