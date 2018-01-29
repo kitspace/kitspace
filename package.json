@@ -8,8 +8,8 @@
   ],
   "scripts": {
     "nginx": "./nginx/make_conf" ,
-    "docker": "docker-compose up -d",
+    "docker": "docker-compose up",
     "start:frontend": "cd frontend && yarn start",
-    "start": "yarn run nginx && yarn run docker && yarn start:frontend"
+    "start": "yarn run nginx && yarn run docker > /dev/null & yarn start:frontend"
   }
 }
