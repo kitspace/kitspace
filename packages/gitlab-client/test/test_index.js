@@ -3,7 +3,7 @@ const assert = require('better-assert')
 const shortid = require('shortid')
 const GitlabClient = require('../src/index')
 
-require('dotenv').config()
+require('dotenv').config({path: '../../.env'})
 
 describe('user', () => {
   const g = new GitlabClient(process.env.GITLAB_URL, process.env.GITLAB_TOKEN)

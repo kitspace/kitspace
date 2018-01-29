@@ -1,5 +1,5 @@
 gitlab:
-  image: 'gitlab/gitlab-ce:latest'
+  image: 'gitlab/gitlab-ce:10.2.4-ce.0'
   restart: always
   environment:
     GITLAB_OMNIBUS_CONFIG: |
@@ -13,8 +13,8 @@ gitlab:
     - '/srv/gitlab/logs:/var/log/gitlab'
     - '/srv/gitlab/data:/var/opt/gitlab'
 nginx:
-  image: nginx
+  image: 'nginx:1.13.8-alpine'
   volumes:
-    - ./nginx:/etc/nginx/conf.d
+    - './nginx:/etc/nginx/conf.d'
   ports:
-   - "8080:80"
+   - '8080:80'
