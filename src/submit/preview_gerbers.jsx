@@ -16,9 +16,8 @@ publicly accessible Git repository (you could use [GitHub](https://github.com)
 or [GitLab](https://gitlab.com) for instance). Preview your board by
 entering the repository URL below.
 
-If you think it hasn't found the right gerbers you can try adding a
-[\`kitspace.yaml\`](https://github.com/monostable/kitspace#kitspaceyaml-format) with the
-gerber field.
+If you think it hasn't found the right gerbers you can add [kitspace.yaml](https://github.com/monostable/kitspace#kitspaceyaml-format)
+with a gerbers field.
 
     gerbers: path/to/your/gerber-folder
 
