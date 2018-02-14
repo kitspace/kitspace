@@ -12,7 +12,7 @@ addons:
       - inkscape
 script:
   - export NODE_ENV=production
-  - ./scripts/plug_versions
+  - ./scripts/update_registry
   - ./scripts/get_boards production
   - ./configure production
   - wget https://github.com/ninja-build/ninja/releases/download/v1.6.0/ninja-linux.zip
