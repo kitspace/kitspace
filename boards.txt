@@ -35,3 +35,4 @@ https://github.com/dusjagr/PN001_Pop-Neuron_ShenzhenReady
 https://github.com/GaudiLabs/ChaosLooper
 https://github.com/python-ugame/ugame-10-hardware
 https://github.com/sgmk/microNoise_SZ-Ready
+https://github.com/sgmk/solarbird_shenzen_rdy
