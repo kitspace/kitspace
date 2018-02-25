@@ -2,57 +2,11 @@ const fs = require('fs')
 const globule = require('globule')
 const path = require('path')
 const yaml = require('js-yaml')
-const Svgo = require('svgo')
 const utils = require('../utils/utils')
 const boardBuilder = require('../../src/board_builder')
 const cp = require('child_process')
 const Jszip = require('jszip')
 const gerberFiles = require('../../src/gerber_files')
-
-const svgo = new Svgo({
-  full: true,
-  plugins: [
-    {removeDoctype: true},
-    {removeXMLProcInst: true},
-    {removeComments: true},
-    {removeMetadata: true},
-    {removeEditorsNSData: true},
-    {cleanupAttrs: true},
-    {minifyStyles: false},
-    {convertStyleToAttrs: true},
-    {cleanupIDs: true},
-    {removeRasterImages: true},
-    {removeUselessDefs: true},
-    {cleanupNumericValues: true},
-    {cleanupListOfValues: true},
-    {convertColors: true},
-    {removeUnknownsAndDefaults: true},
-    {removeNonInheritableGroupAttrs: true},
-    {removeUselessStrokeAndFill: true},
-    {removeViewBox: true},
-    {cleanupEnableBackground: true},
-    {removeHiddenElems: true},
-    {removeEmptyText: true},
-    {convertShapeToPath: true},
-    {moveElemsAttrsToGroup: false},
-    {moveGroupAttrsToElems: true},
-    {collapseGroups: false},
-    {convertPathData: true},
-    {convertTransform: true},
-    {removeEmptyAttrs: true},
-    {removeEmptyContainers: true},
-    {mergePaths: true},
-    {removeUnusedNS: true},
-    {transformsWithOnePath: true},
-    {sortAttrs: true},
-    {removeTitle: true},
-    {removeDesc: true},
-    {removeDimensions: true},
-    {removeAttrs: true},
-    {addClassesToSVGElement: false},
-    {removeStyleElement: false}
-  ]
-})
 
 if (require.main !== module) {
   module.exports = function(config, folder) {
