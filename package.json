@@ -71,7 +71,7 @@
     "redux-immutable": "^4.0.0",
     "semantic-ui-react": "^0.67.1",
     "superagent": "^3.3.1",
-    "whats-that-gerber": "^2.1.0",
+    "whats-that-gerber": "git+https://github.com/tracespace/whats-that-gerber.git#fix-outline",
     "xml-element-string": "^1.0.0"
   },
   "sasslintConfig": "./src/.sass-lint.yml"

@@ -4817,6 +4817,10 @@ whats-that-gerber@^2.1.0:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/whats-that-gerber/-/whats-that-gerber-2.1.1.tgz#7e662f42757f988712880c1e4faf83fe38a585cc"
 
+"whats-that-gerber@git+https://github.com/tracespace/whats-that-gerber.git#fix-outline":
+  version "2.1.1"
+  resolved "git+https://github.com/tracespace/whats-that-gerber.git#f23faad175ba8d212de1fcd18dd6a24e47cee179"
+
 whatwg-encoding@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/whatwg-encoding/-/whatwg-encoding-1.0.1.tgz#3c6c451a198ee7aec55b1ec61d0920c67801a5f4"
