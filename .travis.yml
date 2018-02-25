@@ -14,7 +14,7 @@ addons:
       - g++-4.8
       - inkscape
 script:
-  - bash keep_alive.sh
+  - bash keep_alive.sh &
   - export NODE_ENV=production
   - ./scripts/update_registry
   - ./scripts/get_boards production
