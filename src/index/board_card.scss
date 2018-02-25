@@ -61,6 +61,7 @@ $mobile-summary-h: $summary-h * 3 + 48;
     overflow: hidden;
     text-overflow: ellipsis;
     width: 286px;
+    white-space: nowrap;
   }
 
   .url {
