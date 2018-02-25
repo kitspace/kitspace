@@ -3646,14 +3646,14 @@ pcb-stackup-core@^3.0.0:
     viewbox "^1.0.0"
     xml-element-string "^1.0.0"
 
-pcb-stackup@^3.0.0:
+"pcb-stackup@git+https://github.com/tracespace/pcb-stackup.git#fix-outline":
   version "3.0.0"
-  resolved "https://registry.yarnpkg.com/pcb-stackup/-/pcb-stackup-3.0.0.tgz#d766d2170944891ad47d12630751d183ccf65465"
+  resolved "git+https://github.com/tracespace/pcb-stackup.git#b211083b33fbc7926b08d4ea7b2e07433cefaf81"
   dependencies:
     gerber-to-svg "^2.1.0"
     pcb-stackup-core "^3.0.0"
     shortid "^2.2.6"
-    whats-that-gerber "^2.1.0"
+    whats-that-gerber "git+https://github.com/tracespace/whats-that-gerber.git#fix-outline"
 
 pify@^2.0.0:
   version "2.3.0"
@@ -4770,10 +4770,6 @@ webidl-conversions@^2.0.0:
 webidl-conversions@^3.0.0, webidl-conversions@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/webidl-conversions/-/webidl-conversions-3.0.1.tgz#24534275e2a7bc6be7bc86611cc16ae0a5654871"
-
-whats-that-gerber@^2.1.0:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/whats-that-gerber/-/whats-that-gerber-2.1.1.tgz#7e662f42757f988712880c1e4faf83fe38a585cc"
 
 "whats-that-gerber@git+https://github.com/tracespace/whats-that-gerber.git#fix-outline":
   version "2.1.1"

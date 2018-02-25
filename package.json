@@ -56,7 +56,7 @@
     "js-yaml": "^3.3.1",
     "lodash.camelcase": "^4.3.0",
     "lodash.throttle": "^4.1.1",
-    "pcb-stackup": "^3.0.0",
+    "pcb-stackup": "git+https://github.com/tracespace/pcb-stackup.git#fix-outline",
     "react": "^15.3.0",
     "react-document-title": "^2.0.1",
     "react-dom": "^15.3.0",
