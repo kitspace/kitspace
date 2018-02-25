@@ -190,24 +190,20 @@ if (require.main !== module) {
           }
         })
       })
-      svgo.optimize(stackup.top.svg, result => {
-        fs.writeFile(topSvgPath, result.data, function(err) {
-          if (err != null) {
-            console.error(`Could not write top svg for ${folder}`)
-            console.error(err)
-            return process.exit(1)
-          }
-        })
+      fs.writeFile(topSvgPath, stackup.top.svg, function(err) {
+        if (err != null) {
+          console.error(`Could not write top svg for ${folder}`)
+          console.error(err)
+          return process.exit(1)
+        }
       })
-      return svgo.optimize(stackup.bottom.svg, result =>
-        fs.writeFile(bottomSvgPath, result.data, function(err) {
-          if (err != null) {
-            console.error(`Could not write bottom svg for ${folder}`)
-            console.error(err)
-            return process.exit(1)
-          }
-        })
-      )
+      fs.writeFile(bottomSvgPath, stackup.bottom.svg, function(err) {
+        if (err != null) {
+          console.error(`Could not write bottom svg for ${folder}`)
+          console.error(err)
+          return process.exit(1)
+        }
+      })
     })
   } catch (e) {
     console.error(`Could not process gerbers for ${folder}`)
