@@ -101,7 +101,7 @@ function styleString(options) {
 module.exports = (layers, color, callback, createElement) => {
   return pcbStackup(layers, {
     color: styleToOption(colorToStyle[color]),
-    outlineGapFill: 0.011,
+    outlineGapFill: 0.05,
     id: 'pcb-stackup',
     createElement: createElement || xmlElementString,
   }, callback)
