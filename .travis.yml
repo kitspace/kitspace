@@ -3,9 +3,6 @@ node_js:
   - "6"
 env:
   - CXX=g++-4.8
-cache:
-    directories:
-        - build
 addons:
   apt:
     sources:
