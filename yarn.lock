@@ -2040,9 +2040,9 @@ generate-object-property@^1.1.0:
   dependencies:
     is-property "^1.0.0"
 
-"gerber-parser@git+https://github.com/kasbah/gerber-parser#trailing-zero-detection":
-  version "1.0.6"
-  resolved "git+https://github.com/kasbah/gerber-parser#2360b76a2855777430df67b354dfd7e42b4997ec"
+gerber-parser@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/gerber-parser/-/gerber-parser-1.1.0.tgz#3a119aa876ab59494d093dca00189aefb52f4831"
   dependencies:
     inherits "^2.0.1"
     lodash.isfinite "^3.3.1"
@@ -2060,13 +2060,31 @@ gerber-plotter@^1.1.0:
     lodash.isfunction "^3.0.6"
     readable-stream "^2.1.2"
 
-gerber-to-svg@^2.1.0, "gerber-to-svg@git+https://github.com/kasbah/gerber-to-svg.git#upgrade-parser":
+"gerber-to-svg@git+https://github.com/kasbah/gerber-to-svg.git#upgrade-parser":
   version "2.1.0"
-  resolved "git+https://github.com/kasbah/gerber-to-svg.git#cc362fd4486f47dc53c00d34c2289e598c11761f"
+  resolved "git+https://github.com/kasbah/gerber-to-svg.git#8812f3c298ad000647690b2fbc28373c1e55b024"
   dependencies:
     chalk "^1.1.1"
     escape-html "^1.0.3"
-    gerber-parser "git+https://github.com/kasbah/gerber-parser#trailing-zero-detection"
+    gerber-parser "^1.1.0"
+    gerber-plotter "^1.1.0"
+    inherits "^2.0.1"
+    lodash.isfinite "^3.2.0"
+    lodash.isstring "^4.0.1"
+    minimist "^1.1.0"
+    mkdirp "^0.5.1"
+    readable-stream "^2.1.2"
+    xml-element-string "^1.0.0"
+    xmlovely "^1.0.0"
+
+"gerber-to-svg@https://github.com/kasbah/gerber-to-svg#upgrade-parser":
+  version "2.1.0"
+  uid "8812f3c298ad000647690b2fbc28373c1e55b024"
+  resolved "https://github.com/kasbah/gerber-to-svg#8812f3c298ad000647690b2fbc28373c1e55b024"
+  dependencies:
+    chalk "^1.1.1"
+    escape-html "^1.0.3"
+    gerber-parser "^1.1.0"
     gerber-plotter "^1.1.0"
     inherits "^2.0.1"
     lodash.isfinite "^3.2.0"
@@ -3648,9 +3666,9 @@ pcb-stackup-core@^3.0.0:
 
 "pcb-stackup@git+https://github.com/tracespace/pcb-stackup.git#fix-outline":
   version "3.0.0"
-  resolved "git+https://github.com/tracespace/pcb-stackup.git#b211083b33fbc7926b08d4ea7b2e07433cefaf81"
+  resolved "git+https://github.com/tracespace/pcb-stackup.git#4fa3233a6f55247ec4751d55b29b3440692a8759"
   dependencies:
-    gerber-to-svg "^2.1.0"
+    gerber-to-svg "https://github.com/kasbah/gerber-to-svg#upgrade-parser"
     pcb-stackup-core "^3.0.0"
     shortid "^2.2.6"
     whats-that-gerber "git+https://github.com/tracespace/whats-that-gerber.git#fix-outline"
