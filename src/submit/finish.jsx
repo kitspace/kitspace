@@ -13,7 +13,7 @@ const Step4 = React.createClass({
     const url = board.url ? `\`${board.url}\`` : 'your URL'
     const instructionText =
       'Please [edit the boards.txt]' +
-      '(https://github.com/monostable/kitnic/edit/master/boards.txt)' +
+      '(https://github.com/monostable/kitspace/edit/master/boards.txt)' +
       ' file on GitHub. Add' +
       ` ${url} and send us a pull request with your change.`
     return (

@@ -16,7 +16,7 @@ const Step3 = React.createClass({
     let nextButton, infoBar
     let text = board.yaml
       ? ''
-      : 'Add a kitnic.yaml with "summary" and' +
+      : 'Add a kitspace.yaml with "summary" and' +
         ' "site" fields to appear at the top of your page'
     const info = board.yaml || {}
     info.repo = board.url
@@ -41,7 +41,7 @@ const Step3 = React.createClass({
       'Add a README.md to your repository explaining more' +
       ' about the project. This should be written in [Markdown]' +
       '(http://commonmark.org/help/).' +
-      ' You can also add a summary and a link to your kitnic.yaml that will' +
+      ' You can also add a summary and a link to your kitspace.yaml that will' +
       ' appear at the top of your page:' +
       '\n\n```\n' +
       'summary: <a summary for your project>\n' +
