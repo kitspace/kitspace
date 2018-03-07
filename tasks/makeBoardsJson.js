@@ -50,11 +50,13 @@ else {
     folders.sort((a,b) => a.toLowerCase() > b.toLowerCase());
 
     for (let folder of folders) {
-        var info;
-        let file = undefined;
-        try {
-            file = fs.readFileSync(`${folder}/kitnic.yaml`);
-        } catch (error) {}
+        let info;
+        let file;
+        if (fs.existsSync(`${folder}/kitnic.yaml`)) {
+          file = fs.readFileSync(`${folder}/kitnic.yaml`);
+        } else if (fs.existsSync(`${folder}/kitspace.yaml`)) {
+          file = fs.readFileSync(`${folder}/kitspace.yaml`);
+        }
         if (file != null) {
             info = yaml.safeLoad(file);
         } else {
