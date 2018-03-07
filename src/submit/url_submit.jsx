@@ -113,8 +113,8 @@ function createElement(type, props, children) {
   return React.createElement(type, props, children)
 }
 
-function kitnicYaml(files) {
-  const yaml = files.filter(f => RegExp('^kitnic.yaml$').test(f))
+function kitspaceYaml(files) {
+  const yaml = files.filter(f => RegExp('^(kitspace|kitnic).yaml$').test(f))
   if (yaml.length > 0) {
     return yaml[0]
   }
@@ -152,7 +152,7 @@ const UrlSubmit = React.createClass({
         const files = res.body.data.files
         const root = res.body.data.root
         const gerbers = gerberFiles(files)
-        const yaml = kitnicYaml(files)
+        const yaml = kitspaceYaml(files)
         const readme = findReadme(files)
         if (readme) {
           superagent

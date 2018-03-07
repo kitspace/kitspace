@@ -25,7 +25,7 @@ module.exports = function ColorSelector(props) {
     if (props.active !== 'green') {
       yamlInfo = (
         <Label attached="bottom right">
-          {`Add a kitnic.yaml with "color: ${props.active}" to\
+          {`Add a kitspace.yaml with "color: ${props.active}" to\
             your repo to use this color`}
         </Label>
       )
@@ -33,7 +33,7 @@ module.exports = function ColorSelector(props) {
   } else if (props.yamlColor !== props.active) {
     yamlInfo = (
       <Label attached="bottom right">
-        {`Change the color in your kitnic.yaml to "color: \
+        {`Change the color in your kitspace.yaml to "color: \
           ${props.active}" to use this color`}
       </Label>
     )

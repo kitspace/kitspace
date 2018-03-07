@@ -11,13 +11,17 @@ const getPartinfo = require('../../src/get_partinfo.js')
 if (require.main !== module) {
   module.exports = function(config, folder) {
     let bom, file, info
-    try {
+    if (fs.existsSync(`${folder}/kitnic.yaml`)) {
       file = fs.readFileSync(`${folder}/kitnic.yaml`)
-    } catch (error) {}
+    } else if (fs.existsSync(`${folder}/kitspace.yaml`)) {
+      file = fs.readFileSync(`${folder}/kitspace.yaml`)
+    }
     if (file != null) {
       info = yaml.safeLoad(file)
+    } else {
+      info = {}
     }
-    if (info && info.bom) {
+    if (info.bom) {
       bom = folder + '/' + info.bom
     } else {
       bom = folder + '/1-click-bom.tsv'
