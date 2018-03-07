@@ -30,9 +30,9 @@ You can get similar renderings and also inspect invdividual layers, using the [t
 
 Check out [kitspace.org/submit](https://kitspace.org/submit) which will guide you through the process.
 
-### Kitnic.yaml format
+### kitspace.yaml format
 
-Currently the `kitnic.yaml` makes use of the following fields:
+Currently the `kitspace.yaml` makes use of the following fields:
 
 ```yaml
 summary: A description for your project
@@ -53,7 +53,7 @@ gerbers: A path to your folder of gerbers in case it isn't `gerbers/`.
 Paths should be in UNIX style (i.e. use `/` not `\`) and relative to the root
 of your repository. The YAML format is pretty straight forward but if you need
 to know more check the example below and [the YAML website][6]. Use [this YAML
-validator][yamllint] to be extra sure that your `kitnic.yaml` is valid.
+validator][yamllint] to be extra sure that your `kitspace.yaml` is valid.
 
 ### Some examples
 Check out the repo links of the projects listed on
@@ -80,7 +80,7 @@ A more advanced example could be something like:
 
 ```
 .
-├── kitnic.yaml
+├── kitspace.yaml
 └── manufacture
     ├── advanced-example-BOM.tsv
     └── gerbers-and-drills
@@ -102,7 +102,7 @@ A more advanced example could be something like:
         └── advanced-example-F_SilkS.gto
 ```
 
-with `kitnic.yaml` containing:
+with `kitspace.yaml` containing:
 
 ```yaml
 summary: A more advanced example
