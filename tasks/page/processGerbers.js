@@ -65,9 +65,11 @@ if (require.main !== module) {
   }
   const zip = new Jszip()
   const folder_name = path.basename(zipPath, '.zip')
-  try {
-    file = fs.readFileSync(`${folder}/kitnic.yaml`)
-  } catch (error) {}
+  if (fs.existsSync(`${folder}/kitnic.yaml`)) {
+    file = fs.readFileSync(`${folder}/kitnic.yaml`);
+  } else if (fs.existsSync(`${folder}/kitspace.yaml`)) {
+    file = fs.readFileSync(`${folder}/kitspace.yaml`);
+  }
   try {
     let color, data
     const stackupData = []

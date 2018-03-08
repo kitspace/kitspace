@@ -3,7 +3,7 @@ const path = require('path')
 
 function gerberFiles(files, gerberPath) {
   if (gerberPath != null) {
-    regex = RegExp('^' + gerberPath)
+    const regex = RegExp('^' + gerberPath)
     files = files.filter(f => regex.test(f))
   }
   const layers = files
