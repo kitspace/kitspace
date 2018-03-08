@@ -10,17 +10,19 @@ const gerberFiles = require('../../src/gerber_files')
 
 if (require.main !== module) {
   module.exports = function(config, folder) {
-    let file, info
+    let file
     if (fs.existsSync(`${folder}/kitnic.yaml`)) {
       file = fs.readFileSync(`${folder}/kitnic.yaml`);
     } else if (fs.existsSync(`${folder}/kitspace.yaml`)) {
       file = fs.readFileSync(`${folder}/kitspace.yaml`);
     }
-    if (file != null) {
-      info = yaml.safeLoad(file)
-    }
-    const files = globule.find(`${folder}/**/*`)
-    const gerbers = gerberFiles(files, info.gerbers)
+    const info = file == null ? {} : yaml.safeLoad(file)
+    const files = globule
+      .find(`${folder}/**/*`)
+      .map(p => path.relative(folder, p))
+    const gerbers = gerberFiles(files, info.gerbers).map(p =>
+      path.join(folder, p)
+    )
     if (gerbers.length === 0) {
       console.error(`No gerbers found for ${folder}.`)
       process.exit(1)
