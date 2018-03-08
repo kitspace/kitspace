@@ -151,7 +151,6 @@ const UrlSubmit = React.createClass({
         }
         const files = res.body.data.files
         const root = res.body.data.root
-        const gerbers = gerberFiles(files)
         const yaml = kitspaceYaml(files)
         const readme = findReadme(files)
         if (readme) {
@@ -182,8 +181,10 @@ const UrlSubmit = React.createClass({
             value: {type: 'readme', message: 'No README found in repository'}
           })
         }
+        let p = Promise.resolve({})
+        let info
         if (yaml) {
-          superagent
+          p = superagent
             .get(url.resolve(GIT_CLONE_SERVER, path.join(root, yaml)))
             .withCredentials()
             .then(res => {
@@ -197,28 +198,32 @@ const UrlSubmit = React.createClass({
               if (!(info && info.summary)) {
                 getGithubSummary(gitUrl, dispatch)
               }
+              return info || {}
             })
         } else {
           getBom(root, null, dispatch)
         }
-        if (gerbers.length === 0) {
-          dispatch({
-            type: 'reportError',
-            value: {
-              type: 'gerbers',
-              message: 'No Gerber files found in repository'
-            }
-          })
-        } else {
-          const requests = gerbers.map(f => {
-            return superagent
-              .get(url.resolve(GIT_CLONE_SERVER, path.join(root, f)))
-              .withCredentials()
-              .then(res => ({gerber: res.text, filename: f}))
-          })
-          Promise.all(requests).then(buildBoard.bind(null, dispatch))
-          dispatch({type: 'setFileListing', value: files})
-        }
+        return p.then(info => {
+          const gerbers = gerberFiles(files, info.gerbers)
+          if (gerbers.length === 0) {
+            dispatch({
+              type: 'reportError',
+              value: {
+                type: 'gerbers',
+                message: 'No Gerber files found in repository'
+              }
+            })
+          } else {
+            const requests = gerbers.map(f => {
+              return superagent
+                .get(url.resolve(GIT_CLONE_SERVER, path.join(root, f)))
+                .withCredentials()
+                .then(res => ({gerber: res.text, filename: f}))
+            })
+            Promise.all(requests).then(buildBoard.bind(null, dispatch))
+            dispatch({type: 'setFileListing', value: files})
+          }
+        })
       })
   },
   onChange(event, input) {

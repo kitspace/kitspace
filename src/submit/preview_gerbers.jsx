@@ -16,8 +16,14 @@ publicly accessible Git repository (you could use [GitHub](https://github.com)
 or [GitLab](https://gitlab.com) for instance). Preview your board by
 entering the repository URL below.
 
-If you run into any problems please get in touch via [Riot.im
-chat](https://riot.im/app/#/room/#kitspace:matrix.org), IRC (freenode#kitspace) or the
+If you think it hasn't found the right gerbers you can add [kitspace.yaml](https://github.com/monostable/kitspace#kitspaceyaml-format)
+with a gerbers field.
+
+    gerbers: path/to/your/gerber-folder
+
+If you run into any other problems please get in touch via
+[Riot.im chat](https://riot.im/app/#/room/#kitspace:matrix.org)
+, IRC (freenode#kitspace) or the
 [mailing-list](https://groups.google.com/forum/#!forum/kitspace).
 You can also use the [Tracespace Viewer](http://viewer.tracespace.io) to try
 and figure out any issues with the board rendering.
