@@ -39,3 +39,4 @@ https://github.com/sgmk/solarbird_shenzen_rdy
 https://github.com/kasbah/maulwurf
 https://github.com/squaresolid/tiger_biosynth
 https://github.com/squaresolid/fish-caller
+https://github.com/jasiek/antenna-analyser
