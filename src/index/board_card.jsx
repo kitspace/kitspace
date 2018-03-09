@@ -78,14 +78,10 @@ let BoardCard = React.createClass({
               .join(' / ')}
           </div>
           <div className="url">
-            {truncate(
-              this.props.data.id
-                .split('/')
-                .slice(0, 2)
-                .join(' / '),
-              30,
-              true
-            )}
+            {this.props.data.id
+              .split('/')
+              .slice(0, 2)
+              .join(' / ')}
           </div>
           <div className="summary">{truncate(this.props.data.summary, 85)}</div>
         </a>
