@@ -56,6 +56,11 @@ function getBom(root, bomPath, dispatch) {
         getPartinfo(lines).then(parts => {
           dispatch({type: 'setParts', value: parts})
         })
+      } else {
+        dispatch({
+          type: 'reportError',
+          value: {type: 'bom', message: 'BOM is empty'}
+        })
       }
     })
 }
