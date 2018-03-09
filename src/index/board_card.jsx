@@ -6,16 +6,12 @@ const FadeImage = require('../fade_image')
 const mediaQueries = require('../media_queries')
 
 function truncate(input, len, fromStart) {
-  var str = input
+  let str = input
   if (fromStart) {
     str = reverse(str)
   }
   if (str.length > len) {
-    str = str.substr(0, len)
-    if (str[len] !== ' ') {
-      str = str.concat(' ')
-    }
-    str = str.concat('...')
+    str = str.substr(0, len) + '...'
   }
   if (fromStart) {
     str = reverse(str)
@@ -28,7 +24,7 @@ let BoardCard = React.createClass({
     data: React.PropTypes.object
   },
   render: function() {
-    var image
+    let image
     if (this.props.lazyLoad) {
       image = (
         <LazyLoad
