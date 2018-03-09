@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"1-click-bom@^1.1.2":
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/1-click-bom/-/1-click-bom-1.1.2.tgz#98a03df237e1da397e15d3aa57257b9512c27f26"
+"1-click-bom@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/1-click-bom/-/1-click-bom-1.2.0.tgz#602116ba355c7c7791b8edd33a11f95dde665ede"
 
 JSONStream@^1.0.3:
   version "1.2.1"

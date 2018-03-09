@@ -70,7 +70,6 @@ else {
                 info.summary = ghInfo.description;
             } else {
                 console.warn(`WARNING: could not get GitHub description for ${folder}`);
-                console.warn(ghInfo);
             }
         }
         boards.push(info);
