@@ -50,11 +50,13 @@ function getBom(root, bomPath, dispatch) {
           dispatch({type: 'reportWarning', value: {type: 'bom', message}})
         })
       }
-      const bom = oneClickBOM.writeTSV(lines)
-      dispatch({type: 'setBom', value: bom})
-      getPartinfo(lines).then(parts => {
-        dispatch({type: 'setParts', value: parts})
-      })
+      if (lines && lines.length > 0) {
+        const bom = oneClickBOM.writeTSV(lines)
+        dispatch({type: 'setBom', value: bom})
+        getPartinfo(lines).then(parts => {
+          dispatch({type: 'setParts', value: parts})
+        })
+      }
     })
 }
 
