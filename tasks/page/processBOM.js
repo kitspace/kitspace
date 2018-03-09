@@ -61,7 +61,13 @@ if (require.main !== module) {
 
   const tsv = fs.readFileSync(bomPath, {encoding: 'utf8'})
   info.bom = oneClickBOM.parseTSV(tsv)
+
+  if (!info.bom.lines || info.bom.lines.length === 0) {
+    console.error('No lines in BOM found')
+    process.exit(1)
+  }
   info.bom.tsv = oneClickBOM.writeTSV(info.bom.lines)
+
 
   let repo = cp.execSync(`cd ${folder} && git remote -v`, {encoding: 'utf8'})
   repo = repo.split('\t')[1].split(' ')[0]
