@@ -4,12 +4,13 @@ const glob = require('glob')
 const marky = require('marky-markdown')
 const path = require('path')
 const htmlToJsx = require('htmltojsx')
+const rst2mdown = require('rst2mdown')
 
 const converter = new htmlToJsx({createClass: true, outputClassName: 'Readme'})
 
 if (require.main !== module) {
   module.exports = function(config, folder) {
-    const pattern = `${folder}/readme?(\.markdown|\.mdown|\.mkdn|\.md)`
+    const pattern = `${folder}/readme?(\.markdown|\.mdown|\.mkdn|\.md|\.rst)`
     const readmes = glob.sync(pattern, {nocase: true})
     const deps = [`build/.temp/${folder}/info.json`]
     if (readmes.length > 0) {
@@ -26,7 +27,12 @@ if (require.main !== module) {
   const readme = deps[1]
   if (readme != null) {
     const pkg = {repository: {url: info.repo}}
-    html = marky(fs.readFileSync(readme, 'utf8'), {package: pkg}).html()
+    const contents = fs.readFileSync(readme, 'utf8')
+    let markdown = contents
+    if (path.extname(readme).toLowerCase() === '.rst') {
+      markdown = rst2mdown(contents)
+    }
+    html = marky(markdown, {package: pkg}).html()
   }
   const reactComponent = converter.convert(`<div class='readme'>${html}</div>`)
   fs.writeFileSync(
