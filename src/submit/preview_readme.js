@@ -1,6 +1,5 @@
 const React = require('react')
 const Markdown = require('react-markdown')
-const marky = require('marky-markdown')
 const semantic = require('semantic-ui-react')
 
 const util = require('./util')
