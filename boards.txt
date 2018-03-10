@@ -41,3 +41,4 @@ https://github.com/squaresolid/tiger_biosynth
 https://github.com/squaresolid/fish-caller
 https://github.com/jasiek/antenna-analyser
 https://github.com/prometheus-science/Flypi
+https://github.com/less-smog/hardware
