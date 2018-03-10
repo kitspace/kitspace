@@ -68,6 +68,7 @@
     "react-search-input": "~0.10.1",
     "redux": "^3.6.0",
     "redux-immutable": "^4.0.0",
+    "rst2mdown": "^0.1.0",
     "semantic-ui-react": "^0.67.1",
     "superagent": "^3.3.1",
     "whats-that-gerber": "git+https://github.com/tracespace/whats-that-gerber.git#fix-outline",
