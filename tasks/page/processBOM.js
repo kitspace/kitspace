@@ -50,14 +50,17 @@ if (require.main !== module) {
     }
   }, '')
 
-  try {
+  if (fs.existsSync(`${folder}/kitnic.yaml`)) {
     file = fs.readFileSync(`${folder}/kitnic.yaml`)
-  } catch (error) {}
-
+  } else if (fs.existsSync(`${folder}/kitspace.yaml`)) {
+    file = fs.readFileSync(`${folder}/kitspace.yaml`)
+  }
   if (file != null) {
     kitnicYaml = yaml.safeLoad(file)
+  } else {
+    kitnicYaml = {}
   }
-  info.site = kitnicYaml && kitnicYaml.site ? kitnicYaml.site : ''
+  info.site = kitnicYaml.site || ''
 
   const tsv = fs.readFileSync(bomPath, {encoding: 'utf8'})
   info.bom = oneClickBOM.parseTSV(tsv)
