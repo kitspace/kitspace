@@ -25,7 +25,7 @@ function Intro(props) {
       <div style={style.introContainer}>
         <div className="introText" style={style.intro}>
           <p>
-            Kitspace (formerly called Kitnic) is a registry of open hardware
+            Kit Space (formerly called Kitnic) is a registry of open hardware
             electronics projects that are ready for you to order and build. It
             could be described as a "Thingiverse for electronics". Click on any
             project to get further info, download the Gerbers and see the bill

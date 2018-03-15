@@ -4,7 +4,7 @@
 
 [![video](image_src/fosdem2017.jpg)](https://video.fosdem.org/2017/AW1.120/kitnic_it.vp8.webm)
 
-Kitspace (formerly Kitnic) is a registry of open source hardware electronics
+Kit Space (formerly Kitnic) is a registry of open source hardware electronics
 projects that are ready to order and build. It could be described as a
 "Thingiverse for electronics". The most important elements of a Kit Space
 project page are:
