@@ -54,6 +54,18 @@ describe('project', () => {
     await g.deleteFile(id, path)
   })
 
+  it('creates multiple files', async () => {
+    const content1 = shortid.generate()
+    const path1 = shortid.generate()
+    const content2 = shortid.generate()
+    const path2 = shortid.generate()
+    const r = await g.createFiles(id, [
+      {path: path1, content: content1},
+      {path: path2, content: content2}
+    ])
+    assert(r.id != null)
+  })
+
   it('overwrites a file', async () => {
     const content1 = shortid.generate()
     const content2 = shortid.generate()
