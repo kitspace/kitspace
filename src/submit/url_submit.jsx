@@ -16,7 +16,7 @@ const {Form, Button, Input, Message} = require('semantic-ui-react')
 
 const boardBuilder = require('../board_builder')
 
-const GIT_CLONE_SERVER = 'https://git-clone-server.kitnic.it'
+const GIT_CLONE_SERVER = 'https://git-clone-server.kitspace.org'
 
 function getGithubSummary(repoUrl, dispatch) {
   const repoInfo = githubUrlToObject(repoUrl)
