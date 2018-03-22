@@ -1,9 +1,9 @@
 gitlab:
-  image: 'gitlab/gitlab-ce:10.2.4-ce.0'
+  image: 'gitlab/gitlab-ce:10.6.0-ce.0'
   restart: always
   environment:
     GITLAB_OMNIBUS_CONFIG: |
-      external_url 'http://kitspace-gitlab-dev/gitlab'
+      external_url 'http://localhost/gitlab'
       # Add any other gitlab.rb configuration here, each on its own line
   ports:
     - '8079:80'
@@ -13,7 +13,7 @@ gitlab:
     - '/srv/gitlab/logs:/var/log/gitlab'
     - '/srv/gitlab/data:/var/opt/gitlab'
 nginx:
-  image: 'nginx:1.13.8-alpine'
+  image: 'nginx:1.13.10-alpine'
   volumes:
     - './nginx:/etc/nginx/conf.d'
   ports:
