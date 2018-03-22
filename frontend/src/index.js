@@ -3,6 +3,8 @@ const ReactDOM = require('react-dom')
 const Gitlab = require('kitspace-gitlab-client')
 const gitlab = new Gitlab('http://localhost:8080/gitlab')
 const superagent = require('superagent')
+const {Helmet} = require('react-helmet')
+const {BrowserRouter, Route, Switch, Redirect} = require('react-router-dom')
 
 class Index extends React.Component {
   constructor() {
@@ -13,7 +15,8 @@ class Index extends React.Component {
     gitlab.getProjects().then(projects => {
       this.setState({projects})
     })
-    superagent.get('http://localhost:8080/gitlab/api/v4/user')
+    superagent
+      .get('http://localhost:8080/gitlab/api/v4/user')
       .set('Accept', 'application/json')
       .withCredentials()
       .then(r => this.setState({user: r.body}))
@@ -28,5 +31,27 @@ class Index extends React.Component {
   }
 }
 
+class Login extends React.Component {
+  render() {
+    return <div>login</div>
+  }
+}
+
+class App extends React.Component {
+  render() {
+    return (
+      <div>
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/" component={Index} />
+            <Route exact path="/login" component={Login} />
+            <Redirect to="/" />
+          </Switch>
+        </BrowserRouter>
+      </div>
+    )
+  }
+}
+
 const element = document.getElementById('app')
-ReactDOM.render(<Index />, element)
+ReactDOM.render(<App />, element)
