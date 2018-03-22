@@ -9,7 +9,7 @@ function getLocation(callback) {
   const used_country_codes = Object.keys(countries_data).map(key => {
     return countries_data[key]
   })
-  const url = 'https://freegeoip.kitnic.it'
+  const url = 'https://freegeoip.kitspace.org'
   return superagent
     .get(url)
     .then(res => {
