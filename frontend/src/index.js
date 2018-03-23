@@ -32,8 +32,25 @@ class Index extends React.Component {
 }
 
 class Login extends React.Component {
+  constructor() {
+    super()
+    this.state = {token: null}
+  }
+  componentDidMount() {
+    superagent.get('http://localhost:8080/gitlab/users/sign_in').then(r => {
+      const doc = (new DOMParser).parseFromString(r.text, 'text/html')
+      const input = doc.querySelector('input[name=authenticity_token]')
+      if (input) {
+        this.setState({token: input.value})
+      }
+    })
+  }
   render() {
-    return <div>login</div>
+    return (
+      <div>
+        <pre>{JSON.stringify(this.state, null, 2)}</pre>
+      </div>
+    )
   }
 }
 
@@ -51,6 +68,11 @@ class App extends React.Component {
       </div>
     )
   }
+}
+
+function trace(x) {
+  console.log(x)
+  return x
 }
 
 const element = document.getElementById('app')
