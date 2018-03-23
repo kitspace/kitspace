@@ -34,21 +34,32 @@ class Index extends React.Component {
 class Login extends React.Component {
   constructor() {
     super()
-    this.state = {token: null}
+    this.state = {authenticity_token: null}
   }
   componentDidMount() {
-    superagent.get('http://localhost:8080/gitlab/users/sign_in').then(r => {
-      const doc = (new DOMParser).parseFromString(r.text, 'text/html')
-      const input = doc.querySelector('input[name=authenticity_token]')
-      if (input) {
-        this.setState({token: input.value})
-      }
+    superagent.get('/login/api').then(r => {
+      this.setState(r.body)
     })
   }
   render() {
     return (
       <div>
-        <pre>{JSON.stringify(this.state, null, 2)}</pre>
+        <form action="/login/api" method="post">
+          <label htmlFor="user_login" required="required">
+            Username or email
+          </label>
+          <input id="user_login" name="user[login]" />
+          <label htmlFor="user_password" required="required">
+            Password
+          </label>
+          <input type="password" id="user_password" name="user[password]" />
+          <input
+            type="hidden"
+            name="authenticity_token"
+            value={this.state.authenticity_token}
+          />
+          <input type="submit" value="Login" />
+        </form>
       </div>
     )
   }

@@ -37,8 +37,8 @@ server {
 
 	}
 
-	location /login {
-		proxy_pass http://${docker_host}:4004;
+	location /login/api {
+		proxy_pass http://${docker_host}:4004/;
 	}
 
 }" > "${dir}/default.conf"
