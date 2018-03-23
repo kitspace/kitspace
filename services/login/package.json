@@ -3,11 +3,17 @@
   "version": "0.0.0",
   "description": "",
   "scripts": {
-    "test": "mocha",
-    "start": "node src/server.js"
+    "start": "nodemon src/server.js"
   },
   "author": "",
   "dependencies": {
-    "express": "^4.16.2"
+    "cheerio": "^1.0.0-rc.2",
+    "express": "^4.16.2",
+    "kitspace-gitlab-client": "*",
+    "superagent": "^3.8.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.2",
+    "prettier": "^1.11.1"
   }
 }
