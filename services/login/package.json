@@ -1,0 +1,13 @@
+{
+  "name": "kitspace-login",
+  "version": "0.0.0",
+  "description": "",
+  "scripts": {
+    "test": "mocha",
+    "start": "node src/server.js"
+  },
+  "author": "",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
