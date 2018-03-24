@@ -48,11 +48,11 @@ class Login extends React.Component {
           <label htmlFor="user_login" required="required">
             Username or email
           </label>
-          <input id="user_login" name="user[login]" />
+          <input id="user_login" name="login" />
           <label htmlFor="user_password" required="required">
             Password
           </label>
-          <input type="password" id="user_password" name="user[password]" />
+          <input type="password" id="user_password" name="password" />
           <input
             type="hidden"
             name="authenticity_token"
