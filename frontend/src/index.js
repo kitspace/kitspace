@@ -44,15 +44,15 @@ class Login extends React.Component {
   render() {
     return (
       <div>
-        <form action="/login/api" method="post">
+        <form action="/gitlab/users/sign_in" method="post">
           <label htmlFor="user_login" required="required">
             Username or email
           </label>
-          <input id="user_login" name="login" />
+          <input id="user_login" name="user[login]" />
           <label htmlFor="user_password" required="required">
             Password
           </label>
-          <input type="password" id="user_password" name="password" />
+          <input type="password" id="user_password" name="user[password]" />
           <input
             type="hidden"
             name="authenticity_token"
