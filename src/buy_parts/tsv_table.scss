@@ -4,6 +4,12 @@
   border-bottom-left-radius: 0px !important;
   border-bottom-right-radius: 0px !important;
 
+  td {
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
   td.marked.orange {
     border-left: 13px solid #ff9e39 !important;
   }
