@@ -39,7 +39,7 @@ function getBom(root, bomPath, dispatch) {
       if (err) {
         return
       }
-      const {lines, errors, warnings} = oneClickBOM.parseTSV(res.text)
+      const {lines, errors, warnings} = oneClickBOM.parse(res.text)
       if (errors) {
         errors.forEach(message => {
           dispatch({type: 'reportError', value: {type: 'bom', message}})
