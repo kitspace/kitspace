@@ -148,7 +148,7 @@ const TsvTable = React.createClass({
       unstackable: true,
       singleLine: true,
       size: 'small',
-      className: 'TsvTable'
+      className: 'TsvTable' + (this.props.collapsed ? ' collapsed' : '')
     }
     return h(semantic.Table, tableProps, [headingJSX, bodyJSX])
   }

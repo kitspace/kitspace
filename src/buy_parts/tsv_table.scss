@@ -1,11 +1,16 @@
 @import 'mpn_popup';
 
+.TsvTable.collapsed {
+  td {
+    max-width: 200px;
+  }
+}
+
 .TsvTable {
   border-bottom-left-radius: 0px !important;
   border-bottom-right-radius: 0px !important;
 
   td {
-    max-width: 200px;
     overflow: hidden;
     text-overflow: ellipsis;
   }
