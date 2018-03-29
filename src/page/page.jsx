@@ -31,21 +31,27 @@ const Page = React.createClass({
 
           <meta itemprop="name" content={titleText} />
           <meta itemprop="description" content={info.summary} />
-          <meta itemprop="image" content="images/top-large.png" />
+          <meta
+            itemprop="image"
+            content={`/boards/${info.id}/images/top-large.png`}
+          />
 
           <meta property="og:url" content="kitspace.org" />
           <meta property="og:type" content="website" />
           <meta property="og:title" content={titleText} />
+          <meta property="og:description" content={info.summary} />
           <meta
-            property="og:description"
-            content={info.summary}
+            property="og:image"
+            content={`/boards/${info.id}/images/top-large.png`}
           />
-          <meta property="og:image" content="images/top-large.png" />
 
           <meta name="twitter:card" content="summary_large_image" />
           <meta name="twitter:title" content={titleText} />
           <meta name="twitter:description" content={info.summary} />
-          <meta name="twitter:image" content="images/top-large.png" />
+          <meta
+            name="twitter:image"
+            content={`/boards/${info.id}/images/top-large.png`}
+          />
         </Helmet>
         <div className="page">
           <TitleBar submissionButton={true}>
