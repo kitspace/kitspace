@@ -14,10 +14,11 @@ const info = require('../info.json')
 
 const Page = React.createClass({
   render() {
-    const titleText = info.id
+    const idText = info.id
       .split('/')
       .slice(2)
       .join(' / ')
+    const titleText = `${idText} - Kitspace`
     const subtitleText = info.id
       .split('/')
       .slice(0, 2)
@@ -25,11 +26,30 @@ const Page = React.createClass({
     return (
       <div>
         <Helmet>
-          <title>{`${titleText} - Kitspace`}</title>
+          <title>{titleText}</title>
+          <meta name="description" content={info.summary} />
+
+          <meta itemprop="name" content={titleText} />
+          <meta itemprop="description" content={info.summary} />
+          <meta itemprop="image" content="images/top-large.png" />
+
+          <meta property="og:url" content="kitspace.org" />
+          <meta property="og:type" content="website" />
+          <meta property="og:title" content={titleText} />
+          <meta
+            property="og:description"
+            content={info.summary}
+          />
+          <meta property="og:image" content="images/top-large.png" />
+
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:title" content={titleText} />
+          <meta name="twitter:description" content={info.summary} />
+          <meta name="twitter:image" content="images/top-large.png" />
         </Helmet>
         <div className="page">
           <TitleBar submissionButton={true}>
-            <div className="titleText">{titleText}</div>
+            <div className="titleText">{idText}</div>
             <div className="subtitleText">{subtitleText}</div>
           </TitleBar>
           <div className="pageContainer">

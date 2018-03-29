@@ -50,9 +50,11 @@ exports.reactRender = function(jsx, html, output, router = false) {
     </head>`)
 
   for (const tag of head.children) {
-    //don't append empty titles
-    if (tag.tagName === 'TITLE' && tag.innerHTML === '') {
-      continue
+    //remove all other title tags if we have a title
+    if (tag.tagName === 'TITLE' && tag.innerHTML) {
+      for (const t of document.head.getElementsByTagName('title')) {
+        document.head.removeChild(t)
+      }
     }
     document.head.appendChild(tag)
   }
