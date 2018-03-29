@@ -19,6 +19,7 @@ const Page = React.createClass({
       .slice(2)
       .join(' / ')
     const titleText = `${idText} - Kitspace`
+    const metaTitle = `${idText} on Kitspace`
     const subtitleText = info.id
       .split('/')
       .slice(0, 2)
@@ -29,7 +30,7 @@ const Page = React.createClass({
           <title>{titleText}</title>
           <meta name="description" content={info.summary} />
 
-          <meta itemprop="name" content={titleText} />
+          <meta itemprop="name" content={metaTitle} />
           <meta itemprop="description" content={info.summary} />
           <meta
             itemprop="image"
@@ -38,7 +39,7 @@ const Page = React.createClass({
 
           <meta property="og:url" content="kitspace.org" />
           <meta property="og:type" content="website" />
-          <meta property="og:title" content={titleText} />
+          <meta property="og:title" content={metaTitle} />
           <meta property="og:description" content={info.summary} />
           <meta
             property="og:image"
@@ -46,7 +47,7 @@ const Page = React.createClass({
           />
 
           <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:title" content={titleText} />
+          <meta name="twitter:title" content={metaTitle} />
           <meta name="twitter:description" content={info.summary} />
           <meta
             name="twitter:image"
