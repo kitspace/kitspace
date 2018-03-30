@@ -42,7 +42,7 @@ if (require.main !== module) {
       `build/.temp/${folder}/unoptimized-top.svg`,
       `${buildFolder}/images/top.png`,
       `${buildFolder}/images/top-large.png`,
-      `${buildFolder}/images/top-medium.png`,
+      `${buildFolder}/images/top-meta.png`,
       `${buildFolder}/images/top-with-background.png`
     ]
     return {deps, targets, moduleDep: false}
@@ -60,7 +60,7 @@ if (require.main !== module) {
     unOptimizedSvgPath,
     topPngPath,
     topLargePngPath,
-    topMediumPngPath,
+    topMetaPngPath,
     topWithBgndPath
   ] = targets
   const zipInfo = {
@@ -149,19 +149,19 @@ if (require.main !== module) {
             return process.exit(1)
           }
         })
-        let cmd_medium = `inkscape --without-gui '${unOptimizedSvgPath}'`
-        cmd_medium += ` --export-png='${topMediumPngPath}'`
+        let cmd_meta = `inkscape --without-gui '${unOptimizedSvgPath}'`
+        cmd_meta += ` --export-png='${topMetaPngPath}'`
         if (stackup.top.width > stackup.top.height + 0.05) {
-          cmd_medium += ' --export-width=400'
+          cmd_meta += ' --export-width=900'
         } else {
-          cmd_medium += ' --export-height=300'
+          cmd_meta += ' --export-height=450'
         }
-        cp.exec(cmd_medium, err => {
+        cp.exec(cmd_meta, err => {
           if (err) {
             console.error(err)
             return process.exit(1)
           }
-          const cmd = `convert -background '#373737' -gravity center ${topMediumPngPath} -extent 500x400 ${topWithBgndPath}`
+          const cmd = `convert -background '#373737' -gravity center ${topMetaPngPath} -extent 1000x524 ${topWithBgndPath}`
           cp.exec(cmd, err => {
             if (err) {
               console.error(err)

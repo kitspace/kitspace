@@ -49,8 +49,8 @@ const Page = React.createClass({
               info.id
             }/images/top-with-background.png`}
           />
-          <meta property="og:image:width" content={500} />
-          <meta property="og:image:height" content={400} />
+          <meta property="og:image:width" content={1000} />
+          <meta property="og:image:height" content={524} />
 
           <meta name="twitter:card" content="summary_large_image" />
           <meta name="twitter:title" content={metaTitle} />
