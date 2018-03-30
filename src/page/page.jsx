@@ -39,7 +39,10 @@ const Page = React.createClass({
             }/images/top-large-with-background.png`}
           />
 
-          <meta property="og:url" content="kitspace.org" />
+          <meta
+            property="og:url"
+            content={`https://kitspace.org/boards/${info.id}`}
+          />
           <meta property="og:type" content="website" />
           <meta property="og:title" content={metaTitle} />
           <meta property="og:description" content={info.summary} />
