@@ -152,7 +152,7 @@ if (require.main !== module) {
         let cmd_meta = `inkscape --without-gui '${unOptimizedSvgPath}'`
         cmd_meta += ` --export-png='${topMetaPngPath}'`
         if (stackup.top.width > stackup.top.height + 0.05) {
-          cmd_meta += ' --export-width=900'
+          cmd_meta += ' --export-width=800'
         } else {
           cmd_meta += ' --export-height=450'
         }
