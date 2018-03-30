@@ -11,7 +11,7 @@ const BuyParts = require('../buy_parts/buy_parts')
 const Readme = require('../readme')
 
 const info = require('../info.json')
-const description = info.summary + ' - Shared on Kitspace - Kitspace is a place to share ready to order electronics designs. It could be described as a "Thingiverse for electronics".'
+const description = info.summary + ' - Shared on Kitspace - Kitspace is a place to share ready to order electronics designs. You can order the right components for this project with a few clicks.'
 
 const Page = React.createClass({
   render() {
