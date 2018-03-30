@@ -11,7 +11,12 @@ const BuyParts = require('../buy_parts/buy_parts')
 const Readme = require('../readme')
 
 const info = require('../info.json')
-const description = info.summary + ' - Shared on Kitspace - Kitspace is a place to share ready to order electronics designs. You can order the right components for this project with a few clicks.'
+const description =
+  info.summary +
+  ' - Shared on Kitspace - Kitspace is a place to share ready to order electronics designs. You can order the right components for this project with a few clicks.'
+const metaImage = `https://kitspace.org/boards/${
+  info.id
+}/images/top-with-background.png`
 
 const Page = React.createClass({
   render() {
@@ -33,34 +38,19 @@ const Page = React.createClass({
 
           <meta itemprop="name" content={metaTitle} />
           <meta itemprop="description" content={description} />
-          <meta
-            itemprop="image"
-            content={`http://meta-tags.preview.kitspace.org/boards/${
-              info.id
-            }/images/top-with-background.png`}
-          />
+          <meta itemprop="image" content={metaImage} />
 
           <meta property="og:type" content="website" />
           <meta property="og:title" content={metaTitle} />
           <meta property="og:description" content={description} />
-          <meta
-            property="og:image"
-            content={`http://meta-tags.preview.kitspace.org/boards/${
-              info.id
-            }/images/top-with-background.png`}
-          />
+          <meta property="og:image" content={metaImage} />
           <meta property="og:image:width" content={1000} />
           <meta property="og:image:height" content={524} />
 
           <meta name="twitter:card" content="summary_large_image" />
           <meta name="twitter:title" content={metaTitle} />
           <meta name="twitter:description" content={description} />
-          <meta
-            name="twitter:image"
-            content={`http://meta-tags.preview.kitspace.org/boards/${
-              info.id
-            }/images/top-with-background.png`}
-          />
+          <meta name="twitter:image" content={metaImage} />
         </Helmet>
         <div className="page">
           <TitleBar submissionButton={true}>
