@@ -151,13 +151,17 @@ if (require.main !== module) {
         })
         let cmd_medium = `inkscape --without-gui '${unOptimizedSvgPath}'`
         cmd_medium += ` --export-png='${topMediumPngPath}'`
-        cmd_medium += ' --export-width=500 --export-height=300'
+        if (stackup.top.width > stackup.top.height + 0.05) {
+          cmd_medium += ' --export-width=400'
+        } else {
+          cmd_medium += ' --export-height=300'
+        }
         cp.exec(cmd_medium, err => {
           if (err) {
             console.error(err)
             return process.exit(1)
           }
-          const cmd = `convert -background '#373737' -gravity center ${topMediumPngPath} -extent 600x350 ${topWithBgndPath}`
+          const cmd = `convert -background '#373737' -gravity center ${topMediumPngPath} -extent 500x400 ${topWithBgndPath}`
           cp.exec(cmd, err => {
             if (err) {
               console.error(err)
