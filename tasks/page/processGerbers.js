@@ -146,7 +146,7 @@ if (require.main !== module) {
             console.error(err)
             return process.exit(1)
           }
-          const cmd = `convert -background '#373737' -gravity center ${topLargePngPath} -extent 700x470 ${topLargeWithBgndPath}`
+          const cmd = `convert -background '#373737' -gravity center ${topLargePngPath} -extent 800x550 ${topLargeWithBgndPath}`
           cp.exec(cmd, err => {
             if (err) {
               console.error(err)
