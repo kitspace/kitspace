@@ -12,9 +12,9 @@ if (require.main !== module) {
   module.exports = function(config, folder) {
     let file
     if (fs.existsSync(`${folder}/kitnic.yaml`)) {
-      file = fs.readFileSync(`${folder}/kitnic.yaml`);
+      file = fs.readFileSync(`${folder}/kitnic.yaml`)
     } else if (fs.existsSync(`${folder}/kitspace.yaml`)) {
-      file = fs.readFileSync(`${folder}/kitspace.yaml`);
+      file = fs.readFileSync(`${folder}/kitspace.yaml`)
     }
     const info = file == null ? {} : yaml.safeLoad(file)
     const files = globule
@@ -42,7 +42,8 @@ if (require.main !== module) {
       `build/.temp/${folder}/unoptimized-top.svg`,
       `${buildFolder}/images/top.png`,
       `${buildFolder}/images/top-large.png`,
-      `${buildFolder}/images/top-large-with-background.png`
+      `${buildFolder}/images/top-medium.png`,
+      `${buildFolder}/images/top-with-background.png`
     ]
     return {deps, targets, moduleDep: false}
   }
@@ -59,7 +60,8 @@ if (require.main !== module) {
     unOptimizedSvgPath,
     topPngPath,
     topLargePngPath,
-    topLargeWithBgndPath
+    topMediumPngPath,
+    topWithBgndPath
   ] = targets
   const zipInfo = {
     zipPath: path.basename(zipPath),
@@ -68,9 +70,9 @@ if (require.main !== module) {
   const zip = new Jszip()
   const folder_name = path.basename(zipPath, '.zip')
   if (fs.existsSync(`${folder}/kitnic.yaml`)) {
-    file = fs.readFileSync(`${folder}/kitnic.yaml`);
+    file = fs.readFileSync(`${folder}/kitnic.yaml`)
   } else if (fs.existsSync(`${folder}/kitspace.yaml`)) {
-    file = fs.readFileSync(`${folder}/kitspace.yaml`);
+    file = fs.readFileSync(`${folder}/kitspace.yaml`)
   }
   try {
     let color, data
@@ -106,7 +108,7 @@ if (require.main !== module) {
       if (stackup.top.units === 'in') {
         if (stackup.bottom.units !== 'in') {
           console.error('We got a weird board with disparate units:', folder)
-          process.exit(1);
+          process.exit(1)
         }
         zipInfo.width *= 25.4
         zipInfo.height *= 25.4
@@ -146,7 +148,16 @@ if (require.main !== module) {
             console.error(err)
             return process.exit(1)
           }
-          const cmd = `convert -background '#373737' -gravity center ${topLargePngPath} -extent 800x700 ${topLargeWithBgndPath}`
+        })
+        let cmd_medium = `inkscape --without-gui '${unOptimizedSvgPath}'`
+        cmd_medium += ` --export-png='${topMediumPngPath}'`
+        cmd_medium += ' --export-width=500 --export-height=300'
+        cp.exec(cmd_medium, err => {
+          if (err) {
+            console.error(err)
+            return process.exit(1)
+          }
+          const cmd = `convert -background '#373737' -gravity center ${topMediumPngPath} -extent 600x350 ${topWithBgndPath}`
           cp.exec(cmd, err => {
             if (err) {
               console.error(err)

@@ -36,7 +36,7 @@ const Page = React.createClass({
             itemprop="image"
             content={`http://meta-tags.preview.kitspace.org/boards/${
               info.id
-            }/images/top-large-with-background.png`}
+            }/images/top-with-background.png`}
           />
 
           <meta
@@ -50,10 +50,10 @@ const Page = React.createClass({
             property="og:image"
             content={`http://meta-tags.preview.kitspace.org/boards/${
               info.id
-            }/images/top-large-with-background.png`}
+            }/images/top-with-background.png`}
           />
-          <meta property="og:image:width" content={800} />
-          <meta property="og:image:height" content={700} />
+          <meta property="og:image:width" content={600} />
+          <meta property="og:image:height" content={350} />
 
           <meta name="twitter:card" content="summary_large_image" />
           <meta name="twitter:title" content={metaTitle} />
@@ -62,7 +62,7 @@ const Page = React.createClass({
             name="twitter:image"
             content={`http://meta-tags.preview.kitspace.org/boards/${
               info.id
-            }/images/top-large-with-background.png`}
+            }/images/top-with-background.png`}
           />
         </Helmet>
         <div className="page">
