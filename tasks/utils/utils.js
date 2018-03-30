@@ -24,7 +24,7 @@ exports.reactRender = function(jsx, html, output, router = false) {
   const fs = require('fs')
   const React = require('react')
   const ReactDOMServer = require('react-dom/server')
-  const DocumentTitle = require('react-document-title')
+  const {Helmet} = require('react-helmet')
   const jsdom = require('jsdom')
 
   require('babel-register')({presets: ['react']})
@@ -38,17 +38,24 @@ exports.reactRender = function(jsx, html, output, router = false) {
     var react = ReactDOMServer.renderToString(React.createElement(Main))
   }
 
-  const title = DocumentTitle.rewind(react)
-
   const rawHtml = fs.readFileSync(html, {encoding: 'utf8'})
   const document = jsdom.jsdom(rawHtml)
 
-  if (title != null) {
-    for (let t of document.head.getElementsByTagName('title')) {
-      document.head.removeChild(t)
+  const helmet = Helmet.renderStatic()
+
+  const {head} = jsdom.jsdom(`<head>
+       ${helmet.title.toString()}
+       ${helmet.meta.toString()}
+       ${helmet.link.toString()}
+    </head>`)
+
+  for (const tag of head.children) {
+    //remove all other title tags if we have a title
+    if (tag.tagName === 'TITLE' && tag.innerHTML) {
+      for (const t of document.head.getElementsByTagName('title')) {
+        document.head.removeChild(t)
+      }
     }
-    const tag = document.createElement('title')
-    tag.innerHTML = title
     document.head.appendChild(tag)
   }
 
