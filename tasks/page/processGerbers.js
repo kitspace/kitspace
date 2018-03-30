@@ -41,7 +41,8 @@ if (require.main !== module) {
       `build/.temp/${folder}/zip-info.json`,
       `build/.temp/${folder}/unoptimized-top.svg`,
       `${buildFolder}/images/top.png`,
-      `${buildFolder}/images/top-large.png`
+      `${buildFolder}/images/top-large.png`,
+      `${buildFolder}/images/top-large-with-backround.png`
     ]
     return {deps, targets, moduleDep: false}
   }
@@ -57,7 +58,8 @@ if (require.main !== module) {
     zipInfoPath,
     unOptimizedSvgPath,
     topPngPath,
-    topLargePngPath
+    topLargePngPath,
+    topLargeWithBgndPath
   ] = targets
   const zipInfo = {
     zipPath: path.basename(zipPath),
@@ -144,6 +146,13 @@ if (require.main !== module) {
             console.error(err)
             return process.exit(1)
           }
+          const cmd = `convert -background '#373737' -gravity center ${topLargePngPath} -extent 700x470 ${topLargeWithBgndPath}`
+          cp.exec(cmd, err => {
+            if (err) {
+              console.error(err)
+              return process.exit(1)
+            }
+          })
         })
       })
       fs.writeFile(topSvgPath, stackup.top.svg, function(err) {
