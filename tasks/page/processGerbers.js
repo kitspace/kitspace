@@ -151,10 +151,18 @@ if (require.main !== module) {
         })
         let cmd_meta = `inkscape --without-gui '${unOptimizedSvgPath}'`
         cmd_meta += ` --export-png='${topMetaPngPath}'`
-        if (stackup.top.width > stackup.top.height + 0.05) {
-          cmd_meta += ' --export-width=800'
+        const width = 900
+        let height = 400
+        const ratioW = width / stackup.top.width
+        if (ratioW * stackup.top.height > height) {
+          let ratioH = height / stackup.top.height
+          while (ratioH * stackup.top.width > width) {
+            height -= 1
+            ratioH = height / stackup.top.height
+          }
+          cmd_meta += ` --export-height=${height}`
         } else {
-          cmd_meta += ' --export-height=450'
+          cmd_meta += ` --export-width=${width}`
         }
         cp.exec(cmd_meta, err => {
           if (err) {
