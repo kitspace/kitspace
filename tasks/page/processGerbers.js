@@ -12,9 +12,9 @@ if (require.main !== module) {
   module.exports = function(config, folder) {
     let file
     if (fs.existsSync(`${folder}/kitnic.yaml`)) {
-      file = fs.readFileSync(`${folder}/kitnic.yaml`);
+      file = fs.readFileSync(`${folder}/kitnic.yaml`)
     } else if (fs.existsSync(`${folder}/kitspace.yaml`)) {
-      file = fs.readFileSync(`${folder}/kitspace.yaml`);
+      file = fs.readFileSync(`${folder}/kitspace.yaml`)
     }
     const info = file == null ? {} : yaml.safeLoad(file)
     const files = globule
@@ -41,7 +41,9 @@ if (require.main !== module) {
       `build/.temp/${folder}/zip-info.json`,
       `build/.temp/${folder}/unoptimized-top.svg`,
       `${buildFolder}/images/top.png`,
-      `${buildFolder}/images/top-large.png`
+      `${buildFolder}/images/top-large.png`,
+      `${buildFolder}/images/top-meta.png`,
+      `${buildFolder}/images/top-with-background.png`
     ]
     return {deps, targets, moduleDep: false}
   }
@@ -57,7 +59,9 @@ if (require.main !== module) {
     zipInfoPath,
     unOptimizedSvgPath,
     topPngPath,
-    topLargePngPath
+    topLargePngPath,
+    topMetaPngPath,
+    topWithBgndPath
   ] = targets
   const zipInfo = {
     zipPath: path.basename(zipPath),
@@ -66,9 +70,9 @@ if (require.main !== module) {
   const zip = new Jszip()
   const folder_name = path.basename(zipPath, '.zip')
   if (fs.existsSync(`${folder}/kitnic.yaml`)) {
-    file = fs.readFileSync(`${folder}/kitnic.yaml`);
+    file = fs.readFileSync(`${folder}/kitnic.yaml`)
   } else if (fs.existsSync(`${folder}/kitspace.yaml`)) {
-    file = fs.readFileSync(`${folder}/kitspace.yaml`);
+    file = fs.readFileSync(`${folder}/kitspace.yaml`)
   }
   try {
     let color, data
@@ -104,7 +108,7 @@ if (require.main !== module) {
       if (stackup.top.units === 'in') {
         if (stackup.bottom.units !== 'in') {
           console.error('We got a weird board with disparate units:', folder)
-          process.exit(1);
+          process.exit(1)
         }
         zipInfo.width *= 25.4
         zipInfo.height *= 25.4
@@ -144,6 +148,34 @@ if (require.main !== module) {
             console.error(err)
             return process.exit(1)
           }
+        })
+        let cmd_meta = `inkscape --without-gui '${unOptimizedSvgPath}'`
+        cmd_meta += ` --export-png='${topMetaPngPath}'`
+        const width = 900
+        let height = 400
+        const ratioW = width / stackup.top.width
+        if (ratioW * stackup.top.height > height) {
+          let ratioH = height / stackup.top.height
+          while (ratioH * stackup.top.width > width) {
+            height -= 1
+            ratioH = height / stackup.top.height
+          }
+          cmd_meta += ` --export-height=${height}`
+        } else {
+          cmd_meta += ` --export-width=${width}`
+        }
+        cp.exec(cmd_meta, err => {
+          if (err) {
+            console.error(err)
+            return process.exit(1)
+          }
+          const cmd = `convert -background '#373737' -gravity center ${topMetaPngPath} -extent 1000x524 ${topWithBgndPath}`
+          cp.exec(cmd, err => {
+            if (err) {
+              console.error(err)
+              return process.exit(1)
+            }
+          })
         })
       })
       fs.writeFile(topSvgPath, stackup.top.svg, function(err) {

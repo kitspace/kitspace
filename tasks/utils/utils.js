@@ -49,15 +49,15 @@ exports.reactRender = function(jsx, html, output, router = false) {
        ${helmet.link.toString()}
     </head>`)
 
+  // remove empty title tag that is added by default
   for (const tag of head.children) {
-    //remove all other title tags if we have a title
-    if (tag.tagName === 'TITLE' && tag.innerHTML) {
-      for (const t of document.head.getElementsByTagName('title')) {
-        document.head.removeChild(t)
-      }
+    if (tag.tagName === 'TITLE' && !tag.innerHTML) {
+       head.removeChild(tag)
     }
-    document.head.appendChild(tag)
   }
+
+  document.head.innerHTML += head.innerHTML
+
 
   const content = document.getElementById('content')
   content.innerHTML = react
