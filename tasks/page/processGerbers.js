@@ -42,7 +42,7 @@ if (require.main !== module) {
       `build/.temp/${folder}/unoptimized-top.svg`,
       `${buildFolder}/images/top.png`,
       `${buildFolder}/images/top-large.png`,
-      `${buildFolder}/images/top-large-with-backround.png`
+      `${buildFolder}/images/top-large-with-background.png`
     ]
     return {deps, targets, moduleDep: false}
   }
