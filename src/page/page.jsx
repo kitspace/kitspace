@@ -41,7 +41,7 @@ const Page = React.createClass({
 
           <meta
             property="og:url"
-            content={`https://kitspace.org/boards/${info.id}`}
+            content={`https://kitspace.org/boards/${info.id}/`}
           />
           <meta property="og:type" content="website" />
           <meta property="og:title" content={metaTitle} />
