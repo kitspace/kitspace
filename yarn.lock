@@ -2098,7 +2098,7 @@ generate-object-property@^1.1.0:
   dependencies:
     is-property "^1.0.0"
 
-gerber-parser@^1.1.0:
+gerber-parser@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/gerber-parser/-/gerber-parser-1.1.0.tgz#3a119aa876ab59494d093dca00189aefb52f4831"
   dependencies:
@@ -2118,31 +2118,13 @@ gerber-plotter@^1.1.0:
     lodash.isfunction "^3.0.6"
     readable-stream "^2.1.2"
 
-"gerber-to-svg@git+https://github.com/kasbah/gerber-to-svg.git#upgrade-parser":
+gerber-to-svg@^2.1.0, gerber-to-svg@next:
   version "2.1.0"
-  resolved "git+https://github.com/kasbah/gerber-to-svg.git#8812f3c298ad000647690b2fbc28373c1e55b024"
+  resolved "https://registry.yarnpkg.com/gerber-to-svg/-/gerber-to-svg-2.1.0.tgz#f6c8635d90db53b8bc32135b23b63ba5377c3c15"
   dependencies:
     chalk "^1.1.1"
     escape-html "^1.0.3"
-    gerber-parser "^1.1.0"
-    gerber-plotter "^1.1.0"
-    inherits "^2.0.1"
-    lodash.isfinite "^3.2.0"
-    lodash.isstring "^4.0.1"
-    minimist "^1.1.0"
-    mkdirp "^0.5.1"
-    readable-stream "^2.1.2"
-    xml-element-string "^1.0.0"
-    xmlovely "^1.0.0"
-
-"gerber-to-svg@https://github.com/kasbah/gerber-to-svg#upgrade-parser":
-  version "2.1.0"
-  uid "8812f3c298ad000647690b2fbc28373c1e55b024"
-  resolved "https://github.com/kasbah/gerber-to-svg#8812f3c298ad000647690b2fbc28373c1e55b024"
-  dependencies:
-    chalk "^1.1.1"
-    escape-html "^1.0.3"
-    gerber-parser "^1.1.0"
+    gerber-parser "^1.0.0"
     gerber-plotter "^1.1.0"
     inherits "^2.0.1"
     lodash.isfinite "^3.2.0"
@@ -3736,14 +3718,14 @@ pcb-stackup-core@^3.0.0:
     viewbox "^1.0.0"
     xml-element-string "^1.0.0"
 
-"pcb-stackup@git+https://github.com/tracespace/pcb-stackup.git#fix-outline":
-  version "3.0.0"
-  resolved "git+https://github.com/tracespace/pcb-stackup.git#4fa3233a6f55247ec4751d55b29b3440692a8759"
+pcb-stackup@next:
+  version "4.0.0-next.2"
+  resolved "https://registry.yarnpkg.com/pcb-stackup/-/pcb-stackup-4.0.0-next.2.tgz#365046f231b6b920ba393b3ad7a97b98586b86e4"
   dependencies:
-    gerber-to-svg "https://github.com/kasbah/gerber-to-svg#upgrade-parser"
+    gerber-to-svg "^2.1.0"
     pcb-stackup-core "^3.0.0"
     shortid "^2.2.6"
-    whats-that-gerber "git+https://github.com/tracespace/whats-that-gerber.git#fix-outline"
+    whats-that-gerber "^2.1.0"
 
 pify@^2.0.0:
   version "2.3.0"
@@ -4895,9 +4877,13 @@ webidl-conversions@^3.0.0, webidl-conversions@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/webidl-conversions/-/webidl-conversions-3.0.1.tgz#24534275e2a7bc6be7bc86611cc16ae0a5654871"
 
-"whats-that-gerber@git+https://github.com/tracespace/whats-that-gerber.git#fix-outline":
+whats-that-gerber@^2.1.0:
   version "2.1.1"
-  resolved "git+https://github.com/tracespace/whats-that-gerber.git#f23faad175ba8d212de1fcd18dd6a24e47cee179"
+  resolved "https://registry.yarnpkg.com/whats-that-gerber/-/whats-that-gerber-2.1.1.tgz#7e662f42757f988712880c1e4faf83fe38a585cc"
+
+whats-that-gerber@next:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/whats-that-gerber/-/whats-that-gerber-3.0.0.tgz#1b58b569fbbba8ceb8aebb1ee6f594e899da7a00"
 
 whatwg-encoding@^1.0.1:
   version "1.0.1"
