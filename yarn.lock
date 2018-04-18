@@ -3719,13 +3719,13 @@ pcb-stackup-core@^3.0.0:
     xml-element-string "^1.0.0"
 
 pcb-stackup@next:
-  version "4.0.0-next.2"
-  resolved "https://registry.yarnpkg.com/pcb-stackup/-/pcb-stackup-4.0.0-next.2.tgz#365046f231b6b920ba393b3ad7a97b98586b86e4"
+  version "4.0.0-next.3"
+  resolved "https://registry.yarnpkg.com/pcb-stackup/-/pcb-stackup-4.0.0-next.3.tgz#659d6ea7a92c010039ebe868128ec08056e268f7"
   dependencies:
     gerber-to-svg "^2.1.0"
     pcb-stackup-core "^3.0.0"
     shortid "^2.2.6"
-    whats-that-gerber "^2.1.0"
+    whats-that-gerber "^4.0.0-next.3"
 
 pify@^2.0.0:
   version "2.3.0"
@@ -4877,13 +4877,9 @@ webidl-conversions@^3.0.0, webidl-conversions@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/webidl-conversions/-/webidl-conversions-3.0.1.tgz#24534275e2a7bc6be7bc86611cc16ae0a5654871"
 
-whats-that-gerber@^2.1.0:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/whats-that-gerber/-/whats-that-gerber-2.1.1.tgz#7e662f42757f988712880c1e4faf83fe38a585cc"
-
-whats-that-gerber@next:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/whats-that-gerber/-/whats-that-gerber-3.0.0.tgz#1b58b569fbbba8ceb8aebb1ee6f594e899da7a00"
+whats-that-gerber@^4.0.0-next.3, whats-that-gerber@next:
+  version "4.0.0-next.3"
+  resolved "https://registry.yarnpkg.com/whats-that-gerber/-/whats-that-gerber-4.0.0-next.3.tgz#fd2b73cda98847aa8d9738ce85ee8ee85aa57682"
 
 whatwg-encoding@^1.0.1:
   version "1.0.1"
