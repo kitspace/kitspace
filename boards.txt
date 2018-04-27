@@ -43,3 +43,4 @@ https://github.com/jasiek/antenna-analyser
 https://github.com/prometheus-science/Flypi
 https://github.com/less-smog/hardware
 https://github.com/8BitMixtape/8BitmixtapeNEO_BerlinerSchule_SZ-RDY
+https://github.com/MobiusHorizons/binary-crap-clock-kit
