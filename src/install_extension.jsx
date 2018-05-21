@@ -1,19 +1,19 @@
-const browserVersion   = require('browser-version')
+const browserVersion = require('browser-version')
 function installExtension() {
   const version = browserVersion()
   let onClick
   if (/Chrome/.test(version)) {
     onClick = () => {
-      chrome.webstore.install( //eslint-disable-line no-undef
-        undefined, undefined, (err) =>
-        console.log(err) //eslint-disable-line no-console
-      )}
+      chrome.webstore.install(
+        //eslint-disable-line no-undef
+        undefined,
+        undefined,
+        err => console.log(err) //eslint-disable-line no-console
+      )
+    }
   } else if (/Firefox/.test(version)) {
     onClick = () => {
-      window.open(
-        '//addons.mozilla.org/firefox/' +
-        'downloads/latest/634060/addon-634060-latest.xpi',
-        '_self')
+      window.open('https://addons.mozilla.org/en-US/firefox/addon/1clickbom')
     }
   } else {
     onClick = () => {
