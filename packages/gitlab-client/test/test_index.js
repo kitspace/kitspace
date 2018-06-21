@@ -20,9 +20,47 @@ describe('user', () => {
   })
 })
 
+describe('login', () => {
+  before(async () => {
+    const g = new GitlabClient(process.env.GITLAB_URL, process.env.GITLAB_TOKEN)
+    this.name = shortid.generate()
+    this.password = shortid.generate()
+    return g.createUser({
+      username: this.name,
+      name: this.name,
+      // This is the pattern gitlab uses internally for oauth when it can't
+      // get the email. Using this might prevent it actually trying to send
+      // out emails?
+      email: `temp-email-for-oauth-${this.name}@gitlab.localhost`,
+      password: this.password,
+      skip_confirmation: true
+    })
+  })
+  it('logs in', async () => {
+    const g = new GitlabClient(process.env.GITLAB_URL)
+    await g.login(this.name, this.password)
+    const u = await g.getCurrentUser()
+    assert(u.name === this.name)
+  })
+})
+
 describe('project', () => {
   const g = new GitlabClient(process.env.GITLAB_URL, process.env.GITLAB_TOKEN)
   const id = 1
+
+  before(async () => {
+    this.name = shortid.generate()
+    this.password = shortid.generate()
+    return g.createUser({
+      username: this.name,
+      name: this.name,
+      // This is the pattern gitlab uses internally for oauth when it can't
+      // get the email. Using this might prevent it actually trying to send
+      // out emails?
+      email: `temp-email-for-oauth-${this.name}@gitlab.localhost`,
+      password: this.password
+    })
+  })
 
   it('gets project HEAD', () => {
     return g.getProjectHead(id).then(sha => {

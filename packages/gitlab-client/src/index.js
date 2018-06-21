@@ -44,23 +44,37 @@ class GitlabClient {
           .send(`user[password]=${encodeURIComponent(password)}`)
           .send('user[remember_me]=0')
           .send('utf8=✓')
+          .catch(e => {
+            if (e.status === 302) {
+              return e.response
+            } else {
+              throw e
+            }
+          })
       )
+  }
+  createUser(params) {
+    return this.agent
+      .post(this.apiUrl('users'))
+      .send(params)
+      .then(r => r.body)
+  }
+  getCurrentUser() {
+    return this.agent.get(this.apiUrl('user')).then(r => r.body)
   }
   createTempUser() {
     const name = shortid.generate()
-    return this.agent
-      .post(this.apiUrl('users'))
-      .send({
-        username: name,
-        name: name,
-        // This is the pattern gitlab uses internally for oauth when it can't
-        // get the email. Using this might prevent it actually trying to send
-        // out emails?
-        email: `temp-email-for-oauth-${name}@gitlab.localhost`,
-        password: shortid.generate(),
-        projects_limit: 10
-      })
-      .then(r => r.body)
+    return this.createUser({
+      username: name,
+      name: name,
+      // This is the pattern gitlab uses internally for oauth when it can't
+      // get the email. Using this might prevent it actually trying to send
+      // out emails?
+      email: `temp-email-for-oauth-${name}@gitlab.localhost`,
+      password: shortid.generate(),
+      projects_limit: 10,
+      skip_confirmation: true
+    })
   }
   createProject(params, user) {
     if (user != null) {
@@ -152,7 +166,9 @@ class GitlabClient {
       .then(r => r.body)
   }
   getInfo(projectId, files) {
-    const yaml = files.find(f => RegExp('^(kitnic.yaml|kitspace.yaml)$').test(f.path))
+    const yaml = files.find(f =>
+      RegExp('^(kitnic.yaml|kitspace.yaml)$').test(f.path)
+    )
     if (yaml) {
       return this.getFile(projectId, yaml.id).then(str =>
         Object.assign(defaultInfo, jsYaml.safeLoad(str))
