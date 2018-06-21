@@ -44,7 +44,7 @@ class Login extends React.Component {
   render() {
     return (
       <div>
-        <form action="/gitlab/users/sign_in" method="post">
+        <form action="/login/api" method="post">
           <label htmlFor="user_login" required="required">
             Username or email
           </label>
