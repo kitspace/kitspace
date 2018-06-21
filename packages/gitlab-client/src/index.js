@@ -120,7 +120,7 @@ class GitlabClient {
     const defaultParams = {
       content,
       branch: 'master',
-      commit_message: 'Upload files from Kitspace web interface'
+      commit_message: 'Upload file from Kitspace web interface'
     }
     params = Object.assign(defaultParams, params)
     const url = this.apiUrl(`/projects/${projectId}/repository/files/${path}`)
@@ -143,7 +143,7 @@ class GitlabClient {
   deleteFile(projectId, path, params) {
     const defaultParams = {
       branch: 'master',
-      commit_message: 'Upload files from Kitspace web interface'
+      commit_message: 'Delete file from Kitspace web interface'
     }
     params = Object.assign(defaultParams, params)
     return this.agent
@@ -152,7 +152,7 @@ class GitlabClient {
       .then(r => r.body)
   }
   getInfo(projectId, files) {
-    const yaml = files.find(f => RegExp('^kitnic.yaml$').test(f.path))
+    const yaml = files.find(f => RegExp('^(kitnic.yaml|kitspace.yaml)$').test(f.path))
     if (yaml) {
       return this.getFile(projectId, yaml.id).then(str =>
         Object.assign(defaultInfo, jsYaml.safeLoad(str))
