@@ -34,7 +34,7 @@ class Index extends React.Component {
 class Login extends React.Component {
   constructor() {
     super()
-    this.state = {authenticity_token: null}
+    this.state = {authenticity_token: null, password: null, login: null}
   }
   componentDidMount() {
     superagent.get('/login/api').then(r => {
@@ -60,6 +60,33 @@ class Login extends React.Component {
           />
           <input type="submit" value="Login" />
         </form>
+        <input
+          onChange={e => this.setState({login: e.target.value})}
+          id="login"
+          name="login"
+          value={this.state.login}
+        />
+        <input
+          onChange={e => {
+            this.setState({password: e.target.value})
+          }}
+          type="password"
+          id="password"
+          name="password"
+          value={this.state.password}
+        />
+        <button
+          onClick={() => {
+            gitlab
+              .login(this.state.login, this.state.password)
+              .then(r => {
+                window.location.href = '/'
+              })
+              .catch(e => console.error(e))
+          }}
+        >
+          ajax login
+        </button>
       </div>
     )
   }

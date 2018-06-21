@@ -5,6 +5,7 @@ const superagent = require('superagent')
 const jsYaml = require('js-yaml')
 const path = require('path')
 const whatsThatGerber = require('whats-that-gerber')
+const cheerio = require('cheerio')
 
 const defaultInfo = {
   color: 'green',
@@ -13,6 +14,7 @@ const defaultInfo = {
 
 class GitlabClient {
   constructor(gitlab_url, token) {
+    this.gitlab_url = gitlab_url
     this.url = urlJoin(gitlab_url, 'api/v4/')
     this.agent = superagent.agent()
     if (token) {
@@ -21,6 +23,28 @@ class GitlabClient {
   }
   apiUrl(path) {
     return urlJoin(this.url, path)
+  }
+  gitlabUrl(path) {
+    return urlJoin(this.gitlab_url, path)
+  }
+  login(username, password) {
+    const url = this.gitlabUrl('users/sign_in')
+    return this.agent
+      .get(url)
+      .then(r => {
+        const $ = cheerio.load(r.text)
+        return $('input[name=authenticity_token]').attr('value')
+      })
+      .then(authenticity_token =>
+        this.agent
+          .post(url)
+          .redirects(0)
+          .send(`authenticity_token=${encodeURIComponent(authenticity_token)}`)
+          .send(`user[login]=${encodeURIComponent(username)}`)
+          .send(`user[password]=${encodeURIComponent(password)}`)
+          .send('user[remember_me]=0')
+          .send('utf8=✓')
+      )
   }
   createTempUser() {
     const name = shortid.generate()
