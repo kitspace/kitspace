@@ -35,7 +35,7 @@ server {
 
 		proxy_cookie_path /gitlab /;
 
-		proxy_pass http://${docker_host}:8079/gitlab;
+		proxy_pass http://${docker_host}:8080/gitlab;
 
 	}
 
