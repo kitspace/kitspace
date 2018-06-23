@@ -36,8 +36,8 @@ class Login extends React.Component {
     this.state = {authenticity_token: null, password: null, login: null}
   }
   componentDidMount() {
-    superagent.get('/login/api').then(r => {
-      this.setState(r.body)
+    gitlab.getAuthenticity().then(authenticity_token => {
+      this.setState({authenticity_token})
     })
   }
   render() {
@@ -85,6 +85,33 @@ class Login extends React.Component {
           }}
         >
           ajax login
+        </button>
+        <pre>{this.state.authenticity_token}</pre>
+
+        <form action="/gitlab/users/auth/github" method="post">
+          <input
+            type="hidden"
+            name="authenticity_token"
+            value={this.state.authenticity_token}
+          />
+          <input type="submit" value="Github" />
+        </form>
+        <button
+          onClick={() => {
+            superagent
+              .get('/login/api')
+              .then(r => r.body.authenticity_token)
+              .then(token =>
+                superagent
+                  .post('/login/api/github')
+                  .send(`authenticity_token=${token}`)
+                  .then(r => {
+                    window.location.replace(r.body.location)
+                  })
+              )
+          }}
+        >
+          github api
         </button>
       </div>
     )

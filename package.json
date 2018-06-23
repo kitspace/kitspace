@@ -12,6 +12,6 @@
     "docker": "docker-compose up",
     "start:frontend": "cd frontend && yarn start",
     "start:login": "cd services/login && yarn start",
-    "start": "yarn run nginx && yarn run docker > /dev/null & yarn start:login & yarn start:frontend"
+    "start": "yarn run nginx && yarn run docker & yarn start:login & yarn start:frontend"
   }
 }

@@ -27,31 +27,42 @@ class GitlabClient {
   gitlabUrl(path) {
     return urlJoin(this.gitlab_url, path)
   }
+  getAuthenticity() {
+    const url = this.gitlabUrl('users/sign_in')
+    return this.agent.get(url).then(r => {
+      const $ = cheerio.load(r.text)
+      return $('input[name=authenticity_token]').attr('value')
+    })
+  }
   login(username, password) {
     const url = this.gitlabUrl('users/sign_in')
-    return this.agent
-      .get(url)
-      .then(r => {
-        const $ = cheerio.load(r.text)
-        return $('input[name=authenticity_token]').attr('value')
-      })
-      .then(authenticity_token =>
-        this.agent
-          .post(url)
-          .redirects(0)
-          .send(`authenticity_token=${encodeURIComponent(authenticity_token)}`)
-          .send(`user[login]=${encodeURIComponent(username)}`)
-          .send(`user[password]=${encodeURIComponent(password)}`)
-          .send('user[remember_me]=0')
-          .send('utf8=✓')
-          .catch(e => {
-            if (e.status === 302) {
-              return e.response
-            } else {
-              throw e
-            }
-          })
-      )
+    return this.getAuthenticity().then(authenticity_token =>
+      this.agent
+        .post(url)
+        .redirects(0)
+        .send(`authenticity_token=${encodeURIComponent(authenticity_token)}`)
+        .send(`user[login]=${encodeURIComponent(username)}`)
+        .send(`user[password]=${encodeURIComponent(password)}`)
+        .send('user[remember_me]=0')
+        .send('utf8=✓')
+        .catch(e => {
+          if (e.status === 302) {
+            return e.response
+          } else {
+            throw e
+          }
+        })
+    )
+  }
+  loginOAuth(provider) {
+    const url = this.gitlabUrl('users/auth/' + provider)
+    return this.getAuthenticity().then(token =>
+      this.agent
+        .post(url)
+        .redirects(0)
+        .on('redirect', r => console.log({r}))
+        .send(`authenticity_token=${encodeURIComponent(token)}`)
+    )
   }
   createUser(params) {
     return this.agent
