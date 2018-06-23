@@ -47,6 +47,17 @@ app.post('//github', (req, res) => {
   })
 })
 
+app.get('//sign_out', (req, res) => {
+  const p = superagent
+    .get('http://localhost:7334/gitlab/users/sign_out')
+    .send(`authenticity_token=${encodeURIComponent(req.body.authenticity_token)}`)
+  if (req.cookies._gitlab_session) {
+    p.set('cookie', `_gitlab_session=${req.cookies._gitlab_session}`)
+  }
+  p.then(r => res.send('ok'))
+  p.catch(e => res.sendStatus(e.status))
+})
+
 app.post('/', (req, res) => {
   const p = superagent
     .post('http://localhost:7334/gitlab/users/sign_in')

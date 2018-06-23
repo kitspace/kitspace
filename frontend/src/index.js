@@ -24,6 +24,15 @@ class Index extends React.Component {
   render() {
     return (
       <div>
+        <button
+          onClick={() => {
+            superagent.get('/login/api/sign_out').then(r => {
+              window.location.replace(r.body.location)
+            })
+          }}
+        >
+          sign out
+        </button>
         <pre>{JSON.stringify(this.state.user, null, 2)}</pre>
       </div>
     )
@@ -36,9 +45,10 @@ class Login extends React.Component {
     this.state = {authenticity_token: null, password: null, login: null}
   }
   componentDidMount() {
-    gitlab.getAuthenticity().then(authenticity_token => {
-      this.setState({authenticity_token})
-    })
+    superagent
+      .get('/login/api')
+      .then(r => r.body.authenticity_token)
+      .then(token => this.setState({authenticity_token: token}))
   }
   render() {
     return (
