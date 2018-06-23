@@ -3,6 +3,8 @@
 docker_host=$(ip addr show docker0 | awk '/inet / {print $2}' | cut -f1 -d'/')
 dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+source "${dir}/../.env"
+
 echo "
 server {
 	listen 80 default_server;
@@ -35,7 +37,7 @@ server {
 
 		proxy_cookie_path /gitlab /;
 
-		proxy_pass http://${docker_host}:8080/gitlab;
+		proxy_pass http://${docker_host}:${GITLAB_PORT}/gitlab;
 
 	}
 

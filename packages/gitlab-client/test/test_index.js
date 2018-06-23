@@ -5,8 +5,10 @@ const GitlabClient = require('../src/index')
 
 require('dotenv').config({path: '../../.env'})
 
+const gitlab_url = `${process.env.GITLAB_DOMAIN}:${process.env.GITLAB_PORT}/${process.env.GITLAB_PATH}`
+
 describe('user', () => {
-  const g = new GitlabClient(process.env.GITLAB_URL, process.env.GITLAB_TOKEN)
+  const g = new GitlabClient(gitlab_url, process.env.GITLAB_TOKEN)
 
   it('creates random user and imports a project', async () => {
     const user = await g.createTempUser()
@@ -22,7 +24,7 @@ describe('user', () => {
 
 describe('login', () => {
   before(async () => {
-    const g = new GitlabClient(process.env.GITLAB_URL, process.env.GITLAB_TOKEN)
+    const g = new GitlabClient(gitlab_url, process.env.GITLAB_TOKEN)
     this.name = shortid.generate()
     this.password = shortid.generate()
     return g.createUser({
@@ -37,7 +39,7 @@ describe('login', () => {
     })
   })
   it('logs in', async () => {
-    const g = new GitlabClient(process.env.GITLAB_URL)
+    const g = new GitlabClient(gitlab_url)
     await g.login(this.name, this.password)
     const u = await g.getCurrentUser()
     assert(u.name === this.name)
@@ -45,22 +47,8 @@ describe('login', () => {
 })
 
 describe('project', () => {
-  const g = new GitlabClient(process.env.GITLAB_URL, process.env.GITLAB_TOKEN)
+  const g = new GitlabClient(gitlab_url, process.env.GITLAB_TOKEN)
   const id = 1
-
-  before(async () => {
-    this.name = shortid.generate()
-    this.password = shortid.generate()
-    return g.createUser({
-      username: this.name,
-      name: this.name,
-      // This is the pattern gitlab uses internally for oauth when it can't
-      // get the email. Using this might prevent it actually trying to send
-      // out emails?
-      email: `temp-email-for-oauth-${this.name}@gitlab.localhost`,
-      password: this.password
-    })
-  })
 
   it('gets project HEAD', () => {
     return g.getProjectHead(id).then(sha => {
