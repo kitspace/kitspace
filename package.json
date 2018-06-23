@@ -4,12 +4,14 @@
     "frontend",
     "packages/gitlab-client",
     "services/partinfo",
-    "services/board-files"
+    "services/board-files",
+    "services/login"
   ],
   "scripts": {
-    "nginx-conf": "./nginx/make_conf" ,
+    "nginx": "./nginx/make_conf" ,
     "docker": "docker-compose up",
     "start:frontend": "cd frontend && yarn start",
-    "start": "yarn run nginx-conf && yarn run docker & yarn run start:frontend"
+    "start:login": "cd services/login && yarn start",
+    "start": "yarn run nginx && yarn run docker > /dev/null & yarn start:login & yarn start:frontend"
   }
 }

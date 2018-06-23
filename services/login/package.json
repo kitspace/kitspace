@@ -1,0 +1,21 @@
+{
+  "name": "kitspace-login",
+  "version": "0.0.0",
+  "description": "",
+  "scripts": {
+    "start": "nodemon src/server.js"
+  },
+  "author": "",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "cheerio": "^1.0.0-rc.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.16.2",
+    "kitspace-gitlab-client": "*",
+    "superagent": "^3.8.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.2",
+    "prettier": "^1.11.1"
+  }
+}
