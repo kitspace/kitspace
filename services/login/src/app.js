@@ -1,15 +1,20 @@
 const app = require('express')()
 const cheerio = require('cheerio')
 const bodyParser = require('body-parser')
-//const gitlab = new Gitlab('http://localhost:7334/gitlab')
+//const gitlab = new Gitlab('${DOMAIN}:${PORT}/gitlab')
 const superagent = require('superagent')
 const cookieParser = require('cookie-parser')
+
+require('dotenv').config({path: '../../.env'})
+
+const {DOMAIN, PORT} = process.env
 
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(cookieParser())
 
+
 app.get('/', (req, res) => {
-  const p = superagent.get('http://localhost:7334/gitlab/users/sign_in')
+  const p = superagent.get(`${DOMAIN}:${PORT}/gitlab/users/sign_in`)
   if (req.cookies._gitlab_session) {
     p.set('cookie', `_gitlab_session=${req.cookies._gitlab_session}`)
   }
@@ -28,7 +33,7 @@ app.get('//github', (req, res) => {
 
 app.post('//github', (req, res) => {
   const p = superagent
-    .post('http://localhost:7334/gitlab/users/auth/github')
+    .post(`${DOMAIN}:${PORT}/gitlab/users/auth/github`)
     .redirects(0)
     .send(`authenticity_token=${encodeURIComponent(req.body.authenticity_token)}`)
   if (req.cookies._gitlab_session) {
@@ -49,7 +54,7 @@ app.post('//github', (req, res) => {
 
 app.get('//sign_out', (req, res) => {
   const p = superagent
-    .get('http://localhost:7334/gitlab/users/sign_out')
+    .get(`${DOMAIN}:${PORT}/gitlab/users/sign_out`)
     .send(`authenticity_token=${encodeURIComponent(req.body.authenticity_token)}`)
   if (req.cookies._gitlab_session) {
     p.set('cookie', `_gitlab_session=${req.cookies._gitlab_session}`)
@@ -60,7 +65,7 @@ app.get('//sign_out', (req, res) => {
 
 app.post('/', (req, res) => {
   const p = superagent
-    .post('http://localhost:7334/gitlab/users/sign_in')
+    .post(`${DOMAIN}:${PORT}/gitlab/users/sign_in`)
     .redirects(0)
     .send(`authenticity_token=${encodeURIComponent(req.body.authenticity_token)}`)
     .send(`user[login]=${req.body['user[login]']}`)
