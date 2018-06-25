@@ -17,7 +17,7 @@ server {
 	}
 
 
-	location /gitlab/users/auth {
+	location /${GITLAB_PATH}/users/auth {
 		client_max_body_size 0;
 
 		gzip off;
@@ -35,13 +35,13 @@ server {
 		proxy_set_header    X-Forwarded-For     \$proxy_add_x_forwarded_for;
 		proxy_set_header    X-Forwarded-Proto   \$scheme;
 
-		proxy_cookie_path /gitlab /;
+		proxy_cookie_path /${GITLAB_PATH} /;
 
 		proxy_pass http://${docker_host}:${GITLAB_PORT}/gitlab/users/auth;
 
 	}
 
-	location /gitlab/users {
+	location /${GITLAB_PATH}/users {
 		# allow the login service to access these externally, but no one else
 		allow ${LOGIN_SERVER_IP};
 		deny all;
@@ -64,13 +64,13 @@ server {
 		proxy_set_header    X-Forwarded-For     \$proxy_add_x_forwarded_for;
 		proxy_set_header    X-Forwarded-Proto   \$scheme;
 
-		proxy_cookie_path /gitlab /;
+		proxy_cookie_path /${GITLAB_PATH} /;
 
 		proxy_pass http://${docker_host}:${GITLAB_PORT}/gitlab/users;
 
 	}
 
-	location /gitlab/api/v4 {
+	location /${GITLAB_PATH}/api/v4 {
 
 		client_max_body_size 0;
 
@@ -89,7 +89,7 @@ server {
 		proxy_set_header    X-Forwarded-For     \$proxy_add_x_forwarded_for;
 		proxy_set_header    X-Forwarded-Proto   \$scheme;
 
-		proxy_cookie_path /gitlab /;
+		proxy_cookie_path /${GITLAB_PATH} /;
 
 		proxy_pass http://${docker_host}:${GITLAB_PORT}/gitlab/api/v4;
 
@@ -108,7 +108,8 @@ server {
 		proxy_set_header    X-Real-IP           \$remote_addr;
 		proxy_set_header    X-Forwarded-For     \$proxy_add_x_forwarded_for;
 		proxy_set_header    X-Forwarded-Proto   \$scheme;
-		proxy_cookie_path /gitlab /;
+
+		proxy_cookie_path /${GITLAB_PATH} /;
 
 		proxy_pass http://${docker_host}:4004/;
 	}
