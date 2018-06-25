@@ -17,7 +17,7 @@ server {
 	}
 
 
-	location /gitlab {
+	location /gitlab/users/auth {
 		client_max_body_size 0;
 
 		gzip off;
@@ -37,7 +37,36 @@ server {
 
 		proxy_cookie_path /gitlab /;
 
-		proxy_pass http://${docker_host}:${GITLAB_PORT}/gitlab;
+		proxy_pass http://${docker_host}:${GITLAB_PORT}/gitlab/users/auth;
+
+	}
+
+	location /gitlab/users {
+		# allow the login service to access these externally, but no one else
+		allow ${LOGIN_SERVER_IP};
+		deny all;
+		error_page 403 /login;
+
+		client_max_body_size 0;
+
+		gzip off;
+
+		## https://github.com/gitlabhq/gitlabhq/issues/694
+		## Some requests take more than 30 seconds.
+		proxy_read_timeout      300;
+		proxy_connect_timeout   300;
+		proxy_redirect          off;
+
+		proxy_http_version 1.1;
+
+		proxy_set_header    Host                \$http_host;
+		proxy_set_header    X-Real-IP           \$remote_addr;
+		proxy_set_header    X-Forwarded-For     \$proxy_add_x_forwarded_for;
+		proxy_set_header    X-Forwarded-Proto   \$scheme;
+
+		proxy_cookie_path /gitlab /;
+
+		proxy_pass http://${docker_host}:${GITLAB_PORT}/gitlab/users;
 
 	}
 

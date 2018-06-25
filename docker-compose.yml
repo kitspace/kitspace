@@ -3,7 +3,7 @@ gitlab:
   restart: always
   environment:
     GITLAB_OMNIBUS_CONFIG: |
-      external_url "${GITLAB_DOMAIN}:${PORT}/${GITLAB_PATH}"
+      external_url "${DOMAIN}:${PORT}/${GITLAB_PATH}"
       gitlab_rails['omniauth_enabled'] = true
       gitlab_rails['omniauth_allow_single_sign_on'] = ['github']
       gitlab_rails['omniauth_block_auto_created_users'] = false

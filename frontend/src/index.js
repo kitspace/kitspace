@@ -5,7 +5,7 @@ const superagent = require('superagent')
 const {Helmet} = require('react-helmet')
 const {BrowserRouter, Route, Switch, Redirect} = require('react-router-dom')
 
-const gitlab = new Gitlab('/' + process.env.GITLAB_PATH)
+const gitlab = new Gitlab(process.env.GITLAB_PATH)
 
 class Index extends React.Component {
   constructor() {
