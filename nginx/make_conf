@@ -12,12 +12,12 @@ server {
 
 	server_name _;
 
-	location / {
+	location ^~ / {
 		proxy_pass http://${docker_host}:1234;
 	}
 
 
-	location /${GITLAB_PATH}/users/auth {
+	location ^~ '/${GITLAB_PATH}/users/auth' {
 		client_max_body_size 0;
 
 		gzip off;
@@ -37,11 +37,11 @@ server {
 
 		proxy_cookie_path /${GITLAB_PATH} /;
 
-		proxy_pass http://${docker_host}:${GITLAB_PORT}/gitlab/users/auth;
+		proxy_pass http://${docker_host}:${GITLAB_PORT}/${GITLAB_PATH}/users/auth;
 
 	}
 
-	location /${GITLAB_PATH}/users {
+	location ^~ '/${GITLAB_PATH}/users' {
 		# allow the login service to access these externally, but no one else
 		allow ${LOGIN_SERVER_IP};
 		deny all;
@@ -64,13 +64,13 @@ server {
 		proxy_set_header    X-Forwarded-For     \$proxy_add_x_forwarded_for;
 		proxy_set_header    X-Forwarded-Proto   \$scheme;
 
-		proxy_cookie_path /${GITLAB_PATH} /;
+		proxy_cookie_path '/${GITLAB_PATH}' /;
 
-		proxy_pass http://${docker_host}:${GITLAB_PORT}/gitlab/users;
+		proxy_pass http://${docker_host}:${GITLAB_PORT}/${GITLAB_PATH}/users;
 
 	}
 
-	location /${GITLAB_PATH}/api/v4 {
+	location ^~ '/${GITLAB_PATH}/api/v4' {
 
 		client_max_body_size 0;
 
@@ -91,11 +91,11 @@ server {
 
 		proxy_cookie_path /${GITLAB_PATH} /;
 
-		proxy_pass http://${docker_host}:${GITLAB_PORT}/gitlab/api/v4;
+		proxy_pass http://${docker_host}:${GITLAB_PORT}/${GITLAB_PATH}/api/v4;
 
 	}
 
-	location /login/api {
+	location ^~ '/!login/api' {
 		## https://github.com/gitlabhq/gitlabhq/issues/694
 		## Some requests take more than 30 seconds.
 		proxy_read_timeout      300;

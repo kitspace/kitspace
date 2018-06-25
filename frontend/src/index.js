@@ -27,7 +27,7 @@ class Index extends React.Component {
             return (
               <button
                 onClick={() => {
-                  superagent.get('/login/api/sign_out').then(r => {
+                  superagent.get('/!login/api/sign_out').then(r => {
                     window.location.replace('/login')
                   })
                 }}
@@ -50,7 +50,7 @@ class Login extends React.Component {
   }
   componentDidMount() {
     superagent
-      .get('/login/api')
+      .get('/!login/api')
       .then(r => r.body.authenticity_token)
       .then(token => this.setState({authenticity_token: token}))
     gitlab
@@ -62,7 +62,7 @@ class Login extends React.Component {
     return (
       <div>
         <pre>{JSON.stringify(this.state.user, null, 2)}</pre>
-        <form action="/login/api" method="post">
+        <form action="/!login/api" method="post">
           <label htmlFor="user_login" required="required">
             Username or email
           </label>
@@ -118,11 +118,11 @@ class Login extends React.Component {
         <button
           onClick={() => {
             superagent
-              .get('/login/api')
+              .get('/!login/api')
               .then(r => r.body.authenticity_token)
               .then(token =>
                 superagent
-                  .post('/login/api/github')
+                  .post('/!login/api/github')
                   .send(`authenticity_token=${token}`)
                   .then(r => {
                     window.location.replace(r.body.location)
