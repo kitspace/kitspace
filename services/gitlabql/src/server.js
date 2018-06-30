@@ -5,91 +5,46 @@ const {makeExecutableSchema} = require('graphql-tools')
 const superagent = require('superagent')
 const cookieParser = require('cookie-parser')
 
-// Some fake data
-const books = [
-  {
-    title: "Harry Bowler and the Sorcerer's bowl",
-    author: 'J.K. Bowling',
-    id: 0,
-  },
-  {
-    title: "Harry Potter and the Sorcerer's stone",
-    author: 'J.K. Rowling',
-    id: 1,
-  },
-  {
-    title: 'Jurassic Park',
-    author: 'Michael Crichton',
-    id: 2,
-  },
-  {
-    title: 'A',
-    author: 'Michael Crichton',
-    id: 3,
-  },
-  {
-    title: 'B',
-    author: 'Michael Crichton',
-    id: 4,
-  },
-  {
-    title: 'C',
-    author: 'Michael Crichton',
-    id: 5,
-  },
-  {
-    title: 'E',
-    author: 'Michael Crichton',
-    id: 6,
-  },
-  {
-    title: 'F',
-    author: 'Michael Crichton',
-    id: 7,
-  },
-  {
-    title: 'G',
-    author: 'Michael Crichton',
-    id: 8,
-  },
-]
-
-// The GraphQL schema in string form
 const typeDefs = gql`
   type Query {
-    books(cursor: Int): Books
     user: User
-  }
-
-  type Books {
-    nextCursor: Int!
-    books: [Book]
-  }
-
-  type Book {
-    id: Int!
-    title: String
-    author: String
   }
 
   type User {
     id: Int!
     name: String!
+    username: String!
+    state: String!
+    avatar_url: String!
+    web_url: String!
+    created_at: String!
+    bio: String
+    location: String
+    skype: String
+    linkedin: String
+    twitter: String
+    website_url: String
+    organization: String
+    last_sign_in_at: String
+    confirmed_at: String
+    last_activity_on: String
+    email: String
+    theme_id: Float
+    color_scheme_id: Int
+    projects_limit: Int
+    current_sign_in_at: String
+    identities: [String]
+    can_create_group: Boolean
+    can_create_project: Boolean
+    two_factor_enabled: Boolean
+    external: Boolean
+    is_admin: Boolean
   }
 `
 // The resolvers
 const resolvers = {
   Query: {
-    books: (root, {cursor}, ctx) => {
-      console.log({ctx})
-      cursor = parseInt(cursor)
-      const nextCursor = cursor + 2
-      return {books: books.slice(cursor, nextCursor), nextCursor}
-    },
-    user: (_, __, ctx) => {
-      console.log({ctx})
-      return ctx.user
-    },
+    user: (_, __, ctx) => ctx.user,
   },
 }
 
@@ -99,12 +54,8 @@ const schema = makeExecutableSchema({
   resolvers,
 })
 
-// In the most basic sense, the ApolloServer can be started
-// by passing type definitions (typeDefs) and the resolvers
-// responsible for fetching the data for those types.
 const server = new ApolloServer({
-  typeDefs,
-  resolvers,
+  schema,
   context: ({req}) => {
     return superagent
       .get('http://localhost:8080/!gitlab/api/v4/user')
@@ -116,8 +67,7 @@ const server = new ApolloServer({
 const app = express()
 app.use(cookieParser())
 server.applyMiddleware({app, path: '/'})
-// This `listen` method launches a web-server.  Existing apps
-// can utilize middleware options, which we'll discuss later.
+
 app.listen({port: 3000}, () => {
   console.log(`Server ready at port 3000${server.graphqlPath}`)
 })
