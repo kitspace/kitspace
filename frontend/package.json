@@ -5,15 +5,23 @@
     "start": "parcel src/index.html"
   },
   "devDependencies": {
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-function-bind": "^6.22.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-react": "^6.24.1",
     "kitspace-gitlab-client": "*",
+    "node-sass": "^4.9.0",
     "parcel-bundler": "^1.9.3"
   },
   "dependencies": {
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
+    "create-react-class": "^15.6.3",
+    "react": ">=0.14.0 <17.0.0",
+    "react-avatar-editor": "^9.1.1",
+    "react-dom": ">=0.14.0 <17.0.0",
     "react-helmet": "^5.2.0",
     "react-router-dom": "^4.2.2",
+    "semantic-ui-css": "^2.3.2",
+    "semantic-ui-react": "^0.81.3",
     "superagent": "^3.8.2"
   }
 }

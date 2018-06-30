@@ -1,0 +1,15 @@
+@import '../common';
+
+.Settings {
+    .ui.container {
+        margin-top: 50px;
+    }
+    .removeAvatarLink {
+        margin-left: 20px;
+
+    }
+    .removeAvatarLink:hover {
+        text-decoration: none !important;
+    }
+}
+

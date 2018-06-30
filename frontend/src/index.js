@@ -4,6 +4,7 @@ const Gitlab = require('kitspace-gitlab-client')
 const superagent = require('superagent')
 const {Helmet} = require('react-helmet')
 const {BrowserRouter, Route, Switch, Redirect} = require('react-router-dom')
+const Settings = require('./settings/settings')
 
 const gitlab = new Gitlab('/' + process.env.GITLAB_PATH)
 
@@ -143,6 +144,7 @@ class App extends React.Component {
           <Switch>
             <Route exact path="/" component={Index} />
             <Route exact path="/login" component={Login} />
+            <Route exact path="/settings" component={Settings} />
             <Redirect to="/" />
           </Switch>
         </BrowserRouter>
