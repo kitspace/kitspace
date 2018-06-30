@@ -44,7 +44,11 @@ const typeDefs = gql`
 // The resolvers
 const resolvers = {
   Query: {
-    user: (_, __, ctx) => ctx.user,
+    user: (_, __, {cookie}) =>
+      superagent
+        .get('http://localhost:8080/!gitlab/api/v4/user')
+        .set({cookie})
+        .then(r => r.body),
   },
 }
 
@@ -57,10 +61,7 @@ const schema = makeExecutableSchema({
 const server = new ApolloServer({
   schema,
   context: ({req}) => {
-    return superagent
-      .get('http://localhost:8080/!gitlab/api/v4/user')
-      .set('cookie', req.headers.cookie)
-      .then(r => ({user: r.body, cookie: req.headers.cookie}))
+    return {cookie: req.headers.cookie}
   },
 })
 
