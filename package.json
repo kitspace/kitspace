@@ -5,7 +5,8 @@
     "packages/gitlab-client",
     "services/partinfo",
     "services/board-files",
-    "services/login"
+    "services/login",
+    "services/gitlabql"
   ],
   "scripts": {
     "start:nginx": "./nginx/make_conf && docker-compose up nginx" ,
@@ -13,6 +14,7 @@
     "docker": "yarn start:nginx & yarn start:gitlab",
     "start:frontend": "cd frontend && yarn start",
     "start:login": "cd services/login && yarn start",
+    "start:gitlabql": "cd services/gitlabql && yarn start",
     "start": "yarn run docker & yarn start:login & yarn start:frontend"
   }
 }

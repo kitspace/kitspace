@@ -5,7 +5,7 @@ const superagent = require('superagent')
 const {Helmet} = require('react-helmet')
 const {BrowserRouter, Route, Switch, Redirect} = require('react-router-dom')
 
-const gitlab = new Gitlab(process.env.GITLAB_PATH)
+const gitlab = new Gitlab('/' + process.env.GITLAB_PATH)
 
 class Index extends React.Component {
   constructor() {
@@ -13,11 +13,9 @@ class Index extends React.Component {
     this.state = {projects: [], user: null}
   }
   componentDidMount() {
-    gitlab.getProjects().then(projects => this.setState({projects}))
-    gitlab
-      .getCurrentUser()
-      .then(user => this.setState({user}))
-      .catch(e => this.setState({user: 'not signed in'}))
+    superagent
+      .get('/' + process.env.GITLAB_PATH + '/api/v4/user')
+      .then(r => this.setState({user: r.body}))
   }
   render() {
     return (

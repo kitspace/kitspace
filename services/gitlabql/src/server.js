@@ -1,7 +1,9 @@
-const express = require('express')
 const bodyParser = require('body-parser')
-const {ApolloServer, gql} = require('apollo-server')
+const express = require('express')
+const {ApolloServer, gql} = require('apollo-server-express')
 const {makeExecutableSchema} = require('graphql-tools')
+const superagent = require('superagent')
+const cookieParser = require('cookie-parser')
 
 // Some fake data
 const books = [
@@ -55,28 +57,38 @@ const books = [
 // The GraphQL schema in string form
 const typeDefs = gql`
   type Query {
-    books(cursor: ID): Books
+    books(cursor: Int): Books
+    user: User
   }
 
   type Books {
-    nextCursor: ID!
+    nextCursor: Int!
     books: [Book]
   }
 
   type Book {
-    id: ID!
+    id: Int!
     title: String
     author: String
   }
-`
 
+  type User {
+    id: Int!
+    name: String!
+  }
+`
 // The resolvers
 const resolvers = {
   Query: {
-    books: (_, {cursor}) => {
+    books: (root, {cursor}, ctx) => {
+      console.log({ctx})
       cursor = parseInt(cursor)
-      nextCursor = cursor + 2
+      const nextCursor = cursor + 2
       return {books: books.slice(cursor, nextCursor), nextCursor}
+    },
+    user: (_, __, ctx) => {
+      console.log({ctx})
+      return ctx.user
     },
   },
 }
@@ -93,12 +105,19 @@ const schema = makeExecutableSchema({
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: req => console.log(req),
+  context: ({req}) => {
+    return superagent
+      .get('http://localhost:8080/!gitlab/api/v4/user')
+      .set('cookie', req.headers.cookie)
+      .then(r => ({user: r.body, cookie: req.headers.cookie}))
+  },
 })
 
-
+const app = express()
+app.use(cookieParser())
+server.applyMiddleware({app, path: '/'})
 // This `listen` method launches a web-server.  Existing apps
 // can utilize middleware options, which we'll discuss later.
-server.listen(3000).then(({url}) => {
-  console.log(`🚀  Server ready at ${url}`)
+app.listen({port: 3000}, () => {
+  console.log(`Server ready at port 3000${server.graphqlPath}`)
 })

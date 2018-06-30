@@ -1,0 +1,18 @@
+{
+  "name": "gitlab-api-graphql-wrapper",
+  "version": "0.0.0",
+  "scripts": {
+    "start": "nodemon src/server.js",
+    "test": "npm run test:integration",
+    "test:integration": "mocha --timeout 15000 integration/"
+  },
+  "dependencies": {
+    "apollo-server-express": "^2.0.0-rc.6",
+    "cookie-parser": "^1.4.3",
+    "graphql": "^0.13.2",
+    "superagent": "^3.8.3"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.5"
+  }
+}
