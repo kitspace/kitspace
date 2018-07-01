@@ -9,7 +9,7 @@
     "start:prod": "PORT=1234 NODE_ENV=production node build/server.js"
   },
   "dependencies": {
-    "@jaredpalmer/after": "latest",
+    "@jaredpalmer/after": "/home/kaspar/projects/kitspace/playground/after.js",
     "express": "^4.16.2",
     "razzle": "^2.2.0",
     "react": "^16.2.0",

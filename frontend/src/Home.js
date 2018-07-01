@@ -6,7 +6,8 @@ import superagent from 'superagent'
 class Home extends Component {
   static async getInitialProps({req, res, match, history, location, ...ctx}) {
     return superagent
-      .get('/!gitlab/api/v4/user')
+      .get('http://192.168.43.168:7334/!gitlab/api/v4/user')
+      .set({cookie: req.headers.cookie})
       .then(r => ({user: r.body}))
       .catch(e => ({user: 'not signed in'}))
   }
@@ -15,11 +16,10 @@ class Home extends Component {
     this.state = {user: null}
   }
   componentDidMount() {
-    console.log(this.props)
     superagent.get('/!gitlab/api/v4/user').then(r => this.setState({user: r.body}))
   }
   render() {
-    const user = (this.state.user || this.props.user)
+    const user = this.state.user || this.props.user
     return (
       <div>
         {(() => {
