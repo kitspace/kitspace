@@ -5,7 +5,7 @@ const GitlabClient = require('../src/index')
 
 require('dotenv').config({path: '../../.env'})
 
-const gitlab_url = `${process.env.DOMAIN}:${process.env.GITLAB_PORT}/${process.env.GITLAB_PATH}`
+const gitlab_url = `${process.env.KITSPACE_DOMAIN}:${process.env.KITSPACE_GITLAB_PORT}/${process.env.KITSPACE_GITLAB_PATH}`
 
 describe('user', () => {
   const g = new GitlabClient(gitlab_url, process.env.GITLAB_TOKEN)

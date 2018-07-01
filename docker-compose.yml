@@ -3,7 +3,7 @@ gitlab:
   restart: always
   environment:
     GITLAB_OMNIBUS_CONFIG: |
-      external_url "${DOMAIN}:${PORT}/${GITLAB_PATH}"
+      external_url "${KITSPACE_DOMAIN}:${KITSPACE_PORT}/${KITSPACE_GITLAB_PATH}"
       gitlab_rails['omniauth_enabled'] = true
       gitlab_rails['omniauth_allow_single_sign_on'] = ['github']
       gitlab_rails['omniauth_block_auto_created_users'] = false
@@ -16,7 +16,7 @@ gitlab:
          }
        ]
   ports:
-    - '${GITLAB_PORT}:${PORT}'
+    - '${KITSPACE_GITLAB_PORT}:${KITSPACE_PORT}'
     - '8022:22'
   volumes:
     - '/srv/gitlab/config:/etc/gitlab'
@@ -27,4 +27,4 @@ nginx:
   volumes:
     - './nginx:/etc/nginx/conf.d'
   ports:
-   - '${PORT}:80'
+   - '${KITSPACE_PORT}:80'

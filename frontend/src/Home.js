@@ -3,6 +3,8 @@ import './Home.css'
 import {Link} from 'react-router-dom'
 import superagent from 'superagent'
 
+console.log(process.env.GITLAB_PATH)
+
 class Home extends Component {
   static async getInitialProps({req, res, match, history, location, ...ctx}) {
     return superagent

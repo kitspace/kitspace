@@ -17,7 +17,7 @@ server {
 	}
 
 
-	location ^~ '/${GITLAB_PATH}/users/auth' {
+	location ^~ '/${KITSPACE_GITLAB_PATH}/users/auth' {
 		client_max_body_size 0;
 
 		gzip off;
@@ -35,15 +35,15 @@ server {
 		proxy_set_header    X-Forwarded-For     \$proxy_add_x_forwarded_for;
 		proxy_set_header    X-Forwarded-Proto   \$scheme;
 
-		proxy_cookie_path /${GITLAB_PATH} /;
+		proxy_cookie_path /${KITSPACE_GITLAB_PATH} /;
 
-		proxy_pass http://${docker_host}:${GITLAB_PORT}/${GITLAB_PATH}/users/auth;
+		proxy_pass http://${docker_host}:${KITSPACE_GITLAB_PORT}/${KITSPACE_GITLAB_PATH}/users/auth;
 
 	}
 
-	location ^~ '/${GITLAB_PATH}/users' {
+	location ^~ '/${KITSPACE_GITLAB_PATH}/users' {
 		# allow the login service to access these externally, but no one else
-		allow ${LOGIN_SERVER_IP};
+		allow ${KITSPACE_LOGIN_SERVER_IP};
 		deny all;
 		error_page 403 /login;
 
@@ -64,15 +64,15 @@ server {
 		proxy_set_header    X-Forwarded-For     \$proxy_add_x_forwarded_for;
 		proxy_set_header    X-Forwarded-Proto   \$scheme;
 
-		proxy_cookie_path '/${GITLAB_PATH}' /;
+		proxy_cookie_path '/${KITSPACE_GITLAB_PATH}' /;
 
-		proxy_pass http://${docker_host}:${GITLAB_PORT}/${GITLAB_PATH}/users;
+		proxy_pass http://${docker_host}:${KITSPACE_GITLAB_PORT}/${KITSPACE_GITLAB_PATH}/users;
 
 	}
 
-	location ^~ '/${GITLAB_PATH}/profile' {
+	location ^~ '/${KITSPACE_GITLAB_PATH}/profile' {
 		# allow the login service to access these externally, but no one else
-		allow ${LOGIN_SERVER_IP};
+		allow ${KITSPACE_LOGIN_SERVER_IP};
 		deny all;
 		error_page 403 /login;
 
@@ -93,15 +93,15 @@ server {
 		proxy_set_header    X-Forwarded-For     \$proxy_add_x_forwarded_for;
 		proxy_set_header    X-Forwarded-Proto   \$scheme;
 
-		proxy_cookie_path '/${GITLAB_PATH}' /;
+		proxy_cookie_path '/${KITSPACE_GITLAB_PATH}' /;
 
-		proxy_pass http://${docker_host}:${GITLAB_PORT}/${GITLAB_PATH}/profile;
+		proxy_pass http://${docker_host}:${KITSPACE_GITLAB_PORT}/${KITSPACE_GITLAB_PATH}/profile;
 
 	}
 
-	location ^~ '/${GITLAB_PATH}/uploads' {
+	location ^~ '/${KITSPACE_GITLAB_PATH}/uploads' {
 		# allow the login service to access these externally, but no one else
-		allow ${LOGIN_SERVER_IP};
+		allow ${KITSPACE_LOGIN_SERVER_IP};
 		deny all;
 		error_page 403 /login;
 
@@ -122,14 +122,14 @@ server {
 		proxy_set_header    X-Forwarded-For     \$proxy_add_x_forwarded_for;
 		proxy_set_header    X-Forwarded-Proto   \$scheme;
 
-		proxy_cookie_path '/${GITLAB_PATH}' /;
+		proxy_cookie_path '/${KITSPACE_GITLAB_PATH}' /;
 
-		proxy_pass http://${docker_host}:${GITLAB_PORT}/${GITLAB_PATH}/uploads;
+		proxy_pass http://${docker_host}:${KITSPACE_GITLAB_PORT}/${KITSPACE_GITLAB_PATH}/uploads;
 
 	}
 
 
-	location ^~ '/${GITLAB_PATH}/api/v4' {
+	location ^~ '/${KITSPACE_GITLAB_PATH}/api/v4' {
 
 		client_max_body_size 0;
 
@@ -148,9 +148,9 @@ server {
 		proxy_set_header    X-Forwarded-For     \$proxy_add_x_forwarded_for;
 		proxy_set_header    X-Forwarded-Proto   \$scheme;
 
-		proxy_cookie_path /${GITLAB_PATH} /;
+		proxy_cookie_path /${KITSPACE_GITLAB_PATH} /;
 
-		proxy_pass http://${docker_host}:${GITLAB_PORT}/${GITLAB_PATH}/api/v4;
+		proxy_pass http://${docker_host}:${KITSPACE_GITLAB_PORT}/${KITSPACE_GITLAB_PATH}/api/v4;
 
 	}
 
@@ -168,7 +168,7 @@ server {
 		proxy_set_header    X-Forwarded-For     \$proxy_add_x_forwarded_for;
 		proxy_set_header    X-Forwarded-Proto   \$scheme;
 
-		proxy_cookie_path /${GITLAB_PATH} /;
+		proxy_cookie_path /${KITSPACE_GITLAB_PATH} /;
 
 		proxy_pass http://${docker_host}:4004/;
 	}
@@ -187,7 +187,7 @@ server {
 		proxy_set_header    X-Forwarded-For     \$proxy_add_x_forwarded_for;
 		proxy_set_header    X-Forwarded-Proto   \$scheme;
 
-		proxy_cookie_path /${GITLAB_PATH} /;
+		proxy_cookie_path /${KITSPACE_GITLAB_PATH} /;
 
 		proxy_pass http://${docker_host}:3000/;
 	}
