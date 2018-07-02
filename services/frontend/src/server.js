@@ -1,29 +1,28 @@
-import React from 'react';
-import express from 'express';
-import { render } from '@kitspace/after';
-import { renderToString } from 'react-dom/server';
-import { ApolloProvider, getDataFromTree } from 'react-apollo';
-import routes from './routes';
-import createApolloClient from './createApolloClient';
-import Document from './Document';
+import React from 'react'
+import express from 'express'
+import {render} from '@kitspace/after'
+import {renderToString} from 'react-dom/server'
+import {ApolloProvider, getDataFromTree} from 'react-apollo'
+import routes from './routes'
+import createApolloClient from './createApolloClient'
+import Document from './Document'
 
-const assets = require(process.env.RAZZLE_ASSETS_MANIFEST);
+const assets = require(process.env.RAZZLE_ASSETS_MANIFEST)
 
-const server = express();
+const server = express()
 server
   .disable('x-powered-by')
   .use(express.static(process.env.RAZZLE_PUBLIC_DIR))
   .get('/*', async (req, res) => {
-    const client = createApolloClient({ ssrMode: true });
-
+    const client = createApolloClient({ssrMode: true, cookie: req.headers.cookie})
     const customRenderer = node => {
-      const App = <ApolloProvider client={client}>{node}</ApolloProvider>;
+      const App = <ApolloProvider client={client}>{node}</ApolloProvider>
       return getDataFromTree(App).then(() => {
-        const initialApolloState = client.extract();
-        const html = renderToString(App);
-        return { html, initialApolloState };
-      });
-    };
+        const initialApolloState = client.extract()
+        const html = renderToString(App)
+        return {html, initialApolloState}
+      })
+    }
 
     try {
       const html = await render({
@@ -33,12 +32,12 @@ server
         assets,
         customRenderer,
         document: Document,
-      });
-      res.send(html);
+      })
+      res.send(html)
     } catch (error) {
       console.error(error)
       res.json({message: error.message, stack: error.stack})
     }
-  });
+  })
 
-export default server;
+export default server

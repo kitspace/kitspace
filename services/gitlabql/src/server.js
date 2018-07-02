@@ -125,13 +125,23 @@ const typeDefs = gql`
 // The resolvers
 const resolvers = {
   Query: {
-    user: (_, __, {cookie}) =>
-      superagent
+    user: (_, params, {cookie}) => {
+      if (!cookie) {
+        return null
+      }
+      return superagent
         .get('http://localhost:8080/!gitlab/api/v4/user')
+        .query(params)
         .set({cookie})
-        .then(r => r.body),
+        .then(r => r.body)
+        .catch(e => {
+          if (e.status === 401) {
+            return null
+          }
+          throw e
+        })
+    },
     projects: (_, params, {cookie}) => {
-      console.log(params)
       const p = superagent
         .get('http://localhost:8080/!gitlab/api/v4/projects')
         .query(params)
