@@ -11,13 +11,17 @@
   "dependencies": {
     "@kitspace/after": "*",
     "@kitspace/razzle": "*",
-    "razzle-plugin-scss": "*",
-    "kitspace-gitlab-client": "*",
+    "create-react-class": "^15.6.3",
     "express": "^4.16.2",
+    "kitspace-gitlab-client": "*",
+    "razzle-plugin-scss": "*",
     "react": "^16.2.0",
+    "react-avatar-editor": "^11.0.4",
     "react-dom": "^16.2.0",
     "react-helmet": "^5.2.0",
     "react-router-dom": "^4.2.2",
+    "semantic-ui-css": "^2.3.2",
+    "semantic-ui-react": "^0.81.3",
     "superagent": "^3.8.3"
   },
   "devDependencies": {
