@@ -1,34 +1,38 @@
-# https://kitnic.it
-**We are giving away free PCB manufacturing vouchers to the first 20
-projects that register. Just follow the steps in the [submission preview](https://kitnic.it/submit). Current status: 1/20 left.**
+# https://kitspace.org
 
-[![build status][travis-status]](https://travis-ci.org/monostable/kitnic)
+[![build status][travis-status]](https://travis-ci.org/monostable/kitspace)
 
 [![video](image_src/fosdem2017.jpg)](https://video.fosdem.org/2017/AW1.120/kitnic_it.vp8.webm)
 
-Kitnic is a registry of open source hardware electronics projects that are
-ready to order and build. The most important elements of a Kitnic project page
-are:
+Kit Space (formerly Kitnic) is a registry of open source hardware electronics
+projects that are ready to order and build. It could be described as a
+"Thingiverse for electronics". The most important elements of a Kit Space
+project page are:
 
 - A prominent link to download the Gerber files and a preview rendering of the board
 - The ability to quickly add the required components to a retailer shopping
-  cart (using clever magic in the form of our [browser extension][1clickbom])
+  cart (using our [browser extension][1clickbom])
 
 
-Help us build a open hardware repository of useful electronics projects!
+Help us build an open hardware repository of useful electronics projects!
+
+## pcb-stackup
+
+The renderings of the PCB files are made using [pcb-stackup](https://github.com/tracespace/pcb-stackup).
+You can get similar renderings and also inspect invdividual layers, using the [tracespace gerber viewer](http://viewer.tracespace.io).
 
 ## Get in touch
 
- - [Join Riot.im chat][riot.im] or IRC freenode#kitnic
- - [Post on our Google Groups mailing list](https://groups.google.com/forum/#!forum/kitnic-discuss)
+ - [Join Riot.im chat][riot.im] or IRC freenode#kitspace
+ - [Post on our Google Groups mailing list](https://groups.google.com/forum/#!forum/kitspace)
 
 ## Submitting your project
 
-Check out [kitnic.it/submit](https://kitnic.it/submit) which will guide you through the process.
+Check out [kitspace.org/submit](https://kitspace.org/submit) which will guide you through the process.
 
-### Kitnic.yaml format
+### kitspace.yaml format
 
-Currently the `kitnic.yaml` makes use of the following fields:
+Currently the `kitspace.yaml` makes use of the following fields:
 
 ```yaml
 summary: A description for your project
@@ -49,11 +53,11 @@ gerbers: A path to your folder of gerbers in case it isn't `gerbers/`.
 Paths should be in UNIX style (i.e. use `/` not `\`) and relative to the root
 of your repository. The YAML format is pretty straight forward but if you need
 to know more check the example below and [the YAML website][6]. Use [this YAML
-validator][yamllint] to be extra sure that your `kitnic.yaml` is valid.
+validator][yamllint] to be extra sure that your `kitspace.yaml` is valid.
 
 ### Some examples
 Check out the repo links of the projects listed on
-[kitnic.it](https://kitnic.it) already. The minimum required file tree is
+[kitspace.org](https://kitspace.org) already. The minimum required file tree is
 something like :
 
 ```
@@ -76,7 +80,7 @@ A more advanced example could be something like:
 
 ```
 .
-├── kitnic.yaml
+├── kitspace.yaml
 └── manufacture
     ├── advanced-example-BOM.tsv
     └── gerbers-and-drills
@@ -98,7 +102,7 @@ A more advanced example could be something like:
         └── advanced-example-F_SilkS.gto
 ```
 
-with `kitnic.yaml` containing:
+with `kitspace.yaml` containing:
 
 ```yaml
 summary: A more advanced example
@@ -113,40 +117,15 @@ gerbers: manufacture/gerbers-and-drills
 
 ### Architecture
 
-#### Current
-This repository is the Kitnic front-end. The contents including all project
-data are currently pre-compiled into a static site.  The main part of the site
-that requires server side components is the submission preview (`/submit`). Pages also use freegeoip lookup to decide what sites to link to for people that do not have the 1-click BOM browser extension. This roughly illustrates the main data flow when someone is browsing the site.
+We use the [GitLab CE Omnibus](https://docs.gitlab.com/omnibus/README.html) Docker image as our main authentication and project hosting back-end. In front of that sits Nginx, also in a Docker image. Nginx acts as a reverse proxy to GitLab and our other services.
 
-![](docs/current.png)
+The rest of the site consists of smaller (micro, if you will) services written in Javascript.
 
-We have two services running for the submission preview.
-
-- [git-clone-server](https://github.com/kasbah/git-clone-server) for serving up files from git repositories.
-- [partinfo](https://github.com/monostable/kitnic-partinfo) for getting part information for the BOM.
-
-And one for the geo ip lookup on pages.
-
-- [freegeoip](https://github.com/fiorix/freegeoip)
-
-#### Planned
-
-We are using [GitLab](https://gitlab.com/gitlab-org/gitlab-ce) as an authentication and Git hosting service. We modify and proxy it to get the functionality we need.
-The graphs get too complicated if we try to add all the possible data-flows but here is the rough data-flow for submission of a project.
-
-![](docs/planned.png)
-
-Services used are:
-
-- [nginx-config](https://github.com/monostable/kitnic-nginx-config) to configure Nginx to serve the frontend and all services.
-- [partinfo](https://github.com/monostable/kitnic-partinfo) for getting part information for BOMs.
-- [gitlab-config](http://github.com/monostable/kitnic-gitlab-config) configuring GitLab to be used for authentication and Git hosting.
-- [gitlab-proxy](https://github.com/monostable/kitnic-gitlab-proxy) for requests that need to access GitLab API but need any kind of added functionality like unauthenticated access or modifying projects (which needs additional hooks to trigger processing).
 
 ### Roadmap
 
 - [ ] GitLab and Accounts
-   - [x] Modify GitLab and integrate with login in Kitnic frontend
+   - [x] Modify GitLab and integrate with login in Kitspace frontend
    - [x] Build frontend for basic account settings
    - [ ] Make GitLab source of user projects
 - [ ] Upload submissions and editing
@@ -176,10 +155,9 @@ file-saves and re-build when you change a source file.
 [1clickbom]: https://1clickBOM.com
 [yamllint]: http://www.yamllint.com
 [1clickbom#making]: https://1clickbom.com/#making-a-1-click-bom
-[travis-status]: https://travis-ci.org/monostable/kitnic.svg?branch=master
-[riot.im]: https://riot.im/app/#/room/#kitnic:matrix.org
+[travis-status]: https://travis-ci.org/monostable/kitspace.svg?branch=master
+[riot.im]: https://riot.im/app/#/room/#kitspace:matrix.org
 
 [4]: https://help.github.com/articles/create-a-repo/
 [5]: https://help.github.com/articles/adding-a-file-to-a-repository/
 [6]: http://www.yaml.org/start.html
-[8]: https://img.shields.io/badge/mailing--list-kitnic--discuss-green.svg
