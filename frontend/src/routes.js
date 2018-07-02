@@ -2,7 +2,7 @@ import React from 'react'
 import Home from './Home'
 import Login from './Login'
 
-import {asyncComponent} from '@jaredpalmer/after'
+import {asyncComponent} from '@kitspace/after'
 
 export default [
   {

@@ -3,6 +3,8 @@
   "workspaces": [
     "frontend",
     "packages/gitlab-client",
+    "packages/after.js",
+    "packages/razzle",
     "services/partinfo",
     "services/board-files",
     "services/login",

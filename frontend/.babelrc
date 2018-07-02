@@ -1,6 +1,6 @@
 {
   "presets": [
-    "razzle/babel",
+    "razzle",
     "es2015"
   ],
   "plugins": [
