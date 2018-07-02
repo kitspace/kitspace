@@ -13,9 +13,9 @@ describe('user', () => {
   it('creates random user and imports a project', async () => {
     const user = await g.createTempUser()
     assert(user.id != null)
-    const import_url = 'https://github.com/monostable/jelly'
+    const import_url = 'https://github.com/monostable/test-repo'
     const project = await g.createProject(
-      {name: 'jelly', import_url, visibility: 'public'},
+      {name: 'test-repo', import_url, visibility: 'public'},
       user.id
     )
     assert(project.name != null)

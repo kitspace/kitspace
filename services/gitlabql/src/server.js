@@ -10,7 +10,17 @@ const typeDefs = gql`
 
   type Query {
     user: User
-    projects: [Project]!
+    projects(
+      per_page: Int
+      page: Int
+      sort: String
+      order_by: String
+      visibility: String
+      search: String
+      owned: Boolean
+      membership: Boolean
+      starred: Boolean
+    ): [Project]!
   }
 
   type User {
@@ -84,7 +94,6 @@ const typeDefs = gql`
     only_allow_merge_if_all_discussions_are_resolved: Boolean!
     request_access_enabled: Boolean!
     merge_method: String!
-    statistics: Statistics!
     #_links: {
     #  self: 'http://example.com/api/v4/projects'
     #  issues: 'http://example.com/api/v4/projects/1/issues'
@@ -121,9 +130,10 @@ const resolvers = {
         .get('http://localhost:8080/!gitlab/api/v4/user')
         .set({cookie})
         .then(r => r.body),
-    projects: (_, __, {cookie}) =>
+    projects: (_, params, {cookie}) =>
       superagent
         .get('http://localhost:8080/!gitlab/api/v4/projects')
+        .query(params)
         .set({cookie})
         .then(r => r.body),
   },
