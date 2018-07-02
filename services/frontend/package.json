@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "start": "PORT=1234 RAZZLE_ENV_PREFIX=KITSPACE_ razzle start",
-    "build": "razzle build",
+    "build": "PORT=1234 razzle build",
     "test": "razzle test --env=jsdom",
     "start:prod": "PORT=1234 RAZZLE_ENV_PREFIX=KITSPACE_ NODE_ENV=production node build/server.js"
   },

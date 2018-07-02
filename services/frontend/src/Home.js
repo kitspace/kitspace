@@ -17,12 +17,13 @@ const QUERY = gql`
 `
 
 function Home(props) {
-  const {data} = props
+  const {user, error, loading, projects} = props.data
+  console.error(error)
   return (
     <div className="Home">
-      <pre>{(data.user || {}).username}</pre>
+      <pre>{(user || {}).username}</pre>
       {(() => {
-        if (data.user) {
+        if (user) {
           return (
             <button
               onClick={() => {
@@ -37,9 +38,11 @@ function Home(props) {
         }
       })()}
 
-      <pre>{JSON.stringify(data.projects, null, 2)}</pre>
+      <pre>{JSON.stringify(projects, null, 2)}</pre>
     </div>
   )
 }
 
-export default graphql(QUERY)(Home)
+export default graphql(QUERY, {
+  options: {errorPolicy: 'all', ssr: false},
+})(Home)

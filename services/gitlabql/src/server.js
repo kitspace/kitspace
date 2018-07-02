@@ -1,6 +1,6 @@
 const bodyParser = require('body-parser')
 const express = require('express')
-const {ApolloServer, gql} = require('apollo-server-express')
+const {ApolloServer, gql, AuthenticationError} = require('apollo-server-express')
 const {makeExecutableSchema} = require('graphql-tools')
 const superagent = require('superagent')
 const cookieParser = require('cookie-parser')
@@ -127,19 +127,13 @@ const resolvers = {
   Query: {
     user: (_, params, {cookie}) => {
       if (!cookie) {
-        return null
+        throw new AuthenticationError('cookie required')
       }
       return superagent
         .get('http://localhost:8080/!gitlab/api/v4/user')
         .query(params)
         .set({cookie})
         .then(r => r.body)
-        .catch(e => {
-          if (e.status === 401) {
-            return null
-          }
-          throw e
-        })
     },
     projects: (_, params, {cookie}) => {
       const p = superagent
