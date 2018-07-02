@@ -1,6 +1,5 @@
 import 'semantic-ui-css/semantic.css'
 import './settings.scss'
-const Redux = require('redux')
 const React = require('react')
 const superagent = require('superagent')
 const semantic = require('semantic-ui-react')
