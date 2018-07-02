@@ -6,8 +6,11 @@ const superagent = require('superagent')
 const cookieParser = require('cookie-parser')
 
 const typeDefs = gql`
+  scalar Date
+
   type Query {
     user: User
+    projects: [Project]!
   }
 
   type User {
@@ -40,13 +43,87 @@ const typeDefs = gql`
     external: Boolean
     is_admin: Boolean
   }
+
+  type Project {
+    id: ID!
+    description: String
+    default_branch: String
+    visibility: String
+    ssh_url_to_repo: String!
+    http_url_to_repo: String!
+    web_url: String!
+    readme_url: String!
+    tag_list: [String]
+    owner: User!
+    name: String
+    name_with_namespace: String
+    path: String!
+    path_with_namespace: String!
+    issues_enabled: Boolean!
+    open_issues_count: Int!
+    merge_requests_enabled: Boolean!
+    jobs_enabled: Boolean!
+    wiki_enabled: Boolean!
+    snippets_enabled: Boolean!
+    resolve_outdated_diff_discussions: Boolean!
+    container_registry_enabled: Boolean!
+    created_at: Date!
+    last_activity_at: Date
+    creator_id: Int!
+    namespace: Namespace!
+    import_status: String
+    archived: Boolean!
+    avatar_url: String!
+    shared_runners_enabled: Boolean!
+    forks_count: Int!
+    star_count: Int!
+    runners_token: String
+    public_jobs: Boolean!
+    # shared_with_groups: []
+    only_allow_merge_if_pipeline_succeeds: Boolean!
+    only_allow_merge_if_all_discussions_are_resolved: Boolean!
+    request_access_enabled: Boolean!
+    merge_method: String!
+    statistics: Statistics!
+    #_links: {
+    #  self: 'http://example.com/api/v4/projects'
+    #  issues: 'http://example.com/api/v4/projects/1/issues'
+    #  merge_requests: 'http://example.com/api/v4/projects/1/merge_requests'
+    #  repo_branches: 'http://example.com/api/v4/projects/1/repository_branches'
+    #  labels: 'http://example.com/api/v4/projects/1/labels'
+    #  events: 'http://example.com/api/v4/projects/1/events'
+    #  members: 'http://example.com/api/v4/projects/1/members'
+    #}
+  }
+
+  type Statistics {
+    commit_Vcount: Int!
+    storage_size: Int!
+    repository_size: Int!
+    lfs_objects_size: Int!
+    job_artifacts_size: Int!
+  }
+
+  type Namespace {
+    id: ID!
+    name: String!
+    path: String!
+    kind: String!
+    full_path: String!
+  }
 `
+
 // The resolvers
 const resolvers = {
   Query: {
     user: (_, __, {cookie}) =>
       superagent
         .get('http://localhost:8080/!gitlab/api/v4/user')
+        .set({cookie})
+        .then(r => r.body),
+    projects: (_, __, {cookie}) =>
+      superagent
+        .get('http://localhost:8080/!gitlab/api/v4/projects')
         .set({cookie})
         .then(r => r.body),
   },
@@ -72,3 +149,8 @@ server.applyMiddleware({app, path: '/'})
 app.listen({port: 3000}, () => {
   console.log(`Server ready at port 3000${server.graphqlPath}`)
 })
+
+function trace(x) {
+  console.log(x)
+  return x
+}
