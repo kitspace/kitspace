@@ -3,4 +3,4 @@ singleQuote: true
 tabWidth: 2
 printWidth: 84
 bracketSpacing: false
-trailingComma: true
+trailingComma: all

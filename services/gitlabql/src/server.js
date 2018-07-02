@@ -130,12 +130,16 @@ const resolvers = {
         .get('http://localhost:8080/!gitlab/api/v4/user')
         .set({cookie})
         .then(r => r.body),
-    projects: (_, params, {cookie}) =>
-      superagent
+    projects: (_, params, {cookie}) => {
+      console.log(params)
+      const p = superagent
         .get('http://localhost:8080/!gitlab/api/v4/projects')
         .query(params)
-        .set({cookie})
-        .then(r => r.body),
+      if (cookie) {
+        p.set({cookie})
+      }
+      return p.then(r => r.body)
+    },
   },
 }
 
