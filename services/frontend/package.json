@@ -1,12 +1,12 @@
 {
-  "name": "razzle-examples-with-afterjs",
-  "version": "2.2.0",
+  "name": "@kitspace/frontend",
+  "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "PORT=1234 razzle start",
-    "build": "PORT=1234 razzle build",
+    "start": "PORT=1234 RAZZLE_ENV_PREFIX=KITSPACE_ razzle start",
+    "build": "razzle build",
     "test": "razzle test --env=jsdom",
-    "start:prod": "PORT=1234 NODE_ENV=production node build/server.js"
+    "start:prod": "PORT=1234 RAZZLE_ENV_PREFIX=KITSPACE_ NODE_ENV=production node build/server.js"
   },
   "dependencies": {
     "@kitspace/after": "*",

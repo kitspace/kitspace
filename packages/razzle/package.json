@@ -1,5 +1,5 @@
 {
-  "name": "razzle",
+  "name": "@kitspace/razzle",
   "version": "2.2.0",
   "description": "Create server-rendered universal JavaScript applications with no configuration",
   "repository": "git@github.com:jaredpalmer/razzle.git",

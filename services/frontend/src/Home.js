@@ -3,17 +3,20 @@ import './Home.css'
 import {Link} from 'react-router-dom'
 import superagent from 'superagent'
 
+const KITSPACE_DOMAIN = process.env.KITSPACE_DOMAIN
+const KITSPACE_PORT = process.env.KITSPACE_PORT
+const KITSPACE_GITLAB_PATH = process.env.KITSPACE_GITLAB_PATH
+
 class Home extends Component {
-  static async getInitialProps({req, res, match, history, location, ...ctx}) {
+  state = {user: null}
+  static getInitialProps({req, res, match, history, location, ...ctx}) {
     return superagent
-      .get('http://192.168.43.168:7334/!gitlab/api/v4/user')
+      .get(
+        `${KITSPACE_DOMAIN}:${KITSPACE_PORT}/${KITSPACE_GITLAB_PATH}/api/v4/user`
+      )
       .set({cookie: req.headers.cookie})
       .then(r => ({user: r.body}))
       .catch(e => ({user: 'not signed in'}))
-  }
-  constructor() {
-    super()
-    this.state = {user: null}
   }
   componentDidMount() {
     superagent.get('/!gitlab/api/v4/user').then(r => this.setState({user: r.body}))
