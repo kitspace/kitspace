@@ -1,11 +1,11 @@
 {
   "private": true,
   "workspaces": [
-    "frontend",
     "packages/gitlab-client",
     "packages/after.js",
     "packages/razzle",
     "packages/razzle-plugin-scss",
+    "services/frontend",
     "services/partinfo",
     "services/board-files",
     "services/login",
@@ -15,7 +15,7 @@
     "start:nginx": "./nginx/make_conf && docker-compose up nginx" ,
     "start:gitlab": "docker-compose up gitlab" ,
     "docker": "yarn start:nginx & yarn start:gitlab",
-    "start:frontend": "cd frontend && yarn start",
+    "start:frontend": "cd services/frontend && yarn start",
     "start:login": "cd services/login && yarn start",
     "start:gitlabql": "cd services/gitlabql && yarn start",
     "start": "yarn run docker & yarn start:login & yarn start:frontend"
