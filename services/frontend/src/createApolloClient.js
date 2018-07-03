@@ -8,7 +8,7 @@ function createApolloClient({ssrMode, cookie}) {
   return new ApolloClient({
     ssrMode,
     link: createHttpLink({
-      uri: 'http://localhost:3000',
+      uri: 'http://192.168.43.168:7334/!gitlabql',
       credentials: 'same-origin',
       fetch,
       headers,
