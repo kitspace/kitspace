@@ -21,6 +21,14 @@ function Home(props) {
   return (
     <div className="Home">
       <pre>{(user || {}).username}</pre>
+      <ul>
+        <li>
+          <Link to="/login">login</Link>
+        </li>
+        <li>
+          <Link to="/settings">settings</Link>
+        </li>
+      </ul>
       {(() => {
         if (user) {
           return (
