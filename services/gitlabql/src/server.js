@@ -105,13 +105,13 @@ const typeDefs = gql`
     #}
   }
 
-  type Statistics {
-    commit_Vcount: Int!
-    storage_size: Int!
-    repository_size: Int!
-    lfs_objects_size: Int!
-    job_artifacts_size: Int!
-  }
+  #type Statistics {
+  #  commit_Vcount: Int!
+  #  storage_size: Int!
+  #  repository_size: Int!
+  #  lfs_objects_size: Int!
+  #  job_artifacts_size: Int!
+  #}
 
   type Namespace {
     id: ID!

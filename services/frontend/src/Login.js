@@ -1,29 +1,36 @@
 import React from 'react'
+import {graphql} from 'react-apollo'
+import gql from 'graphql-tag'
 import {Link} from 'react-router-dom'
 import superagent from 'superagent'
 import Gitlab from 'kitspace-gitlab-client'
 
 const gitlab = new Gitlab('/!gitlab')
 
+const QUERY = gql`
+  query {
+    user {
+      username
+    }
+  }
+`
+
 class Login extends React.Component {
   constructor() {
     super()
-    this.state = {authenticity_token: null, password: null, login: null, user: null}
+    this.state = {authenticity_token: null, password: null, login: null}
   }
   componentDidMount() {
+    this.props.data.refetch()
     superagent
       .get('/!login/api')
       .then(r => r.body.authenticity_token)
       .then(token => this.setState({authenticity_token: token}))
-    gitlab
-      .getCurrentUser()
-      .then(user => this.setState({user}))
-      .catch(e => this.setState({user: 'not signed in'}))
   }
   render() {
     return (
       <div>
-        <pre>{JSON.stringify(this.state.user, null, 2)}</pre>
+        <pre>{JSON.stringify(this.props.data.user, null, 2)}</pre>
         <form action="/!login/api" method="post">
           <label htmlFor="user_login" required="required">
             Username or email
@@ -69,7 +76,7 @@ class Login extends React.Component {
         </button>
         <pre>{this.state.authenticity_token}</pre>
 
-        <form action="/gitlab/users/auth/github" method="post">
+        <form action="/!gitlab/users/auth/github" method="post">
           <input
             type="hidden"
             name="authenticity_token"
@@ -99,4 +106,6 @@ class Login extends React.Component {
   }
 }
 
-export default Login
+export default graphql(QUERY, {
+  options: {errorPolicy: 'all'},
+})(Login)

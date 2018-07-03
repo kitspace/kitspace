@@ -17,8 +17,7 @@ const QUERY = gql`
 `
 
 function Home(props) {
-  const {user, error, loading, projects} = props.data
-  console.error(error)
+  const {user, projects} = props.data
   return (
     <div className="Home">
       <pre>{(user || {}).username}</pre>
@@ -44,5 +43,5 @@ function Home(props) {
 }
 
 export default graphql(QUERY, {
-  options: {errorPolicy: 'all', ssr: false},
+  options: {errorPolicy: 'all'},
 })(Home)
