@@ -1,5 +1,6 @@
 import 'semantic-ui-css/semantic.css'
 import './settings.scss'
+import {Redirect} from 'react-router-dom'
 const React = require('react')
 const superagent = require('superagent')
 const semantic = require('semantic-ui-react')
@@ -11,7 +12,7 @@ const Settings = createReactClass({
   getInitialState() {
     return {
       emailMessage: '',
-      user: {},
+      user: null,
       newAvatarBlob: null,
       newAvatarUrl: null,
       modalOpen: false,
@@ -35,7 +36,6 @@ const Settings = createReactClass({
         }
         this.setState({user: newUser, newAvatarUrl: null})
       })
-      .catch(e => (window.location = '/login'))
   },
 
   getForm() {
@@ -109,7 +109,12 @@ const Settings = createReactClass({
   },
 
   render() {
-    const user = this.state.user || {}
+    const user = this.state.user
+
+    if (!user) {
+      return <Redirect to="/login" />
+    }
+
     const warning = this.state.confirmationEmail != null
     const notGravatar = checkGravater(this.state.user.avatar_url)
     if (this.state.emailReSent) {
