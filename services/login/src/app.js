@@ -65,6 +65,7 @@ app.get('//sign_out', (req, res) => {
 })
 
 app.post('/', (req, res) => {
+  console.log('/', req.body)
   const p = superagent
     .post(`${KITSPACE_DOMAIN}:${KITSPACE_PORT}/${KITSPACE_GITLAB_PATH}/users/sign_in`)
     .redirects(0)
@@ -76,6 +77,11 @@ app.post('/', (req, res) => {
   if (req.cookies._gitlab_session) {
     p.set('cookie', `_gitlab_session=${req.cookies._gitlab_session}`)
   }
+  p.then(r => {
+    console.log({r})
+    res.set('set-cookie', r.headers['set-cookie'])
+    res.send(r.text)
+  })
   p.catch(e => {
     if (e.status === 302) {
       res.set('set-cookie', e.response.headers['set-cookie'])
@@ -85,5 +91,10 @@ app.post('/', (req, res) => {
     }
   })
 })
+
+function trace(x) {
+  console.log(x)
+  return x
+}
 
 module.exports = app

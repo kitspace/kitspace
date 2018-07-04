@@ -69,8 +69,14 @@ class Login extends React.Component {
         />
         <button
           onClick={() => {
-            gitlab
-              .login(this.state.login, this.state.password)
+            const {login, password, authenticity_token} = this.state
+            superagent
+              .post('/!login/api')
+              .send(`authenticity_token=${encodeURIComponent(authenticity_token)}`)
+              .send(`user[login]=${encodeURIComponent(login)}`)
+              .send(`user[password]=${encodeURIComponent(password)}`)
+              .send('user[remember_me]=0')
+              .send('utf8=✓')
               .then(r => this.props.data.refetch())
               .catch(e => console.error(e))
           }}
