@@ -65,7 +65,6 @@ app.get('//sign_out', (req, res) => {
 })
 
 app.post('/', (req, res) => {
-  console.log('/', req.body)
   const p = superagent
     .post(`${KITSPACE_DOMAIN}:${KITSPACE_PORT}/${KITSPACE_GITLAB_PATH}/users/sign_in`)
     .redirects(0)

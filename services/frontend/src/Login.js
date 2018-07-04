@@ -29,8 +29,9 @@ class Login extends React.Component {
       .then(token => this.setState({authenticity_token: token}))
   }
   render() {
+    const referrer = (this.props.location.state || {}).referrer
     if (this.props.data.user) {
-      return <Redirect to={(this.props.location.state || {}).referrer || '/'} />
+      return <Redirect to={referrer || '/'} />
     }
     return (
       <div>
@@ -85,7 +86,17 @@ class Login extends React.Component {
         </button>
         <pre>{this.state.authenticity_token}</pre>
 
-        <form action="/!gitlab/users/auth/github" method="post">
+        <form
+          action="/!gitlab/users/auth/github"
+          method="post"
+          onSubmit={e => {
+            if (referrer) {
+              sessionStorage.setItem('oauthLoginReferrer', referrer)
+            } else {
+              sessionStorage.removeItem('oauthLoginReferrer')
+            }
+          }}
+        >
           <input
             type="hidden"
             name="authenticity_token"
@@ -96,7 +107,7 @@ class Login extends React.Component {
         <button
           onClick={() => {
             superagent
-              .post('/!login/api/github')
+              .post('/!gitlab/users/auth/github')
               .send(`authenticity_token=${this.state.authenticity_token}`)
               .then(r => {
                 this.props.data.refetch()

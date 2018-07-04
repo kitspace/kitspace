@@ -1,7 +1,7 @@
 import React from 'react'
 import {graphql} from 'react-apollo'
 import gql from 'graphql-tag'
-import {Link} from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
 import superagent from 'superagent'
 
 const QUERY = gql`
@@ -19,6 +19,14 @@ const QUERY = gql`
 
 function Home(props) {
   const {user, projects} = props.data
+  const loginReferrer =
+    typeof sessionStorage !== 'undefined'
+      ? sessionStorage.getItem('oauthLoginReferrer')
+      : null
+  if (loginReferrer) {
+    sessionStorage.removeItem('oauthLoginReferrer')
+    return <Redirect to={loginReferrer} />
+  }
   return (
     <div className="Home">
       <pre>{(user || {}).username}</pre>
