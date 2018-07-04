@@ -6,6 +6,7 @@ import {ApolloProvider, getDataFromTree} from 'react-apollo'
 import routes from './routes'
 import createApolloClient from './createApolloClient'
 import Document from './Document'
+import cookieParser from 'cookie-parser'
 
 const assets = require(process.env.RAZZLE_ASSETS_MANIFEST)
 
@@ -13,6 +14,14 @@ const server = express()
 server
   .disable('x-powered-by')
   .use(express.static(process.env.RAZZLE_PUBLIC_DIR))
+  .use('/!gitlab/*', cookieParser(), (req, res) => {
+    const oauthLoginRedirect = req.cookies.oauthLoginRedirect
+    if (oauthLoginRedirect && oauthLoginRedirect !== 'done') {
+      res.cookie('oauthLoginRedirect', 'done')
+      return res.redirect(oauthLoginRedirect)
+    }
+    return res.redirect('/')
+  })
   .get('/*', async (req, res) => {
     const client = createApolloClient({ssrMode: true, cookie: req.headers.cookie})
     const customRenderer = node => {

@@ -19,14 +19,6 @@ const QUERY = gql`
 
 function Home(props) {
   const {user, projects} = props.data
-  const loginReferrer =
-    typeof sessionStorage !== 'undefined'
-      ? sessionStorage.getItem('oauthLoginReferrer')
-      : null
-  if (loginReferrer) {
-    sessionStorage.removeItem('oauthLoginReferrer')
-    return <Redirect to={loginReferrer} />
-  }
   return (
     <div className="Home">
       <pre>{(user || {}).username}</pre>
