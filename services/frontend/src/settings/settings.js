@@ -1,12 +1,23 @@
 import 'semantic-ui-css/semantic.css'
 import './settings.scss'
 import {Redirect} from 'react-router-dom'
+import {graphql} from 'react-apollo'
+import gql from 'graphql-tag'
 const React = require('react')
 const superagent = require('superagent')
 const semantic = require('semantic-ui-react')
 const createReactClass = require('create-react-class')
 
 const CustomAvatarEditor = require('./custom_avatar_editor')
+
+const QUERY = gql`
+  query {
+    user {
+      username
+      avatar_url
+    }
+  }
+`
 
 const Settings = createReactClass({
   getInitialState() {
@@ -50,7 +61,7 @@ const Settings = createReactClass({
         copy('input[name="user[email]"]')
         copy('input[name="user[name]"]')
         const authenticity_token = doc.querySelector(
-          'input[name=authenticity_token]'
+          'input[name=authenticity_token]',
         ).value
         const emailMessage = doc.querySelector('input[name="user[email]"]')
           .nextElementSibling
@@ -76,7 +87,7 @@ const Settings = createReactClass({
           modalOpen: true,
         })
       },
-      false
+      false,
     )
     if (file) {
       reader.readAsDataURL(file)
@@ -109,14 +120,16 @@ const Settings = createReactClass({
   },
 
   render() {
-    const user = this.state.user
+    const user = this.state.user || this.props.data.user
+
+    console.log({user})
 
     if (!user) {
-      return <Redirect to="/login" />
+      return <Redirect to={{pathname: '/login', state: {referrer: '/settings'}}} />
     }
 
     const warning = this.state.confirmationEmail != null
-    const notGravatar = checkGravater(this.state.user.avatar_url)
+    const notGravatar = checkGravater(user.avatar_url)
     if (this.state.emailReSent) {
       var emailReSendMessage = 'Email has been re-sent.'
     } else {
@@ -128,7 +141,7 @@ const Settings = createReactClass({
               .post(
                 `/!gitlab/users/confirmation?user_email=${
                   this.state.confirmationEmail
-                }`
+                }`,
               )
               .field('_method', 'post')
               .field('authenticity_token', this.state.authenticity_token)
@@ -145,7 +158,7 @@ const Settings = createReactClass({
       <semantic.Image
         as="a"
         style={{height: 80, width: 80}}
-        src={this.state.newAvatarUrl || this.state.user.avatar_url}
+        src={this.state.newAvatarUrl || user.avatar_url}
       />
     )
     if (this.state.removingAvatar) {
@@ -158,7 +171,7 @@ const Settings = createReactClass({
           className="removeAvatarLink"
           onClick={event => {
             const confirmation = window.confirm(
-              'Are you sure you want to remove the avatar picture?'
+              'Are you sure you want to remove the avatar picture?',
             )
             if (confirmation) {
               this.setState({removingAvatar: true})
@@ -201,7 +214,7 @@ const Settings = createReactClass({
                     formData.append(
                       'user[avatar]',
                       this.state.newAvatarBlob,
-                      'avatar.png'
+                      'avatar.png',
                     )
                   }
                   superagent
@@ -378,4 +391,6 @@ function checkGravater(url) {
   return RegExp('/!gitlab/uploads/-/system/user/avatar/').test(url)
 }
 
-module.exports = Settings
+export default graphql(QUERY, {
+  options: {errorPolicy: 'all'},
+})(Settings)

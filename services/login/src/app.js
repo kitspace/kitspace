@@ -31,12 +31,13 @@ app.get('//github', (req, res) => {
 })
 
 app.post('//github', (req, res) => {
+  console.log(req.url)
   const p = superagent
     .post(`${KITSPACE_DOMAIN}:${KITSPACE_PORT}/${KITSPACE_GITLAB_PATH}/users/auth/github`)
     .redirects(0)
     .send(`authenticity_token=${encodeURIComponent(req.body.authenticity_token)}`)
-  if (req.cookies._gitlab_session) {
-    p.set('cookie', `_gitlab_session=${req.cookies._gitlab_session}`)
+  if (req.headers.cookie) {
+    p.set('cookie', req.headers.cookie)
   }
   p.catch(e => {
     console.log('error', e.status)
@@ -44,6 +45,7 @@ app.post('//github', (req, res) => {
       if (e.response.headers['set-cookie']) {
         res.set('set-cookie', e.response.headers['set-cookie'])
       }
+      console.log('location', e.response.headers.location)
       res.send({location: e.response.headers.location})
     } else {
       res.sendStatus(e.status)

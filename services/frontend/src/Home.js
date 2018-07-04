@@ -8,6 +8,7 @@ const QUERY = gql`
   query {
     user {
       username
+      avatar_url
     }
     projects {
       id

@@ -1,7 +1,7 @@
 import React from 'react'
 import {graphql} from 'react-apollo'
 import gql from 'graphql-tag'
-import {Link} from 'react-router-dom'
+import {Redirect} from 'react-router-dom'
 import superagent from 'superagent'
 import Gitlab from 'kitspace-gitlab-client'
 
@@ -11,6 +11,7 @@ const QUERY = gql`
   query {
     user {
       username
+      avatar_url
     }
   }
 `
@@ -28,9 +29,13 @@ class Login extends React.Component {
       .then(token => this.setState({authenticity_token: token}))
   }
   render() {
+    if (this.props.data.user) {
+      return <Redirect to={(this.props.location.state || {}).referrer || '/'} />
+    }
     return (
       <div>
         <pre>{JSON.stringify(this.props.data.user, null, 2)}</pre>
+        <pre>{JSON.stringify(this.props.location)}</pre>
         <form action="/!login/api" method="post">
           <label htmlFor="user_login" required="required">
             Username or email
@@ -66,9 +71,7 @@ class Login extends React.Component {
           onClick={() => {
             gitlab
               .login(this.state.login, this.state.password)
-              .then(r => {
-                window.location.href = '/'
-              })
+              .then(r => this.props.data.refetch())
               .catch(e => console.error(e))
           }}
         >
@@ -87,16 +90,11 @@ class Login extends React.Component {
         <button
           onClick={() => {
             superagent
-              .get('/!login/api')
-              .then(r => r.body.authenticity_token)
-              .then(token =>
-                superagent
-                  .post('/!login/api/github')
-                  .send(`authenticity_token=${token}`)
-                  .then(r => {
-                    window.location.replace(r.body.location)
-                  })
-              )
+              .post('/!login/api/github')
+              .send(`authenticity_token=${this.state.authenticity_token}`)
+              .then(r => {
+                this.props.data.refetch()
+              })
           }}
         >
           github api
@@ -104,6 +102,11 @@ class Login extends React.Component {
       </div>
     )
   }
+}
+
+function trace(x) {
+  console.log(x)
+  return x
 }
 
 export default graphql(QUERY, {
