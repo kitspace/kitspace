@@ -56,14 +56,13 @@ app.post('/', (req, res) => {
     p.set('cookie', `_gitlab_session=${req.cookies._gitlab_session}`)
   }
   p.then(r => {
-    console.log({r})
     res.set('set-cookie', r.headers['set-cookie'])
-    res.send(r.text)
+    res.send({success: false, status: r.status})
   })
   p.catch(e => {
     if (e.status === 302) {
       res.set('set-cookie', e.response.headers['set-cookie'])
-      res.redirect('/')
+      res.send({success: true})
     } else {
       res.sendStatus(e.status)
     }

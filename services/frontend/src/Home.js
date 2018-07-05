@@ -1,5 +1,5 @@
 import React from 'react'
-import {graphql} from 'react-apollo'
+import {graphql, Query} from 'react-apollo'
 import gql from 'graphql-tag'
 import {Link, Redirect} from 'react-router-dom'
 import superagent from 'superagent'
@@ -17,40 +17,42 @@ const QUERY = gql`
   }
 `
 
-function Home(props) {
-  const {user, projects} = props.data
+export default function Home(props) {
   return (
-    <div className="Home">
-      <pre>{(user || {}).username}</pre>
-      <ul>
-        <li>
-          <Link to="/login">login</Link>
-        </li>
-        <li>
-          <Link to="/settings">settings</Link>
-        </li>
-      </ul>
-      {(() => {
-        if (user) {
-          return (
-            <button
-              onClick={() => {
-                superagent.get('/!login/api/sign_out').then(r => {
-                  window.location.replace('/login')
-                })
-              }}
-            >
-              sign out
-            </button>
-          )
-        }
-      })()}
+    <Query query={QUERY}>
+      {({client, history, data: {user, projects}}) => {
+        return (
+          <div className="Home">
+            <pre>{(user || {}).username}</pre>
+            <ul>
+              <li>
+                <Link to="/login">login</Link>
+              </li>
+              <li>
+                <Link to="/settings">settings</Link>
+              </li>
+            </ul>
+            {(() => {
+              if (user) {
+                return (
+                  <button
+                    onClick={() => {
+                      superagent.get('/!login/api/sign_out').then(r => {
+                        client.resetStore()
+                        props.history.push('/login')
+                      })
+                    }}
+                  >
+                    sign out
+                  </button>
+                )
+              }
+            })()}
 
-      <pre>{JSON.stringify(projects, null, 2)}</pre>
-    </div>
+            <pre>{JSON.stringify(projects, null, 2)}</pre>
+          </div>
+        )
+      }}
+    </Query>
   )
 }
-
-export default graphql(QUERY, {
-  options: {errorPolicy: 'all'},
-})(Home)

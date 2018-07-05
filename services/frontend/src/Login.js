@@ -19,10 +19,9 @@ const QUERY = gql`
 class Login extends React.Component {
   constructor() {
     super()
-    this.state = {authenticity_token: null, password: null, login: null}
+    this.state = {authenticity_token: '', password: '', login: ''}
   }
   componentDidMount() {
-    this.props.data.refetch()
     superagent
       .get('/!login/api')
       .then(r => r.body.authenticity_token)
@@ -30,29 +29,9 @@ class Login extends React.Component {
   }
   render() {
     const referrer = (this.props.location.state || {}).referrer
-    if (this.props.data.user) {
-      return <Redirect to={referrer || '/'} />
-    }
     return (
       <div>
         <pre>{JSON.stringify(this.props.data.user, null, 2)}</pre>
-        <pre>{JSON.stringify(this.props.location)}</pre>
-        <form action="/!login/api" method="post">
-          <label htmlFor="user_login" required="required">
-            Username or email
-          </label>
-          <input id="user_login" name="user[login]" />
-          <label htmlFor="user_password" required="required">
-            Password
-          </label>
-          <input type="password" id="user_password" name="user[password]" />
-          <input
-            type="hidden"
-            name="authenticity_token"
-            value={this.state.authenticity_token}
-          />
-          <input type="submit" value="Login" />
-        </form>
         <input
           onChange={e => this.setState({login: e.target.value})}
           id="login"
@@ -78,7 +57,13 @@ class Login extends React.Component {
               .send(`user[password]=${encodeURIComponent(password)}`)
               .send('user[remember_me]=0')
               .send('utf8=✓')
-              .then(r => this.props.data.refetch())
+              .then(r => {
+                if (r.body.success) {
+                  this.props.history.push(referrer || '/')
+                } else {
+                  console.error(r.body)
+                }
+              })
               .catch(e => console.error(e))
           }}
         >
