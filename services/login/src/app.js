@@ -11,9 +11,10 @@ const {KITSPACE_DOMAIN, KITSPACE_PORT, KITSPACE_GITLAB_PATH} = process.env
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(cookieParser())
 
-
 app.get('/', (req, res) => {
-  const p = superagent.get(`${KITSPACE_DOMAIN}:${KITSPACE_PORT}/${KITSPACE_GITLAB_PATH}/users/sign_in`)
+  const p = superagent.get(
+    `${KITSPACE_DOMAIN}:${KITSPACE_PORT}/${KITSPACE_GITLAB_PATH}/users/sign_in`,
+  )
   if (req.cookies._gitlab_session) {
     p.set('cookie', `_gitlab_session=${req.cookies._gitlab_session}`)
   }
@@ -26,36 +27,12 @@ app.get('/', (req, res) => {
     res.send({authenticity_token})
   })
 })
-app.get('//github', (req, res) => {
-  res.send('ok')
-})
-
-app.post('//github', (req, res) => {
-  console.log(req.url)
-  const p = superagent
-    .post(`${KITSPACE_DOMAIN}:${KITSPACE_PORT}/${KITSPACE_GITLAB_PATH}/users/auth/github`)
-    .redirects(0)
-    .send(`authenticity_token=${encodeURIComponent(req.body.authenticity_token)}`)
-  if (req.headers.cookie) {
-    p.set('cookie', req.headers.cookie)
-  }
-  p.catch(e => {
-    console.log('error', e.status)
-    if (e.status === 302) {
-      if (e.response.headers['set-cookie']) {
-        res.set('set-cookie', e.response.headers['set-cookie'])
-      }
-      console.log('location', e.response.headers.location)
-      res.send({location: e.response.headers.location})
-    } else {
-      res.sendStatus(e.status)
-    }
-  })
-})
 
 app.get('//sign_out', (req, res) => {
   const p = superagent
-    .get(`${KITSPACE_DOMAIN}:${KITSPACE_PORT}/${KITSPACE_GITLAB_PATH}/users/sign_out`)
+    .get(
+      `${KITSPACE_DOMAIN}:${KITSPACE_PORT}/${KITSPACE_GITLAB_PATH}/users/sign_out`,
+    )
     .send(`authenticity_token=${encodeURIComponent(req.body.authenticity_token)}`)
   if (req.cookies._gitlab_session) {
     p.set('cookie', `_gitlab_session=${req.cookies._gitlab_session}`)
@@ -66,7 +43,9 @@ app.get('//sign_out', (req, res) => {
 
 app.post('/', (req, res) => {
   const p = superagent
-    .post(`${KITSPACE_DOMAIN}:${KITSPACE_PORT}/${KITSPACE_GITLAB_PATH}/users/sign_in`)
+    .post(
+      `${KITSPACE_DOMAIN}:${KITSPACE_PORT}/${KITSPACE_GITLAB_PATH}/users/sign_in`,
+    )
     .redirects(0)
     .send(`authenticity_token=${encodeURIComponent(req.body.authenticity_token)}`)
     .send(`user[login]=${req.body['user[login]']}`)
@@ -95,6 +74,5 @@ function trace(x) {
   console.log(x)
   return x
 }
-
 
 module.exports = app

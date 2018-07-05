@@ -102,18 +102,6 @@ class Login extends React.Component {
           />
           <input type="submit" value="Github" />
         </form>
-        <button
-          onClick={() => {
-            superagent
-              .post('/!gitlab/users/auth/github')
-              .send(`authenticity_token=${this.state.authenticity_token}`)
-              .then(r => {
-                this.props.data.refetch()
-              })
-          }}
-        >
-          github api
-        </button>
       </div>
     )
   }
