@@ -13,6 +13,7 @@ const QUERY = /* GraphQL */ `
     projects {
       id
       path_with_namespace
+      wiki_enabled
     }
   }
 `

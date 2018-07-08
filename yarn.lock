@@ -5271,6 +5271,10 @@ graphql-extensions@^0.1.0-rc.0:
     core-js "^2.5.7"
     source-map-support "^0.5.6"
 
+graphql-fields@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/graphql-fields/-/graphql-fields-1.1.0.tgz#a2466d1c414554dab80c0f7777d6ba9a0e0f75b4"
+
 graphql-subscriptions@^0.5.8:
   version "0.5.8"
   resolved "https://registry.yarnpkg.com/graphql-subscriptions/-/graphql-subscriptions-0.5.8.tgz#13a6143c546bce390404657dc73ca501def30aa7"

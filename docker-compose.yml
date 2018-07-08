@@ -1,5 +1,5 @@
 gitlab:
-  image: 'gitlab/gitlab-ce:11.0.0-rc13.ce.0'
+  image: 'gitlab/gitlab-ce:11.0.3-ce.0'
   restart: always
   environment:
     GITLAB_OMNIBUS_CONFIG: |

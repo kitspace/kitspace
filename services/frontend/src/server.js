@@ -26,7 +26,7 @@ server
 
     function customRenderer(node) {
       const html = renderToString(node)
-      return {html, initialUrqlStore: urql.store}
+      return {html, initialUrqlStore: {}/* urql.store */}
     }
 
     try {

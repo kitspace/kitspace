@@ -4,6 +4,11 @@ const {ApolloServer, gql, AuthenticationError} = require('apollo-server-express'
 const {makeExecutableSchema} = require('graphql-tools')
 const superagent = require('superagent')
 const cookieParser = require('cookie-parser')
+const graphqlFields = require('graphql-fields')
+
+require('dotenv').config({path: '../../.env'})
+
+const {GITLAB_TOKEN, KITSPACE_GITLAB_PORT} = process.env
 
 const typeDefs = gql`
   scalar Date
@@ -122,23 +127,43 @@ const typeDefs = gql`
   }
 `
 
-// The resolvers
+const simpleProjectFields = Object.freeze([
+  'id',
+  'description',
+  'name',
+  'name_with_namespace',
+  'path',
+  'path_with_namespace',
+  'created_at',
+  'default_branch',
+  'tag_list',
+  'ssh_url_to_repo',
+  'http_url_to_repo',
+  'web_url',
+  'readme_url',
+  'avatar_url',
+  'star_count',
+  'forks_count',
+  'last_activity_at',
+])
+
 const resolvers = {
   Query: {
-    user: (_, params, {cookie}) => {
-      if (!cookie) {
-        throw new AuthenticationError('cookie required')
-      }
-      return superagent
-        .get('http://localhost:8080/!gitlab/api/v4/user')
-        .query(params)
-        .set({cookie})
-        .then(r => r.body)
+    user: (_, __, {user}) => {
+      return user
     },
-    projects: (_, params, {cookie}) => {
+    projects: (_, params, {cookie, user}, info) => {
+      const topLevelFields = Object.keys(graphqlFields(info))
+      if (topLevelFields.every(f => simpleProjectFields.includes(f))) {
+        params.simple = true
+      }
       const p = superagent
-        .get('http://localhost:8080/!gitlab/api/v4/projects')
+        .get(`http://localhost:${KITSPACE_GITLAB_PORT}/!gitlab/api/v4/projects`)
         .query(params)
+      //give unauthenticated users full visibility of public projects
+      if (!user && !params.simple) {
+        p.query({visibility: 'public', private_token: GITLAB_TOKEN})
+      }
       if (cookie) {
         p.set({cookie})
       }
@@ -147,7 +172,6 @@ const resolvers = {
   },
 }
 
-// Put together a schema
 const schema = makeExecutableSchema({
   typeDefs,
   resolvers,
@@ -156,7 +180,12 @@ const schema = makeExecutableSchema({
 const server = new ApolloServer({
   schema,
   context: ({req}) => {
-    return {cookie: req.headers.cookie}
+    const cookie = req.headers.cookie
+    return superagent
+      .get(`http://localhost:${KITSPACE_GITLAB_PORT}/!gitlab/api/v4/user`)
+      .set({cookie})
+      .catch(e => ({user: null, cookie}))
+      .then(r => ({user: r.body, cookie}))
   },
 })
 

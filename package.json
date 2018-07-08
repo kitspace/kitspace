@@ -19,6 +19,6 @@
     "start:frontend": "cd services/frontend && yarn start",
     "start:login": "cd services/login && yarn start",
     "start:gitlabql": "cd services/gitlabql && yarn start",
-    "start": "yarn run docker & yarn start:login & yarn start:frontend"
+    "start": "yarn run docker & yarn start:login & yarn start:frontend & yarn start:gitlabql"
   }
 }
