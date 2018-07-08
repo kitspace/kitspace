@@ -119,9 +119,11 @@ const Settings = createReactClass({
   },
 
   render() {
-    const user = this.state.user || this.props.data.user
+    const user = this.state.user || (this.props.data || {}).user
 
-    console.log({user})
+    if (!this.props.loaded) {
+      return <div>Loading..</div>
+    }
 
     if (!user) {
       return <Redirect to={{pathname: '/login', state: {referrer: '/settings'}}} />
@@ -390,4 +392,4 @@ function checkGravater(url) {
   return RegExp('/!gitlab/uploads/-/system/user/avatar/').test(url)
 }
 
-export default urql.ConnectHOC(urql.query(QUERY))(Settings)
+export default urql.ConnectHOC({query: urql.query(QUERY)})(Settings)
