@@ -8,6 +8,8 @@ import createUrqlClient from './createUrqlClient'
 
 const urql = createUrqlClient({ssrMode: false})
 
+window.urql = urql
+
 ensureReady(routes).then(data =>
   hydrate(
     <UrqlProvider client={urql}>

@@ -22,7 +22,7 @@ server
     return res.redirect('/')
   })
   .get('/*', async (req, res) => {
-    const urql = createUrqlClient({ssrMode: true})
+    const urql = createUrqlClient({ssrMode: true, cookie: req.headers.cookie})
 
     function customRenderer(node) {
       const html = renderToString(node)
@@ -34,6 +34,7 @@ server
         req,
         res,
         routes,
+        urql,
         assets,
         customRenderer,
         document: Document,
