@@ -1,13 +1,13 @@
 import React from 'react'
-import {graphql} from 'react-apollo'
-import gql from 'graphql-tag'
 import {Redirect} from 'react-router-dom'
 import superagent from 'superagent'
 import Gitlab from 'kitspace-gitlab-client'
+import * as urql from '@kitspace/urql'
+import fetchQuery from './fetchQuery'
 
 const gitlab = new Gitlab('/!gitlab')
 
-const QUERY = gql`
+const QUERY = /* GraphQL */ `
   query {
     user {
       username
@@ -17,6 +17,11 @@ const QUERY = gql`
 `
 
 class Login extends React.Component {
+  static async getInitialProps({urql}) {
+    if (urql) {
+      return fetchQuery(urql, QUERY)
+    }
+  }
   constructor() {
     super()
     this.state = {authenticity_token: '', password: '', login: ''}
@@ -28,6 +33,9 @@ class Login extends React.Component {
       .then(token => this.setState({authenticity_token: token}))
   }
   render() {
+    if (!this.props.loaded) {
+      return <div>Loading...</div>
+    }
     const referrer = (this.props.location.state || {}).referrer
     return (
       <div>
@@ -93,10 +101,9 @@ class Login extends React.Component {
 }
 
 function setCookie(name, value, minutes = 3) {
-  let expires = ''
   const date = new Date()
   date.setTime(date.getTime() + minutes * 60 * 1000)
-  expires = '; expires=' + date.toUTCString()
+  const expires = '; expires=' + date.toUTCString()
   document.cookie = name + '=' + (value || '') + expires + '; path=/'
 }
 
@@ -105,6 +112,4 @@ function trace(x) {
   return x
 }
 
-export default graphql(QUERY, {
-  options: {errorPolicy: 'all'},
-})(Login)
+export default urql.ConnectHOC({query: urql.query(QUERY)})(Login)

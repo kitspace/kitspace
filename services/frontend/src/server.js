@@ -2,11 +2,10 @@ import React from 'react'
 import express from 'express'
 import {render} from '@kitspace/after'
 import {renderToString} from 'react-dom/server'
-import {ApolloProvider, getDataFromTree} from 'react-apollo'
-import routes from './routes'
-import createApolloClient from './createApolloClient'
-import Document from './Document'
 import cookieParser from 'cookie-parser'
+import routes from './routes'
+import createUrqlClient from './createUrqlClient'
+import Document from './Document'
 
 const assets = require(process.env.RAZZLE_ASSETS_MANIFEST)
 
@@ -23,14 +22,11 @@ server
     return res.redirect('/')
   })
   .get('/*', async (req, res) => {
-    const client = createApolloClient({ssrMode: true, cookie: req.headers.cookie})
-    const customRenderer = node => {
-      const App = <ApolloProvider client={client}>{node}</ApolloProvider>
-      return getDataFromTree(App).then(() => {
-        const initialApolloState = client.extract()
-        const html = renderToString(App)
-        return {html, initialApolloState}
-      })
+    const urql = createUrqlClient({ssrMode: true})
+
+    function customRenderer(node) {
+      const html = renderToString(node)
+      return {html, initialUrqlStore: urql.store}
     }
 
     try {

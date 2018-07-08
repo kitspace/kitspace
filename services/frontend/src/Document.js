@@ -1,34 +1,32 @@
-import * as React from 'react'
-import {AfterRoot, AfterData} from '@kitspace/after'
+import * as React from 'react';
+import {AfterRoot, AfterData} from '@kitspace/after';
 
 export default class Document extends React.Component {
   static async getInitialProps({assets, data, renderPage}) {
-    const page = await renderPage()
+    const page = await renderPage();
     return {
       assets,
       data,
       ...page,
-    }
+    };
   }
 
   render() {
-    const {helmet, assets, data, initialApolloState} = this.props
+    const {helmet, assets, data, initialUrqlStore} = this.props;
     // get attributes from React Helmet
-    const htmlAttrs = helmet.htmlAttributes.toComponent()
-    const bodyAttrs = helmet.bodyAttributes.toComponent()
+    const htmlAttrs = helmet.htmlAttributes.toComponent();
+    const bodyAttrs = helmet.bodyAttributes.toComponent();
     return (
       <html {...htmlAttrs}>
         <head>
-          <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-          <meta charSet="utf-8" />
-          <title>After with Apollo !</title>
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta charSet="utf-8" />
           <meta
             name="viewport"
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
           />
           <meta name="theme-color" content="#000000" />
+          <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+          <title>After with urql !</title>
           {helmet.title.toComponent()}
           {helmet.meta.toComponent()}
           {helmet.link.toComponent()}
@@ -38,8 +36,8 @@ export default class Document extends React.Component {
           <AfterData data={data} />
           <script
             dangerouslySetInnerHTML={{
-              __html: `window.__APOLLO_STATE__=${JSON.stringify(
-                initialApolloState,
+              __html: `window.__URQL_STORE__=${JSON.stringify(
+                initialUrqlStore || {},
               ).replace(/</g, '\\u003c')};`,
             }}
           />
@@ -51,6 +49,6 @@ export default class Document extends React.Component {
           />
         </body>
       </html>
-    )
+    );
   }
 }

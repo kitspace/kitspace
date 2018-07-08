@@ -1,5 +1,5 @@
 {
-  "name": "razzle-plugin-scss",
+  "name": "razzle-plugin-kitspace-scss",
   "version": "2.2.0",
   "description": "Use SCSS/SASS with Razzle",
   "main": "index.js",

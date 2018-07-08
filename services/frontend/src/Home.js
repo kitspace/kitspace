@@ -1,10 +1,10 @@
 import React from 'react'
-import {graphql, Query} from 'react-apollo'
-import gql from 'graphql-tag'
 import {Link, Redirect} from 'react-router-dom'
 import superagent from 'superagent'
+import * as urql from '@kitspace/urql'
+import fetchQuery from './fetchQuery'
 
-const QUERY = gql`
+const QUERY = /* GraphQL */ `
   query {
     user {
       username
@@ -17,42 +17,49 @@ const QUERY = gql`
   }
 `
 
-export default function Home(props) {
-  return (
-    <Query query={QUERY}>
-      {({client, history, data: {user, projects}}) => {
-        return (
-          <div className="Home">
-            <pre>{(user || {}).username}</pre>
-            <ul>
-              <li>
-                <Link to="/login">login</Link>
-              </li>
-              <li>
-                <Link to="/settings">settings</Link>
-              </li>
-            </ul>
-            {(() => {
-              if (user) {
-                return (
-                  <button
-                    onClick={() => {
-                      superagent.get('/!login/api/sign_out').then(r => {
-                        client.resetStore()
-                        props.history.push('/login')
-                      })
-                    }}
-                  >
-                    sign out
-                  </button>
-                )
-              }
-            })()}
+class Home extends React.Component {
+  static async getInitialProps({urql}) {
+    if (urql) {
+      return fetchQuery(urql, QUERY)
+    }
+  }
+  render() {
+    const {loaded, data, refetch, history} = this.props
+    if (!loaded) {
+      return <div>Loading...</div>
+    }
+    const {user, projects} = data
+    return (
+      <div className="Home">
+        <pre>{(user || {}).username}</pre>
+        <ul>
+          <li>
+            <Link to="/login">login</Link>
+          </li>
+          <li>
+            <Link to="/settings">settings</Link>
+          </li>
+        </ul>
+        {(() => {
+          if (user) {
+            return (
+              <button
+                onClick={() => {
+                  superagent.get('/!login/api/sign_out').then(r => {
+                    history.push('/login')
+                  })
+                }}
+              >
+                sign out
+              </button>
+            )
+          }
+        })()}
 
-            <pre>{JSON.stringify(projects, null, 2)}</pre>
-          </div>
-        )
-      }}
-    </Query>
-  )
+        <pre>{JSON.stringify(projects, null, 2)}</pre>
+      </div>
+    )
+  }
 }
+
+export default urql.ConnectHOC({query: urql.query(QUERY)})(Home)

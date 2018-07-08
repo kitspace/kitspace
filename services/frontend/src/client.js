@@ -1,23 +1,23 @@
-import React from 'react';
-import { hydrate } from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
-import { ensureReady, After } from '@kitspace/after';
-import { ApolloProvider } from 'react-apollo';
-import routes from './routes';
-import createApolloClient from './createApolloClient';
+import React from 'react'
+import {hydrate} from 'react-dom'
+import {BrowserRouter} from 'react-router-dom'
+import {ensureReady, After} from '@kitspace/after'
+import {Provider as UrqlProvider} from '@kitspace/urql'
+import routes from './routes'
+import createUrqlClient from './createUrqlClient'
 
-const client = createApolloClient({ ssrMode: false });
+const urql = createUrqlClient({ssrMode: false})
 
 ensureReady(routes).then(data =>
   hydrate(
-    <ApolloProvider client={client}>
+    <UrqlProvider client={urql}>
       <BrowserRouter>
         <After data={data} routes={routes} />
       </BrowserRouter>
-    </ApolloProvider>,
-    document.getElementById('root')
-  )
-);
+    </UrqlProvider>,
+    document.getElementById('root'),
+  ),
+)
 if (module.hot) {
-  module.hot.accept();
+  module.hot.accept()
 }

@@ -1,8 +1,7 @@
 import 'semantic-ui-css/semantic.css'
 import './settings.scss'
 import {Redirect} from 'react-router-dom'
-import {graphql} from 'react-apollo'
-import gql from 'graphql-tag'
+import * as urql from '@kitspace/urql'
 const React = require('react')
 const superagent = require('superagent')
 const semantic = require('semantic-ui-react')
@@ -10,7 +9,7 @@ const createReactClass = require('create-react-class')
 
 const CustomAvatarEditor = require('./custom_avatar_editor')
 
-const QUERY = gql`
+const QUERY = /* GraphQL */ `
   query {
     user {
       username
@@ -391,6 +390,4 @@ function checkGravater(url) {
   return RegExp('/!gitlab/uploads/-/system/user/avatar/').test(url)
 }
 
-export default graphql(QUERY, {
-  options: {errorPolicy: 'all'},
-})(Settings)
+export default urql.ConnectHOC(urql.query(QUERY))(Settings)

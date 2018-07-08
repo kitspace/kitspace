@@ -5,6 +5,7 @@
     "packages/after.js",
     "packages/razzle",
     "packages/razzle-plugin-scss",
+    "packages/urql",
     "services/frontend",
     "services/partinfo",
     "services/board-files",
