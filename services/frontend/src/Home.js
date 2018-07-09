@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link, Redirect} from 'react-router-dom'
 import superagent from 'superagent'
-import * as urql from '@kitspace/urql'
+import * as urql from 'urquelle'
 import fetchQuery from './fetchQuery'
 
 const QUERY = /* GraphQL */ `

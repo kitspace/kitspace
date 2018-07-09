@@ -1,7 +1,7 @@
-import {query, formatTypeNames} from '@kitspace/urql'
+import {query} from 'urquelle'
 
 export default function fetchQuery(urqlClient, QUERY, vars) {
-  const q = formatTypeNames(query(QUERY, vars))
+  const q = query(QUERY, vars)
   return urqlClient.executeQuery(q).then(props => {
     if (props.error) {
       console.error(props.error)

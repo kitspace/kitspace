@@ -11,7 +11,6 @@
   "dependencies": {
     "@kitspace/after": "*",
     "@kitspace/razzle": "*",
-    "@kitspace/urql": "0.3.0-next1",
     "create-react-class": "^15.6.3",
     "express": "^4.16.2",
     "graphql": "^0.13.2",
@@ -25,7 +24,8 @@
     "react-router-dom": "^4.2.2",
     "semantic-ui-css": "^2.3.2",
     "semantic-ui-react": "^0.81.3",
-    "superagent": "3.8.2"
+    "superagent": "3.8.2",
+    "urquelle": "^1.0.0-2"
   },
   "devDependencies": {
     "babel-plugin-transform-class-properties": "^6.24.1",

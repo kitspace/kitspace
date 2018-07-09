@@ -1,4 +1,4 @@
-import {Client} from '@kitspace/urql'
+import {Client} from 'urquelle'
 import 'isomorphic-fetch'
 
 function createUrqlClient({ssrMode, cookie}) {

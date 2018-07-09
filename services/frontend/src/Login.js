@@ -2,7 +2,7 @@ import React from 'react'
 import {Redirect} from 'react-router-dom'
 import superagent from 'superagent'
 import Gitlab from 'kitspace-gitlab-client'
-import * as urql from '@kitspace/urql'
+import * as urql from 'urquelle'
 import fetchQuery from './fetchQuery'
 
 const gitlab = new Gitlab('/!gitlab')

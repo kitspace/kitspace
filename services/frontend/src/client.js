@@ -2,7 +2,7 @@ import React from 'react'
 import {hydrate} from 'react-dom'
 import {BrowserRouter} from 'react-router-dom'
 import {ensureReady, After} from '@kitspace/after'
-import {Provider as UrqlProvider} from '@kitspace/urql'
+import {Provider as UrqlProvider} from 'urquelle'
 import routes from './routes'
 import createUrqlClient from './createUrqlClient'
 

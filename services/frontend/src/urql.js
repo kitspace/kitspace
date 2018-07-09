@@ -1,4 +1,4 @@
-const {Provider, Client} = require('@kitspace/urql')
+const {Provider, Client} = require('urquelle')
 const Q = `
 query {
   projects {

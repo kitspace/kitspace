@@ -1,7 +1,7 @@
 import 'semantic-ui-css/semantic.css'
 import './settings.scss'
 import {Redirect} from 'react-router-dom'
-import * as urql from '@kitspace/urql'
+import * as urql from 'urquelle'
 const React = require('react')
 const superagent = require('superagent')
 const semantic = require('semantic-ui-react')

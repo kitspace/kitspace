@@ -11329,6 +11329,15 @@ url@^0.11.0:
     punycode "1.3.2"
     querystring "0.2.0"
 
+urquelle@^1.0.0-2:
+  version "1.0.0-2"
+  resolved "https://registry.yarnpkg.com/urquelle/-/urquelle-1.0.0-2.tgz#53218ecb4495652b39a2c9286c9d5c856ed7e1b9"
+  dependencies:
+    create-react-context "^0.1.3"
+    graphql "^0.13.1"
+    hoist-non-react-statics "^2.5.0"
+    zen-observable-ts "^0.8.9"
+
 use@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/use/-/use-3.1.0.tgz#14716bf03fdfefd03040aef58d8b4b85f3a7c544"
