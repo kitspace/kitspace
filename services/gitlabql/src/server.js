@@ -8,7 +8,13 @@ const graphqlFields = require('graphql-fields')
 
 require('dotenv').config({path: '../../.env'})
 
-const {GITLAB_TOKEN, KITSPACE_GITLAB_PORT} = process.env
+const {
+  GITLAB_TOKEN,
+  KITSPACE_DOMAIN,
+  KITSPACE_PORT,
+  KITSPACE_GITLAB_PATH,
+  KITSPACE_GITLAB_PORT,
+} = process.env
 
 const typeDefs = gql`
   scalar Date
@@ -26,6 +32,10 @@ const typeDefs = gql`
       membership: Boolean
       starred: Boolean
     ): ProjectsPage!
+  }
+
+  type Mutation {
+    login(username: String!, password: String!, authenticity_token: String!): User
   }
 
   type ProjectsPage {
@@ -176,6 +186,43 @@ const resolvers = {
       return p.then(r => ({page, nodes: r.body}))
     },
   },
+  Mutation: {
+    login: (_, {username, password, authenticity_token}, {user, cookie, res}) => {
+      const p = superagent
+        .post(
+          `${KITSPACE_DOMAIN}:${KITSPACE_PORT}/${KITSPACE_GITLAB_PATH}/users/sign_in`,
+        )
+        .redirects(0)
+        .send(`authenticity_token=${encodeURIComponent(authenticity_token)}`)
+        .send(`user[login]=${encodeURIComponent(username)}`)
+        .send(`user[password]=${encodeURIComponent(password)}`)
+        .send('user[remember_me]=0')
+        .send('utf8=✓')
+      if (cookie) {
+        p.set({cookie})
+      }
+      return p
+        .then(r => {
+          console.error(r)
+        })
+        .catch(e => {
+          if (e.status === 302) {
+            const cookie = e.response.headers['set-cookie']
+            res.set('set-cookie', cookie)
+            return getUser(cookie)
+          }
+          console.error(e)
+        })
+    },
+  },
+}
+
+function getUser(cookie) {
+  return superagent
+    .get(`http://localhost:${KITSPACE_GITLAB_PORT}/!gitlab/api/v4/user`)
+    .set({cookie})
+    .then(r => r.body)
+    .catch(e => null)
 }
 
 const schema = makeExecutableSchema({
@@ -185,13 +232,9 @@ const schema = makeExecutableSchema({
 
 const server = new ApolloServer({
   schema,
-  context: ({req}) => {
+  context: ({req, res}) => {
     const cookie = req.headers.cookie
-    return superagent
-      .get(`http://localhost:${KITSPACE_GITLAB_PORT}/!gitlab/api/v4/user`)
-      .set({cookie})
-      .catch(e => ({user: null, cookie}))
-      .then(r => ({user: r.body, cookie}))
+    return getUser(cookie).then(user => ({user, cookie, res}))
   },
 })
 
@@ -200,7 +243,7 @@ app.use(cookieParser())
 server.applyMiddleware({app, path: '/'})
 
 app.listen({port: 3000}, () => {
-  console.log(`Server ready at port 3000${server.graphqlPath}`)
+  console.log(`gitlabql ready at port 3000${server.graphqlPath}`)
 })
 
 function trace(x) {

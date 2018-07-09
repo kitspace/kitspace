@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "apollo-server-express": "^2.0.0-rc.6",
+    "body-parser": "^1.18.3",
     "cookie-parser": "^1.4.3",
     "graphql": "^0.13.2",
     "graphql-fields": "^1.1.0",

@@ -11,7 +11,7 @@
   "dependencies": {
     "@kitspace/after": "*",
     "@kitspace/razzle": "*",
-    "@kitspace/urql": "0.3.0-next1",
+    "@kitspace/urql": "*",
     "create-react-class": "^15.6.3",
     "express": "^4.16.2",
     "graphql": "^0.13.2",

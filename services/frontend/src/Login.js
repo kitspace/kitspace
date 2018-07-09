@@ -16,6 +16,18 @@ const QUERY = /* GraphQL */ `
   }
 `
 
+const MUTATION = /* GraphQL */ `
+  mutation($username: String!, $password: String!, $authenticity_token: String!) {
+    login(
+      username: $username
+      password: $password
+      authenticity_token: $authenticity_token
+    ) {
+      username
+    }
+  }
+`
+
 class Login extends React.Component {
   static async getInitialProps({urql}) {
     if (urql) {
@@ -24,7 +36,7 @@ class Login extends React.Component {
   }
   constructor() {
     super()
-    this.state = {authenticity_token: '', password: '', login: ''}
+    this.state = {authenticity_token: '', password: '', username: ''}
   }
   componentDidMount() {
     superagent
@@ -36,15 +48,16 @@ class Login extends React.Component {
     if (!this.props.loaded) {
       return <div>Loading...</div>
     }
+    const {login, refetch} = this.props
     const referrer = (this.props.location.state || {}).referrer
     return (
       <div>
         <pre>{JSON.stringify(this.props.data.user, null, 2)}</pre>
         <input
-          onChange={e => this.setState({login: e.target.value})}
-          id="login"
-          name="login"
-          value={this.state.login}
+          onChange={e => this.setState({username: e.target.value})}
+          id="username"
+          name="username"
+          value={this.state.username}
         />
         <input
           onChange={e => {
@@ -57,11 +70,11 @@ class Login extends React.Component {
         />
         <button
           onClick={() => {
-            const {login, password, authenticity_token} = this.state
+            const {username, password, authenticity_token} = this.state
             superagent
               .post('/!login/api')
               .send(`authenticity_token=${encodeURIComponent(authenticity_token)}`)
-              .send(`user[login]=${encodeURIComponent(login)}`)
+              .send(`user[login]=${encodeURIComponent(username)}`)
               .send(`user[password]=${encodeURIComponent(password)}`)
               .send('user[remember_me]=0')
               .send('utf8=✓')
@@ -76,6 +89,17 @@ class Login extends React.Component {
           }}
         >
           ajax login
+        </button>
+        <button
+          onClick={() => {
+            const {username, password, authenticity_token} = this.state
+            login({username, password, authenticity_token}).then(() => {
+              // XXX this shouldn't be needed
+              refetch({skipCache: true})
+            })
+          }}
+        >
+          graphql login
         </button>
         <pre>{this.state.authenticity_token}</pre>
 
@@ -112,4 +136,9 @@ function trace(x) {
   return x
 }
 
-export default urql.ConnectHOC({query: urql.query(QUERY)})(Login)
+export default urql.ConnectHOC({
+  query: urql.query(QUERY),
+  mutation: {
+    login: urql.mutation(MUTATION),
+  },
+})(Login)
