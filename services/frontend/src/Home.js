@@ -11,9 +11,12 @@ const QUERY = /* GraphQL */ `
       avatar_url
     }
     projects {
-      id
-      path_with_namespace
-      wiki_enabled
+      page
+      nodes {
+        id
+        path_with_namespace
+        wiki_enabled
+      }
     }
   }
 `

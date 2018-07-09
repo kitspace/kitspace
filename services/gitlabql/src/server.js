@@ -25,7 +25,12 @@ const typeDefs = gql`
       owned: Boolean
       membership: Boolean
       starred: Boolean
-    ): [Project]!
+    ): ProjectsPage!
+  }
+
+  type ProjectsPage {
+    page: Int!
+    nodes: [Project]!
   }
 
   type User {
@@ -157,6 +162,7 @@ const resolvers = {
       if (topLevelFields.every(f => simpleProjectFields.includes(f))) {
         params.simple = true
       }
+      const page = params.page || 1
       const p = superagent
         .get(`http://localhost:${KITSPACE_GITLAB_PORT}/!gitlab/api/v4/projects`)
         .query(params)
@@ -167,7 +173,7 @@ const resolvers = {
       if (cookie) {
         p.set({cookie})
       }
-      return p.then(r => r.body)
+      return p.then(r => ({page, nodes: r.body}))
     },
   },
 }
