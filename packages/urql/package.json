@@ -1,6 +1,6 @@
 {
   "name": "@kitspace/urql",
-  "version": "0.3.0-next1",
+  "version": "0.3.0-kitspace1",
   "description": "A naive React Graphql library",
   "main": "lib/index.js",
   "module": "es/index.js",

@@ -50,6 +50,7 @@ class Home extends React.Component {
               <button
                 onClick={() => {
                   superagent.get('/!login/api/sign_out').then(r => {
+                    refetch({skipCache: true})
                     history.push('/login')
                   })
                 }}

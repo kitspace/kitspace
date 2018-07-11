@@ -48,8 +48,11 @@ class Login extends React.Component {
     if (!this.props.loaded) {
       return <div>Loading...</div>
     }
-    const {login, refetch} = this.props
     const referrer = (this.props.location.state || {}).referrer
+    if (this.props.data.user) {
+      return <Redirect to={referrer || '/'} />
+    }
+    const {login, refetch} = this.props
     return (
       <div>
         <pre>{JSON.stringify(this.props.data.user, null, 2)}</pre>
