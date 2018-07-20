@@ -46,3 +46,4 @@ https://github.com/8BitMixtape/8BitmixtapeNEO_BerlinerSchule_SZ-RDY
 https://github.com/emard/ulx3s
 https://github.com/monostable/ruler
 https://github.com/BadenLab/Spikeling
+https://github.com/rwb27/openflexure_nano_motor_controller
