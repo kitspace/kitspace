@@ -2,26 +2,35 @@ import React from 'react'
 import superagent from 'superagent'
 import Gitlab from 'kitspace-gitlab-client'
 
-const gitlab = new Gitlab(
-  process.env.KITSPACE_DOMAIN + ':' + process.env.KITSPACE_PORT + '/!gitlab',
-)
-
 class Login extends React.Component {
+  static async getInitialProps({req}) {
+    const cookie = req ? req.headers.cookie : null
+    const p = superagent.get(
+      process.env.KITSPACE_DOMAIN +
+        ':' +
+        process.env.KITSPACE_PORT +
+        '/!gitlab/api/v4/user',
+    )
+    if (cookie) {
+      p.set({cookie})
+    }
+    const user = await p.then(r => r.body)
+    return {user}
+  }
   constructor() {
     super()
-    this.state = {authenticity_token: '', password: '', username: '', user: null}
+    this.state = {authenticity_token: '', password: '', username: ''}
   }
   componentDidMount() {
     superagent
       .get('/!login/api')
       .then(r => r.body.authenticity_token)
       .then(token => this.setState({authenticity_token: token}))
-    gitlab.getCurrentUser().then(user => this.setState({user}))
   }
   render() {
     return (
       <div>
-        <pre>{JSON.stringify(this.state.user, null, 2)}</pre>
+        <pre>{JSON.stringify(this.props.user, null, 2)}</pre>
         <input
           onChange={e => this.setState({username: e.target.value})}
           id="username"
