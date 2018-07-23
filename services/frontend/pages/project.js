@@ -1,18 +1,21 @@
 import React from 'react'
 import Gitlab from 'kitspace-gitlab-client'
 
-const gitlab = new Gitlab(
-  process.env.KITSPACE_DOMAIN + ':' + process.env.KITSPACE_PORT + '/!gitlab',
-)
-
 export default class extends React.Component {
-  static async getInitialProps({query: {namespace, projectname}}) {
+  static async getInitialProps({req, query: {namespace, projectname}}) {
+    const cookie = req ? req.headers.cookie : null
+    const gitlab = new Gitlab(
+      process.env.KITSPACE_DOMAIN + ':' + process.env.KITSPACE_PORT + '/!gitlab',
+      null,
+      cookie,
+    )
     const path = namespace + '/' + projectname
-    const [project, files] = await Promise.all([
+    const [project, files, user] = await Promise.all([
       gitlab.getProject(path),
       gitlab.getProjectFiles(path),
+      gitlab.getCurrentUser(),
     ])
-    return {project, files}
+    return {project, files, user}
   }
 
   render() {
