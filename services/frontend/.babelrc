@@ -2,6 +2,7 @@
   presets: ['next/babel'],
   plugins: [
     'transform-class-properties',
+    'transform-object-rest-spread',
     'transform-function-bind',
     'inline-dotenv',
   ],

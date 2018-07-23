@@ -9,38 +9,23 @@
     "start:prod": "yarn build && PORT=1234 node server.js"
   },
   "dependencies": {
-    "@kitspace/after": "*",
-    "@kitspace/razzle": "*",
-    "@kitspace/urql": "0.3.0-kitspace1",
     "@zeit/next-sass": "^0.2.0",
-    "babel-plugin-transform-inline-environment-variables": "^0.4.3",
     "create-react-class": "^15.6.3",
     "express": "^4.16.3",
-    "graphql": "^0.13.2",
-    "graphql-tag": "^2.9.2",
-    "isomorphic-fetch": "^2.2.1",
     "kitspace-gitlab-client": "*",
     "next": "^6.1.1",
     "node-sass": "^4.9.2",
     "path-match": "^1.2.4",
     "react": "^16.2.0",
     "react-avatar-editor": "^11.0.4",
-    "react-dom": "^16.2.0",
-    "react-helmet": "^5.2.0",
-    "react-router-dom": "^4.2.2",
     "semantic-ui-css": "^2.3.2",
     "semantic-ui-react": "^0.81.3",
     "superagent": "3.8.2"
   },
   "devDependencies": {
     "babel-plugin-inline-dotenv": "^1.1.2",
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-plugin-transform-function-bind": "^6.22.0",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-razzle": "^2.0.0",
-    "babel-preset-react": "^6.24.1",
-    "dotenv": "^6.0.0",
-    "razzle-plugin-kitspace-scss": "*"
+    "babel-plugin-transform-class-properties": "^7.0.0-beta",
+    "babel-plugin-transform-function-bind": "^7.0.0-beta",
+    "babel-plugin-transform-object-rest-spread": "^7.0.0-beta"
   }
 }

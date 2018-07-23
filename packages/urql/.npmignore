@@ -1,9 +1,0 @@
-/*
-!/lib
-!/es
-!/types
-**/tests/
-**/*.test.js
-!package.json
-!LICENSE.md
-!README.md
