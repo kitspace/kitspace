@@ -129,7 +129,7 @@ server {
 	}
 
 
-	location ^~ '/${KITSPACE_GITLAB_PATH}/api/v4' {
+	location ^~ '/${KITSPACE_GITLAB_PATH}/api/v4/' {
 
 		client_max_body_size 0;
 
@@ -150,7 +150,10 @@ server {
 
 		proxy_cookie_path /${KITSPACE_GITLAB_PATH} /;
 
-		proxy_pass http://${docker_host}:${KITSPACE_GITLAB_PORT}/${KITSPACE_GITLAB_PATH}/api/v4;
+        rewrite ^ \$request_uri;
+        rewrite ^/(.*) \$1 break;
+        return 400;
+		proxy_pass http://${docker_host}:${KITSPACE_GITLAB_PORT}/\$uri;
 
 	}
 

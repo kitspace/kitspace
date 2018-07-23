@@ -9,7 +9,7 @@ const cheerio = require('cheerio')
 
 const defaultInfo = {
   color: 'green',
-  bom: '1-click-bom.tsv'
+  bom: '1-click-bom.tsv',
 }
 
 class GitlabClient {
@@ -51,7 +51,7 @@ class GitlabClient {
           } else {
             throw e
           }
-        })
+        }),
     )
   }
   loginOAuth(provider) {
@@ -61,7 +61,7 @@ class GitlabClient {
         .post(url)
         .redirects(0)
         .on('redirect', r => console.log({r}))
-        .send(`authenticity_token=${encodeURIComponent(token)}`)
+        .send(`authenticity_token=${encodeURIComponent(token)}`),
     )
   }
   createUser(params) {
@@ -71,7 +71,15 @@ class GitlabClient {
       .then(r => r.body)
   }
   getCurrentUser() {
-    return this.agent.get(this.apiUrl('user')).then(r => r.body)
+    return this.agent
+      .get(this.apiUrl('user'))
+      .then(r => r.body)
+      .catch(e => {
+        if (e.status === 401) {
+          return null
+        }
+        throw e
+      })
   }
   createTempUser() {
     const name = shortid.generate()
@@ -84,7 +92,7 @@ class GitlabClient {
       email: `temp-email-for-oauth-${name}@gitlab.localhost`,
       password: shortid.generate(),
       projects_limit: 10,
-      skip_confirmation: true
+      skip_confirmation: true,
     })
   }
   createProject(params, user) {
@@ -102,9 +110,14 @@ class GitlabClient {
     //TODO: projects > 20
     return this.agent.get(this.apiUrl('projects')).then(r => r.body)
   }
-  getProjectHead(projectId) {
+  getProject(id) {
     return this.agent
-      .get(this.apiUrl(`projects/${projectId}/repository/commits`))
+      .get(this.apiUrl(`projects/${encodeURIComponent(id)}`))
+      .then(r => r.body)
+  }
+  getProjectHead(id) {
+    return this.agent
+      .get(this.apiUrl(`projects/${encodeURIComponent(id)}/repository/commits`))
       .then(r => {
         return r.body[0].id
       })
@@ -117,7 +130,11 @@ class GitlabClient {
         ref ? `&ref=${ref}` : ''
       }`
       return this.agent
-        .get(this.apiUrl(`projects/${id}/repository/tree?${params}`))
+        .get(
+          this.apiUrl(
+            `projects/${encodeURIComponent(id)}/repository/tree?${params}`,
+          ),
+        )
         .then(r => r.body)
     }
     let files = await getPage(1)
@@ -136,8 +153,8 @@ class GitlabClient {
     return this.agent
       .get(
         this.apiUrl(
-          `/projects/${projectId}/repository/blobs/${blob}${base64 ? '' : '/raw'}`
-        )
+          `/projects/${projectId}/repository/blobs/${blob}${base64 ? '' : '/raw'}`,
+        ),
       )
       .then(r => (base64 ? r.body : r.text))
   }
@@ -145,7 +162,7 @@ class GitlabClient {
     const defaultParams = {
       content,
       branch: 'master',
-      commit_message: 'Upload file from Kitspace web interface'
+      commit_message: 'Upload file from Kitspace web interface',
     }
     params = Object.assign(defaultParams, params)
     const url = this.apiUrl(`/projects/${projectId}/repository/files/${path}`)
@@ -168,7 +185,7 @@ class GitlabClient {
   deleteFile(projectId, path, params) {
     const defaultParams = {
       branch: 'master',
-      commit_message: 'Delete file from Kitspace web interface'
+      commit_message: 'Delete file from Kitspace web interface',
     }
     params = Object.assign(defaultParams, params)
     return this.agent
@@ -178,11 +195,11 @@ class GitlabClient {
   }
   getInfo(projectId, files) {
     const yaml = files.find(f =>
-      RegExp('^(kitnic.yaml|kitspace.yaml)$').test(f.path)
+      RegExp('^(kitnic.yaml|kitspace.yaml)$').test(f.path),
     )
     if (yaml) {
       return this.getFile(projectId, yaml.id).then(str =>
-        Object.assign(defaultInfo, jsYaml.safeLoad(str))
+        Object.assign(defaultInfo, jsYaml.safeLoad(str)),
       )
     }
     return Promise.resolve(defaultInfo)
@@ -193,9 +210,9 @@ class GitlabClient {
       files.map(f =>
         this.getFile(projectId, f.id).then(str => ({
           filename: f.name,
-          gerber: str
-        }))
-      )
+          gerber: str,
+        })),
+      ),
     )
   }
 }
@@ -203,7 +220,7 @@ class GitlabClient {
 function filterOutGerbers(files, info) {
   if (info.gerbers) {
     files = files.filter(
-      f => path.dirname(f.path) + '/' === path.join(info.gerbers, '/')
+      f => path.dirname(f.path) + '/' === path.join(info.gerbers, '/'),
     )
   }
   const layers = files

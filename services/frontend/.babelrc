@@ -1,11 +1,16 @@
 {
-  "presets": [
-    "razzle",
-    "es2015"
+  presets: ['next/babel'],
+  plugins: [
+    'transform-class-properties',
+    'transform-object-rest-spread',
+    'transform-function-bind',
   ],
-  "plugins": [
-    "transform-class-properties",
-    "transform-object-rest-spread",
-    "transform-function-bind"
-  ]
+  env: {
+    development: {
+      plugins: ['inline-dotenv'],
+    },
+    production: {
+      plugins: ['transform-inline-environment-variables'],
+    },
+  },
 }
