@@ -18,8 +18,8 @@ export default class Index extends React.Component {
     return this.props.projects.map(project => {
       return (
         <li>
-          <Link href={`/project/${project.path_with_namespace}`}>
-            {project.path_with_namespace}
+          <Link href={`/${project.path_with_namespace}`}>
+            <a>{project.path_with_namespace}</a>
           </Link>
         </li>
       )
