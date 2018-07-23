@@ -14,9 +14,7 @@ app.prepare().then(() => {
   server.use('/submit/*', nextHandler)
   server.use('/_next/*', nextHandler)
 
-  server.get('/:namespace/:projectname', (req, res) => {
-    app.render(req, res, '/project', Object.assign({}, req.params, req.query))
-  })
+  server.get('/:namespace/:projectname', customHandler('/project'))
 
   server.use('/', nextHandler)
 
@@ -24,3 +22,8 @@ app.prepare().then(() => {
     if (err) throw err
   })
 })
+
+function customHandler(page) {
+  return (req, res) =>
+    app.render(req, res, page, Object.assign({}, req.params, req.query))
+}
