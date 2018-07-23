@@ -2,15 +2,7 @@
   presets: ['next/babel'],
   plugins: [
     'transform-class-properties',
-    'transform-object-rest-spread',
     'transform-function-bind',
+    'inline-dotenv',
   ],
-  env: {
-    development: {
-      plugins: ['inline-dotenv'],
-    },
-    production: {
-      plugins: ['transform-inline-environment-variables'],
-    },
-  },
 }

@@ -15,7 +15,7 @@ app.prepare().then(() => {
   server.use('/_next/*', nextHandler)
 
   server.get('/:namespace/:projectname', (req, res) => {
-    app.render(req, res, '/project', req.params)
+    app.render(req, res, '/project', Object.assign({}, req.params, req.query))
   })
 
   server.use('/', nextHandler)

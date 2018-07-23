@@ -6,7 +6,7 @@
     "start": "if [ \"${NODE_ENV}\" != 'production' ]; then yarn start:dev; else yarn start:prod; fi",
     "start:dev": "PORT=1234 node server.js",
     "build": "next build",
-    "start:prod": "yarn build && next start --port 1234"
+    "start:prod": "yarn build && PORT=1234 node server.js"
   },
   "dependencies": {
     "@kitspace/after": "*",
