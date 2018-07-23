@@ -5,17 +5,12 @@ import Gitlab from 'kitspace-gitlab-client'
 class Login extends React.Component {
   static async getInitialProps({req}) {
     const cookie = req ? req.headers.cookie : null
-    const p = superagent.get(
-      process.env.KITSPACE_DOMAIN +
-        ':' +
-        process.env.KITSPACE_PORT +
-        '/!gitlab/api/v4/user',
+    const gitlab = new Gitlab(
+      process.env.KITSPACE_DOMAIN + ':' + process.env.KITSPACE_PORT + '/!gitlab',
+      null,
+      cookie,
     )
-    if (cookie) {
-      p.set({cookie})
-    }
-    const user = await p.then(r => r.body)
-    return {user}
+    return {user: await gitlab.getCurrentUser()}
   }
   constructor() {
     super()

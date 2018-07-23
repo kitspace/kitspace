@@ -13,12 +13,15 @@ const defaultInfo = {
 }
 
 class GitlabClient {
-  constructor(gitlab_url, token) {
+  constructor(gitlab_url, token, cookie) {
     this.gitlab_url = gitlab_url
     this.url = urlJoin(gitlab_url, 'api/v4/')
     this.agent = superagent.agent()
     if (token) {
       this.agent.set('PRIVATE-TOKEN', token)
+    }
+    if (cookie) {
+      this.agent.set({cookie})
     }
   }
   apiUrl(path) {
