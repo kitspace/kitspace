@@ -17,6 +17,7 @@
     "node-sass": "^4.9.2",
     "path-match": "^1.2.4",
     "react": "^16.2.0",
+    "react-dom": "^16.2.0",
     "react-avatar-editor": "^11.0.4",
     "semantic-ui-css": "^2.3.2",
     "semantic-ui-react": "^0.81.3",

@@ -12,14 +12,16 @@ app.prepare().then(() => {
 
   server.use('/login/*', nextHandler)
   server.use('/submit/*', nextHandler)
-  server.use('/_next/*', nextHandler)
+  server.use('/settings/*', nextHandler)
 
   server.get('/:namespace/:projectname', customHandler('/project'))
 
   server.use('/', nextHandler)
 
   server.listen(port, err => {
-    if (err) throw err
+    if (err) {
+      console.error(err)
+    }
   })
 })
 
