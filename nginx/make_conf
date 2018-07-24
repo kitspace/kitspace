@@ -150,9 +150,10 @@ server {
 
 		proxy_cookie_path /${KITSPACE_GITLAB_PATH} /;
 
-        rewrite ^ \$request_uri;
-        rewrite ^/(.*) \$1 break;
-        return 400;
+		rewrite ^ \$request_uri;
+		rewrite ^/(.*) \$1 break;
+		return 400;
+
 		proxy_pass http://${docker_host}:${KITSPACE_GITLAB_PORT}/\$uri;
 
 	}
