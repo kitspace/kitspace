@@ -9,7 +9,6 @@
     "start:prod": "yarn build && PORT=1234 node server.js"
   },
   "dependencies": {
-    "@zeit/next-sass": "^0.2.0",
     "create-react-class": "^15.6.3",
     "express": "^4.16.3",
     "kitspace-gitlab-client": "*",
@@ -17,16 +16,18 @@
     "node-sass": "^4.9.2",
     "path-match": "^1.2.4",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0",
     "react-avatar-editor": "^11.0.4",
-    "semantic-ui-css": "^2.3.2",
-    "semantic-ui-react": "^0.81.3",
+    "react-dom": "^16.2.0",
+    "semantic-ui-react": "^0.82.1",
     "superagent": "3.8.2"
   },
   "devDependencies": {
+    "@zeit/next-sass": "^0.2.0",
     "babel-plugin-inline-dotenv": "^1.1.2",
     "babel-plugin-transform-class-properties": "^7.0.0-beta",
     "babel-plugin-transform-function-bind": "^7.0.0-beta",
-    "babel-plugin-transform-object-rest-spread": "^7.0.0-beta"
+    "babel-plugin-transform-object-rest-spread": "^7.0.0-beta",
+    "file-loader": "^1.1.11",
+    "url-loader": "^1.0.1"
   }
 }

@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
 import Gitlab from 'kitspace-gitlab-client'
+import TitleBar from '../components/TitleBar'
 
 export default class Index extends React.Component {
   static async getInitialProps({req}) {
@@ -17,16 +18,21 @@ export default class Index extends React.Component {
     return {projects, user}
   }
   render() {
-    return [<pre>{(this.props.user || {}).username}</pre>].concat(
-      this.props.projects.map(project => {
-        return (
-          <li>
-            <Link href={`/${project.path_with_namespace}`}>
-              <a>{project.path_with_namespace}</a>
-            </Link>
-          </li>
-        )
-      }),
+    const projects = this.props.projects.map(project => {
+      return (
+        <li key={project.path_with_namespace}>
+          <Link href={`/${project.path_with_namespace}`}>
+            <a>{project.path_with_namespace}</a>
+          </Link>
+        </li>
+      )
+    })
+    return (
+      <>
+        <TitleBar user={this.props.user} />
+        <pre>{(this.props.user || {}).username}</pre>
+        {projects}
+      </>
     )
   }
 }
