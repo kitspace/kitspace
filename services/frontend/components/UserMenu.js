@@ -8,10 +8,6 @@ function UserMenu(props) {
     <div className="UserMenu">
       <div className="userName">{user.username}</div>
       <semantic.Menu vertical attached>
-        <semantic.Menu.Item href="/">
-          <semantic.Icon name="grid layout" />
-          Your projects
-        </semantic.Menu.Item>
         <semantic.Menu.Item href="/settings">
           <semantic.Icon name="settings" />
           Settings
