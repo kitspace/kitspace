@@ -296,7 +296,6 @@ class ChangeProfile extends React.Component {
           </div>
           <semantic.Form.Input label="Real Name" name="user[name]" type="text" />
           <semantic.Form.Input
-            disabled={!!this.props.confirmationEmail}
             label="Email"
             name="user[email]"
             type="text"
