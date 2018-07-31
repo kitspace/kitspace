@@ -23,14 +23,14 @@ export default class KitspaceApp extends App {
       getInitialProps(),
     ])
 
-    return {user, pageProps}
+    return {user, pageProps, route: router.route}
   }
 
   render() {
-    const {Component, user, pageProps} = this.props
+    const {Component, user, pageProps, route} = this.props
     return (
       <Container>
-        {Component.name === 'Settings' ? null : <TitleBar user={user} />}
+        {Component.name === 'Settings' ? null : <TitleBar user={user} active={route}/>}
         <Component user={user} {...pageProps} />
       </Container>
     )

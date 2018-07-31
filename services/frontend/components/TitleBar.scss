@@ -1,8 +1,16 @@
 @import 'common';
 
 .titleBar {
-    .ui.inverted.pointing.secondary.menu {
+    .ui.inverted.menu {
         border: none !important;
+        background-color: transparent;
+        font-size: 12pt !important;
+    }
+    .ui.secondary.inverted.pointing.menu .item {
+        color: lightgrey !important;
+    }
+    .ui.secondary.inverted.pointing.menu .item:hover {
+        color: white !important;
     }
     align-items: center;
     background-color: $cod-gray;
@@ -115,10 +123,6 @@
         min-width: 87px;
         display: flex;
         justify-content: center;
-    }
-
-    .inverted.pointing.secondary.menu {
-        border-width: 0px;
     }
 
     .userDropContainer {
