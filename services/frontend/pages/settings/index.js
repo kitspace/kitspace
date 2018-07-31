@@ -182,196 +182,209 @@ export default class Settings extends React.Component {
           <semantic.Container>
             <semantic.Grid>
               <semantic.Grid.Column mobile={14} tablet={10} computer={8}>
-                <semantic.Header as="h3" dividing>
-                  {'Profile'}
-                </semantic.Header>
-                <form
-                  className={`ui large form ${warning ? 'warning' : ''}`}
-                  encType="multipart/form-data"
-                  acceptCharset="UTF-8"
-                  method="post"
-                  onSubmit={event => {
-                    event.preventDefault()
-                    const formData = new FormData(this.profileForm)
-                    if (this.state.newAvatarBlob != null) {
-                      formData.append(
-                        'user[avatar]',
-                        this.state.newAvatarBlob,
-                        'avatar.png',
-                      )
-                    }
-                    superagent
-                      .post('/!gitlab/profile')
-                      .send(formData)
-                      .set('Accept', 'application/json')
-                      .then(r => {
-                        this.setProfileMessage({
-                          text: r.body.message,
-                          type: 'success',
-                        })
-                        this.getUser()
-                        this.getForm()
-                      })
-                      .catch(e => {
-                        this.setProfileMessage({
-                          text: 'Profile update failed.',
-                          type: 'failed',
-                        })
-                      })
-                  }}
-                  ref={form => (this.profileForm = form)}
-                >
-                  <input name="utf8" type="hidden" value="✓" />
-                  <input type="hidden" name="_method" value="put" />
-                  <input
-                    name="authenticity_token"
-                    type="hidden"
-                    value={this.state.authenticity_token}
-                  />
-                  <label style={{fontSize: 13, fontWeight: 'bold'}}>
-                    {'Avatar'}
-                  </label>
-                  <div style={{display: 'flex', alignItems: 'center'}}>
-                    <semantic.Segment compact>
-                      <label htmlFor="fileInput">{avatarImage}</label>
-                      <input
-                        style={{
-                          opacity: 0,
-                          position: 'absolute',
-                          zIndex: -1,
-                        }}
-                        id="fileInput"
-                        accept="image/*"
-                        type="file"
-                        onChange={this.setRawImage}
-                      />
-                      <semantic.Modal
-                        trigger={<div />}
-                        open={this.state.modalOpen}
-                        onOpen={() => this.setState({modalOpen: true})}
-                        onClose={this.handleSave}
-                        size="small"
-                      >
-                        <semantic.Modal.Content>
-                          <CustomAvatarEditor
-                            ref={customEditor =>
-                              (this.editor = (customEditor || {}).editor)
-                            }
-                            image={this.state.rawImage}
-                          />
-                        </semantic.Modal.Content>
-                        <semantic.Modal.Actions>
-                          <semantic.Button primary onClick={this.handleSave}>
-                            {'Ok'}
-                          </semantic.Button>
-                        </semantic.Modal.Actions>
-                      </semantic.Modal>
-                    </semantic.Segment>
-                    {removeAvatarLink}
-                  </div>
-                  <semantic.Form.Input
-                    label="Real Name"
-                    name="user[name]"
-                    type="text"
-                  />
-                  <semantic.Form.Input
-                    disabled={!!this.state.confirmationEmail}
-                    label="Email"
-                    name="user[email]"
-                    type="text"
-                  />
-                  <semantic.Message
-                    size="tiny"
-                    warning={!this.state.emailReSent}
-                    id="emailMessage"
-                  >
-                    {'A confirmation email has been sent to '}
-                    <strong>{this.state.confirmationEmail}</strong>
-                    {'. Please click the link in the email before continuing. '}
-                    {emailReSendMessage}
-                  </semantic.Message>
-                  <semantic.Button type="submit">{'Save'}</semantic.Button>
-                  <semantic.Message
-                    style={{
-                      visibility: this.state.profileMessage ? 'visible' : 'hidden',
-                    }}
-                    positive={
-                      this.state.profileMessage &&
-                      this.state.profileMessage.type === 'success'
-                    }
-                    negative={
-                      this.state.profileMessage &&
-                      this.state.profileMessage.type !== 'success'
-                    }
-                  >
-                    {this.state.profileMessage
-                      ? this.state.profileMessage.text
-                      : '-'}
-                  </semantic.Message>
-                  <semantic.Header as="h3" dividing>
-                    {'Password'}
-                  </semantic.Header>
-                </form>
-                <form
-                  className={`ui form warning`}
-                  encType="multipart/form-data"
-                  acceptCharset="UTF-8"
-                  method="post"
-                  onSubmit={event => {
-                    event.preventDefault()
-                    const formData = new FormData(this.passwordForm)
-                    superagent
-                      .post('/!gitlab/profile/password')
-                      .send(formData)
-                      .set('Accept', 'application/json')
-                      .then(r => {
-                        window.location = '/!gitlab/users/sign_in'
-                      })
-                      .catch(e => {
-                        this.setPasswordMessage('Changing password failed')
-                      })
-                  }}
-                  ref={form => (this.passwordForm = form)}
-                >
-                  <semantic.Form.Input
-                    label="Current Password"
-                    required
-                    type="password"
-                    name="user[current_password]"
-                  />
-                  <semantic.Form.Input
-                    label="New Password"
-                    required
-                    type="password"
-                    name="user[password]"
-                  />
-                  <semantic.Form.Input
-                    label="Confirm New Password"
-                    required
-                    type="password"
-                    name="user[password_confirmation]"
-                  />
-                  <input
-                    name="authenticity_token"
-                    type="hidden"
-                    value={this.state.authenticity_token}
-                  />
-                  <semantic.Button type="submit">
-                    {'Change password'}
-                  </semantic.Button>
-                  <semantic.Message
-                    style={{
-                      visibility: this.state.passwordMessage ? 'visible' : 'hidden',
-                    }}
-                    negative
-                  >
-                    {this.state.passwordMessage ? this.state.passwordMessage : '-'}
-                  </semantic.Message>
-                </form>
+                <ChangePassword
+                  passwordMessage={this.state.passwordMessage}
+                  authenticity_token={this.state.authenticity_token}
+                />
               </semantic.Grid.Column>
             </semantic.Grid>
           </semantic.Container>
         </div>
+      </>
+    )
+  }
+}
+
+class ChangeProfile extends React.Component {
+  render() {
+    return (
+      <>
+        <semantic.Header as="h3" dividing>
+          {'Profile'}
+        </semantic.Header>
+        <form
+          className={`ui large form ${warning ? 'warning' : ''}`}
+          encType="multipart/form-data"
+          acceptCharset="UTF-8"
+          method="post"
+          onSubmit={event => {
+            event.preventDefault()
+            const formData = new FormData(this.profileForm)
+            if (this.props.newAvatarBlob != null) {
+              formData.append(
+                'user[avatar]',
+                this.props.newAvatarBlob,
+                'avatar.png',
+              )
+            }
+            superagent
+              .post('/!gitlab/profile')
+              .send(formData)
+              .set('Accept', 'application/json')
+              .then(r => {
+                this.setProfileMessage({
+                  text: r.body.message,
+                  type: 'success',
+                })
+                this.getUser()
+                this.getForm()
+              })
+              .catch(e => {
+                this.setProfileMessage({
+                  text: 'Profile update failed.',
+                  type: 'failed',
+                })
+              })
+          }}
+          ref={form => (this.profileForm = form)}
+        >
+          <input name="utf8" type="hidden" value="✓" />
+          <input type="hidden" name="_method" value="put" />
+          <input
+            name="authenticity_token"
+            type="hidden"
+            value={this.props.authenticity_token}
+          />
+          <label style={{fontSize: 13, fontWeight: 'bold'}}>{'Avatar'}</label>
+          <div style={{display: 'flex', alignItems: 'center'}}>
+            <semantic.Segment compact>
+              <label htmlFor="fileInput">{avatarImage}</label>
+              <input
+                style={{
+                  opacity: 0,
+                  position: 'absolute',
+                  zIndex: -1,
+                }}
+                id="fileInput"
+                accept="image/*"
+                type="file"
+                onChange={this.setRawImage}
+              />
+              <semantic.Modal
+                trigger={<div />}
+                open={this.props.modalOpen}
+                onOpen={() => this.setState({modalOpen: true})}
+                onClose={this.handleSave}
+                size="small"
+              >
+                <semantic.Modal.Content>
+                  <CustomAvatarEditor
+                    ref={customEditor =>
+                      (this.editor = (customEditor || {}).editor)
+                    }
+                    image={this.props.rawImage}
+                  />
+                </semantic.Modal.Content>
+                <semantic.Modal.Actions>
+                  <semantic.Button primary onClick={this.handleSave}>
+                    {'Ok'}
+                  </semantic.Button>
+                </semantic.Modal.Actions>
+              </semantic.Modal>
+            </semantic.Segment>
+            {removeAvatarLink}
+          </div>
+          <semantic.Form.Input label="Real Name" name="user[name]" type="text" />
+          <semantic.Form.Input
+            disabled={!!this.props.confirmationEmail}
+            label="Email"
+            name="user[email]"
+            type="text"
+          />
+          <semantic.Message
+            size="tiny"
+            warning={!this.props.emailReSent}
+            id="emailMessage"
+          >
+            {'A confirmation email has been sent to '}
+            <strong>{this.props.confirmationEmail}</strong>
+            {'. Please click the link in the email before continuing. '}
+            {emailReSendMessage}
+          </semantic.Message>
+          <semantic.Button type="submit">{'Save'}</semantic.Button>
+          <semantic.Message
+            style={{
+              visibility: this.props.profileMessage ? 'visible' : 'hidden',
+            }}
+            positive={
+              this.props.profileMessage &&
+              this.props.profileMessage.type === 'success'
+            }
+            negative={
+              this.props.profileMessage &&
+              this.props.profileMessage.type !== 'success'
+            }
+          >
+            {this.state.profileMessage ? this.state.profileMessage.text : '-'}
+          </semantic.Message>
+        </form>
+      </>
+    )
+  }
+}
+
+class ChangePassword extends React.Component {
+  render() {
+    const props = this.props
+    return (
+      <>
+        <semantic.Header as="h3" dividing>
+          {'Password'}
+        </semantic.Header>
+        <form
+          className={`ui form warning`}
+          encType="multipart/form-data"
+          acceptCharset="UTF-8"
+          method="post"
+          onSubmit={event => {
+            event.preventDefault()
+            const formData = new FormData(this.passwordForm)
+            superagent
+              .post('/!gitlab/profile/password')
+              .send(formData)
+              .set('Accept', 'application/json')
+              .then(r => {
+                window.location = '/!gitlab/users/sign_in'
+              })
+              .catch(e => {
+                props.setPasswordMessage('Changing password failed')
+              })
+          }}
+          ref={form => (this.passwordForm = form)}
+        >
+          <semantic.Form.Input
+            label="Current Password"
+            required
+            type="password"
+            name="user[current_password]"
+          />
+          <semantic.Form.Input
+            label="New Password"
+            required
+            type="password"
+            name="user[password]"
+          />
+          <semantic.Form.Input
+            label="Confirm New Password"
+            required
+            type="password"
+            name="user[password_confirmation]"
+          />
+          <input
+            name="authenticity_token"
+            type="hidden"
+            value={props.authenticity_token}
+          />
+          <semantic.Button type="submit">{'Change password'}</semantic.Button>
+          <semantic.Message
+            style={{
+              visibility: props.passwordMessage ? 'visible' : 'hidden',
+            }}
+            negative
+          >
+            {props.passwordMessage ? props.passwordMessage : '-'}
+          </semantic.Message>
+        </form>
       </>
     )
   }
