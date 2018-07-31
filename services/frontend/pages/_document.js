@@ -5,8 +5,8 @@ export default class MyDocument extends Document {
     return (
       <html>
         <Head>
-          <link rel="stylesheet" href="/_next/static/style.css" />
           <link rel="stylesheet" href="/static/semantic.min.css" />
+          <link rel="stylesheet" href="/_next/static/style.css" />
           <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/octicons/3.3.0/octicons.min.css"
