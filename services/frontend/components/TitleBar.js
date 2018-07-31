@@ -39,7 +39,7 @@ const TitleBar = createReactClass({
                 <semantic.Image
                   style={{background: 'white'}}
                   size="mini"
-                  shape="rounded"
+                  rounded
                   src={user.avatar_url}
                 />
                 <semantic.Icon inverted name="triangle down" />
