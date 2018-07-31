@@ -12,29 +12,24 @@ export default class Settings extends React.Component {
   state = {
     emailMessage: '',
     user: null,
-    newAvatarBlob: null,
-    newAvatarUrl: null,
-    modalOpen: false,
-    profileMessage: null,
-    passwordMessage: null,
     authenticity_token: '',
-    removingAvatar: false,
-    emailReSent: false,
   }
+
   getUser = () => {
     return superagent
       .get('/!gitlab/api/v4/user')
       .set('Accept', 'application/json')
       .then(r => {
         const newUser = r.body
-        const notGravatar = checkGravater(newUser.avatar_url)
+        const notGravatar = checkGravatar(newUser.avatar_url)
         //force a re-render of the avatar
         if (notGravatar) {
           newUser.avatar_url += '?' + Math.random()
         }
-        this.setState({user: newUser, newAvatarUrl: null})
+        this.setState({user: newUser})
       })
   }
+
   getForm = () => {
     return superagent
       .get('/!gitlab/profile')
@@ -60,6 +55,57 @@ export default class Settings extends React.Component {
   componentDidMount() {
     this.getForm()
   }
+
+  render() {
+    const user = this.state.user || this.props.user
+    return (
+      <>
+        <Head>
+          <title>Kitspace - Settings</title>
+        </Head>
+        <TitleBar user={user} />
+        <div className="Settings">
+          <semantic.Container>
+            <semantic.Grid>
+              <semantic.Grid.Column mobile={14} tablet={10} computer={8}>
+                <ChangeProfile
+                  authenticity_token={this.state.authenticity_token}
+                  getUser={this.getUser}
+                  getForm={this.getForm}
+                  confirmationEmail={this.state.confirmationEmail}
+                  profileMessage={this.state.profileMessage}
+                  user={user}
+                />
+                <ChangePassword
+                  passwordMessage={this.state.passwordMessage}
+                  authenticity_token={this.state.authenticity_token}
+                />
+              </semantic.Grid.Column>
+            </semantic.Grid>
+          </semantic.Container>
+        </div>
+      </>
+    )
+  }
+}
+
+class ChangeProfile extends React.Component {
+  state = {
+    emailReSent: false,
+    modalOpen: false,
+    removingAvatar: false,
+    newAvatarBlob: null,
+    newAvatarUrl: null,
+    profileMessage: null,
+  }
+
+  setProfileMessage = profileMessage => {
+    this.setState({profileMessage})
+    setTimeout(() => {
+      this.setState({profileMessage: null})
+    }, 5000)
+  }
+
 
   setRawImage = event => {
     const reader = new FileReader()
@@ -90,25 +136,12 @@ export default class Settings extends React.Component {
     this.setState({modalOpen: false})
   }
 
-  setProfileMessage = profileMessage => {
-    this.setState({profileMessage})
-    setTimeout(() => {
-      this.setState({profileMessage: null})
-    }, 5000)
-  }
-
-  setPasswordMessage = passwordMessage => {
-    this.setState({passwordMessage})
-    setTimeout(() => {
-      this.setState({passwordMessage: null})
-    }, 5000)
-  }
 
   render() {
-    const user = this.state.user || this.props.user
-    const warning = this.state.confirmationEmail != null
-    const notGravatar = checkGravater(user.avatar_url)
-    if (this.state.emailReSent) {
+    const user = this.props.user
+    const warning = this.props.confirmationEmail != null
+    const notGravatar = checkGravatar(user.avatar_url)
+    if (this.props.emailReSent) {
       var emailReSendMessage = 'Email has been re-sent.'
     } else {
       var emailReSendMessage = (
@@ -118,11 +151,11 @@ export default class Settings extends React.Component {
             superagent
               .post(
                 `/!gitlab/users/confirmation?user_email=${
-                  this.state.confirmationEmail
+                  this.props.confirmationEmail
                 }`,
               )
               .field('_method', 'post')
-              .field('authenticity_token', this.state.authenticity_token)
+              .field('authenticity_token', this.props.authenticity_token)
               .then(r => this.setState({emailReSent: true}))
               .catch(e => console.error(e))
           }}
@@ -155,11 +188,13 @@ export default class Settings extends React.Component {
               this.setState({removingAvatar: true})
               superagent
                 .post('/!gitlab/profile/avatar')
-                .field('authenticity_token', this.state.authenticity_token)
+                .field('authenticity_token', this.props.authenticity_token)
                 .field('_method', 'delete')
                 .then(r => {
-                  this.getForm()
-                  this.getUser().then(() => this.setState({removingAvatar: false}))
+                  this.props.getForm()
+                  this.props
+                    .getUser()
+                    .then(() => this.setState({removingAvatar: false}))
                 })
                 .catch(e => {
                   console.error(e)
@@ -174,31 +209,6 @@ export default class Settings extends React.Component {
     }
     return (
       <>
-        <Head>
-          <title>Kitspace - Settings</title>
-        </Head>
-        <TitleBar user={user} />
-        <div className="Settings">
-          <semantic.Container>
-            <semantic.Grid>
-              <semantic.Grid.Column mobile={14} tablet={10} computer={8}>
-                <ChangePassword
-                  passwordMessage={this.state.passwordMessage}
-                  authenticity_token={this.state.authenticity_token}
-                />
-              </semantic.Grid.Column>
-            </semantic.Grid>
-          </semantic.Container>
-        </div>
-      </>
-    )
-  }
-}
-
-class ChangeProfile extends React.Component {
-  render() {
-    return (
-      <>
         <semantic.Header as="h3" dividing>
           {'Profile'}
         </semantic.Header>
@@ -210,10 +220,10 @@ class ChangeProfile extends React.Component {
           onSubmit={event => {
             event.preventDefault()
             const formData = new FormData(this.profileForm)
-            if (this.props.newAvatarBlob != null) {
+            if (this.state.newAvatarBlob != null) {
               formData.append(
                 'user[avatar]',
-                this.props.newAvatarBlob,
+                this.state.newAvatarBlob,
                 'avatar.png',
               )
             }
@@ -226,8 +236,8 @@ class ChangeProfile extends React.Component {
                   text: r.body.message,
                   type: 'success',
                 })
-                this.getUser()
-                this.getForm()
+                this.props.getUser()
+                this.props.getForm()
               })
               .catch(e => {
                 this.setProfileMessage({
@@ -262,7 +272,7 @@ class ChangeProfile extends React.Component {
               />
               <semantic.Modal
                 trigger={<div />}
-                open={this.props.modalOpen}
+                open={this.state.modalOpen}
                 onOpen={() => this.setState({modalOpen: true})}
                 onClose={this.handleSave}
                 size="small"
@@ -272,7 +282,7 @@ class ChangeProfile extends React.Component {
                     ref={customEditor =>
                       (this.editor = (customEditor || {}).editor)
                     }
-                    image={this.props.rawImage}
+                    image={this.state.rawImage}
                   />
                 </semantic.Modal.Content>
                 <semantic.Modal.Actions>
@@ -293,7 +303,7 @@ class ChangeProfile extends React.Component {
           />
           <semantic.Message
             size="tiny"
-            warning={!this.props.emailReSent}
+            warning={!this.state.emailReSent}
             id="emailMessage"
           >
             {'A confirmation email has been sent to '}
@@ -304,15 +314,15 @@ class ChangeProfile extends React.Component {
           <semantic.Button type="submit">{'Save'}</semantic.Button>
           <semantic.Message
             style={{
-              visibility: this.props.profileMessage ? 'visible' : 'hidden',
+              visibility: this.state.profileMessage ? 'visible' : 'hidden',
             }}
             positive={
-              this.props.profileMessage &&
-              this.props.profileMessage.type === 'success'
+              this.state.profileMessage &&
+              this.state.profileMessage.type === 'success'
             }
             negative={
-              this.props.profileMessage &&
-              this.props.profileMessage.type !== 'success'
+              this.state.profileMessage &&
+              this.state.profileMessage.type !== 'success'
             }
           >
             {this.state.profileMessage ? this.state.profileMessage.text : '-'}
@@ -324,6 +334,15 @@ class ChangeProfile extends React.Component {
 }
 
 class ChangePassword extends React.Component {
+  state = {passwordMessage: null}
+
+  setPasswordMessage = passwordMessage => {
+    this.setState({passwordMessage})
+    setTimeout(() => {
+      this.setState({passwordMessage: null})
+    }, 5000)
+  }
+
   render() {
     const props = this.props
     return (
@@ -344,10 +363,10 @@ class ChangePassword extends React.Component {
               .send(formData)
               .set('Accept', 'application/json')
               .then(r => {
-                window.location = '/!gitlab/users/sign_in'
+                window.location = '/login'
               })
               .catch(e => {
-                props.setPasswordMessage('Changing password failed')
+                this.setPasswordMessage('Changing password failed')
               })
           }}
           ref={form => (this.passwordForm = form)}
@@ -378,11 +397,11 @@ class ChangePassword extends React.Component {
           <semantic.Button type="submit">{'Change password'}</semantic.Button>
           <semantic.Message
             style={{
-              visibility: props.passwordMessage ? 'visible' : 'hidden',
+              visibility: this.state.passwordMessage ? 'visible' : 'hidden',
             }}
             negative
           >
-            {props.passwordMessage ? props.passwordMessage : '-'}
+            {this.state.passwordMessage ? this.state.passwordMessage : '-'}
           </semantic.Message>
         </form>
       </>
@@ -390,6 +409,6 @@ class ChangePassword extends React.Component {
   }
 }
 
-function checkGravater(url) {
+function checkGravatar(url) {
   return RegExp('/!gitlab/uploads/-/system/user/avatar/').test(url)
 }
