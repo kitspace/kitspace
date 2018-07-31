@@ -1,6 +1,6 @@
 import Document, {Head, Main, NextScript} from 'next/document'
 
-export default class MyDocument extends Document {
+export default class KitspaceDocument extends Document {
   render() {
     return (
       <html>

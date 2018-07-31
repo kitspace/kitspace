@@ -1,18 +1,8 @@
 import React from 'react'
 import superagent from 'superagent'
 import Gitlab from 'kitspace-gitlab-client'
-import TitleBar from '../components/TitleBar'
 
 class Login extends React.Component {
-  static async getInitialProps({req}) {
-    const cookie = req ? req.headers.cookie : null
-    const gitlab = new Gitlab(
-      process.env.KITSPACE_DOMAIN + ':' + process.env.KITSPACE_PORT + '/!gitlab',
-      null,
-      cookie,
-    )
-    return {user: await gitlab.getCurrentUser()}
-  }
   constructor() {
     super()
     this.state = {authenticity_token: '', password: '', username: ''}
@@ -26,7 +16,6 @@ class Login extends React.Component {
   render() {
     return (
       <>
-        <TitleBar user={this.props.user} />
         <div>
           <pre>{JSON.stringify(this.props.user, null, 2)}</pre>
           <input

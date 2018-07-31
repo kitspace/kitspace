@@ -20,16 +20,6 @@ export default class Settings extends React.Component {
     removingAvatar: false,
     emailReSent: false,
   }
-  static async getInitialProps({req}) {
-    const cookie = req ? req.headers.cookie : null
-    const gitlab = new Gitlab(
-      process.env.KITSPACE_DOMAIN + ':' + process.env.KITSPACE_PORT + '/!gitlab',
-      null,
-      cookie,
-    )
-    const user = await gitlab.getCurrentUser()
-    return {user}
-  }
   getUser = () => {
     return superagent
       .get('/!gitlab/api/v4/user')
