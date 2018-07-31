@@ -1,11 +1,14 @@
 @import 'common';
 
 .titleBar {
+    .ui.inverted.pointing.secondary.menu {
+        border: none !important;
+    }
     align-items: center;
-    background-color: $mine-shaft;
+    background-color: $cod-gray;
     border-bottom-left-radius: 5;
     border-bottom-right-radius: 5;
-    box-shadow: 0 .1em .5em $black;
+    box-shadow: 0 .1em .5em $cod-gray;
     display: flex;
     flex-wrap: wrap;
     max-width: 100%;
@@ -22,7 +25,6 @@
         min-width:320px;
         display:flex;
         justify-content: flex-start;
-        background-color: $mine-shaft;
         margin: 10px;
         z-index: 1;
         flex-shrink: 2;
@@ -56,7 +58,6 @@
     .userMenu {
         min-width: 320px;
         align-items: center;
-        background-color: $mine-shaft;
         color: $white;
         display: flex;
         flex-shrink: 0;
