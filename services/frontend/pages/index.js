@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Head from 'next/head'
 import React from 'react'
 import Gitlab from 'kitspace-gitlab-client'
 import TitleBar from '../components/TitleBar'
@@ -20,6 +21,9 @@ export default class Index extends React.Component {
     })
     return (
       <>
+        <Head>
+          <title>Kitspace</title>
+        </Head>
         {projects}
       </>
     )

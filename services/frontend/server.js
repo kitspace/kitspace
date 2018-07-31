@@ -13,6 +13,7 @@ app.prepare().then(() => {
   server.use('/login/*', nextHandler)
   server.use('/submit/*', nextHandler)
   server.use('/settings/*', nextHandler)
+  server.use('/about/*', nextHandler)
 
   server.get('/:namespace/:projectname', customHandler('/project'))
 

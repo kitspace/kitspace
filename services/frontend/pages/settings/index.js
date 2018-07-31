@@ -2,6 +2,7 @@ import './settings.scss'
 import React from 'react'
 import superagent from 'superagent'
 import * as semantic from 'semantic-ui-react'
+import Head from 'next/head'
 
 import Gitlab from 'kitspace-gitlab-client'
 import TitleBar from '../../components/TitleBar'
@@ -173,6 +174,9 @@ export default class Settings extends React.Component {
     }
     return (
       <>
+        <Head>
+          <title>Kitspace - Settings</title>
+        </Head>
         <TitleBar user={user} />
         <div className="Settings">
           <semantic.Container>
