@@ -20,15 +20,13 @@ export default function TitleBar(props) {
     />
   )
   let userButton
-  if (user === 'loading') {
-    userButton = <semantic.Loader active inline />
-  } else if (user === 'not signed in') {
+  if (!user) {
     userButton = (
-      <semantic.Button basic inverted href="/accounts/users/sign_in">
+      <semantic.Button basic inverted href="/login">
         {'Sign in'}
       </semantic.Button>
     )
-  } else if (user) {
+  } else {
     userButton = (
       <semantic.Popup
         trigger={
