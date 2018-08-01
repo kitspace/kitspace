@@ -11,6 +11,7 @@ import ChangePassword from './ChangePassword'
 import {checkGravatar} from './util'
 
 export default class Settings extends React.Component {
+  static omitTitleBar = true
   state = {
     emailMessage: '',
     user: null,
