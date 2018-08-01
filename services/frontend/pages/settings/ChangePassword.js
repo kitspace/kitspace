@@ -1,6 +1,7 @@
 import React from 'react'
 import superagent from 'superagent'
 import * as semantic from 'semantic-ui-react'
+import Router from 'next/router'
 
 export default class ChangePassword extends React.Component {
   state = {passwordMessage: null}
@@ -31,10 +32,10 @@ export default class ChangePassword extends React.Component {
               .post('/!gitlab/profile/password')
               .send(formData)
               .set('Accept', 'application/json')
-              .then(r => {
-                window.location = '/login'
-              })
               .catch(e => {
+                if (e.status === 404) {
+                  Router.push('/login')
+                }
                 this.setPasswordMessage('Changing password failed')
               })
           }}
