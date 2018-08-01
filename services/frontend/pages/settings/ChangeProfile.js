@@ -47,15 +47,48 @@ export default class ChangeProfile extends React.Component {
       image.toBlob(blob => {
         this.setState({newAvatarBlob: blob})
       })
+      setTimeout(this.submitForm, 100)
     }
     this.setState({modalOpen: false})
+  }
+  submitForm = event => {
+    event ? event.preventDefault() : null
+    const formData = new FormData(this.profileForm)
+    if (this.state.newAvatarBlob != null) {
+      formData.append('user[avatar]', this.state.newAvatarBlob, 'avatar.png')
+    }
+    superagent
+      .post('/!gitlab/profile')
+      .send(formData)
+      .set('Accept', 'application/json')
+      .then(r => {
+        this.setProfileMessage({
+          text: r.body.message,
+          type: r.body.status || 'success',
+        })
+        this.props.getUser()
+      })
+      .catch(e => {
+        this.setProfileMessage({
+          text: 'Profile update failed.',
+          type: 'failed',
+        })
+      })
+  }
+
+  inputOnChange = e => {
+    clearTimeout(this.inputOnChangeTimeout)
+    this.inputOnChangeTimeout = setTimeout(() => {
+      this.submitForm()
+    }, 700)
   }
 
   render() {
     const user = this.props.user
     const warning = this.props.confirmationEmail != null
     const notGravatar = checkGravatar(user.avatar_url)
-    if (this.props.emailReSent) {
+    const hideClear = notGravatar || this.state.newAvatarBlob != null
+    if (this.state.emailReSent) {
       var emailReSendMessage = 'Email has been re-sent.'
     } else {
       var emailReSendMessage = (
@@ -96,7 +129,7 @@ export default class ChangeProfile extends React.Component {
           className="removeAvatarLink"
           onClick={event => {
             const confirmation = window.confirm(
-              'Are you sure you want to remove the avatar picture?',
+              'Are you sure you want to clear the avatar picture?',
             )
             if (confirmation) {
               this.setState({removingAvatar: true})
@@ -105,10 +138,13 @@ export default class ChangeProfile extends React.Component {
                 .field('authenticity_token', this.props.authenticity_token)
                 .field('_method', 'delete')
                 .then(r => {
-                  this.props.getForm()
-                  this.props
-                    .getUser()
-                    .then(() => this.setState({removingAvatar: false}))
+                  this.props.getUser().then(() =>
+                    this.setState({
+                      removingAvatar: false,
+                      newAvatarBlob: null,
+                      newAvatarUrl: null,
+                    }),
+                  )
                 })
                 .catch(e => {
                   console.error(e)
@@ -116,8 +152,10 @@ export default class ChangeProfile extends React.Component {
             }
           }}
         >
-          <semantic.Icon name="trash" />
-          {'remove'}
+          <semantic.Label attached="bottom">
+            <semantic.Icon name="x" />
+            {'Clear'}
+          </semantic.Label>
         </a>
       )
     }
@@ -131,35 +169,6 @@ export default class ChangeProfile extends React.Component {
           encType="multipart/form-data"
           acceptCharset="UTF-8"
           method="post"
-          onSubmit={event => {
-            event.preventDefault()
-            const formData = new FormData(this.profileForm)
-            if (this.state.newAvatarBlob != null) {
-              formData.append(
-                'user[avatar]',
-                this.state.newAvatarBlob,
-                'avatar.png',
-              )
-            }
-            superagent
-              .post('/!gitlab/profile')
-              .send(formData)
-              .set('Accept', 'application/json')
-              .then(r => {
-                this.setProfileMessage({
-                  text: r.body.message,
-                  type: 'success',
-                })
-                this.props.getUser()
-                this.props.getForm()
-              })
-              .catch(e => {
-                this.setProfileMessage({
-                  text: 'Profile update failed.',
-                  type: 'failed',
-                })
-              })
-          }}
           ref={form => (this.profileForm = form)}
         >
           <input name="utf8" type="hidden" value="✓" />
@@ -169,8 +178,8 @@ export default class ChangeProfile extends React.Component {
             type="hidden"
             value={this.props.authenticity_token}
           />
-          <label style={{fontSize: 13, fontWeight: 'bold'}}>{'Avatar'}</label>
-          <div style={{display: 'flex', alignItems: 'center'}}>
+          <label style={{fontSize: 14, fontWeight: 'bold'}}>{'Avatar'}</label>
+          <div style={{display: 'flex', alignItems: 'center', marginBottom: 10}}>
             <semantic.Segment compact>
               <label htmlFor="fileInput">{avatarImage}</label>
               <input
@@ -205,11 +214,21 @@ export default class ChangeProfile extends React.Component {
                   </semantic.Button>
                 </semantic.Modal.Actions>
               </semantic.Modal>
+              {removeAvatarLink}
             </semantic.Segment>
-            {removeAvatarLink}
           </div>
-          <semantic.Form.Input label="Real Name" name="user[name]" type="text" />
-          <semantic.Form.Input label="Email" name="user[email]" type="text" />
+          <semantic.Form.Input
+            onChange={this.inputOnChange}
+            label="Real Name"
+            name="user[name]"
+            type="text"
+          />
+          <semantic.Form.Input
+            label="Email"
+            name="user[email]"
+            type="text"
+            action={{onClick: this.submitForm, content: 'Submit'}}
+          />
           <semantic.Message
             size="tiny"
             warning={!this.state.emailReSent}
@@ -220,7 +239,6 @@ export default class ChangeProfile extends React.Component {
             {'. Please click the link in the email before continuing. '}
             {emailReSendMessage}
           </semantic.Message>
-          <semantic.Button type="submit">{'Save'}</semantic.Button>
           <semantic.Message
             style={{
               visibility: this.state.profileMessage ? 'visible' : 'hidden',
