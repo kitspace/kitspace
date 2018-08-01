@@ -5,7 +5,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 
 export default class Error extends React.Component {
-  static getInitialProps({res, err}) {
+  static async getInitialProps({res, err}) {
     const statusCode = res ? res.statusCode : err ? err.statusCode : null
     return {statusCode}
   }
@@ -16,10 +16,25 @@ export default class Error extends React.Component {
 
   render() {
     const {statusCode} = this.props
-    const title =
-      statusCode === 404
-        ? 'Sorry, this page could not be found'
-        : HTTPStatus[statusCode] || 'Sorry, an unexpected error occurred'
+    let title, link
+    switch (statusCode) {
+      case 404:
+        title = 'Sorry, this page could not be found'
+        link = (
+          <Link href="/">
+            <a>View all projects.</a>
+          </Link>
+        )
+        break
+      case 502:
+        title = 'Our server took too long to respond'
+        link = 'Please retry in a moment.'
+        break
+      default:
+        title = HTTPStatus[statusCode] || 'Sorry, an unexpected error occurred'
+        link = 'Please retry in a moment.'
+        break
+    }
 
     return (
       <div style={styles.error}>
@@ -35,11 +50,7 @@ export default class Error extends React.Component {
           <div style={styles.desc}>
             <h2 style={styles.h2}>{title}.</h2>
           </div>
-          <div style={styles.link}>
-            <Link href="/">
-              <a>View all projects</a>
-            </Link>
-          </div>
+          <div style={styles.link}>{link}</div>
         </div>
       </div>
     )
@@ -50,7 +61,7 @@ const styles = {
   error: {
     color: '#000',
     background: '#fff',
-    fontFamily: 'Noto Sans',
+    fontFamily: 'Lato',
     height: '70vh',
     textAlign: 'center',
     display: 'flex',
@@ -87,6 +98,7 @@ const styles = {
   },
 
   link: {
+    fontFamily: 'Lato',
     marginTop: 50,
   },
 }

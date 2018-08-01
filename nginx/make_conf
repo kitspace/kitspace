@@ -12,10 +12,19 @@ server {
 
 	server_name _;
 
+	error_page 403 /login;
+
+	error_page 404 /error/404;
+	error_page 405 /error/405;
+	error_page 500 /error/500;
+	error_page 501 /error/501;
+	error_page 502 /error/502;
+	error_page 503 /error/503;
+	error_page 504 /error/504;
+
 	location ^~ / {
 		proxy_pass http://${docker_host}:1234;
 	}
-
 
 	location ^~ '/${KITSPACE_GITLAB_PATH}/users/auth' {
 		client_max_body_size 0;
@@ -34,6 +43,8 @@ server {
 		proxy_set_header    X-Real-IP           \$remote_addr;
 		proxy_set_header    X-Forwarded-For     \$proxy_add_x_forwarded_for;
 		proxy_set_header    X-Forwarded-Proto   \$scheme;
+
+		proxy_intercept_errors on;
 
 		proxy_cookie_path /${KITSPACE_GITLAB_PATH} /;
 
@@ -64,6 +75,8 @@ server {
 		proxy_set_header    X-Forwarded-For     \$proxy_add_x_forwarded_for;
 		proxy_set_header    X-Forwarded-Proto   \$scheme;
 
+		proxy_intercept_errors on;
+
 		proxy_cookie_path '/${KITSPACE_GITLAB_PATH}' /;
 
 		proxy_pass http://${docker_host}:${KITSPACE_GITLAB_PORT}/${KITSPACE_GITLAB_PATH}/users;
@@ -74,7 +87,6 @@ server {
 		# allow the login service to access these externally, but no one else
 		allow ${KITSPACE_LOGIN_SERVER_IP};
 		deny all;
-		error_page 403 /login;
 
 		client_max_body_size 0;
 
@@ -92,6 +104,8 @@ server {
 		proxy_set_header    X-Real-IP           \$remote_addr;
 		proxy_set_header    X-Forwarded-For     \$proxy_add_x_forwarded_for;
 		proxy_set_header    X-Forwarded-Proto   \$scheme;
+
+		proxy_intercept_errors on;
 
 		proxy_cookie_path '/${KITSPACE_GITLAB_PATH}' /;
 
@@ -122,6 +136,8 @@ server {
 		proxy_set_header    X-Forwarded-For     \$proxy_add_x_forwarded_for;
 		proxy_set_header    X-Forwarded-Proto   \$scheme;
 
+		proxy_intercept_errors on;
+
 		proxy_cookie_path '/${KITSPACE_GITLAB_PATH}' /;
 
 		proxy_pass http://${docker_host}:${KITSPACE_GITLAB_PORT}/${KITSPACE_GITLAB_PATH}/uploads;
@@ -147,6 +163,8 @@ server {
 		proxy_set_header    X-Real-IP           \$remote_addr;
 		proxy_set_header    X-Forwarded-For     \$proxy_add_x_forwarded_for;
 		proxy_set_header    X-Forwarded-Proto   \$scheme;
+
+		proxy_intercept_errors on;
 
 		proxy_cookie_path /${KITSPACE_GITLAB_PATH} /;
 
@@ -177,6 +195,8 @@ server {
 		proxy_set_header    X-Forwarded-For     \$proxy_add_x_forwarded_for;
 		proxy_set_header    X-Forwarded-Proto   \$scheme;
 
+		proxy_intercept_errors on;
+
 		proxy_cookie_path /${KITSPACE_GITLAB_PATH} /;
 
 		rewrite ^ \$request_uri;
@@ -202,6 +222,8 @@ server {
 		proxy_set_header    X-Forwarded-For     \$proxy_add_x_forwarded_for;
 		proxy_set_header    X-Forwarded-Proto   \$scheme;
 
+		proxy_intercept_errors on;
+
 		proxy_cookie_path /${KITSPACE_GITLAB_PATH} /;
 
 		proxy_pass http://${docker_host}:4004/;
@@ -220,6 +242,8 @@ server {
 		proxy_set_header    X-Real-IP           \$remote_addr;
 		proxy_set_header    X-Forwarded-For     \$proxy_add_x_forwarded_for;
 		proxy_set_header    X-Forwarded-Proto   \$scheme;
+
+		proxy_intercept_errors on;
 
 		proxy_cookie_path /${KITSPACE_GITLAB_PATH} /;
 

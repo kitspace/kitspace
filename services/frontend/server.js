@@ -15,6 +15,8 @@ app.prepare().then(() => {
   server.use('/settings/*', nextHandler)
   server.use('/about/*', nextHandler)
 
+  server.use('/error/:statusCode', customHandler('/error_page'))
+
   server.get('/:namespace/:projectname', customHandler('/project'))
 
   server.use('/', nextHandler)

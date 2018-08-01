@@ -12,15 +12,21 @@ export default class KitspaceApp extends App {
       cookie,
     )
 
-    function getInitialProps() {
+    function getPageProps() {
       return Component.getInitialProps
-        ? Component.getInitialProps(Object.assign(ctx, {gitlab}))
+        ? Component.getInitialProps(Object.assign(ctx, {gitlab})).catch(e => {
+            console.error(e)
+            return {}
+          })
         : Promise.resolve({})
     }
 
     const [user, pageProps] = await Promise.all([
-      gitlab.getCurrentUser(),
-      getInitialProps(),
+      gitlab.getCurrentUser().catch(e => {
+        console.error(e)
+        return null
+      }),
+      getPageProps(),
     ])
 
     return {user, pageProps, route: router.route}
@@ -30,7 +36,9 @@ export default class KitspaceApp extends App {
     const {Component, user, pageProps, route} = this.props
     return (
       <Container>
-        {Component.name === 'Settings' ? null : <TitleBar user={user} active={route}/>}
+        {Component.name === 'Settings' ? null : (
+          <TitleBar user={user} active={route} />
+        )}
         <Component user={user} {...pageProps} />
       </Container>
     )
