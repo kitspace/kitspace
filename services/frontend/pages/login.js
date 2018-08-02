@@ -1,6 +1,7 @@
 import React from 'react'
 import superagent from 'superagent'
 import Gitlab from 'kitspace-gitlab-client'
+import Router from 'next/router'
 
 class Login extends React.Component {
   constructor() {
