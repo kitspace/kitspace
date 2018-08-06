@@ -1,7 +1,7 @@
 //these are also defined in media_queries.js and need to be adjusted there and here
 @mixin breakpoint($point) {
     @if $point == small_width {
-        @media (max-width: 767px)
+        @media (max-width: 878px)
         {
             @content;
         }

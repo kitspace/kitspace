@@ -20,7 +20,7 @@
     min-width: 100px;
   }
 
-  @include breakpoint(small_width) {
+  @media (max-width: 710px) {
     .ui.menu {
       width: 100%;
     }

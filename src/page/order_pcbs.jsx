@@ -16,7 +16,7 @@ const royalCircuitsUrl = 'https://www.royalcircuits.com/'
 let OrderPcbs = React.createClass({
   render() {
     return (
-      <ReactResponsive query={'(max-width: 702px)'}>
+      <ReactResponsive query={'(max-width: 710px)'}>
         {matches => (
           <div className="OrderPcbs">
             <semantic.Menu stackable={matches} compact collapsing borderless>
