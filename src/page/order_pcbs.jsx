@@ -16,7 +16,7 @@ const royalCircuitsUrl = 'https://www.royalcircuits.com/'
 let OrderPcbs = React.createClass({
   render() {
     return (
-      <ReactResponsive query={mediaQueries.mobile_m}>
+      <ReactResponsive query={mediaQueries.small_width}>
         {matches => (
           <div className="OrderPcbs">
             <semantic.Menu stackable={matches} compact borderless>
@@ -29,9 +29,15 @@ let OrderPcbs = React.createClass({
               </semantic.Menu.Item>
               <semantic.Menu.Item as="a" href={aislerUrl}>
                 <img src="/images/aisler.png" />
+                <semantic.Label floating={!matches}>
+                  <semantic.Flag name="de" />
+                </semantic.Label>
               </semantic.Menu.Item>
               <semantic.Menu.Item as="a" href={pcbwayUrl}>
                 <img src="/images/pcbway.png" />
+                <semantic.Label floating={!matches}>
+                  <semantic.Flag name="cn" />
+                </semantic.Label>
               </semantic.Menu.Item>
               <semantic.Menu.Item
                 as="a"
@@ -43,6 +49,9 @@ let OrderPcbs = React.createClass({
                 }}
               >
                 <img src="/images/royal_circuits.png" />
+                <semantic.Label floating={!matches}>
+                  <semantic.Flag name="us" />
+                </semantic.Label>
               </semantic.Menu.Item>
             </semantic.Menu>
           </div>

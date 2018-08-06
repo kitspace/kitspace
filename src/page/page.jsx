@@ -9,6 +9,7 @@ const TitleBar = require('../title_bar')
 const FadeImage = require('../fade_image')
 const BuyParts = require('../buy_parts/buy_parts')
 const Readme = require('../readme')
+const semantic = require('semantic-ui-react')
 
 const info = require('../info.json')
 const description =
@@ -57,6 +58,7 @@ const Page = React.createClass({
             <div className="subtitleText">{subtitleText}</div>
           </TitleBar>
           <div className="pageContainer">
+            <img style={{display: 'none'}} src="/images/flags.png" />
             <InfoBar info={info} />
             <BoardShowcase>
               <FadeImage src="images/top.svg" />

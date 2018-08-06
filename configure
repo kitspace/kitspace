@@ -118,7 +118,7 @@ ninja.rule('autoprefix')
 
 ninja.edge('build/vendor.js').using('browserify-require')
 
-const images = globule.find('src/images/*')
+const images = globule.find('src/images/**/*', {filter: 'isFile'})
 for (var f of images) {
   ninja
     .edge(f.replace('src', 'build'))
@@ -270,9 +270,17 @@ if (config === 'production') {
 }
 
 ninja
+  .rule('sed')
+  .run("sed -e 's/themes\\/default\\/assets\\/images\\/flags\\.png/\\/images\\/flags.png/' $in > $out")
+  .description('$command')
+
+
+ninja
   .edge('build/semantic.min.css')
   .from('node_modules/semantic-ui-css/semantic.min.css')
-  .using('copy')
+  .using('sed')
+
+
 globule
   .find('node_modules/semantic-ui-css/themes/default/assets/fonts/*')
   .forEach(file => {
@@ -281,6 +289,13 @@ globule
       .from(file)
       .using('copy')
   })
+
+
+ninja
+  .edge('build/images/flags.png')
+  .from('node_modules/semantic-ui-css/themes/default/assets/images/flags.png')
+  .using('copy')
+
 
 ninja
   .edge('clean')
