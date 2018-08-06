@@ -11,6 +11,8 @@ const aislerUrl = `https://aisler.net/p/new?url=${zipUrl}&ref=kitspace`
 
 const pcbwayUrl = `https://www.pcbway.com/QuickOrderOnline.aspx?fileurl=${zipUrl}&from=kitspace`
 
+const royalCircuitsUrl = 'https://www.royalcircuits.com/'
+
 let OrderPcbs = React.createClass({
   render() {
     return (
@@ -30,6 +32,17 @@ let OrderPcbs = React.createClass({
               </semantic.Menu.Item>
               <semantic.Menu.Item as="a" href={pcbwayUrl}>
                 <img src="/images/pcbway.png" />
+              </semantic.Menu.Item>
+              <semantic.Menu.Item
+                as="a"
+                href={royalCircuitsUrl}
+                onClick={() => {
+                  if (!this.state.downloaded) {
+                    window.open(zipPath)
+                  }
+                }}
+              >
+                <img src="/images/royal_circuits.png" />
               </semantic.Menu.Item>
             </semantic.Menu>
           </div>
