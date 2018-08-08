@@ -3,7 +3,7 @@ const fs = require('fs')
 const utils = require('./utils')
 
 const repos = utils.readRepos()
-const registry = JSON.parse(fs.readFileSync('registry.json'))
+const registry = JSON.parse(fs.readFileSync('registry.json', 'utf8'))
 
 for (let index = 0; index < repos.length; index++) {
   var repo = repos[index]

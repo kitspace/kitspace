@@ -5,9 +5,9 @@ const cp = require('child_process');
 const utils = require('./utils');
 
 if (process.argv[2] === 'production') {
-    registry = JSON.parse(fs.readFileSync('registry.json'));
+    registry = JSON.parse(fs.readFileSync('registry.json', 'utf8'));
 } else {
-    registry = JSON.parse(fs.readFileSync('dev_registry.json'));
+    registry = JSON.parse(fs.readFileSync('dev_registry.json', 'utf8'));
 }
 
 
