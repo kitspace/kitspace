@@ -47,7 +47,7 @@ else {
     const {config, deps, targets} = utils.processArgs(process.argv);
     const boards = [];
     const folders = globule.find(`${boardDir}/*/*/*`, {filter: 'isDirectory'});
-    folders.sort((a,b) => a.toLowerCase() > b.toLowerCase());
+    folders.sort(() => Math.random() > 0.5);
 
     for (let folder of folders) {
         let info;
