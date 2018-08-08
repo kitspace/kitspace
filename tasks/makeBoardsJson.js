@@ -47,7 +47,7 @@ else {
     const {config, deps, targets} = utils.processArgs(process.argv);
     const boards = [];
     const folders = globule.find(`${boardDir}/*/*/*`, {filter: 'isDirectory'});
-    folders.sort(() => Math.random() > 0.5);
+    shuffleArray(folders)
 
     for (let folder of folders) {
         let info;
@@ -81,4 +81,11 @@ else {
 
 function __guard__(value, transform) {
   return (typeof value !== 'undefined' && value !== null) ? transform(value) : undefined;
+}
+
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]]; // eslint-disable-line no-param-reassign
+    }
 }
