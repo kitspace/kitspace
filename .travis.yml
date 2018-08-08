@@ -18,4 +18,4 @@ script:
   - ./configure production
   - wget https://github.com/ninja-build/ninja/releases/download/v1.6.0/ninja-linux.zip
   - unzip ninja-linux.zip
-  - ./ninja -j 3 && ./scripts/deploy
+  - ./ninja -j 2 && ./scripts/deploy
