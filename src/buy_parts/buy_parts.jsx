@@ -110,7 +110,9 @@ const BuyParts = React.createClass({
           <RetailerButton
             name={name}
             adding={this.state.adding[name]}
-            extensionPresence={this.state.extensionPresence}
+            extensionPresence={
+              name === 'Digikey' ? false : this.state.extensionPresence
+            }
             buyParts={this.state.buyParts.bind(null, name)}
             numberOfParts={numberOfParts}
             total={total}
