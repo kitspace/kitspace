@@ -1,2 +1,3 @@
 /jelly /boards/github.com/monostable/jelly
+/boards/github.com/prometheus-science/flypi /boards/github.com/amchagas/flypi
 /boards/github.com/kitnic-forks/* /boards/github.com/kitspace-forks/:splat
