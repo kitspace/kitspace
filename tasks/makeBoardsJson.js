@@ -19,7 +19,7 @@ else {
     const getGithubInfo = function(id) {
         let text;
         const url =  `https://api.github.com/repos${id.replace(/^github.com/,'')}`;
-        //we use this avoid being rate-limited
+        //we use this to avoid being rate-limited
         if (process.env.GH_TOKEN != null)  {
             text = cp.execSync(`curl -u kasbah:${process.env.GH_TOKEN} ${url}`);
         }
