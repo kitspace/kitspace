@@ -68,8 +68,14 @@ if (require.main !== module) {
       var content = fs.readFileSync(bomPath)
   }
   info.bom = oneClickBOM.parse(content)
+  info.bom.invalid.forEach(invalid => {
+    console.log('INVALID LINE:', invalid)
+  })
+  info.bom.warnings.forEach(warning => {
+    console.log('WARNING:', warning)
+  })
   if (!info.bom.lines || info.bom.lines.length === 0) {
-    console.error('No lines in BOM found')
+    console.error('ERROR: No lines in BOM found')
     process.exit(1)
   }
   info.bom.tsv = oneClickBOM.writeTSV(info.bom.lines)
