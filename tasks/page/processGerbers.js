@@ -42,8 +42,8 @@ if (require.main !== module) {
       `build/.temp/${folder}/unoptimized-top.svg`,
       `${buildFolder}/images/top.png`,
       `${buildFolder}/images/top-large.png`,
-      `${buildFolder}/images/top-meta-${version}.png`,
-      `${buildFolder}/images/top-with-background-${version}.png`
+      `${buildFolder}/images/top-meta.png`,
+      `${buildFolder}/images/top-with-background.png`
     ]
     return {deps, targets, moduleDep: false}
   }
@@ -64,7 +64,6 @@ if (require.main !== module) {
     topWithBgndPath
   ] = targets
   const zipInfo = {
-    metaPngPath: path.basename(topWithBgndPath),
     zipPath: path.basename(zipPath),
     folder
   }

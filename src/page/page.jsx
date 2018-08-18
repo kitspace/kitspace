@@ -10,14 +10,13 @@ const FadeImage = require('../fade_image')
 const BuyParts = require('../buy_parts/buy_parts')
 const Readme = require('../readme')
 
-const {metaPngPath} = require('../zip-info.json')
 const info = require('../info.json')
 const description =
   info.summary +
   ' - Shared on Kitspace - Kitspace is a place to share ready to order electronics designs. You can order the right components for this project with a few clicks.'
 const metaImage = `https://kitspace.org/boards/${
   info.id
-}/images/${metaPngPath}`
+}/images/top-with-background.png`
 
 const Page = React.createClass({
   render() {
