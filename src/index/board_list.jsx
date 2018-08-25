@@ -9,7 +9,7 @@ var BoardList = React.createClass({
     data: React.PropTypes.array,
     searching: React.PropTypes.bool
   },
-  render: function() {
+  render() {
     const intro = this.props.searching ? null : <Intro />
     if (this.props.data.length === 0) {
       return (
@@ -27,7 +27,9 @@ var BoardList = React.createClass({
     return (
       <div>
         {intro}
-        <div className="boardList">{cardNodes}</div>
+        <div className="boardListContainer">
+          <div className="boardList">{cardNodes}</div>
+        </div>
       </div>
     )
   }
