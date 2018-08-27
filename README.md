@@ -1,6 +1,6 @@
 # https://kitspace.org
 
-[![build status][travis-status]](https://travis-ci.org/monostable/kitspace)
+[![build status][travis-status]](https://travis-ci.org/kitspace/kitspace)
 
 [![video](image_src/fosdem2017.jpg)](https://video.fosdem.org/2017/AW1.120/kitnic_it.vp8.webm)
 
@@ -127,7 +127,7 @@ that requires server side components is the submission preview (`/submit`). Page
 We have two services running for the submission preview.
 
 - [git-clone-server](https://github.com/kasbah/git-clone-server) for serving up files from git repositories.
-- [partinfo](https://github.com/monostable/kitnic-partinfo) for getting part information for the BOM.
+- [partinfo](https://github.com/kitspace/kitnic-partinfo) for getting part information for the BOM.
 
 And one for the geo ip lookup on pages.
 
@@ -142,7 +142,7 @@ The graphs get too complicated if we try to add all the possible data-flows but 
 
 Services used are:
 
-- [nginx-config](https://github.com/monostable/kitnic-nginx-config) to configure Nginx to serve the frontend and all services.
+- [nginx-config](https://github.com/kitspace/kitnic-nginx-config) to configure Nginx to serve the frontend and all services.
 - [partinfo](https://github.com/monostable/kitnic-partinfo) for getting part information for BOMs.
 - [gitlab-config](http://github.com/monostable/kitnic-gitlab-config) configuring GitLab to be used for authentication and Git hosting.
 - [gitlab-proxy](https://github.com/monostable/kitnic-gitlab-proxy) for requests that need to access GitLab API but need any kind of added functionality like unauthenticated access or modifying projects (which needs additional hooks to trigger processing).
@@ -180,7 +180,7 @@ file-saves and re-build when you change a source file.
 [1clickbom]: https://1clickBOM.com
 [yamllint]: http://www.yamllint.com
 [1clickbom#making]: https://1clickbom.com/#making-a-1-click-bom
-[travis-status]: https://travis-ci.org/monostable/kitspace.svg?branch=master
+[travis-status]: https://travis-ci.org/kitspace/kitspace.svg?branch=master
 [riot.im]: https://riot.im/app/#/room/#kitspace:matrix.org
 
 [4]: https://help.github.com/articles/create-a-repo/
