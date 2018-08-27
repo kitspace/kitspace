@@ -20,7 +20,7 @@ https://github.com/jpralves/cseduino
 https://github.com/kitspace-forks/neo
 https://github.com/InaneCoding/KOS01_IdealDiode20A
 https://github.com/UDXS/Arduitsy
-https://github.com/monostable/jelly
+https://github.com/kitspace/jelly
 https://github.com/GenericLab/Gar-Lampli
 https://github.com/GenericLab/Unagi_Gar-Lampli
 https://github.com/kimitobo/Neocococat
@@ -44,7 +44,7 @@ https://github.com/amchagas/Flypi
 https://github.com/less-smog/hardware
 https://github.com/8BitMixtape/8BitmixtapeNEO_BerlinerSchule_SZ-RDY
 https://github.com/emard/ulx3s
-https://github.com/monostable/ruler
+https://github.com/kitspace/ruler
 https://github.com/BadenLab/Spikeling
 https://github.com/rwb27/openflexure_nano_motor_controller
 https://github.com/morgulbrut/LoRa32_Node

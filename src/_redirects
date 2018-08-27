@@ -1,3 +1,4 @@
 /jelly /boards/github.com/monostable/jelly
 /boards/github.com/prometheus-science/* /boards/github.com/amchagas/:splat
 /boards/github.com/kitnic-forks/* /boards/github.com/kitspace-forks/:splat
+/boards/github.com/monostable/* /boards/github.com/kitspace/:splat
