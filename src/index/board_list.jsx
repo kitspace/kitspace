@@ -4,6 +4,8 @@ const SearchInput = require('react-search-input').default
 
 const BoardCard = require('./board_card')
 
+const OptIn = require('../opt_in')
+
 var BoardList = React.createClass({
   propTypes: {
     data: React.PropTypes.array,
@@ -28,6 +30,7 @@ var BoardList = React.createClass({
         <div className="boardListContainer">
           <div className="boardList">{cardNodes}</div>
         </div>
+        <OptIn />
       </div>
     )
   }

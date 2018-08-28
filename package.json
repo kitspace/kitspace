@@ -71,7 +71,7 @@
     "redux": "^3.6.0",
     "redux-immutable": "^4.0.0",
     "rst2mdown": "^0.1.0",
-    "semantic-ui-react": "^0.67.1",
+    "semantic-ui-react": "^0.82.3",
     "superagent": "^3.3.1",
     "whats-that-gerber": "4.0.0-next.13",
     "xml-element-string": "^1.0.0"

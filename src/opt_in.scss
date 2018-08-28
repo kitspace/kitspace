@@ -1,0 +1,14 @@
+@import 'common';
+
+.OptIn {
+  position: fixed !important;
+  bottom: 0px !important;
+  width: 100%;
+  display: flex !important;
+  justify-content: space-evenly !important;
+  padding: 7px !important;
+  padding-top: 12px !important;
+  @include breakpoint(mobile-m) {
+    flex-wrap: wrap;
+  }
+}
