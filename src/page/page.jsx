@@ -1,3 +1,4 @@
+const semantic = require('semantic-ui-react')
 const React = require('react')
 const {Helmet} = require('react-helmet')
 
@@ -9,7 +10,7 @@ const TitleBar = require('../title_bar')
 const FadeImage = require('../fade_image')
 const BuyParts = require('../buy_parts/buy_parts')
 const Readme = require('../readme')
-const semantic = require('semantic-ui-react')
+const OptIn = require('../opt_in')
 
 const info = require('../info.json')
 const description =
@@ -62,6 +63,7 @@ const Page = React.createClass({
             <Readme />
           </div>
         </div>
+        <OptIn />
       </div>
     )
   }

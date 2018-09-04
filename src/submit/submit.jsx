@@ -10,6 +10,7 @@ const PreviewGerbers = require('./preview_gerbers')
 const PreviewBom = require('./preview_bom')
 const PreviewReadme = require('./preview_readme')
 const Finish = require('./finish')
+const OptIn = require('../opt_in')
 
 const board_colors = require('./board_colors')
 
@@ -149,7 +150,6 @@ const SubmitRouter = React.createClass({
   render() {
     return (
       <div>
-        <TitleBar route="/submit/" />
         <Router history={hashHistory}>
           <Route
             path="/"
@@ -192,6 +192,7 @@ const SubmitRouter = React.createClass({
             }
           />
         </Router>
+        <OptIn />
       </div>
     )
   },

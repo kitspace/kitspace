@@ -8,6 +8,7 @@ const Intro = require('./intro')
 
 const TitleBar = require('../title_bar')
 const boards = require('../boards.json')
+const OptIn = require('../opt_in')
 
 function Search(props) {
   return (
@@ -44,6 +45,7 @@ var Main = React.createClass({
         <Search searchUpdated={this.searchUpdated} />
         {this.state.searching ? null : <Intro />}
         <BoardList data={this.state.result} searching={this.state.searching} />
+        <OptIn />
       </div>
     )
   },
