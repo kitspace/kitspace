@@ -4,7 +4,7 @@ const semantic = require('semantic-ui-react')
 class OptIn extends React.Component {
   render() {
     return (
-      <semantic.Segment compact className="OptIn" float="right">
+      <semantic.Segment compact className="OptIn">
         <div>
           We collect statistics about visitors to this site. This data helps us
           to justify our work and improve Kitspace. See our{' '}
