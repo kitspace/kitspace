@@ -8,7 +8,7 @@ class OptIn extends React.Component {
         <div>
           We collect statistics about visitors to this site. This data helps us
           to justify our work and improve Kitspace. See our{' '}
-          <a href="/privacy-policy">privacy policy</a> for details.
+          <a href="/privacy">privacy policy</a> for details.
         </div>
         <div style={{minWidth: 130}}>
           <semantic.Button size="mini">Opt Out</semantic.Button>

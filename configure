@@ -245,6 +245,13 @@ ninja
   .using('sass')
 
 ninja
+  .edge('build/.temp/privacy.css')
+  .from('src/privacy/privacy.scss')
+  .need(sassSrc)
+  .assign('path', 'src/')
+  .using('sass')
+
+ninja
   .edge('build/index.css')
   .from('build/.temp/index.css')
   .using('autoprefix')
@@ -257,6 +264,11 @@ ninja
 ninja
   .edge('build/submit.css')
   .from('build/.temp/submit.css')
+  .using('autoprefix')
+
+ninja
+  .edge('build/privacy.css')
+  .from('build/.temp/privacy.css')
   .using('autoprefix')
 
 ninja
@@ -288,9 +300,16 @@ ninja
   .need(jsMainTargets)
   .using('browserify')
 
+ninja
+  .edge('build/privacy/app.js')
+  .from('build/.temp/privacy/render_privacy.jsx')
+  .need(jsMainTargets)
+  .using('browserify')
+  
 for (const board of boards) {
   const boardPath = board.boardPath
   const escapedFolder = ninjaBuildGen.escape(boardPath)
+
   ninja
     .edge(`build/${escapedFolder}/app.js`)
     .assign('dotd', `build/${escapedFolder}/app.js.d`)
