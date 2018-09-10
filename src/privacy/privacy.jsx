@@ -61,11 +61,20 @@ class Privacy extends React.Component {
               inquiries, and/or other requests or questions.{' '}
             </li>
           </ul>
-          <h2>How do we protect your information?</h2>
+          <h2>How do we protect your information and do I have any rights?</h2>
           <p>
-            We implement a variety of security measures to maintain the safety
-            of your personal information when you enter, submit, or access your
-            personal information.
+            <li>
+              We implement a variety of security measures to maintain the safety 
+              of your personal information when you enter, submit, or access your
+              personal information.
+             </li>
+             <li>
+               If you think that we have not sufficiently protected your personal
+               information or that there has been a data breach, you have the right to
+               directly file a complaint with the local supervisory authority. But
+               please contact us and we will do our best to resolve the problem for you
+               first!
+             </li>    
           </p>
           <h2>What is your data retention policy?</h2>
           <p>We will make a good faith effort to:</p>
