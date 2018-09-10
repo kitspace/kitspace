@@ -5,7 +5,7 @@ const semantic = require('semantic-ui-react')
 class Privacy extends React.Component {
   render() {
     return (
-      <div>
+      <div className="Privacy">
         <TitleBar />
         <semantic.Container>
           <h1>The Kitspace Privacy Policy</h1>
@@ -15,30 +15,52 @@ class Privacy extends React.Component {
             Asked Questions about our Privacy Policy:
           </p>
           <h2>What information do we collect?</h2>
-          * We use Piwik to monitor and analyse the use of our services. This
-          app runs on a SandStorm server who seem to have a reasonably good
-          privacy policy but if you would like to have a look for yourself, you
-          can find it at https://oasis.sandstorm.io/privacy * When you visit
-          https://kitspace.org, with Piwik web analytics service we record your
-          IP address (but we scrub the last two bytes, eg. 192.168.xxx.xxx),
-          browser type, browser version, which pages of our website you visited
-          and for how long, when you visited our site, unique device identifiers
-          and other diagnostic data.
+          <ul>
+            <li>
+              We use Piwik to monitor and analyse the use of our services. This
+              app runs on a Sandstorm server. Analytics data itself is not
+              shared with Sandstorm but your requests do hit their servers. You
+              can check their{' '}
+              <a href="https://oasis.sandstorm.io/privacy">
+                privacy policy here
+              </a>.
+            </li>
+            <li>
+              When you visit https://kitspace.org, with Piwik web analytics
+              service we record your IP address (but we scrub the last two
+              bytes, eg. 192.168.xxx.xxx), browser type, browser version, which
+              pages of our website you visited and for how long, when you
+              visited our site, unique device identifiers and other diagnostic
+              data.
+            </li>
+          </ul>
           <h2>What do we use your information for?</h2>
           <p>
             Any of the information we collect from you may be used in one of the
             following ways:
           </p>
-          * To personalize your experience — your information helps us to better
-          respond to your individual needs. * To improve our site — we
-          continually strive to improve our site offerings based on the
-          information and feedback we receive from you. * To improve customer
-          service — your information helps us to more effectively respond to
-          your customer service requests and support needs. * To send periodic
-          emails — The email address you provide may be used to send you
-          information, notifications that you request about changes to topics or
-          in response to your user name, respond to inquiries, and/or other
-          requests or questions.
+          <ul>
+            <li>
+              To personalize your experience — your information helps us to
+              better respond to your individual needs.
+            </li>
+            <li>
+              To improve our site — we continually strive to improve our site
+              offerings based on the information and feedback we receive from
+              you.
+            </li>
+            <li>
+              To improve customer service — your information helps us to more
+              effectively respond to your customer service requests and support
+              needs.
+            </li>
+            <li>
+              To send periodic emails — The email address you provide may be
+              used to send you information, notifications that you request about
+              changes to topics or in response to your user name, respond to
+              inquiries, and/or other requests or questions.{' '}
+            </li>
+          </ul>
           <h2>How do we protect your information?</h2>
           <p>
             We implement a variety of security measures to maintain the safety
@@ -47,9 +69,16 @@ class Privacy extends React.Component {
           </p>
           <h2>What is your data retention policy?</h2>
           <p>We will make a good faith effort to:</p>
-          * Retain server logs containing the IP address of all requests to this
-          server no more than 90 days. * Retain the IP addresses associated with
-          registered users and their posts no more than 5 years.
+          <ul>
+            <li>
+              Retain server logs containing the IP address of all requests to
+              this server no more than 90 days.
+            </li>
+            <li>
+              Retain the IP addresses associated with registered users and their
+              posts no more than 5 years.
+            </li>
+          </ul>
           <h2>Do we use cookies?</h2>
           <p>
             Yes. Cookies are small files that a site or its service provider
@@ -108,7 +137,11 @@ class Privacy extends React.Component {
             If you have any questions about this Privacy Policy or would like
             your data removed, please contact us:
           </p>
-          * By email: info@kitspace.org
+          <ul>
+            <li>
+              By email: <a href="mailto:info@kitspace.org">info@kitspace.org</a>
+            </li>
+          </ul>
           <h2>Changes to our Privacy Policy</h2>
           <p>
             If we decide to change our privacy policy, we will post those
