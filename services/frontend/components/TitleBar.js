@@ -56,7 +56,6 @@ export default function TitleBar(props) {
           <a href="/">
             <semantic.Image className="logoImg" src="/static/logo.svg" />
           </a>
-          <semantic.Menu.Item />
           <semantic.Menu.Item active={props.active === '/'} href="/">
             {'Projects'}
           </semantic.Menu.Item>

@@ -25,10 +25,6 @@
     width: 100%;
     justify-content: center;
 
-    @include breakpoint(small_width) {
-        justify-content: space-around;
-    }
-
     .logoContainer {
         min-width:320px;
         display:flex;
@@ -36,9 +32,6 @@
         margin: 10px;
         z-index: 1;
         flex-shrink: 2;
-        @include breakpoint(mobile-l) {
-            width: 100%;
-        }
     }
 
     .logoImg {
@@ -73,13 +66,6 @@
         padding: 10px;
         z-index: 1;
 
-        @include breakpoint(small_width) {
-            min-width: 0px;
-        }
-        @include breakpoint(mobile-l) {
-            width: 100%;
-        }
-
         .contributeButton {
             align-items: center;
             border: 0;
@@ -108,11 +94,6 @@
     .middleContainer {
         flex-grow: 2;
 
-        @include breakpoint(small_width) {
-            margin: 10px;
-            order: 3;
-            width: 100%;
-        }
     }
 
     .addProjectButton {
