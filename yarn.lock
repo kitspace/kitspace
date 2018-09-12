@@ -8,6 +8,10 @@
   dependencies:
     xlsx "^0.12.6"
 
+"@tracespace/xml-id@^4.0.0-next.13":
+  version "4.0.0-next.13"
+  resolved "https://registry.yarnpkg.com/@tracespace/xml-id/-/xml-id-4.0.0-next.13.tgz#7ee9b229572400303e19f43841e7507a0d329320"
+
 JSONStream@^1.0.3:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/JSONStream/-/JSONStream-1.2.1.tgz#32aa5790e799481083b49b4b7fa94e23bae69bf9"
@@ -2108,9 +2112,9 @@ gerber-parser@^4.0.0-next.9:
     lodash.padright "^3.1.3"
     readable-stream "^2.1.2"
 
-gerber-plotter@^4.0.0-next.9:
-  version "4.0.0-next.9"
-  resolved "https://registry.yarnpkg.com/gerber-plotter/-/gerber-plotter-4.0.0-next.9.tgz#8e9a48a41b6386e58caed4b5ce848518c1d823a6"
+gerber-plotter@^4.0.0-next.13:
+  version "4.0.0-next.13"
+  resolved "https://registry.yarnpkg.com/gerber-plotter/-/gerber-plotter-4.0.0-next.13.tgz#e3167a7cb60650607687ce127fb15ac144adef75"
   dependencies:
     inherits "^2.0.3"
     lodash.fill "^3.4.0"
@@ -2118,13 +2122,14 @@ gerber-plotter@^4.0.0-next.9:
     lodash.isfunction "^3.0.9"
     readable-stream "^2.3.6"
 
-gerber-to-svg@^4.0.0-next.12:
-  version "4.0.0-next.12"
-  resolved "https://registry.yarnpkg.com/gerber-to-svg/-/gerber-to-svg-4.0.0-next.12.tgz#4e31e18b87d82bc622c0b8bc84184ea45a9d7e67"
+gerber-to-svg@^4.0.0-next.13:
+  version "4.0.0-next.13"
+  resolved "https://registry.yarnpkg.com/gerber-to-svg/-/gerber-to-svg-4.0.0-next.13.tgz#11b6d477ad8e89ba05ccc05469f1e0ca2afccfa3"
   dependencies:
+    "@tracespace/xml-id" "^4.0.0-next.13"
     escape-html "^1.0.3"
     gerber-parser "^4.0.0-next.9"
-    gerber-plotter "^4.0.0-next.9"
+    gerber-plotter "^4.0.0-next.13"
     inherits "^2.0.1"
     lodash.isfinite "^3.2.0"
     lodash.isstring "^4.0.1"
@@ -3701,23 +3706,24 @@ pbkdf2@^3.0.3:
   dependencies:
     create-hmac "^1.1.2"
 
-pcb-stackup-core@^4.0.0-next.9:
-  version "4.0.0-next.9"
-  resolved "https://registry.yarnpkg.com/pcb-stackup-core/-/pcb-stackup-core-4.0.0-next.9.tgz#831adce5f63e9399b8b43748f9a75d9d6dc8e153"
+pcb-stackup-core@^4.0.0-next.13:
+  version "4.0.0-next.13"
+  resolved "https://registry.yarnpkg.com/pcb-stackup-core/-/pcb-stackup-core-4.0.0-next.13.tgz#2f001ee05254c6ae9d171c5ae34e23d5eb7cd25c"
   dependencies:
+    "@tracespace/xml-id" "^4.0.0-next.13"
     color-string "^1.4.0"
     lodash.isstring "^4.0.1"
     viewbox "^1.0.0"
     xml-element-string "^1.0.0"
 
-pcb-stackup@^4.0.0-next.12:
-  version "4.0.0-next.12"
-  resolved "https://registry.yarnpkg.com/pcb-stackup/-/pcb-stackup-4.0.0-next.12.tgz#06e567841d40eb68676ad749ed81dbe81272b22e"
+pcb-stackup@^4.0.0-next.13:
+  version "4.0.0-next.13"
+  resolved "https://registry.yarnpkg.com/pcb-stackup/-/pcb-stackup-4.0.0-next.13.tgz#3adffb6d0ff81d15f1dec66f51b9c923f17cb5bf"
   dependencies:
-    gerber-to-svg "^4.0.0-next.12"
-    pcb-stackup-core "^4.0.0-next.9"
-    shortid "^2.2.6"
-    whats-that-gerber "^4.0.0-next.12"
+    "@tracespace/xml-id" "^4.0.0-next.13"
+    gerber-to-svg "^4.0.0-next.13"
+    pcb-stackup-core "^4.0.0-next.13"
+    whats-that-gerber "^4.0.0-next.13"
     xtend "^4.0.1"
 
 pify@^2.0.0:
@@ -4396,10 +4402,6 @@ shelljs@^0.7.5:
     interpret "^1.0.0"
     rechoir "^0.6.2"
 
-shortid@^2.2.6:
-  version "2.2.6"
-  resolved "https://registry.yarnpkg.com/shortid/-/shortid-2.2.6.tgz#3abbefc6c51074cf2c1f1e72f6216a1b45876d72"
-
 signal-exit@^3.0.0:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.2.tgz#b5fdc08f1287ea1178628e415e25132b73646c6d"
@@ -4896,9 +4898,9 @@ webidl-conversions@^3.0.0, webidl-conversions@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/webidl-conversions/-/webidl-conversions-3.0.1.tgz#24534275e2a7bc6be7bc86611cc16ae0a5654871"
 
-whats-that-gerber@^4.0.0-next.12:
-  version "4.0.0-next.12"
-  resolved "https://registry.yarnpkg.com/whats-that-gerber/-/whats-that-gerber-4.0.0-next.12.tgz#1cada3f518236fdab95b0739d1f3038ab25eed6a"
+whats-that-gerber@^4.0.0-next.13:
+  version "4.0.0-next.13"
+  resolved "https://registry.yarnpkg.com/whats-that-gerber/-/whats-that-gerber-4.0.0-next.13.tgz#1bd76056b2450d13c2000de94950c300b2b3e4eb"
 
 whatwg-encoding@^1.0.1:
   version "1.0.1"
