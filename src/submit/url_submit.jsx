@@ -225,7 +225,7 @@ const UrlSubmit = React.createClass({
               return superagent
                 .get(url.resolve(GIT_CLONE_SERVER, path.join(root, f)))
                 .withCredentials()
-                .then(res => ({gerber: res.text, filename: f}))
+                .then(res => ({gerber: res.text, filename: path.basename(f)}))
             })
             Promise.all(requests).then(buildBoard.bind(null, dispatch))
             dispatch({type: 'setFileListing', value: files})

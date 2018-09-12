@@ -79,7 +79,7 @@ if (require.main !== module) {
     const stackupData = []
     for (let gerberPath of gerbers) {
       data = fs.readFileSync(gerberPath, {encoding: 'utf8'})
-      stackupData.push({filename: gerberPath, gerber: data})
+      stackupData.push({filename: path.basename(gerberPath), gerber: data})
       zip.file(path.join(folder_name, path.basename(gerberPath)), data)
     }
     zip

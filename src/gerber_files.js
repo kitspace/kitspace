@@ -7,7 +7,7 @@ function gerberFiles(files, gerberPath) {
     files = files.filter(f => regex.test(f))
   }
   const layers = files
-    .map(f => ({path: f, type: whatsThatGerber(f)}))
+    .map(f => ({path: f, type: whatsThatGerber(path.basename(f))}))
     .filter(({type}) => type !== 'drw')
   const possibleGerbers = layers.map(({path}) => path)
   const possibleTypes = layers.map(({type}) => type)
