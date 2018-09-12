@@ -6,7 +6,9 @@ class Privacy extends React.Component {
   render() {
     return (
       <div className="Privacy">
-        <TitleBar />
+        <TitleBar submissionButton>
+          <div className="titleText">Privacy Policy</div>
+        </TitleBar>
         <semantic.Container>
           <h1>The Kitspace Privacy Policy</h1>
           <p>
@@ -26,12 +28,11 @@ class Privacy extends React.Component {
               </a>.
             </li>
             <li>
-              When you visit https://kitspace.org, with Piwik web analytics
-              service we record your IP address (but we scrub the last two
-              bytes, eg. 192.168.xxx.xxx), browser type, browser version, which
-              pages of our website you visited and for how long, when you
-              visited our site, unique device identifiers and other diagnostic
-              data.
+              When you visit kitspace.org, with Piwik web analytics service we
+              record your IP address (but we scrub the last two bytes, eg.
+              192.168.xxx.xxx), browser type, browser version, which pages of
+              our website you visited and for how long, when you visited our
+              site, unique device identifiers and other diagnostic data.
             </li>
           </ul>
           <h2>What do we use your information for?</h2>
