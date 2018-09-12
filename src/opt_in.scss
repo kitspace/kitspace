@@ -5,7 +5,7 @@
   bottom: 0px !important;
   width: 100%;
   display: flex !important;
-  justify-content: space-evenly !important;
+  justify-content: space-around !important;
   padding: 7px !important;
   padding-top: 12px !important;
   @include breakpoint(mobile-m) {
