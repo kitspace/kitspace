@@ -103,11 +103,12 @@ class Privacy extends React.Component {
           </p>
           <h2>Do we disclose any information to outside parties?</h2>
           <p>
-            We do not sell, trade, or otherwise transfer to outside parties your
-            personally identifiable information. This does not include trusted
-            third parties who assist us in operating our site, conducting our
-            business, or servicing you, so long as those parties agree to keep
-            this information confidential. 
+            We do not disclose your personally identifiable information to 
+            outside parties for the purpose of selling your information, trading 
+            it or otherwise transferring it. However, we do disclose your 
+            information to trusted third parties who assist us in operating our site, 
+            conducting our business, or servicing you. These third parties are under 
+            the agreement that they will keep this information confidential.
            </p>
            <p>
             We may also release your information when we believe release is 
