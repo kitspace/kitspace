@@ -1,0 +1,4 @@
+[[headers]]
+  for = "/privacy/"
+  [headers.values]
+    X-Frame-Options = "ALLOW"
