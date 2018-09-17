@@ -29,10 +29,6 @@ class Privacy extends React.Component {
               when you visited our site, unique device identifiers and other
               diagnostic data.
             </li>
-            <iframe
-              style={{border: 0, height: 200, width: 600}}
-              src="https://matomo.kitspace.org/index.php?module=CoreAdminHome&action=optOut&language=en&backgroundColor=&fontColor=&fontSize=&fontFamily=Noto%20Sans"
-            />
           </ul>
           <h2>What do we use your information for?</h2>
           <p>
@@ -140,7 +136,14 @@ class Privacy extends React.Component {
             through our site and not to information collected offline.
           </p>
           <h2>Your Consent</h2>
-          <p>By using our site, you consent to our web site privacy policy.</p>
+          <p>
+            By using our site, you consent to our web site privacy policy. You
+            may opt-in and opt-out of tracking below.
+          </p>
+          <iframe
+            style={{border: 0, height: 200, width: 600}}
+            src="https://matomo.kitspace.org/index.php?module=CoreAdminHome&action=optOut&language=en&backgroundColor=&fontColor=&fontSize=&fontFamily=Noto%20Sans"
+          />
           <h2>Contact Us</h2>
           <p>
             If you have any questions about this Privacy Policy or would like
