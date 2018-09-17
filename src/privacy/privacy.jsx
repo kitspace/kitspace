@@ -51,7 +51,7 @@ class Privacy extends React.Component {
               needs.
             </li>
             <li>
-              To send periodic emails — The email address you provide may be
+              To send periodic emails — the email address you provide may be
               used to send you information, notifications that you request about
               changes to topics or in response to your user name, respond to
               inquiries, and/or other requests or questions.{' '}
@@ -107,12 +107,15 @@ class Privacy extends React.Component {
             personally identifiable information. This does not include trusted
             third parties who assist us in operating our site, conducting our
             business, or servicing you, so long as those parties agree to keep
-            this information confidential. We may also release your information
-            when we believe release is appropriate to comply with the law,
-            enforce our site policies, or protect ours or others rights,
-            property, or safety. However, non-personally identifiable visitor
-            information may be provided to other parties for marketing,
-            advertising, or other uses.
+            this information confidential. 
+           </p>
+           <p>
+            We may also release your information when we believe release is 
+            appropriate to comply with the law, enforce our site policies, or 
+            protect ours or others rights, property, or safety.
+           <p>
+            Non-personally identifiable visitor information may be provided to 
+            other parties for other uses.
           </p>
           <h2>Third party links</h2>
           <p>
