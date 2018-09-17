@@ -19,21 +19,20 @@ class Privacy extends React.Component {
           <h2>What information do we collect?</h2>
           <ul>
             <li>
-              We use Piwik to monitor and analyse the use of our services. This
-              app runs on a Sandstorm server. Analytics data itself is not
-              shared with Sandstorm but your requests do hit their servers. You
-              can check their{' '}
-              <a href="https://oasis.sandstorm.io/privacy">
-                privacy policy here
-              </a>.
+              We host our own instance of Matomo to monitor and analyse the use
+              of our services.
             </li>
             <li>
-              When you visit kitspace.org, with Piwik web analytics service we
-              record your IP address (but we scrub the last two bytes, eg.
-              192.168.xxx.xxx), browser type, browser version, which pages of
-              our website you visited and for how long, when you visited our
-              site, unique device identifiers and other diagnostic data.
+              When you visit kitspace.org we record your IP address (but scrub
+              the last two bytes, eg. 192.168.xxx.xxx), browser type, browser
+              version, which pages of our website you visited and for how long,
+              when you visited our site, unique device identifiers and other
+              diagnostic data.
             </li>
+            <iframe
+              style={{border: 0, height: 200, width: 600}}
+              src="https://matomo.kitspace.org/index.php?module=CoreAdminHome&action=optOut&language=en&backgroundColor=&fontColor=&fontSize=&fontFamily=Noto%20Sans"
+            />
           </ul>
           <h2>What do we use your information for?</h2>
           <p>
@@ -65,17 +64,17 @@ class Privacy extends React.Component {
           <h2>How do we protect your information and do I have any rights?</h2>
           <p>
             <li>
-              We implement a variety of security measures to maintain the safety 
-              of your personal information when you enter, submit, or access your
-              personal information.
-             </li>
-             <li>
-               If you think that we have not sufficiently protected your personal
-               information or that there has been a data breach, you have the right to
-               directly file a complaint with the local supervisory authority. But
-               please contact us and we will do our best to resolve the problem for you
-               first!
-             </li>    
+              We implement a variety of security measures to maintain the safety
+              of your personal information when you enter, submit, or access
+              your personal information.
+            </li>
+            <li>
+              If you think that we have not sufficiently protected your personal
+              information or that there has been a data breach, you have the
+              right to directly file a complaint with the local supervisory
+              authority. But please contact us and we will do our best to
+              resolve the problem for you first!
+            </li>
           </p>
           <h2>What is your data retention policy?</h2>
           <p>We will make a good faith effort to:</p>
