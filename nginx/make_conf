@@ -22,159 +22,11 @@ server {
 	error_page 503 /error/503;
 	error_page 504 /error/504;
 
+
 	location ^~ / {
 		proxy_pass http://${docker_host}:1234;
 	}
 
-	location ^~ '/${KITSPACE_GITLAB_PATH}/users/auth' {
-		client_max_body_size 0;
-
-		gzip off;
-
-		## https://github.com/gitlabhq/gitlabhq/issues/694
-		## Some requests take more than 30 seconds.
-		proxy_read_timeout      300;
-		proxy_connect_timeout   300;
-		proxy_redirect          off;
-
-		proxy_http_version 1.1;
-
-		proxy_set_header    Host                \$http_host;
-		proxy_set_header    X-Real-IP           \$remote_addr;
-		proxy_set_header    X-Forwarded-For     \$proxy_add_x_forwarded_for;
-		proxy_set_header    X-Forwarded-Proto   \$scheme;
-
-		proxy_intercept_errors on;
-
-		proxy_cookie_path /${KITSPACE_GITLAB_PATH} /;
-
-		proxy_pass http://${docker_host}:${KITSPACE_GITLAB_PORT}/${KITSPACE_GITLAB_PATH}/users/auth;
-
-	}
-
-	location ^~ '/${KITSPACE_GITLAB_PATH}/users' {
-		# allow the login service to access these externally, but no one else
-		allow ${KITSPACE_LOGIN_SERVER_IP};
-		deny all;
-		error_page 403 /login;
-
-		client_max_body_size 0;
-
-		gzip off;
-
-		## https://github.com/gitlabhq/gitlabhq/issues/694
-		## Some requests take more than 30 seconds.
-		proxy_read_timeout      300;
-		proxy_connect_timeout   300;
-		proxy_redirect          off;
-
-		proxy_http_version 1.1;
-
-		proxy_set_header    Host                \$http_host;
-		proxy_set_header    X-Real-IP           \$remote_addr;
-		proxy_set_header    X-Forwarded-For     \$proxy_add_x_forwarded_for;
-		proxy_set_header    X-Forwarded-Proto   \$scheme;
-
-		proxy_intercept_errors on;
-
-		proxy_cookie_path '/${KITSPACE_GITLAB_PATH}' /;
-
-		proxy_pass http://${docker_host}:${KITSPACE_GITLAB_PORT}/${KITSPACE_GITLAB_PATH}/users;
-
-	}
-
-	location ^~ '/${KITSPACE_GITLAB_PATH}/profile' {
-		# allow the login service to access these externally, but no one else
-		allow ${KITSPACE_LOGIN_SERVER_IP};
-		deny all;
-
-		client_max_body_size 0;
-
-		gzip off;
-
-		## https://github.com/gitlabhq/gitlabhq/issues/694
-		## Some requests take more than 30 seconds.
-		proxy_read_timeout      300;
-		proxy_connect_timeout   300;
-		proxy_redirect          off;
-
-		proxy_http_version 1.1;
-
-		proxy_set_header    Host                \$http_host;
-		proxy_set_header    X-Real-IP           \$remote_addr;
-		proxy_set_header    X-Forwarded-For     \$proxy_add_x_forwarded_for;
-		proxy_set_header    X-Forwarded-Proto   \$scheme;
-
-		proxy_intercept_errors on;
-
-		proxy_cookie_path '/${KITSPACE_GITLAB_PATH}' /;
-
-		proxy_pass http://${docker_host}:${KITSPACE_GITLAB_PORT}/${KITSPACE_GITLAB_PATH}/profile;
-
-	}
-
-	location ^~ '/${KITSPACE_GITLAB_PATH}/uploads' {
-		# allow the login service to access these externally, but no one else
-		allow ${KITSPACE_LOGIN_SERVER_IP};
-		deny all;
-		error_page 403 /login;
-
-		client_max_body_size 0;
-
-		gzip off;
-
-		## https://github.com/gitlabhq/gitlabhq/issues/694
-		## Some requests take more than 30 seconds.
-		proxy_read_timeout      300;
-		proxy_connect_timeout   300;
-		proxy_redirect          off;
-
-		proxy_http_version 1.1;
-
-		proxy_set_header    Host                \$http_host;
-		proxy_set_header    X-Real-IP           \$remote_addr;
-		proxy_set_header    X-Forwarded-For     \$proxy_add_x_forwarded_for;
-		proxy_set_header    X-Forwarded-Proto   \$scheme;
-
-		proxy_intercept_errors on;
-
-		proxy_cookie_path '/${KITSPACE_GITLAB_PATH}' /;
-
-		proxy_pass http://${docker_host}:${KITSPACE_GITLAB_PORT}/${KITSPACE_GITLAB_PATH}/uploads;
-
-	}
-
-
-	location ^~ '/${KITSPACE_GITLAB_PATH}/api/v4/' {
-
-		client_max_body_size 0;
-
-		gzip off;
-
-		## https://github.com/gitlabhq/gitlabhq/issues/694
-		## Some requests take more than 30 seconds.
-		proxy_read_timeout      300;
-		proxy_connect_timeout   300;
-		proxy_redirect          off;
-
-		proxy_http_version 1.1;
-
-		proxy_set_header    Host                \$http_host;
-		proxy_set_header    X-Real-IP           \$remote_addr;
-		proxy_set_header    X-Forwarded-For     \$proxy_add_x_forwarded_for;
-		proxy_set_header    X-Forwarded-Proto   \$scheme;
-
-		proxy_intercept_errors on;
-
-		proxy_cookie_path /${KITSPACE_GITLAB_PATH} /;
-
-		rewrite ^ \$request_uri;
-		rewrite ^/(.*) \$1 break;
-		return 400;
-
-		proxy_pass http://${docker_host}:${KITSPACE_GITLAB_PORT}/\$uri;
-
-	}
 
 	location ^~ '/${KITSPACE_GITLAB_PATH}' {
 
@@ -249,5 +101,6 @@ server {
 
 		proxy_pass http://${docker_host}:3000/;
 	}
+
 
 }" > "${dir}/default.conf"
