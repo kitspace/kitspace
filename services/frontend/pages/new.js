@@ -20,14 +20,16 @@ export default class New extends React.Component {
           <div className="ui two column stackable center aligned grid">
             <semantic.Grid.Row verticalAlign='middle'>
               <semantic.Grid.Column>
+                <p>Upload Gerbers, CAD files, BOM (csv, xlsx, ods)</p>
                 <semantic.Button color='green'>Upload Files</semantic.Button>
               </semantic.Grid.Column>
               <div className="dividerContainer">
                 <semantic.Divider vertical>Or</semantic.Divider>
               </div>
               <semantic.Grid.Column>
+                <p>Import and link an existing Git repository</p>
                 <semantic.Input
-                  action={{content: 'Link Git Repo', color: 'green'}}
+                  action={{content: 'Import', color: 'green'}}
                   value="https://"
                 />
               </semantic.Grid.Column>
