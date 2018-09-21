@@ -218,6 +218,12 @@ export default class ChangeProfile extends React.Component {
             </semantic.Segment>
           </div>
           <semantic.Form.Input
+            disabled
+            name="username"
+            label="User Name (not changeable yet)"
+            value={user.username}
+          />
+          <semantic.Form.Input
             onChange={this.inputOnChange}
             label="Real Name"
             name="user[name]"
