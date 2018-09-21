@@ -1,6 +1,7 @@
 import './UserMenu.scss'
 import React from 'react'
 import * as semantic from 'semantic-ui-react'
+import Link from 'next/link'
 
 function UserMenu(props) {
   const user = props.user || {}
@@ -8,10 +9,12 @@ function UserMenu(props) {
     <div className="UserMenu">
       <div className="userName">{user.username}</div>
       <semantic.Menu vertical attached>
-        <semantic.Menu.Item href="/settings">
+        <Link href="/settings">
+        <semantic.Menu.Item>
           <semantic.Icon name="settings" />
           Settings
         </semantic.Menu.Item>
+      </Link>
         <semantic.Menu.Item href="/!gitlab/users/sign_out">
           <semantic.Icon name="sign out" />
           Sign out

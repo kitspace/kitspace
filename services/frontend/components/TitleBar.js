@@ -1,6 +1,7 @@
 import './TitleBar.scss'
 import React from 'react'
 import * as semantic from 'semantic-ui-react'
+import Link from 'next/link'
 
 import UserMenu from './UserMenu'
 
@@ -22,9 +23,11 @@ export default function TitleBar(props) {
   let userButton
   if (!user) {
     userButton = (
-      <semantic.Button basic inverted href="/login">
-        {'Sign in'}
-      </semantic.Button>
+      <Link href="/login">
+        <semantic.Button basic inverted>
+          {'Sign in'}
+        </semantic.Button>
+      </Link>
     )
   } else {
     userButton = (
@@ -53,15 +56,21 @@ export default function TitleBar(props) {
     <div className="titleBar">
       <div className="logoContainer">
         <semantic.Menu inverted pointing secondary>
-          <a href="/">
-            <semantic.Image className="logoImg" src="/static/logo.svg" />
-          </a>
-          <semantic.Menu.Item active={props.active === '/'} href="/">
-            {'Projects'}
-          </semantic.Menu.Item>
-          <semantic.Menu.Item active={props.active === '/about'} href="/about">
-            {'About'}
-          </semantic.Menu.Item>
+          <Link href="/">
+            <a>
+              <semantic.Image className="logoImg" src="/static/logo.svg" />
+            </a>
+          </Link>
+          <Link href="/">
+            <semantic.Menu.Item active={props.active === '/'}>
+              {'Projects'}
+            </semantic.Menu.Item>
+          </Link>
+          <Link href="/about">
+            <semantic.Menu.Item active={props.active === '/about'}>
+              {'About'}
+            </semantic.Menu.Item>
+          </Link>
         </semantic.Menu>
       </div>
       <div className="middleContainer">{props.children}</div>
