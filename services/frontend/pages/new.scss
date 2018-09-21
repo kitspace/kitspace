@@ -1,8 +1,14 @@
+@import '../components/common';
+
 .New {
   border: 0 none !important;
   box-shadow: none !important;
 
   margin-top: 50px !important;
+
+  .ui.two.column.stackable.center.aligned.grid {
+    min-height: 200px !important;
+  }
 
   .options {
     overflow: hidden;
@@ -17,5 +23,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  .dividerContainer {
+    @include breakpoint(small_width) {
+      min-width: 100%;
+    }
   }
 }

@@ -16,7 +16,7 @@ export default function TitleBar(props) {
         icon="plus"
         labelPosition="left"
         style={{
-          visibility: props.hideAddProjectButton ? 'hidden' : 'initial',
+          visibility: props.active === '/new' ? 'hidden' : 'initial',
         }}
       />
     </Link>

@@ -17,28 +17,21 @@ export default class New extends React.Component {
           <title>New Project - Kitspace</title>
         </Head>
         <semantic.Segment className="New">
-          <div className="options">
-            <div className="optionContainer">
-              <div>
-                <semantic.Button size="large" primary>
-                  Upload Files
-                </semantic.Button>
+          <div className="ui two column stackable center aligned grid">
+            <semantic.Grid.Row verticalAlign='middle'>
+              <semantic.Grid.Column>
+                <semantic.Button color='green'>Upload Files</semantic.Button>
+              </semantic.Grid.Column>
+              <div className="dividerContainer">
+                <semantic.Divider vertical>Or</semantic.Divider>
               </div>
-            </div>
-            <div style={{minWidth: 100}}>
-              <semantic.Divider vertical> or </semantic.Divider>
-            </div>
-            <div className="optionContainer">
-              <div>
-                <form className="ui large form">
-                  <semantic.Form.Input
-                    label="Link a Git repository"
-                    value="https://"
-                    action={{content: 'Submit'}}
-                  />
-                </form>
-              </div>
-            </div>
+              <semantic.Grid.Column>
+                <semantic.Input
+                  action={{content: 'Link Git Repo', color: 'green'}}
+                  value="https://"
+                />
+              </semantic.Grid.Column>
+            </semantic.Grid.Row>
           </div>
         </semantic.Segment>
       </>
