@@ -43,7 +43,7 @@ export default function TitleBar(props) {
           </a>
         }
         on="click"
-        offset={-20}
+        basic
       >
         <UserMenu user={user} />
       </semantic.Popup>
