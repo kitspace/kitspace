@@ -29,7 +29,8 @@ export default class KitspaceApp extends App {
       getPageProps(),
     ])
 
-    return {user, pageProps, route: router.route}
+
+    return {user, pageProps, route: ctx.asPath}
   }
 
   render() {
