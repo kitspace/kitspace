@@ -13,7 +13,8 @@ app.prepare().then(() => {
   const server = express()
 
   server.all('/login/*', nextHandler)
-  server.all('/submit/*', nextHandler)
+  server.all('/submit', (req, res) => res.redirect(301, '/new'))
+  server.all('/new', nextHandler)
   server.all('/about/*', nextHandler)
   server.all('/_next/*', nextHandler)
   server.all('/static/*', nextHandler)

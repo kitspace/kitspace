@@ -1,0 +1,21 @@
+.New {
+  border: 0 none !important;
+  box-shadow: none !important;
+
+  margin-top: 50px !important;
+
+  .options {
+    overflow: hidden;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .optionContainer {
+    margin: 10px;
+    width: 40%;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

@@ -8,17 +8,18 @@ import UserMenu from './UserMenu'
 export default function TitleBar(props) {
   const user = props.user
   const addProjectButton = (
-    <semantic.Button
-      className="addProjectButton"
-      href="/submit"
-      content="Add a project"
-      color="green"
-      icon="plus"
-      labelPosition="left"
-      style={{
-        visibility: props.hideAddProjectButton ? 'hidden' : 'initial',
-      }}
-    />
+    <Link href="/new">
+      <semantic.Button
+        className="addProjectButton"
+        content="Add a project"
+        color="green"
+        icon="plus"
+        labelPosition="left"
+        style={{
+          visibility: props.hideAddProjectButton ? 'hidden' : 'initial',
+        }}
+      />
+    </Link>
   )
   let userButton
   if (!user) {
