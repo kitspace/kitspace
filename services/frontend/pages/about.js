@@ -2,7 +2,7 @@ import * as semantic from 'semantic-ui-react'
 import Link from 'next/link'
 import Head from 'next/head'
 import React from 'react'
-import Gitlab from 'kitspace-gitlab-client'
+import Gitlab from '@kitspace/gitlab-client'
 import TitleBar from '../components/TitleBar'
 
 import './about.scss'

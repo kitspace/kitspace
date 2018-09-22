@@ -2,7 +2,7 @@ const express = require('express')
 const next = require('next')
 const conf = require('./next.config.js')
 const dotenv = require('dotenv').config({path: '../../.env'})
-const Gitlab = require('kitspace-gitlab-client')
+const Gitlab = require('@kitspace/gitlab-client')
 
 const port = parseInt(process.env.PORT, 10) || 1234
 const dev = process.env.NODE_ENV !== 'production'

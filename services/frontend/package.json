@@ -12,7 +12,7 @@
     "create-react-class": "^15.6.3",
     "dotenv": "^6.0.0",
     "express": "^4.16.3",
-    "kitspace-gitlab-client": "*",
+    "@kitspace/gitlab-client": "*",
     "next": "^6.1.1",
     "node-sass": "^4.9.2",
     "path-match": "^1.2.4",

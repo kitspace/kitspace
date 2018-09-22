@@ -1,6 +1,6 @@
 import App, {Container} from 'next/app'
 import React from 'react'
-import Gitlab from 'kitspace-gitlab-client'
+import Gitlab from '@kitspace/gitlab-client'
 import TitleBar from '../components/TitleBar'
 
 export default class KitspaceApp extends App {

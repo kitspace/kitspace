@@ -1,5 +1,5 @@
 import React from 'react'
-import Gitlab from 'kitspace-gitlab-client'
+import Gitlab from '@kitspace/gitlab-client'
 
 export default class extends React.Component {
   static async getInitialProps({req, query: {namespace, projectname}}) {

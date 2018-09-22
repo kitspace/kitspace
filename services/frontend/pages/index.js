@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import Head from 'next/head'
 import React from 'react'
-import Gitlab from 'kitspace-gitlab-client'
+import Gitlab from '@kitspace/gitlab-client'
 
 export default class Index extends React.Component {
   static async getInitialProps({req, gitlab}) {

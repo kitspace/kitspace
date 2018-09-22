@@ -2,7 +2,7 @@ import Link from 'next/link'
 import Head from 'next/head'
 import React from 'react'
 import * as semantic from 'semantic-ui-react'
-import Gitlab from 'kitspace-gitlab-client'
+import Gitlab from '@kitspace/gitlab-client'
 
 import './new.scss'
 

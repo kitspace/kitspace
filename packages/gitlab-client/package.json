@@ -1,5 +1,5 @@
 {
-  "name": "kitspace-gitlab-client",
+  "name": "@kitspace/gitlab-client",
   "version": "0.0.0",
   "description": "",
   "scripts": {
