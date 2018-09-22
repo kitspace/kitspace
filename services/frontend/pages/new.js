@@ -4,6 +4,7 @@ import React from 'react'
 import * as semantic from 'semantic-ui-react'
 import Gitlab from '@kitspace/gitlab-client'
 import gitUrlParse from 'git-url-parse'
+import Router from 'next/router'
 
 import './new.scss'
 
@@ -18,19 +19,25 @@ if (typeof window !== 'undefined') {
 export default class New extends React.Component {
   state = {import_url: 'https://github.com/kitspace/ruler'}
   static async getInitialProps({req, gitlab}) {
-    const [token, project_names] = await Promise.all([
+    const [token, userProjects] = await Promise.all([
       gitlab.getAuthenticity(),
-      gitlab.getUserProjects().then(ps => ps.map(p => p.name)),
+      gitlab.getUserProjects(),
     ])
-    return {token, project_names}
+    return {token, userProjects}
   }
   handleImport = e => {
     const {import_url} = this.state
+    const previous = this.props.userProjects.find(p => p.import_url === import_url)
+    if (previous) {
+      Router.push('/' + previous.path_with_namespace)
+      return
+    }
+    const projectNames = this.props.userProjects.map(p => p.name)
     let name = gitUrlParse(import_url)
       .full_name.split('/')
       .pop()
     let i = 0
-    while (this.props.project_names.includes(name) && i++ < 10000) {
+    while (projectNames.includes(name) && i++ < 10000) {
       name = incrementName(name)
     }
     gitlab
