@@ -9,7 +9,7 @@ function UserMenu(props) {
     <div className="UserMenu">
       <div className="userName">{user.username}</div>
       <semantic.Menu vertical attached>
-        <Link href="/settings">
+        <Link prefetch href="/settings">
         <semantic.Menu.Item>
           <semantic.Icon name="settings" />
           Settings

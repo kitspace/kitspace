@@ -8,7 +8,7 @@ import UserMenu from './UserMenu'
 export default function TitleBar(props) {
   const user = props.user
   const addProjectButton = (
-    <Link href="/new">
+    <Link prefetch href="/new">
       <semantic.Button
         className="addProjectButton"
         content="Add a project"
@@ -24,7 +24,7 @@ export default function TitleBar(props) {
   let userButton
   if (!user) {
     userButton = (
-      <Link href="/login">
+      <Link prefetch href="/login">
         <semantic.Button basic inverted>
           {'Sign in'}
         </semantic.Button>
@@ -57,17 +57,17 @@ export default function TitleBar(props) {
     <div className="titleBar">
       <div className="logoContainer">
         <semantic.Menu inverted pointing secondary>
-          <Link href="/">
+          <Link prefetch href="/">
             <a>
               <semantic.Image className="logoImg" src="/static/logo.svg" />
             </a>
           </Link>
-          <Link href="/">
+          <Link prefetch href="/">
             <semantic.Menu.Item active={props.active === '/'}>
               {'Projects'}
             </semantic.Menu.Item>
           </Link>
-          <Link href="/about">
+          <Link prefetch href="/about">
             <semantic.Menu.Item active={props.active === '/about'}>
               {'About'}
             </semantic.Menu.Item>

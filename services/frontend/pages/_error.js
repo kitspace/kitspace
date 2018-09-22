@@ -21,7 +21,7 @@ export default class Error extends React.Component {
       case 404:
         title = 'Sorry, this page could not be found'
         link = (
-          <Link href="/">
+          <Link prefetch href="/">
             <a>View all projects.</a>
           </Link>
         )
