@@ -31,10 +31,12 @@ class GitlabClient {
     return urlJoin(this.gitlab_url, path)
   }
   getAuthenticity() {
-    const url = this.gitlabUrl('users/sign_in')
+    const url = this.gitlabUrl('profile')
     return this.agent.get(url).then(r => {
       const $ = cheerio.load(r.text)
-      return $('input[name=authenticity_token]').attr('value')
+      const token = $('input[name=authenticity_token]').attr('value')
+      this.agent.set({'X-CSRF-TOKEN': token})
+      return token
     })
   }
   login(username, password) {
@@ -98,16 +100,17 @@ class GitlabClient {
       skip_confirmation: true,
     })
   }
-  createProject(params, user) {
+  createProject(params, user, token) {
     if (user != null) {
       var url = this.apiUrl(`projects/user/${user}`)
     } else {
       var url = this.apiUrl('projects')
     }
-    return this.agent
-      .post(url)
-      .send(params)
-      .then(r => r.body)
+    const p = this.agent.post(url)
+    if (token) {
+      p.set({'X-CSRF-TOKEN': token})
+    }
+    return p.send(params).then(r => r.body)
   }
   getProjects() {
     //TODO: projects > 20

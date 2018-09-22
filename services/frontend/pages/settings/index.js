@@ -4,7 +4,6 @@ import superagent from 'superagent'
 import * as semantic from 'semantic-ui-react'
 import Head from 'next/head'
 
-import Gitlab from '@kitspace/gitlab-client'
 import TitleBar from '../../components/TitleBar'
 import ChangeProfile from './ChangeProfile'
 import ChangePassword from './ChangePassword'
