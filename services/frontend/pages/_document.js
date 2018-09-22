@@ -11,6 +11,7 @@ export default class MyDocument extends Document {
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/octicons/3.3.0/octicons.min.css"
           />
+          <link rel="icon" type="image/png" href="/static/favicon.png" />
         </Head>
         <body>
           <Main />

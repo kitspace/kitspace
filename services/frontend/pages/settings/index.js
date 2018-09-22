@@ -64,7 +64,7 @@ export default class Settings extends React.Component {
     return (
       <>
         <Head>
-          <title>Kitspace - Settings</title>
+          <title>Settings - Kitspace</title>
         </Head>
         <TitleBar user={user} />
         <div className="Settings">
