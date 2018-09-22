@@ -116,6 +116,15 @@ class GitlabClient {
     //TODO: projects > 20
     return this.agent.get(this.apiUrl('projects')).then(r => r.body)
   }
+  getUserProjects(user_id) {
+    //TODO: projects > 20
+    if (user_id) {
+      return this.agent
+        .get(this.apiUrl(`users/${user_id}/projects`))
+        .then(r => r.body)
+    }
+    return this.agent.get(this.apiUrl(`projects?owned=true`)).then(r => r.body)
+  }
   getProject(id) {
     return this.agent
       .get(this.apiUrl(`projects/${encodeURIComponent(id)}`))

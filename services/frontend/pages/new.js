@@ -18,14 +18,21 @@ if (typeof window !== 'undefined') {
 export default class New extends React.Component {
   state = {import_url: 'https://github.com/kitspace/ruler'}
   static async getInitialProps({req, gitlab}) {
-    const token = await gitlab.getAuthenticity()
-    return {token}
+    const [token, project_names] = await Promise.all([
+      gitlab.getAuthenticity(),
+      gitlab.getUserProjects().then(ps => ps.map(p => p.name)),
+    ])
+    return {token, project_names}
   }
   handleImport = e => {
     const {import_url} = this.state
-    const name = gitUrlParse(import_url)
+    let name = gitUrlParse(import_url)
       .full_name.split('/')
       .pop()
+    let i = 0
+    while (this.props.project_names.includes(name) && i++ < 10000) {
+      name = incrementName(name)
+    }
     gitlab
       .createProject(
         {name, import_url, visibility: 'public'},
@@ -68,4 +75,14 @@ export default class New extends React.Component {
       </>
     )
   }
+}
+
+function incrementName(name) {
+  const ns = name.split(/\D/)
+  const lastN = ns[ns.length - 1]
+  const n = parseInt(lastN, 10)
+  if (isNaN(n)) {
+    return name + '2'
+  }
+  return name.slice(0, name.lastIndexOf(lastN)) + String(n + 1)
 }
