@@ -46,7 +46,7 @@ class Login extends React.Component {
                 .send(`user[password]=${encodeURIComponent(password)}`)
                 .send('user[remember_me]=0')
                 .send('utf8=✓')
-                .then(r => {
+                .then(user => {
                   this.props.router.push(this.props.after || '/')
                 })
                 .catch(e => console.error(e))

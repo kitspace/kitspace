@@ -5,10 +5,13 @@ import TitleBar from '../components/TitleBar'
 import {Router} from '../routes'
 
 export default class KitspaceApp extends App {
-  state = {message: null}
   setMessage = message => {
     this.setState({message})
     setTimeout(() => this.setState({message: null}), 30000)
+  }
+  constructor(props) {
+    super(props)
+    this.state = {user: props.user, message: null}
   }
   static async getInitialProps({Component, router, ctx}) {
     const cookie = ctx.req ? ctx.req.headers.cookie : null
@@ -38,14 +41,22 @@ export default class KitspaceApp extends App {
     return {user, pageProps, route: ctx.asPath}
   }
 
+  setUser = user => {
+    this.setState({user})
+  }
+
   render() {
-    const {Component, user, pageProps, route} = this.props
+    const {Component, pageProps, route} = this.props
+    const user = this.state.user || this.props.user
     return (
       <Container>
-        {Component.omitTitleBar ? null : <TitleBar user={user} route={route} />}
+        {Component.omitTitleBar ? null : (
+          <TitleBar setUser={this.setUser} user={user} route={route} />
+        )}
         <Component
           message={this.state.message}
           setMessage={this.setMessage}
+          setUser={this.setUser}
           user={user}
           {...pageProps}
         />

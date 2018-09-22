@@ -14,7 +14,6 @@ export default class Settings extends React.Component {
   static omitTitleBar = true
   state = {
     emailMessage: '',
-    user: null,
     authenticity_token: '',
   }
 
@@ -29,7 +28,7 @@ export default class Settings extends React.Component {
         if (notGravatar) {
           newUser.avatar_url += '?' + Math.random()
         }
-        this.setState({user: newUser})
+        this.props.setUser(newUser)
       })
   }
 

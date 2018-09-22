@@ -8,10 +8,11 @@ import {Link} from '../routes'
 import './UserMenu.scss'
 
 class UserMenu extends React.Component {
-  logout = () =>
-    superagent
-      .get('/!gitlab/users/sign_out')
-      .then(r => this.props.router.push('/login'))
+  logout = () => {
+    superagent.get('/!gitlab/users/sign_out').then(r => {
+      this.props.router.push('/login')
+    })
+  }
   render() {
     const user = this.props.user || {}
     return (

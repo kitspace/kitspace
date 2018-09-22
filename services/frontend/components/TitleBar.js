@@ -33,7 +33,7 @@ export default function TitleBar(props) {
       userButton = (
         <Link prefetch href={href}>
           <semantic.Button basic inverted>
-            {'Sign in'}
+            {'Log in'}
           </semantic.Button>
         </Link>
       )
@@ -57,7 +57,7 @@ export default function TitleBar(props) {
         on="click"
         basic
       >
-        <UserMenu user={user} />
+        <UserMenu setUser={props.setUser} user={user} />
       </semantic.Popup>
     )
   }
