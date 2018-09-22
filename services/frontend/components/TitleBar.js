@@ -23,13 +23,21 @@ export default function TitleBar(props) {
   )
   let userButton
   if (!user) {
-    userButton = (
-      <Link prefetch href={`/login?after=${props.route}`}>
-        <semantic.Button basic inverted>
-          {'Sign in'}
-        </semantic.Button>
-      </Link>
-    )
+    if (/^\/login/.test(props.route)) {
+      userButton = null
+    } else {
+      let href = '/login'
+      if (!/^\/$/.test(props.route)) {
+        href += '?after=' + props.route
+      }
+      userButton = (
+        <Link prefetch href={href}>
+          <semantic.Button basic inverted>
+            {'Sign in'}
+          </semantic.Button>
+        </Link>
+      )
+    }
   } else {
     userButton = (
       <semantic.Popup
