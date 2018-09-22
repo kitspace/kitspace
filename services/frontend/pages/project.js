@@ -2,7 +2,9 @@ import React from 'react'
 import Gitlab from '@kitspace/gitlab-client'
 
 export default class extends React.Component {
-  static async getInitialProps({req, query: {namespace, projectname}}) {
+  static async getInitialProps({req, query}) {
+    const {namespace, projectname} = query
+    console.log('getInitialProps', query)
     const cookie = req ? req.headers.cookie : null
     const gitlab = new Gitlab(
       process.env.KITSPACE_DOMAIN + ':' + process.env.KITSPACE_PORT + '/!gitlab',
@@ -21,7 +23,7 @@ export default class extends React.Component {
   render() {
     return (
       <>
-        <pre>{JSON.stringify(this.props.files, null, 2)}</pre>
+        <pre>{JSON.stringify(this.props.message)}</pre>
         <pre>{JSON.stringify(this.props.project, null, 2)}</pre>
       </>
     )

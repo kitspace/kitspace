@@ -4,6 +4,11 @@ import Gitlab from '@kitspace/gitlab-client'
 import TitleBar from '../components/TitleBar'
 
 export default class KitspaceApp extends App {
+  state = {message: null}
+  setMessage = message => {
+    this.setState({message})
+    setTimeout(() => this.setState({message: null}), 30000)
+  }
   static async getInitialProps({Component, router, ctx}) {
     const cookie = ctx.req ? ctx.req.headers.cookie : null
     const gitlab = new Gitlab(
@@ -29,16 +34,21 @@ export default class KitspaceApp extends App {
       getPageProps(),
     ])
 
-
     return {user, pageProps, route: ctx.asPath}
   }
 
   render() {
     const {Component, user, pageProps, route} = this.props
+    console.log('state', this.state)
     return (
       <Container>
         {Component.omitTitleBar ? null : <TitleBar user={user} active={route} />}
-        <Component user={user} {...pageProps} />
+        <Component
+          message={this.state.message}
+          setMessage={this.setMessage}
+          user={user}
+          {...pageProps}
+        />
       </Container>
     )
   }

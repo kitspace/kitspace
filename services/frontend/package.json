@@ -16,6 +16,7 @@
     "git-repo-name": "^0.6.0",
     "git-url-parse": "^10.0.1",
     "next": "^6.1.1",
+    "next-routes": "^1.4.2",
     "node-sass": "^4.9.2",
     "path-match": "^1.2.4",
     "react": "^16.2.0",

@@ -4,7 +4,7 @@ import React from 'react'
 import * as semantic from 'semantic-ui-react'
 import Gitlab from '@kitspace/gitlab-client'
 import gitUrlParse from 'git-url-parse'
-import Router from 'next/router'
+import {Router} from '../routes'
 
 import './new.scss'
 
@@ -29,7 +29,11 @@ export default class New extends React.Component {
     const {import_url} = this.state
     const previous = this.props.userProjects.find(p => p.import_url === import_url)
     if (previous) {
-      Router.push('/' + previous.path_with_namespace)
+      this.props.setMessage({
+        type: 'info',
+        text: 'You have already imported a repository from this URL',
+      })
+      Router.pushRoute('/' + previous.path_with_namespace)
       return
     }
     const projectNames = this.props.userProjects.map(p => p.name)

@@ -7,6 +7,9 @@ const Gitlab = require('@kitspace/gitlab-client')
 const port = parseInt(process.env.PORT, 10) || 1234
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({dev, conf})
+
+const routes = require('./routes')
+const routesHandler = routes.getRequestHandler(app)
 const nextHandler = app.getRequestHandler()
 
 app.prepare().then(() => {
