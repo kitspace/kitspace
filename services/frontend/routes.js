@@ -1,4 +1,9 @@
-const routes = require('next-routes')
+const Routes = require('next-routes')
 
-module.exports = routes()
-  .add('/:namespace/:projectname', 'project')
+const routes = Routes().add('/:namespace/:projectname', 'project')
+
+routes.Router.onRouteChangeStart = url => {
+  console.log('App is changing to: ', url)
+}
+
+module.exports = routes

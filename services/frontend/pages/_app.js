@@ -2,6 +2,7 @@ import App, {Container} from 'next/app'
 import React from 'react'
 import Gitlab from '@kitspace/gitlab-client'
 import TitleBar from '../components/TitleBar'
+import {Router} from '../routes'
 
 export default class KitspaceApp extends App {
   state = {message: null}
@@ -39,7 +40,6 @@ export default class KitspaceApp extends App {
 
   render() {
     const {Component, user, pageProps, route} = this.props
-    console.log('state', this.state)
     return (
       <Container>
         {Component.omitTitleBar ? null : <TitleBar user={user} active={route} />}

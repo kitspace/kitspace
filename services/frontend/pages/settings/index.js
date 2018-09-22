@@ -8,6 +8,7 @@ import TitleBar from '../../components/TitleBar'
 import ChangeProfile from './ChangeProfile'
 import ChangePassword from './ChangePassword'
 import {checkGravatar} from './util'
+import {Router} from '../../routes'
 
 export default class Settings extends React.Component {
   static omitTitleBar = true
@@ -60,6 +61,10 @@ export default class Settings extends React.Component {
 
   render() {
     const user = this.state.user || this.props.user
+    if (user == null) {
+      Router.pushRoute('/login')
+      return []
+    }
     return (
       <>
         <Head>
@@ -90,4 +95,3 @@ export default class Settings extends React.Component {
     )
   }
 }
-
