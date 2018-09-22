@@ -1,12 +1,12 @@
 import React from 'react'
 import superagent from 'superagent'
 import Gitlab from '@kitspace/gitlab-client'
-import Router from 'next/router'
+import {withRouter} from 'next/router'
 
 class Login extends React.Component {
-  constructor() {
-    super()
-    this.state = {authenticity_token: '', password: '', username: ''}
+  state = {authenticity_token: '', password: '', username: ''}
+  static async getInitialProps({query: {after}}) {
+    return {after}
   }
   componentDidMount() {
     superagent
@@ -46,6 +46,9 @@ class Login extends React.Component {
                 .send(`user[password]=${encodeURIComponent(password)}`)
                 .send('user[remember_me]=0')
                 .send('utf8=✓')
+                .then(r => {
+                  this.props.router.push(this.props.after || '/')
+                })
                 .catch(e => console.error(e))
             }}
           >
@@ -82,4 +85,4 @@ function setCookie(name, value, minutes = 3) {
   document.cookie = name + '=' + (value || '') + expires + '; path=/'
 }
 
-export default Login
+export default withRouter(Login)

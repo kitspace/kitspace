@@ -42,7 +42,7 @@ export default class KitspaceApp extends App {
     const {Component, user, pageProps, route} = this.props
     return (
       <Container>
-        {Component.omitTitleBar ? null : <TitleBar user={user} active={route} />}
+        {Component.omitTitleBar ? null : <TitleBar user={user} route={route} />}
         <Component
           message={this.state.message}
           setMessage={this.setMessage}

@@ -16,7 +16,7 @@ export default function TitleBar(props) {
         icon="plus"
         labelPosition="left"
         style={{
-          visibility: props.active === '/new' ? 'hidden' : 'initial',
+          visibility: props.route === '/new' ? 'hidden' : 'initial',
         }}
       />
     </Link>
@@ -24,7 +24,7 @@ export default function TitleBar(props) {
   let userButton
   if (!user) {
     userButton = (
-      <Link prefetch href="/login">
+      <Link prefetch href={`/login?after=${props.route}`}>
         <semantic.Button basic inverted>
           {'Sign in'}
         </semantic.Button>
@@ -63,12 +63,12 @@ export default function TitleBar(props) {
             </a>
           </Link>
           <Link prefetch href="/">
-            <semantic.Menu.Item active={props.active === '/'}>
+            <semantic.Menu.Item active={props.route === '/'}>
               {'Projects'}
             </semantic.Menu.Item>
           </Link>
           <Link prefetch href="/about">
-            <semantic.Menu.Item active={props.active === '/about'}>
+            <semantic.Menu.Item active={props.route === '/about'}>
               {'About'}
             </semantic.Menu.Item>
           </Link>

@@ -48,7 +48,8 @@ function protected(handler) {
       if (user) {
         return handler(req, res)
       } else {
-        return res.redirect('/login')
+        const after = req.route.path
+        return res.redirect(`/login?after=${after}`)
       }
     })
   }
