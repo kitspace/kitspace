@@ -109,12 +109,13 @@ class Privacy extends React.Component {
             information to trusted third parties who assist us in operating our 
             site, conducting our business, or servicing you, so long as those 
             parties agree to keep this information confidential.
-           </p>
-           <p>
+          </p>
+          <p>
             We may also release your information when we believe release is 
             appropriate to comply with the law, enforce our site policies, or 
             protect ours or others rights, property, or safety.
-           </p>
+          </p>
+          <p>
             Non-personally identifiable visitor information may be provided to 
             other parties for other uses.
           </p>
