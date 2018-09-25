@@ -105,16 +105,16 @@ class Privacy extends React.Component {
           <p>
             We do not disclose your personally identifiable information to 
             outside parties for the purpose of selling your information, trading 
-            it or otherwise transferring it. However, we do disclose your 
-            information to trusted third parties who assist us in operating our site, 
-            conducting our business, or servicing you. These third parties are under 
-            the agreement that they will keep this information confidential.
+            it or otherwise transferring it. However, we may disclose your 
+            information to trusted third parties who assist us in operating our 
+            site, conducting our business, or servicing you, so long as those 
+            parties agree to keep this information confidential.
            </p>
            <p>
             We may also release your information when we believe release is 
             appropriate to comply with the law, enforce our site policies, or 
             protect ours or others rights, property, or safety.
-           <p>
+           </p>
             Non-personally identifiable visitor information may be provided to 
             other parties for other uses.
           </p>
