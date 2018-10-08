@@ -52,3 +52,4 @@ https://github.com/GenericLab/GOSH-Board_UGM/
 https://github.com/dusjagr/ESPTINY86_Stompbox
 https://github.com/8BitMixtape/mCore_Mixtape
 https://github.com/kasbah/corners
+https://github.com/proudcloud/clouduino
