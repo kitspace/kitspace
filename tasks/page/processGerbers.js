@@ -15,6 +15,8 @@ if (require.main !== module) {
       file = fs.readFileSync(`${folder}/kitnic.yaml`)
     } else if (fs.existsSync(`${folder}/kitspace.yaml`)) {
       file = fs.readFileSync(`${folder}/kitspace.yaml`)
+    } else if (fs.existsSync(`${folder}/kitspace.yml`)) {
+      file = fs.readFileSync(`${folder}/kitspace.yml`)
     }
     const info = file == null ? {} : yaml.safeLoad(file)
     const files = globule
@@ -73,6 +75,8 @@ if (require.main !== module) {
     file = fs.readFileSync(`${folder}/kitnic.yaml`)
   } else if (fs.existsSync(`${folder}/kitspace.yaml`)) {
     file = fs.readFileSync(`${folder}/kitspace.yaml`)
+  } else if (fs.existsSync(`${folder}/kitspace.yml`)) {
+    file = fs.readFileSync(`${folder}/kitspace.yml`)
   }
   try {
     let color, data

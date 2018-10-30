@@ -121,7 +121,7 @@ function createElement(type, props, children) {
 }
 
 function kitspaceYaml(files) {
-  const yaml = files.filter(f => RegExp('^(kitspace|kitnic).yaml$').test(f))
+  const yaml = files.filter(f => RegExp('^(kitspace|kitnic).ya?ml$').test(f))
   if (yaml.length > 0) {
     return yaml[0]
   }
