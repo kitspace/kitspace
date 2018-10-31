@@ -90,12 +90,12 @@ const BuyParts = React.createClass({
   render() {
     const lines = this.props.lines
     const nLinesToDisplay = this.props.nLinesToDisplay
-    const retailer_list = oneClickBom.lineData.retailer_list
     const mult = this.getMultiplier()
     const total = lines.reduce((acc, line) => {
       return acc + Math.ceil(mult * line.quantity)
     }, 0)
-    const retailerButtons = retailer_list
+    const retailerButtons = oneClickBom
+      .getRetailers()
       .map(name => {
         const numberOfParts = lines.reduce((acc, line) => {
           if (line.retailers[name]) {
