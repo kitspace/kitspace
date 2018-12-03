@@ -1,6 +1,8 @@
 # https://kitspace.org
 
 [![build status][travis-status]](https://travis-ci.org/kitspace/kitspace)
+[![Backers on Open Collective](https://opencollective.com/kitspace/backers/badge.svg)](#backers)
+ [![Sponsors on Open Collective](https://opencollective.com/kitspace/sponsors/badge.svg)](#sponsors) 
 
 [![video](image_src/fosdem2017.jpg)](https://video.fosdem.org/2017/AW1.120/kitnic_it.vp8.webm)
 
@@ -186,3 +188,33 @@ file-saves and re-build when you change a source file.
 [4]: https://help.github.com/articles/create-a-repo/
 [5]: https://help.github.com/articles/adding-a-file-to-a-repository/
 [6]: http://www.yaml.org/start.html
+
+## Contributors
+
+This project exists thanks to all the people who contribute. 
+<a href="https://github.com/kitspace/kitspace/graphs/contributors"><img src="https://opencollective.com/kitspace/contributors.svg?width=890&button=false" /></a>
+
+
+## Backers
+
+Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com/kitspace#backer)]
+
+<a href="https://opencollective.com/kitspace#backers" target="_blank"><img src="https://opencollective.com/kitspace/backers.svg?width=890"></a>
+
+
+## Sponsors
+
+Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/kitspace#sponsor)]
+
+<a href="https://opencollective.com/kitspace/sponsor/0/website" target="_blank"><img src="https://opencollective.com/kitspace/sponsor/0/avatar.svg"></a>
+<a href="https://opencollective.com/kitspace/sponsor/1/website" target="_blank"><img src="https://opencollective.com/kitspace/sponsor/1/avatar.svg"></a>
+<a href="https://opencollective.com/kitspace/sponsor/2/website" target="_blank"><img src="https://opencollective.com/kitspace/sponsor/2/avatar.svg"></a>
+<a href="https://opencollective.com/kitspace/sponsor/3/website" target="_blank"><img src="https://opencollective.com/kitspace/sponsor/3/avatar.svg"></a>
+<a href="https://opencollective.com/kitspace/sponsor/4/website" target="_blank"><img src="https://opencollective.com/kitspace/sponsor/4/avatar.svg"></a>
+<a href="https://opencollective.com/kitspace/sponsor/5/website" target="_blank"><img src="https://opencollective.com/kitspace/sponsor/5/avatar.svg"></a>
+<a href="https://opencollective.com/kitspace/sponsor/6/website" target="_blank"><img src="https://opencollective.com/kitspace/sponsor/6/avatar.svg"></a>
+<a href="https://opencollective.com/kitspace/sponsor/7/website" target="_blank"><img src="https://opencollective.com/kitspace/sponsor/7/avatar.svg"></a>
+<a href="https://opencollective.com/kitspace/sponsor/8/website" target="_blank"><img src="https://opencollective.com/kitspace/sponsor/8/avatar.svg"></a>
+<a href="https://opencollective.com/kitspace/sponsor/9/website" target="_blank"><img src="https://opencollective.com/kitspace/sponsor/9/avatar.svg"></a>
+
+
