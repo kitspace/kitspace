@@ -129,7 +129,7 @@ function kitspaceYaml(files) {
 }
 
 const UrlSubmit = React.createClass({
-  placeholder: 'https://github.com/kitnic-forks/arduino-uno',
+  placeholder: 'https://github.com/kitspace-forks/arduino-uno',
   getInitialState() {
     return {url: this.props.board.url || ''}
   },

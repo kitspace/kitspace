@@ -127,7 +127,7 @@ that requires server side components is the submission preview (`/submit`). Page
 We have two services running for the submission preview.
 
 - [git-clone-server](https://github.com/kasbah/git-clone-server) for serving up files from git repositories.
-- [partinfo](https://github.com/kitspace/kitnic-partinfo) for getting part information for the BOM.
+- [partinfo](https://github.com/kitspace/kitspace-partinfo) for getting part information for the BOM.
 
 And one for the geo ip lookup on pages.
 
@@ -142,8 +142,8 @@ The graphs get too complicated if we try to add all the possible data-flows but 
 
 Services used are:
 
-- [nginx-config](https://github.com/kitspace/kitnic-nginx-config) to configure Nginx to serve the frontend and all services.
-- [partinfo](https://github.com/monostable/kitnic-partinfo) for getting part information for BOMs.
+- [nginx-config](https://github.com/monostable/kitnic-nginx-config) to configure Nginx to serve the frontend and all services.
+- [partinfo](https://github.com/kitspace/kitspace-partinfo) for getting part information for BOMs.
 - [gitlab-config](http://github.com/monostable/kitnic-gitlab-config) configuring GitLab to be used for authentication and Git hosting.
 - [gitlab-proxy](https://github.com/monostable/kitnic-gitlab-proxy) for requests that need to access GitLab API but need any kind of added functionality like unauthenticated access or modifying projects (which needs additional hooks to trigger processing).
 
@@ -158,7 +158,7 @@ Services used are:
    - [ ] Gerber plotter processing for KiCAD and Eagle
    - [ ] BOM extraction processing
    - [ ] BOM Builder
-       - [ ] Get retailer info out of [partinfo](https://github.com/monostable/kitnic-partinfo)
+       - [ ] Get retailer info out of [partinfo](https://github.com/kitspace/kitspace-partinfo)
 
 ### Requirements
 

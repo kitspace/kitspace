@@ -13,8 +13,8 @@ then
     echo -e "User-agent: *\nDisallow: /\n" > build/robots.txt
     echo -e "${SSH_KEY}" > key-file
     chmod 600 key-file
-    ssh -i key-file -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no "ubuntu@preview.kitnic.it" "rm -rf preview/${TRAVIS_BRANCH}"
-    scp -i key-file -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -r build "ubuntu@preview.kitnic.it:preview/${TRAVIS_BRANCH}"
+    ssh -i key-file -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no "ubuntu@preview.kitspace.org" "rm -rf preview/${TRAVIS_BRANCH}"
+    scp -i key-file -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -r build "ubuntu@preview.kitspace.org:preview/${TRAVIS_BRANCH}"
     rm -f key-file
 else
     rm -rf build/.temp
@@ -25,5 +25,5 @@ else
     git config user.email "travisCI@monostable.co.uk"
     git add .
     git commit -m "Deploy to GitHub Pages" > /dev/null
-    git push --force --quiet "https://${GH_TOKEN}@github.com/monostable/kitnic" master:gh-pages > /dev/null 2>&1
+    git push --force --quiet "https://${GH_TOKEN}@github.com/kitspace/kitspace" master:gh-pages > /dev/null 2>&1
 fi
