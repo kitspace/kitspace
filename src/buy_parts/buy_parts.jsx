@@ -90,7 +90,7 @@ const BuyParts = React.createClass({
   render() {
     const lines = this.props.lines
     const nLinesToDisplay = this.props.nLinesToDisplay
-    const retailer_list = oneClickBom.lineData.retailer_list
+    const retailer_list = oneClickBom.getRetailers()
     const mult = this.getMultiplier()
     const total = lines.reduce((acc, line) => {
       return acc + Math.ceil(mult * line.quantity)
