@@ -27,7 +27,19 @@ if (require.main !== module) {
   const readme = deps[1]
   if (readme != null) {
     const pkg = {repository: {url: info.repo}}
-    const contents = fs.readFileSync(readme, 'utf8')
+    let contents = fs.readFileSync(readme, 'utf8')
+    // replace blob image urls with raw image urls, they don't work outside of github
+    contents = contents.replace(
+      RegExp(
+        '(' +
+        escapeRegExp('https://github.com/') +
+          '.*?' +
+          '/)(blob)(/master/' +
+          '.*?.(:?png|jpeg|jpg|gif|bmp))',
+        'gi'
+      ),
+      '$1raw$3'
+    )
     let markdown = contents
     if (path.extname(readme).toLowerCase() === '.rst') {
       markdown = rst2mdown(contents)
@@ -39,4 +51,8 @@ if (require.main !== module) {
     readmeJsx,
     `const React = require('react');\n${reactComponent}\nmodule.exports = Readme;\n`
   )
+}
+
+function escapeRegExp(string) {
+  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') // $& means the whole matched string
 }
