@@ -2,11 +2,13 @@
 
 [![build status][travis-status]](https://travis-ci.org/kitspace/kitspace)
 [![Backers on Open Collective](https://opencollective.com/kitspace/backers/badge.svg)](#backers)
- [![Sponsors on Open Collective](https://opencollective.com/kitspace/sponsors/badge.svg)](#sponsors) 
+[![Sponsors on Open Collective](https://opencollective.com/kitspace/sponsors/badge.svg)](#sponsors)
 
-[![video](image_src/fosdem2017.jpg)](https://video.fosdem.org/2017/AW1.120/kitnic_it.vp8.webm)
+> [Watch a 5 minute lightning talk about Kitspace from the 35c3 congress](https://media.ccc.de/v/35c3-9566-lightning_talks_day_2#t=477).
 
-Kit Space (formerly Kitnic) is a registry of open source hardware electronics
+[![video](image_src/35c3_lightning.jpg)](https://media.ccc.de/v/35c3-9566-lightning_talks_day_2#t=477)
+
+Kitspace (formerly Kitnic) is a registry of open source hardware electronics
 projects that are ready to order and build. It could be described as a
 "Thingiverse for electronics". The most important elements of a Kit Space
 project page are:
@@ -191,7 +193,7 @@ file-saves and re-build when you change a source file.
 
 ## Contributors
 
-This project exists thanks to all the people who contribute. 
+This project exists thanks to all the people who contribute.
 <a href="https://github.com/kitspace/kitspace/graphs/contributors"><img src="https://opencollective.com/kitspace/contributors.svg?width=890&button=false" /></a>
 
 
