@@ -54,3 +54,4 @@ https://github.com/8BitMixtape/mCore_Mixtape
 https://github.com/kasbah/corners
 https://github.com/maltman23/ArduTouch
 https://gogs.zenerdio.de/sebastian/satnogs-diplexer
+https://github.com/Jan--Henrik/CH330_Hardware
