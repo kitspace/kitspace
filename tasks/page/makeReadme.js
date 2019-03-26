@@ -32,7 +32,7 @@ if (require.main !== module) {
     contents = contents.replace(
       RegExp(
         '(' +
-        escapeRegExp('https://github.com/') +
+          escapeRegExp('https://github.com/') +
           '.*?' +
           '/)(blob)(/master/' +
           '.*?.(:?png|jpeg|jpg|gif|bmp))',

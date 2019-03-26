@@ -67,9 +67,9 @@ if (require.main !== module) {
   info.site = kitnicYaml.site || ''
 
   if (/\.tsv$|\.csv$/i.test(bomPath)) {
-      var content = fs.readFileSync(bomPath, {encoding:'utf8'})
+    var content = fs.readFileSync(bomPath, {encoding: 'utf8'})
   } else {
-      var content = fs.readFileSync(bomPath)
+    var content = fs.readFileSync(bomPath)
   }
   info.bom = oneClickBOM.parse(content)
   info.bom.invalid.forEach(invalid => {

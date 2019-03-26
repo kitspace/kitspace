@@ -36,8 +36,8 @@ function Intro(props) {
             <a className="clickableLink" onClick={installExtension}>
               install
             </a>{' '}
-            the 1-click BOM extension. It's pretty useful on its own too and
-            can be used on other sites. Read more about it{' '}
+            the 1-click BOM extension. It's pretty useful on its own too and can
+            be used on other sites. Read more about it{' '}
             <a className="clickableLink" href="http://1clickBOM.com">
               here
             </a>.

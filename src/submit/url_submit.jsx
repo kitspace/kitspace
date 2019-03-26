@@ -59,7 +59,10 @@ function getBom(root, bomPath, dispatch) {
       } else {
         dispatch({
           type: 'reportError',
-          value: {type: 'bom', message: 'Could not find any complete lines in your BOM'}
+          value: {
+            type: 'bom',
+            message: 'Could not find any complete lines in your BOM'
+          }
         })
       }
     })
