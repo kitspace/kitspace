@@ -11,7 +11,7 @@ const aislerUrl = `https://aisler.net/p/new?url=${zipUrl}&ref=kitspace`
 const pcbwayUrl =
   'https://www.pcbway.com/orderonline.aspx' +
   `?x=${width}&y=${height}&from=kitspace`
-const pcbwayUrlPriceComp =
+const pcbshopperUrl =
   'https://pcbshopper.com/?' +
   `Width=${width}&Height=${height}`
 
@@ -40,16 +40,19 @@ let OrderPcbs = React.createClass({
                 <img src="/images/aisler.png" />
               </semantic.Menu.Item>
 
+              <semantic.Menu.Item>
+                <h4>PCB Comparison</h4>
+              </semantic.Menu.Item>
               <semantic.Menu.Item
                 as="a"
-                href={pcbwayUrlPriceComp}
+                href={pcbshopperUrl}
                 onClick={() => {
                   if (!this.state.downloaded) {
                     window.open(zipPath)
                   }
                 }}
               >
-                
+                <img src="/images/pcbshopper.png" />
               </semantic.Menu.Item>
 
               <semantic.Menu.Item
