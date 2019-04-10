@@ -263,6 +263,10 @@ if (config === 'production') {
     .edge('build/_redirects')
     .from('src/_redirects')
     .using('copy')
+  ninja
+    .edge('build/_headers')
+    .from('src/_headers')
+    .using('copy')
 }
 
 ninja
