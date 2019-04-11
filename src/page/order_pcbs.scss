@@ -20,13 +20,25 @@
     min-width: 100px;
   }
 
-  @include breakpoint(mobile-m) {
+  @media (max-width: 710px) {
     .ui.menu {
       width: 100%;
     }
-    .item {
-      display: flex !important;
-      justify-content: center !important;
-    }
+  }
+
+  a.item {
+    margin-right: 10px !important;
+    margin-left: 10px !important;
+    display: flex !important;
+    justify-content: center !important;
+  }
+
+  div.ui.floating.label {
+    top: 2.5em !important;
+    left: 95% !important;
+  }
+
+  div.ui.label {
+    background-color: transparent !important;
   }
 }
