@@ -58,3 +58,4 @@ https://github.com/alpharesearch/ESP8266_DS18B20
 https://github.com/Jan--Henrik/CH330_Hardware
 https://github.com/8BitMixtape/ESPTINY86_MixtapePCB
 https://github.com/ollyoid/ShenzhenPostcard
+https://gitlab.com/erigas/gnukey
