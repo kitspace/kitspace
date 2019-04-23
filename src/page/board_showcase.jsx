@@ -31,7 +31,7 @@ var BoardShowcase = React.createClass({
 	    backBoardClass += ' selectedBoard'
 	}
 	const children = this.props.children || [<div />, <div />]
-	const TraceSpaceLink = props => zipUrl ? <a href={`https://tracespace.io/view/?boardUrl=${zipUrl}`}>{props.children}</a> : <div>{props.children}</div>
+	const TraceSpaceLink = props => zipUrl ? <a href={`https://tracespace.io/view/?boardUrl=${zipUrl}`} target="_blank">{props.children}</a> : <div>{props.children}</div>
 	return (
 	    <div className="boardShowcaseContainer">
               <div className="toggleBoardView responsiveTabs">
