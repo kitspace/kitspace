@@ -33,6 +33,10 @@
   }
 }
 
+.boardShowcase:hover {
+  box-shadow: 0 0.1em 0.5em $azure-radiance;
+}
+
 .boardShowcase {
   display: flex;
   flex-direction: column;
