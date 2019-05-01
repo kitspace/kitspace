@@ -166,7 +166,7 @@ Services used are:
 
 ### Requirements
 
-- [Nodejs](https://nodejs.org) >= 6
+- [Nodejs](https://nodejs.org) version 6 (v6.17.1)
 - [fswatch](http://emcrisostomo.github.io/fswatch/) on OSX/Windows or inotify-tools on Linux
 - [Ninja Build](https://github.com/ninja-build/ninja/releases) >= 1.5.1
 - [Yarn](https://yarnpkg.com/) to ensure the correct dependencies are installed
