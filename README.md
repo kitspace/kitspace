@@ -169,13 +169,14 @@ Services used are:
 - [Nodejs](https://nodejs.org) >= 6
 - [fswatch](http://emcrisostomo.github.io/fswatch/) on OSX/Windows or inotify-tools on Linux
 - [Ninja Build](https://github.com/ninja-build/ninja/releases) >= 1.5.1
-- The rest of the dependencies can be retrieved via `npm install`
+- [Yarn](https://yarnpkg.com/) to ensure the correct dependencies are installed
+- The rest of the dependencies can be retrieved via `yarn install`
 
 ### Running a local dev server
 
 - Get requirements above and make sure executables are on your path
-- `npm install` (or `yarn install`)
-- `npm start` (or `yarn start`)
+- `yarn install`
+- `yarn start` (or `npm start`)
 - Point your browser at `http://127.0.0.1:8080`. The script should watch for
 file-saves and re-build when you change a source file.
 
