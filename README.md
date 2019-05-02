@@ -171,6 +171,7 @@ Services used are:
 - [Ninja Build](https://github.com/ninja-build/ninja/releases) >= 1.5.1
 - [Yarn](https://yarnpkg.com/) to ensure the correct dependencies are installed
 - The rest of the dependencies can be retrieved via `yarn install`
+- [Inkscape] Use the respective Linux tool to install it (i.e. `sudo apt-get install inkscape` on Ubuntu).
 
 ### Running a local dev server
 
