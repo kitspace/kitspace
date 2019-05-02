@@ -60,3 +60,4 @@ https://github.com/8BitMixtape/ESPTINY86_MixtapePCB
 https://github.com/ollyoid/ShenzhenPostcard
 https://gitlab.com/erigas/gnukey
 https://gitlab.com/alexander.kutschera/singingplants
+https://gitlab.com/xengi/darling
