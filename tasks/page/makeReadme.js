@@ -40,7 +40,7 @@ if (require.main !== module) {
       ),
       '$1raw$3'
     )
-    let markdown = contents
+    let markdown = addSpacing(contents)
     if (path.extname(readme).toLowerCase() === '.rst') {
       markdown = rst2mdown(contents)
     }
@@ -55,4 +55,8 @@ if (require.main !== module) {
 
 function escapeRegExp(string) {
   return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') // $& means the whole matched string
+}
+
+function addSpacing(string) {
+  return string.replace(/[^ `](`[^\`].*?`)/g, ' $1')
 }
