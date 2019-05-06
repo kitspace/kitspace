@@ -1,6 +1,8 @@
 'use strict'
 const React = require('react')
 const LazyLoad = require('../lazy_load')
+const {Icon} = require('semantic-ui-react')
+
 
 var BoardShowcase = React.createClass({
     getInitialState: function() {
@@ -65,6 +67,7 @@ var BoardShowcase = React.createClass({
 		    <div className={backBoardClass}>{children[1]}</div>
 		  </div>
 		</LazyLoad>
+		<Icon name="external alternate"/>
               </div>
 	      </TraceSpaceLink>
 	    </div>
