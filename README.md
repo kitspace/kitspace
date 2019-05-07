@@ -171,6 +171,12 @@ Services used are:
 - [Ninja Build](https://github.com/ninja-build/ninja/releases) >= 1.5.1
 - [Yarn](https://yarnpkg.com/) to ensure the correct dependencies are installed
 - The rest of the dependencies can be retrieved via `yarn install`
+- Inkscape (See below for quickstart instructions for Ubuntu/Debian)
+
+### Inkscape Quickstart for Ubuntu/Debian
+
+`sudo apt-get update`
+`sudo apt-get install inkscape`
 
 ### Running a local dev server
 
