@@ -13,6 +13,8 @@ const pcbwayUrl = `https://www.pcbway.com/QuickOrderOnline.aspx?fileurl=${zipUrl
 
 const royalCircuitsUrl = 'https://www.royalcircuits.com/'
 
+const pcbShopperUrl = `https://pcbshopper.com/?Width=${width}&Height=${height}`
+
 let OrderPcbs = React.createClass({
   render() {
     return (
@@ -54,6 +56,13 @@ let OrderPcbs = React.createClass({
                 </semantic.Label>
               </semantic.Menu.Item>
             </semantic.Menu>
+
+            <semantic.Menu stackable={matches} compact collapsing borderless>
+              <semantic.Menu.Item as="a" href={pcbShopperUrl}>
+                <img src="/images/pcb-shopper.png" />
+              </semantic.Menu.Item>
+            </semantic.Menu>
+
           </div>
         )}
       </ReactResponsive>
