@@ -11,12 +11,19 @@ const getPartinfo = require('../../src/get_partinfo.js')
 if (require.main !== module) {
   module.exports = function(config, folder) {
     let bom, file, info
-    if (fs.existsSync(`${folder}/kitnic.yaml`)) {
-      file = fs.readFileSync(`${folder}/kitnic.yaml`)
-    } else if (fs.existsSync(`${folder}/kitspace.yaml`)) {
-      file = fs.readFileSync(`${folder}/kitspace.yaml`)
-    } else if (fs.existsSync(`${folder}/kitspace.yml`)) {
-      file = fs.readFileSync(`${folder}/kitspace.yml`)
+    let root = folder
+
+    repoStructure = folder.split('/')
+    if (repoStructure.length > 4) {
+      root = repoStructure.slice(0, 4).join('/')
+    }
+
+    if (fs.existsSync(`${root}/kitnic.yaml`)) {
+      file = fs.readFileSync(`${root}/kitnic.yaml`)
+    } else if (fs.existsSync(`${root}/kitspace.yaml`)) {
+      file = fs.readFileSync(`${root}/kitspace.yaml`)
+    } else if (fs.existsSync(`${root}/kitspace.yml`)) {
+      file = fs.readFileSync(`${root}/kitspace.yml`)
     }
     if (file != null) {
       info = yaml.safeLoad(file)
@@ -52,12 +59,19 @@ if (require.main !== module) {
     }
   }, '')
 
-  if (fs.existsSync(`${folder}/kitnic.yaml`)) {
-    file = fs.readFileSync(`${folder}/kitnic.yaml`)
-  } else if (fs.existsSync(`${folder}/kitspace.yaml`)) {
-    file = fs.readFileSync(`${folder}/kitspace.yaml`)
-  } else if (fs.existsSync(`${folder}/kitspace.yml`)) {
-    file = fs.readFileSync(`${folder}/kitspace.yml`)
+  let root = folder
+
+  repoStructure = folder.split('/')
+  if (repoStructure.length > 4) {
+    root = repoStructure.slice(0, 4).join('/')
+  }
+
+  if (fs.existsSync(`${root}/kitnic.yaml`)) {
+    file = fs.readFileSync(`${root}/kitnic.yaml`)
+  } else if (fs.existsSync(`${root}/kitspace.yaml`)) {
+    file = fs.readFileSync(`${root}/kitspace.yaml`)
+  } else if (fs.existsSync(`${root}/kitspace.yml`)) {
+    file = fs.readFileSync(`${root}/kitspace.yml`)
   }
   if (file != null) {
     kitnicYaml = yaml.safeLoad(file)
