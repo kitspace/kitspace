@@ -10,12 +10,11 @@ module.exports = function(el, distance) {
     right: rect.right - distance,
     bottom: rect.bottom - distance
   }
-  var pageHeight = (window.innerHeight || document.documentElement.clientHeight)
-  var pageWidth = (window.innerWidth || document.documentElement.clientWidth)
+  var pageHeight = window.innerHeight || document.documentElement.clientHeight
+  var pageWidth = window.innerWidth || document.documentElement.clientWidth
 
-  var isOnPage =
-    (paddedRect.top >= 0 && paddedRect.left >= 0)
+  var isOnPage = paddedRect.top >= 0 && paddedRect.left >= 0
   var isUnderPage =
-    (paddedRect.bottom <= pageHeight && paddedRect.right <= pageWidth)
-  return (isOnPage && isUnderPage)
+    paddedRect.bottom <= pageHeight && paddedRect.right <= pageWidth
+  return isOnPage && isUnderPage
 }

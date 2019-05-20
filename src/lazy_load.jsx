@@ -13,9 +13,9 @@ var LazyLoad = React.createClass({
 
   getDefaultProps: function() {
     return {
-      distance: 100
-      , component: <div></div>
-      , once: false
+      distance: 100,
+      component: <div />,
+      once: false
     }
   },
 

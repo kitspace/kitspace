@@ -271,15 +271,15 @@ if (config === 'production') {
 
 ninja
   .rule('sed')
-  .run("sed -e 's/themes\\/default\\/assets\\/images\\/flags\\.png/\\/images\\/flags.png/' $in > $out")
+  .run(
+    "sed -e 's/themes\\/default\\/assets\\/images\\/flags\\.png/\\/images\\/flags.png/' $in > $out"
+  )
   .description('$command')
-
 
 ninja
   .edge('build/semantic.min.css')
   .from('node_modules/semantic-ui-css/semantic.min.css')
   .using('sed')
-
 
 globule
   .find('node_modules/semantic-ui-css/themes/default/assets/fonts/*')
@@ -290,12 +290,10 @@ globule
       .using('copy')
   })
 
-
 ninja
   .edge('build/images/flags.png')
   .from('node_modules/semantic-ui-css/themes/default/assets/images/flags.png')
   .using('copy')
-
 
 ninja
   .edge('clean')

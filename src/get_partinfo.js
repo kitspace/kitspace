@@ -1,5 +1,5 @@
 const superagent = require('superagent')
-const ramda      = require('ramda')
+const ramda = require('ramda')
 
 const partinfoURL = 'https://partinfo.kitspace.org/graphql'
 
@@ -33,20 +33,21 @@ function post(mpn) {
       query: MpnQuery,
       variables: {
         mpn
-      },
-    }).then(res => {
+      }
+    })
+    .then(res => {
       return res.body.data.part
-    }).catch(err => {
+    })
+    .catch(err => {
       console.error(err)
       return {}
     })
-
 }
 
 function getPartinfo(lines) {
   const requests = lines.map(line => {
-        return Promise.all(line.partNumbers.map(post))
-    })
+    return Promise.all(line.partNumbers.map(post))
+  })
   return Promise.all(requests).then(ramda.flatten)
 }
 

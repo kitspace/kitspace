@@ -41,7 +41,7 @@
     "plug-reg": "./scripts/plug_versions",
     "serve": "http-server build/",
     "lint": "eslint src",
-    "fmt": "prettier --write configure *.js src/**/*.jsx src/**/*.js src/**/*.scss tasks/**/*.js"
+    "fmt": "prettier --write configure *.js $(find src -name '*.jsx') $(find src -name '*.js') $(find tasks -name '*.js')"
   },
   "author": "Kaspar Emanuel",
   "license": "CPAL-1.0",
