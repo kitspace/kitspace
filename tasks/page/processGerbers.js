@@ -12,7 +12,6 @@ if (require.main !== module) {
   module.exports = function(config, folder) {
     let file
     let projectPath
-    let gerbersPath
     let repoRootPath = folder
 
     repoFolders = folder.split('/')
@@ -28,7 +27,7 @@ if (require.main !== module) {
     } else if (fs.existsSync(`${repoRootPath}/kitspace.yml`)) {
       file = fs.readFileSync(`${repoRootPath}/kitspace.yml`)
     }
-    const info = file == null ? {} : yaml.safeLoad(file)
+    let info = file == null ? {} : yaml.safeLoad(file)
     const files = globule
       .find(`${folder}/**/*`)
       .map(p => path.relative(folder, p))
@@ -36,14 +35,12 @@ if (require.main !== module) {
     if (info.multi) {
       for (let project in info.multi) {
         if (project === projectPath) {
-          gerbersPath = info.multi[project].gerbers
+          info = info.multi[project]
         }
       }
-    } else {
-      gerbersPath = info.gerbers
     }
 
-    const gerbers = gerberFiles(files, gerbersPath).map(p =>
+    const gerbers = gerberFiles(files, info.gerbers).map(p =>
       path.join(folder, p)
     )
     if (gerbers.length === 0) {
