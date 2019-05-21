@@ -13,20 +13,20 @@ if (require.main !== module) {
     let file
     let projectPath
     let gerbersPath
-    let root = folder
+    let repoRootPath = folder
 
-    repoStructure = folder.split('/')
-    if (repoStructure.length > 4) {
-      root = repoStructure.slice(0, 4).join('/')
-      projectPath = repoStructure.splice(4).join('/')
+    repoFolders = folder.split('/')
+    if (repoFolders.length > 4) {
+      repoRootPath = repoFolders.slice(0, 4).join('/')
+      projectPath = repoFolders.splice(4).join('/')
     }
 
-    if (fs.existsSync(`${root}/kitnic.yaml`)) {
-      file = fs.readFileSync(`${root}/kitnic.yaml`)
-    } else if (fs.existsSync(`${root}/kitspace.yaml`)) {
-      file = fs.readFileSync(`${root}/kitspace.yaml`)
-    } else if (fs.existsSync(`${root}/kitspace.yml`)) {
-      file = fs.readFileSync(`${root}/kitspace.yml`)
+    if (fs.existsSync(`${repoRootPath}/kitnic.yaml`)) {
+      file = fs.readFileSync(`${repoRootPath}/kitnic.yaml`)
+    } else if (fs.existsSync(`${repoRootPath}/kitspace.yaml`)) {
+      file = fs.readFileSync(`${repoRootPath}/kitspace.yaml`)
+    } else if (fs.existsSync(`${repoRootPath}/kitspace.yml`)) {
+      file = fs.readFileSync(`${repoRootPath}/kitspace.yml`)
     }
     const info = file == null ? {} : yaml.safeLoad(file)
     const files = globule
