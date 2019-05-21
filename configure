@@ -148,7 +148,7 @@ boardFolders.forEach((folder, index) => {
 
   if (info.multi) {
     for (let project in info.multi) {
-      projectPath = `${folder}/${info.multi[project].path}`
+      projectPath = `${folder}/${project}`
       boardFolders.push(projectPath)
     }
     boardFolders.splice(index, 1)

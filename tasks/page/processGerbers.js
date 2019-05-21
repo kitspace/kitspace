@@ -35,7 +35,7 @@ if (require.main !== module) {
 
     if (info.multi) {
       for (let project in info.multi) {
-        if (info.multi[project].path === projectPath) {
+        if (project === projectPath) {
           gerbersPath = info.multi[project].gerbers
         }
       }
@@ -134,7 +134,7 @@ if (require.main !== module) {
       info = yaml.safeLoad(file)
       if (info.multi) {
         for (let project in info.multi) {
-          if (info.multi[project].path === projectPath) {
+          if (project === projectPath) {
             color = info.multi[project].color
           }
         }
