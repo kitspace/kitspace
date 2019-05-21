@@ -11,30 +11,41 @@ const getPartinfo = require('../../src/get_partinfo.js')
 if (require.main !== module) {
   module.exports = function(config, folder) {
     let bom, file, info
-    let root = folder
+    let repoRootPath = folder
 
-    repoStructure = folder.split('/')
-    if (repoStructure.length > 4) {
-      root = repoStructure.slice(0, 4).join('/')
+    repoFolders = folder.split('/')
+    if (repoFolders.length > 4) {
+      repoRootPath = repoFolders.slice(0, 4).join('/')
+      projectFolder = repoFolders.splice(4).join('/')
     }
 
-    if (fs.existsSync(`${root}/kitnic.yaml`)) {
-      file = fs.readFileSync(`${root}/kitnic.yaml`)
-    } else if (fs.existsSync(`${root}/kitspace.yaml`)) {
-      file = fs.readFileSync(`${root}/kitspace.yaml`)
-    } else if (fs.existsSync(`${root}/kitspace.yml`)) {
-      file = fs.readFileSync(`${root}/kitspace.yml`)
+    if (fs.existsSync(`${repoRootPath}/kitnic.yaml`)) {
+      file = fs.readFileSync(`${repoRootPath}/kitnic.yaml`)
+    } else if (fs.existsSync(`${repoRootPath}/kitspace.yaml`)) {
+      file = fs.readFileSync(`${repoRootPath}/kitspace.yaml`)
+    } else if (fs.existsSync(`${repoRootPath}/kitspace.yml`)) {
+      file = fs.readFileSync(`${repoRootPath}/kitspace.yml`)
     }
     if (file != null) {
       info = yaml.safeLoad(file)
     } else {
       info = {}
     }
+
+    if (info.multi) {
+      for (let project in info.multi) {
+        if (project === projectFolder) {
+          info = info.multi[project]
+        }
+      }
+    }
+
     if (info.bom) {
-      bom = folder + '/' + info.bom
+      bom = repoRootPath + '/' + info.bom
     } else {
       bom = folder + '/1-click-bom.tsv'
     }
+
     const deps = ['build/.temp/boards.json', folder, bom]
     const targets = [
       `build/.temp/${folder}/info.json`,
