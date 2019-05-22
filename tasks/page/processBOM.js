@@ -10,13 +10,15 @@ const getPartinfo = require('../../src/get_partinfo.js')
 
 if (require.main !== module) {
   module.exports = function(config, folder) {
-    let bom, file, info
-    let repoRootPath = folder
+    let bom, file, info, repoRootPath, projectPath
+    const repoFolders = folder.split('/')
 
-    repoFolders = folder.split('/')
     if (repoFolders.length > 4) {
       repoRootPath = repoFolders.slice(0, 4).join('/')
-      projectFolder = repoFolders.splice(4).join('/')
+      projectPath = repoFolders.splice(4).join('/')
+    } else {
+      repoRootPath = folder
+      projectPath = folder
     }
 
     if (fs.existsSync(`${repoRootPath}/kitnic.yaml`)) {
@@ -34,16 +36,16 @@ if (require.main !== module) {
 
     if (info.multi) {
       for (let project in info.multi) {
-        if (project === projectFolder) {
+        if (project === projectPath) {
           info = info.multi[project]
         }
       }
     }
-
+    
     if (info.bom) {
       bom = repoRootPath + '/' + info.bom
     } else {
-      bom = folder + '/1-click-bom.tsv'
+      bom = projectPath + '/1-click-bom.tsv'
     }
 
     const deps = ['build/.temp/boards.json', folder, bom]
@@ -54,7 +56,7 @@ if (require.main !== module) {
     return {deps, targets, moduleDep: false}
   }
 } else {
-  let file, kitnicYaml
+  let file, kitnicYaml, repoRootPath
   const {deps, targets} = utils.processArgs(process.argv)
   const [boardsJSON, folder, bomPath] = deps
   const [infoPath, outBomPath] = targets
@@ -70,19 +72,19 @@ if (require.main !== module) {
     }
   }, '')
 
-  let root = folder
-
-  repoStructure = folder.split('/')
-  if (repoStructure.length > 4) {
-    root = repoStructure.slice(0, 4).join('/')
+  repoFolders = folder.split('/')
+  if (repoFolders.length > 4) {
+    repoRootPath = repoFolders.slice(0, 4).join('/')
+  } else {
+    repoRootPath = folder
   }
 
-  if (fs.existsSync(`${root}/kitnic.yaml`)) {
-    file = fs.readFileSync(`${root}/kitnic.yaml`)
-  } else if (fs.existsSync(`${root}/kitspace.yaml`)) {
-    file = fs.readFileSync(`${root}/kitspace.yaml`)
-  } else if (fs.existsSync(`${root}/kitspace.yml`)) {
-    file = fs.readFileSync(`${root}/kitspace.yml`)
+  if (fs.existsSync(`${repoRootPath}/kitnic.yaml`)) {
+    file = fs.readFileSync(`${repoRootPath}/kitnic.yaml`)
+  } else if (fs.existsSync(`${repoRootPath}/kitspace.yaml`)) {
+    file = fs.readFileSync(`${repoRootPath}/kitspace.yaml`)
+  } else if (fs.existsSync(`${repoRootPath}/kitspace.yml`)) {
+    file = fs.readFileSync(`${repoRootPath}/kitspace.yml`)
   }
   if (file != null) {
     kitnicYaml = yaml.safeLoad(file)
