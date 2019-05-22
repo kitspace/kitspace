@@ -10,14 +10,15 @@ const gerberFiles = require('../../src/gerber_files')
 
 if (require.main !== module) {
   module.exports = function(config, folder) {
-    let file
-    let projectPath
-    let repoRootPath = folder
+    let file, projectPath, repoRootPath
 
     repoFolders = folder.split('/')
     if (repoFolders.length > 4) {
       repoRootPath = repoFolders.slice(0, 4).join('/')
       projectPath = repoFolders.splice(4).join('/')
+    } else {
+      repoRootPath = folder
+      projectPath = folder
     }
 
     if (fs.existsSync(`${repoRootPath}/kitnic.yaml`)) {
@@ -29,8 +30,8 @@ if (require.main !== module) {
     }
     let info = file == null ? {} : yaml.safeLoad(file)
     const files = globule
-      .find(`${folder}/**/*`)
-      .map(p => path.relative(folder, p))
+      .find(`${repoRootPath}/**/*`)
+      .map(p => path.relative(repoRootPath, p))
 
     if (info.multi) {
       for (let project in info.multi) {
@@ -39,12 +40,11 @@ if (require.main !== module) {
         }
       }
     }
-
     const gerbers = gerberFiles(files, info.gerbers).map(p =>
-      path.join(folder, p)
+      path.join(repoRootPath, p)
     )
     if (gerbers.length === 0) {
-      console.error(`No gerbers found for ${folder}.`)
+      console.error(`No gerbers found for ${repoRootPath}.`)
       process.exit(1)
     }
     const deps = [folder].concat(gerbers)
