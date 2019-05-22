@@ -10,5 +10,9 @@
   {
     "repo": "https://github.com/kitspace-forks/Bus_Pirate",
     "hash": "0ca376a0eedd116e3ffdbd5dfd5398a67fdba708"
+  },
+  {
+    "repo": "https://github.com/kitspace-forks/hoverboard-breakout",
+    "hash": "0ad61fa761b571e12159b51b310f5d8971eda384"
   }
 ]
