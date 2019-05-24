@@ -20,7 +20,7 @@ if (require.main !== module) {
     let projectFolder = folder
 
     if (project.path) {
-      projectFolder = projectFolder + '/' + project.path
+      projectFolder = path.join(projectFolder, project.path)
     }
 
     board.id = path.relative(boardDir, projectFolder)

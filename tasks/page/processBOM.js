@@ -41,11 +41,11 @@ if (require.main !== module) {
         }
       }
     }
-    
+
     if (info.bom) {
-      bom = repoRootPath + '/' + info.bom
+      bom = path.join(repoRootPath, info.bom)
     } else {
-      bom = projectPath + '/1-click-bom.tsv'
+      bom = path.join(projectPath, '1-click-bom.tsv')
     }
 
     const deps = ['build/.temp/boards.json', folder, bom]

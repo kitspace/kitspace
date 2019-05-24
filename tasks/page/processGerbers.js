@@ -28,13 +28,13 @@ if (require.main !== module) {
       file = fs.readFileSync(`${repoRootPath}/kitspace.yml`)
     }
     let info = file == null ? {} : yaml.safeLoad(file)
-    let gerberPath = `${repoRootPath}/**/*`
+    let gerberPath = path.join(repoRootPath, '**', '*')
 
     if (info.multi) {
       for (let project in info.multi) {
         if (project === projectPath) {
           info = info.multi[project]
-          gerberPath = `${repoRootPath}/${projectPath}/**/*`
+          gerberPath = path.join(repoRootPath, projectPath, '**', '*')
         }
       }
     }
