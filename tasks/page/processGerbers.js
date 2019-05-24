@@ -34,7 +34,11 @@ if (require.main !== module) {
       for (let project in info.multi) {
         if (project === projectPath) {
           info = info.multi[project]
-          gerberPath = path.join(repoRootPath, projectPath, '**', '*')
+          if (info.gerbers) {
+            gerberPath = path.join(repoRootPath, info.gerbers, '*')
+          } else {
+            gerberPath = path.join(repoRootPath, projectPath, '**', '*')
+          }
         }
       }
     }
