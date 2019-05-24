@@ -18,7 +18,6 @@ if (require.main !== module) {
       projectPath = repoFolders.splice(4).join('/')
     } else {
       repoRootPath = folder
-      projectPath = folder
     }
 
     if (fs.existsSync(`${repoRootPath}/kitnic.yaml`)) {
@@ -29,17 +28,21 @@ if (require.main !== module) {
       file = fs.readFileSync(`${repoRootPath}/kitspace.yml`)
     }
     let info = file == null ? {} : yaml.safeLoad(file)
-    const files = globule
-      .find(`${repoRootPath}/**/*`)
-      .map(p => path.relative(repoRootPath, p))
+    let gerberPath = `${repoRootPath}/**/*`
 
     if (info.multi) {
       for (let project in info.multi) {
         if (project === projectPath) {
           info = info.multi[project]
+          gerberPath = `${repoRootPath}/${projectPath}/**/*`
         }
       }
     }
+
+    const files = globule
+      .find(gerberPath)
+      .map(p => path.relative(repoRootPath, p))
+
     const gerbers = gerberFiles(files, info.gerbers).map(p =>
       path.join(repoRootPath, p)
     )
