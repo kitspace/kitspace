@@ -52,6 +52,7 @@ color: The solder resist color of the preview rendering. Can be one of:
        - yellow
 bom: A path to your 1-click-bom in case it isn't `1-click-bom.tsv`.
 gerbers: A path to your folder of gerbers in case it isn't `gerbers/`.
+multi: Identifier field only used if the repository contains multiple projects.
 
 ```
 Paths should be in UNIX style (i.e. use `/` not `\`) and relative to the root
@@ -116,6 +117,31 @@ bom: manufacture/advanced-example-BOM.tsv
 gerbers: manufacture/gerbers-and-drills
 ```
 
+#### The multi field
+Kitspace supports multiple projects in one repository with the `multi` field. When multiple projects exist, `multi` will always be the first field in the `kitspace.yaml`, with the paths to your projects folder nested underneath.
+
+```
+├── kitspace.yaml
+├── project_one
+│    ├── 1-click-bom.tsv
+│    └── gerbers
+├── project_two
+     ├── 1-click-bom.tsv
+     └── gerbers
+
+```
+with `kitspace.yaml` containing:
+```yaml
+multi:
+    project_one:
+        summary: First project in a repository.
+        color: blue
+        site: https://example-one.com
+    project_two:
+        summary: Second project in a repository.
+        color: red
+        site: https://example-two.com
+```
 
 ## Development
 
