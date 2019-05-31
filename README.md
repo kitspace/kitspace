@@ -118,6 +118,9 @@ gerbers: manufacture/gerbers-and-drills
 ```
 
 #### The multi field
+
+> NOTE: `multi` doesn't yet work with the [kitspace.org/submit](https://kitspace.org/submit) preview tool. See issue [#182](https://github.com/kitspace/kitspace/issues/182).
+
 Kitspace supports multiple projects in one repository with the `multi` field. When multiple projects exist, `multi` will always be the first field in the `kitspace.yaml`, with the paths to your projects folder nested underneath.
 
 ```
