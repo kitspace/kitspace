@@ -126,14 +126,30 @@ Kitspace supports multiple projects in one repository with the `multi` field. Wh
 ```
 ├── kitspace.yaml
 ├── project_one
-│    ├── 1-click-bom.tsv
-│    └── gerbers
-├── project_two
-     ├── 1-click-bom.tsv
-     └── gerbers
+│   ├── 1-click-bom.tsv
+│   ├── README.md
+│   └── gerbers
+│       ├── example.cmp
+│       ├── example.drd
+│       ├── example.dri
+│        ...
+│       ├── example.stc
+│       └── example.sts
+└── project_two
+    ├── 1-click-bom.tsv
+    ├── README.md
+    └── gerbers
+        ├── example.cmp
+        ├── example.drd
+        ├── example.dri
+         ...
+        ├── example.stc
+        └── example.sts
 
 ```
+
 with `kitspace.yaml` containing:
+
 ```yaml
 multi:
     project_one:
@@ -144,6 +160,36 @@ multi:
         summary: Second project in a repository.
         color: red
         site: https://example-two.com
+```
+
+If you want to use custom paths for `bom` and `gerbers` then note that these are from the root of the repository. There is currently no way to change the path of the README.
+
+E.g.
+
+```
+├── kitspace.yaml
+├── manufacturing_outputs
+│   └── project_one_gerbers
+│       ├── example.cmp
+│       ├── example.drd
+│       ├── example.dri
+│        ...
+│       ├── example.stc
+│       └── example.sts
+├── project_one
+    ├── BOM.csv
+    └── README.md
+└── project_two
+    ├── README.md
+    ...
+
+```yaml
+multi:
+    project_one:
+        bom: project_one/bom.csv
+        gerbers: manufacturing_outputs/project_one_gerbers
+    project_two:
+      ...
 ```
 
 ## Development
