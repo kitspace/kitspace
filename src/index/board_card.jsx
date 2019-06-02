@@ -70,7 +70,7 @@ let BoardCard = React.createClass({
           <div className="title">
             {this.props.data.id
               .split('/')
-              .slice(2)
+              .slice(-1)
               .join(' / ')}
           </div>
           <div className="url">

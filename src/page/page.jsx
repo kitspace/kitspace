@@ -23,7 +23,7 @@ const Page = React.createClass({
   render() {
     const idText = info.id
       .split('/')
-      .slice(2)
+      .slice(-1)
       .join(' / ')
     const titleText = `${idText} on Kitspace`
     const subtitleText = info.id

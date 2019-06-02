@@ -10,23 +10,48 @@ const gerberFiles = require('../../src/gerber_files')
 
 if (require.main !== module) {
   module.exports = function(config, folder) {
-    let file
-    if (fs.existsSync(`${folder}/kitnic.yaml`)) {
-      file = fs.readFileSync(`${folder}/kitnic.yaml`)
-    } else if (fs.existsSync(`${folder}/kitspace.yaml`)) {
-      file = fs.readFileSync(`${folder}/kitspace.yaml`)
-    } else if (fs.existsSync(`${folder}/kitspace.yml`)) {
-      file = fs.readFileSync(`${folder}/kitspace.yml`)
+    let file, projectPath, repoRootPath
+
+    repoFolders = folder.split('/')
+    if (repoFolders.length > 4) {
+      repoRootPath = repoFolders.slice(0, 4).join('/')
+      projectPath = repoFolders.splice(4).join('/')
+    } else {
+      repoRootPath = folder
     }
-    const info = file == null ? {} : yaml.safeLoad(file)
+
+    if (fs.existsSync(`${repoRootPath}/kitnic.yaml`)) {
+      file = fs.readFileSync(`${repoRootPath}/kitnic.yaml`)
+    } else if (fs.existsSync(`${repoRootPath}/kitspace.yaml`)) {
+      file = fs.readFileSync(`${repoRootPath}/kitspace.yaml`)
+    } else if (fs.existsSync(`${repoRootPath}/kitspace.yml`)) {
+      file = fs.readFileSync(`${repoRootPath}/kitspace.yml`)
+    }
+    let info = file == null ? {} : yaml.safeLoad(file)
+    let gerberPath = path.join(repoRootPath, '**', '*')
+
+    if (info.multi) {
+      for (let project in info.multi) {
+        if (project === projectPath) {
+          info = info.multi[project]
+          if (info.gerbers) {
+            gerberPath = path.join(repoRootPath, info.gerbers, '*')
+          } else {
+            gerberPath = path.join(repoRootPath, projectPath, '**', '*')
+          }
+        }
+      }
+    }
+
     const files = globule
-      .find(`${folder}/**/*`)
-      .map(p => path.relative(folder, p))
+      .find(gerberPath)
+      .map(p => path.relative(repoRootPath, p))
+
     const gerbers = gerberFiles(files, info.gerbers).map(p =>
-      path.join(folder, p)
+      path.join(repoRootPath, p)
     )
     if (gerbers.length === 0) {
-      console.error(`No gerbers found for ${folder}.`)
+      console.error(`No gerbers found for ${repoRootPath}.`)
       process.exit(1)
     }
     const deps = [folder].concat(gerbers)
@@ -50,10 +75,12 @@ if (require.main !== module) {
     return {deps, targets, moduleDep: false}
   }
 } else {
-  let file
   const {config, deps, targets} = utils.processArgs(process.argv)
   const folder = deps[0]
   const gerbers = deps.slice(1)
+  let file
+  let root = folder
+  let projectPath
   const [
     topSvgPath,
     bottomSvgPath,
@@ -71,12 +98,19 @@ if (require.main !== module) {
   }
   const zip = new Jszip()
   const folder_name = path.basename(zipPath, '.zip')
-  if (fs.existsSync(`${folder}/kitnic.yaml`)) {
-    file = fs.readFileSync(`${folder}/kitnic.yaml`)
-  } else if (fs.existsSync(`${folder}/kitspace.yaml`)) {
-    file = fs.readFileSync(`${folder}/kitspace.yaml`)
-  } else if (fs.existsSync(`${folder}/kitspace.yml`)) {
-    file = fs.readFileSync(`${folder}/kitspace.yml`)
+
+  repoStructure = folder.split('/')
+  if (repoStructure.length > 4) {
+    root = repoStructure.slice(0, 4).join('/')
+    projectPath = repoStructure.splice(4).join('/')
+  }
+
+  if (fs.existsSync(`${root}/kitnic.yaml`)) {
+    file = fs.readFileSync(`${root}/kitnic.yaml`)
+  } else if (fs.existsSync(`${root}/kitspace.yaml`)) {
+    file = fs.readFileSync(`${root}/kitspace.yaml`)
+  } else if (fs.existsSync(`${root}/kitspace.yml`)) {
+    file = fs.readFileSync(`${root}/kitspace.yml`)
   }
   try {
     let color, data
@@ -101,7 +135,16 @@ if (require.main !== module) {
         })
       )
     if (file != null) {
-      ;({color} = yaml.safeLoad(file))
+      info = yaml.safeLoad(file)
+      if (info.multi) {
+        for (let project in info.multi) {
+          if (project === projectPath) {
+            color = info.multi[project].color
+          }
+        }
+      } else {
+        color = info.color
+      }
     }
     boardBuilder(stackupData, color || 'green', function(error, stackup) {
       if (error != null) {

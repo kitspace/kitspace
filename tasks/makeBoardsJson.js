@@ -15,6 +15,28 @@ if (require.main !== module) {
     return {deps, targets, moduleDep}
   }
 } else {
+  const getBoardInfo = function(project, folder) {
+    let board = correctTypes(project)
+    let projectFolder = folder
+
+    if (project.path) {
+      projectFolder = path.join(projectFolder, project.path)
+    }
+
+    board.id = path.relative(boardDir, projectFolder)
+
+    if (board.summary === '' && /^github.com/.test(board.id)) {
+      const ghInfo = getGithubInfo(board.id)
+      if (__guard__(ghInfo, x => x.description) != null) {
+        board.summary = ghInfo.description
+      } else {
+        console.warn(`WARNING: could not get GitHub description for ${folder}`)
+      }
+    }
+
+    boards.push(board)
+  }
+
   const getGithubInfo = function(id) {
     let text
     const url = `https://api.github.com/repos${id.replace(/^github.com/, '')}`
@@ -33,11 +55,13 @@ if (require.main !== module) {
       id: '',
       summary: ''
     }
+
     for (let prop in boardInfoWithEmpty) {
       if (boardInfo.hasOwnProperty(prop)) {
         boardInfoWithEmpty[prop] = String(boardInfo[prop])
       }
     }
+
     return boardInfoWithEmpty
   }
 
@@ -61,17 +85,16 @@ if (require.main !== module) {
     } else {
       info = {}
     }
-    info = correctTypes(info)
-    info.id = path.relative(boardDir, folder)
-    if (info.summary === '' && /^github.com/.test(info.id)) {
-      const ghInfo = getGithubInfo(info.id)
-      if (__guard__(ghInfo, x => x.description) != null) {
-        info.summary = ghInfo.description
-      } else {
-        console.warn(`WARNING: could not get GitHub description for ${folder}`)
+
+    if (info.multi) {
+      for (let project in info.multi) {
+        info.multi[project].path = project
+
+        getBoardInfo(info.multi[project], folder)
       }
+    } else {
+      getBoardInfo(info, folder)
     }
-    boards.push(info)
   }
 
   const boardJson = fs.openSync(targets[0], 'w')
