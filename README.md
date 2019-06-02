@@ -162,7 +162,7 @@ multi:
         site: https://example-two.com
 ```
 
-If you want to use custom paths for `bom` and `gerbers` then note that these are from the root of the repository. There is currently no way to change the path of the README.
+If you want to use custom paths for `bom` and `gerbers` then note that these are from the root of the repository. There is currently no way to change the path of the README (see issue [#183](https://github.com/kitspace/kitspace/issues/183)).
 
 E.g.
 
@@ -186,7 +186,7 @@ E.g.
 ```yaml
 multi:
     project_one:
-        bom: project_one/bom.csv
+        bom: project_one/BOM.csv
         gerbers: manufacturing_outputs/project_one_gerbers
     project_two:
       ...
