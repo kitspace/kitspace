@@ -182,6 +182,7 @@ E.g.
 └── project_two
     ├── README.md
     ...
+```
 
 ```yaml
 multi:
