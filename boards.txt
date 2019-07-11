@@ -62,3 +62,4 @@ https://gitlab.com/erigas/gnukey
 https://gitlab.com/alexander.kutschera/singingplants
 https://gitlab.com/xengi/darling
 https://github.com/Jan--Henrik/hoverboard-breakout
+https://github.com/eulerlab/open-visual-stimulator
