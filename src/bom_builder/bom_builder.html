@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- HTML Meta Tags -->
+        <title>Kitspace BOM Builder</title>
+        <meta name="description" content='Kitspace is a place to share ready to order open hardware electronics projects. You can order the the circuit board and all the components for a project with just a few clicks.'>
+
+        <!-- Google / Search Engine Tags -->
+        <meta itemprop="name" content="Kit Space">
+        <meta itemprop="description" content='Kitspace is a place to share ready to order open hardware electronics projects. You can order the the circuit board and all the components for a project with just a few clicks.'>
+        <meta itemprop="image" content="https://kitspace.org/images/logo_meta.png">
+
+        <!-- Facebook Meta Tags -->
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="Kitspace">
+        <meta property="og:description" content='Kitspace is a place to share ready to order open hardware electronics projects. You can order the the circuit board and all components for a project with just a few clicks.'>
+        <meta property="og:image" content="https://kitspace.org/images/logo_meta.png">
+        <meta property="og:image:width" content=500>
+        <meta property="og:image:height" content=269>
+
+        <!-- Twitter Meta Tags -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="Kitspace">
+        <meta name="twitter:description" content='Kitspace is a place to share ready to order open hardware electronics projects. You can order the circuit board and all components for a project with just a few clicks.'>
+        <meta name="twitter:image" content="https://kitspace.org/images/logo_meta.png">
+
+        <style>
+          @font-face {
+              font-family: 'Noto Sans';
+              font-style: normal;
+              font-weight: 400;
+              src: local('Noto Sans'), local('NotoSans'), url(/images/NotoSans.ttf) format('truetype');
+          }
+          @font-face {
+              font-family: 'Noto Sans';
+              font-style: normal;
+              font-weight: 700;
+              src: local('Noto Sans Bold'), local('NotoSans-Bold'), url(/images/NotoSansBold.ttf) format('truetype');
+          }
+        </style>
+        <script type="text/javascript" src=/vendor.js></script>
+        <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/mflpmlediakefinapghmabapjeippfdi">
+        <link
+            rel="icon"
+            type="image/png"
+            href="/images/favicon.png">
+        <link rel="stylesheet"
+            href="//cdnjs.cloudflare.com/ajax/libs/octicons/3.3.0/octicons.min.css">
+        <link rel="stylesheet" href="bom_builder.css">
+        <script type="text/javascript">
+          var _paq = _paq || [];
+          /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+          _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+          _paq.push(["setCookieDomain", "*.kitspace.org"]);
+          _paq.push(["setDomains", ["*.kitspace.org"]]);
+          _paq.push(['trackPageView']);
+          _paq.push(['enableLinkTracking']);
+          (function() {
+            var u="https://matomo.kitspace.org/";
+            _paq.push(['setTrackerUrl', u+'piwik.php']);
+            _paq.push(['setSiteId', '1']);
+            var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+            g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+          })();
+        </script>
+    </head>
+    <body>
+        <div id="content"></div>
+        <script type="text/javascript" src=app.js></script>
+    </body>
+</html>

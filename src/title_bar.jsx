@@ -21,13 +21,17 @@ function TitleBar(props) {
           </semantic.Menu.Item>
           <semantic.Menu.Item
             as="a"
+            href="/bom_builder"
+            active={props.route === '/bom_builder'}
+          >
+            {'BOM Builder'}
+          </semantic.Menu.Item>
+          <semantic.Menu.Item
+            as="a"
             target="blank"
             href="https://1clickbom.com"
           >
             {'1-click BOM'}
-          </semantic.Menu.Item>
-          <semantic.Menu.Item as="a" href="/bom-builder">
-            {'BOM Builder'}
           </semantic.Menu.Item>
         </semantic.Menu>
       </div>
