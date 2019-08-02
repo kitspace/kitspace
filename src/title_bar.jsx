@@ -1,45 +1,34 @@
 const React = require('react')
-const {Button} = require('semantic-ui-react')
+const semantic = require('semantic-ui-react')
 
-var TitleBar = React.createClass({
-  propTypes: {
-    children: React.PropTypes.any,
-    submissionButton: React.PropTypes.bool
-  },
-  render: function() {
-    let button
-    if (this.props.submissionButton) {
-      button = (
-        <Button color="green" onClick={() => (location.href = '/submit')}>
-          Submit a project
-        </Button>
-      )
-    } else {
-      button = null
-    }
-    return (
-      <div className="titleBar">
-        <div className="logoContainer">
+function TitleBar(props) {
+  console.log({props})
+  return (
+    <div className="titleBar">
+      <div className="logoContainer">
+        <semantic.Menu inverted pointing secondary>
           <a href="/">
-            <img className="logoImg" src="/images/logo.svg" />
+            <semantic.Image className="logoImg" src="/images/logo.svg" />
           </a>
-        </div>
-        <div className="middleContainer">{this.props.children}</div>
-        <div className="submitContainer">
-          {button}
-          <a
-            className="contributeContainer"
-            title="Star Kitspace on GitHub"
-            href="https://github.com/monostable/kitspace/"
+          <semantic.Menu.Item
+            active={
+              props.route === '/' || RegExp('^/boards/').test(props.route)
+            }
           >
-            <div className="contributeButton">
-              <span className="octicon octicon-mark-github githubIcon" />
-            </div>
-          </a>
-        </div>
+            <a href="/">{'Projects'}</a>
+          </semantic.Menu.Item>
+          <semantic.Menu.Item>
+            <a target="blank" href="https://1clickbom.com">
+              {'1-click BOM'}
+            </a>
+          </semantic.Menu.Item>
+          <semantic.Menu.Item>
+            <a href="/bom-builder">{'BOM Builder'}</a>
+          </semantic.Menu.Item>
+        </semantic.Menu>
       </div>
-    )
-  }
-})
+    </div>
+  )
+}
 
 module.exports = TitleBar

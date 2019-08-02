@@ -16,19 +16,7 @@ var Main = React.createClass({
   render: function() {
     return (
       <div>
-        <TitleBar submissionButton={true}>
-          <div className="searchContainer">
-            <div className="searchBackground">
-              <div className="searchInputIcon">
-                <span className="icon-search searchIcon" />
-              </div>
-              <SearchInput
-                className="searchInput"
-                onChange={this.searchUpdated}
-              />
-            </div>
-          </div>
-        </TitleBar>
+        <TitleBar route="/" />
         <BoardList data={this.state.result} searching={this.state.searching} />
       </div>
     )
