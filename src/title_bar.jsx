@@ -2,7 +2,16 @@ const React = require('react')
 const semantic = require('semantic-ui-react')
 
 function TitleBar(props) {
-  console.log({props})
+  const isProjectRoute =
+    props.route === '/' || RegExp('^/boards/').test(props.route)
+  const addAProject = isProjectRoute ? (
+    <div>
+      <semantic.Button icon labelPosition="left" color="green" href="/submit">
+        <semantic.Icon name="plus" />
+        Add a project
+      </semantic.Button>
+    </div>
+  ) : null
   return (
     <div className="titleBar">
       <div className="logoContainer">
@@ -10,13 +19,7 @@ function TitleBar(props) {
           <a href="/">
             <semantic.Image className="logoImg" src="/images/logo.svg" />
           </a>
-          <semantic.Menu.Item
-            as="a"
-            href="/"
-            active={
-              props.route === '/' || RegExp('^/boards/').test(props.route)
-            }
-          >
+          <semantic.Menu.Item as="a" href="/" active={isProjectRoute}>
             {'Projects'}
           </semantic.Menu.Item>
           <semantic.Menu.Item
@@ -35,6 +38,7 @@ function TitleBar(props) {
           </semantic.Menu.Item>
         </semantic.Menu>
       </div>
+      {addAProject}
     </div>
   )
 }

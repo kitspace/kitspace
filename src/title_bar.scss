@@ -2,7 +2,7 @@
 @import '/semantic.min.css';
 
 .titleBar {
-    padding-bottom: 10px;
+    padding: 10px;
     .ui.menu .item > a:hover {
         text-decoration: none !important;
     }
@@ -17,14 +17,12 @@
     overflow: hidden;
     position: relative;
     width: 100%;
-    justify-content: left;
+    justify-content: space-between;
 
     .logoContainer {
         min-width:320px;
         display:flex;
         justify-content: flex-start;
-        margin-top: 10px;
-        margin-left: 10px;
         z-index: 1;
         flex-shrink: 2;
     }
