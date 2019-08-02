@@ -53,10 +53,7 @@ const Page = React.createClass({
           <meta name="twitter:image" content={metaImage} />
         </Helmet>
         <div className="page">
-          <TitleBar submissionButton={true}>
-            <div className="titleText">{idText}</div>
-            <div className="subtitleText">{subtitleText}</div>
-          </TitleBar>
+          <TitleBar route={'/boards/' + info.id} />
           <div className="pageContainer">
             <img style={{display: 'none'}} src="/images/flags.png" />
             <InfoBar info={info} />

@@ -11,19 +11,23 @@ function TitleBar(props) {
             <semantic.Image className="logoImg" src="/images/logo.svg" />
           </a>
           <semantic.Menu.Item
+            as="a"
+            href="/"
             active={
               props.route === '/' || RegExp('^/boards/').test(props.route)
             }
           >
-            <a href="/">{'Projects'}</a>
+            {'Projects'}
           </semantic.Menu.Item>
-          <semantic.Menu.Item>
-            <a target="blank" href="https://1clickbom.com">
-              {'1-click BOM'}
-            </a>
+          <semantic.Menu.Item
+            as="a"
+            target="blank"
+            href="https://1clickbom.com"
+          >
+            {'1-click BOM'}
           </semantic.Menu.Item>
-          <semantic.Menu.Item>
-            <a href="/bom-builder">{'BOM Builder'}</a>
+          <semantic.Menu.Item as="a" href="/bom-builder">
+            {'BOM Builder'}
           </semantic.Menu.Item>
         </semantic.Menu>
       </div>
