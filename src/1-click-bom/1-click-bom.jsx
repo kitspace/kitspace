@@ -27,7 +27,7 @@ const text = `
 function BomBuilder(props) {
   return (
     <div>
-      <TitleBar route="/1-click-bom" />
+      <TitleBar route="/1-click-bom/" />
       <semantic.Container style={{marginTop: 30}}>
         <Markdown source={text} />
       </semantic.Container>
