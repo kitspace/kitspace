@@ -19,7 +19,11 @@ function Search(props) {
           <div className="searchInputIcon">
             <span className="icon-search searchIcon" />
           </div>
-          <SearchInput className="searchInput" onChange={props.searchUpdated} />
+          <SearchInput
+            placeholder="Search for projects"
+            className="searchInput"
+            onChange={props.searchUpdated}
+          />
         </div>
       </div>
     </semantic.Container>
