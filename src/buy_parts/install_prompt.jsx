@@ -57,7 +57,7 @@ function NotCompatible(props) {
     <semantic.Message attached warning>
       <semantic.Icon name="attention" />
       Sorry, the{' '}
-      <a className="bomPromptLink" href="https://1clickbom.com/">
+      <a className="bomPromptLink" href="/1-click-bom">
         1-click BOM extension
       </a>{' '}
       is not yet available for your browser. Only the Digikey add-to-cart links

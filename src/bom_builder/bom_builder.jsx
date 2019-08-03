@@ -7,7 +7,7 @@ const TitleBar = require('../title_bar')
 const text = `
 # The Kitspace BOM Builder
 
-The BOM Builder allows you to automatically find in-stock components and alternatives across distributors and lets you add entire bill of materials directly to shopping carts by connecting up to [1-click BOM](https://1clickbom.com).
+The BOM Builder allows you to automatically find in-stock components and alternatives across distributors and lets you add entire bill of materials directly to shopping carts by connecting up to [1-click BOM](/1-click-bom).
 
 In our experience this can cut the purchasing time down from a few hours to a few minutes. We are now in a closed beta phase so if you are interested in trying it out please [get in touch](mailto:info@kitspace.org?subject=BOM%20Builder).
 
@@ -24,7 +24,7 @@ In our experience this can cut the purchasing time down from a few hours to a fe
 function BomBuilder(props) {
   return (
     <div>
-      <TitleBar route="/bom_builder" />
+      <TitleBar route="/bom_builder/" />
       <semantic.Container style={{marginTop: 30}}>
         <Markdown source={text} />
       </semantic.Container>

@@ -196,8 +196,20 @@ ninja
   .using('sass')
 
 ninja
+  .edge('build/.temp/1-click-bom/1-click-bom.css')
+  .from('src/1-click-bom/1-click-bom.scss')
+  .need(sassSrc)
+  .assign('path', 'src/')
+  .using('sass')
+
+ninja
   .edge('build/bom_builder/bom_builder.css')
   .from('build/.temp/bom_builder/bom_builder.css')
+  .using('autoprefix')
+
+ninja
+  .edge('build/1-click-bom/1-click-bom.css')
+  .from('build/.temp/1-click-bom/1-click-bom.css')
   .using('autoprefix')
 
 ninja
@@ -239,6 +251,12 @@ ninja
 ninja
   .edge('build/bom_builder/app.js')
   .from('build/.temp/bom_builder/render_bom_builder.jsx')
+  .need(jsMainTargets)
+  .using('browserify')
+
+ninja
+  .edge('build/1-click-bom/app.js')
+  .from('build/.temp/1-click-bom/render_1-click-bom.jsx')
   .need(jsMainTargets)
   .using('browserify')
 
