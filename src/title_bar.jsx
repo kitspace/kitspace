@@ -5,14 +5,14 @@ function TitleBar(props) {
   const isProjectRoute =
     props.route === '/' || RegExp('^/boards/').test(props.route)
   const isSubmitRoute = RegExp('^/submit/').test(props.route)
-  const addAProject = isProjectRoute ? (
+  const addAProject = isSubmitRoute ? null : (
     <div>
       <semantic.Button icon labelPosition="left" color="green" href="/submit">
         <semantic.Icon name="plus" />
         Add a project
       </semantic.Button>
     </div>
-  ) : null
+  )
   return (
     <div className="titleBar">
       <div className="logoContainer">
