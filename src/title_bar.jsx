@@ -20,7 +20,11 @@ function TitleBar(props) {
           <a href="/">
             <semantic.Image className="logoImg" src="/images/logo.svg" />
           </a>
-          <semantic.Menu.Item as="a" href="/" active={isProjectRoute || isSubmitRoute}>
+          <semantic.Menu.Item
+            as="a"
+            href="/"
+            active={isProjectRoute || isSubmitRoute}
+          >
             {'Projects'}
           </semantic.Menu.Item>
           <semantic.Menu.Item
@@ -39,7 +43,32 @@ function TitleBar(props) {
           </semantic.Menu.Item>
         </semantic.Menu>
       </div>
-      {addAProject}
+      <div className="rightButtons">
+        <semantic.Menu
+          className="socialMenu"
+          inverted
+          pointing
+          secondary
+          size="small"
+        >
+          <semantic.Menu.Item
+            as="a"
+            href="https://riot.im/app/#/room/#kitspace:matrix.org"
+          >
+            <semantic.Icon name="chat" />
+            Chat
+          </semantic.Menu.Item>
+          <semantic.Menu.Item as="a" href="https://twitter.com/kitspaceorg">
+            <semantic.Icon name="twitter" />
+            Twitter
+          </semantic.Menu.Item>
+          <semantic.Menu.Item as="a" href="https://github.com/kitspace">
+            <semantic.Icon name="github" />
+            GitHub
+          </semantic.Menu.Item>
+        </semantic.Menu>
+        {addAProject}
+      </div>
     </div>
   )
 }
