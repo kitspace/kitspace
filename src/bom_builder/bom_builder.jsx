@@ -11,7 +11,7 @@ The BOM Builder allows you to automatically find in-stock components and alterna
 
 You can easily select alternatives for line items even for generic components such as resistors and capacitors. The aim is to cut the purchasing time down from several hours to a few minutes and quickly buy alternatives when parts go out of stock at your preferred distributor.
 
-We are now in a closed beta phase so if you are interested in trying it out please [get in touch](mailto:kaspar@kitspace.org?subject=BOM%20Builder)
+We are now in a closed beta phase so if you are interested in trying it out please [get in touch](mailto:info@kitspace.org?subject=BOM%20Builder).
 
 A quick demo of the alpha version:
 

@@ -26,10 +26,6 @@ const Page = React.createClass({
       .slice(-1)
       .join(' / ')
     const titleText = `${idText} on Kitspace`
-    const subtitleText = info.id
-      .split('/')
-      .slice(0, 2)
-      .join(' / ')
     return (
       <div>
         <Helmet>
