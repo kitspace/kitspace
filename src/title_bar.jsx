@@ -53,15 +53,15 @@ function TitleBar(props) {
                 href="https://riot.im/app/#/room/#kitspace:matrix.org"
               >
                 <semantic.Icon name="chat" />
-                <span className="socialText">Chat</span>
+                Chat
               </semantic.Menu.Item>
               <semantic.Menu.Item as="a" href="https://twitter.com/kitspaceorg">
                 <semantic.Icon name="twitter" />
-                <span className="socialText">Twitter</span>
+                Twitter
               </semantic.Menu.Item>
               <semantic.Menu.Item as="a" href="https://github.com/kitspace">
                 <semantic.Icon name="github" />
-                <span className="socialText">GitHub</span>
+                GitHub
               </semantic.Menu.Item>
               {isSubmitRoute ? null : (
                 <semantic.Menu.Item>
