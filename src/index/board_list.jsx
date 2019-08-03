@@ -1,8 +1,8 @@
 'use strict'
 const React = require('react')
+const SearchInput = require('react-search-input').default
 
 const BoardCard = require('./board_card')
-const Intro = require('./intro')
 
 var BoardList = React.createClass({
   propTypes: {
@@ -10,13 +10,12 @@ var BoardList = React.createClass({
     searching: React.PropTypes.bool
   },
   render() {
-    const intro = this.props.searching ? null : <Intro />
     if (this.props.data.length === 0) {
       return (
         <div>
-          <div style={{height: '40vh'}} />
+          <div style={{height: '30vh'}} />
           <div style={{width: '100%', textAlign: 'center'}}>
-            Sorry, no results.
+            Sorry, no result yet. <a href="/submit">Add your project!</a>
           </div>
         </div>
       )
@@ -26,7 +25,6 @@ var BoardList = React.createClass({
     })
     return (
       <div>
-        {intro}
         <div className="boardListContainer">
           <div className="boardList">{cardNodes}</div>
         </div>

@@ -5,6 +5,10 @@
 @import '../fontello';
 
 .searchContainer {
+  border: 1px solid #e3e3e3;
+  flex-grow: 2;
+  max-width: 594px;
+  border-radius: 4px;
   box-sizing: border-box;
   display: flex;
   height: 61px;
