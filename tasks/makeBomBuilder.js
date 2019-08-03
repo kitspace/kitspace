@@ -4,15 +4,15 @@ const utils = require('./utils/utils')
 if (require.main !== module) {
   module.exports = function(config) {
     let deps
-    const targets = ['build/bom_builder/index.html']
+    const targets = ['build/bom-builder/index.html']
     if (config === 'production') {
       deps = [
-        'build/.temp/bom_builder/bom_builder.jsx',
-        'src/bom_builder/bom_builder.html',
+        'build/.temp/bom-builder/bom-builder.jsx',
+        'src/bom-builder/bom-builder.html',
       ]
       return {deps, targets, moduleDep: true}
     } else if (config === 'dev') {
-      deps = ['src/bom_builder/bom_builder.html']
+      deps = ['src/bom-builder/bom-builder.html']
       return {deps, targets, moduleDep: false}
     }
   }

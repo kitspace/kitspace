@@ -24,7 +24,7 @@ In our experience this can cut the purchasing time down from a few hours to a fe
 function BomBuilder(props) {
   return (
     <div>
-      <TitleBar route="/bom_builder/" />
+      <TitleBar route="/bom-builder/" />
       <semantic.Container style={{marginTop: 30}}>
         <Markdown source={text} />
       </semantic.Container>

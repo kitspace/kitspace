@@ -14,7 +14,7 @@ const text = `
 </a>
 </p>
 
-1-click BOM is a browser extension that fills your shopping carts for you on sites like Digikey and Mouser. It lets you simply click on the "buy parts" links on Kitspace to get the right parts. You can also use it directly with your own spreadsheets or with our [BOM Builder](/bom_builder) tool.
+1-click BOM is a browser extension that fills your shopping carts for you on sites like Digikey and Mouser. It lets you simply click on the "buy parts" links on Kitspace to get the right parts. You can also use it directly with your own spreadsheets or with our [BOM Builder](/bom-builder) tool.
 
 [Read further documentation on GitHub](https://github.com/kitspace/1clickBOM#readme).
 
