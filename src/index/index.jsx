@@ -42,6 +42,7 @@ var Main = React.createClass({
       <div>
         <TitleBar route="/" />
         <Search searchUpdated={this.searchUpdated} />
+        {this.state.searching ? null : <Intro />}
         <BoardList data={this.state.result} searching={this.state.searching} />
       </div>
     )

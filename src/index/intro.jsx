@@ -1,12 +1,8 @@
 'use strict'
 const React = require('react')
 
-const installExtension = require('../install_extension')
-
 const style = {
   introContainer: {
-    marginLeft: '10%',
-    marginRight: '10%',
     marginTop: 32,
     marginBottom: 32
   },
@@ -24,7 +20,7 @@ function Intro(props) {
     <center>
       <div style={style.introContainer}>
         <div className="introText" style={style.intro}>
-          Chat | Twitter | GitHub
+          Kitspace is a place to share ready-to-order electronics designs. We automate parts purchasing to let you focus on building.
         </div>
       </div>
     </center>
