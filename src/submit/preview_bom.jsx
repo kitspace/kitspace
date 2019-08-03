@@ -6,7 +6,6 @@ const util = require('./util')
 const Steps = require('./steps')
 const UrlSubmit = require('./url_submit')
 
-const TitleBar = require('../title_bar')
 const Bom = require('../buy_parts/bom')
 const getPartinfo = require('../get_partinfo.js')
 
@@ -46,9 +45,6 @@ const PreviewBom = React.createClass({
     )
     return (
       <div className="Step Step2">
-        <TitleBar>
-          <div className="titleText">{'Submit a project'}</div>
-        </TitleBar>
         <semantic.Container>
           <Steps setStep={this.props.setStep} active={2} />
           {instructions}

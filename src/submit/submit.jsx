@@ -5,6 +5,7 @@ const path = require('path')
 const immutable = require('immutable')
 const {Router, Route, Link, hashHistory} = require('react-router')
 
+const TitleBar = require('../title_bar')
 const PreviewGerbers = require('./preview_gerbers')
 const PreviewBom = require('./preview_bom')
 const PreviewReadme = require('./preview_readme')
@@ -147,48 +148,51 @@ const SubmitRouter = React.createClass({
   },
   render() {
     return (
-      <Router history={hashHistory}>
-        <Route
-          path="/"
-          component={() =>
-            h(PreviewGerbers, {
-              setStep,
-              dispatch: this.store.dispatch,
-              board: this.state.board
-            })
-          }
-        />
-        <Route
-          path="/2"
-          component={() =>
-            h(PreviewBom, {
-              setStep,
-              dispatch: this.store.dispatch,
-              board: this.state.board
-            })
-          }
-        />
-        <Route
-          path="/3"
-          component={() =>
-            h(PreviewReadme, {
-              setStep,
-              dispatch: this.store.dispatch,
-              board: this.state.board
-            })
-          }
-        />
-        <Route
-          path="/4"
-          component={() =>
-            h(Finish, {
-              setStep,
-              dispatch: this.store.dispatch,
-              board: this.state.board
-            })
-          }
-        />
-      </Router>
+      <div>
+        <TitleBar route="/submit/" />
+        <Router history={hashHistory}>
+          <Route
+            path="/"
+            component={() =>
+              h(PreviewGerbers, {
+                setStep,
+                dispatch: this.store.dispatch,
+                board: this.state.board
+              })
+            }
+          />
+          <Route
+            path="/2"
+            component={() =>
+              h(PreviewBom, {
+                setStep,
+                dispatch: this.store.dispatch,
+                board: this.state.board
+              })
+            }
+          />
+          <Route
+            path="/3"
+            component={() =>
+              h(PreviewReadme, {
+                setStep,
+                dispatch: this.store.dispatch,
+                board: this.state.board
+              })
+            }
+          />
+          <Route
+            path="/4"
+            component={() =>
+              h(Finish, {
+                setStep,
+                dispatch: this.store.dispatch,
+                board: this.state.board
+              })
+            }
+          />
+        </Router>
+      </div>
     )
   },
   componentDidMount() {
