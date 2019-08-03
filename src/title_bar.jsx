@@ -6,17 +6,17 @@ function TitleBar(props) {
     props.route === '/' || RegExp('^/boards/').test(props.route)
   const isSubmitRoute = RegExp('^/submit/').test(props.route)
   const addAProject = isSubmitRoute ? null : (
-    <div>
+    <semantic.Menu.Item>
       <semantic.Button icon labelPosition="left" color="green" href="/submit">
         <semantic.Icon name="plus" />
         Add a project
       </semantic.Button>
-    </div>
+    </semantic.Menu.Item>
   )
   return (
     <div className="titleBar">
       <div className="logoContainer">
-        <semantic.Menu inverted pointing secondary>
+        <semantic.Menu inverted pointing secondary stackable>
           <a href="/">
             <semantic.Image className="logoImg" src="/images/logo.svg" />
           </a>
@@ -49,6 +49,7 @@ function TitleBar(props) {
           inverted
           pointing
           secondary
+          stackable
           size="small"
         >
           <semantic.Menu.Item
@@ -66,8 +67,8 @@ function TitleBar(props) {
             <semantic.Icon name="github" />
             GitHub
           </semantic.Menu.Item>
+          {addAProject}
         </semantic.Menu>
-        {addAProject}
       </div>
     </div>
   )
