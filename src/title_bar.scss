@@ -7,9 +7,10 @@
         text-decoration: none !important;
     }
 
-    .rightButtons {
+    .rightButtonsContainer {
         display: flex;
         align-items: center;
+        flex-wrap: wrap;
     }
 
     .socialMenu {
@@ -27,13 +28,14 @@
     overflow: hidden;
     position: relative;
     width: 100%;
-    justify-content: space-between;
+    justify-content: space-around;
 
     .logoContainer {
         display:flex;
         justify-content: flex-start;
         z-index: 1;
         flex-shrink: 2;
+        flex-wrap: wrap;
     }
 
     .logoImg {
