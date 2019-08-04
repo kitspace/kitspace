@@ -17,7 +17,7 @@ function installExtension() {
     }
   } else {
     onClick = () => {
-      window.open('//1clickBOM.com', '_self')
+      window.open('/1-click-bom', '_self')
     }
   }
   return onClick

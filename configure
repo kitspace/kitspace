@@ -189,6 +189,30 @@ ninja
   .using('sass')
 
 ninja
+  .edge('build/.temp/bom-builder/bom-builder.css')
+  .from('src/bom-builder/bom-builder.scss')
+  .need(sassSrc)
+  .assign('path', 'src/')
+  .using('sass')
+
+ninja
+  .edge('build/.temp/1-click-bom/1-click-bom.css')
+  .from('src/1-click-bom/1-click-bom.scss')
+  .need(sassSrc)
+  .assign('path', 'src/')
+  .using('sass')
+
+ninja
+  .edge('build/bom-builder/bom-builder.css')
+  .from('build/.temp/bom-builder/bom-builder.css')
+  .using('autoprefix')
+
+ninja
+  .edge('build/1-click-bom/1-click-bom.css')
+  .from('build/.temp/1-click-bom/1-click-bom.css')
+  .using('autoprefix')
+
+ninja
   .edge('build/.temp/page.css')
   .from('src/page/page.scss')
   .need(sassSrc)
@@ -222,6 +246,18 @@ ninja
   .from('build/.temp/index/render_index.jsx')
   .need(jsMainTargets)
   .need('build/.temp/boards.json')
+  .using('browserify')
+
+ninja
+  .edge('build/bom-builder/app.js')
+  .from('build/.temp/bom-builder/render_bom-builder.jsx')
+  .need(jsMainTargets)
+  .using('browserify')
+
+ninja
+  .edge('build/1-click-bom/app.js')
+  .from('build/.temp/1-click-bom/render_1-click-bom.jsx')
+  .need(jsMainTargets)
   .using('browserify')
 
 ninja

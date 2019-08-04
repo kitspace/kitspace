@@ -2,35 +2,45 @@
 @import '/semantic.min.css';
 
 .titleBar {
+    padding: 10px;
+    .ui.menu .item > a:hover {
+        text-decoration: none !important;
+    }
+
+    .rightButtonsContainer {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .socialMenu {
+        margin-bottom: 0px !important;
+    }
+
     align-items: center;
-    background-color: $mine-shaft;
+    background-color: $cod-gray;
     border-bottom-left-radius: 5;
     border-bottom-right-radius: 5;
-    box-shadow: 0 .1em .5em $black;
+    box-shadow: 0 .1em .5em $cod-gray;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
     max-width: 100%;
     overflow: hidden;
     position: relative;
     width: 100%;
-
-    @include breakpoint(small_width) {
-        justify-content: space-around;
-    }
+    justify-content: space-around;
 
     .logoContainer {
-        min-width:180px;
         display:flex;
-        justify-content:center;
-        background-color: $mine-shaft;
-        margin: 10px;
+        justify-content: flex-start;
         z-index: 1;
         flex-shrink: 2;
+        flex-wrap: wrap;
     }
 
     .logoImg {
         max-height: 46px;
+        min-width: 140px;
     }
     .submissionButton {
         align-items: center;
@@ -51,78 +61,30 @@
         white-space: nowrap;
     }
 
-    .submitContainer {
-        align-items: center;
-        background-color: $mine-shaft;
-        color: $white;
-        display: flex;
-        flex-shrink: 0;
-        justify-content: space-around;
-        padding: 10px;
-        z-index: 1;
-        min-width:180px;
-
-        @include breakpoint(mobile-m) {
-            width: 100%;
-        }
-
-
-        .octicon.uploadIcon,
-        .octicon.githubIcon {
-            display: block;
-            font-size: 32px;
-            height: 32px;
-            width: 32px;
-        }
-
-        .contributeButton {
-            align-items: center;
-            border: 0;
-            border-radius: 3px;
-            color: $gray;
-            cursor: pointer;
-            display: flex;
-            font-family: 'Noto Sans','Helvetica', 'Arial', sans-serif;
-            font-size: 16px;
-            font-weight: bold;
-            justify-content: space-around;
-            padding: 5px;
-            white-space: nowrap;
-
-        }
-
-        .contributeButton:hover {
-            color: $silver-chalice;
-        }
-
-        .uploadContainer:hover {
-            text-decoration: none;
-        }
-    }
-
-    .submitImage {
-        width: 60%;
-    }
-
     .middleContainer {
         flex-grow: 2;
 
-        @include breakpoint(small_width) {
-            margin: 10px;
-            order: 3;
-            width: 100%;
-        }
     }
 
-    .contributeContainer:hover {
-        color: $white;
-        text-decoration: none;
+    .addProjectButton {
+        margin-right: 8px;
     }
 
-    .contributeContainer {
-        align-items: center;
-        color: $gray;
+    .userButtonContainer {
+        min-width: 87px;
         display: flex;
+        justify-content: center;
+    }
+
+    .userDropContainer {
+        display: flex;
+        align-items: center;
+
+    }
+
+    .userDropContainer > i {
+        padding-left: 5px;
+        margin-top: -3px;
     }
 
 }

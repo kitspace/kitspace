@@ -6,7 +6,6 @@ const util = require('./util')
 const Steps = require('./steps')
 const UrlSubmit = require('./url_submit')
 
-const TitleBar = require('../title_bar')
 const Bom = require('../buy_parts/bom')
 const getPartinfo = require('../get_partinfo.js')
 
@@ -14,7 +13,7 @@ const PreviewBom = React.createClass({
   render() {
     const board = this.props.board
     const instructionText =
-      'Add a [1-click-bom.tsv](https://1clickbom.com/#usage)' +
+      'Add a [1-click-bom.tsv](https://github.com/kitspace/1clickBOM#usage)' +
       ' to the root of your repository.' +
       ' If you would like to put it in a different folder or call it something' +
       ' else, add a kitspace.yaml with:\n\n' +
@@ -46,9 +45,6 @@ const PreviewBom = React.createClass({
     )
     return (
       <div className="Step Step2">
-        <TitleBar>
-          <div className="titleText">{'Submit a project'}</div>
-        </TitleBar>
         <semantic.Container>
           <Steps setStep={this.props.setStep} active={2} />
           {instructions}

@@ -14,15 +14,17 @@
 .subtitleText {
   color: $gray;
   font-size: 14px;
-  text-align: center;
+  text-align: left;
+  margin: 3px;
+  margin-left: 0px;
 }
 
 .titleText {
   border-radius: 5px;
-  color: $white;
+  color: black;
   font-size: 24px;
   line-height: 40px;
-  text-align: center;
+  text-align: left;
   vertical-align: middle;
   width: 100%;
 }
@@ -32,24 +34,35 @@
   padding: 20px;
 }
 
-.infoBarSummary {
-  margin-bottom: 10px;
-  margin-top: 5px;
+.infoBarTitle {
+  margin: 10px;
   line-height: 1em;
+}
+
+.infoBarSummary {
+  margin: 10px;
+  margin-left: 0px;
 }
 
 .infoBarInner {
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-around;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.infoBarLinksContainer {
+.infoBarWebsiteLink {
+  font-size: 14px;
+  text-align: left;
+  margin: 10px;
+}
+.infoBarSiteLink {
+  margin-top: 8px;
+}
+
+.infoBarLinkContainer {
   display: flex;
-  flex-flow: row wrap;
-  flex-grow: 2;
-  justify-content: space-around;
-  margin-top: 5px;
+  justify-content: space-between;
 }
 
 .infoBarLinks {

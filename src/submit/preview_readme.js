@@ -6,7 +6,6 @@ const util = require('./util')
 const Steps = require('./steps')
 const UrlSubmit = require('./url_submit')
 
-const TitleBar = require('../title_bar')
 const InfoBar = require('../page/info_bar')
 
 const Step3 = React.createClass({
@@ -56,9 +55,6 @@ const Step3 = React.createClass({
     )
     return (
       <div className="Step Step3">
-        <TitleBar>
-          <div className="titleText">{'Submit a project'}</div>
-        </TitleBar>
         <semantic.Container>
           <Steps setStep={this.props.setStep} active={3} />
           <Markdown className="instructions" source={instructionText} />
