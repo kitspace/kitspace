@@ -38,6 +38,7 @@
 }
 
 .boardShowcase {
+  position: relative;
   display: flex;
   flex-direction: column;
   margin-bottom: 16px;
@@ -116,4 +117,13 @@
   padding: 16px 32px;
   width: 100%;
   z-index: 1;
+}
+
+#externalLink{
+  color: white;
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  font-size: 18px;
+  z-index: 2;
 }
