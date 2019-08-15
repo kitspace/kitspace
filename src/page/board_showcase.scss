@@ -32,7 +32,9 @@
     display: none;
   }
 }
-
+.traceSpaceLink{
+  background-color: #000;
+}
 .boardShowcase:hover {
   box-shadow: 0 0.1em 0.5em $azure-radiance;
 }
@@ -120,10 +122,32 @@
 }
 
 #externalLink{
-  color: white;
+  fill: #30c2c2;
   position: absolute;
   right: 10px;
   bottom: 10px;
   font-size: 18px;
   z-index: 2;
+}
+
+.overlay{
+  background-color: #000;
+  color: #FFF;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  z-index: 1;
+}
+
+.overlay p{
+  font-size: 30px;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  text-align: center;
+}
+
+.overlay:hover{
+  opacity: 0.5;
 }

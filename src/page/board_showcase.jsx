@@ -35,9 +35,10 @@ var BoardShowcase = React.createClass({
     const TraceSpaceLink = props =>
       zipUrl ? (
         <a
+          className="traceSpaceLink"
           href={`https://tracespace.io/view/?boardUrl=${zipUrl}`}
           target="_blank"
-          title="Open in Tracespace"
+          title="Inspect gerbers in Tracespace"
         >
           {props.children}
         </a>
@@ -77,7 +78,12 @@ var BoardShowcase = React.createClass({
                 <div className={backBoardClass}>{children[1]}</div>
               </div>
             </LazyLoad>
-            <Icon id="externalLink" name="external alternate" />
+            <svg id="externalLink" height="36" width="36">
+              <path d="M22 14H36V0H16L0 16V36H14V22L22 14Z M36 28C36 32.4183 32.4183 36 28 36C23.5817 36 20 32.4183 20 28C20 23.5817 23.5817 20 28 20C32.4183 20 36 23.5817 36 28Z" />
+            </svg>
+            <div className="overlay">
+              <p>Inspect gerbers in Tracespace</p>
+            </div>
           </div>
         </TraceSpaceLink>
       </div>
