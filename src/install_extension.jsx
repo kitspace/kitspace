@@ -4,12 +4,7 @@ function installExtension() {
   let onClick
   if (/Chrome/.test(version)) {
     onClick = () => {
-      chrome.webstore.install(
-        //eslint-disable-line no-undef
-        undefined,
-        undefined,
-        err => console.log(err) //eslint-disable-line no-console
-      )
+      window.open('https://chrome.google.com/webstore/detail/kitspace-1-click-bom/mflpmlediakefinapghmabapjeippfdi')
     }
   } else if (/Firefox/.test(version)) {
     onClick = () => {
