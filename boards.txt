@@ -63,4 +63,5 @@ https://gitlab.com/alexander.kutschera/singingplants
 https://gitlab.com/xengi/darling
 https://github.com/Jan--Henrik/hoverboard-breakout
 https://github.com/eulerlab/open-visual-stimulator
+https://gitlab.com/bath_open_instrumentation_group/sangaboard
 https://github.com/kb-consulting/pt101a
