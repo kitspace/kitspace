@@ -10,18 +10,27 @@ const converter = new htmlToJsx({createClass: true, outputClassName: 'Readme'})
 
 if (require.main !== module) {
   module.exports = function(config, folder) {
+    const folders = folder.split('/')
     const pattern = `${folder}/readme?(\.markdown|\.mdown|\.mkdn|\.md|\.rst)`
     const readmes = glob.sync(pattern, {nocase: true})
     const deps = [`build/.temp/${folder}/info.json`]
     if (readmes.length > 0) {
       deps.push(readmes[0])
     }
+
     const targets = [`build/.temp/${folder}/readme.jsx`]
+
+    if (folders.length > 4) {
+      const projectPath = folders.splice(4).join('/')
+      targets.push(projectPath)
+    }
+
     return {deps, targets, moduleDep: false}
   }
 } else {
   const {deps, targets} = utils.processArgs(process.argv)
   const readmeJsx = targets[0]
+  const multiProjectPath = targets[1]
   let html = ''
   const info = require(__dirname + '/../../' + deps[0])
   const readme = deps[1]
@@ -41,6 +50,9 @@ if (require.main !== module) {
       '$1raw$3'
     )
     let markdown = addSpacing(contents)
+    if (multiProjectPath) {
+      markdown = correctImagePaths(markdown, multiProjectPath)
+    }
     if (path.extname(readme).toLowerCase() === '.rst') {
       markdown = rst2mdown(contents)
     }
@@ -59,4 +71,15 @@ function escapeRegExp(string) {
 
 function addSpacing(string) {
   return string.replace(/[^ `](`[^\`].*?`)/g, ' $1')
+}
+
+function correctImagePaths(string, projectPath) {
+  const imagePaths = /(\()(.+?(\.png|\.jpg|\.gif|\.jpeg|\.bmp))/g
+
+  return string.replace(imagePaths, (_match, _$1, path) => {
+    const parts = path.split('/')
+    const fileName = parts[parts.length - 1]
+
+    return `(/${projectPath}/${fileName}`
+  })
 }
