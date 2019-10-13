@@ -1,22 +1,10 @@
 [
   {
-    "repo": "https://github.com/mattvenn/esp8266-breakout",
-    "hash": "fcb3107c66670035c7cb330f5d98eddde5d17f56"
-  },
-  {
     "repo": "https://github.com/kitspace-forks/arduino-uno",
     "hash": "5f10c3e4d9709344153aecf65faaef492ddcb0d1"
   },
   {
-    "repo": "https://github.com/kitspace-forks/Bus_Pirate",
-    "hash": "0ca376a0eedd116e3ffdbd5dfd5398a67fdba708"
-  },
-  {
-    "repo": "https://github.com/kitspace-forks/hoverboard-breakout",
-    "hash": "3b5db21b48e9172c63d911aae6a6fa241e0060e4"
-  },
-  {
-    "repo": "https://github.com/8BitMixtape/8BitmixtapeNEO_ShenzhenReady",
-    "hash": "d8f86818c2ad3206abc9b7a0ed26dfdf672dba10"
+    "repo": "https://github.com/kitspace-forks/open-source-rover",
+    "hash": "b352c24436addbd31edfb2d202ff35ffe7adf8ad"
   }
 ]
