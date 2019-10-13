@@ -48,15 +48,15 @@ let rule = ninja.rule('node-task')
 if (config === 'production') {
   rule.run(`node -- $in -- ${config} $out`)
 } else {
-  //write to $out.d depfile in makefile format for ninja to keep track of deps
+  //write to $dotd depfile in makefile format for ninja to keep track of deps
   rule
     .run(
-      `browserify --list $taskFile > $out.d \
-        && if [ '$jsMain' != '' ]; then ${browserify} --list $jsMain >> $out.d; fi \
-        && ./scripts/depfileify $out $out.d \
+      `browserify --list $taskFile > '$dotd' \
+        && if [ '$jsMain' != '' ]; then ${browserify} --list $jsMain >> '$dotd'; fi \
+        && ./scripts/depfileify $out '$dotd' \
         && node -- $in -- ${config} $targetFiles`
     )
-    .depfile('$out.d')
+    .depfile("'$dotd'")
     .description(`node -- $in -- ${config} $targetFiles`)
 }
 
@@ -94,11 +94,11 @@ if (config === 'production') {
 } else {
   rule
     .run(
-      `${browserify} ${excludes} --list $in > $out.d \
-        && ./scripts/depfileify $out $out.d \
+      `${browserify} ${excludes} --list $in > '$dotd' \
+        && ./scripts/depfileify $out '$dotd' \
         && ${browserify} ${excludes} $in -o $out`
     )
-    .depfile('$out.d')
+    .depfile("'$dotd'")
     .description(`browserify ${excludes} $in -o $out`)
 }
 
@@ -161,6 +161,7 @@ const jsSrc = globule.find(['src/**/*.js', 'src/**/*.jsx'])
 
 const jsMainTargets = jsSrc.map(function(f) {
   const temp = ninjaBuildGen.escape(f.replace('src', 'build/.temp'))
+  f = ninjaBuildGen.escape(f)
   ninja
     .edge(temp)
     .from(f)
@@ -245,6 +246,7 @@ ninja
 
 ninja
   .edge('build/app.js')
+  .assign('dotd', 'build/app.js.d')
   .from('build/.temp/index/render_index.jsx')
   .need(jsMainTargets)
   .need('build/.temp/boards.json')
@@ -252,31 +254,35 @@ ninja
 
 ninja
   .edge('build/bom-builder/app.js')
+  .assign('dotd', 'build/bom-builder/app.js.d')
   .from('build/.temp/bom-builder/render_bom-builder.jsx')
   .need(jsMainTargets)
   .using('browserify')
 
 ninja
   .edge('build/1-click-bom/app.js')
+  .assign('dotd', 'build/1-click-bom/app.js.d')
   .from('build/.temp/1-click-bom/render_1-click-bom.jsx')
   .need(jsMainTargets)
   .using('browserify')
 
 ninja
   .edge('build/submit/app.js')
+  .assign('dotd', 'build/submit/app.js.d')
   .from('build/.temp/submit/render_submit.jsx')
   .need(jsMainTargets)
   .using('browserify')
 
-for (folder of boardFolders) {
-  folder = ninjaBuildGen.escape(folder)
+for (const folder of boardFolders) {
+  const escapedFolder = ninjaBuildGen.escape(folder)
   ninja
-    .edge(`build/${folder}/app.js`)
-    .need(`build/.temp/${folder}/info.json`)
-    .need(`build/.temp/${folder}/zip-info.json`)
-    .need(`build/.temp/${folder}/readme.jsx`)
+    .edge(`build/${escapedFolder}/app.js`)
+    .assign('dotd', `build/${escapedFolder}/app.js.d`)
+    .need(`build/.temp/${escapedFolder}/info.json`)
+    .need(`build/.temp/${escapedFolder}/zip-info.json`)
+    .need(`build/.temp/${escapedFolder}/readme.jsx`)
     .need(jsPageTargets[folder])
-    .from(`build/.temp/${folder}/page/render_page.jsx`)
+    .from(`build/.temp/${escapedFolder}/page/render_page.jsx`)
     .using('browserify')
 }
 
@@ -287,18 +293,24 @@ function addEdge(taskFile, task) {
       .from([taskFile].concat(task.deps).map(ninjaBuildGen.escape))
       .using('node-task')
   } else {
+    const targetFiles = "'" + task.targets.map(ninjaBuildGen.escape).join("' '") + "'"
     const edge = ninja
       .edge(ninjaBuildGen.escape(task.targets[0]))
       .from([taskFile].concat(task.deps).map(ninjaBuildGen.escape))
       .assign('taskFile', taskFile)
-      .assign('targetFiles', task.targets.join(' '))
+      .assign('targetFiles', targetFiles)
+      .assign('dotd', task.targets[0] + '.d')
       .using('node-task')
     if (task.moduleDep) {
-      edge.assign('jsMain', task.deps[0])
+      edge.assign('jsMain', ninjaBuildGen.escape(task.deps[0]))
     }
     task.targets
       .slice(1)
-      .map(target => ninja.edge(target).from(task.targets[0]))
+      .forEach(target =>
+        ninja
+          .edge(ninjaBuildGen.escape(target))
+          .from(ninjaBuildGen.escape(task.targets[0]))
+      )
   }
 }
 
@@ -320,7 +332,11 @@ if (config === 'production') {
   presentation_folders.forEach(folder => {
     globule.find(path.join(folder, '**/*'), {filter: 'isFile'}).forEach(f => {
       ninja
-        .edge(path.join('build', path.relative('presentations', f)))
+        .edge(
+          ninjaBuildGen.escape(
+            path.join('build', path.relative('presentations', f))
+          )
+        )
         .from(f)
         .using('copy')
     })
