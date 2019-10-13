@@ -111,7 +111,7 @@ if (require.main !== module) {
   }
   info.bom.tsv = oneClickBOM.writeTSV(info.bom.lines)
 
-  let repo = cp.execSync(`cd ${folder} && git remote -v`, {encoding: 'utf8'})
+  let repo = cp.execSync(`cd '${folder}' && git remote -v`, {encoding: 'utf8'})
   repo = repo.split('\t')[1].split(' ')[0]
   info.repo = repo
 

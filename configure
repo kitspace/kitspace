@@ -123,7 +123,7 @@ ninja.edge('build/vendor.js').using('browserify-require')
 const images = globule.find('src/images/**/*', {filter: 'isFile'})
 for (var f of images) {
   ninja
-    .edge(f.replace('src', 'build'))
+    .edge(ninjaBuildGen.escape(f.replace('src', 'build')))
     .from(f)
     .using('copy')
 }
@@ -155,10 +155,11 @@ boardFolders.forEach((folder, index) => {
   }
 })
 
+
 const jsSrc = globule.find(['src/**/*.js', 'src/**/*.jsx'])
 
 const jsMainTargets = jsSrc.map(function(f) {
-  const temp = f.replace('src', 'build/.temp')
+  const temp = ninjaBuildGen.escape(f.replace('src', 'build/.temp'))
   ninja
     .edge(temp)
     .from(f)
@@ -169,12 +170,12 @@ const jsMainTargets = jsSrc.map(function(f) {
 const jsPageTargets = {}
 for (var folder of boardFolders) {
   jsPageTargets[folder] = []
-  jsSrc.map(function(f) {
-    const temp = f.replace('src', `build/.temp/${folder}`)
+  jsSrc.forEach(f => {
+    const temp = f.replace('src', `build/.temp/${ninjaBuildGen.escape(folder)}`)
     jsPageTargets[folder].push(temp)
-    return ninja
+    ninja
       .edge(temp)
-      .from(f)
+      .from(ninjaBuildGen.escape(f))
       .using('copy')
   })
 }
@@ -267,6 +268,7 @@ ninja
   .using('browserify')
 
 for (folder of boardFolders) {
+  folder = ninjaBuildGen.escape(folder)
   ninja
     .edge(`build/${folder}/app.js`)
     .need(`build/.temp/${folder}/info.json`)
@@ -370,4 +372,4 @@ ninja.edge('all').from(all)
 ninja.byDefault('all')
 
 ninja.save('build.ninja')
-console.log(`generated ./build.ninja with '${config}' config`)
+console.info(`generated ./build.ninja with '${config}' config`)
