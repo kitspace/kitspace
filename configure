@@ -130,7 +130,7 @@ for (var f of images) {
 
 let boardFolders = globule.find('boards/*/*/*', {filter: 'isDirectory'})
 
-boardFolders.forEach((folder, index) => {
+boardFolders = boardFolders.reduce((newBoardFolders, folder, index) => {
   let info
   let file
   if (fs.existsSync(`${folder}/kitnic.yaml`)) {
@@ -149,12 +149,13 @@ boardFolders.forEach((folder, index) => {
   if (info.multi) {
     for (let project in info.multi) {
       projectPath = path.join(folder, project)
-      boardFolders.push(projectPath)
+      newBoardFolders.push(projectPath)
     }
-    boardFolders.splice(index, 1)
+  } else {
+    newBoardFolders.push(folder)
   }
-})
-
+  return newBoardFolders
+}, [])
 
 const jsSrc = globule.find(['src/**/*.js', 'src/**/*.jsx'])
 
