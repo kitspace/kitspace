@@ -89,3 +89,4 @@ https://github.com/pyr0ball/pyr0piezo
 https://github.com/jasiek/ESP8266-PowerMonitor
 https://github.com/Ryzee119/OpenXenium
 https://github.com/Neotron-Compute/Neotron-32-Hardware
+https://github.com/joeycastillo/The-Open-Book/
