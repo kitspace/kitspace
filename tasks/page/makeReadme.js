@@ -66,7 +66,9 @@ if (require.main !== module) {
 
     html = cheerio$.html()
   }
-  const reactComponent = converter.convert(`<div class='readme'>${html}</div>`)
+  let reactComponent = converter.convert(`<div class='readme'>${html}</div>`)
+  //work around weird textAlign output
+  reactComponent = reactComponent.replace( /{{textAlign: *{(.*?)}}}/g, '{{textalign: $1}}')
   fs.writeFileSync(
     readmeJsx,
     `const React = require('react');\n${reactComponent}\nmodule.exports = Readme;\n`
