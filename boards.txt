@@ -67,3 +67,4 @@ https://gitlab.com/bath_open_instrumentation_group/sangaboard
 https://github.com/kb-consulting/pt101a
 https://github.com/fossasia/pslab-hardware
 https://github.com/Jan--Henrik/OtterScreenAdapter
+https://github.com/arturo182/bbq10kbd_breakout
