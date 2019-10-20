@@ -37,25 +37,22 @@ if (require.main !== module) {
   if (readme != null) {
     const pkg = {repository: {url: info.repo}}
     let contents = fs.readFileSync(readme, 'utf8')
-    // replace blob image urls with raw image urls, they don't work outside of github
-    contents = contents.replace(
-      RegExp(
-        '(' +
-          escapeRegExp('https://github.com/') +
-          '.*?' +
-          '/)(blob)(/master/' +
-          '.*?.(:?png|jpeg|jpg|gif|bmp))',
-        'gi'
-      ),
-      '$1raw$3'
-    )
-    let markdown = addSpacing(contents)
-    if (multiProjectPath) {
-      markdown = correctImagePaths(markdown, multiProjectPath)
-    }
+    let markdown = ''
+
     if (path.extname(readme).toLowerCase() === '.rst') {
       markdown = rst2mdown(contents)
+    } else {
+      markdown = contents
     }
+
+    if (info.repo.includes('github')) {
+      markdown = replaceImageUrls(markdown)
+      markdown = addSpacing(markdown)
+      if (multiProjectPath) {
+        markdown = correctMarkdownImagePaths(markdown, multiProjectPath)
+      }
+    }
+
     html = marky(markdown, {package: pkg}).html()
   }
   const reactComponent = converter.convert(`<div class='readme'>${html}</div>`)
@@ -65,18 +62,21 @@ if (require.main !== module) {
   )
 }
 
-function escapeRegExp(string) {
-  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') // $& means the whole matched string
-}
-
 function addSpacing(string) {
   return string.replace(/[^ `](`[^\`].*?`)/g, ' $1')
 }
 
-function correctImagePaths(string, projectPath) {
-  const imagePaths = /(\()(.+?(\.png|\.jpg|\.gif|\.jpeg|\.bmp))/g
+// replace blob image urls with raw image urls, they don't work outside of github
+function replaceImageUrls(string) {
+  const imageUrl = /(https:\/\/github\.com\/.*?\/)(blob)(\/master\/.*?.(:?png|jpeg|jpg|gif|bmp))/gi
 
-  return string.replace(imagePaths, (_match, _$1, path) => {
+  return string.replace(imageUrl, '$1raw$3')
+}
+
+function correctMarkdownImagePaths(string, projectPath) {
+  const imagePath = /(!\[.*?]\()((?!https:\/\/).+?(\.png|\.jpg|\.gif|\.jpeg|\.bmp))/gi
+
+  return string.replace(imagePath, (_match, _$1, path) => {
     const parts = path.split('/')
     const fileName = parts[parts.length - 1]
 
