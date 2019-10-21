@@ -46,6 +46,7 @@ if (require.main !== module) {
     }
 
     if (info.repo.includes('https://github.com')) {
+      markdown = replaceBlobUrls(markdown)
       markdown = addSpacing(markdown)
       if (multiProjectPath) {
         markdown = correctMarkdownImagePaths(markdown, multiProjectPath)
@@ -65,20 +66,21 @@ function addSpacing(string) {
   return string.replace(/[^ `](`[^\`].*?`)/g, ' $1')
 }
 
-// replace blob image urls with raw image urls, they don't work outside of github
-function replaceImageUrls(string) {
-  const imageUrl = /(https:\/\/github\.com\/.*?\/)(blob)(\/master\/.*?.(:?png|jpeg|jpg|gif|bmp))/gi
+// replace blob file urls with raw file urls, they don't work outside of github
+function replaceBlobUrls(string) {
+  const imageUrl = /(https:\/\/github\.com\/.*?\/)(blob)(\/.*?\.)/gi
 
   return string.replace(imageUrl, '$1raw$3')
 }
 
+// add project path from root folder to images; required before being parsed by marky markdown
 function correctMarkdownImagePaths(string, projectPath) {
   const imagePath = /(!\[.*?]\()((?!https:\/\/).+?(\.png|\.jpg|\.gif|\.jpeg|\.bmp))/gi
 
-  return string.replace(imagePath, (_match, _$1, path) => {
+  return string.replace(imagePath, (_match, imgTag, path) => {
     const parts = path.split('/')
     const fileName = parts[parts.length - 1]
 
-    return `(/${projectPath}/${fileName}`
+    return `${imgTag}/${projectPath}/${fileName}`
   })
 }
