@@ -45,8 +45,7 @@ if (require.main !== module) {
       markdown = contents
     }
 
-    if (info.repo.includes('github')) {
-      markdown = replaceImageUrls(markdown)
+    if (info.repo.includes('https://github.com')) {
       markdown = addSpacing(markdown)
       if (multiProjectPath) {
         markdown = correctMarkdownImagePaths(markdown, multiProjectPath)
