@@ -10,7 +10,7 @@ const converter = new htmlToJsx({createClass: true, outputClassName: 'Readme'})
 
 if (require.main !== module) {
   module.exports = function(config, folder) {
-    const folders = folder.split('/')
+    const fileSystemPathToProject = folder.split('/')
     const pattern = `${folder}/readme?(\.markdown|\.mdown|\.mkdn|\.md|\.rst)`
     const readmes = glob.sync(pattern, {nocase: true})
     const deps = [`build/.temp/${folder}/info.json`]
@@ -20,10 +20,14 @@ if (require.main !== module) {
 
     const targets = [`build/.temp/${folder}/readme.jsx`]
 
-    // save project path if located in a subfolder of the repo's root folder
-    if (folders.length > 4) {
-      const projectPath = folders.splice(4).join('/')
-      targets.push(projectPath)
+    // Projects with a folder structure deeper than 4 levels from the system path can be
+    // identied as being from a multi project repositoy. The path in relation to the root
+    // repository folder is stored for later processing.
+    if (fileSystemPathToProject.length > 4) {
+      const projectPathFromRepositoryRoot = fileSystemPathToProject
+        .splice(4)
+        .join('/')
+      targets.push(projectPathFromRepositoryRoot)
     }
 
     return {deps, targets, moduleDep: false}
@@ -63,14 +67,14 @@ function addSpacing(string) {
   return string.replace(/[^ `](`[^\`].*?`)/g, ' $1')
 }
 
-// replace blob file urls with raw file urls, they don't work outside of github
+// Replace blob file urls with raw file urls, they don't work outside of github
 function replaceBlobUrls(string) {
   const blobUrl = /(https:\/\/github\.com\/.*?\/)(blob)(\/.*?\.)/gi
 
   return string.replace(blobUrl, '$1raw$3')
 }
 
-// add project path from root folder to images; required before being parsed by marky markdown
+// Add project path from root folder to images; required before being parsed by marky markdown
 function addProjectPath(imgTag, markdownPath, projectPath) {
   const parts = markdownPath.split('/')
   const fileName = parts[parts.length - 1]
@@ -82,8 +86,12 @@ function correctMarkdownImagePaths(string, projectPath) {
   const imagePath = /(!\[.*?]\()(.+?(\.png|\.jpg|\.gif|\.jpeg|\.bmp))/gi
 
   return string.replace(imagePath, (match, imgTag, path) => {
-    if (match.includes('/blob/')) return replaceBlobUrls(match)
+    if (match.includes('/blob/')) {
+      return replaceBlobUrls(match)
+    }
 
-    if (projectPath) return addProjectPath(imgTag, path, projectPath)
+    if (projectPath) {
+      return addProjectPath(imgTag, path, projectPath)
+    }
   })
 }
