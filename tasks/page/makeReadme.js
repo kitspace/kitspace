@@ -20,6 +20,7 @@ if (require.main !== module) {
 
     const targets = [`build/.temp/${folder}/readme.jsx`]
 
+    // save project path if located in a subfolder of the repo's root folder
     if (folders.length > 4) {
       const projectPath = folders.splice(4).join('/')
       targets.push(projectPath)
@@ -46,13 +47,9 @@ if (require.main !== module) {
     }
 
     if (info.repo.includes('https://github.com')) {
-      markdown = replaceBlobUrls(markdown)
       markdown = addSpacing(markdown)
-      if (multiProjectPath) {
-        markdown = correctMarkdownImagePaths(markdown, multiProjectPath)
-      }
+      markdown = correctMarkdownImagePaths(markdown, multiProjectPath)
     }
-
     html = marky(markdown, {package: pkg}).html()
   }
   const reactComponent = converter.convert(`<div class='readme'>${html}</div>`)
@@ -68,19 +65,25 @@ function addSpacing(string) {
 
 // replace blob file urls with raw file urls, they don't work outside of github
 function replaceBlobUrls(string) {
-  const imageUrl = /(https:\/\/github\.com\/.*?\/)(blob)(\/.*?\.)/gi
+  const blobUrl = /(https:\/\/github\.com\/.*?\/)(blob)(\/.*?\.)/gi
 
-  return string.replace(imageUrl, '$1raw$3')
+  return string.replace(blobUrl, '$1raw$3')
 }
 
 // add project path from root folder to images; required before being parsed by marky markdown
+function addProjectPath(imgTag, markdownPath, projectPath) {
+  const parts = markdownPath.split('/')
+  const fileName = parts[parts.length - 1]
+
+  return `${imgTag}/${projectPath}/${fileName}`
+}
+
 function correctMarkdownImagePaths(string, projectPath) {
-  const imagePath = /(!\[.*?]\()((?!https:\/\/).+?(\.png|\.jpg|\.gif|\.jpeg|\.bmp))/gi
+  const imagePath = /(!\[.*?]\()(.+?(\.png|\.jpg|\.gif|\.jpeg|\.bmp))/gi
 
-  return string.replace(imagePath, (_match, imgTag, path) => {
-    const parts = path.split('/')
-    const fileName = parts[parts.length - 1]
+  return string.replace(imagePath, (match, imgTag, path) => {
+    if (match.includes('/blob/')) return replaceBlobUrls(match)
 
-    return `${imgTag}/${projectPath}/${fileName}`
+    if (projectPath) return addProjectPath(imgTag, path, projectPath)
   })
 }
