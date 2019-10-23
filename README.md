@@ -34,6 +34,21 @@ You can get similar renderings and also inspect invdividual layers, using the [t
 
 Check out [kitspace.org/submit](https://kitspace.org/submit) which will guide you through the process.
 
+After you add your project consider using the following badge in your readme. 
+
+```html
+<a href="https://kitspace.org/boards/..." >
+  <img alt="Build it on Kitspace" src="https://kitspace.org/images/badge.svg">
+</a>
+```
+
+Which will look like this:
+
+<a href="https://kitspace.org/images/badge.svg" >
+  <img alt="Build it on Kitspace" src="https://badge.preview.kitspace.org/images/badge.svg">
+</a>
+
+
 ### kitspace.yaml format
 
 Currently the `kitspace.yaml` makes use of the following fields:
