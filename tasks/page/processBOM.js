@@ -56,7 +56,7 @@ if (require.main !== module) {
     return {deps, targets, moduleDep: false}
   }
 } else {
-  let file, kitnicYaml, repoRootPath
+  let file, kitnicYaml, repoRootPath, projectPath
   const {deps, targets} = utils.processArgs(process.argv)
   const [boardsJSON, folder, bomPath] = deps
   const [infoPath, outBomPath] = targets
@@ -75,8 +75,10 @@ if (require.main !== module) {
   repoFolders = folder.split('/')
   if (repoFolders.length > 4) {
     repoRootPath = repoFolders.slice(0, 4).join('/')
+    projectPath = repoFolders.splice(4).join('/')
   } else {
     repoRootPath = folder
+    projectPath = folder
   }
 
   if (fs.existsSync(`${repoRootPath}/kitnic.yaml`)) {
@@ -90,6 +92,9 @@ if (require.main !== module) {
     kitnicYaml = yaml.safeLoad(file)
   } else {
     kitnicYaml = {}
+  }
+  if (kitnicYaml.multi) {
+    kitnicYaml = kitnicYaml.multi[projectPath]
   }
   info.site = kitnicYaml.site || ''
 
@@ -111,7 +116,7 @@ if (require.main !== module) {
   }
   info.bom.tsv = oneClickBOM.writeTSV(info.bom.lines)
 
-  let repo = cp.execSync(`cd ${folder} && git remote -v`, {encoding: 'utf8'})
+  let repo = cp.execSync(`cd '${folder}' && git remote -v`, {encoding: 'utf8'})
   repo = repo.split('\t')[1].split(' ')[0]
   info.repo = repo
 

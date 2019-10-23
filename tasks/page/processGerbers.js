@@ -56,7 +56,7 @@ if (require.main !== module) {
     }
     const deps = [folder].concat(gerbers)
     const buildFolder = folder.replace('boards', 'build/boards')
-    let version = cp.execSync(`cd ${folder} && git log -n 1 --oneline`, {
+    let version = cp.execSync(`cd '${folder}' && git log -n 1 --oneline`, {
       encoding: 'utf8'
     })
     version = version.split(' ')[0]
@@ -216,7 +216,7 @@ if (require.main !== module) {
             console.error(err)
             return process.exit(1)
           }
-          const cmd = `convert -background '#373737' -gravity center ${topMetaPngPath} -extent 1000x524 ${topWithBgndPath}`
+          const cmd = `convert -background '#373737' -gravity center '${topMetaPngPath}' -extent 1000x524 '${topWithBgndPath}'`
           cp.exec(cmd, err => {
             if (err) {
               console.error(err)
