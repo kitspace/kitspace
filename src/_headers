@@ -1,2 +1,5 @@
 /*.zip
   Access-Control-Allow-Origin: *
+
+/images/badge.svg
+  Access-Control-Allow-Origin: *
