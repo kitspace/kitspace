@@ -45,7 +45,7 @@ After you add your project consider using the following badge in your readme.
 Which will look like this:
 
 <a href="https://kitspace.org/images/badge.svg" >
-  <img alt="Build it on Kitspace" src="https://badge.preview.kitspace.org/images/badge.svg">
+  <img alt="Build it on Kitspace" src="http://badge.preview.kitspace.org/images/badge.svg">
 </a>
 
 
