@@ -10,39 +10,49 @@ const converter = new htmlToJsx({createClass: true, outputClassName: 'Readme'})
 
 if (require.main !== module) {
   module.exports = function(config, folder) {
+    const fileSystemPathToProject = folder.split('/')
     const pattern = `${folder}/readme?(\.markdown|\.mdown|\.mkdn|\.md|\.rst)`
     const readmes = glob.sync(pattern, {nocase: true})
     const deps = [`build/.temp/${folder}/info.json`]
     if (readmes.length > 0) {
       deps.push(readmes[0])
     }
+
     const targets = [`build/.temp/${folder}/readme.jsx`]
+
+    // Projects with a folder structure deeper than 4 levels from the system path can be
+    // identied as being from a multi project repositoy. The path in relation to the root
+    // repository folder is stored for later processing.
+    if (fileSystemPathToProject.length > 4) {
+      const projectPathFromRepositoryRoot = fileSystemPathToProject
+        .splice(4)
+        .join('/')
+      targets.push(projectPathFromRepositoryRoot)
+    }
+
     return {deps, targets, moduleDep: false}
   }
 } else {
   const {deps, targets} = utils.processArgs(process.argv)
   const readmeJsx = targets[0]
+  const multiProjectPath = targets[1]
   let html = ''
   const info = require(__dirname + '/../../' + deps[0])
   const readme = deps[1]
   if (readme != null) {
     const pkg = {repository: {url: info.repo}}
     let contents = fs.readFileSync(readme, 'utf8')
-    // replace blob image urls with raw image urls, they don't work outside of github
-    contents = contents.replace(
-      RegExp(
-        '(' +
-          escapeRegExp('https://github.com/') +
-          '.*?' +
-          '/)(blob)(/master/' +
-          '.*?.(:?png|jpeg|jpg|gif|bmp))',
-        'gi'
-      ),
-      '$1raw$3'
-    )
-    let markdown = addSpacing(contents)
+    let markdown = ''
+
     if (path.extname(readme).toLowerCase() === '.rst') {
       markdown = rst2mdown(contents)
+    } else {
+      markdown = contents
+    }
+
+    if (info.repo.includes('https://github.com')) {
+      markdown = addSpacing(markdown)
+      markdown = correctMarkdownImagePaths(markdown, multiProjectPath)
     }
     html = marky(markdown, {package: pkg}).html()
   }
@@ -53,10 +63,35 @@ if (require.main !== module) {
   )
 }
 
-function escapeRegExp(string) {
-  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') // $& means the whole matched string
-}
-
 function addSpacing(string) {
   return string.replace(/[^ `](`[^\`].*?`)/g, ' $1')
+}
+
+// Replace blob file urls with raw file urls, they don't work outside of github
+function replaceBlobUrls(string) {
+  const blobUrl = /(https:\/\/github\.com\/.*?\/)(blob)(\/.*?\.)/gi
+
+  return string.replace(blobUrl, '$1raw$3')
+}
+
+// Add project path from root folder to images; required before being parsed by marky markdown
+function addProjectPath(imgTag, markdownPath, projectPath) {
+  const parts = markdownPath.split('/')
+  const fileName = parts[parts.length - 1]
+
+  return `${imgTag}/${projectPath}/${fileName}`
+}
+
+function correctMarkdownImagePaths(string, projectPath) {
+  const imagePath = /(!\[.*?]\()(.+?(\.png|\.jpg|\.gif|\.jpeg|\.bmp))/gi
+
+  return string.replace(imagePath, (match, imgTag, path) => {
+    if (match.includes('/blob/')) {
+      return replaceBlobUrls(match)
+    }
+
+    if (projectPath) {
+      return addProjectPath(imgTag, path, projectPath)
+    }
+  })
 }
