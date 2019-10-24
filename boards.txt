@@ -69,3 +69,4 @@ https://github.com/fossasia/pslab-hardware
 https://github.com/Jan--Henrik/OtterScreenAdapter
 https://github.com/arturo182/bbq10kbd_breakout
 https://github.com/Jan--Henrik/OtterPill
+https://github.com/sci-bots/teensy-3.2-clone.kicad
