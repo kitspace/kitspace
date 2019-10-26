@@ -3,17 +3,13 @@ const semantic = require('semantic-ui-react')
 const ReactResponsive = require('react-responsive')
 
 const mediaQueries = require('../media_queries')
-const {zipPath, folder, width, height} = require('../zip-info.json')
+const {zipPath, folder, width, height, layers} = require('../zip-info.json')
 
 const zipUrl = `https://kitspace.org/${folder}/${zipPath}`
-
 const aislerUrl = `https://aisler.net/p/new?url=${zipUrl}&ref=kitspace`
-
 const pcbwayUrl = `https://www.pcbway.com/QuickOrderOnline.aspx?fileurl=${zipUrl}&from=kitspace`
-
 const royalCircuitsUrl = 'https://www.royalcircuits.com/'
-
-const pcbShopperUrl = `https://pcbshopper.com/?Width=${width}&Height=${height}&Units=mm&GetPrices`
+const pcbShopperUrl = `https://pcbshopper.com/?Width=${width}&Height=${height}&Units=mm&Layers=${layers}&GetPrices`
 
 let OrderPcbs = React.createClass({
   render() {
