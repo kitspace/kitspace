@@ -70,3 +70,4 @@ https://github.com/Jan--Henrik/OtterScreenAdapter
 https://github.com/arturo182/bbq10kbd_breakout
 https://github.com/Jan--Henrik/OtterPill
 https://github.com/carrotIndustries/pluto
+https://github.com/ollyoid/TuneShroom
