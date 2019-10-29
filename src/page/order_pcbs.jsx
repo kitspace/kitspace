@@ -9,7 +9,7 @@ const zipUrl = `https://kitspace.org/${folder}/${zipPath}`
 const aislerUrl = `https://aisler.net/p/new?url=${zipUrl}&ref=kitspace`
 const pcbwayUrl = `https://www.pcbway.com/QuickOrderOnline.aspx?fileurl=${zipUrl}&from=kitspace`
 const royalCircuitsUrl = 'https://www.royalcircuits.com/'
-const pcbShopperUrl = `https://pcbshopper.com/?Width=${width}&Height=${height}&Units=mm&Layers=${layers}&GetPrices`
+const pcbShopperUrl = `https://pcbshopper.com/?Width=${width}&Height=${height}&Units=mm&Layers=${layers}&Quantity=1&GetPrices`
 
 let OrderPcbs = React.createClass({
   render() {
