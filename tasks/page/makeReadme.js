@@ -93,5 +93,6 @@ function correctMarkdownImagePaths(string, projectPath) {
     if (projectPath) {
       return addProjectPath(imgTag, path, projectPath)
     }
+    return match
   })
 }
