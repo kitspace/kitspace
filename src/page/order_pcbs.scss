@@ -53,7 +53,8 @@
     min-width: 100px;
   }
 
-  @media (max-width: 710px) {
+  //XXX if you change this change it in the .jsx too!
+  @media (max-width: 920px) {
     .ui.menu {
       width: 100%;
     }

@@ -15,7 +15,11 @@ const pcbShopperUrl = `https://pcbshopper.com/?Width=${width}&Height=${height}&U
 let OrderPcbs = React.createClass({
   render() {
     return (
-      <ReactResponsive query={'(max-width: 710px)'}>
+      <ReactResponsive
+        query={
+          '(max-width: 920px)' // XXX if you change this change it in the .scss too!
+        }
+      >
         {matches => (
           <div className="PcbMenu">
             <semantic.Menu stackable={matches} compact borderless>
