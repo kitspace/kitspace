@@ -9,6 +9,7 @@ const zipUrl = `https://kitspace.org/${folder}/${zipPath}`
 const aislerUrl = `https://aisler.net/p/new?url=${zipUrl}&ref=kitspace`
 const pcbwayUrl = `https://www.pcbway.com/QuickOrderOnline.aspx?fileurl=${zipUrl}&from=kitspace`
 const royalCircuitsUrl = 'https://www.royalcircuits.com/'
+const oshparkUrl = `https://oshpark.com/import?url=${zipUrl}`
 const pcbShopperUrl = `https://pcbshopper.com/?Width=${width}&Height=${height}&Units=mm&Layers=${layers}&Quantity=1&GetPrices`
 
 let OrderPcbs = React.createClass({
@@ -62,6 +63,17 @@ let OrderPcbs = React.createClass({
                       className="PcbMenu__link"
                     >
                       <img src="/images/royal_circuits.png" />
+                      <semantic.Label floating={!matches}>
+                        <semantic.Flag name="us" />
+                      </semantic.Label>
+                    </semantic.Menu.Item>
+
+                    <semantic.Menu.Item
+                      as="a"
+                      href={oshparkUrl}
+                      className="PcbMenu__link"
+                    >
+                      <img src="/images/oshpark.png" />
                       <semantic.Label floating={!matches}>
                         <semantic.Flag name="us" />
                       </semantic.Label>
