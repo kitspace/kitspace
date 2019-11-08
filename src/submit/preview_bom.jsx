@@ -13,12 +13,9 @@ const PreviewBom = React.createClass({
   render() {
     const board = this.props.board
     const instructionText =
-      'Add a [1-click-bom.tsv](https://github.com/kitspace/1clickBOM#usage)' +
-      ' to the root of your repository.' +
-      ' If you would like to put it in a different folder or call it something' +
-      ' else, add a kitspace.yaml with:\n\n' +
+      'Add a bill of materials to your repository, this can be a csv, tsv, excel or libreoffice spreadshsset with [fields that we recognize](https://github.com/kitspace/1clickBOM#usage). Add a kitspace.yaml with:\n\n' +
       '```\n' +
-      'bom: path/to/bom.tsv\n' +
+      'bom: path/to/bom.csv\n' +
       '```\n'
     const instructions = (
       <Markdown className="instructions" source={instructionText} />
