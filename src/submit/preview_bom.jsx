@@ -13,7 +13,7 @@ const PreviewBom = React.createClass({
   render() {
     const board = this.props.board
     const instructionText =
-      'Add a bill of materials to your repository, this can be a csv, tsv, excel or libreoffice spreadshsset with [fields that we recognize](https://github.com/kitspace/1clickBOM#usage). Add a kitspace.yaml with:\n\n' +
+      'Add a bill of materials to your repository, this can be a csv, tsv, Excel or LibreOffice spreadsheet with [fields that we recognize](https://github.com/kitspace/1clickBOM#usage). Add a kitspace.yaml with:\n\n' +
       '```\n' +
       'bom: path/to/bom.csv\n' +
       '```\n'
