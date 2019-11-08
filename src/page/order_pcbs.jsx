@@ -60,11 +60,6 @@ let OrderPcbs = React.createClass({
                       as="a"
                       href={royalCircuitsUrl}
                       className="PcbMenu__link"
-                      onClick={() => {
-                        if (!this.state.downloaded) {
-                          window.open(zipPath)
-                        }
-                      }}
                     >
                       <img src="/images/royal_circuits.png" />
                       <semantic.Label floating={!matches}>
