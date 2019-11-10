@@ -9,12 +9,17 @@ const zipUrl = `https://kitspace.org/${folder}/${zipPath}`
 const aislerUrl = `https://aisler.net/p/new?url=${zipUrl}&ref=kitspace`
 const pcbwayUrl = `https://www.pcbway.com/QuickOrderOnline.aspx?fileurl=${zipUrl}&from=kitspace`
 const royalCircuitsUrl = 'https://www.royalcircuits.com/'
+const oshparkUrl = `https://oshpark.com/import?url=${zipUrl}`
 const pcbShopperUrl = `https://pcbshopper.com/?Width=${width}&Height=${height}&Units=mm&Layers=${layers}&Quantity=1&GetPrices`
 
 let OrderPcbs = React.createClass({
   render() {
     return (
-      <ReactResponsive query={'(max-width: 710px)'}>
+      <ReactResponsive
+        query={
+          '(max-width: 920px)' // XXX if you change this change it in the .scss too!
+        }
+      >
         {matches => (
           <div className="PcbMenu">
             <semantic.Menu stackable={matches} compact borderless>
@@ -60,13 +65,19 @@ let OrderPcbs = React.createClass({
                       as="a"
                       href={royalCircuitsUrl}
                       className="PcbMenu__link"
-                      onClick={() => {
-                        if (!this.state.downloaded) {
-                          window.open(zipPath)
-                        }
-                      }}
                     >
                       <img src="/images/royal_circuits.png" />
+                      <semantic.Label floating={!matches}>
+                        <semantic.Flag name="us" />
+                      </semantic.Label>
+                    </semantic.Menu.Item>
+
+                    <semantic.Menu.Item
+                      as="a"
+                      href={oshparkUrl}
+                      className="PcbMenu__link"
+                    >
+                      <img src="/images/oshpark.png" />
                       <semantic.Label floating={!matches}>
                         <semantic.Flag name="us" />
                       </semantic.Label>
