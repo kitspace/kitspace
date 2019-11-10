@@ -15,10 +15,13 @@ publicly accessible Git repository (you could use [GitHub](https://github.com)
 or [GitLab](https://gitlab.com) for instance). Preview your board by
 entering the repository URL below.
 
-If you think it hasn't found the right gerbers you can add [kitspace.yaml](https://github.com/monostable/kitspace#kitspaceyaml-format)
+If you think it hasn't found the right gerbers you can add [kitspace.yaml](https://github.com/kitspace/kitspace#kitspaceyaml-format)
 with a gerbers field.
 
     gerbers: path/to/your/gerber-folder
+
+
+(Note: adding multiple projects in one repository _is_ supported by Kitspace but not by this preview yet.)
 
 If you run into any other problems please get in touch via
 [Riot.im chat](https://riot.im/app/#/room/#kitspace:matrix.org)
