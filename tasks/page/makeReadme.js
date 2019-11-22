@@ -76,10 +76,14 @@ function replaceBlobUrls(string) {
 
 // Add project path from root folder to images; required before being parsed by marky markdown
 function addProjectPath(imgTag, markdownPath, projectPath) {
-  const parts = markdownPath.split('/')
-  const fileName = parts[parts.length - 1]
-
-  return `${imgTag}/${projectPath}/${fileName}`
+  let imgUrl
+  if (path.isAbsolute(markdownPath)) {
+    imgUrl = markdownPath
+  }
+  else {
+    imgUrl = path.join('/' + projectPath, markdownPath)
+  }
+  return imgTag + imgUrl
 }
 
 function correctMarkdownImagePaths(string, projectPath) {
