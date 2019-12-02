@@ -148,7 +148,15 @@ boardFolders = boardFolders.reduce((newBoardFolders, folder, index) => {
 
   if (info.multi) {
     for (let project in info.multi) {
-      projectPath = path.join(folder, project)
+      const multiProjectPath = info.multi[project].path
+      let projectPath
+
+      if (multiProjectPath) {
+        projectPath = path.join(folder, multiProjectPath)
+      } else {
+        projectPath = path.join(folder, project)
+      }
+
       newBoardFolders.push(projectPath)
     }
   } else {

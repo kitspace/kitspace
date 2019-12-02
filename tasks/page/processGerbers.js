@@ -31,15 +31,19 @@ if (require.main !== module) {
     let gerberPath = path.join(repoRootPath, '**', '*')
 
     if (info.multi) {
-      for (let project in info.multi) {
-        if (project === projectPath) {
-          info = info.multi[project]
-          if (info.gerbers) {
-            gerberPath = path.join(repoRootPath, info.gerbers, '*')
-          } else {
-            gerberPath = path.join(repoRootPath, projectPath, '**', '*')
-          }
-        }
+      const projects = Object.keys(info.multi)
+      const multiProjectPath = projects.find(project => {
+        return (
+          info.multi[project].path === projectPath || project === projectPath
+        )
+      })
+
+      info = info.multi[multiProjectPath]
+
+      if (info.gerbers) {
+        gerberPath = path.join(repoRootPath, info.gerbers, '*')
+      } else {
+        gerberPath = path.join(repoRootPath, projectPath, '**', '*')
       }
     }
 

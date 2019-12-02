@@ -88,7 +88,9 @@ if (require.main !== module) {
 
     if (info.multi) {
       for (let project in info.multi) {
-        info.multi[project].path = project
+        if (!info.multi[project].path) {
+          info.multi[project].path = project
+        }
 
         getBoardInfo(info.multi[project], folder)
       }

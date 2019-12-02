@@ -35,11 +35,14 @@ if (require.main !== module) {
     }
 
     if (info.multi) {
-      for (let project in info.multi) {
-        if (project === projectPath) {
-          info = info.multi[project]
-        }
-      }
+      const projects = Object.keys(info.multi)
+      const multiProjectPath = projects.find(project => {
+        return (
+          info.multi[project].path === projectPath || project === projectPath
+        )
+      })
+
+      info = info.multi[multiProjectPath]
     }
 
     if (info.bom) {
@@ -47,7 +50,6 @@ if (require.main !== module) {
     } else {
       bom = path.join(projectPath, '1-click-bom.tsv')
     }
-
     const deps = ['build/.temp/boards.json', folder, bom]
     const targets = [
       `build/.temp/${folder}/info.json`,
@@ -94,7 +96,15 @@ if (require.main !== module) {
     kitnicYaml = {}
   }
   if (kitnicYaml.multi) {
-    kitnicYaml = kitnicYaml.multi[projectPath]
+    const projects = Object.keys(kitnicYaml.multi)
+    const multiProjectPath = projects.find(project => {
+      return (
+        kitnicYaml.multi[project].path === projectPath ||
+        project === projectPath
+      )
+    })
+
+    kitnicYaml = kitnicYaml.multi[multiProjectPath]
   }
   info.site = kitnicYaml.site || ''
 
