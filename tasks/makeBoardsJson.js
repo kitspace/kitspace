@@ -88,7 +88,7 @@ if (require.main !== module) {
 
     if (info.multi) {
       for (let project in info.multi) {
-        if (!info.multi[project].path) {
+        if (info.multi[project].path == null) {
           info.multi[project].path = project
         }
 
