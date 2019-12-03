@@ -58,7 +58,7 @@ if (require.main !== module) {
     return {deps, targets, moduleDep: false}
   }
 } else {
-  let file, kitnicYaml, repoRootPath, projectPath
+  let file, kitspaceYaml, repoRootPath, projectPath
   const {deps, targets} = utils.processArgs(process.argv)
   const [boardsJSON, folder, bomPath] = deps
   const [infoPath, outBomPath] = targets
