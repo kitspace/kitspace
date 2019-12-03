@@ -73,3 +73,4 @@ https://github.com/carrotIndustries/pluto
 https://github.com/ollyoid/TuneShroom
 https://github.com/sci-bots/teensy-3.2-clone.kicad
 https://github.com/eez-open/modular-psu
+https://github.com/kitspace-forks/DIY_particle_detector
