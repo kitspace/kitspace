@@ -91,22 +91,22 @@ if (require.main !== module) {
     file = fs.readFileSync(`${repoRootPath}/kitspace.yml`)
   }
   if (file != null) {
-    kitnicYaml = yaml.safeLoad(file)
+    kitspaceYaml = yaml.safeLoad(file)
   } else {
-    kitnicYaml = {}
+    kitspaceYaml = {}
   }
-  if (kitnicYaml.multi) {
-    const projects = Object.keys(kitnicYaml.multi)
+  if (kitspaceYaml.multi) {
+    const projects = Object.keys(kitspaceYaml.multi)
     const multiProjectPath = projects.find(project => {
       return (
-        kitnicYaml.multi[project].path === projectPath ||
+        kitspaceYaml.multi[project].path === projectPath ||
         project === projectPath
       )
     })
 
-    kitnicYaml = kitnicYaml.multi[multiProjectPath]
+    kitspaceYaml = kitspaceYaml.multi[multiProjectPath]
   }
-  info.site = kitnicYaml.site || ''
+  info.site = kitspaceYaml.site || ''
 
   if (/\.tsv$|\.csv$/i.test(bomPath)) {
     var content = fs.readFileSync(bomPath, {encoding: 'utf8'})
