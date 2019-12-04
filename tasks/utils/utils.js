@@ -71,3 +71,11 @@ exports.reactRender = function(jsx, html, output, router = false) {
 
   return fs.writeFileSync(output, jsdom.serializeDocument(document))
 }
+
+exports.getProjectYamlKey = function(kitspaceYaml, projectPath) {
+  const yamlKeys = Object.keys(kitspaceYaml.multi)
+
+  return yamlKeys.find(key => {
+    return kitspaceYaml.multi[key].path === projectPath || key === projectPath
+  })
+}

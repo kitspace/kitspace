@@ -31,14 +31,8 @@ if (require.main !== module) {
     let gerberPath = path.join(repoRootPath, '**', '*')
 
     if (info.multi) {
-      const projects = Object.keys(info.multi)
-      const multiProjectPath = projects.find(project => {
-        return (
-          info.multi[project].path === projectPath || project === projectPath
-        )
-      })
-
-      info = info.multi[multiProjectPath]
+      const projectKey = utils.getProjectYamlKey(info, projectPath)
+      info = info.multi[projectKey]
 
       if (info.gerbers) {
         gerberPath = path.join(repoRootPath, info.gerbers, '*')

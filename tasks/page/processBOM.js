@@ -35,14 +35,8 @@ if (require.main !== module) {
     }
 
     if (info.multi) {
-      const projects = Object.keys(info.multi)
-      const multiProjectPath = projects.find(project => {
-        return (
-          info.multi[project].path === projectPath || project === projectPath
-        )
-      })
-
-      info = info.multi[multiProjectPath]
+      const projectKey = utils.getProjectYamlKey(info, projectPath)
+      info = info.multi[projectKey]
     }
 
     if (info.bom) {
@@ -95,17 +89,12 @@ if (require.main !== module) {
   } else {
     kitspaceYaml = {}
   }
-  if (kitspaceYaml.multi) {
-    const projects = Object.keys(kitspaceYaml.multi)
-    const multiProjectPath = projects.find(project => {
-      return (
-        kitspaceYaml.multi[project].path === projectPath ||
-        project === projectPath
-      )
-    })
 
-    kitspaceYaml = kitspaceYaml.multi[multiProjectPath]
+  if (kitspaceYaml.multi) {
+    const projectKey = utils.getProjectYamlKey(kitspaceYaml, projectPath)
+    kitspaceYaml = kitspaceYaml.multi[projectKey]
   }
+
   info.site = kitspaceYaml.site || ''
 
   if (/\.tsv$|\.csv$/i.test(bomPath)) {
