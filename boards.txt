@@ -21,7 +21,6 @@ https://github.com/kitspace-forks/neo
 https://github.com/InaneCoding/KOS01_IdealDiode20A
 https://github.com/UDXS/Arduitsy
 https://github.com/kitspace/jelly
-https://github.com/GenericLab/Gar-Lampli
 https://github.com/GenericLab/Unagi_Gar-Lampli
 https://github.com/kimitobo/Neocococat
 https://github.com/RoboticsBrno/RB3200-ESP32universal/
