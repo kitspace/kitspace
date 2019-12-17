@@ -72,15 +72,15 @@ popt.SetSubtractMaskFromSilk(True)
 
 
 plot_plan = [
-    ("CuTop", F_Cu, "Top layer"),
-    ("CuBottom", B_Cu, "Bottom layer"),
-    ("MaskBottom", B_Mask, "Mask Bottom"),
-    ("MaskTop", F_Mask, "Mask top"),
-    ("PasteBottom", B_Paste, "Paste Bottom"),
-    ("PasteTop", F_Paste, "Paste Top"),
-    ("SilkTop", F_SilkS, "Silk Top"),
-    ("SilkBottom", B_SilkS, "Silk Bottom"),
-    ("EdgeCuts", Edge_Cuts, "Edges"),
+    ("F_Cu", F_Cu, "Top layer"),
+    ("B_Cu", B_Cu, "Bottom layer"),
+    ("B_Mask", B_Mask, "Mask Bottom"),
+    ("F_Mask", F_Mask, "Mask top"),
+    ("B_Paster", B_Paste, "Paste Bottom"),
+    ("F_Paste", F_Paste, "Paste Top"),
+    ("F_SilkS", F_SilkS, "Silk Top"),
+    ("B_SilkS", B_SilkS, "Silk Bottom"),
+    ("Edge_Cuts", Edge_Cuts, "Edges"),
 ]
 
 popt.SetMirror(False)
@@ -102,8 +102,8 @@ lyrcnt = board.GetCopperLayerCount()
 
 for innerlyr in range(1, lyrcnt - 1):
     pctl.SetLayer(innerlyr)
-    lyrname = "inner%s" % innerlyr
-    pctl.OpenPlotfile(lyrname, PLOT_FORMAT_GERBER, "inner")
+    lyrname = "Inner%s" % innerlyr
+    pctl.OpenPlotfile(lyrname, PLOT_FORMAT_GERBER, "Inner")
     pctl.PlotLayer()
     time.sleep(0.01)
     pctl.ClosePlot()
