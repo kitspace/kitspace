@@ -18,6 +18,7 @@ if (require.main !== module) {
       projectPath = repoFolders.splice(4).join('/')
     } else {
       repoRootPath = folder
+      projectPath = ''
     }
 
     if (fs.existsSync(`${repoRootPath}/kitnic.yaml`)) {
@@ -51,6 +52,15 @@ if (require.main !== module) {
       path.join(repoRootPath, p)
     )
     if (gerbers.length === 0) {
+      let kicadPcbFile
+      if (info.eda.type === 'kicad' && info.eda.pcb != null) {
+        kicadPcbFile = info.eda.pcb
+      } else {
+        const kicadPcbPattern = path.join(repoRootPath, projectPath, '**', '*.kicad_pcb')
+        kicadPcbFile = globule.find(kicadPcbPattern)[0]
+      }
+      if (kicadPcbFile != null) {
+      }
       console.error(`No gerbers found for ${repoRootPath}.`)
       process.exit(1)
     }
