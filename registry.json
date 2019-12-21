@@ -2,13 +2,5 @@
   {
     "repo": "https://github.com/robotsrulz/SP_Adapter",
     "hash": "0391e520c2f1e953f703b467ebe6b8022971771"
-  },
-  {
-    "repo": "https://github.com/eez-open/modular-psu",
-    "hash": "a57ca78c0682e1dd261e4ac4e145796d93247665"
-  },
-  {
-    "repo": "https://github.com/Jan--Henrik/OtterPill",
-    "hash": "f2087b0da8dce8a8ca41a0557ea638cf44714be5"
   }
-]
+  ]
