@@ -11,7 +11,7 @@
 
 "1-click-bom@https://github.com/kitspace/npm-1-click-bom#ae579c2dd425d3c2041a0f4ed933fde1350a3228":
   version "1.3.1"
-  resolved "https://github.com/kitspace/npm-1-click-bom#628265f3047513ef4cd254f449b3822e20e7a227"
+  resolved "https://github.com/kitspace/npm-1-click-bom#b79b7ad00f74e4e666ff8cd691a9c969f9c95506"
   dependencies:
     s-expression "^3.0.3"
     xlsx "^0.12.6"
