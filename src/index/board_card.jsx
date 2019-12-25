@@ -1,7 +1,6 @@
 const React = require('react')
 const ReactResponsive = require('react-responsive')
 
-const FadeImage = require('../fade_image')
 const mediaQueries = require('../media_queries')
 
 function truncate(input, len, fromStart) {
@@ -27,14 +26,14 @@ let BoardCard = React.createClass({
         {matches => {
           if (matches) {
             return (
-              <FadeImage
+              <img
                 src={'boards/' + this.props.data.id + '/images/top-large.png'}
                 className="img"
               />
             )
           } else {
             return (
-              <FadeImage
+              <img
                 src={'boards/' + this.props.data.id + '/images/top.png'}
                 className="img"
               />

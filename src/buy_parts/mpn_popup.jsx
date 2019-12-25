@@ -3,8 +3,6 @@ const {h, a, div} = require('react-hyperscript-helpers')
 const semantic = require('semantic-ui-react')
 const ramda = require('ramda')
 
-const FadeImage = require('../fade_image')
-
 const importance = [
   ['color', 'capacitance', 'resistance'],
   ['case_package'],

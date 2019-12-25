@@ -6,7 +6,6 @@ const OrderPcbs = require('./order_pcbs')
 const InfoBar = require('./info_bar')
 
 const TitleBar = require('../title_bar')
-const FadeImage = require('../fade_image')
 const BuyParts = require('../buy_parts/buy_parts')
 const Readme = require('../readme')
 const semantic = require('semantic-ui-react')
@@ -54,8 +53,8 @@ const Page = React.createClass({
             <img style={{display: 'none'}} src="/images/flags.png" />
             <InfoBar info={info} />
             <BoardShowcase>
-              <FadeImage src="images/top.svg" />
-              <FadeImage src="images/bottom.svg" />
+              <img src="images/top.svg" />
+              <img src="images/bottom.svg" />
             </BoardShowcase>
             <OrderPcbs />
             <BuyParts lines={info.bom.lines} parts={info.bom.parts} />
