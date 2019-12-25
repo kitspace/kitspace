@@ -21,7 +21,7 @@ var BoardList = React.createClass({
       )
     }
     const cardNodes = this.props.data.map(function(data, index) {
-      return <BoardCard data={data} key={data.id + index} lazyLoad={true} />
+      return <BoardCard data={data} key={data.id + index} />
     })
     return (
       <div>

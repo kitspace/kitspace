@@ -1,6 +1,5 @@
 'use strict'
 const React = require('react')
-const LazyLoad = require('../lazy_load')
 
 var BoardShowcase = React.createClass({
   getInitialState: function() {
@@ -48,19 +47,13 @@ var BoardShowcase = React.createClass({
           </button>
         </div>
         <div className="boardShowcase">
-          <LazyLoad
-            once={true}
-            component={React.createElement('div', {className: 'img'})}
-            distance={300}
-          >
-            <div className="boardContainer">
-              <div className={frontBoardClass}>{children[0]}</div>
-              <div className="circuitBorderContainer">
-                <div className="circuitBorder" />
-              </div>
-              <div className={backBoardClass}>{children[1]}</div>
+          <div className="boardContainer">
+            <div className={frontBoardClass}>{children[0]}</div>
+            <div className="circuitBorderContainer">
+              <div className="circuitBorder" />
             </div>
-          </LazyLoad>
+            <div className={backBoardClass}>{children[1]}</div>
+          </div>
         </div>
       </div>
     )
