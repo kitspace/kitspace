@@ -3,7 +3,7 @@ const fs = require('fs')
 const utils = require('./utils')
 
 const repos = utils.readRepos()
-const registry = JSON.parse(fs.readFileSync('registry.json', 'utf8'))
+const registry = JSON.parse(fs.readFileSync('./registry.json', 'utf8'))
 
 for (let index = 0; index < repos.length; index++) {
   var repo = repos[index]
@@ -12,15 +12,9 @@ for (let index = 0; index < repos.length; index++) {
     false
   )
   if (!hasVersion) {
-    utils.getVersion(
-      repo,
-      function(repo, index, hash) {
-        registry.push({repo, hash})
-        return fs.writeFile(
-          './registry.json',
-          JSON.stringify(registry, undefined, 2)
-        )
-      }.bind(undefined, repo, index)
-    )
+    utils.getVersion(repo, (index, hash) => {
+      registry.push({repo, hash})
+    })
   }
 }
+fs.writeFileSync('./registry.json', JSON.stringify(registry, undefined, 2))
