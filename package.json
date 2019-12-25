@@ -31,7 +31,7 @@
     "semantic-ui-css": "^2.2.4",
     "source-map-support": "^0.4.0",
     "uglifyify": "^5.0.2",
-    "uglifyjs": "^2.4.10"
+    "uglify-js": "^2.4.11"
   },
   "scripts": {
     "watch": "./scripts/watch",
