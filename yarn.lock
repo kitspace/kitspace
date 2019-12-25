@@ -2,11 +2,11 @@
 # yarn lockfile v1
 
 
-"1-click-bom@https://github.com/kitspace/npm-1-click-bom":
+"1-click-bom@^1.3.1":
   version "1.3.1"
-  resolved "https://github.com/kitspace/npm-1-click-bom#43e513931a3b8eac3ff8947f194f9c78de464b54"
+  resolved "https://registry.yarnpkg.com/1-click-bom/-/1-click-bom-1.3.1.tgz#3ad6c53f32c83c366616d1e7c1dca0118424936b"
+  integrity sha512-26a7xV/Z5LTG2Y94eU3ctEf+79hi3kXXsGOXgQNWyWPuaFYbFTkPIca+NjPgLw0lzSs0QMzQssycwaDd0Bo7Lw==
   dependencies:
-    s-expression "^3.0.3"
     xlsx "^0.12.6"
 
 "@tracespace/xml-id@^4.0.0", "@tracespace/xml-id@^4.0.0-next.13":
@@ -5572,11 +5572,6 @@ rx-lite@^3.1.2:
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/rx-lite/-/rx-lite-3.1.2.tgz#19ce502ca572665f3b647b10939f97fd1615f102"
   integrity sha1-Gc5QLKVyZl87ZHsQk5+X/RYV8QI=
-
-s-expression@^3.0.3:
-  version "3.0.3"
-  resolved "https://registry.yarnpkg.com/s-expression/-/s-expression-3.0.3.tgz#80309bfea6bcf80960b61bb22f4498d17860799d"
-  integrity sha1-gDCb/qa8+AlgthuyL0SY0XhgeZ0=
 
 safe-buffer@^5.0.1, safe-buffer@^5.1.0, safe-buffer@^5.1.1, safe-buffer@^5.1.2, safe-buffer@~5.2.0:
   version "5.2.0"
