@@ -54,7 +54,7 @@ if (require.main !== module) {
       markdown = addSpacing(markdown)
       markdown = correctMarkdownImagePaths(markdown, multiProjectPath)
     }
-    html = marky(markdown, {package: pkg}).html()
+    html = marky(markdown, {package: pkg})
   }
   const reactComponent = converter.convert(`<div class='readme'>${html}</div>`)
   fs.writeFileSync(
