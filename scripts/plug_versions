@@ -5,16 +5,19 @@ const utils = require('./utils')
 const repos = utils.readRepos()
 const registry = JSON.parse(fs.readFileSync('./registry.json', 'utf8'))
 
-for (let index = 0; index < repos.length; index++) {
-  var repo = repos[index]
-  const hasVersion = registry.reduce(
-    (prev, {repo: r}) => prev || r === repo,
-    false
+Promise.all(
+  repos.map(
+    repo =>
+      new Promise((resolve, reject) => {
+        const existing = registry.find(x => x.repo === repo)
+        if (existing != null) {
+          return resolve(existing)
+        }
+        utils.getVersion(repo, hash => {
+          resolve({repo, hash})
+        })
+      })
   )
-  if (!hasVersion) {
-    utils.getVersion(repo, (index, hash) => {
-      registry.push({repo, hash})
-    })
-  }
-}
-fs.writeFileSync('./registry.json', JSON.stringify(registry, undefined, 2))
+).then(updatedRegistry => {
+  fs.writeFileSync('./registry.json', JSON.stringify(updatedRegistry, null, 2))
+})
