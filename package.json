@@ -76,6 +76,7 @@
   },
   "sasslintConfig": "./src/.sass-lint.yml",
   "resolutions": {
-    "pcb-stackup-core": "4.0.0-next.13"
+    "pcb-stackup-core": "4.0.0-next.13",
+    "whats-that-gerber": "4.0.0-next.13"
   }
 }

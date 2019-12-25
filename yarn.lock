@@ -6513,17 +6513,10 @@ webidl-conversions@^4.0.0:
   resolved "https://registry.yarnpkg.com/webidl-conversions/-/webidl-conversions-4.0.2.tgz#a855980b1f0b6b359ba1d5d9fb39ae941faa63ad"
   integrity sha512-YQ+BmxuTgd6UXZW3+ICGfyqRyHXVlD5GtQr5+qjiNW7bF0cqrzX500HVXPBOvgXb5YnzDd+h0zqyv61KUD7+Sg==
 
-whats-that-gerber@4.0.0-next.13:
+whats-that-gerber@4.0.0-next.13, whats-that-gerber@^4.0.0-next.13:
   version "4.0.0-next.13"
   resolved "https://registry.yarnpkg.com/whats-that-gerber/-/whats-that-gerber-4.0.0-next.13.tgz#1bd76056b2450d13c2000de94950c300b2b3e4eb"
   integrity sha512-KZ9KR/VdBdM1YGJRfLPFnGZ4QG+0kjdKNuM/qFTPZZzwL+lq3TRco9Q3UrMHfCZ7pJBAB1W2FEPh1gR1LEWOPQ==
-
-whats-that-gerber@^4.0.0-next.13:
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/whats-that-gerber/-/whats-that-gerber-4.2.0.tgz#77cbe3c1ea40cb5abd4bb3c760f01e7558e32dca"
-  integrity sha512-uPzjOvMd73hwGjigzGau6D4Qz+eJyHnkcdbAKuPMGmZabR+WjJDYHbHfM8jDvz9soJI86V8/nGeqIjGXSGNSBQ==
-  dependencies:
-    xtend "^4.0.2"
 
 whatwg-encoding@^1.0.1:
   version "1.0.5"
