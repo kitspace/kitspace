@@ -78,8 +78,7 @@ function addProjectPath(imgTag, markdownPath, projectPath) {
   let imgUrl
   if (path.isAbsolute(markdownPath)) {
     imgUrl = markdownPath
-  }
-  else {
+  } else {
     imgUrl = path.join('/' + projectPath, markdownPath)
   }
   return imgTag + imgUrl
@@ -94,9 +93,6 @@ function correctMarkdownImagePaths(string, projectPath) {
     }
 
     if (projectPath) {
-      console.log(imgTag)
-      console.log(path)
-      console.log(projectPath)
       return addProjectPath(imgTag, path, projectPath)
     }
     return match
