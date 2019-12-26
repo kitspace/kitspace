@@ -27,7 +27,7 @@ if (require.main !== module) {
     return {deps, targets, moduleDep: false}
   }
 } else {
-  let file, kitnicYaml, repoRootPath, projectPath
+  let file, kitspaceYaml, repoRootPath, projectPath
   const {deps, targets} = utils.processArgs(process.argv)
   const [boardsJSON, folder, bomPath] = deps
   const [infoPath, outBomPath] = targets
@@ -60,14 +60,14 @@ if (require.main !== module) {
     file = fs.readFileSync(`${repoRootPath}/kitspace.yml`)
   }
   if (file != null) {
-    kitnicYaml = yaml.safeLoad(file)
+    kitspaceYaml = yaml.safeLoad(file)
   } else {
-    kitnicYaml = {}
+    kitspaceYaml = {}
   }
-  if (kitnicYaml.multi) {
-    kitnicYaml = kitnicYaml.multi[projectPath]
+  if (kitspaceYaml.multi) {
+    kitspaceYaml = kitspaceYaml.multi[projectPath]
   }
-  info.site = kitnicYaml.site || ''
+  info.site = kitspaceYaml.site || ''
 
   if (/\.tsv$|\.csv$/i.test(bomPath)) {
     var content = fs.readFileSync(bomPath, {encoding: 'utf8'})
