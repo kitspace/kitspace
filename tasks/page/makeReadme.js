@@ -9,25 +9,24 @@ const rst2mdown = require('rst2mdown')
 const converter = new htmlToJsx({createClass: true, outputClassName: 'Readme'})
 
 if (require.main !== module) {
-  module.exports = function(config, folder) {
-    const fileSystemPathToProject = folder.split('/')
-    const pattern = `${folder}/readme?(\.markdown|\.mdown|\.mkdn|\.md|\.rst)`
-    const readmes = glob.sync(pattern, {nocase: true})
-    const deps = [`build/.temp/${folder}/info.json`]
-    if (readmes.length > 0) {
-      deps.push(readmes[0])
+  module.exports = function(config, boardInfo) {
+    const deps = [`build/.temp/${boardInfo.boardPath}/info.json`]
+    const targets = [`build/.temp/${boardInfo.boardPath}/readme.jsx`]
+
+    if (boardInfo.readme) {
+      deps.push(path.join(boardInfo.repoPath, boardInfo.readme))
+    } else {
+      const pattern = `${boardInfo.boardPath}/readme?(\.markdown|\.mdown|\.mkdn|\.md|\.rst)`
+      const readmes = glob.sync(pattern, {nocase: true})
+
+      if (readmes.length > 0) {
+        deps.push(readmes[0])
+      }
     }
 
-    const targets = [`build/.temp/${folder}/readme.jsx`]
-
-    // Projects with a folder structure deeper than 4 levels from the system path can be
-    // identied as being from a multi project repositoy. The path in relation to the root
-    // repository folder is stored for later processing.
-    if (fileSystemPathToProject.length > 4) {
-      const projectPathFromRepositoryRoot = fileSystemPathToProject
-        .splice(4)
-        .join('/')
-      targets.push(projectPathFromRepositoryRoot)
+    // Save path to board directory from the repository root folder.
+    if (boardInfo.multiKey) {
+      targets.push(boardInfo.multiKey)
     }
 
     return {deps, targets, moduleDep: false}
@@ -95,6 +94,9 @@ function correctMarkdownImagePaths(string, projectPath) {
     }
 
     if (projectPath) {
+      console.log(imgTag)
+      console.log(path)
+      console.log(projectPath)
       return addProjectPath(imgTag, path, projectPath)
     }
     return match
