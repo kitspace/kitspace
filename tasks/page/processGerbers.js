@@ -9,64 +9,42 @@ const Jszip = require('jszip')
 const gerberFiles = require('../../src/gerber_files')
 
 if (require.main !== module) {
-  module.exports = function(config, folder) {
-    let file, projectPath, repoRootPath
+  module.exports = function(config, boardInfo) {
+    let gerberPath = path.join(boardInfo.repoPath, '**', '*')
 
-    repoFolders = folder.split('/')
-    if (repoFolders.length > 4) {
-      repoRootPath = repoFolders.slice(0, 4).join('/')
-      projectPath = repoFolders.splice(4).join('/')
+    if (boardInfo.gerbers) {
+      gerberPath = path.join(boardInfo.repoPath, boardInfo.gerbers, '*')
     } else {
-      repoRootPath = folder
-    }
-
-    if (fs.existsSync(`${repoRootPath}/kitnic.yaml`)) {
-      file = fs.readFileSync(`${repoRootPath}/kitnic.yaml`)
-    } else if (fs.existsSync(`${repoRootPath}/kitspace.yaml`)) {
-      file = fs.readFileSync(`${repoRootPath}/kitspace.yaml`)
-    } else if (fs.existsSync(`${repoRootPath}/kitspace.yml`)) {
-      file = fs.readFileSync(`${repoRootPath}/kitspace.yml`)
-    }
-    let info = file == null ? {} : yaml.safeLoad(file)
-    let gerberPath = path.join(repoRootPath, '**', '*')
-
-    if (info.multi) {
-      for (let project in info.multi) {
-        if (project === projectPath) {
-          info = info.multi[project]
-          if (info.gerbers) {
-            gerberPath = path.join(repoRootPath, info.gerbers, '*')
-          } else {
-            gerberPath = path.join(repoRootPath, projectPath, '**', '*')
-          }
-        }
-      }
+      gerberPath = path.join(boardInfo.boardPath, '**', '*')
     }
 
     const files = globule
       .find(gerberPath)
-      .map(p => path.relative(repoRootPath, p))
+      .map(p => path.relative(boardInfo.repoPath, p))
 
-    const gerbers = gerberFiles(files, info.gerbers).map(p =>
-      path.join(repoRootPath, p)
+    const gerbers = gerberFiles(files, boardInfo.gerbers).map(p =>
+      path.join(boardInfo.repoPath, p)
     )
     if (gerbers.length === 0) {
-      console.error(`No gerbers found for ${repoRootPath}.`)
+      console.error(`No gerbers found for ${boardInfo.boardPath}.`)
       process.exit(1)
     }
-    const deps = [folder].concat(gerbers)
-    const buildFolder = folder.replace('boards', 'build/boards')
-    let version = cp.execSync(`cd '${folder}' && git log -n 1 --oneline`, {
-      encoding: 'utf8'
-    })
+    const deps = [boardInfo.boardPath].concat(gerbers)
+    const buildFolder = boardInfo.boardPath.replace('boards', 'build/boards')
+    let version = cp.execSync(
+      `cd '${boardInfo.boardPath}' && git log -n 1 --oneline`,
+      {
+        encoding: 'utf8'
+      }
+    )
     version = version.split(' ')[0]
-    const zip = `${path.basename(folder)}-${version}-gerbers.zip`
+    const zip = `${path.basename(boardInfo.boardPath)}-${version}-gerbers.zip`
     const targets = [
       `${buildFolder}/images/top.svg`,
       `${buildFolder}/images/bottom.svg`,
       `${buildFolder}/${zip}`,
-      `build/.temp/${folder}/zip-info.json`,
-      `build/.temp/${folder}/unoptimized-top.svg`,
+      `build/.temp/${boardInfo.boardPath}/zip-info.json`,
+      `build/.temp/${boardInfo.boardPath}/unoptimized-top.svg`,
       `${buildFolder}/images/top.png`,
       `${buildFolder}/images/top-large.png`,
       `${buildFolder}/images/top-meta.png`,

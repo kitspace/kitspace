@@ -9,49 +9,20 @@ const utils = require('../utils/utils')
 const getPartinfo = require('../../src/get_partinfo.js')
 
 if (require.main !== module) {
-  module.exports = function(config, folder) {
-    let bom, file, info, repoRootPath, projectPath
-    const repoFolders = folder.split('/')
+  module.exports = function(config, boardInfo) {
+    let bom
 
-    if (repoFolders.length > 4) {
-      repoRootPath = repoFolders.slice(0, 4).join('/')
-      projectPath = repoFolders.splice(4).join('/')
+    if (boardInfo.bom) {
+      bom = path.join(boardInfo.repoPath, boardInfo.bom)
     } else {
-      repoRootPath = folder
-      projectPath = folder
+      bom = path.join(boardInfo.boardPath, '1-click-bom.tsv')
     }
 
-    if (fs.existsSync(`${repoRootPath}/kitnic.yaml`)) {
-      file = fs.readFileSync(`${repoRootPath}/kitnic.yaml`)
-    } else if (fs.existsSync(`${repoRootPath}/kitspace.yaml`)) {
-      file = fs.readFileSync(`${repoRootPath}/kitspace.yaml`)
-    } else if (fs.existsSync(`${repoRootPath}/kitspace.yml`)) {
-      file = fs.readFileSync(`${repoRootPath}/kitspace.yml`)
-    }
-    if (file != null) {
-      info = yaml.safeLoad(file)
-    } else {
-      info = {}
-    }
-
-    if (info.multi) {
-      for (let project in info.multi) {
-        if (project === projectPath) {
-          info = info.multi[project]
-        }
-      }
-    }
-
-    if (info.bom) {
-      bom = path.join(repoRootPath, info.bom)
-    } else {
-      bom = path.join(projectPath, '1-click-bom.tsv')
-    }
-
-    const deps = ['build/.temp/boards.json', folder, bom]
+    const site = boardInfo.site || ''
+    const deps = ['build/.temp/boards.json', boardInfo.boardPath, bom]
     const targets = [
-      `build/.temp/${folder}/info.json`,
-      `build/${folder}/1-click-BOM.tsv`
+      `build/.temp/${boardInfo.boardPath}/info.json`,
+      `build/${boardInfo.boardPath}/1-click-BOM.tsv`
     ]
     return {deps, targets, moduleDep: false}
   }
