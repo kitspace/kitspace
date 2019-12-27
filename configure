@@ -167,7 +167,7 @@ function getKitspaceYaml(folder) {
     return [info, filePath]
   }
 
-  return [{}, '']
+  return [{}, folder]
 }
 
 const jsSrc = globule.find(['src/**/*.js', 'src/**/*.jsx'])

@@ -49,10 +49,16 @@ if (require.main !== module) {
     }
   }, '')
 
-  const file = fs.readFileSync(yamlPath)
-  if (file != null) {
-    kitspaceYaml = yaml.safeLoad(file)
+  try {
+    const file = fs.readFileSync(yamlPath)
+
+    if (file != null) {
+      kitspaceYaml = yaml.safeLoad(file)
+    }
+  } catch (error) {
+    console.log('WARNING: NO KITSPACE YAML FILE')
   }
+
   if (kitspaceYaml.multi) {
     const yamlKey = boardFolder.replace(`${repoPath}/`, '')
     kitspaceYaml = kitspaceYaml.multi[yamlKey]
