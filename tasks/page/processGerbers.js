@@ -10,12 +10,10 @@ const gerberFiles = require('../../src/gerber_files')
 
 if (require.main !== module) {
   module.exports = function(config, boardInfo) {
-    let gerberPath = path.join(boardInfo.repoPath, '**', '*')
+    let gerberPath = path.join(boardInfo.boardPath, '**', '*')
 
     if (boardInfo.gerbers) {
       gerberPath = path.join(boardInfo.repoPath, boardInfo.gerbers, '*')
-    } else {
-      gerberPath = path.join(boardInfo.boardPath, '**', '*')
     }
 
     const files = globule
