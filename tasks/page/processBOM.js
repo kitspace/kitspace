@@ -17,9 +17,12 @@ if (require.main !== module) {
     } else {
       bom = path.join(boardInfo.boardPath, '1-click-bom.tsv')
     }
-
-    const site = boardInfo.site || ''
-    const deps = ['build/.temp/boards.json', boardInfo.boardPath, bom]
+    const deps = [
+      'build/.temp/boards.json',
+      boardInfo.yamlPath,
+      boardInfo.repoPath,
+      bom
+    ]
     const targets = [
       `build/.temp/${boardInfo.boardPath}/info.json`,
       `build/${boardInfo.boardPath}/1-click-BOM.tsv`
@@ -27,13 +30,16 @@ if (require.main !== module) {
     return {deps, targets, moduleDep: false}
   }
 } else {
-  let file, kitspaceYaml, repoRootPath, projectPath
+  let kitspaceYaml = {}
   const {deps, targets} = utils.processArgs(process.argv)
-  const [boardsJSON, folder, bomPath] = deps
+  const [boardsJSON, yamlPath, repoPath, bomPath] = deps
   const [infoPath, outBomPath] = targets
+  const boardFolder = infoPath
+    .replace('build/.temp/', '')
+    .replace('/info.json', '')
 
   const boards = JSON.parse(fs.readFileSync(boardsJSON))
-  const info = {id: folder.replace('boards/', '')}
+  const info = {id: boardFolder.replace('boards/', '')}
 
   info.summary = boards.reduce((prev, obj) => {
     if (obj.id === info.id) {
@@ -43,29 +49,13 @@ if (require.main !== module) {
     }
   }, '')
 
-  repoFolders = folder.split('/')
-  if (repoFolders.length > 4) {
-    repoRootPath = repoFolders.slice(0, 4).join('/')
-    projectPath = repoFolders.splice(4).join('/')
-  } else {
-    repoRootPath = folder
-    projectPath = folder
-  }
-
-  if (fs.existsSync(`${repoRootPath}/kitnic.yaml`)) {
-    file = fs.readFileSync(`${repoRootPath}/kitnic.yaml`)
-  } else if (fs.existsSync(`${repoRootPath}/kitspace.yaml`)) {
-    file = fs.readFileSync(`${repoRootPath}/kitspace.yaml`)
-  } else if (fs.existsSync(`${repoRootPath}/kitspace.yml`)) {
-    file = fs.readFileSync(`${repoRootPath}/kitspace.yml`)
-  }
+  const file = fs.readFileSync(yamlPath)
   if (file != null) {
     kitspaceYaml = yaml.safeLoad(file)
-  } else {
-    kitspaceYaml = {}
   }
   if (kitspaceYaml.multi) {
-    kitspaceYaml = kitspaceYaml.multi[projectPath]
+    const yamlKey = boardFolder.replace(`${repoPath}/`, '')
+    kitspaceYaml = kitspaceYaml.multi[yamlKey]
   }
   info.site = kitspaceYaml.site || ''
 
@@ -91,7 +81,9 @@ if (require.main !== module) {
   }
   info.bom.tsv = oneClickBOM.writeTSV(info.bom.lines)
 
-  let repo = cp.execSync(`cd '${folder}' && git remote -v`, {encoding: 'utf8'})
+  let repo = cp.execSync(`cd '${repoPath}' && git remote -v`, {
+    encoding: 'utf8'
+  })
   repo = repo.split('\t')[1].split(' ')[0]
   info.repo = repo
 
