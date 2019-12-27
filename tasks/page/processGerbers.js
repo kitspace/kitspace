@@ -27,10 +27,10 @@ if (require.main !== module) {
       console.error(`No gerbers found for ${boardInfo.boardPath}.`)
       process.exit(1)
     }
-    const deps = [boardInfo.boardPath].concat(gerbers)
+    const deps = [boardInfo.repoPath].concat(gerbers)
     const buildFolder = boardInfo.boardPath.replace('boards', 'build/boards')
     let version = cp.execSync(
-      `cd '${boardInfo.boardPath}' && git log -n 1 --oneline`,
+      `cd '${boardInfo.repoPath}' && git log -n 1 --oneline`,
       {
         encoding: 'utf8'
       }
