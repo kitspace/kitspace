@@ -19,9 +19,9 @@ if (require.main !== module) {
     }
     const deps = [
       'build/.temp/boards.json',
-      boardInfo.yamlPath,
       boardInfo.repoPath,
-      bom
+      bom,
+      boardInfo.yamlPath
     ]
     const targets = [
       `build/.temp/${boardInfo.boardPath}/info.json`,
@@ -32,7 +32,7 @@ if (require.main !== module) {
 } else {
   let kitspaceYaml = {}
   const {deps, targets} = utils.processArgs(process.argv)
-  const [boardsJSON, yamlPath, repoPath, bomPath] = deps
+  const [boardsJSON, repoPath, bomPath, yamlPath] = deps
   const [infoPath, outBomPath] = targets
   const boardFolder = infoPath
     .replace('build/.temp/', '')
@@ -40,6 +40,7 @@ if (require.main !== module) {
 
   const boards = JSON.parse(fs.readFileSync(boardsJSON))
   const info = {id: boardFolder.replace('boards/', '')}
+  const file = yamlPath ? fs.readFileSync(yamlPath) : null
 
   info.summary = boards.reduce((prev, obj) => {
     if (obj.id === info.id) {
@@ -49,14 +50,8 @@ if (require.main !== module) {
     }
   }, '')
 
-  try {
-    const file = fs.readFileSync(yamlPath)
-
-    if (file != null) {
-      kitspaceYaml = yaml.safeLoad(file)
-    }
-  } catch (error) {
-    console.log('WARNING: NO KITSPACE YAML FILE')
+  if (file != null) {
+    kitspaceYaml = yaml.safeLoad(file)
   }
 
   if (kitspaceYaml.multi) {

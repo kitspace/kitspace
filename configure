@@ -162,12 +162,13 @@ function getKitspaceYaml(folder) {
     file = fs.readFileSync(`${folder}/kitspace.yml`)
     filePath = `${folder}/kitspace.yml`
   }
+
   if (file != null) {
     const info = yaml.safeLoad(file)
     return [info, filePath]
   }
 
-  return [{}, folder]
+  return [{}, '']
 }
 
 const jsSrc = globule.find(['src/**/*.js', 'src/**/*.jsx'])
