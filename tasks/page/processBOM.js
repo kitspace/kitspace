@@ -9,60 +9,38 @@ const utils = require('../utils/utils')
 const getPartinfo = require('../../src/get_partinfo.js')
 
 if (require.main !== module) {
-  module.exports = function(config, folder) {
-    let bom, file, info, repoRootPath, projectPath
-    const repoFolders = folder.split('/')
+  module.exports = function(config, boardInfo) {
+    let bom
 
-    if (repoFolders.length > 4) {
-      repoRootPath = repoFolders.slice(0, 4).join('/')
-      projectPath = repoFolders.splice(4).join('/')
+    if (boardInfo.bom) {
+      bom = path.join(boardInfo.repoPath, boardInfo.bom)
     } else {
-      repoRootPath = folder
-      projectPath = folder
+      bom = path.join(boardInfo.boardPath, '1-click-bom.tsv')
     }
-
-    if (fs.existsSync(`${repoRootPath}/kitnic.yaml`)) {
-      file = fs.readFileSync(`${repoRootPath}/kitnic.yaml`)
-    } else if (fs.existsSync(`${repoRootPath}/kitspace.yaml`)) {
-      file = fs.readFileSync(`${repoRootPath}/kitspace.yaml`)
-    } else if (fs.existsSync(`${repoRootPath}/kitspace.yml`)) {
-      file = fs.readFileSync(`${repoRootPath}/kitspace.yml`)
-    }
-    if (file != null) {
-      info = yaml.safeLoad(file)
-    } else {
-      info = {}
-    }
-
-    if (info.multi) {
-      for (let project in info.multi) {
-        if (project === projectPath) {
-          info = info.multi[project]
-        }
-      }
-    }
-
-    if (info.bom) {
-      bom = path.join(repoRootPath, info.bom)
-    } else {
-      bom = path.join(projectPath, '1-click-bom.tsv')
-    }
-
-    const deps = ['build/.temp/boards.json', folder, bom]
+    const deps = [
+      'build/.temp/boards.json',
+      boardInfo.repoPath,
+      bom,
+      boardInfo.yamlPath
+    ]
     const targets = [
-      `build/.temp/${folder}/info.json`,
-      `build/${folder}/1-click-BOM.tsv`
+      `build/.temp/${boardInfo.boardPath}/info.json`,
+      `build/${boardInfo.boardPath}/1-click-BOM.tsv`
     ]
     return {deps, targets, moduleDep: false}
   }
 } else {
-  let file, kitnicYaml, repoRootPath, projectPath
+  let kitspaceYaml = {}
   const {deps, targets} = utils.processArgs(process.argv)
-  const [boardsJSON, folder, bomPath] = deps
+  const [boardsJSON, repoPath, bomPath, yamlPath] = deps
   const [infoPath, outBomPath] = targets
+  const boardFolder = infoPath
+    .replace('build/.temp/', '')
+    .replace('/info.json', '')
 
   const boards = JSON.parse(fs.readFileSync(boardsJSON))
-  const info = {id: folder.replace('boards/', '')}
+  const info = {id: boardFolder.replace('boards/', '')}
+  const file = yamlPath ? fs.readFileSync(yamlPath) : null
 
   info.summary = boards.reduce((prev, obj) => {
     if (obj.id === info.id) {
@@ -72,31 +50,15 @@ if (require.main !== module) {
     }
   }, '')
 
-  repoFolders = folder.split('/')
-  if (repoFolders.length > 4) {
-    repoRootPath = repoFolders.slice(0, 4).join('/')
-    projectPath = repoFolders.splice(4).join('/')
-  } else {
-    repoRootPath = folder
-    projectPath = folder
+  if (file != null) {
+    kitspaceYaml = yaml.safeLoad(file)
   }
 
-  if (fs.existsSync(`${repoRootPath}/kitnic.yaml`)) {
-    file = fs.readFileSync(`${repoRootPath}/kitnic.yaml`)
-  } else if (fs.existsSync(`${repoRootPath}/kitspace.yaml`)) {
-    file = fs.readFileSync(`${repoRootPath}/kitspace.yaml`)
-  } else if (fs.existsSync(`${repoRootPath}/kitspace.yml`)) {
-    file = fs.readFileSync(`${repoRootPath}/kitspace.yml`)
+  if (kitspaceYaml.multi) {
+    const yamlKey = boardFolder.replace(`${repoPath}/`, '')
+    kitspaceYaml = kitspaceYaml.multi[yamlKey]
   }
-  if (file != null) {
-    kitnicYaml = yaml.safeLoad(file)
-  } else {
-    kitnicYaml = {}
-  }
-  if (kitnicYaml.multi) {
-    kitnicYaml = kitnicYaml.multi[projectPath]
-  }
-  info.site = kitnicYaml.site || ''
+  info.site = kitspaceYaml.site || ''
 
   if (/\.tsv$|\.csv$/i.test(bomPath)) {
     var content = fs.readFileSync(bomPath, {encoding: 'utf8'})
@@ -120,7 +82,9 @@ if (require.main !== module) {
   }
   info.bom.tsv = oneClickBOM.writeTSV(info.bom.lines)
 
-  let repo = cp.execSync(`cd '${folder}' && git remote -v`, {encoding: 'utf8'})
+  let repo = cp.execSync(`cd '${repoPath}' && git remote -v`, {
+    encoding: 'utf8'
+  })
   repo = repo.split('\t')[1].split(' ')[0]
   info.repo = repo
 
