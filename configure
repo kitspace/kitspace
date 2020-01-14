@@ -128,34 +128,48 @@ for (var f of images) {
     .using('copy')
 }
 
-let boardFolders = globule.find('boards/*/*/*', {filter: 'isDirectory'})
-
-boardFolders = boardFolders.reduce((newBoardFolders, folder, index) => {
-  let info
-  let file
-  if (fs.existsSync(`${folder}/kitnic.yaml`)) {
-    file = fs.readFileSync(`${folder}/kitnic.yaml`)
-  } else if (fs.existsSync(`${folder}/kitspace.yaml`)) {
-    file = fs.readFileSync(`${folder}/kitspace.yaml`)
-  } else if (fs.existsSync(`${folder}/kitspace.yml`)) {
-    file = fs.readFileSync(`${folder}/kitspace.yml`)
-  }
-  if (file != null) {
-    info = yaml.safeLoad(file)
-  } else {
-    info = {}
-  }
-
+const repositories = globule.find('boards/*/*/*', {filter: 'isDirectory'})
+const boards = repositories.reduce((newBoards, folder) => {
+  const [info, yamlPath] = getKitspaceYaml(folder)
   if (info.multi) {
-    for (let project in info.multi) {
-      projectPath = path.join(folder, project)
-      newBoardFolders.push(projectPath)
+    for (let board in info.multi) {
+      const boardInfo = info.multi[board]
+      boardInfo.multiKey = board
+      boardInfo.yamlPath = yamlPath
+      boardInfo.repoPath = folder
+      boardInfo.boardPath = path.join(folder, board)
+      newBoards.push(boardInfo)
     }
   } else {
-    newBoardFolders.push(folder)
+    info.yamlPath = yamlPath
+    info.repoPath = folder
+    info.boardPath = folder
+    newBoards.push(info)
   }
-  return newBoardFolders
+  return newBoards
 }, [])
+
+function getKitspaceYaml(folder) {
+  let file, filePath
+
+  if (fs.existsSync(`${folder}/kitnic.yaml`)) {
+    file = fs.readFileSync(`${folder}/kitnic.yaml`)
+    filePath = `${folder}/kitnic.yaml`
+  } else if (fs.existsSync(`${folder}/kitspace.yaml`)) {
+    file = fs.readFileSync(`${folder}/kitspace.yaml`)
+    filePath = `${folder}/kitspace.yaml`
+  } else if (fs.existsSync(`${folder}/kitspace.yml`)) {
+    file = fs.readFileSync(`${folder}/kitspace.yml`)
+    filePath = `${folder}/kitspace.yml`
+  }
+
+  if (file != null) {
+    const info = yaml.safeLoad(file)
+    return [info, filePath]
+  }
+
+  return [{}, '']
+}
 
 const jsSrc = globule.find(['src/**/*.js', 'src/**/*.jsx'])
 
@@ -170,7 +184,8 @@ const jsMainTargets = jsSrc.map(function(f) {
 })
 
 const jsPageTargets = {}
-for (var folder of boardFolders) {
+for (const board of boards) {
+  const folder = board.boardPath
   jsPageTargets[folder] = []
   jsSrc.forEach(f => {
     const temp = f.replace('src', `build/.temp/${ninjaBuildGen.escape(folder)}`)
@@ -273,15 +288,16 @@ ninja
   .need(jsMainTargets)
   .using('browserify')
 
-for (const folder of boardFolders) {
-  const escapedFolder = ninjaBuildGen.escape(folder)
+for (const board of boards) {
+  const boardPath = board.boardPath
+  const escapedFolder = ninjaBuildGen.escape(boardPath)
   ninja
     .edge(`build/${escapedFolder}/app.js`)
     .assign('dotd', `build/${escapedFolder}/app.js.d`)
     .need(`build/.temp/${escapedFolder}/info.json`)
     .need(`build/.temp/${escapedFolder}/zip-info.json`)
     .need(`build/.temp/${escapedFolder}/readme.jsx`)
-    .need(jsPageTargets[folder])
+    .need(jsPageTargets[boardPath])
     .from(`build/.temp/${escapedFolder}/page/render_page.jsx`)
     .using('browserify')
 }
@@ -293,7 +309,8 @@ function addEdge(taskFile, task) {
       .from([taskFile].concat(task.deps).map(ninjaBuildGen.escape))
       .using('node-task')
   } else {
-    const targetFiles = "'" + task.targets.map(ninjaBuildGen.escape).join("' '") + "'"
+    const targetFiles =
+      "'" + task.targets.map(ninjaBuildGen.escape).join("' '") + "'"
     const edge = ninja
       .edge(ninjaBuildGen.escape(task.targets[0]))
       .from([taskFile].concat(task.deps).map(ninjaBuildGen.escape))
@@ -321,7 +338,9 @@ globule.find('tasks/*.js').forEach(taskFile => {
 
 globule.find('tasks/page/*.js').forEach(taskFile => {
   const task = require(`./${path.dirname(taskFile)}/${path.basename(taskFile)}`)
-  boardFolders.forEach(folder => addEdge(taskFile, task(config, folder)))
+  boards.forEach(board => {
+    addEdge(taskFile, task(config, board))
+  })
 })
 
 if (config === 'production') {

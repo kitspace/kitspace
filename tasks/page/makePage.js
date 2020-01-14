@@ -2,7 +2,8 @@ const fs = require('fs')
 const utils = require('../utils/utils')
 
 if (require.main !== module) {
-  module.exports = function(config, folder) {
+  module.exports = function(config, boardInfo) {
+    const folder = boardInfo.boardPath
     let deps
     let targets = [`build/${folder}/index.html`]
     if (config === 'production') {

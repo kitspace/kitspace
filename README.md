@@ -52,6 +52,7 @@ color: The solder resist color of the preview rendering. Can be one of:
        - yellow
 bom: A path to your 1-click-bom in case it isn't `1-click-bom.tsv`.
 gerbers: A path to your folder of gerbers in case it isn't `gerbers/`.
+readme: A path to your README file in case it isn't in the repository root directory.
 multi: Identifier field only used if the repository contains multiple projects.
 
 ```
@@ -162,7 +163,7 @@ multi:
         site: https://example-two.com
 ```
 
-If you want to use custom paths for `bom` and `gerbers` then note that these are from the root of the repository. There is currently no way to change the path of the README (see issue [#183](https://github.com/kitspace/kitspace/issues/183)).
+If you want to use custom paths for the `readme`, `bom`, or `gerbers` then note that these are from the root of the repository.
 
 E.g.
 
@@ -177,16 +178,17 @@ E.g.
 │       ├── example.stc
 │       └── example.sts
 ├── project_one
-    ├── BOM.csv
-    └── README.md
+│   ├── documentation
+│   │   └── README.md
+    └── BOM.csv
 └── project_two
-    ├── README.md
     ...
 ```
 
 ```yaml
 multi:
     project_one:
+        readme: project_one/documentation/README.md
         bom: project_one/BOM.csv
         gerbers: manufacturing_outputs/project_one_gerbers
     project_two:
