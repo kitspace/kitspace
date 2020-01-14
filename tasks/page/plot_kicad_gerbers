@@ -21,6 +21,9 @@
         the result is the pcbnew lib will crash if you try to plot
         the unknown frame references template.
 """
+import sys
+sys.path.insert(1, '/usr/lib/kicad-nightly/lib/python2.7/dist-packages/')
+
 from datetime import datetime
 from pcbnew import *
 from shutil import copy
