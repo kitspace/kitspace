@@ -7,7 +7,7 @@ addons:
   apt:
     sources:
       - ubuntu-toolchain-r-test
-      - sourceline: 'ppa:js-reynaud/kicad-5-nightly'
+      - sourceline: 'ppa:js-reynaud/kicad-dev-nightly'
     packages:
       - g++-4.8
       - inkscape
