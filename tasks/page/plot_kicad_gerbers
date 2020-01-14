@@ -23,6 +23,7 @@
 """
 import sys
 sys.path.insert(1, '/usr/lib/kicad-nightly/lib/python2.7/dist-packages/')
+sys.path.insert(1, '/usr/lib/kicad-nightly/lib/x86_64-linux-gnu/')
 
 from datetime import datetime
 from pcbnew import *
