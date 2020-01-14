@@ -60,12 +60,14 @@ if (require.main !== module) {
   }
   info.site = kitspaceYaml.site || ''
 
-  if (/\.tsv$|\.csv$/i.test(bomPath)) {
+  if (/\.tsv$|\.csv$|\.kicad_pcb$/i.test(bomPath)) {
     var content = fs.readFileSync(bomPath, {encoding: 'utf8'})
   } else {
     var content = fs.readFileSync(bomPath)
   }
-  info.bom = oneClickBOM.parse(content)
+  info.bom = oneClickBOM.parse(content, {
+    ext: /\.kicad_pcb$/i.test(bomPath) ? 'kicad_pcb' : null
+  })
   if (info.bom.invalid != null) {
     info.bom.invalid.forEach(invalid => {
       console.log('INVALID LINE:', invalid)
