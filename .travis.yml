@@ -11,7 +11,7 @@ addons:
     packages:
       - g++-4.8
       - inkscape
-      - kicad
+      - kicad-nightly
 script:
   - bash keep_alive.sh &
   - export NODE_ENV=production
