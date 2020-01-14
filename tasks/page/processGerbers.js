@@ -29,8 +29,7 @@ if (require.main !== module) {
         kicadPcbFile = boardInfo.eda.pcb
       } else if (boardInfo.eda == null) {
         const kicadPcbPattern = path.join(
-          repoRootPath,
-          projectPath,
+          boardInfo.repoPath,
           '**/*.kicad_pcb'
         )
         kicadPcbFile = globule.find(kicadPcbPattern)[0]
