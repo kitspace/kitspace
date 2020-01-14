@@ -37,7 +37,7 @@ if (require.main !== module) {
       if (kicadPcbFile != null) {
         gerbers.push(kicadPcbFile)
       } else {
-        console.error(`No gerbers or .kicad_pcb found for ${repoRootPath}.`)
+        console.error(`No gerbers or .kicad_pcb found for ${boardInfo.repoPath}.`)
         process.exit(1)
       }
     }
