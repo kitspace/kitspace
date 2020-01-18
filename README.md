@@ -252,7 +252,7 @@ Services used are:
 
 ### Running a local dev server
 
-- Get requirements above and make sure executables are on your path
+- Get requirements above
 - `yarn install`
 - `yarn start` (or `npm start`)
 - Point your browser at `http://127.0.0.1:8080`. The script should watch for
