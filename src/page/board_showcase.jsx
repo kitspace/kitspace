@@ -38,7 +38,7 @@ var BoardShowcase = React.createClass({
           className="traceSpaceLink"
           href={`https://tracespace.io/view/?boardUrl=${zipUrl}`}
           target="_blank"
-          title="Inspect gerbers in Tracespace"
+          title="Click to inspect the Gerber files on Tracespace"
         >
           {props.children}
         </a>
