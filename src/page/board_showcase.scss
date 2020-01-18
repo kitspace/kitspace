@@ -148,9 +148,10 @@
 .overlay p{
   font-size: 30px;
   width: 100%;
-  text-align: center;
-  position: relative;
-  top: 50%;
+  text-align: right;
+  position: absolute;
+  bottom: 0px;
+  right: 10px;
   pointer-events: none;
 }
 
@@ -159,5 +160,5 @@
 }
 
 .shadow:hover{
-  opacity: 0.5;
+  opacity: 0.3;
 }
