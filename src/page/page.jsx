@@ -19,6 +19,10 @@ const metaImage = `https://kitspace.org/boards/${
   info.id
 }/images/top-with-background.png`
 
+const {zipPath, folder, width, height} = require('../zip-info.json')
+
+const zipUrl = `https://kitspace.org/${folder}/${zipPath}`
+
 const Page = React.createClass({
   render() {
     const idText = info.id
@@ -53,7 +57,7 @@ const Page = React.createClass({
           <div className="pageContainer">
             <img style={{display: 'none'}} src="/images/flags.png" />
             <InfoBar info={info} />
-            <BoardShowcase>
+            <BoardShowcase zipUrl={zipUrl}>
               <FadeImage src="images/top.svg" />
               <FadeImage src="images/bottom.svg" />
             </BoardShowcase>
