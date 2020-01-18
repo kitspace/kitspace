@@ -1,4 +1,0 @@
-[[headers]]
-  for = "/privacy/"
-  [headers.values]
-    X-Frame-Options = "allow-from https://matomo.kitspace.org"

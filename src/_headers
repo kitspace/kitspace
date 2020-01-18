@@ -1,2 +1,4 @@
 /*.zip
   Access-Control-Allow-Origin: *
+/privacy/
+  X-Frame-Options: allow-from https://matomo.kitspace.org
