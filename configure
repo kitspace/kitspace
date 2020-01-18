@@ -302,10 +302,11 @@ ninja
 
 ninja
   .edge('build/privacy/app.js')
+  .assign('dotd', 'build/privacy/app.js.d')
   .from('build/.temp/privacy/render_privacy.jsx')
   .need(jsMainTargets)
   .using('browserify')
-  
+
 for (const board of boards) {
   const boardPath = board.boardPath
   const escapedFolder = ninjaBuildGen.escape(boardPath)
