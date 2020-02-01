@@ -11,8 +11,8 @@ function MakingProductsMeetup(props) {
         <h1>Making Products Meetup</h1>
         <p>
           Join us for our product design and manufacturing meetups in Bristol,
-          UK. These meetups are for people making (or aspiring to make)
-          hardware products. They provide networking and skills exchange between
+          UK. These meetups are for people making (or aspiring to make) hardware
+          products. They provide networking and skills exchange between
           designers, engineers and local manufacturers. We have regular talks,
           workshops and social events.
         </p>
@@ -24,7 +24,7 @@ function MakingProductsMeetup(props) {
           or add your email below. If you would like to propose a talk please
           also add a title and description of your talk.
         </p>
-        <p style={{display: 'flex', justifyContent: 'center'}}>
+        <div style={{display: 'flex', justifyContent: 'center'}}>
           <semantic.Card
             as="a"
             href="https://www.meetup.com/Making-Products/events/268380209/"
@@ -44,7 +44,7 @@ function MakingProductsMeetup(props) {
               </semantic.Card.Description>
             </semantic.Card.Content>
           </semantic.Card>
-        </p>
+        </div>
         <h3>Sign up</h3>
         <semantic.Form
           name="meetup-contact"
@@ -54,7 +54,7 @@ function MakingProductsMeetup(props) {
         >
           <semantic.Form.Field>
             <label>Your Email</label>
-            <input type="email" name="email" placeholder="you@example.com"/>
+            <input type="email" name="email" placeholder="you@example.com" />
           </semantic.Form.Field>
           <semantic.Form.Field>
             <label>Proposed Talk Title (about 50 characters, optional)</label>
@@ -66,7 +66,9 @@ function MakingProductsMeetup(props) {
             </label>
             <textarea name="talk-description" />
           </semantic.Form.Field>
-          <semantic.Button primary type="submit">Submit</semantic.Button>
+          <semantic.Button primary type="submit">
+            Submit
+          </semantic.Button>
         </semantic.Form>
       </semantic.Container>
     </div>
