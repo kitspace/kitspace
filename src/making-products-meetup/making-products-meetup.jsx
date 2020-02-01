@@ -24,7 +24,7 @@ function MakingProductsMeetup(props) {
           or add your email below. If you would like to propose a talk please
           also add a title and description of your talk.
         </p>
-        <p>
+        <p style={{display: 'flex', justifyContent: 'center'}}>
           <semantic.Card
             as="a"
             href="https://www.meetup.com/Making-Products/events/268380209/"
@@ -45,6 +45,7 @@ function MakingProductsMeetup(props) {
             </semantic.Card.Content>
           </semantic.Card>
         </p>
+        <h3>Sign up</h3>
         <semantic.Form
           name="meetup-contact"
           method="POST"
@@ -65,7 +66,7 @@ function MakingProductsMeetup(props) {
             </label>
             <textarea name="talk-description" />
           </semantic.Form.Field>
-          <semantic.Button type="submit">Submit</semantic.Button>
+          <semantic.Button primary type="submit">Submit</semantic.Button>
         </semantic.Form>
       </semantic.Container>
     </div>
