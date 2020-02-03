@@ -46,7 +46,7 @@
   "author": "Kaspar Emanuel",
   "license": "CPAL-1.0",
   "dependencies": {
-    "1-click-bom": "https://github.com/kitspace/npm-1-click-bom#ae579c2dd425d3c2041a0f4ed933fde1350a3228",
+    "1-click-bom": "https://github.com/kitspace/npm-1-click-bom#78df7bb0ebfbdb7beee99d13514b3737f010508f",
     "babel-polyfill": "^6.13.0",
     "browser-version": "^1.0.0",
     "gerber-to-svg": "4.0.0-next.13",
