@@ -35,7 +35,7 @@ if (require.main !== module) {
         kicadPcbFile = globule.find(kicadPcbPattern)[0]
       }
       if (kicadPcbFile != null) {
-        gerbers.push(kicadPcbFile)
+        gerbers.push(path.join(boardInfo.repoPath, kicadPcbFile))
       } else {
         console.error(`No gerbers or .kicad_pcb found for ${boardInfo.repoPath}.`)
         process.exit(1)
