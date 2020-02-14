@@ -91,9 +91,10 @@ if (require.main !== module) {
     topMetaPngPath,
     topWithBgndPath
   ] = targets
+
   const zipInfo = {
     zipPath: path.basename(zipPath),
-    folder
+    folder: path.relative('build/', path.dirname(zipPath))
   }
   const zip = new Jszip()
   const folder_name = path.basename(zipPath, '.zip')

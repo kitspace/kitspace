@@ -74,3 +74,6 @@ https://github.com/sci-bots/teensy-3.2-clone.kicad
 https://github.com/eez-open/modular-psu
 https://github.com/Jan--Henrik/USB-LED-Otter
 https://github.com/Jan--Henrik/Otter-Iron
+https://github.com/Sussex-Neuroscience/voltage-amplifier
+https://github.com/ozel/DIY_particle_detector
+https://github.com/free-pdk/easy-pdk-programmer-hardware

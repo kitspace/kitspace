@@ -214,6 +214,13 @@ ninja
   .using('sass')
 
 ninja
+  .edge('build/.temp/making-products-meetup/making-products-meetup.css')
+  .from('src/making-products-meetup/making-products-meetup.scss')
+  .need(sassSrc)
+  .assign('path', 'src/')
+  .using('sass')
+
+ninja
   .edge('build/.temp/1-click-bom/1-click-bom.css')
   .from('src/1-click-bom/1-click-bom.scss')
   .need(sassSrc)
@@ -223,6 +230,11 @@ ninja
 ninja
   .edge('build/bom-builder/bom-builder.css')
   .from('build/.temp/bom-builder/bom-builder.css')
+  .using('autoprefix')
+
+ninja
+  .edge('build/making-products-meetup/making-products-meetup.css')
+  .from('build/.temp/making-products-meetup/making-products-meetup.css')
   .using('autoprefix')
 
 ninja
@@ -271,6 +283,13 @@ ninja
   .edge('build/bom-builder/app.js')
   .assign('dotd', 'build/bom-builder/app.js.d')
   .from('build/.temp/bom-builder/render_bom-builder.jsx')
+  .need(jsMainTargets)
+  .using('browserify')
+
+ninja
+  .edge('build/making-products-meetup/app.js')
+  .assign('dotd', 'build/making-products-meetup/app.js.d')
+  .from('build/.temp/making-products-meetup/render_making-products-meetup.jsx')
   .need(jsMainTargets)
   .using('browserify')
 
