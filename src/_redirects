@@ -2,3 +2,5 @@
 /boards/github.com/prometheus-science/* /boards/github.com/amchagas/:splat
 /boards/github.com/kitnic-forks/* /boards/github.com/kitspace-forks/:splat
 /boards/github.com/monostable/* /boards/github.com/kitspace/:splat
+"/boards/github.com/ozel/diy_particle_detector/diy alpha spectrometer" /boards/github.com/ozel/diy_particle_detector/alpha-spectrometer
+"/boards/github.com/ozel/diy_particle_detector/diy electron detector" /boards/github.com/ozel/diy_particle_detector/electron-detector
