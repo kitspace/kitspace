@@ -223,14 +223,26 @@ And one for the geo ip lookup on pages.
 - [Yarn](https://yarnpkg.com/) to ensure the correct dependencies are installed
 - The rest of the dependencies can be retrieved via `yarn install`
 
+#### Quick start for Debian/Ubuntu
+
+```
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+sudo apt update && sudo apt install git nodejs inotify-tools ninja-build inkscape yarn
+yarn install
+```
+
 ### Running a local dev server
 
-- Get requirements above
-- `yarn install`
-- `yarn start` (or `npm start`)
-- Point your browser at `http://127.0.0.1:8080`. The script should watch for
-file-saves and re-build when you change a source file.
+Get requirements above then:
 
+```bash
+yarn install    # retrieves dependencies
+yarn get-boards # gets the test projects and puts them into boards/
+yarn configure  # generates a build.ninja file
+yarn build      # ninja reads the build.ninja file and builds everything
+yarn serve      # starts a development server to preview the site
+```
 
 [viewer]: http://viewer.tracespace.io
 [1clickbom]: https://1clickBOM.com
