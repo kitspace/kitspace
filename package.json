@@ -39,6 +39,7 @@
     "start": "./scripts/get_boards && npm run serve & npm run watch",
     "update-reg": "./scripts/update_registry",
     "plug-reg": "./scripts/plug_versions",
+    "get-boards": "./scripts/get_boards",
     "serve": "http-server build/",
     "lint": "eslint src",
     "fmt": "prettier --write configure *.js $(find src -name '*.jsx') $(find src -name '*.js') $(find tasks -name '*.js')",
