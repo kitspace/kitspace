@@ -247,6 +247,7 @@ Services used are:
 - [Nodejs](https://nodejs.org) version 6 (v6.17.1)
 - [fswatch](http://emcrisostomo.github.io/fswatch/) on OSX/Windows or inotify-tools on Linux
 - [Ninja Build](https://github.com/ninja-build/ninja/releases) >= 1.5.1
+- [Inkscape](https://inkscape.org/) (v0.92) for converting SVGs to PNGs
 - [Yarn](https://yarnpkg.com/) to ensure the correct dependencies are installed
 - The rest of the dependencies can be retrieved via `yarn install`
 
