@@ -244,6 +244,8 @@ yarn build      # ninja reads the build.ninja file and builds everything
 yarn serve      # starts a development server to preview the site
 ```
 
+Visit http://127.0.0.1:8080 in your browser to see your local development site.
+
 [viewer]: http://viewer.tracespace.io
 [1clickbom]: https://1clickBOM.com
 [yamllint]: http://www.yamllint.com
