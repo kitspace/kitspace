@@ -199,7 +199,6 @@ multi:
 
 ### Architecture
 
-#### Current
 This repository is the Kitspace front-end. The contents including all project
 data are currently pre-compiled into a static site.  The main part of the site
 that requires server side components is the submission preview (`/submit`). Pages also use freegeoip lookup to decide what sites to link to for people that do not have the 1-click BOM browser extension. This roughly illustrates the main data flow when someone is browsing the site.
@@ -214,33 +213,6 @@ We have two services running for the submission preview.
 And one for the geo ip lookup on pages.
 
 - [freegeoip](https://github.com/fiorix/freegeoip)
-
-#### Planned
-
-We are using [GitLab](https://gitlab.com/gitlab-org/gitlab-ce) as an authentication and Git hosting service. We modify and proxy it to get the functionality we need.
-The graphs get too complicated if we try to add all the possible data-flows but here is the rough data-flow for submission of a project.
-
-![](docs/planned.png)
-
-Services used are:
-
-- [nginx-config](https://github.com/monostable/kitnic-nginx-config) to configure Nginx to serve the frontend and all services.
-- [partinfo](https://github.com/kitspace/kitspace-partinfo) for getting part information for BOMs.
-- [gitlab-config](http://github.com/monostable/kitnic-gitlab-config) configuring GitLab to be used for authentication and Git hosting.
-- [gitlab-proxy](https://github.com/monostable/kitnic-gitlab-proxy) for requests that need to access GitLab API but need any kind of added functionality like unauthenticated access or modifying projects (which needs additional hooks to trigger processing).
-
-### Roadmap
-
-- [ ] GitLab and Accounts
-   - [x] Modify GitLab and integrate with login in Kitspace frontend
-   - [x] Build frontend for basic account settings
-   - [ ] Make GitLab source of user projects
-- [ ] Upload submissions and editing
-   - [ ] Allow for file upload to GitLab
-   - [ ] Gerber plotter processing for KiCAD and Eagle
-   - [ ] BOM extraction processing
-   - [ ] BOM Builder
-       - [ ] Get retailer info out of [partinfo](https://github.com/kitspace/kitspace-partinfo)
 
 ### Requirements
 
