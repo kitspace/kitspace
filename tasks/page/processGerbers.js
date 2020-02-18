@@ -24,8 +24,22 @@ if (require.main !== module) {
       path.join(boardInfo.repoPath, p)
     )
     if (gerbers.length === 0) {
-      console.error(`No gerbers found for ${boardInfo.boardPath}.`)
-      process.exit(1)
+      let kicadPcbFile
+      if (boardInfo.eda && boardInfo.eda.type === 'kicad' && boardInfo.eda.pcb != null) {
+        kicadPcbFile = boardInfo.eda.pcb
+      } else if (boardInfo.eda == null) {
+        const kicadPcbPattern = path.join(
+          boardInfo.repoPath,
+          '**/*.kicad_pcb'
+        )
+        kicadPcbFile = globule.find(kicadPcbPattern)[0]
+      }
+      if (kicadPcbFile != null) {
+        gerbers.push(path.join(boardInfo.repoPath, kicadPcbFile))
+      } else {
+        console.error(`No gerbers or .kicad_pcb found for ${boardInfo.repoPath}.`)
+        process.exit(1)
+      }
     }
     const deps = [boardInfo.repoPath].concat(gerbers)
     const buildFolder = boardInfo.boardPath.replace('boards', 'build/boards')
@@ -53,7 +67,16 @@ if (require.main !== module) {
 } else {
   const {config, deps, targets} = utils.processArgs(process.argv)
   const folder = deps[0]
-  const gerbers = deps.slice(1)
+  let gerbers = deps.slice(1)
+  if (gerbers.length === 1 && path.extname(gerbers[0]) === '.kicad_pcb') {
+    const kicadPcbFile = gerbers[0]
+    const gerberFolder = path.join('/tmp/kitspace', folder, 'gerbers')
+    const plot_kicad_gerbers = path.join(__dirname, 'plot_kicad_gerbers')
+    const cmd_plot = `${plot_kicad_gerbers} ${kicadPcbFile} ${gerberFolder}`
+    cp.execSync(`mkdir -p ${gerberFolder}`)
+    cp.execSync(cmd_plot)
+    gerbers = globule.find(path.join(gerberFolder, '*'))
+  }
   let file
   let root = folder
   let projectPath
