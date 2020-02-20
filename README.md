@@ -52,6 +52,9 @@ color: The solder resist color of the preview rendering. Can be one of:
        - yellow
 bom: A path to your 1-click-bom in case it isn't `1-click-bom.tsv`.
 gerbers: A path to your folder of gerbers in case it isn't `gerbers/`.
+eda:
+  type: kicad
+  pcb: path/to/your/file.kicad_pcb
 readme: A path to your README file in case it isn't in the repository root directory.
 multi: Identifier field only used if the repository contains multiple projects.
 
@@ -60,6 +63,17 @@ Paths should be in UNIX style (i.e. use `/` not `\`) and relative to the root
 of your repository. The YAML format is pretty straight forward but if you need
 to know more check the example below and [the YAML website][6]. Use [this YAML
 validator][yamllint] to be extra sure that your `kitspace.yaml` is valid.
+
+### KiCad PCB
+
+Instead of using Gerber files you can also specify a KiCad PCB file to use by adding an `eda` field.
+
+```yaml
+eda:
+  type: kicad
+  pcb: path/to/your/file.kicad_pcb
+
+```
 
 ### Some examples
 Check out the repo links of the projects listed on
