@@ -98,7 +98,12 @@ if (require.main !== module) {
   }
 
   const boardJson = fs.openSync(targets[0], 'w')
-  fs.write(boardJson, JSON.stringify(boards))
+  fs.write(boardJson, JSON.stringify(boards), err => {
+    if (err) {
+      console.error(err)
+      process.exit(1)
+    }
+  })
 }
 
 function __guard__(value, transform) {
