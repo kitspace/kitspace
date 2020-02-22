@@ -230,7 +230,7 @@ And one for the geo ip lookup on pages.
 
 ### Requirements
 
-- [Nodejs](https://nodejs.org) version 6 (v6.17.1)
+- [Nodejs](https://nodejs.org) version 10 or higher
 - [fswatch](http://emcrisostomo.github.io/fswatch/) on OSX/Windows or inotify-tools on Linux
 - [Ninja Build](https://github.com/ninja-build/ninja/releases) >= 1.5.1
 - [Inkscape](https://inkscape.org/) (v0.92) for converting SVGs to PNGs
