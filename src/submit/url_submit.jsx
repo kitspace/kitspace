@@ -2,7 +2,7 @@ const React = require('react')
 const superagent = require('superagent')
 const path = require('path')
 const camelCase = require('lodash.camelcase')
-const marky = require('marky-markdown')
+const marky = require('@kitspace/marky-markdown')
 const url = require('url')
 const jsYaml = require('js-yaml')
 const htmlToReact = new new require('html-to-react').Parser(React)
@@ -169,7 +169,7 @@ const UrlSubmit = React.createClass({
             .withCredentials()
             .then(res => {
               const pkg = {repository: {url: gitUrl}}
-              const html = marky(res.text, {package: pkg}).html()
+              const html = marky(res.text, {package: pkg})
               const component = htmlToReact.parse(
                 `<div class='readme'>${html}</div>`
               )
