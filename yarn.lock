@@ -4158,9 +4158,9 @@ markdown-it@^7.0.0:
     mdurl "^1.0.1"
     uc.micro "^1.0.1"
 
-marky-markdown@kasbah/marky-markdown#fix-default-anchors-2:
+"marky-markdown@https://github.com/kasbah/marky-markdown#fix-default-anchors-4":
   version "8.1.0"
-  resolved "https://codeload.github.com/kasbah/marky-markdown/tar.gz/ae8bbfa34b55c4a70d3238f4f3b87db5fecab21e"
+  resolved "https://github.com/kasbah/marky-markdown#67e54dfaadbe12a05db2c654a280d9f19ff55587"
   dependencies:
     atom-language-diff "^1.0.0"
     atom-language-nginx "^0.6.1"
