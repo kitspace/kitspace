@@ -93,8 +93,18 @@ if (require.main !== module) {
   getPartinfo(info.bom.lines).then(parts => {
     info.bom.parts = parts
 
-    fs.writeFile(infoPath, JSON.stringify(info))
+    fs.writeFile(infoPath, JSON.stringify(info), err => {
+      if (err) {
+        console.error(err)
+        process.exit(1)
+      }
+    })
 
-    fs.writeFile(outBomPath, info.bom.tsv)
+    fs.writeFile(outBomPath, info.bom.tsv, err => {
+      if (err) {
+        console.error(err)
+        process.exit(1)
+      }
+    })
   })
 }

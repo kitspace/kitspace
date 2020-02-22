@@ -4158,9 +4158,9 @@ markdown-it@^7.0.0:
     mdurl "^1.0.1"
     uc.micro "^1.0.1"
 
-marky-markdown@kasbah/marky-markdown#fix-default-anchors-2:
+"marky-markdown@https://github.com/kasbah/marky-markdown#fix-default-anchors-4":
   version "8.1.0"
-  resolved "https://codeload.github.com/kasbah/marky-markdown/tar.gz/ae8bbfa34b55c4a70d3238f4f3b87db5fecab21e"
+  resolved "https://github.com/kasbah/marky-markdown#67e54dfaadbe12a05db2c654a280d9f19ff55587"
   dependencies:
     atom-language-diff "^1.0.0"
     atom-language-nginx "^0.6.1"
@@ -4404,7 +4404,7 @@ mute-stream@0.0.5:
   resolved "https://registry.yarnpkg.com/mute-stream/-/mute-stream-0.0.5.tgz#8fbfabb0a98a253d3184331f9e8deb7372fac6c0"
   integrity sha1-j7+rsKmKJT0xhDMfno3rc3L6xsA=
 
-nan@^2.0.9, nan@^2.12.1, nan@^2.13.2:
+nan@^2.12.1, nan@^2.13.2, nan@^2.14.0:
   version "2.14.0"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.14.0.tgz#7818f722027b2459a86f0295d434d1fc2336c52c"
   integrity sha512-INOFj37C7k3AfaNTtX8RhsTw7qRy7eLET14cROi9+5HAVbbHuIWUHEauBv5qT4Av2tWasiTY1Jw6puUNqRJXQg==
@@ -4636,12 +4636,12 @@ onetime@^1.0.0:
   resolved "https://registry.yarnpkg.com/onetime/-/onetime-1.1.0.tgz#a1f7838f8314c516f05ecefcbc4ccfe04b4ed789"
   integrity sha1-ofeDj4MUxRbwXs78vEzP4EtO14k=
 
-oniguruma@^6.1.0:
-  version "6.2.1"
-  resolved "https://registry.yarnpkg.com/oniguruma/-/oniguruma-6.2.1.tgz#a50ee69642844ad1d252685aab187171b06ece04"
-  integrity sha1-pQ7mlkKEStHSUmhaqxhxcbBuzgQ=
+oniguruma@7.2.1, oniguruma@^6.1.0:
+  version "7.2.1"
+  resolved "https://registry.yarnpkg.com/oniguruma/-/oniguruma-7.2.1.tgz#51775834f7819b6e31aa878706aa7f65ad16b07f"
+  integrity sha512-WPS/e1uzhswPtJSe+Zls/kAj27+lEqZjCmRSjnYk/Z4L2Mu+lJC2JWtkZhPJe4kZeTQfz7ClcLyXlI4J68MG2w==
   dependencies:
-    nan "^2.0.9"
+    nan "^2.14.0"
 
 opener@~1.4.0:
   version "1.4.3"
