@@ -1,7 +1,7 @@
 {
   "name": "kitspace",
   "version": "1.0.0",
-  "repository": "git@github.com:monostable/kitspace",
+  "repository": "git@github.com:kitspace/kitspace",
   "description": "",
   "main": "",
   "devDependencies": {
@@ -21,7 +21,7 @@
     "http-server": "^0.9.0",
     "jsdom": "^9.4.2",
     "jszip": "^3.1.1",
-    "marky-markdown": "kasbah/marky-markdown#fix-default-anchors-2",
+    "marky-markdown": "kasbah/marky-markdown#fix-default-anchors-3",
     "mocha": "^3.4.2",
     "ninja-build-gen": "^0.2.1",
     "node-sass": "^4.0.0",
