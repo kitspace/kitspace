@@ -35,7 +35,7 @@ const options = {
 
 const styleToOption = ({copperFinish, solderMask, silkScreen}) => ({
   fr4: '#4D542C',
-  cu: 'orange',
+  cu: '#C87533',
   cf: options.cf[copperFinish],
   sm: options.sm[solderMask],
   ss: options.ss[silkScreen],
