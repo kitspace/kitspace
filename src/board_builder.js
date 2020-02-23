@@ -71,7 +71,7 @@ const colorToStyle = {
   },
   orange: {
     solderMask: 'orange',
-    copperFinish: 'hasl',
+    copperFinish: 'gold',
     silkScreen: 'white'
   },
   purple: {
