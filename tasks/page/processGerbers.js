@@ -95,7 +95,7 @@ if (require.main !== module) {
 
   const zipInfo = {
     zipPath: path.basename(zipPath),
-    root: path.relative('build/', path.dirname(zipPath))
+    folder: path.relative('build/', path.dirname(zipPath))
   }
   const zip = new Jszip()
 
