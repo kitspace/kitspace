@@ -67,7 +67,14 @@ if (require.main !== module) {
 } else {
   const {config, deps, targets} = utils.processArgs(process.argv)
   const folder = deps[0]
+  // oh man, what are we doing?
+  const multiKey = path.relative(
+    path.join('build', folder),
+    targets[0].replace('/images/top.svg', '')
+  )
+
   let gerbers = deps.slice(1)
+
   if (gerbers.length === 1 && path.extname(gerbers[0]) === '.kicad_pcb') {
     const kicadPcbFile = gerbers[0]
     const gerberFolder = path.join('/tmp/kitspace', folder, 'gerbers')
@@ -98,12 +105,6 @@ if (require.main !== module) {
   }
   const zip = new Jszip()
   const folder_name = path.basename(zipPath, '.zip')
-
-  repoStructure = folder.split('/')
-  if (repoStructure.length > 4) {
-    root = repoStructure.slice(0, 4).join('/')
-    projectPath = repoStructure.splice(4).join('/')
-  }
 
   if (fs.existsSync(`${root}/kitnic.yaml`)) {
     file = fs.readFileSync(`${root}/kitnic.yaml`)
@@ -136,12 +137,8 @@ if (require.main !== module) {
       )
     if (file != null) {
       info = yaml.safeLoad(file)
-      if (info.multi) {
-        for (let project in info.multi) {
-          if (project === projectPath) {
-            color = info.multi[project].color
-          }
-        }
+      if (info.multi && multiKey) {
+        color = info.multi[multiKey].color
       } else {
         color = info.color
       }
