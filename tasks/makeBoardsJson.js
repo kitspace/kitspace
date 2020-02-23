@@ -26,7 +26,7 @@ if (require.main !== module) {
     board.id = path.relative(boardDir, projectFolder)
 
     if (board.summary === '' && /^github.com/.test(board.id)) {
-      const ghInfo = getGithubInfo(board.id)
+      const ghInfo = getGithubInfo(folder)
       if (__guard__(ghInfo, x => x.description) != null) {
         board.summary = ghInfo.description
       } else {
@@ -37,9 +37,10 @@ if (require.main !== module) {
     boards.push(board)
   }
 
-  const getGithubInfo = function(id) {
+ function getGithubInfo(folder) {
+    const id = folder.replace(/^boards\/github.com/, '')
     let text
-    const url = `https://api.github.com/repos${id.replace(/^github.com/, '')}`
+    const url = `https://api.github.com/repos${id}`
     //we use this avoid being rate-limited
     if (process.env.GH_TOKEN != null) {
       text = cp.execSync(`curl -u kasbah:${process.env.GH_TOKEN} ${url}`)
@@ -98,7 +99,12 @@ if (require.main !== module) {
   }
 
   const boardJson = fs.openSync(targets[0], 'w')
-  fs.write(boardJson, JSON.stringify(boards))
+  fs.write(boardJson, JSON.stringify(boards), err => {
+    if (err) {
+      console.error(err)
+      process.exit(1)
+    }
+  })
 }
 
 function __guard__(value, transform) {

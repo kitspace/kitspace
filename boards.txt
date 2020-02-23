@@ -78,3 +78,4 @@ https://github.com/Sussex-Neuroscience/voltage-amplifier
 https://github.com/ozel/DIY_particle_detector
 https://github.com/free-pdk/easy-pdk-programmer-hardware
 https://github.com/saadcaffeine/Falcon-Badge
+https://github.com/mattvenn/teensy-audio-fx

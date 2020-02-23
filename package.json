@@ -21,7 +21,7 @@
     "http-server": "^0.9.0",
     "jsdom": "^9.4.2",
     "jszip": "^3.1.1",
-    "marky-markdown": "kasbah/marky-markdown#fix-default-anchors-2",
+    "marky-markdown": "https://github.com/kasbah/marky-markdown#fix-default-anchors-4",
     "mocha": "^3.4.2",
     "ninja-build-gen": "^0.2.1",
     "node-sass": "^4.0.0",
@@ -39,6 +39,7 @@
     "start": "./scripts/get_boards && npm run serve & npm run watch",
     "update-reg": "./scripts/update_registry",
     "plug-reg": "./scripts/plug_versions",
+    "get-boards": "./scripts/get_boards",
     "serve": "http-server build/",
     "lint": "eslint src",
     "fmt": "prettier --write configure *.js $(find src -name '*.jsx') $(find src -name '*.js') $(find tasks -name '*.js')",
@@ -72,13 +73,14 @@
     "redux-immutable": "^4.0.0",
     "rst2mdown": "^0.1.0",
     "semantic-ui-react": "^0.67.1",
-    "superagent": "^3.3.1",
+    "superagent": "^5.2.2",
     "whats-that-gerber": "4.0.0-next.13",
     "xml-element-string": "^1.0.0"
   },
   "sasslintConfig": "./src/.sass-lint.yml",
   "resolutions": {
     "pcb-stackup-core": "4.0.0-next.13",
-    "whats-that-gerber": "4.0.0-next.13"
+    "whats-that-gerber": "4.0.0-next.13",
+    "oniguruma": "7.2.1"
   }
 }

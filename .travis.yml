@@ -1,15 +1,19 @@
 language: node_js
 node_js:
-  - "6"
+  - "12"
 env:
   - CXX=g++-4.8
 addons:
   apt:
     sources:
       - ubuntu-toolchain-r-test
+      - sourceline: 'ppa:js-reynaud/kicad-dev-nightly'
+      - sourceline: 'ppa:js-reynaud/kicad-5-nightly'
     packages:
       - g++-4.8
       - inkscape
+      - kicad
+      - kicad-nightly
 script:
   - bash keep_alive.sh &
   - export NODE_ENV=production

@@ -52,6 +52,9 @@ color: The solder resist color of the preview rendering. Can be one of:
        - yellow
 bom: A path to your 1-click-bom in case it isn't `1-click-bom.tsv`.
 gerbers: A path to your folder of gerbers in case it isn't `gerbers/`.
+eda:
+  type: kicad
+  pcb: path/to/your/file.kicad_pcb
 readme: A path to your README file in case it isn't in the repository root directory.
 multi: Identifier field only used if the repository contains multiple projects.
 
@@ -60,6 +63,17 @@ Paths should be in UNIX style (i.e. use `/` not `\`) and relative to the root
 of your repository. The YAML format is pretty straight forward but if you need
 to know more check the example below and [the YAML website][6]. Use [this YAML
 validator][yamllint] to be extra sure that your `kitspace.yaml` is valid.
+
+### KiCad PCB
+
+Instead of using Gerber files you can also specify a KiCad PCB file to use by adding an `eda` field.
+
+```yaml
+eda:
+  type: kicad
+  pcb: path/to/your/file.kicad_pcb
+
+```
 
 ### Some examples
 Check out the repo links of the projects listed on
@@ -199,7 +213,6 @@ multi:
 
 ### Architecture
 
-#### Current
 This repository is the Kitspace front-end. The contents including all project
 data are currently pre-compiled into a static site.  The main part of the site
 that requires server side components is the submission preview (`/submit`). Pages also use freegeoip lookup to decide what sites to link to for people that do not have the 1-click BOM browser extension. This roughly illustrates the main data flow when someone is browsing the site.
@@ -215,49 +228,38 @@ And one for the geo ip lookup on pages.
 
 - [freegeoip](https://github.com/fiorix/freegeoip)
 
-#### Planned
-
-We are using [GitLab](https://gitlab.com/gitlab-org/gitlab-ce) as an authentication and Git hosting service. We modify and proxy it to get the functionality we need.
-The graphs get too complicated if we try to add all the possible data-flows but here is the rough data-flow for submission of a project.
-
-![](docs/planned.png)
-
-Services used are:
-
-- [nginx-config](https://github.com/monostable/kitnic-nginx-config) to configure Nginx to serve the frontend and all services.
-- [partinfo](https://github.com/kitspace/kitspace-partinfo) for getting part information for BOMs.
-- [gitlab-config](http://github.com/monostable/kitnic-gitlab-config) configuring GitLab to be used for authentication and Git hosting.
-- [gitlab-proxy](https://github.com/monostable/kitnic-gitlab-proxy) for requests that need to access GitLab API but need any kind of added functionality like unauthenticated access or modifying projects (which needs additional hooks to trigger processing).
-
-### Roadmap
-
-- [ ] GitLab and Accounts
-   - [x] Modify GitLab and integrate with login in Kitspace frontend
-   - [x] Build frontend for basic account settings
-   - [ ] Make GitLab source of user projects
-- [ ] Upload submissions and editing
-   - [ ] Allow for file upload to GitLab
-   - [ ] Gerber plotter processing for KiCAD and Eagle
-   - [ ] BOM extraction processing
-   - [ ] BOM Builder
-       - [ ] Get retailer info out of [partinfo](https://github.com/kitspace/kitspace-partinfo)
-
 ### Requirements
 
-- [Nodejs](https://nodejs.org) version 6 (v6.17.1)
+- [Nodejs](https://nodejs.org) version 10 or higher
 - [fswatch](http://emcrisostomo.github.io/fswatch/) on OSX/Windows or inotify-tools on Linux
 - [Ninja Build](https://github.com/ninja-build/ninja/releases) >= 1.5.1
+- [Inkscape](https://inkscape.org/) (v0.92) for converting SVGs to PNGs
 - [Yarn](https://yarnpkg.com/) to ensure the correct dependencies are installed
 - The rest of the dependencies can be retrieved via `yarn install`
 
+#### Quick start for Debian/Ubuntu
+
+```
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+sudo apt update && sudo apt install git nodejs inotify-tools ninja-build inkscape yarn
+git clone https://github.com/kitspace/kitspace && cd kitspace
+yarn install
+```
+
 ### Running a local dev server
 
-- Get requirements above
-- `yarn install`
-- `yarn start` (or `npm start`)
-- Point your browser at `http://127.0.0.1:8080`. The script should watch for
-file-saves and re-build when you change a source file.
+Get requirements above then:
 
+```bash
+yarn install    # retrieves dependencies
+yarn get-boards # gets the test projects and puts them into boards/
+yarn configure  # generates a build.ninja file
+yarn build      # ninja reads the build.ninja file and builds everything
+yarn serve      # starts a development server to preview the site
+```
+
+Visit http://127.0.0.1:8080 in your browser to see your local development site.
 
 [viewer]: http://viewer.tracespace.io
 [1clickbom]: https://1clickBOM.com
