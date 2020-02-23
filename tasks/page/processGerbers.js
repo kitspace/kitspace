@@ -70,12 +70,6 @@ if (require.main !== module) {
 } else {
   const {config, deps, targets} = utils.processArgs(process.argv)
   const root = deps[0]
-  // oh man, what are we doing?
-  const multiKey = path.relative(
-    path.join('build', root),
-    targets[0].replace('/images/top.svg', '')
-  )
-
   let gerbers = deps.slice(1)
 
   if (gerbers.length === 1 && path.extname(gerbers[0]) === '.kicad_pcb') {
@@ -98,24 +92,6 @@ if (require.main !== module) {
     topMetaPngPath,
     topWithBgndPath
   ] = targets
-
-
-  let file, color
-  if (fs.existsSync(`${root}/kitnic.yaml`)) {
-    file = fs.readFileSync(`${root}/kitnic.yaml`)
-  } else if (fs.existsSync(`${root}/kitspace.yaml`)) {
-    file = fs.readFileSync(`${root}/kitspace.yaml`)
-  } else if (fs.existsSync(`${root}/kitspace.yml`)) {
-    file = fs.readFileSync(`${root}/kitspace.yml`)
-  }
-  if (file != null) {
-    info = yaml.safeLoad(file)
-    if (info.multi && multiKey) {
-      color = info.multi[multiKey].color
-    } else {
-      color = info.color
-    }
-  }
 
   const zipInfo = {
     zipPath: path.basename(zipPath),
@@ -146,6 +122,29 @@ if (require.main !== module) {
           }
         })
       )
+
+    let file, color
+    if (fs.existsSync(`${root}/kitnic.yaml`)) {
+      file = fs.readFileSync(`${root}/kitnic.yaml`)
+    } else if (fs.existsSync(`${root}/kitspace.yaml`)) {
+      file = fs.readFileSync(`${root}/kitspace.yaml`)
+    } else if (fs.existsSync(`${root}/kitspace.yml`)) {
+      file = fs.readFileSync(`${root}/kitspace.yml`)
+    }
+
+    const multiKey = path.relative(
+      path.join('build', root),
+      path.dirname(zipPath)
+    )
+
+    if (file != null) {
+      info = yaml.safeLoad(file)
+      if (info.multi && multiKey) {
+        color = info.multi[multiKey].color
+      } else {
+        color = info.color
+      }
+    }
     boardBuilder(stackupData, color || 'green', function(error, stackup) {
       if (error != null) {
         throw error
