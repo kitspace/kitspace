@@ -25,19 +25,22 @@ if (require.main !== module) {
     )
     if (gerbers.length === 0) {
       let kicadPcbFile
-      if (boardInfo.eda && boardInfo.eda.type === 'kicad' && boardInfo.eda.pcb != null) {
+      if (
+        boardInfo.eda &&
+        boardInfo.eda.type === 'kicad' &&
+        boardInfo.eda.pcb != null
+      ) {
         kicadPcbFile = boardInfo.eda.pcb
       } else if (boardInfo.eda == null) {
-        const kicadPcbPattern = path.join(
-          boardInfo.repoPath,
-          '**/*.kicad_pcb'
-        )
+        const kicadPcbPattern = path.join(boardInfo.repoPath, '**/*.kicad_pcb')
         kicadPcbFile = globule.find(kicadPcbPattern)[0]
       }
       if (kicadPcbFile != null) {
         gerbers.push(path.join(boardInfo.repoPath, kicadPcbFile))
       } else {
-        console.error(`No gerbers or .kicad_pcb found for ${boardInfo.repoPath}.`)
+        console.error(
+          `No gerbers or .kicad_pcb found for ${boardInfo.repoPath}.`
+        )
         process.exit(1)
       }
     }
@@ -66,20 +69,18 @@ if (require.main !== module) {
   }
 } else {
   const {config, deps, targets} = utils.processArgs(process.argv)
-  const folder = deps[0]
+  const root = deps[0]
   let gerbers = deps.slice(1)
+
   if (gerbers.length === 1 && path.extname(gerbers[0]) === '.kicad_pcb') {
     const kicadPcbFile = gerbers[0]
-    const gerberFolder = path.join('/tmp/kitspace', folder, 'gerbers')
+    const gerberFolder = path.join('/tmp/kitspace', root, 'gerbers')
     const plot_kicad_gerbers = path.join(__dirname, 'plot_kicad_gerbers')
     const cmd_plot = `${plot_kicad_gerbers} ${kicadPcbFile} ${gerberFolder}`
     cp.execSync(`mkdir -p ${gerberFolder}`)
     cp.execSync(cmd_plot)
     gerbers = globule.find(path.join(gerberFolder, '*'))
   }
-  let file
-  let root = folder
-  let projectPath
   const [
     topSvgPath,
     bottomSvgPath,
@@ -94,30 +95,17 @@ if (require.main !== module) {
 
   const zipInfo = {
     zipPath: path.basename(zipPath),
-    folder: path.relative('build/', path.dirname(zipPath))
+    root: path.relative('build/', path.dirname(zipPath))
   }
   const zip = new Jszip()
-  const folder_name = path.basename(zipPath, '.zip')
 
-  repoStructure = folder.split('/')
-  if (repoStructure.length > 4) {
-    root = repoStructure.slice(0, 4).join('/')
-    projectPath = repoStructure.splice(4).join('/')
-  }
-
-  if (fs.existsSync(`${root}/kitnic.yaml`)) {
-    file = fs.readFileSync(`${root}/kitnic.yaml`)
-  } else if (fs.existsSync(`${root}/kitspace.yaml`)) {
-    file = fs.readFileSync(`${root}/kitspace.yaml`)
-  } else if (fs.existsSync(`${root}/kitspace.yml`)) {
-    file = fs.readFileSync(`${root}/kitspace.yml`)
-  }
   try {
-    let color, data
+    let data
     const stackupData = []
-    for (let gerberPath of gerbers) {
+    for (const gerberPath of gerbers) {
       data = fs.readFileSync(gerberPath, {encoding: 'utf8'})
       stackupData.push({filename: path.basename(gerberPath), gerber: data})
+      const folder_name = path.basename(zipPath, '.zip')
       zip.file(path.join(folder_name, path.basename(gerberPath)), data)
     }
     zip
@@ -129,19 +117,30 @@ if (require.main !== module) {
       .then(content =>
         fs.writeFile(zipPath, content, function(err) {
           if (err != null) {
-            console.error(`Could not write gerber zip for ${folder}`)
+            console.error(`Could not write gerber zip for ${root}`)
             throw err
           }
         })
       )
+
+    let file, color
+    if (fs.existsSync(`${root}/kitnic.yaml`)) {
+      file = fs.readFileSync(`${root}/kitnic.yaml`)
+    } else if (fs.existsSync(`${root}/kitspace.yaml`)) {
+      file = fs.readFileSync(`${root}/kitspace.yaml`)
+    } else if (fs.existsSync(`${root}/kitspace.yml`)) {
+      file = fs.readFileSync(`${root}/kitspace.yml`)
+    }
+
+    const multiKey = path.relative(
+      path.join('build', root),
+      path.dirname(zipPath)
+    )
+
     if (file != null) {
       info = yaml.safeLoad(file)
-      if (info.multi) {
-        for (let project in info.multi) {
-          if (project === projectPath) {
-            color = info.multi[project].color
-          }
-        }
+      if (info.multi && multiKey) {
+        color = info.multi[multiKey].color
       } else {
         color = info.color
       }
@@ -154,7 +153,7 @@ if (require.main !== module) {
       zipInfo.height = Math.max(stackup.top.height, stackup.bottom.height)
       if (stackup.top.units === 'in') {
         if (stackup.bottom.units !== 'in') {
-          console.error('We got a weird board with disparate units:', folder)
+          console.error('We got a weird board with disparate units:', root)
           process.exit(1)
         }
         zipInfo.width *= 25.4
@@ -169,7 +168,7 @@ if (require.main !== module) {
 
       fs.writeFile(unOptimizedSvgPath, stackup.top.svg, function(err) {
         if (err != null) {
-          console.error(`Could not write unoptimized top svg for ${folder}`)
+          console.error(`Could not write unoptimized top svg for ${root}`)
           console.error(err)
           return process.exit(1)
         }
@@ -230,21 +229,21 @@ if (require.main !== module) {
       })
       fs.writeFile(topSvgPath, stackup.top.svg, function(err) {
         if (err != null) {
-          console.error(`Could not write top svg for ${folder}`)
+          console.error(`Could not write top svg for ${root}`)
           console.error(err)
           return process.exit(1)
         }
       })
       fs.writeFile(bottomSvgPath, stackup.bottom.svg, function(err) {
         if (err != null) {
-          console.error(`Could not write bottom svg for ${folder}`)
+          console.error(`Could not write bottom svg for ${root}`)
           console.error(err)
           return process.exit(1)
         }
       })
     })
   } catch (e) {
-    console.error(`Could not process gerbers for ${folder}`)
+    console.error(`Could not process gerbers for ${root}`)
     console.error(e)
     process.exit(1)
   }
