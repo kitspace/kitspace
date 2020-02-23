@@ -21,7 +21,6 @@
     "http-server": "^0.9.0",
     "jsdom": "^9.4.2",
     "jszip": "^3.1.1",
-    "marky-markdown": "https://github.com/kasbah/marky-markdown#fix-default-anchors-4",
     "mocha": "^3.4.2",
     "ninja-build-gen": "^0.2.1",
     "node-sass": "^4.0.0",
@@ -59,6 +58,7 @@
     "js-yaml": "^3.3.1",
     "lodash.camelcase": "^4.3.0",
     "lodash.throttle": "^4.1.1",
+    "marky-markdown": "https://github.com/kasbah/marky-markdown#fix-default-anchors-4",
     "pcb-stackup": "4.0.0-next.13",
     "react": "^15.3.0",
     "react-dom": "^15.3.0",
@@ -81,6 +81,7 @@
   "resolutions": {
     "pcb-stackup-core": "4.0.0-next.13",
     "whats-that-gerber": "4.0.0-next.13",
-    "oniguruma": "7.2.1"
+    "oniguruma": "7.2.1",
+    "sanitize-html": "1.6.1"
   }
 }
