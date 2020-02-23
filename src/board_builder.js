@@ -13,7 +13,7 @@ const options = {
   // soldermask
   sm: {
     red: 'rgba(139,   0,   0, 0.90)',
-    orange: 'rgba(195, 107,   0, 0.90)',
+    orange: 'rgba(255, 110,   0, 0.50)',
     yellow: 'rgba(255, 255, 102, 0.50)',
     green: 'rgba(  0,  68,   0, 0.90)',
     blue: 'rgba(  0,  30, 104, 0.90)',
@@ -35,7 +35,7 @@ const options = {
 
 const styleToOption = ({copperFinish, solderMask, silkScreen}) => ({
   fr4: '#4D542C',
-  cu: 'lightgrey',
+  cu: 'orange',
   cf: options.cf[copperFinish],
   sm: options.sm[solderMask],
   ss: options.ss[silkScreen],
