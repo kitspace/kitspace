@@ -254,8 +254,8 @@ Get requirements above then:
 ```bash
 yarn install    # retrieves dependencies
 yarn get-boards # gets the test projects and puts them into boards/
-yarn configure  # generates a build.ninja file
-yarn build      # ninja reads the build.ninja file and builds everything
+yarn build      # generates a build.ninja file using the ./configure script
+# and calls ninja to execute the build.ninja file which builds everything (similar to how make executes a makefile)
 yarn serve      # starts a development server to preview the site
 ```
 
