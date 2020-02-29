@@ -49,52 +49,23 @@ if (require.main !== module) {
       markdown = contents
     }
 
-    if (info.repo.includes('https://github.com')) {
-      markdown = addSpacing(markdown)
-      markdown = correctMarkdownImagePaths(markdown, multiProjectPath)
-    }
-    html = marky(markdown, {package: pkg}).html()
+    const cheerio$ = marky(markdown, {package: pkg})
+
+    // replace any "blob" image source with their "raw" version so they
+    // actually work
+    cheerio$('img').each((_, elem) => {
+      const img = cheerio$(elem)
+      let src = img.attr('src')
+      const blobUrl = /^(https:\/\/git(?:hub|lab).com\/.*\/)blob(\/.*)$/
+      src = src.replace(blobUrl, '$1raw$2')
+      img.attr('src' , src)
+    })
+
+    html = cheerio$.html()
   }
   const reactComponent = converter.convert(`<div class='readme'>${html}</div>`)
   fs.writeFileSync(
     readmeJsx,
     `const React = require('react');\n${reactComponent}\nmodule.exports = Readme;\n`
   )
-}
-
-function addSpacing(string) {
-  return string.replace(/[^ `](`[^\`].*?`)/g, ' $1')
-}
-
-// Replace blob file urls with raw file urls, they don't work outside of github
-function replaceBlobUrls(string) {
-  const blobUrl = /(https:\/\/github\.com\/.*?\/)(blob)(\/.*?\.)/gi
-
-  return string.replace(blobUrl, '$1raw$3')
-}
-
-// Add project path from root folder to images; required before being parsed by marky markdown
-function addProjectPath(imgTag, markdownPath, projectPath) {
-  let imgUrl
-  if (path.isAbsolute(markdownPath)) {
-    imgUrl = markdownPath
-  } else {
-    imgUrl = path.join('/' + projectPath, markdownPath)
-  }
-  return imgTag + imgUrl
-}
-
-function correctMarkdownImagePaths(string, projectPath) {
-  const imagePath = /(!\[.*?]\()(.+?(\.png|\.jpg|\.gif|\.jpeg|\.bmp))/gi
-
-  return string.replace(imagePath, (match, imgTag, path) => {
-    if (match.includes('/blob/')) {
-      return replaceBlobUrls(match)
-    }
-
-    if (projectPath) {
-      return addProjectPath(imgTag, path, projectPath)
-    }
-    return match
-  })
 }
