@@ -63,6 +63,10 @@
             g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
           })();
         </script>
+        <script src="https://posthog.kitspace.org/static/array.js"></script>
+        <script>
+        posthog.init('xc_DAp5KeYPgH0QbauIv7UKgaZBc2-a162PPZOfC-Fw', {api_host: 'https://posthog.kitspace.org'})
+        </script>
     </head>
     <body>
         <div id="content"></div>
