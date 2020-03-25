@@ -63,6 +63,10 @@ function TitleBar(props) {
                 <semantic.Icon name="github" />
                 GitHub
               </semantic.Menu.Item>
+              <semantic.Menu.Item as="a" href="https://opencollective.com/kitspace">
+                <semantic.Icon name="heart" />
+                Donate
+              </semantic.Menu.Item>
               {isSubmitRoute ? null : (
                 <semantic.Menu.Item>
                   <semantic.Button
