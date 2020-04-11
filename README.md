@@ -213,7 +213,7 @@ multi:
 
 1. We (Kitspace developers) do not claim any ownership over your work, it remains yours.
 2. By submitting your project you give us permission to host copies of your files for other people to download.
-3. If you change your mind, you can remove your project any time by removing the public git repository, sending a pull-request to remove it from `boards.txt` or notifying @kasbah in some other way.
+3. If you change your mind, you can remove your project any time by removing the public git repository, sending a pull-request to remove it from [`boards.txt`](https://github.com/kitspace/kitspace/blob/master/boards.txt) or notifying [@kasbah](https://github.com/kasbah) in some other way.
 
 ## Development
 
