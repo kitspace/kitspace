@@ -82,3 +82,4 @@ https://github.com/LincolnUehara/Aquarius
 https://github.com/amchagas/fast-response-diode
 https://gitlab.com/openflexure/ofm-illumination
 https://github.com/nerdyscout/NodeMCU
+https://github.com/aleksas/interferometer
