@@ -16,8 +16,9 @@ exports.processArgs = function(argv) {
   const sepIndex = argv.indexOf('--')
   const deps = argv.slice(2, sepIndex - 1 + 1 || undefined)
   const config = process.argv[sepIndex + 1]
-  const targets = process.argv.slice(sepIndex + 2)
-  return {config, deps, targets}
+  const cached_build = process.argv[sepIndex + 2] === 'true'
+  const targets = process.argv.slice(sepIndex + 3)
+  return {config, cached_build, deps, targets}
 }
 
 exports.reactRender = function(jsx, html, output, router = false) {

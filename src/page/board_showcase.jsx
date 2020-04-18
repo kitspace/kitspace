@@ -11,7 +11,6 @@ var BoardShowcase = React.createClass({
   },
   frontBoardView: function(e) {
     e.preventDefault()
-    console.log('here')
     this.setState({
       viewFrontBoard: true
     })

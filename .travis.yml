@@ -12,8 +12,12 @@ script:
   - bash keep_alive.sh &
   - export NODE_ENV=production
   - ./scripts/plug_versions
-  - ./scripts/get_boards production
-  - ./configure production
+  - ./scripts/get_boards production cached
+  - ./configure production cached
   - wget https://github.com/ninja-build/ninja/releases/download/v1.6.0/ninja-linux.zip
   - unzip ninja-linux.zip
-  - ./ninja -j 2 && ./scripts/deploy
+  - ./ninja -j 2 && cp registry.json build/ && ./scripts/deploy
+cache:
+  yarn: true
+  directories:
+    - ./build

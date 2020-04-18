@@ -21,6 +21,7 @@
     "http-server": "^0.9.0",
     "jsdom": "^9.4.2",
     "jszip": "^3.1.1",
+    "mkdirp": "^1.0.4",
     "mocha": "^3.4.2",
     "netlify-cli": "^2.47.0",
     "ninja-build-gen": "^0.2.1",
