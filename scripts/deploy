@@ -17,6 +17,7 @@ then
     rsync --archive --compress --update --delete --recursive -e 'ssh -i key-file -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no' build/ "ubuntu@preview.kitspace.org:preview/${folder}/"
     rm -f key-file
 else
-    rm -rf build/.temp
+    mv build/.temp .
     npx netlify deploy --prod --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --dir=build/
+    mv .temp build/
 fi
