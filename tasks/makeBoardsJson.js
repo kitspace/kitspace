@@ -21,7 +21,6 @@ if (require.main !== module) {
   let folders = registry.map(p => repoToFolder(p.repo))
   let boards = []
   if (cached_build) {
-    console.info({cached_build})
     let new_folders = []
     if (fs.existsSync('build/registry.json')) {
       const cached_registry = require('../build/registry.json')
@@ -46,7 +45,6 @@ if (require.main !== module) {
     folders = new_folders
   }
 
-  console.info({folders})
   for (const folder of folders) {
     let info
     let file
@@ -74,6 +72,8 @@ if (require.main !== module) {
       boards.push(getBoardInfo(info, folder))
     }
   }
+
+  shuffleArray(boards)
 
   const boardJson = fs.openSync(targets[0], 'w')
   fs.write(boardJson, JSON.stringify(boards), err => {
