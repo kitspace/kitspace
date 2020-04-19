@@ -22,6 +22,7 @@
     "jsdom": "^9.4.2",
     "jszip": "^3.1.1",
     "mocha": "^3.4.2",
+    "netlify-cli": "^2.47.0",
     "ninja-build-gen": "^0.2.1",
     "node-sass": "^4.0.0",
     "postcss-cli": "^2.6.0",
