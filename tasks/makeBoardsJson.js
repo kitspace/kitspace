@@ -37,6 +37,7 @@ if (require.main !== module) {
     if (fs.existsSync('build/.temp/boards.json')) {
       boards = require('../build/.temp/boards.json')
     }
+    // remove any boards that are being updated
     boards = boards.filter(x => {
       return !new_folders.find(
         folder => folder === x.fromMulti || folder === path.join('boards', x.id)
