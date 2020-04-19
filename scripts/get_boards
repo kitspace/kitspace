@@ -12,13 +12,15 @@ if (process.argv[2] === 'production') {
 }
 
 if (process.argv[3] === 'cached') {
-  const cached_registry = JSON.parse(
-    fs.readFileSync('build/registry.json', 'utf8')
-  )
+  let cached_registry = []
+  if (fs.existsSync('build/registry.json')) {
+    cached_registry = JSON.parse(fs.readFileSync('build/registry.json', 'utf8'))
+  }
   registry = registry.filter(
-    project => !cached_registry.find(
-      p => p.repo === project.repo && p.hash === project.hash
-    )
+    project =>
+      !cached_registry.find(
+        p => p.repo === project.repo && p.hash === project.hash
+      )
   )
 }
 
