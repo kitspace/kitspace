@@ -45,6 +45,7 @@ if (require.main !== module) {
     folders = new_folders
   }
 
+  console.info({folders})
   for (const folder of folders) {
     let info
     let file
