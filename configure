@@ -12,6 +12,8 @@ if (process.argv[2] === 'production') {
   config = 'dev'
 }
 
+const cached_build = process.argv[3] === 'cached'
+
 const ninja = ninjaBuildGen('1.5.1', 'build/')
 
 ninja.header(`#generated from ${path.basename(module.filename)} \
@@ -46,7 +48,7 @@ const requires = `-r ${dependencies.join(' -r ')}`
 
 let rule = ninja.rule('node-task')
 if (config === 'production') {
-  rule.run(`node -- $in -- ${config} $out`)
+  rule.run(`node -- $in -- ${config} ${cached_build} $out`)
 } else {
   //write to $dotd depfile in makefile format for ninja to keep track of deps
   rule
@@ -57,7 +59,7 @@ if (config === 'production') {
         && node -- $in -- ${config} $targetFiles`
     )
     .depfile("'$dotd'")
-    .description(`node -- $in -- ${config} $targetFiles`)
+    .description(`node -- $in -- ${config} ${cached_build} $targetFiles`)
 }
 
 rule = ninja.rule('browserify')
@@ -128,7 +130,29 @@ for (var f of images) {
     .using('copy')
 }
 
-const repositories = globule.find('boards/*/*/*', {filter: 'isDirectory'})
+let repositories = globule.find('boards/*/*/*', {filter: 'isDirectory'})
+
+if (cached_build) {
+  const previous_path = './build/registry.json'
+  let previous_registry
+  if (fs.existsSync(previous_path)) {
+    previous_registry = require(previous_path)
+  }
+  const new_registry = require('./registry.json')
+  if (previous_registry) {
+    repositories = []
+    const {repoToFolder} = require('./scripts/utils')
+    for (const project of new_registry) {
+      const previous = previous_registry.find(
+        p => p.repo === project.repo && p.hash === project.hash
+      )
+      if (!previous) {
+        repositories.push(repoToFolder(project.repo))
+      }
+    }
+  }
+}
+
 const boards = repositories.reduce((newBoards, folder) => {
   const [info, yamlPath] = getKitspaceYaml(folder)
   if (info.multi) {

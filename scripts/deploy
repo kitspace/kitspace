@@ -9,14 +9,12 @@ then
     exit 0
 elif  [ "${TRAVIS_BRANCH}" != "master" ]
 then
-    rm -rf build/.temp
     echo -e "User-agent: *\nDisallow: /\n" > build/robots.txt
     echo -e "${SSH_KEY}" > key-file
     chmod 600 key-file
     #replace all occurunces of / with .
     folder=${TRAVIS_BRANCH//\//.}
-    ssh -i key-file -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no "ubuntu@preview.kitspace.org" "rm -rf preview/${folder}"
-    scp -i key-file -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -r build "ubuntu@preview.kitspace.org:preview/${folder}"
+    rsync --archive --compress --update --delete --recursive -e 'ssh -i key-file -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no' build/ "ubuntu@preview.kitspace.org:preview/${folder}/"
     rm -f key-file
 else
     rm -rf build/.temp
