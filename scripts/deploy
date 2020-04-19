@@ -3,7 +3,7 @@
 #exit with non-zero exit code if any process fails
 set -e
 
-#  don' do anything on pull-requests
+#  don't do anything on pull-requests
 if [ "${TRAVIS_PULL_REQUEST}" != "false" ]
 then
     exit 0
@@ -20,12 +20,5 @@ then
     rm -f key-file
 else
     rm -rf build/.temp
-    cd build
-    git init
-    echo "kitspace.org" > CNAME
-    git config user.name "Travis CI"
-    git config user.email "travisCI@monostable.co.uk"
-    git add .
-    git commit -m "Deploy to GitHub Pages" > /dev/null
-    git push --force --quiet "https://${GH_TOKEN}@github.com/kitspace/kitspace" master:gh-pages > /dev/null 2>&1
+    netlify --prod --dir=build/
 fi
