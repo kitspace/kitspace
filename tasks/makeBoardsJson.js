@@ -39,7 +39,7 @@ if (require.main !== module) {
         .map(p => repoToFolder(p.repo))
     }
     if (fs.existsSync('build/.temp/boards.json')) {
-      boards = JSON.parse(fs.readSync('build/.temp/boards.json'))
+      boards = JSON.parse(fs.readFileSync('build/.temp/boards.json'))
     }
     // remove any boards that are being updated
     boards = boards.filter(x => {

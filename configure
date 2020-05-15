@@ -456,4 +456,4 @@ ninja.edge('all').from(all)
 ninja.byDefault('all')
 
 ninja.save('build.ninja')
-console.info(`generated ./build.ninja with '${config}' config`)
+console.info(`generated ./build.ninja with '${config}' cached=${cached_build} config`)
