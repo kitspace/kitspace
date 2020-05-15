@@ -39,7 +39,10 @@ if (require.main !== module) {
   const info = require(__dirname + '/../../' + deps[0])
   const readme = deps[1]
   if (readme != null) {
-    const pkg = {repository: {url: info.repo}}
+    const repoUrl = new URL(info.repo)
+    const rootPath = path.join('boards', repoUrl.host, repoUrl.pathname)
+    const readmeFolder = path.relative(rootPath, path.dirname(readme))
+    const pkg = {repository: {url: info.repo, directory: readmeFolder}}
     let contents = fs.readFileSync(readme, 'utf8')
     let markdown = ''
 
@@ -51,14 +54,14 @@ if (require.main !== module) {
 
     const cheerio$ = marky(markdown, {package: pkg})
 
-    // replace any "blob" image source with their "raw" version so they
+    // replace any remaining "blob" image sources with their "raw" version so they
     // actually work
     cheerio$('img').each((_, elem) => {
       const img = cheerio$(elem)
       let src = img.attr('src')
       const blobUrl = /^(https:\/\/git(?:hub|lab).com\/.*\/)blob(\/.*)$/
       src = src.replace(blobUrl, '$1raw$2')
-      img.attr('src' , src)
+      img.attr('src', src)
     })
 
     html = cheerio$.html()
