@@ -1,7 +1,7 @@
 {
   "name": "kitspace",
   "version": "1.0.0",
-  "repository": "git@github.com:monostable/kitspace",
+  "repository": "git@github.com:kitspace/kitspace",
   "description": "",
   "main": "",
   "devDependencies": {
@@ -60,7 +60,7 @@
     "js-yaml": "^3.3.1",
     "lodash.camelcase": "^4.3.0",
     "lodash.throttle": "^4.1.1",
-    "marky-markdown": "https://github.com/kasbah/marky-markdown#fix-default-anchors-4",
+    "marky-markdown": "https://github.com/kasbah/marky-markdown#kitspace-fork",
     "pcb-stackup": "4.0.0-next.13",
     "react": "^15.3.0",
     "react-dom": "^15.3.0",
