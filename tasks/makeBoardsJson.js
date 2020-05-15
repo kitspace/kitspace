@@ -17,13 +17,18 @@ if (require.main !== module) {
   }
 } else {
   const {config, cached_build, deps, targets} = utils.processArgs(process.argv)
-  const registry = require('../registry.json')
-  let folders = registry.map(p => repoToFolder(p.repo))
+  let folders
+  if (config === 'production') {
+    const registry = JSON.parse(fs.readSync('registry.json'))
+    folders = registry.map(p => repoToFolder(p.repo))
+  } else {
+    folders = globule.find(`${boardDir}/*/*/*`, {filter: 'isDirectory'})
+  }
   let boards = []
   if (cached_build) {
     let new_folders = []
     if (fs.existsSync('build/registry.json')) {
-      const cached_registry = require('../build/registry.json')
+      const cached_registry = JSON.parse(fs.readSync('build/registry.json'))
       new_folders = registry
         .filter(
           project =>
@@ -34,7 +39,7 @@ if (require.main !== module) {
         .map(p => repoToFolder(p.repo))
     }
     if (fs.existsSync('build/.temp/boards.json')) {
-      boards = require('../build/.temp/boards.json')
+      boards = JSON.parse(fs.readSync('build/.temp/boards.json'))
     }
     // remove any boards that are being updated
     boards = boards.filter(x => {

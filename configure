@@ -56,7 +56,7 @@ if (config === 'production') {
       `browserify --list $taskFile > '$dotd' \
         && if [ '$jsMain' != '' ]; then ${browserify} --list $jsMain >> '$dotd'; fi \
         && ./scripts/depfileify $out '$dotd' \
-        && node -- $in -- ${config} $targetFiles`
+        && node -- $in -- ${config} ${cached_build} $targetFiles`
     )
     .depfile("'$dotd'")
     .description(`node -- $in -- ${config} ${cached_build} $targetFiles`)
@@ -211,14 +211,19 @@ const jsPageTargets = {}
 for (const board of boards) {
   const folder = board.boardPath
   jsPageTargets[folder] = []
-  jsSrc.forEach(f => {
-    const temp = f.replace('src', `build/.temp/${ninjaBuildGen.escape(folder)}`)
-    jsPageTargets[folder].push(temp)
-    ninja
-      .edge(temp)
-      .from(ninjaBuildGen.escape(f))
-      .using('copy')
-  })
+  jsSrc
+    .filter(s => !/readme\.jsx$/.test(s))
+    .forEach(f => {
+      const temp = f.replace(
+        'src',
+        `build/.temp/${ninjaBuildGen.escape(folder)}`
+      )
+      jsPageTargets[folder].push(temp)
+      ninja
+        .edge(temp)
+        .from(ninjaBuildGen.escape(f))
+        .using('copy')
+    })
 }
 
 const sassSrc = globule.find('src/**/*.scss')
