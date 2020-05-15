@@ -19,7 +19,7 @@ if (require.main !== module) {
   const {config, cached_build, deps, targets} = utils.processArgs(process.argv)
   let folders
   if (config === 'production') {
-    const registry = JSON.parse(fs.readSync('registry.json'))
+    const registry = JSON.parse(fs.readFileSync('registry.json'))
     folders = registry.map(p => repoToFolder(p.repo))
   } else {
     folders = globule.find(`${boardDir}/*/*/*`, {filter: 'isDirectory'})
@@ -28,7 +28,7 @@ if (require.main !== module) {
   if (cached_build) {
     let new_folders = []
     if (fs.existsSync('build/registry.json')) {
-      const cached_registry = JSON.parse(fs.readSync('build/registry.json'))
+      const cached_registry = JSON.parse(fs.readFileSync('build/registry.json'))
       new_folders = registry
         .filter(
           project =>
