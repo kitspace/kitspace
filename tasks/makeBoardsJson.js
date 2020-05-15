@@ -17,9 +17,9 @@ if (require.main !== module) {
   }
 } else {
   const {config, cached_build, deps, targets} = utils.processArgs(process.argv)
-  let folders
+  let folders, registry
   if (config === 'production') {
-    const registry = JSON.parse(fs.readFileSync('registry.json'))
+    registry = JSON.parse(fs.readFileSync('registry.json'))
     folders = registry.map(p => repoToFolder(p.repo))
   } else {
     folders = globule.find(`${boardDir}/*/*/*`, {filter: 'isDirectory'})
