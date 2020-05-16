@@ -7103,7 +7103,7 @@ markdown-it@^7.0.0:
 
 "marky-markdown@https://github.com/kasbah/marky-markdown#kitspace-fork":
   version "8.1.0"
-  resolved "https://github.com/kasbah/marky-markdown#525afe0d58502b226d9f33b4984a49cf76310654"
+  resolved "https://github.com/kasbah/marky-markdown#8ea63acd78aec4cb3365156a8d98fe6d0ac550f7"
   dependencies:
     atom-language-diff "^1.0.0"
     atom-language-nginx "^0.6.1"
