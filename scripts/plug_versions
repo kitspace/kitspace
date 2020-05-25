@@ -14,6 +14,11 @@ Promise.all(
     const hash = await utils.getVersion(repo)
     return {repo, hash}
   })
-).then(repos => {
-  fs.writeFileSync('registry.json', JSON.stringify(repos, null, 2))
-})
+)
+  .then(repos => {
+    fs.writeFileSync('registry.json', JSON.stringify(repos, null, 2))
+  })
+  .catch(e => {
+    console.error(e)
+    process.exit(1)
+  })
