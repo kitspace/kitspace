@@ -7,12 +7,9 @@ const registry = JSON.parse(fs.readFileSync('registry.json', 'utf8'))
 
 Promise.all(
   repos.map(async repo => {
-    const existingHash = registry.reduce(
-      (existingHash, {repo: r, hash}) => existingHash || (r === repo && hash),
-      null
-    )
-    if (existingHash != null) {
-      return {repo, hash: existingHash}
+    const existing = registry.find(({repo: r}) => r === repo)
+    if (existing != null) {
+      return existing
     }
     const hash = await utils.getVersion(repo)
     return {repo, hash}
