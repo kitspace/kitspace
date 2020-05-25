@@ -5,28 +5,15 @@ const utils = require('./utils')
 const repos = utils.readRepos()
 const registry = JSON.parse(fs.readFileSync('registry.json', 'utf8'))
 
-for (let index = 0; index < repos.length; index++) {
-  var repo = repos[index]
-  const hasVersion = registry.reduce(
-    (prev, {repo: r}) => prev || r === repo,
-    false
-  )
-  if (!hasVersion) {
-    utils.getVersion(
-      repo,
-      function(repo, index, hash) {
-        registry.push({repo, hash})
-        return fs.writeFile(
-          './registry.json',
-          JSON.stringify(registry, undefined, 2),
-          err => {
-            if (err) {
-              console.error(err)
-              process.exit(1)
-            }
-          }
-        )
-      }.bind(undefined, repo, index)
-    )
-  }
-}
+Promise.all(
+  repos.map(async repo => {
+    const existing = registry.find(({repo: r}) => r === repo)
+    if (existing != null) {
+      return existing
+    }
+    const hash = await utils.getVersion(repo)
+    return {repo, hash}
+  })
+).then(repos => {
+  fs.writeFileSync('registry.json', JSON.stringify(repos, null, 2))
+})
