@@ -38,7 +38,6 @@
   "scripts": {
     "watch": "./scripts/watch",
     "start": "./scripts/get_boards && npm run serve & npm run watch",
-    "update-reg": "./scripts/update_registry",
     "plug-reg": "./scripts/plug_versions",
     "get-boards": "./scripts/get_boards",
     "serve": "http-server build/",
