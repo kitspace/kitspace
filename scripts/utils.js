@@ -1,19 +1,19 @@
 const fs = require('fs')
 const cp = require('child_process')
 
-function getVersion(repo, callback) {
-  const id = setTimeout(() => {
-    console.error(`timed out to get version for ${repo}`)
-    process.exit(1)
-  }, 10000)
-  cp.exec(`git ls-remote ${repo}`, {encoding: 'utf8'}, (err, output) => {
-    clearTimeout(id)
-    const hash = output.split('\n')[0].split('\t')[0]
-    if (hash == null || hash === '') {
-      console.error(`could not get version for ${repo}`)
-      process.exit(1)
-    }
-    return callback(hash)
+function getVersion(repo) {
+  return new Promise((resolve, reject) => {
+    const id = setTimeout(() => {
+      reject(Error(`timed out to get version for ${repo}`))
+    }, 10000)
+    cp.exec(`git ls-remote ${repo}`, {encoding: 'utf8'}, (err, output) => {
+      clearTimeout(id)
+      const hash = output.split('\n')[0].split('\t')[0]
+      if (hash == null || hash === '') {
+        return reject(Error(`could not get version for ${repo}`))
+      }
+      resolve(hash)
+    })
   })
 }
 
@@ -28,7 +28,7 @@ function readRepos() {
   const repos = fs
     .readFileSync('./boards.txt', {encoding: 'utf8'})
     .split('\n')
-    .filter((l) => l !== '')
+    .filter(l => l !== '')
   repos.reduce(function (prev, repo) {
     const folder = repoToFolder(repo)
     if (prev.includes(folder)) {

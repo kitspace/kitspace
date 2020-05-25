@@ -34,7 +34,7 @@ registry.forEach(({repo, hash}) => {
 || git fetch --unshallow && git checkout ${hash} \
 || git pull origin master && git checkout ${hash}`
     console.log(cmd)
-    return cp.exec(cmd, function(err, out) {
+    return cp.exec(cmd, function (err, out) {
       if (err != null) {
         console.error(err)
         return process.exit(err.code)
@@ -45,7 +45,7 @@ registry.forEach(({repo, hash}) => {
 && cd ${folder} && git checkout ${hash} \
 || git fetch --unshallow && git checkout ${hash}`
     console.log(cmd)
-    return cp.exec(cmd, function(err, out) {
+    return cp.exec(cmd, function (err, out) {
       if (err != null) {
         console.error(err)
         return process.exit(err.code)
