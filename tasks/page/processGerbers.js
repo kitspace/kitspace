@@ -20,10 +20,10 @@ if (require.main !== module) {
       .find(gerberPath)
       .map(p => path.relative(boardInfo.repoPath, p))
 
-    const gerbers = gerberFiles(files, boardInfo.gerbers).map(p =>
+    let gerbers = gerberFiles(files, boardInfo.gerbers).map(p =>
       path.join(boardInfo.repoPath, p)
     )
-    if (gerbers.length === 0) {
+    if (gerbers.length < 2) {
       let kicadPcbFile
       if (
         boardInfo.eda &&
@@ -36,7 +36,7 @@ if (require.main !== module) {
         kicadPcbFile = globule.find(kicadPcbPattern)[0]
       }
       if (kicadPcbFile != null) {
-        gerbers.push(path.join(boardInfo.repoPath, kicadPcbFile))
+        gerbers = [path.join(boardInfo.repoPath, kicadPcbFile)]
       } else {
         console.error(
           `No gerbers or .kicad_pcb found for ${boardInfo.repoPath}.`
