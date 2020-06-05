@@ -10,11 +10,9 @@ const gerberFiles = require('../../src/gerber_files')
 
 if (require.main !== module) {
   module.exports = function(config, boardInfo) {
-    let gerberPath = path.join(boardInfo.boardPath, '**', '*')
-
     let gerbers = []
     if (boardInfo.gerbers) {
-      gerberPath = path.join(boardInfo.repoPath, boardInfo.gerbers, '*')
+      const gerberPath = path.join(boardInfo.repoPath, boardInfo.gerbers, '*')
       const files = globule
         .find(gerberPath)
         .map(p => path.relative(boardInfo.repoPath, p))
@@ -39,10 +37,23 @@ if (require.main !== module) {
       if (kicadPcbFile != null) {
         gerbers.push(path.join(boardInfo.repoPath, kicadPcbFile))
       } else {
-        console.error(
-          `No gerbers or .kicad_pcb found for ${boardInfo.repoPath}.`
+        // no gerber info at all, we search for them in the entire repo,
+        // deprecated  but still supported
+        const gerberPath = path.join(boardInfo.boardPath, '**', '*')
+        const files = globule
+          .find(gerberPath)
+          .map(p => path.relative(boardInfo.repoPath, p))
+
+        gerbers = gerberFiles(files, boardInfo.gerbers).map(p =>
+          path.join(boardInfo.repoPath, p)
         )
-        process.exit(1)
+
+        if (gerbers.length < 2) {
+          console.error(
+            `No gerbers or .kicad_pcb found for ${boardInfo.repoPath}.`
+          )
+          process.exit(1)
+        }
       }
     }
     const deps = [boardInfo.repoPath].concat(gerbers)
