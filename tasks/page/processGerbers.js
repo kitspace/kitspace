@@ -12,17 +12,18 @@ if (require.main !== module) {
   module.exports = function(config, boardInfo) {
     let gerberPath = path.join(boardInfo.boardPath, '**', '*')
 
+    let gerbers = []
     if (boardInfo.gerbers) {
       gerberPath = path.join(boardInfo.repoPath, boardInfo.gerbers, '*')
+      const files = globule
+        .find(gerberPath)
+        .map(p => path.relative(boardInfo.repoPath, p))
+
+      gerbers = gerberFiles(files, boardInfo.gerbers).map(p =>
+        path.join(boardInfo.repoPath, p)
+      )
     }
 
-    const files = globule
-      .find(gerberPath)
-      .map(p => path.relative(boardInfo.repoPath, p))
-
-    const gerbers = gerberFiles(files, boardInfo.gerbers).map(p =>
-      path.join(boardInfo.repoPath, p)
-    )
     if (gerbers.length === 0) {
       let kicadPcbFile
       if (
@@ -72,6 +73,7 @@ if (require.main !== module) {
   const root = deps[0]
   let gerbers = deps.slice(1)
 
+  console.log({gerbers})
   if (gerbers.length === 1 && path.extname(gerbers[0]) === '.kicad_pcb') {
     const kicadPcbFile = gerbers[0]
     const gerberFolder = path.join('/tmp/kitspace', root, 'gerbers')
