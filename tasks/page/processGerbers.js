@@ -23,7 +23,7 @@ if (require.main !== module) {
     const gerbers = gerberFiles(files, boardInfo.gerbers).map(p =>
       path.join(boardInfo.repoPath, p)
     )
-    if (gerbers.length === 0) {
+    if (gerbers.length < 2) {
       let kicadPcbFile
       if (
         boardInfo.eda &&
