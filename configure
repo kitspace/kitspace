@@ -40,11 +40,30 @@ if (config === 'dev') {
   browserify += ' -g uglifyify'
 }
 
+function isSubmitDependency(name) {
+  const dependencies = [
+    'github-url-to-object',
+    'html-to-react',
+    'url',
+    'marky-markdown',
+    'lodash.camelcase',
+    'immutable',
+    'path'
+  ]
+
+  return dependencies.some(dependency => dependency === name)
+}
+
 const dependencies = Object.keys(require('./package.json').dependencies).filter(
   name => name !== 'semantic-ui-css'
 )
 const excludes = `-x ${dependencies.join(' -x ')}`
-const requires = `-r ${dependencies.join(' -r ')}`
+const requires = `-r ${dependencies
+  .filter(name => !isSubmitDependency(name))
+  .join(' -r ')}`
+const submit = `-r ${dependencies
+  .filter(name => isSubmitDependency(name))
+  .join(' -r ')}`
 
 let rule = ninja.rule('node-task')
 if (config === 'production') {
@@ -104,12 +123,19 @@ if (config === 'production') {
     .description(`browserify ${excludes} $in -o $out`)
 }
 
-rule = ninja.rule('browserify-require')
-if (config === 'production') {
-  rule.run(`${browserify} ${requires} $in | ${uglifyjs} > $out`)
-} else {
-  rule.run(`${browserify} ${requires} $in -o $out`)
+function browserifyDependencies(dependencies) {
+  if (config === 'production') {
+    rule.run(`${browserify} ${dependencies} $in | ${uglifyjs} > $out`)
+  } else {
+    rule.run(`${browserify} ${dependencies} $in -o $out`)
+  }
 }
+
+rule = ninja.rule('browserify-require')
+browserifyDependencies(requires)
+
+rule = ninja.rule('browserify-submit')
+browserifyDependencies(submit)
 
 ninja.rule('sass').run('node-sass --sourcemap=none --load-path $path $in $out')
 
@@ -121,6 +147,7 @@ ninja.rule('autoprefix')
 // - Edges - #
 
 ninja.edge('build/vendor.js').using('browserify-require')
+ninja.edge('build/submit.js').using('browserify-submit')
 
 const images = globule.find('src/images/**/*', {filter: 'isFile'})
 for (var f of images) {
@@ -456,4 +483,6 @@ ninja.edge('all').from(all)
 ninja.byDefault('all')
 
 ninja.save('build.ninja')
-console.info(`generated ./build.ninja with '${config}' cached=${cached_build} config`)
+console.info(
+  `generated ./build.ninja with '${config}' cached=${cached_build} config`
+)
