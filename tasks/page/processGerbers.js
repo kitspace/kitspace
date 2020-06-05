@@ -11,16 +11,15 @@ const gerberFiles = require('../../src/gerber_files')
 if (require.main !== module) {
   module.exports = function(config, boardInfo) {
     let gerbers = []
-    if (boardInfo.gerbers) {
-      const gerberPath = path.join(boardInfo.repoPath, boardInfo.gerbers, '*')
-      const files = globule
-        .find(gerberPath)
-        .map(p => path.relative(boardInfo.repoPath, p))
+    const gerberFolder = boardInfo.gerbers || 'gerbers/'
+    const gerberPath = path.join(boardInfo.repoPath, gerberFolder, '*')
+    const files = globule
+      .find(gerberPath)
+      .map(p => path.relative(boardInfo.repoPath, p))
 
-      gerbers = gerberFiles(files, boardInfo.gerbers).map(p =>
-        path.join(boardInfo.repoPath, p)
-      )
-    }
+    gerbers = gerberFiles(files, gerberFolder).map(p =>
+      path.join(boardInfo.repoPath, p)
+    )
 
     if (gerbers.length === 0) {
       let kicadPcbFile
@@ -44,7 +43,7 @@ if (require.main !== module) {
           .find(gerberPath)
           .map(p => path.relative(boardInfo.repoPath, p))
 
-        gerbers = gerberFiles(files, boardInfo.gerbers).map(p =>
+        gerbers = gerberFiles(files).map(p =>
           path.join(boardInfo.repoPath, p)
         )
 
