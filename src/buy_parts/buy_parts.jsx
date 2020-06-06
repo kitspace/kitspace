@@ -106,20 +106,22 @@ const BuyParts = React.createClass({
           },
           [0, 0]
         )
-        return (
-          <RetailerButton
-            name={name}
-            adding={this.state.adding[name]}
-            extensionPresence={
-              name === 'Digikey' ? false : this.state.extensionPresence
-            }
-            buyParts={this.state.buyParts.bind(null, name)}
-            numberOfParts={numberOfParts}
-            numberOfLines={numberOfLines}
-            totalLines={lines.length}
-            key={name}
-          />
-        )
+        if (numberOfLines > 0) {
+          return (
+            <RetailerButton
+              name={name}
+              adding={this.state.adding[name]}
+              extensionPresence={
+                name === 'Digikey' ? false : this.state.extensionPresence
+              }
+              buyParts={this.state.buyParts.bind(null, name)}
+              numberOfParts={numberOfParts}
+              numberOfLines={numberOfLines}
+              totalLines={lines.length}
+              key={name}
+            />
+          )
+        }
       })
       .filter(x => x != null)
     return (
