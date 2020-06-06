@@ -43,12 +43,16 @@ if (config === 'dev') {
 function isSubmitDependency(name) {
   const dependencies = [
     'github-url-to-object',
-    'html-to-react',
     'url',
     'marky-markdown',
     'lodash.camelcase',
     'immutable',
-    'path'
+    'path',
+    'whats-that-gerber',
+    'pcb-stackup',
+    'xml-element-string',
+    'rst2mdown',
+    'js-yaml'
   ]
 
   return dependencies.some(dependency => dependency === name)
