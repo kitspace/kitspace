@@ -92,33 +92,36 @@ const BuyParts = React.createClass({
     const nLinesToDisplay = this.props.nLinesToDisplay
     const retailer_list = oneClickBom.getRetailers()
     const mult = this.getMultiplier()
-    const total = lines.reduce((acc, line) => {
-      return acc + Math.ceil(mult * line.quantity)
-    }, 0)
     const retailerButtons = retailer_list
       .map(name => {
-        const numberOfParts = lines.reduce((acc, line) => {
-          if (line.retailers[name]) {
-            return acc + Math.ceil(mult * line.quantity)
-          }
-          return acc
-        }, 0)
-        if (numberOfParts === 0) {
-          return null
-        }
-        return (
-          <RetailerButton
-            name={name}
-            adding={this.state.adding[name]}
-            extensionPresence={
-              name === 'Digikey' ? false : this.state.extensionPresence
+        const [numberOfLines, numberOfParts] = lines.reduce(
+          ([numberOfLines, numberOfParts], line) => {
+            if (line.retailers[name]) {
+              return [
+                numberOfLines + 1,
+                numberOfParts + Math.ceil(mult * line.quantity)
+              ]
             }
-            buyParts={this.state.buyParts.bind(null, name)}
-            numberOfParts={numberOfParts}
-            total={total}
-            key={name}
-          />
+            return [numberOfLines, numberOfParts]
+          },
+          [0, 0]
         )
+        if (numberOfLines > 0) {
+          return (
+            <RetailerButton
+              name={name}
+              adding={this.state.adding[name]}
+              extensionPresence={
+                name === 'Digikey' ? false : this.state.extensionPresence
+              }
+              buyParts={this.state.buyParts.bind(null, name)}
+              numberOfParts={numberOfParts}
+              numberOfLines={numberOfLines}
+              totalLines={lines.length}
+              key={name}
+            />
+          )
+        }
       })
       .filter(x => x != null)
     return (
@@ -236,7 +239,7 @@ function RetailerButton(props) {
       }
     }
   }
-  const color = props.numberOfParts === props.total ? 'green' : 'pink'
+  const color = props.numberOfLines === props.totalLines ? 'green' : 'pink'
   return (
     <semantic.Button
       onClick={onClick}
@@ -251,7 +254,7 @@ function RetailerButton(props) {
       label={{
         as: 'a',
         color,
-        content: ` ${props.numberOfParts}/${props.total} parts`
+        content: ` ${props.numberOfLines}/${props.totalLines} lines (${props.numberOfParts} parts)`
       }}
       labelPosition="right"
       className={'retailerButton ' + color}

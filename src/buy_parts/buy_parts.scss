@@ -13,7 +13,7 @@
 
   .buttonSegment {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     flex-wrap: wrap;
   }
 
@@ -40,6 +40,10 @@
     margin-top: 5px;
     margin-left: 5px;
     margin-right: 5px;
+  }
+
+  a.ui.left.pointing.basic.label {
+    min-width: 218px !important;
   }
 
   button.retailerButton {
