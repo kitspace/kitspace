@@ -20,7 +20,8 @@ function Intro(props) {
     <center>
       <div style={style.introContainer}>
         <div className="introText" style={style.intro}>
-          Kitspace is a place to share ready-to-order electronics designs. We automate parts purchasing to let you focus on building.
+          Kitspace is a place to share ready-to-order electronics designs. We
+          automate parts purchasing so you can focus on building.
         </div>
       </div>
     </center>
