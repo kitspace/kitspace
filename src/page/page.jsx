@@ -15,9 +15,7 @@ const info = require('../info.json')
 const description =
   info.summary +
   ' - Shared on Kitspace - Kitspace is a place to share ready to order electronics designs. You can order the right components for this project with a few clicks.'
-const metaImage = `https://kitspace.org/boards/${
-  info.id
-}/images/top-with-background.png`
+const metaImage = `https://kitspace.org/boards/${info.id}/images/top-with-background.png`
 
 const {zipPath, folder, width, height} = require('../zip-info.json')
 
@@ -63,7 +61,9 @@ const Page = React.createClass({
             </BoardShowcase>
             <OrderPcbs />
             <BuyParts lines={info.bom.lines} parts={info.bom.parts} />
-            <Readme />
+            <div className="readme-container">
+              <Readme />
+            </div>
           </div>
         </div>
       </div>
