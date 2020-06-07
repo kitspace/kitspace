@@ -44,6 +44,7 @@ function isSubmitDependency(name) {
   const dependencies = [
     '1-click-bom',
     'github-url-to-object',
+    'html-to-react',
     'immutable',
     'js-yaml',
     'lodash.camelcase',
@@ -51,6 +52,7 @@ function isSubmitDependency(name) {
     'path',
     'pcb-stackup',
     'react-router',
+    'react-markdown',
     'redux',
     'redux-immutable',
     'rst2mdown',
