@@ -35,7 +35,7 @@ let browserify = `browserify --extension='.jsx' --transform [ babelify \
     --presets [ react es2015 ] ]`
 
 if (config === 'dev') {
-  browserify += ' --debug'
+  browserify += ' --debug --full-paths'
 } else {
   browserify += ' -g uglifyify'
 }
