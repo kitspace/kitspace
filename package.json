@@ -51,6 +51,7 @@
   "license": "CPAL-1.0",
   "dependencies": {
     "1-click-bom": "https://github.com/kitspace/npm-1-click-bom#78df7bb0ebfbdb7beee99d13514b3737f010508f",
+    "1-click-bom-minimal": "https://github.com/kitspace/npm-1-click-bom-minimal",
     "babel-polyfill": "^6.13.0",
     "browser-version": "^1.0.0",
     "github-url-to-object": "^2.2.6",

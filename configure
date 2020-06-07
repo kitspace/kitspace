@@ -42,6 +42,7 @@ if (config === 'dev') {
 
 function isSubmitDependency(name) {
   const dependencies = [
+    '1-click-bom',
     'github-url-to-object',
     'immutable',
     'js-yaml',
@@ -56,12 +57,7 @@ function isSubmitDependency(name) {
     'url',
     'whats-that-gerber',
     'whats-that-gerber',
-    'xml-element-string',
-    // these ones are indirect dependencies of 1-click-bom that should
-    // only need to be used in /submit
-    'electro-grammar',
-    's-expression',
-    'xlsx'
+    'xml-element-string'
   ]
 
   return dependencies.some(dependency => dependency === name)

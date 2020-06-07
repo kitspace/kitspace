@@ -2,6 +2,13 @@
 # yarn lockfile v1
 
 
+"1-click-bom-minimal@https://github.com/kitspace/npm-1-click-bom-minimal":
+  version "1.3.1"
+  resolved "https://github.com/kitspace/npm-1-click-bom-minimal#a4d6504c67bb9ce453c04f4e19e1250f6a13c975"
+  dependencies:
+    s-expression "^3.0.3"
+    xlsx "^0.12.6"
+
 "1-click-bom@https://github.com/kitspace/npm-1-click-bom#78df7bb0ebfbdb7beee99d13514b3737f010508f":
   version "1.3.1"
   resolved "https://github.com/kitspace/npm-1-click-bom#78df7bb0ebfbdb7beee99d13514b3737f010508f"
@@ -4799,7 +4806,7 @@ gaze@^1.0.0:
   dependencies:
     globule "^1.0.0"
 
-gerber-parser@^4.0.0-next.9, gerber-parser@^4.2.0:
+gerber-parser@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/gerber-parser/-/gerber-parser-4.2.0.tgz#cd9fdee647b82a54a0cf716491d6e9ed0dd5d56b"
   integrity sha512-b9whFhx0lsqL4NwltaAIiOoW9q+RmI8ZiGytsTjvbCa0ltis5XIsmYABoL3d7SFm10UwIebWK4hoCcdBVN9G0g==
@@ -4811,7 +4818,7 @@ gerber-parser@^4.0.0-next.9, gerber-parser@^4.2.0:
     lodash.padstart "^4.6.1"
     readable-stream "^3.4.0"
 
-gerber-plotter@^4.0.0-next.13, gerber-plotter@^4.2.0:
+gerber-plotter@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/gerber-plotter/-/gerber-plotter-4.2.0.tgz#960b2f0ddf1c0eb49e36b1b73e70e0e8964b9fd7"
   integrity sha512-kNI/ybiP0Z+JZih2H/lquNUvIFBQsgh47Z2SHBgP/mw3IzEdevmB5CulcXISJ5G65BVLeUIAeEVHJmrap+cxTw==
@@ -4822,21 +4829,6 @@ gerber-plotter@^4.0.0-next.13, gerber-plotter@^4.2.0:
     lodash.isfinite "^3.3.2"
     lodash.isfunction "^3.0.9"
     readable-stream "^3.4.0"
-
-gerber-to-svg@4.0.0-next.13:
-  version "4.0.0-next.13"
-  resolved "https://registry.yarnpkg.com/gerber-to-svg/-/gerber-to-svg-4.0.0-next.13.tgz#11b6d477ad8e89ba05ccc05469f1e0ca2afccfa3"
-  integrity sha512-ydmvxmyJE8T9kCYrEfJtRwT5M0S0/9l9p33r2o7ExWA1dio1Zw4jf9w9UzmmpqEPhdkPJzoBQCoH//FjfmKtBQ==
-  dependencies:
-    "@tracespace/xml-id" "^4.0.0-next.13"
-    escape-html "^1.0.3"
-    gerber-parser "^4.0.0-next.9"
-    gerber-plotter "^4.0.0-next.13"
-    inherits "^2.0.1"
-    lodash.isfinite "^3.2.0"
-    lodash.isstring "^4.0.1"
-    readable-stream "^2.1.2"
-    xml-element-string "^1.0.0"
 
 gerber-to-svg@^4.0.0-next.13:
   version "4.2.0"
@@ -6816,7 +6808,7 @@ lodash.isequal@^4.5.0:
   resolved "https://registry.yarnpkg.com/lodash.isequal/-/lodash.isequal-4.5.0.tgz#415c4478f2bcc30120c22ce10ed3226f7d3e18e0"
   integrity sha1-QVxEePK8wwEgwizhDtMib30+GOA=
 
-lodash.isfinite@^3.2.0, lodash.isfinite@^3.3.2:
+lodash.isfinite@^3.3.2:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/lodash.isfinite/-/lodash.isfinite-3.3.2.tgz#fb89b65a9a80281833f0b7478b3a5104f898ebb3"
   integrity sha1-+4m2WpqAKBgz8LdHizpRBPiY67M=
@@ -6914,11 +6906,6 @@ lodash.templatesettings@^4.0.0:
   integrity sha512-stgLz+i3Aa9mZgnjr/O+v9ruKZsPsndy7qPZOchbqk2cnTU1ZaldKK+v7m54WoKIyxiuMZTKT2H81F8BeAc3ZQ==
   dependencies:
     lodash._reinterpolate "^3.0.0"
-
-lodash.throttle@^4.1.1:
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/lodash.throttle/-/lodash.throttle-4.1.1.tgz#c23e91b710242ac70c37f1e1cda9274cc39bf2f4"
-  integrity sha1-wj6RtxAkKscMN/HhzaknTMOb8vQ=
 
 lodash.transform@^4.6.0:
   version "4.6.0"
@@ -9101,7 +9088,7 @@ readable-stream@1.1:
     isarray "0.0.1"
     string_decoder "~0.10.x"
 
-readable-stream@^2.0.0, readable-stream@^2.0.1, readable-stream@^2.0.2, readable-stream@^2.0.5, readable-stream@^2.0.6, readable-stream@^2.1.2, readable-stream@^2.1.5, readable-stream@^2.2.2, readable-stream@^2.3.0, readable-stream@^2.3.5, readable-stream@^2.3.6, readable-stream@~2.3.6:
+readable-stream@^2.0.0, readable-stream@^2.0.1, readable-stream@^2.0.2, readable-stream@^2.0.5, readable-stream@^2.0.6, readable-stream@^2.1.5, readable-stream@^2.2.2, readable-stream@^2.3.0, readable-stream@^2.3.5, readable-stream@^2.3.6, readable-stream@~2.3.6:
   version "2.3.7"
   resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-2.3.7.tgz#1eca1cf711aef814c04f62252a36a62f6cb23b57"
   integrity sha512-Ebho8K4jIbHAxnuxi7o42OrZgF/ZTNcsZj6nRKyUmkhLFq8CHItp/fy6hQZuZmP/n3yZ9VBUbp4zz/mX8hmYPw==
