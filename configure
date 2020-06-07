@@ -44,7 +44,7 @@ function isSubmitDependency(name) {
   const dependencies = [
     'github-url-to-object',
     'immutable',
-    'js-yaml'
+    'js-yaml',
     'lodash.camelcase',
     'marky-markdown',
     'path',
@@ -56,7 +56,7 @@ function isSubmitDependency(name) {
     'url',
     'whats-that-gerber',
     'whats-that-gerber',
-    'xml-element-string',
+    'xml-element-string'
   ]
 
   return dependencies.some(dependency => dependency === name)
