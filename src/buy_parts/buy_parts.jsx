@@ -1,6 +1,6 @@
 const React = require('react')
 const semantic = require('semantic-ui-react')
-const oneClickBom = require('1-click-bom')
+const oneClickBom = require('1-click-bom-minimal')
 const ReactResponsive = require('react-responsive')
 const browserVersion = require('browser-version')
 

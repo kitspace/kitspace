@@ -1,9 +1,9 @@
 const React = require('react')
 const superagent = require('superagent')
 
-const digikey_data = require('1-click-bom/lib/data/digikey.json')
-const farnell_data = require('1-click-bom/lib/data/farnell.json')
-const countries_data = require('1-click-bom/lib/data/countries.json')
+const digikey_data = require('1-click-bom-minimal/lib/data/digikey.json')
+const farnell_data = require('1-click-bom-minimal/lib/data/farnell.json')
+const countries_data = require('1-click-bom-minimal/lib/data/countries.json')
 
 function getLocation(callback) {
   const used_country_codes = Object.keys(countries_data).map(key => {

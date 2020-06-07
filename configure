@@ -35,14 +35,16 @@ let browserify = `browserify --extension='.jsx' --transform [ babelify \
     --presets [ react es2015 ] ]`
 
 if (config === 'dev') {
-  browserify += ' --debug'
+  browserify += ' --debug --full-paths'
 } else {
   browserify += ' -g uglifyify'
 }
 
 function isSubmitDependency(name) {
   const dependencies = [
+    '1-click-bom',
     'github-url-to-object',
+    'html-to-react',
     'immutable',
     'js-yaml',
     'lodash.camelcase',
@@ -50,6 +52,7 @@ function isSubmitDependency(name) {
     'path',
     'pcb-stackup',
     'react-router',
+    'react-markdown',
     'redux',
     'redux-immutable',
     'rst2mdown',
