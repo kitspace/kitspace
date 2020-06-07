@@ -126,16 +126,12 @@ if (config === 'production') {
     .description(`browserify ${excludes} $in -o $out`)
 }
 
-function browserifyDependencies() {
-  rule = ninja.rule('browserify-require')
-  if (config === 'production') {
-    rule.run(`${browserify} ${requires} $in | ${uglifyjs} > $out`)
-  } else {
-    rule.run(`${browserify} ${requires} $in -o $out`)
-  }
+rule = ninja.rule('browserify-require')
+if (config === 'production') {
+  rule.run(`${browserify} ${requires} $in | ${uglifyjs} > $out`)
+} else {
+  rule.run(`${browserify} ${requires} $in -o $out`)
 }
-
-browserifyDependencies()
 
 ninja.rule('sass').run('node-sass --sourcemap=none --load-path $path $in $out')
 
