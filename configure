@@ -56,7 +56,12 @@ function isSubmitDependency(name) {
     'url',
     'whats-that-gerber',
     'whats-that-gerber',
-    'xml-element-string'
+    'xml-element-string',
+    // these ones are indirect dependencies of 1-click-bom that should
+    // only need to be used in /submit
+    'electro-grammar',
+    's-expression',
+    'xlsx'
   ]
 
   return dependencies.some(dependency => dependency === name)
