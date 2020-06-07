@@ -40,11 +40,37 @@ if (config === 'dev') {
   browserify += ' -g uglifyify'
 }
 
+function isSubmitDependency(name) {
+  const dependencies = [
+    'github-url-to-object',
+    'immutable',
+    'js-yaml',
+    'lodash.camelcase',
+    'marky-markdown',
+    'path',
+    'pcb-stackup',
+    'react-router',
+    'redux',
+    'redux-immutable',
+    'rst2mdown',
+    'url',
+    'whats-that-gerber',
+    'whats-that-gerber',
+    'xml-element-string'
+  ]
+
+  return dependencies.some(dependency => dependency === name)
+}
+
 const dependencies = Object.keys(require('./package.json').dependencies).filter(
   name => name !== 'semantic-ui-css'
 )
-const excludes = `-x ${dependencies.join(' -x ')}`
-const requires = `-r ${dependencies.join(' -r ')}`
+const excludes = `-x ${dependencies
+  .filter(name => !isSubmitDependency(name))
+  .join(' -x ')}`
+const requires = `-r ${dependencies
+  .filter(name => !isSubmitDependency(name))
+  .join(' -r ')}`
 
 let rule = ninja.rule('node-task')
 if (config === 'production') {
@@ -456,4 +482,6 @@ ninja.edge('all').from(all)
 ninja.byDefault('all')
 
 ninja.save('build.ninja')
-console.info(`generated ./build.ninja with '${config}' cached=${cached_build} config`)
+console.info(
+  `generated ./build.ninja with '${config}' cached=${cached_build} config`
+)
