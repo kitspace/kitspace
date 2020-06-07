@@ -4,10 +4,7 @@
 
 "1-click-bom-minimal@https://github.com/kitspace/npm-1-click-bom-minimal":
   version "1.3.1"
-  resolved "https://github.com/kitspace/npm-1-click-bom-minimal#a4d6504c67bb9ce453c04f4e19e1250f6a13c975"
-  dependencies:
-    s-expression "^3.0.3"
-    xlsx "^0.12.6"
+  resolved "https://github.com/kitspace/npm-1-click-bom-minimal#b174fec7a21fe1d6c9021ded42e85640f2c2244f"
 
 "1-click-bom@https://github.com/kitspace/npm-1-click-bom#78df7bb0ebfbdb7beee99d13514b3737f010508f":
   version "1.3.1"
