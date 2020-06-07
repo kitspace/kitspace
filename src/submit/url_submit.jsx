@@ -5,7 +5,8 @@ const camelCase = require('lodash.camelcase')
 const marky = require('marky-markdown')
 const url = require('url')
 const jsYaml = require('js-yaml')
-const htmlToReact = new new require('html-to-react').Parser(React)
+const HtmlToReactParser = require('html-to-react').Parser
+const htmlToReact = new HtmlToReactParser(React)
 const githubUrlToObject = require('github-url-to-object')
 const oneClickBOM = require('1-click-bom')
 
