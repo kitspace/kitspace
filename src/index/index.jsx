@@ -17,7 +17,7 @@ function Search(props) {
       <div className="searchContainer">
         <div className="searchBackground">
           <div className="searchInputIcon">
-            <span className="icon-search searchIcon" />
+            <semantic.Icon name="search" />
           </div>
           <SearchInput
             placeholder="Search for projects"

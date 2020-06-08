@@ -127,7 +127,10 @@ const BuyParts = React.createClass({
     return (
       <div className="BuyParts">
         <semantic.Header textAlign="center" as="h3" attached="top">
-          <i className="icon-basket-3" />
+          <semantic.Icon
+            style={{fontSize: '14pt', marginBottom: 5}}
+            name="shopping basket"
+          />
           Buy Parts
         </semantic.Header>
         <InstallPrompt

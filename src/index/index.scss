@@ -2,7 +2,6 @@
 @import '../colors';
 @import '../common';
 @import '../title_bar';
-@import '../fontello';
 
 .searchContainer {
   border: 1px solid #e3e3e3;
@@ -12,7 +11,6 @@
   box-sizing: border-box;
   display: flex;
   height: 61px;
-  padding-top: 10px;
 }
 
 .searchBackground {
@@ -26,12 +24,10 @@
 
 .searchInputIcon {
   align-items: center;
-  background-color: $white;
-  border-radius: 5px 0 0 5px;
   display: flex;
-  height: 40px;
+  height: 55px;
   padding-left: 8px;
-  width: 32px;
+  color: #a9a9a9;
 }
 
 .searchIcon {
@@ -46,7 +42,7 @@
   flex-grow: 1;
   height: 52px;
   position: relative;
-
+  margin-top:10px;
   input {
     -webkit-appearance: none;
     background: $white;

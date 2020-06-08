@@ -12,7 +12,7 @@ then
     echo -e "User-agent: *\nDisallow: /\n" > build/robots.txt
     echo -e "${SSH_KEY}" > key-file
     chmod 600 key-file
-    #replace all occurunces of / with .
+    # replace all / with .
     folder=${TRAVIS_BRANCH//\//.}
     rsync --archive --compress --update --delete --recursive -e 'ssh -i key-file -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no' build/ "ubuntu@preview.kitspace.org:preview/${folder}/"
     rm -f key-file
