@@ -4,7 +4,7 @@
 [![Backers on Open Collective](https://opencollective.com/kitspace/backers/badge.svg)](#backers)
 [![Sponsors on Open Collective](https://opencollective.com/kitspace/sponsors/badge.svg)](#sponsors)
 
-> [Watch a 5 minute lightning talk about Kitspace from the 35c3 congress](https://media.ccc.de/v/35c3-9566-lightning_talks_day_2#t=477).
+> [Watch a 5 minute lightning-talk about Kitspace from the 35th Chaos Communication Congress (35C3)](https://media.ccc.de/v/35c3-9566-lightning_talks_day_2#t=477).
 
 [![video](image_src/35c3_lightning.jpg)](https://media.ccc.de/v/35c3-9566-lightning_talks_day_2#t=477)
 
@@ -28,7 +28,6 @@ You can get similar renderings and also inspect invdividual layers, using the [t
 ## Get in touch
 
  - [Join Riot.im chat][riot.im] or IRC freenode#kitspace
- - [Post on our Google Groups mailing list](https://groups.google.com/forum/#!forum/kitspace)
 
 ## Submitting your project
 
