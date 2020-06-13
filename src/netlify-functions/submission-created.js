@@ -3,6 +3,7 @@ exports.handler = async event => {
   console.log(`Received a submission: ${event.body}`)
   const data = JSON.parse(event.body).payload.data
   const {email, updates, new_projects, articles, anything_else} = data
+  console.log({anything_else})
   const tags = []
   if (updates === 'on') {
     tags.push('updates')
