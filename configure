@@ -432,11 +432,6 @@ globule
   })
 
 ninja
-  .edge('build/netlify.toml')
-  .from('src/netlify.toml')
-  .using('copy')
-
-ninja
   .edge('build/images/flags.png')
   .from('node_modules/semantic-ui-css/themes/default/assets/images/flags.png')
   .using('copy')
