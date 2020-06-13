@@ -11,6 +11,9 @@
     display: flex;
     align-items: center;
     flex-wrap: wrap;
+    @media (max-width: 861px) {
+      margin-top: 20px;
+    }
   }
   .ui.inverted.menu .item::before {
     background: none;
