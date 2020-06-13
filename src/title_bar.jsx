@@ -41,46 +41,67 @@ function TitleBar(props) {
             </semantic.Menu>
           </div>
           <div className="rightButtonsContainer">
-            <semantic.Menu
-              className="socialMenu"
-              inverted
-              pointing
-              secondary
-              stackable={matches}
-            >
-              <semantic.Menu.Item
-                as="a"
-                href="https://riot.im/app/#/room/#kitspace:matrix.org"
+            {isSubmitRoute ? null : (
+              <semantic.Button
+                icon
+                labelPosition={matches ? null : 'left'}
+                color="green"
+                href="/submit"
               >
-                <semantic.Icon name="chat" />
-                Chat
-              </semantic.Menu.Item>
-              <semantic.Menu.Item as="a" href="https://twitter.com/kitspaceorg">
-                <semantic.Icon name="twitter" />
-                Twitter
-              </semantic.Menu.Item>
-              <semantic.Menu.Item as="a" href="https://github.com/kitspace">
-                <semantic.Icon name="github" />
-                GitHub
-              </semantic.Menu.Item>
-              <semantic.Menu.Item as="a" href="https://opencollective.com/kitspace">
-                <semantic.Icon name="heart" />
-                Donate
-              </semantic.Menu.Item>
-              {isSubmitRoute ? null : (
-                <semantic.Menu.Item>
-                  <semantic.Button
-                    icon
-                    labelPosition={matches ? null : "left"}
-                    color="green"
-                    href="/submit"
-                  >
-                    <semantic.Icon name="plus" />
-                    Add a project
-                  </semantic.Button>
+                <semantic.Icon name="plus" />
+                Add a project
+              </semantic.Button>
+            )}
+            <semantic.Popup
+              trigger={
+                <semantic.Button labelPosition="right" icon color="blue">
+                  <semantic.Icon inverted name="comments" />
+                  Make contact
+                </semantic.Button>
+              }
+              on="click"
+              position="bottom right"
+              color="blue"
+            >
+              <semantic.Menu
+                color="blue"
+                secondary
+                vertical
+              >
+                <semantic.Menu.Item
+                  as="a"
+                  href="https://riot.im/app/#/room/#kitspace:matrix.org"
+                >
+                  <semantic.Icon name="chat" />
+                  Chat
                 </semantic.Menu.Item>
-              )}
-            </semantic.Menu>
+                <semantic.Menu.Item
+                  as="a"
+                  href="/newsletter/"
+                >
+                  <semantic.Icon name="envelope" />
+                  Newsletter
+                </semantic.Menu.Item>
+                <semantic.Menu.Item
+                  as="a"
+                  href="https://twitter.com/kitspaceorg"
+                >
+                  <semantic.Icon name="twitter" />
+                  Twitter
+                </semantic.Menu.Item>
+                <semantic.Menu.Item as="a" href="https://github.com/kitspace">
+                  <semantic.Icon name="github" />
+                  GitHub
+                </semantic.Menu.Item>
+                <semantic.Menu.Item
+                  as="a"
+                  href="https://opencollective.com/kitspace"
+                >
+                  <semantic.Icon name="heart" />
+                  Donate
+                </semantic.Menu.Item>
+              </semantic.Menu>
+            </semantic.Popup>
           </div>
         </div>
       )}
