@@ -1,3 +1,8 @@
+[[headers]]
+  for = "/*.zip"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+
 [build]
   base = "."
   functions = "./netlify-functions"
