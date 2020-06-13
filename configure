@@ -264,29 +264,29 @@ ninja
   .assign('path', 'src/')
   .using('sass')
 
-ninja
-  .edge('build/.temp/bom-builder/bom-builder.css')
-  .from('src/bom-builder/bom-builder.scss')
-  .need(sassSrc)
-  .assign('path', 'src/')
-  .using('sass')
+for (const name of ['bom-builder', '1-click-bom', 'newsletter']) {
+  // compile the sass scss into css
+  ninja
+    .edge(`build/.temp/${name}/${name}.css`)
+    .from(`src/${name}/${name}.scss`)
+    .need(sassSrc)
+    .assign('path', 'src/')
+    .using('sass')
 
-ninja
-  .edge('build/.temp/1-click-bom/1-click-bom.css')
-  .from('src/1-click-bom/1-click-bom.scss')
-  .need(sassSrc)
-  .assign('path', 'src/')
-  .using('sass')
+  // autoprefix the css
+  ninja
+    .edge(`build/${name}/${name}.css`)
+    .from(`build/.temp/${name}/${name}.css`)
+    .using('autoprefix')
 
-ninja
-  .edge('build/bom-builder/bom-builder.css')
-  .from('build/.temp/bom-builder/bom-builder.css')
-  .using('autoprefix')
-
-ninja
-  .edge('build/1-click-bom/1-click-bom.css')
-  .from('build/.temp/1-click-bom/1-click-bom.css')
-  .using('autoprefix')
+  // bundle the app.js
+  ninja
+    .edge(`build/${name}/app.js`)
+    .assign(`dotd`, `build/${name}/app.js.d`)
+    .from(`build/.temp/${name}/render_${name}.jsx`)
+    .need(jsMainTargets)
+    .using('browserify')
+}
 
 ninja
   .edge('build/.temp/page.css')
@@ -323,20 +323,6 @@ ninja
   .from('build/.temp/index/render_index.jsx')
   .need(jsMainTargets)
   .need('build/.temp/boards.json')
-  .using('browserify')
-
-ninja
-  .edge('build/bom-builder/app.js')
-  .assign('dotd', 'build/bom-builder/app.js.d')
-  .from('build/.temp/bom-builder/render_bom-builder.jsx')
-  .need(jsMainTargets)
-  .using('browserify')
-
-ninja
-  .edge('build/1-click-bom/app.js')
-  .assign('dotd', 'build/1-click-bom/app.js.d')
-  .from('build/.temp/1-click-bom/render_1-click-bom.jsx')
-  .need(jsMainTargets)
   .using('browserify')
 
 ninja
