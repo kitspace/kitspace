@@ -432,11 +432,6 @@ globule
   })
 
 ninja
-  .edge('build/netlify-functions/submission-created.js')
-  .from('src/netlify-functions/submission-created.js')
-  .using('copy')
-
-ninja
   .edge('build/netlify.toml')
   .from('src/netlify.toml')
   .using('copy')
