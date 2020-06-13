@@ -11,10 +11,10 @@
 Kitspace (formerly Kitnic) is a registry of open source hardware electronics
 projects that are ready to order and build. It could be described as a
 "Thingiverse for electronics". The most important elements of a Kit Space
-project page are:
+project page are what allow a design to be manufactured:
 
-- A prominent link to download the Gerber files and a preview rendering of the board
-- The ability to quickly add the required components to a retailer shopping
+- A preview of the printed circuit board and prominent link to download the Gerber manufacturing files
+- The ability to quickly add the required components to a distributor shopping
   cart (using our [browser extension][1clickbom])
 
 
@@ -23,13 +23,13 @@ Help us build an open hardware repository of useful electronics projects!
 ## pcb-stackup
 
 The renderings of the PCB files are made using [pcb-stackup](https://github.com/tracespace/pcb-stackup).
-You can get similar renderings and also inspect invdividual layers, using the [tracespace gerber viewer](http://viewer.tracespace.io).
+You can get similar renderings and also inspect invdividual layers, using the [tracespace gerber viewer](https://tracespace.io/view).
 
 ## Get in touch
 
  - [Join Riot.im chat][riot.im] or IRC freenode#kitspace
 
-## Submitting your project
+## Adding your project
 
 Check out [kitspace.org/submit](https://kitspace.org/submit) which will guide you through the process.
 
@@ -65,7 +65,7 @@ validator][yamllint] to be extra sure that your `kitspace.yaml` is valid.
 
 ### KiCad PCB
 
-Instead of using Gerber files you can also specify a KiCad PCB file to use by adding an `eda` field.
+If you you used KiCad for your design you can also specify a KiCad PCB file to use by adding an `eda` field.
 
 ```yaml
 eda:
@@ -74,7 +74,10 @@ eda:
 
 ```
 
+If both `eda` and `gerbers` are present the Gerber files will be used.
+
 ### Some examples
+
 Check out the repo links of the projects listed on
 [kitspace.org](https://kitspace.org) already. The minimum required file tree is
 something like :
