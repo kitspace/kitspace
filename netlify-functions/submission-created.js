@@ -1,7 +1,7 @@
 const fetch = require('node-fetch')
 exports.handler = async event => {
-  const email = JSON.parse(event.body).payload.email
-  console.log(`Received a submission: ${email}`)
+  console.log(`Received a submission: ${event.body.payload}`)
+  const {email} = JSON.parse(event.body).payload
   return fetch('https://api.buttondown.email/v1/subscribers', {
     method: 'POST',
     headers: {
