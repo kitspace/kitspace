@@ -41,18 +41,21 @@ const Newsletter = React.createClass({
               <label>Interested in:</label>
               <semantic.Form.Field
                 label="Updates about Kitspace itself"
+                name="updates"
                 control="input"
                 type="checkbox"
                 defaultChecked
               />
               <semantic.Form.Field
                 label="New projects added"
+                name="new-projects"
                 control="input"
                 type="checkbox"
                 defaultChecked
               />
               <semantic.Form.Field
                 label="Articles and tutorials"
+                name="articles"
                 control="input"
                 type="checkbox"
                 defaultChecked
