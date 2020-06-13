@@ -48,7 +48,7 @@ const Newsletter = React.createClass({
               />
               <semantic.Form.Field
                 label="New projects added"
-                name="new-projects"
+                name="new_projects"
                 control="input"
                 type="checkbox"
                 defaultChecked
@@ -62,12 +62,12 @@ const Newsletter = React.createClass({
               />
             </semantic.Form.Group>
             <semantic.Form.Field inline size="tiny">
-              <label htmlFor="anything-else">Anything else: </label>
+              <label htmlFor="anything_else">Anything else: </label>
               <input
-                style={{height: 12}}
+                style={{height: 13}}
                 type="text"
-                name="anything-else"
-                id="anything-else"
+                name="anything_else"
+                id="anything_else"
               />
             </semantic.Form.Field>
             <semantic.Button primary type="submit">
