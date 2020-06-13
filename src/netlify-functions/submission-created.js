@@ -1,6 +1,6 @@
 const fetch = require('node-fetch')
 exports.handler = async event => {
-  console.log(`Received a submission: ${event.body.payload}`)
+  console.log(`Received a submission: ${event.body}`)
   const {email} = JSON.parse(event.body).payload
   return fetch('https://api.buttondown.email/v1/subscribers', {
     method: 'POST',
@@ -12,7 +12,7 @@ exports.handler = async event => {
   })
     .then(response => response.json())
     .then(data => {
-      console.log(`Submitted to Buttondown:\n ${data}`)
+      console.log(`Submitted to Buttondown:\n ${JSON.stringify(data)}`)
     })
     .catch(error => ({statusCode: 422, body: String(error)}))
 }
