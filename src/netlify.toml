@@ -4,5 +4,4 @@
     Access-Control-Allow-Origin = "*"
 
 [build]
-  base = "."
-  functions = "./netlify-functions"
+  functions = "src/netlify-functions"
