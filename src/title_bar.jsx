@@ -78,7 +78,7 @@ function TitleBar(props) {
                   </semantic.Menu.Item>
                   <semantic.Menu.Item as="a" href="/newsletter/">
                     <semantic.Icon name="envelope" />
-                    Email
+                    Email (newsletter)
                   </semantic.Menu.Item>
                   <semantic.Menu.Item
                     as="a"
