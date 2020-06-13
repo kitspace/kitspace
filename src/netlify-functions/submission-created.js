@@ -3,7 +3,6 @@ exports.handler = async event => {
   console.log(`Received a submission: ${event.body}`)
   const data = JSON.parse(event.body).payload.data
   const {email, updates, new_projects, articles, anything_else} = data
-  console.log({anything_else})
   const tags = []
   if (updates === 'on') {
     tags.push('updates')
@@ -20,7 +19,11 @@ exports.handler = async event => {
       Authorization: `Token ${process.env.BUTTONDOWN_TOKEN}`,
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({email, tags, notes: anything_else})
+    body: JSON.stringify({
+      email,
+      tags,
+      notes: `Interested in: "${anything_else}"`
+    })
   })
     .then(response => response.json())
     .then(data => {
