@@ -21,6 +21,7 @@ function Newsletter() {
           data-netlify="true"
           style={{padding: 15}}
         >
+          <input type="hidden" name="form-name" value="newsletter" />
           <semantic.Form.Field>
             <label>Your Email:</label>
             <input
