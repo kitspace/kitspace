@@ -1,8 +1,9 @@
 const React = require('react')
+const createClass = require('create-react-class')
 const semantic = require('semantic-ui-react')
 const browserVersion = require('browser-version')
 
-const InstallPrompt = React.createClass({
+const InstallPrompt = createClass({
   getInitialState() {
     return {
       compatible: true,

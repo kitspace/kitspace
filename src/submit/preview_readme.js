@@ -1,4 +1,5 @@
 const React = require('react')
+const createClass = require('create-react-class')
 const Markdown = require('react-markdown')
 const semantic = require('semantic-ui-react')
 
@@ -8,7 +9,7 @@ const UrlSubmit = require('./url_submit')
 
 const InfoBar = require('../page/info_bar')
 
-const Step3 = React.createClass({
+const Step3 = createClass({
   render() {
     const board = this.props.board
     let nextButton, infoBar

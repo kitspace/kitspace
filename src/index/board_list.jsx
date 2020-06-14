@@ -1,14 +1,12 @@
 'use strict'
 const React = require('react')
+const createClass = require('create-react-class')
+
 const SearchInput = require('react-search-input').default
 
 const BoardCard = require('./board_card')
 
-var BoardList = React.createClass({
-  propTypes: {
-    data: React.PropTypes.array,
-    searching: React.PropTypes.bool
-  },
+var BoardList = createClass({
   render() {
     if (this.props.data.length === 0) {
       return (

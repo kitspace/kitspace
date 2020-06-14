@@ -1,4 +1,5 @@
 const React = require('react')
+const createClass = require('create-react-class')
 const superagent = require('superagent')
 
 const digikey_data = require('1-click-bom-minimal/lib/data/digikey.json')
@@ -28,11 +29,7 @@ function getLocation(callback) {
     })
 }
 
-const DirectStores = React.createClass({
-  propTypes: {
-    items: React.PropTypes.any.isRequired,
-    multiplier: React.PropTypes.number.isRequired
-  },
+const DirectStores = createClass({
   getInitialState() {
     if (typeof window != 'undefined') {
       getLocation().then(code => {

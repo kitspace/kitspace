@@ -1,11 +1,12 @@
 const React = require('react')
+const createClass = require('create-react-class')
 const Markdown = require('react-markdown')
 const {Container} = require('semantic-ui-react')
 
 const Steps = require('./steps')
 const UrlSubmit = require('./url_submit')
 
-const Step4 = React.createClass({
+const Step4 = createClass({
   render() {
     const board = this.props.board
     const url = board.url ? `\`${board.url}\`` : 'your URL'

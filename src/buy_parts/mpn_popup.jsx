@@ -1,4 +1,5 @@
 const React = require('react')
+const createClass = require('create-react-class')
 const {h, a, div} = require('react-hyperscript-helpers')
 const semantic = require('semantic-ui-react')
 const ramda = require('ramda')
@@ -48,7 +49,7 @@ function specRow(spec) {
   ])
 }
 
-const MpnPopup = React.createClass({
+const MpnPopup = createClass({
   getInitialState() {
     return {expanded: false}
   },
