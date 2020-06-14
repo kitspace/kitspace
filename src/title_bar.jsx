@@ -2,11 +2,11 @@ const React = require('react')
 const semantic = require('semantic-ui-react')
 
 function TitleBar(props) {
-  const isSubmitRoute = RegExp('^/projects/new').test(props.route)
+  const isSubmitRoute = RegExp('^/submit').test(props.route)
   const isProjectRoute =
     isSubmitRoute ||
     props.route === '/' ||
-    RegExp('^/projects/').test(props.route)
+    RegExp('^/boards/').test(props.route)
   return (
     <div className="titleBar">
       <div className="bigSiteMenu">
@@ -19,7 +19,8 @@ function TitleBar(props) {
       </div>
       <div className="bigSocialMenu">
         <semantic.Menu inverted pointing secondary>
-          <SocialMenuItems isSubmitRoute={isSubmitRoute} />
+          {isSubmitRoute ? null : <AddAProjectButton />}
+          <ContactMenu />
         </semantic.Menu>
       </div>
       <div className="smallMenu">
@@ -42,11 +43,23 @@ function TitleBar(props) {
               route={props.route}
               isProjectRoute={isProjectRoute}
             />
-            <SocialMenuItems isSubmitRoute={isSubmitRoute} />
+            <SocialMenuItems />
+            {isSubmitRoute ? null : <AddAProjectButton />}
           </semantic.Menu>
         </semantic.Popup>
       </div>
     </div>
+  )
+}
+
+function AddAProjectButton() {
+  return (
+    <semantic.Menu.Item>
+      <semantic.Button icon labelPosition="left" color="green" href="/submit">
+        <semantic.Icon name="plus" />
+        Add a project
+      </semantic.Button>
+    </semantic.Menu.Item>
   )
 }
 
@@ -84,6 +97,10 @@ function SocialMenuItems(props) {
         <semantic.Icon name="chat" />
         Chat
       </semantic.Menu.Item>
+      <semantic.Menu.Item as="a" href="/newsletter/">
+        <semantic.Icon name="envelope" />
+        Email & Newsletter
+      </semantic.Menu.Item>
       <semantic.Menu.Item as="a" href="https://twitter.com/kitspaceorg">
         <semantic.Icon name="twitter" />
         Twitter
@@ -96,22 +113,30 @@ function SocialMenuItems(props) {
         <semantic.Icon name="heart" />
         Donate
       </semantic.Menu.Item>
-      {props.isSubmitRoute ? null : (
-        <semantic.Menu.Item>
-          <semantic.Button
-            icon
-            labelPosition="left"
-            color="green"
-            href="/projects/new"
-          >
-            <semantic.Icon name="plus" />
-            Add a project
-          </semantic.Button>
-        </semantic.Menu.Item>
-      )}
     </>
   )
 }
 
+function ContactMenu(props) {
+  return (
+    <semantic.Popup
+      trigger={
+        <semantic.Menu.Item className="contact-button">
+          <semantic.Button labelPosition="right" icon color="blue">
+            <semantic.Icon inverted name="comments" />
+            Make contact
+          </semantic.Button>
+        </semantic.Menu.Item>
+      }
+      on="click"
+      position="bottom right"
+      color="blue"
+    >
+      <semantic.Menu secondary vertical>
+        <SocialMenuItems />
+      </semantic.Menu>
+    </semantic.Popup>
+  )
+}
 
 module.exports = TitleBar
