@@ -12,7 +12,7 @@ const InstallPrompt = require('./install_prompt')
 const DirectStores = require('./direct_stores')
 
 //for react-double-scrollbar in IE11
-require('babel-polyfill')
+require('@babel/polyfill')
 
 const BuyParts = createClass({
   getInitialState() {
