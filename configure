@@ -31,8 +31,8 @@ ninja
   .run('rm -rf $in')
   .description('$command')
 
-let browserify = `browserify --extension='.jsx' --transform '[ babelify \
-    --presets [ @babel/react @babel/env ] ]'`
+let browserify = `browserify --extension='.jsx' --transform [ babelify \
+    --presets [ @babel/react @babel/env ] ]`
 
 if (config === 'dev') {
   browserify += ' --debug --full-paths'
