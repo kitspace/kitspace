@@ -22,7 +22,7 @@ exports.handler = async event => {
     body: JSON.stringify({
       email,
       tags,
-      notes: `Interested in: "${anything_else}"`
+      notes: `anything_else: ${anything_else}\n`
     })
   })
     .then(response => response.json())
