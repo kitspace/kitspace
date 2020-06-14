@@ -67,7 +67,6 @@ if (require.main !== module) {
     html = cheerio$.html()
   }
   const reactComponent = converter.convert(`<div class='readme'>${html}</div>`)
-  console.log({reactComponent})
   fs.writeFileSync(
     readmeJsx,
     `const React = require('react');React.createClass = require('create-react-class');\n${reactComponent}\nmodule.exports = Readme;\n`
