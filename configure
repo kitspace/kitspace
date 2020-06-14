@@ -32,7 +32,7 @@ ninja
   .description('$command')
 
 let browserify = `browserify --extension='.jsx' --transform [ babelify \
-    --presets [ react es2015 ] ]`
+    --presets [ @babel/react @babel/env ] ]`
 
 if (config === 'dev') {
   browserify += ' --debug --full-paths'
