@@ -8,12 +8,14 @@ const Newsletter = React.createClass({
     return (
       <div>
         <TitleBar route="/newsletter/" />
-        <semantic.Container style={{marginTop: 30}}>
+        <semantic.Container style={{marginTop: 50}}>
           <p>
             Often people say to us: "Wow that's a nice printed circuit board. I
             would like to subscribe to your newsletter." Now you can! Let us
             know what would like to hear about exactly. Don't worry, it's easy
-            to unsubscribe if you change your mind.
+            to unsubscribe if you change your mind later. If you just want to
+            get in touch email{' '}
+            <a href="mailto:info@kitspace.org">info@kitspace.org</a> instead.
           </p>
           <semantic.Form
             name="newsletter"
@@ -70,7 +72,7 @@ const Newsletter = React.createClass({
                 id="anything_else"
               />
             </semantic.Form.Field>
-            <semantic.Button primary type="submit">
+            <semantic.Button primary type="submit" style={{marginTop: 30}} >
               Subscribe
             </semantic.Button>
           </semantic.Form>
