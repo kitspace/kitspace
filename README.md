@@ -28,6 +28,8 @@ You can get similar renderings and also inspect invdividual layers, using the [t
 ## Get in touch
 
  - [Join Riot.im chat][riot.im] or IRC freenode#kitspace
+ - [Subscribe to our newsletter](https://kitspace.org/newsletter/)
+ - [Follow us on Twitter](https://twitter.com/kitspaceorg)
 
 ## Adding your project
 
