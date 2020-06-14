@@ -20,13 +20,11 @@ with a gerbers field.
 
     gerbers: path/to/your/gerber-folder
 
-
 (Note: adding multiple projects in one repository _is_ supported by Kitspace but not by this preview yet.)
 
 If you run into any other problems please get in touch via
 [Riot.im chat](https://riot.im/app/#/room/#kitspace:matrix.org)
-, IRC (freenode#kitspace) or the
-[mailing-list](https://groups.google.com/forum/#!forum/kitspace).
+, IRC (freenode#kitspace) or [Github issues](https://github.com/kitspace/kitspace/issues)
 You can also use the [Tracespace Viewer](http://viewer.tracespace.io) to try
 and figure out any issues with the board rendering.
 
