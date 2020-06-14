@@ -17,7 +17,6 @@ const Newsletter = React.createClass({
             get in touch email{' '}
             <a href="mailto:info@kitspace.org">info@kitspace.org</a> instead.
           </p>
-          /p>
           <semantic.Form
             name="newsletter"
             method="POST"
