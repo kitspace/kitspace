@@ -1,9 +1,10 @@
 'use strict'
 const React = require('react')
+const createClass = require('create-react-class')
 const LazyLoad = require('../lazy_load')
 const {Icon} = require('semantic-ui-react')
 
-var BoardShowcase = React.createClass({
+var BoardShowcase = createClass({
   getInitialState: function() {
     return {
       viewFrontBoard: true

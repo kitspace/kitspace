@@ -1,5 +1,6 @@
 const Redux = require('redux')
 const React = require('react')
+const createClass = require('create-react-class')
 const {h} = require('react-hyperscript-helpers')
 const path = require('path')
 const immutable = require('immutable')
@@ -141,7 +142,7 @@ function setStep(step) {
   }
 }
 
-const SubmitRouter = React.createClass({
+const SubmitRouter = createClass({
   store: Redux.createStore(reducer),
   getInitialState() {
     return this.store.getState().toJS()

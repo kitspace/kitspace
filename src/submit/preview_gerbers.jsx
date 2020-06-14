@@ -1,4 +1,5 @@
 const React = require('react')
+const createClass = require('create-react-class')
 const Markdown = require('react-markdown')
 const {Container, Button} = require('semantic-ui-react')
 
@@ -39,7 +40,7 @@ and figure out any issues with the board rendering.
 
 `
 
-const Step1 = React.createClass({
+const Step1 = createClass({
   render() {
     const board = this.props.board
     let showcase = <div style={{height: 450}} />

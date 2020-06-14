@@ -1,4 +1,5 @@
 const React = require('react')
+const createClass = require('create-react-class')
 const Markdown = require('react-markdown')
 const semantic = require('semantic-ui-react')
 
@@ -9,7 +10,7 @@ const UrlSubmit = require('./url_submit')
 const Bom = require('../buy_parts/bom')
 const getPartinfo = require('../get_partinfo.js')
 
-const PreviewBom = React.createClass({
+const PreviewBom = createClass({
   render() {
     const board = this.props.board
     const instructionText =
