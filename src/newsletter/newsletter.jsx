@@ -17,6 +17,7 @@ const Newsletter = React.createClass({
             get in touch email{' '}
             <a href="mailto:info@kitspace.org">info@kitspace.org</a> instead.
           </p>
+          /p>
           <semantic.Form
             name="newsletter"
             method="POST"
@@ -72,7 +73,7 @@ const Newsletter = React.createClass({
                 id="anything_else"
               />
             </semantic.Form.Field>
-            <semantic.Button primary type="submit" style={{marginTop: 30}} >
+            <semantic.Button primary type="submit" style={{marginTop: 30}}>
               Subscribe
             </semantic.Button>
           </semantic.Form>
