@@ -13,17 +13,17 @@ exports.handler = async event => {
   if (articles === 'on') {
     tags.push('articles')
   }
+  let metadata
+  if (anything_else != null) {
+    metadata = {anything_else}
+  }
   return fetch('https://api.buttondown.email/v1/subscribers', {
     method: 'POST',
     headers: {
       Authorization: `Token ${process.env.BUTTONDOWN_TOKEN}`,
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({
-      email,
-      tags,
-      notes: `anything_else: ${anything_else}\n`
-    })
+    body: JSON.stringify({email, tags, metadata})
   })
     .then(response => response.json())
     .then(data => {
