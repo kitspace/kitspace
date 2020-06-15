@@ -416,7 +416,10 @@ globule.find('tasks/*.js').forEach(taskFile => {
 globule.find('tasks/page/*.js').forEach(taskFile => {
   const task = require(`./${path.dirname(taskFile)}/${path.basename(taskFile)}`)
   boards.forEach(board => {
-    addEdge(taskFile, task(config, board))
+    let t = task(config, board)
+    if (t.targets.length > 0) {
+      addEdge(taskFile, t)
+    }
   })
 })
 

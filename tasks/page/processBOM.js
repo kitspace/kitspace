@@ -17,12 +17,26 @@ if (require.main !== module) {
     } else {
       bom = path.join(boardInfo.boardPath, '1-click-bom.tsv')
     }
-    const deps = [
+    let kicadPcbFile
+    if (
+      boardInfo.eda &&
+      boardInfo.eda.type === 'kicad' &&
+      boardInfo.eda.pcb != null
+    ) {
+      kicadPcbFile = path.join(boardInfo.repoPath, boardInfo.eda.pcb)
+    } else if (boardInfo.eda == null) {
+      const kicadPcbPattern = path.join(boardInfo.boardPath, '**/*.kicad_pcb')
+      kicadPcbFile = globule.find(kicadPcbPattern)[0]
+    }
+    let deps = [
       'build/.temp/boards.json',
       boardInfo.repoPath,
       bom,
       boardInfo.yamlPath
     ]
+    if (kicadPcbFile != null) {
+      deps.push(kicadPcbFile)
+    }
     const targets = [
       `build/.temp/${boardInfo.boardPath}/info.json`,
       `build/${boardInfo.boardPath}/1-click-BOM.tsv`
@@ -89,6 +103,8 @@ if (require.main !== module) {
   })
   repo = repo.split('\t')[1].split(' ')[0]
   info.repo = repo
+
+  info.has_interactive_bom = deps.some((d) => d.endsWith('.kicad_pcb'))
 
   getPartinfo(info.bom.lines).then(parts => {
     info.bom.parts = parts

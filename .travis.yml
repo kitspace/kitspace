@@ -8,15 +8,20 @@ addons:
     packages:
       - inkscape
       - kicad
+      - xvfb
 script:
   - bash keep_alive.sh &
   - export NODE_ENV=production
+  - mkdir ~/.kicad_plugins
+  - pushd ~/.kicad_plugins ; wget https://github.com/openscopeproject/InteractiveHtmlBom/releases/download/v2.3/InteractiveHtmlBom.zip ; unzip InteractiveHtmlBom.zip ; rm InteractiveHtmlBom.zip ; popd
   - ./scripts/plug_versions
   - ./scripts/get_boards production $CACHED_BUILD
   - ./configure production $CACHED_BUILD
   - wget https://github.com/ninja-build/ninja/releases/download/v1.6.0/ninja-linux.zip
   - unzip ninja-linux.zip
   - if  [ "${CACHED_BUILD}" != "cached" ]; then ./ninja clean; fi
+  - Xvfb :0 -screen 0 1024x768x24 > X.log 2>&1 &
+  - export DISPLAY=:0
   - ./ninja -j 2 && cp registry.json build/ && ./scripts/deploy
 cache:
   yarn: true
