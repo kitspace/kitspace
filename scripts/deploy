@@ -7,14 +7,15 @@ set -e
 if [ "${TRAVIS_PULL_REQUEST}" != "false" ]
 then
     exit 0
-elif  [ "${TRAVIS_BRANCH}" != "master" ]
+elif  [ "${TRAVIS_BRANCH}" != "master" -o "${TRAVIS_REPO_SLUG}" != "kitspace/kitspace" ]
 then
     echo -e "User-agent: *\nDisallow: /\n" > build/robots.txt
     echo -e "${SSH_KEY}" > key-file
     chmod 600 key-file
     # replace all / with .
     folder=${TRAVIS_BRANCH//\//.}
-    rsync --archive --compress --update --delete --recursive -e 'ssh -i key-file -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no' build/ "ubuntu@preview.kitspace.org:preview/${folder}/"
+    UPLOAD_DESTINATION=${UPLOAD_DESTINATION:-ubuntu@preview.kitspace.org:-preview/${folder}/}
+    rsync --archive --compress --update --delete --recursive -e 'ssh -i key-file -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no' build/ "${UPLOAD_DESTINATION}"
     rm -f key-file
 else
     mv build/.temp .
