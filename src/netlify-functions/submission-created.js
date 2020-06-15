@@ -4,17 +4,17 @@ exports.handler = async event => {
   const data = JSON.parse(event.body).payload.data
   const {email, updates, new_projects, articles, anything_else} = data
   const tags = []
-  if (updates === 'on') {
+  if (updates) {
     tags.push('updates')
   }
-  if (new_projects === 'on') {
+  if (new_projects) {
     tags.push('new_projects')
   }
-  if (articles === 'on') {
+  if (articles) {
     tags.push('articles')
   }
   let metadata
-  if (anything_else != null) {
+  if (anything_else) {
     metadata = {anything_else}
   }
   return fetch('https://api.buttondown.email/v1/subscribers', {
