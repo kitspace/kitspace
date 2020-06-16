@@ -28,7 +28,7 @@ exports.reactRender = function(jsx, html, output, router = false) {
   const {Helmet} = require('react-helmet')
   const jsdom = require('jsdom')
 
-  require('babel-register')({presets: ['react']})
+  require('@babel/register')({presets: ['@babel/react', '@babel/env']})
   const Main = require(process.cwd() + '/' + jsx)
 
   if (router) {

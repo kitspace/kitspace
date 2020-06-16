@@ -1,5 +1,6 @@
 const React = require('react')
 const ReactResponsive = require('react-responsive')
+const createClass = require('create-react-class')
 
 const LazyLoad = require('../lazy_load')
 const FadeImage = require('../fade_image')
@@ -18,11 +19,8 @@ function truncate(input, len, fromStart) {
   }
   return str
 }
-let BoardCard = React.createClass({
-  propTypes: {
-    lazyLoad: React.PropTypes.bool,
-    data: React.PropTypes.object
-  },
+
+const BoardCard = createClass({
   render: function() {
     let image
     if (this.props.lazyLoad) {

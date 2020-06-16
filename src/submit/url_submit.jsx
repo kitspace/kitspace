@@ -1,4 +1,5 @@
 const React = require('react')
+const createClass = require('create-react-class')
 const superagent = require('superagent')
 const path = require('path')
 const camelCase = require('lodash.camelcase')
@@ -132,7 +133,7 @@ function kitspaceYaml(files) {
   return null
 }
 
-const UrlSubmit = React.createClass({
+const UrlSubmit = createClass({
   placeholder: 'https://github.com/kitspace-forks/arduino-uno',
   getInitialState() {
     return {url: this.props.board.url || ''}

@@ -1,4 +1,5 @@
 const React = require('react')
+const createClass = require('create-react-class')
 const semantic = require('semantic-ui-react')
 const ReactResponsive = require('react-responsive')
 
@@ -11,7 +12,7 @@ const pcbwayUrl = `https://www.pcbway.com/QuickOrderOnline.aspx?fileurl=${zipUrl
 const oshparkUrl = `https://oshpark.com/import?url=${zipUrl}`
 const pcbShopperUrl = `https://pcbshopper.com/?Width=${width}&Height=${height}&Units=mm&Layers=${layers}&Quantity=1&GetPrices`
 
-let OrderPcbs = React.createClass({
+let OrderPcbs = createClass({
   render() {
     return (
       <ReactResponsive

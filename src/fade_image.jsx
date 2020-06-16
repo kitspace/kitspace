@@ -1,11 +1,7 @@
-var React = require('react')
+const React = require('react')
+const createClass = require('create-react-class')
 
-var FadeImage = React.createClass({
-  propTypes: {
-    style: React.PropTypes.any,
-    speed: React.PropTypes.any,
-    src: React.PropTypes.string.isRequired
-  },
+const FadeImage = createClass({
   getInitialState: function() {
     return {opacity: 0}
   },

@@ -1,4 +1,5 @@
 const React = require('react')
+const createClass = require('create-react-class')
 const semantic = require('semantic-ui-react')
 const {h, tbody, tr, td} = require('react-hyperscript-helpers')
 const ramda = require('ramda')
@@ -27,7 +28,7 @@ function markerColor(ref) {
   return 'purple'
 }
 
-const TsvTable = React.createClass({
+const TsvTable = createClass({
   getInitialState() {
     return {
       activePopup: null
@@ -76,11 +77,14 @@ const TsvTable = React.createClass({
       .split('\n')
       .slice(0, -1)
       .map(line => line.split('\t'))
-    let columns = lines.slice(1).reduce((prev, line) => {
-      return prev.map((column, index) => {
-        return column.concat([line[index]])
-      })
-    }, lines[0].map(t => [t]))
+    let columns = lines.slice(1).reduce(
+      (prev, line) => {
+        return prev.map((column, index) => {
+          return column.concat([line[index]])
+        })
+      },
+      lines[0].map(t => [t])
+    )
 
     //get rid of empty columns
     columns = columns.filter(column => {
@@ -92,11 +96,14 @@ const TsvTable = React.createClass({
     })
 
     const numberOfLines = this.props.collapsed ? 8 : undefined
-    const reducedLines = columns.slice(1).reduce((prev, column) => {
-      return prev.map((line, index) => {
-        return line.concat([column[index]])
-      })
-    }, columns[0].slice(0, numberOfLines).map(c => [c]))
+    const reducedLines = columns.slice(1).reduce(
+      (prev, column) => {
+        return prev.map((line, index) => {
+          return line.concat([column[index]])
+        })
+      },
+      columns[0].slice(0, numberOfLines).map(c => [c])
+    )
 
     const headings = reducedLines[0]
     const bodyLines = reducedLines.slice(1)
