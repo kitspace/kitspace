@@ -14,7 +14,7 @@ then
     chmod 600 key-file
     # replace all / with .
     folder=${TRAVIS_BRANCH//\//.}
-    UPLOAD_DESTINATION=${UPLOAD_DESTINATION:-ubuntu@preview.kitspace.org:-preview/${folder}/}
+    UPLOAD_DESTINATION=${UPLOAD_DESTINATION:-ubuntu@preview.kitspace.org:preview/${folder}/}
     rsync --archive --compress --update --delete --recursive -e 'ssh -i key-file -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no' build/ "${UPLOAD_DESTINATION}"
     rm -f key-file
 else
