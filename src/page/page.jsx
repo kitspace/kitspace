@@ -1,4 +1,5 @@
 const React = require('react')
+const createClass = require('create-react-class')
 const {Helmet} = require('react-helmet')
 
 const BoardShowcase = require('./board_showcase')
@@ -21,7 +22,7 @@ const {zipPath, folder, width, height} = require('../zip-info.json')
 
 const zipUrl = `https://kitspace.org/${folder}/${zipPath}`
 
-const Page = React.createClass({
+const Page = createClass({
   render() {
     const idText = info.id
       .split('/')

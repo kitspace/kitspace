@@ -1,4 +1,5 @@
 const React = require('react')
+const createClass = require('create-react-class')
 const ReactSearchInput = require('react-search-input')
 const SearchInput = ReactSearchInput.default
 const semantic = require('semantic-ui-react')
@@ -30,7 +31,7 @@ function Search(props) {
   )
 }
 
-var Main = React.createClass({
+var Main = createClass({
   getInitialState() {
     return {
       result: boards,

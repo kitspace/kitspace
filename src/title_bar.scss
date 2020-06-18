@@ -1,27 +1,9 @@
-@import 'colors';
 @import '/semantic.min.css';
+@import 'colors';
+@import 'common';
 
 .titleBar {
   padding: 10px;
-  .ui.menu .item > a:hover {
-    text-decoration: none !important;
-  }
-
-  .rightButtonsContainer {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    @media (max-width: 861px) {
-      margin-top: 20px;
-    }
-  }
-  .ui.inverted.menu .item::before {
-    background: none;
-  }
-  .socialMenu {
-    margin-bottom: 0px !important;
-  }
-
   align-items: center;
   background-color: $cod-gray;
   border-bottom-left-radius: 5;
@@ -29,27 +11,60 @@
   box-shadow: 0 0.1em 0.5em $cod-gray;
   display: flex;
   flex-wrap: wrap;
-  max-width: 100%;
   overflow: hidden;
   position: relative;
-  width: 100%;
-  justify-content: space-around;
+  width: 100vw;
+  justify-content: space-between;
+  @media (max-width: 1047px) {
+    justify-content: space-around;
+  }
 
-  .logoContainer {
+  .bigSocialMenu {
     display: flex;
+    @include breakpoint(mobile_menu) {
+      display: none;
+    }
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .bigSiteMenu {
+    display: flex;
+    @include breakpoint(mobile_menu) {
+      display: none;
+    }
     justify-content: flex-start;
     z-index: 1;
     flex-shrink: 2;
     flex-wrap: wrap;
   }
 
-  .contact-button:hover {
-    background: inherit !important;
-  }
-
   .logoImg {
     max-height: 46px;
     min-width: 140px;
+  }
+
+  .submissionButton {
+    align-items: center;
+    background: $fruit-salad;
+    border: 0;
+    border-radius: 3px;
+    box-sizing: border-box;
+    color: $white;
+    cursor: pointer;
+    display: flex;
+    font-family: 'Noto Sans', 'Helvetica', 'Arial', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 0;
+    margin-right: 8px;
+    min-width: 174px;
+    padding: 20px 15px;
+    white-space: nowrap;
+  }
+
+  .middleContainer {
+    flex-grow: 2;
   }
 
   .addProjectButton {
@@ -70,5 +85,14 @@
   .userDropContainer > i {
     padding-left: 5px;
     margin-top: -3px;
+  }
+
+  .smallMenu {
+    display: none;
+    @include breakpoint(mobile_menu) {
+      display: flex;
+      justify-content: space-around;
+      width: 90%;
+    }
   }
 }

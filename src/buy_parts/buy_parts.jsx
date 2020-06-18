@@ -1,4 +1,5 @@
 const React = require('react')
+const createClass = require('create-react-class')
 const semantic = require('semantic-ui-react')
 const oneClickBom = require('1-click-bom-minimal')
 const ReactResponsive = require('react-responsive')
@@ -11,9 +12,9 @@ const InstallPrompt = require('./install_prompt')
 const DirectStores = require('./direct_stores')
 
 //for react-double-scrollbar in IE11
-require('babel-polyfill')
+require('@babel/polyfill')
 
-const BuyParts = React.createClass({
+const BuyParts = createClass({
   getInitialState() {
     return {
       collapsed: true,
