@@ -44,7 +44,7 @@
     "serve": "http-server build/",
     "lint": "eslint src",
     "fmt": "prettier --write configure *.js $(find src -name '*.jsx') $(find src -name '*.js') $(find tasks -name '*.js')",
-    "build": "./configure && ninja",
+    "build": "./configure && ninja -j 4",
     "configure": "./configure"
   },
   "author": "Kaspar Emanuel",
