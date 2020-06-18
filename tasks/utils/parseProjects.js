@@ -1,14 +1,14 @@
-const yaml = require('js-yaml');
-const fs = require('fs');
-const path = require('path');
-const globule = require('globule');
-const cp = require('child_process');
-const { repoToFolder } = require('../../scripts/utils');
+const yaml = require('js-yaml')
+const fs = require('fs')
+const path = require('path')
+const globule = require('globule')
+const cp = require('child_process')
+const {repoToFolder} = require('../../scripts/utils')
 
-const boardDir = 'boards';
+const boardDir = 'boards'
 
 exports.parseProjects = (config, cached_build) => {
-  let folders, registry;
+  let folders, registry
   if (config === 'production') {
     registry = JSON.parse(fs.readFileSync('registry.json').toString())
     folders = registry.map(p => repoToFolder(p.repo))
@@ -21,7 +21,9 @@ exports.parseProjects = (config, cached_build) => {
   if (cached_build) {
     let new_folders = []
     if (fs.existsSync('build/registry.json')) {
-      const cached_registry = JSON.parse(fs.readFileSync('build/registry.json').toString())
+      const cached_registry = JSON.parse(
+        fs.readFileSync('build/registry.json').toString()
+      )
       new_folders = registry
         .filter(
           project =>
@@ -58,7 +60,7 @@ exports.parseProjects = (config, cached_build) => {
     } else {
       info = {}
     }
-    const {multi} = info;
+    const {multi} = info
     if (multi) {
       for (let project in multi) {
         multi[project].path = project
@@ -70,10 +72,8 @@ exports.parseProjects = (config, cached_build) => {
       boards.push(getBoardInfo(info, folder))
     }
   }
-  return boards;
+  return boards
 }
-
-
 
 const getBoardInfo = (project, folder) => {
   let board = correctTypes(project)
@@ -96,7 +96,7 @@ const getBoardInfo = (project, folder) => {
   return board
 }
 
-const getGithubInfo = (folder) =>  {
+const getGithubInfo = folder => {
   const id = folder.replace(/^boards\/github.com/, '')
   let text
   const url = `https://api.github.com/repos${id}`
@@ -110,7 +110,7 @@ const getGithubInfo = (folder) =>  {
   return JSON.parse(text)
 }
 
-const correctTypes = (boardInfo) => {
+const correctTypes = boardInfo => {
   const boardInfoWithEmpty = {
     id: '',
     summary: ''

@@ -4,7 +4,9 @@ function installExtension() {
   let onClick
   if (/Chrome/.test(version)) {
     onClick = () => {
-      window.open('https://chrome.google.com/webstore/detail/kitspace-1-click-bom/mflpmlediakefinapghmabapjeippfdi')
+      window.open(
+        'https://chrome.google.com/webstore/detail/kitspace-1-click-bom/mflpmlediakefinapghmabapjeippfdi'
+      )
     }
   } else if (/Firefox/.test(version)) {
     onClick = () => {

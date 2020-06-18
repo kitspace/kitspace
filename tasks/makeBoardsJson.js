@@ -1,8 +1,8 @@
-const fs = require('fs');
-const utils = require('./utils/utils');
-const { parseProjects } = require('./utils/parseProjects');
+const fs = require('fs')
+const utils = require('./utils/utils')
+const {parseProjects} = require('./utils/parseProjects')
 
-const boardDir = 'boards';
+const boardDir = 'boards'
 
 if (require.main !== module) {
   module.exports = function() {
@@ -12,11 +12,11 @@ if (require.main !== module) {
     return {deps, targets, moduleDep}
   }
 } else {
-  const {config, cached_build, deps, targets} = utils.processArgs(process.argv);
+  const {config, cached_build, deps, targets} = utils.processArgs(process.argv)
 
-  const boards = parseProjects(config, cached_build);
+  const boards = parseProjects(config, cached_build)
 
-  inPlaceShuffleArray(boards);
+  inPlaceShuffleArray(boards)
 
   const boardJson = fs.openSync(targets[0], 'w')
   fs.write(boardJson, JSON.stringify(boards), err => {

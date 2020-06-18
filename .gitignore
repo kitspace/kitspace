@@ -1,6 +1,7 @@
 build.ninja
 build/*
 node_modules/*
+.idea/
 *.sw*
 boards/*
 npm-debug.log
