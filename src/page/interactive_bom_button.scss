@@ -32,18 +32,6 @@
     min-width: 100px;
   }
 
-  //XXX if you change this change it in the .jsx too!
-  @media (max-width: 920px) {
-    .ui.menu {
-      width: 100%;
-    }
-
-    &__container {
-      flex-direction: column;
-      justify-content: center;
-    }
-  }
-
   a.item {
     margin-right: 10px !important;
     margin-left: 10px !important;

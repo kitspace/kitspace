@@ -13,7 +13,7 @@ script:
   - bash keep_alive.sh &
   - export NODE_ENV=production
   - mkdir ~/.kicad_plugins
-  - pushd ~/.kicad_plugins ; wget https://github.com/openscopeproject/InteractiveHtmlBom/releases/download/v2.3/InteractiveHtmlBom.zip ; unzip InteractiveHtmlBom.zip ; rm InteractiveHtmlBom.zip ; popd
+  - pushd ~/.kicad_plugins ; git clone https://github.com/kitspace/InteractiveHtmlBom.git ; cd InteractiveHtmlBom ; git checkout kitspace-config ; popd
   - ./scripts/plug_versions
   - ./scripts/get_boards production $CACHED_BUILD
   - ./configure production $CACHED_BUILD

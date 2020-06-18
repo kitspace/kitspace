@@ -8,7 +8,10 @@ import os.path
 kicad_file = sys.argv[1]
 ibom_file = sys.argv[2]
 
-IBOM = "~/.kicad_plugins/InteractiveHtmlBom/generate_interactive_bom.py"
+BASEDIR = os.path.dirname(sys.argv[0])
+IBOM_CONFIG = os.path.join(BASEDIR, "ibom_config/config.ini")
+
+IBOM = "~/.kicad_plugins/InteractiveHtmlBom/InteractiveHtmlBom/generate_interactive_bom.py"
 IBOM_SCRIPT = os.path.expanduser(IBOM)
 
 destdir = os.path.abspath(os.path.dirname(ibom_file))
@@ -18,6 +21,8 @@ os.chdir(os.path.dirname(kicad_file))
 cmd = ["python", IBOM_SCRIPT,
        "--dest-dir", destdir,
        "--name-format", "interactive_bom",
+       "--config", IBOM_CONFIG,
        "--no-browser",
        os.path.basename(kicad_file)]
+
 subprocess.call(cmd)
