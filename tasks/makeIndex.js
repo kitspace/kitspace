@@ -9,7 +9,8 @@ if (require.main !== module) {
       deps = [
         'build/.temp/index/index.jsx',
         'src/index/index.html',
-        'build/.temp/boards.json'
+        'build/.temp/boards.json',
+        'build/.temp/search_index.json'
       ]
       return {deps, targets, moduleDep: true}
     } else if (config === 'dev') {
