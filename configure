@@ -323,6 +323,7 @@ ninja
   .from('build/.temp/index/render_index.jsx')
   .need(jsMainTargets)
   .need('build/.temp/boards.json')
+  .need('build/.temp/search_index.json')
   .using('browserify')
 
 ninja

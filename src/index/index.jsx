@@ -7,7 +7,7 @@ const BoardList = require('./board_list')
 const Intro = require('./intro')
 
 const TitleBar = require('../title_bar')
-const boards = require('../boards.json')
+const boards = require('../search_index.json')
 
 function Search(props) {
   return (
@@ -60,7 +60,7 @@ var Main = React.createClass({
       .firstElementChild.addEventListener('keydown', this.handleKeydown)
   },
   searchUpdated(term) {
-    const filters = ['id', 'summary']
+    const filters = ['id', 'summary', 'bom']
     const result = boards.filter(ReactSearchInput.createFilter(term, filters))
     if (typeof _paq !== 'undefined' && term.length > 2) {
       _paq.push([
