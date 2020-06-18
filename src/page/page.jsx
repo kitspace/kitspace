@@ -9,7 +9,7 @@ const InfoBar = require('./info_bar')
 const TitleBar = require('../title_bar')
 const FadeImage = require('../fade_image')
 const BuyParts = require('../buy_parts/buy_parts')
-const InteractiveBOM = require('./interactive_bom')
+const InteractiveBOMButton = require('./interactive_bom_button')
 const Readme = require('../readme')
 const semantic = require('semantic-ui-react')
 
@@ -62,7 +62,7 @@ const Page = createClass({
               <FadeImage src="images/bottom.svg" />
             </BoardShowcase>
             <OrderPcbs />
-            {info.has_interactive_bom && <InteractiveBOM />}
+            {info.has_interactive_bom && <InteractiveBOMButton />}
             <BuyParts lines={info.bom.lines} parts={info.bom.parts} />
             <div className="readme-container">
               <Readme />

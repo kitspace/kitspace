@@ -34,9 +34,3 @@ if (require.main !== module) {
   const run_ibom = path.join(__dirname, 'run_ibom')
   cp.execSync(`${run_ibom} ${kicadPcbFile} ${ibom}`)
 }
-
-function __guard__(value, transform) {
-  return typeof value !== 'undefined' && value !== null
-    ? transform(value)
-    : undefined
-}
