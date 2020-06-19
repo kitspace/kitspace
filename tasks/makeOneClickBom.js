@@ -8,7 +8,7 @@ if (require.main !== module) {
     if (config === 'production') {
       deps = [
         'build/.temp/1-click-bom/1-click-bom.jsx',
-        'src/1-click-bom/1-click-bom.html',
+        'src/1-click-bom/1-click-bom.html'
       ]
       return {deps, targets, moduleDep: true}
     } else if (config === 'dev') {

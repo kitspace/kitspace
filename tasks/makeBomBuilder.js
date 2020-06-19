@@ -8,7 +8,7 @@ if (require.main !== module) {
     if (config === 'production') {
       deps = [
         'build/.temp/bom-builder/bom-builder.jsx',
-        'src/bom-builder/bom-builder.html',
+        'src/bom-builder/bom-builder.html'
       ]
       return {deps, targets, moduleDep: true}
     } else if (config === 'dev') {

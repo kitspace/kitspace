@@ -14,7 +14,8 @@ function InfoBar(props) {
   if (info.site) {
     site = (
       <span>
-        {'  |  '}<a href={info.site}>homepage</a>
+        {'  |  '}
+        <a href={info.site}>homepage</a>
       </span>
     )
   }

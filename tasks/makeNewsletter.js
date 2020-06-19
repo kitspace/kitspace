@@ -8,7 +8,7 @@ if (require.main !== module) {
     if (config === 'production') {
       deps = [
         'build/.temp/newsletter/newsletter.jsx',
-        'src/newsletter/newsletter.html',
+        'src/newsletter/newsletter.html'
       ]
       return {deps, targets, moduleDep: true}
     } else if (config === 'dev') {
