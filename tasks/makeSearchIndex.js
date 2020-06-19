@@ -5,7 +5,10 @@ const {parseProjects} = require('./utils/parseProjects')
 if (require.main !== module) {
   module.exports = function(config) {
     const targets = ['build/.temp/search_index.json']
-    const boards = parseProjects(config, false)
+
+    const {cached_build} = utils.processArgs(process.argv)
+    const boards = parseProjects(config, cached_build)
+
     const boardsInfoPaths = boards.map(
       b => `build/.temp/boards/${b.id}/info.json`
     )
