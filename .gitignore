@@ -1,4 +1,4 @@
-#build.ninja
+build.ninja
 build/*
 node_modules/*
 .idea/
