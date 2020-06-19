@@ -5,7 +5,7 @@ const {parseProjects} = require('./utils/parseProjects')
 if (require.main !== module) {
   module.exports = function(config) {
     const targets = ['build/.temp/search_index.json']
-    const boards = parseProjects(config, false)
+    const boards = parseProjects(config, process.env.CACHED_BUILD)
     const boardsInfoPaths = boards.map(
       b => `build/.temp/boards/${b.id}/info.json`
     )
@@ -24,9 +24,14 @@ if (require.main !== module) {
       id: info.id,
       summary: info.summary,
       bom: info.bom.lines
-        .map(l => l.description)
+        .map(l => {
+          const description = l.description
+          const MPN = l.partNumbers.map(p => p.part)
+
+          return [description, MPN].filter(field => field !== '').toString()
+        })
         .filter(l => l !== '')
-        .toString()
+        .join('')
     }
     indices.push(index)
   })
