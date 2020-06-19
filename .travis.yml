@@ -8,8 +8,6 @@ addons:
     packages:
       - inkscape
       - kicad
-env:
-  - CACHED_BUILD=false
 script:
   - bash keep_alive.sh &
   - export NODE_ENV=production
@@ -18,7 +16,7 @@ script:
   - ./configure production $CACHED_BUILD
   - wget https://github.com/ninja-build/ninja/releases/download/v1.6.0/ninja-linux.zip
   - unzip ninja-linux.zip
-  - if  [ "${CACHED_BUILD}" != "cached" ]; then ./ninja clean; fi
+#  - if  [ "${CACHED_BUILD}" != "cached" ]; then ./ninja clean; fi
   - ./ninja -j 2 && cp registry.json build/ && ./scripts/deploy
 cache:
   yarn: true
