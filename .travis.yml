@@ -12,7 +12,6 @@ script:
   - bash keep_alive.sh &
   - export NODE_ENV=production
   - ./scripts/plug_versions
-  - export CACHED_BUILD=false
   - ./scripts/get_boards production $CACHED_BUILD
   - ./configure production $CACHED_BUILD
   - wget https://github.com/ninja-build/ninja/releases/download/v1.6.0/ninja-linux.zip
