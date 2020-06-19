@@ -24,9 +24,14 @@ if (require.main !== module) {
       id: info.id,
       summary: info.summary,
       bom: info.bom.lines
-        .map(l => l.description)
+        .map(l => {
+          const description = l.description
+          const MPN = l.partNumbers.map(p => p.part)
+
+          return [description, MPN].filter(field => field !== '').toString()
+        })
         .filter(l => l !== '')
-        .toString()
+        .join('')
     }
     indices.push(index)
   })
