@@ -6,8 +6,7 @@ if (require.main !== module) {
   module.exports = function(config) {
     const targets = ['build/.temp/search_index.json']
 
-    // const {cached_build} = utils.processArgs(process.argv)
-    const boards = parseProjects(config, false)
+    const boards = parseProjects(config, true)
 
     const boardsInfoPaths = boards.map(
       b => `build/.temp/boards/${b.id}/info.json`
