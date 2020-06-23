@@ -9,7 +9,7 @@ addons:
       - inkscape
       - kicad
 env:
-  -CACHED_BUILD=cached
+  - CACHED_BUILD=cached
 script:
   - bash keep_alive.sh &
   - export NODE_ENV=production
