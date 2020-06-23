@@ -8,6 +8,8 @@ addons:
     packages:
       - inkscape
       - kicad
+env:
+  -CACHED_BUILD=cashed
 script:
   - bash keep_alive.sh &
   - export NODE_ENV=production
