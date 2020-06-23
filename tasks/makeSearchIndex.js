@@ -38,3 +38,4 @@ if (require.main !== module) {
 
   fs.writeFileSync(targets[0], JSON.stringify(indices))
 }
+  

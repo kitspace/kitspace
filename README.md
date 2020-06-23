@@ -20,6 +20,10 @@ project page are what allow a design to be manufactured:
 
 Help us build an open hardware repository of useful electronics projects!
 
+## How many people visit the site?
+
+Our visitor stats are public [on plausible.io](https://plausible.io/kitspace.org). 
+
 ## pcb-stackup
 
 The renderings of the PCB files are made using [pcb-stackup](https://github.com/tracespace/pcb-stackup).
