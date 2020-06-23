@@ -7,7 +7,6 @@ if (require.main !== module) {
     const targets = ['build/.temp/search_index.json']
 
     const boards = parseProjects(config, true)
-
     const boardsInfoPaths = boards.map(
       b => `build/.temp/boards/${b.id}/info.json`
     )
@@ -40,3 +39,4 @@ if (require.main !== module) {
 
   fs.writeFileSync(targets[0], JSON.stringify(indices))
 }
+  
