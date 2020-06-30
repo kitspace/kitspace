@@ -22,7 +22,7 @@ Help us build an open hardware repository of useful electronics projects!
 
 ## How many people visit the site?
 
-Our visitor stats are public [on plausible.io](https://plausible.io/kitspace.org). 
+Our visitor stats are public [on plausible.io](https://plausible.io/kitspace.org).
 
 ## pcb-stackup
 
@@ -285,6 +285,10 @@ Visit http://127.0.0.1:8080 in your browser to see your local development site.
 [4]: https://help.github.com/articles/create-a-repo/
 [5]: https://help.github.com/articles/adding-a-file-to-a-repository/
 [6]: http://www.yaml.org/start.html
+
+## Code of Conduct
+
+We are committed to making working on Kitspace an inclusive and welcoming environment. All contributors are expected to abide by our [code of conduct](code_of_conduct.md). It's just common sense.
 
 ## Contributors
 
