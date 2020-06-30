@@ -23,7 +23,7 @@ if (require.main !== module) {
     const deps = [kicadPcbFile]
     const buildFolder = boardInfo.boardPath.replace('boards', 'build/boards')
     const targets = [
-      `${buildFolder}/interactive_bom.html`
+      `${buildFolder}/interactive_bom.json`
     ]
     return {deps, targets, moduleDep: false}
   }

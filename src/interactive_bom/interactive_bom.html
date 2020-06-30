@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- HTML Meta Tags -->
+        <title>Interactive BOM</title>
+        <meta name="description" content='Kitspace is a place to share electronics projects.'>
+
+        <!-- TODO: FILL IN METADATA TAGS HERE -->
+
+        <style>
+          @font-face {
+            font-family: 'Noto Sans';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Noto Sans'), local('NotoSans'), url(/images/NotoSans.ttf) format('truetype');
+          }
+          @font-face {
+            font-family: 'Noto Sans';
+            font-style: normal;
+            font-weight: 700;
+            src: local('Noto Sans Bold'), local('NotoSans-Bold'), url(/images/NotoSansBold.ttf) format('truetype');
+          }
+          #content { height: 100%; }
+          #content div.ibom_wrapper { height: 880px; }
+          #content div.ibom_wrapper div.content { height: 800px; }
+        </style>
+        <script type="text/javascript" src=/vendor.js></script>
+        <script type="text/javascript" src="/ibom-scripts.js"></script>
+        <script>
+          var config = {
+            'dark_mode': false,
+            'show_pads': true,
+            'show_fabrication': false,
+            'show_silkscreen': true,
+            'highlight_pin1': true,
+            'redraw_on_drag': true,
+            'board_rotation': 0,
+            'checkboxes': 'Sourced,Placed',
+            'bom_view': 'left-right',
+            'layer_view': 'FB',
+            'extra_fields': []
+          };
+          var pcbdata = null;
+        </script>
+        <link
+          rel="icon"
+          type="image/png"
+          href="/images/favicon.png">
+        <link rel="stylesheet" href="interactive_bom.css">
+        <script type="text/javascript">
+          var _paq = _paq || [];
+          /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+          _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+          _paq.push(["setCookieDomain", "*.kitspace.org"]);
+          _paq.push(["setDomains", ["*.kitspace.org"]]);
+          _paq.push(['trackPageView']);
+          _paq.push(['enableLinkTracking']);
+          (function() {
+            var u="https://matomo.kitspace.org/";
+            _paq.push(['setTrackerUrl', u+'piwik.php']);
+            _paq.push(['setSiteId', '1']);
+            var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+            g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+          })();
+        </script>
+    </head>
+    <body>
+        <div id="content"></div>
+        <script type="text/javascript" src=app.js></script>
+    </body>
+</html>

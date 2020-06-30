@@ -12,8 +12,6 @@ addons:
 script:
   - bash keep_alive.sh &
   - export NODE_ENV=production
-  - mkdir ~/.kicad_plugins
-  - pushd ~/.kicad_plugins ; git clone https://github.com/kitspace/InteractiveHtmlBom.git ; cd InteractiveHtmlBom ; git checkout kitspace-config ; popd
   - ./scripts/plug_versions
   - ./scripts/get_boards production $CACHED_BUILD
   - ./configure production $CACHED_BUILD
@@ -29,4 +27,3 @@ cache:
     - ./build
 env:
   - CACHED_BUILD=false
-

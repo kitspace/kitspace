@@ -1,28 +1,43 @@
 #!/usr/bin/env python
 
+import json
 import sys
-import subprocess
 import os
 import os.path
+import wx
 
-kicad_file = sys.argv[1]
-ibom_file = sys.argv[2]
+from InteractiveHtmlBom.InteractiveHtmlBom.core import ibom
+from InteractiveHtmlBom.InteractiveHtmlBom.core.config import Config
+from InteractiveHtmlBom.InteractiveHtmlBom.ecad import get_parser_by_extension
+from InteractiveHtmlBom.InteractiveHtmlBom.version import version
+
+
+kicad_file = os.path.abspath(sys.argv[1])
+out_file = os.path.abspath(sys.argv[2])
 
 BASEDIR = os.path.dirname(sys.argv[0])
 IBOM_CONFIG = os.path.join(BASEDIR, "ibom_config/config.ini")
 
-IBOM = "~/.kicad_plugins/InteractiveHtmlBom/InteractiveHtmlBom/generate_interactive_bom.py"
-IBOM_SCRIPT = os.path.expanduser(IBOM)
-
-destdir = os.path.abspath(os.path.dirname(ibom_file))
-
 os.chdir(os.path.dirname(kicad_file))
 
-cmd = ["python", IBOM_SCRIPT,
-       "--dest-dir", destdir,
-       "--name-format", "interactive_bom",
-       "--config", IBOM_CONFIG,
-       "--no-browser",
-       os.path.basename(kicad_file)]
+logger = ibom.Logger(cli=True)
+ibom.log = logger
 
-subprocess.call(cmd)
+app = wx.App()
+
+config = Config(version)
+config.config_file = IBOM_CONFIG
+config.load_from_ini()
+
+parser = get_parser_by_extension(kicad_file, config, logger)
+
+pcbdata, components = parser.parse()
+if not pcbdata or not components:
+    logger.error('Parsing failed.')
+    sys.exit(1)
+
+pcbdata["bom"] = ibom.generate_bom(components, config, None)
+pcbdata["ibom_version"] = config.version
+
+with open(out_file, 'w') as fp:
+    json.dump(pcbdata, fp)

@@ -32,7 +32,8 @@ ninja
   .description('$command')
 
 let browserify = `browserify --extension='.jsx' --transform [ babelify \
-    --presets [ @babel/react @babel/env ] ]`
+    --presets [ @babel/react @babel/env ] ] --transform [ stringify \
+    --extensions [.html] ] `
 
 if (config === 'dev') {
   browserify += ' --debug --full-paths'
@@ -224,7 +225,8 @@ function getKitspaceYaml(folder) {
   return [{}, '']
 }
 
-const jsSrc = globule.find(['src/**/*.js', 'src/**/*.jsx'])
+const jsSrc = globule.find(['src/**/*.js', 'src/**/*.jsx']).
+      filter((p) => !p.includes('InteractiveHtmlBom'))
 
 const jsMainTargets = jsSrc.map(function(f) {
   const temp = ninjaBuildGen.escape(f.replace('src', 'build/.temp'))
@@ -255,6 +257,18 @@ for (const board of boards) {
     })
 }
 
+const ibomJs = globule.find(['src/interactive_bom/InteractiveHtmlBom/*.js'])
+
+ninja
+  .rule('concat')
+  .run('cat $in > $out')
+  .description('Concatenate files')
+
+ninja
+  .edge('build/ibom-scripts.js')
+  .from(ibomJs)
+  .using('concat')
+
 const sassSrc = globule.find('src/**/*.scss')
 
 ninja
@@ -264,7 +278,7 @@ ninja
   .assign('path', 'src/')
   .using('sass')
 
-for (const name of ['bom-builder', '1-click-bom', 'newsletter']) {
+for (const name of ['bom-builder', '1-click-bom', 'newsletter', 'interactive_bom']) {
   // compile the sass scss into css
   ninja
     .edge(`build/.temp/${name}/${name}.css`)
@@ -301,6 +315,11 @@ ninja
   .need(sassSrc)
   .assign('path', 'src/')
   .using('sass')
+
+ninja
+  .edge('build/.temp/interactive_bom/InteractiveHtmlBom/ibom.html')
+  .from('src/interactive_bom/InteractiveHtmlBom/ibom.html')
+  .using('copy')
 
 ninja
   .edge('build/index.css')
