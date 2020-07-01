@@ -16,7 +16,7 @@ const bomHtml = bomHtmlTmp.slice(bodyStartIdx + 7, bodyEndIdx)
 const IBOMUI = createClass({
   render() {
     return (
-      <div className="content" dangerouslySetInnerHTML={{__html: bomHtml}}/>
+      <div className="ibom" dangerouslySetInnerHTML={{__html: bomHtml}}/>
     )
   },
   componentDidMount() {
