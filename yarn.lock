@@ -10966,7 +10966,7 @@ string_decoder@~1.1.1:
   dependencies:
     safe-buffer "~5.1.0"
 
-stringify@^5.2.0:
+stringify@^5.1.0:
   version "5.2.0"
   resolved "https://registry.yarnpkg.com/stringify/-/stringify-5.2.0.tgz#f22bb1f31ac10b0464eb7ee60f1aa9f71e546512"
   integrity sha1-8iux8xrBCwRk637mDxqp9x5UZRI=
