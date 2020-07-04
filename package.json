@@ -34,7 +34,6 @@
     "rst2mdown": "^0.1.0",
     "semantic-ui-css": "^2.2.4",
     "source-map-support": "^0.4.0",
-    "stringify": "5.1.0",
     "uglifyify": "^3.0.1",
     "uglifyjs": "^2.4.10"
   },

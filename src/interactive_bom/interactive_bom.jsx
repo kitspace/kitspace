@@ -2,7 +2,7 @@ const React = require('react')
 const createClass = require('create-react-class')
 const semantic = require('semantic-ui-react')
 const TitleBar = require('../title_bar')
-const IBOMUI = require('./ibom_ui')
+const IBOM = require('./IBOM')
 
 const InteractiveBOM = createClass({
   render() {
@@ -16,7 +16,7 @@ const InteractiveBOM = createClass({
            </semantic.Loader>
          </semantic.Container>
         :
-         <IBOMUI pcbdata={this.state.pcbdata} />}
+         <IBOM pcbdata={this.state.pcbdata} />}
       </div>
     )
   },
