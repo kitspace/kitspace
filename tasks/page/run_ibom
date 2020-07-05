@@ -15,8 +15,6 @@ from InteractiveHtmlBom.InteractiveHtmlBom.version import version
 kicad_file = os.path.abspath(sys.argv[1])
 out_file = os.path.abspath(sys.argv[2])
 
-print('===> kicad_file = {}   out_file = {}'.format(kicad_file, out_file), file=sys.stderr)
-
 BASEDIR = os.path.dirname(sys.argv[0])
 IBOM_CONFIG = os.path.join(BASEDIR, "ibom_config/config.ini")
 
@@ -32,8 +30,6 @@ config.config_file = IBOM_CONFIG
 config.load_from_ini()
 
 parser = get_parser_by_extension(kicad_file, config, logger)
-
-print('===> parser =', parser, file=sys.stderr)
 
 pcbdata, components = parser.parse()
 if not pcbdata or not components:

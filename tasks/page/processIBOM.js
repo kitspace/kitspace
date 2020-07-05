@@ -29,11 +29,6 @@ if (require.main !== module) {
   }
 } else {
   const {config, deps, targets} = utils.processArgs(process.argv)
-  console.log('-- deps -------');
-  console.log(deps)
-  console.log('-- targets ----');
-  console.log(targets)
-  console.log('---------------');
   let kicadPcbFile = deps[0];
   let ibom = targets[0];
   const run_ibom = path.join(__dirname, 'run_ibom')
