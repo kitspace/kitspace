@@ -4,6 +4,13 @@ const utils = require('./utils/utils')
 
 const converter = new htmlToJsx({createClass: false})
 
+function fix(re, name, s) {
+  const onChange = /onchange="([^"]+)"/g;
+  return s.replace(re, (match, p1) => {
+    return name + "={(e) => { " + p1.replace("this", "e.target") + " }}"
+  })
+
+}
 if (require.main !== module) {
   module.exports = function(config) {
     let deps
@@ -32,8 +39,15 @@ if (require.main !== module) {
   // would be to fix the htmltojsx package, but the PR open to fix
   // this problem is stale, and I don't want to take the time to
   // freshen it up...
-  const reactComponentFixed =
-    reactComponent.replace(/{"/g, '"').replace(/"}/g, '"')
+  const tmp1 = reactComponent.replace(/{"/g, '"').replace(/"}/g, '"')
+
+  // "Reactify" event handler syntax. This isn't the prettiest, but it
+  // seems like the simplest way to use the IBOM HTML without forking
+  // the IBOM repo.
+  const tmp2 = fix(/onchange="([^"]+)"/g, "onChange", tmp1)
+  const tmp3 = fix(/oninput="([^"]+)"/g, "onInput", tmp2)
+  const tmp4 = fix(/onclick="([^"]+)"/g, "onClick", tmp3)
+  const reactComponentFixed = tmp4
 
   fs.writeFileSync(
     jsx,
