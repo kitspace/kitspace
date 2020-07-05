@@ -18,6 +18,7 @@ function Newsletter() {
         <semantic.Form
           name="newsletter"
           method="POST"
+          action="POST"
           data-netlify="true"
           style={{padding: 15}}
         >
