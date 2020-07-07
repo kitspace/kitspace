@@ -1,10 +1,10 @@
 const React = require('react')
 const semantic = require('semantic-ui-react')
 
-const {folder} = require('../zip-info.json')
+const info = require('../info.json')
 
 function InteractiveBOMButton() {
-  const ibomUrl = `/interactive_bom?/${folder}`
+  const ibomUrl = `/interactive_bom?${info.id}`
   return (
     <div className="InteractiveBOMButton">
       <semantic.Menu compact borderless>

@@ -20,7 +20,10 @@ if (require.main !== module) {
     if (kicadPcbFile == null) {
       return {deps: [], targets: [], moduleDep: false};
     }
-    const deps = [kicadPcbFile]
+    const deps = [
+      kicadPcbFile,
+      `build/.temp/${boardInfo.boardPath}/info.json`,
+    ]
     const buildFolder = boardInfo.boardPath.replace('boards', 'build/boards')
     const targets = [
       `${buildFolder}/interactive_bom.json`
@@ -30,7 +33,8 @@ if (require.main !== module) {
 } else {
   const {config, deps, targets} = utils.processArgs(process.argv)
   let kicadPcbFile = deps[0];
+  let infoFile = deps[1];
   let ibom = targets[0];
   const run_ibom = path.join(__dirname, 'run_ibom')
-  cp.execSync(`${run_ibom} "${kicadPcbFile}" "${ibom}"`)
+  cp.execSync(`${run_ibom} "${kicadPcbFile}" "${infoFile}" "${ibom}"`)
 }

@@ -13,10 +13,11 @@ from InteractiveHtmlBom.InteractiveHtmlBom.version import version
 
 
 kicad_file = os.path.abspath(sys.argv[1])
-out_file = os.path.abspath(sys.argv[2])
+info_file = os.path.abspath(sys.argv[2])
+out_file = os.path.abspath(sys.argv[3])
 
 BASEDIR = os.path.dirname(sys.argv[0])
-IBOM_CONFIG = os.path.join(BASEDIR, "ibom_config/config.ini")
+IBOM_CONFIG = os.path.join(BASEDIR, 'ibom_config/config.ini')
 
 os.chdir(os.path.dirname(kicad_file))
 
@@ -36,8 +37,13 @@ if not pcbdata or not components:
     logger.error('Parsing failed.')
     sys.exit(1)
 
-pcbdata["bom"] = ibom.generate_bom(components, config, None)
-pcbdata["ibom_version"] = config.version
+pcbdata['bom'] = ibom.generate_bom(components, config, None)
+pcbdata['ibom_version'] = config.version
+
+with open(info_file) as ifp:
+    info = json.load(ifp)
+    pcbdata['summary'] = info['summary']
+    pcbdata['metadata']['title'] = info['id'].split('/')[-1]
 
 with open(out_file, 'w') as fp:
     json.dump(pcbdata, fp)
