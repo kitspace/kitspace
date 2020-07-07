@@ -18,9 +18,7 @@ script:
   - wget https://github.com/ninja-build/ninja/releases/download/v1.6.0/ninja-linux.zip
   - unzip ninja-linux.zip
   - if  [ "${CACHED_BUILD}" != "cached" ]; then ./ninja clean; fi
-  - Xvfb :0 -screen 0 1024x768x24 > X.log 2>&1 &
-  - export DISPLAY=:0
-  - ./ninja -j 2 && cp registry.json build/ && ./scripts/deploy
+  - xvfb-run --server-args="-screen 0 1024x768x24" -- ./ninja -j 2 && cp registry.json build/ && ./scripts/deploy
 cache:
   yarn: true
   directories:
