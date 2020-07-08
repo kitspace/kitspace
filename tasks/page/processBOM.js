@@ -8,6 +8,8 @@ const cp = require('child_process')
 const utils = require('../utils/utils')
 const getPartinfo = require('../../src/get_partinfo.js')
 
+const omitIBOMFile = 'omit-ibom-boards.txt'
+
 if (require.main !== module) {
   module.exports = function(config, boardInfo) {
     let bom
@@ -32,7 +34,8 @@ if (require.main !== module) {
       'build/.temp/boards.json',
       boardInfo.repoPath,
       bom,
-      boardInfo.yamlPath
+      boardInfo.yamlPath,
+      omitIBOMFile
     ]
     if (kicadPcbFile != null) {
       deps.push(kicadPcbFile)
@@ -46,7 +49,7 @@ if (require.main !== module) {
 } else {
   let kitspaceYaml = {}
   const {deps, targets} = utils.processArgs(process.argv)
-  const [boardsJSON, repoPath, bomPath, yamlPath] = deps
+  const [boardsJSON, repoPath, bomPath, yamlPath, omitIBOMFile] = deps
   const [infoPath, outBomPath] = targets
   const boardFolder = infoPath
     .replace('build/.temp/', '')
@@ -55,6 +58,8 @@ if (require.main !== module) {
   const boards = JSON.parse(fs.readFileSync(boardsJSON))
   const info = {id: boardFolder.replace('boards/', '')}
   const file = yamlPath ? fs.readFileSync(yamlPath) : null
+  const omitIBOMBoards =
+    fs.readFileSync(omitIBOMFile, 'utf-8').split('\n').filter(Boolean)
 
   info.summary = boards.reduce((prev, obj) => {
     if (obj.id === info.id) {
@@ -104,7 +109,9 @@ if (require.main !== module) {
   repo = repo.split('\t')[1].split(' ')[0]
   info.repo = repo
 
-  info.has_interactive_bom = deps.some((d) => d.endsWith('.kicad_pcb'))
+  const repoName = repoPath.split('/').slice(1).join('/')
+  const omitted = omitIBOMBoards.includes(repoName)
+  info.has_interactive_bom = !omitted && deps.some((d) => d.endsWith('.kicad_pcb'))
 
   getPartinfo(info.bom.lines).then(parts => {
     info.bom.parts = parts

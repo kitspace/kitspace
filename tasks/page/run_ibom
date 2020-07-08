@@ -24,7 +24,24 @@ os.chdir(os.path.dirname(kicad_file))
 logger = ibom.Logger(cli=True)
 ibom.log = logger
 
-app = wx.App()
+wx_retry_count = 0
+wx_ok = False
+while not wx_ok and wx_retry_count < 3:
+    try:
+        app = wx.App()
+        wx_ok = True
+    except Exception as exc:
+        print('WX SETUP FAILED!!!')
+        print()
+        print(exc)
+        print()
+        print('RETRYING IN 30s...')
+        time.sleep(30)
+        wx_retry_count += 1
+
+if not wx_ok:
+    print('WX SETUP FAILED REPEATEDLY!!!')
+    sys.exit(1)
 
 config = Config(version)
 config.config_file = IBOM_CONFIG
@@ -37,25 +54,7 @@ if not pcbdata or not components:
     logger.error('Parsing failed.')
     sys.exit(1)
 
-ibom_retry_count = 0
-ibom_ok = False
-while not ibom_ok and ibom_retry_count < 3:
-    try:
-        pcbdata['bom'] = ibom.generate_bom(components, config, None)
-        ibom_ok = True
-    except Exception as exc:
-        print('RUNNING IBOM FAILED!!!')
-        print()
-        print(exc)
-        print()
-        print('RETRYING IN 30s...')
-        time.sleep(30)
-        ibom_retry_count += 1
-
-if not ibom_ok:
-    print('RUNNING IBOM FAILED REPEATEDLY!!!')
-    sys.exit(1)
-
+pcbdata['bom'] = ibom.generate_bom(components, config, None)
 pcbdata['ibom_version'] = config.version
 
 with open(info_file) as ifp:
