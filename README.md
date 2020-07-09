@@ -80,6 +80,11 @@ eda:
 
 ```
 
+If your project has a KiCad PCB file, and interactive assembly guide
+for the board will be created using the [Interactive HTML BOM
+plugin](https://github.com/openscopeproject/InteractiveHtmlBom) from
+the [Open Scope Project](https://github.com/openscopeproject).
+
 If both `eda` and `gerbers` are present the Gerber files will be used.
 
 ### Some examples
