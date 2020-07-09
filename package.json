@@ -74,6 +74,7 @@
     "react-search-input": "^0.11.3",
     "redux": "^3.6.0",
     "redux-immutable": "^4.0.0",
+    "screenfull": "^5.0.2",
     "semantic-ui-react": "^0.88.2",
     "superagent": "^5.2.2",
     "whats-that-gerber": "4.0.0-next.13",

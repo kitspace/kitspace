@@ -3,6 +3,7 @@ const ReactDOMServer = require('react-dom/server')
 const createClass = require('create-react-class')
 const {Helmet} = require('react-helmet')
 const semantic = require('semantic-ui-react')
+const screenfull = require('screenfull')
 
 const TitleBar = require('../title_bar')
 const IBOM = require('./IBOM')
@@ -35,7 +36,7 @@ const descriptionFixed =
             <meta name="twitter:image" content={this.state.metaImage} />
           </Helmet>
           <div className="ibom_wrapper">
-            <TitleBar route="/interactive_bom" />
+            {this.state.showTitleBar ? <TitleBar route="/interactive_bom" /> : null}
             {this.state.loading ?
              <semantic.Container style={{marginTop: 50}}>
                <semantic.Loader size='big' active>
@@ -43,7 +44,7 @@ const descriptionFixed =
                </semantic.Loader>
              </semantic.Container>
             :
-             <IBOM pcbdata={this.state.pcbdata} />}
+             <IBOM pcbdata={this.state.pcbdata} style={{height: this.state.wrapperHeight}} />}
           </div>
         </div>
       )
@@ -51,6 +52,8 @@ const descriptionFixed =
     getInitialState() {
       return {
         loading: true,
+        showTitleBar: true,
+        wrapperHeight: '',
         pcbdata: null,
         project: null,
         summary: 'Loading PCB data...',
@@ -82,8 +85,16 @@ const descriptionFixed =
             description: title + descriptionFixed,
             metaImage: `https://kitspace.org/${id}/images/top-with-background.png`
           })
-    })
-  }
+          if (screenfull.isEnabled) {
+            screenfull.on('change', () => {
+              this.setState({
+                showTitleBar: !screenfull.isFullscreen,
+                wrapperHeight: screenfull.isFullscreen ? '100%' : ''
+              })
+            })
+          }
+        })
+    }
 })
 
 module.exports = InteractiveBOM
