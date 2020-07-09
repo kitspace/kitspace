@@ -9,13 +9,14 @@ addons:
       - inkscape
       - kicad
       - xvfb
+services:
+  - xvfb
 script:
   - bash keep_alive.sh &
   - export NODE_ENV=production
   - ./scripts/plug_versions
   - ./scripts/get_boards production $CACHED_BUILD
   - ./configure production $CACHED_BUILD
-  - Xvfb -screen 0 1024x768x24 &
   - wget https://github.com/ninja-build/ninja/releases/download/v1.6.0/ninja-linux.zip
   - unzip ninja-linux.zip
   - if  [ "${CACHED_BUILD}" != "cached" ]; then ./ninja clean; fi

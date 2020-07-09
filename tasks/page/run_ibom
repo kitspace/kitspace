@@ -24,24 +24,7 @@ os.chdir(os.path.dirname(kicad_file))
 logger = ibom.Logger(cli=True)
 ibom.log = logger
 
-wx_retry_count = 0
-wx_ok = False
-while not wx_ok and wx_retry_count < 3:
-    try:
-        app = wx.App()
-        wx_ok = True
-    except Exception as exc:
-        print('WX SETUP FAILED!!!')
-        print()
-        print(exc)
-        print()
-        print('RETRYING IN 30s...')
-        time.sleep(30)
-        wx_retry_count += 1
-
-if not wx_ok:
-    print('WX SETUP FAILED REPEATEDLY!!!')
-    sys.exit(1)
+app = wx.App()
 
 config = Config(version)
 config.config_file = IBOM_CONFIG
