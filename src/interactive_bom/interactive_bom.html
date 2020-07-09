@@ -21,10 +21,28 @@
           #content { height: calc(100% - 80px); }
           #content > div { height: 100%; }
           #content > div > div.ibom_wrapper { height: 100%; }
-          #content .menu input[type="checkbox"] { margin: 3px 3px 3px 4px; }
-          #content .menu input[type="radio"] { margin: 3px 3px 3px 4px; }
-          #content .menu-content { box-sizing: content-box; }
-          #content .shameless-plug span { margin-right: 2px; }
+          #content > div > div.ibom_wrapper > div.ibom { height: 100%; }
+          #content div.ibom .menu input[type="checkbox"] { margin: 3px 3px 3px 4px; }
+          #content div.ibom .menu input[type="radio"] { margin: 3px 3px 3px 4px; }
+          #content div.ibom .menu-content { box-sizing: content-box; }
+          #content div.ibom .shameless-plug span { margin-right: 2px; }
+          .topmostdiv {
+            --pcb-edge-color: black;
+            --pad-color: #878787;
+            --pad-color-highlight: #D04040;
+            --pin1-outline-color: #ffb629;
+            --pin1-outline-color-highlight: #b4ff03;
+            --silkscreen-edge-color: #aa4;
+            --silkscreen-polygon-color: #4aa;
+            --silkscreen-text-color: #4aa;
+            --fabrication-edge-color: #907651;
+            --fabrication-polygon-color: #907651;
+            --fabrication-text-color: #a27c24;
+            --track-color: #def5f1;
+            --track-color-highlight: #D04040;
+            --zone-color: #def5f1;
+            --zone-color-highlight: #d0404080;
+          }
         </style>
         <script type="text/javascript" src=/vendor.js></script>
         <script type="text/javascript" src="/ibom-scripts.js"></script>

@@ -1,4 +1,6 @@
 @import '../colors';
 @import '../common';
 @import '../title_bar';
-@import './InteractiveHtmlBom/ibom'
+.ibom {
+  @import './InteractiveHtmlBom/ibom';
+}

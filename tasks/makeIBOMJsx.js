@@ -58,7 +58,9 @@ const createClass = require('create-react-class');
 const IBOM = createClass({
   render() {
     return (
-      ${reactComponentFixed}
+      <div className="ibom">
+        ${reactComponentFixed}
+      </div>
     )
   },
   componentDidMount() {
