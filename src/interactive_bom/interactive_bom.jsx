@@ -36,7 +36,7 @@ const descriptionFixed =
             <meta name="twitter:image" content={this.state.metaImage} />
           </Helmet>
           <div className="ibom_wrapper">
-            {this.state.showTitleBar ? <TitleBar route="/interactive_bom" /> : null}
+            <TitleBar route="/interactive_bom" />
             {this.state.loading ?
              <semantic.Container style={{marginTop: 50}}>
                <semantic.Loader size='big' active>
@@ -44,7 +44,7 @@ const descriptionFixed =
                </semantic.Loader>
              </semantic.Container>
             :
-             <IBOM pcbdata={this.state.pcbdata} style={{height: this.state.wrapperHeight}} />}
+             <IBOM pcbdata={this.state.pcbdata} />}
           </div>
         </div>
       )
@@ -52,8 +52,6 @@ const descriptionFixed =
     getInitialState() {
       return {
         loading: true,
-        showTitleBar: true,
-        wrapperHeight: '',
         pcbdata: null,
         project: null,
         summary: 'Loading PCB data...',
@@ -85,14 +83,6 @@ const descriptionFixed =
             description: title + descriptionFixed,
             metaImage: `https://kitspace.org/${id}/images/top-with-background.png`
           })
-          if (screenfull.isEnabled) {
-            screenfull.on('change', () => {
-              this.setState({
-                showTitleBar: !screenfull.isFullscreen,
-                wrapperHeight: screenfull.isFullscreen ? '100%' : ''
-              })
-            })
-          }
         })
     }
 })

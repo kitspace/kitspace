@@ -57,9 +57,8 @@ const createClass = require('create-react-class');
 
 const IBOM = createClass({
   render() {
-    const style = this.props.style
     return (
-      <div className="ibom" style={style}>
+      <div className="ibom">
         ${reactComponentFixed}
       </div>
     )
