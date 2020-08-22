@@ -6,5 +6,9 @@
   {
     "repo": "https://github.com/GlasgowEmbedded/glasgow",
     "hash": "dc3e083235b32ab51650d4c9700ac61428c8bc18"
+  },
+  {
+    "repo": "https://github.com/Ryzee119/OpenXenium/",
+    "hash": "04c9c27bc7c47ae244603d500aae0ad183562c7a"
   }
 ]
