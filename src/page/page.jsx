@@ -57,12 +57,15 @@ const Page = createClass({
           <div className="pageContainer">
             <img style={{display: 'none'}} src="/images/flags.png" />
             <InfoBar info={info} />
-            <BoardShowcase zipUrl={zipUrl}>
+            <BoardShowcase
+              zipUrl={zipUrl}
+              folder={folder}
+              hasInteractiveBom={info.has_interactive_bom}
+            >
               <FadeImage src="images/top.svg" />
               <FadeImage src="images/bottom.svg" />
             </BoardShowcase>
             <OrderPcbs />
-            {info.has_interactive_bom && <InteractiveBOMButton />}
             <BuyParts lines={info.bom.lines} parts={info.bom.parts} />
             <div className="readme-container">
               <Readme />
