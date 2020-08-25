@@ -86,7 +86,7 @@ var BoardShowcase = createClass({
             <Button
               basic
               as="a"
-              href={`/interactive_bom?/${this.props.folder}`}
+              href={`/interactive_bom?${this.props.folder}`}
             >
               <div style={{display: 'flex', flexDirection: 'column'}}>
                 <Header as="h4">
