@@ -19,8 +19,8 @@ function IBomIcon() {
       />
       <g transform="translate(0 -288.53)">
         <rect
-          stroke-linejoin="round"
-          stroke-width=".4"
+          strokeLinejoin="round"
+          strokeWidth=".4"
           stroke="#000"
           fill="none"
           ry="1.17"
@@ -30,13 +30,13 @@ function IBomIcon() {
           width="7.94"
         />
         <path
-          stroke-width=".4"
+          strokeWidth=".4"
           stroke="#000"
           fill="#4d4d4d"
           d="M1.06 290.12H3.7m-2.64 1.33H3.7m-2.64 1.32H3.7m-2.64 1.3H3.7m-2.64 1.33H3.7"
         />
         <path
-          stroke-width=".3"
+          strokeWidth=".3"
           stroke="#000"
           fill="none"
           d="M4.37 288.8v7.94m0-4.11h3.96"
