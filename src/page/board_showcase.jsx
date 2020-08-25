@@ -2,9 +2,7 @@
 const React = require('react')
 const createClass = require('create-react-class')
 const LazyLoad = require('../lazy_load')
-const InteractiveBomButton = require('./interactive_bom_button')
-const TracespaceIcon = require('./tracespace_icon')
-const {Icon, Segment, Button, Header} = require('semantic-ui-react')
+const {Icon, Segment} = require('semantic-ui-react')
 
 var BoardShowcase = createClass({
   getInitialState: function() {
@@ -67,22 +65,6 @@ var BoardShowcase = createClass({
               </div>
             </LazyLoad>
           </div>
-        </div>
-        <div className="boardshowcase-menu">
-          <Button
-            basic
-            as="a"
-            href={`https://tracespace.io/view/?boardUrl=${this.props.zipUrl}`}
-          >
-            <div style={{display: 'flex', flexDirection: 'column'}}>
-              <Header as="h4">
-                <TracespaceIcon />
-                Inspect Gerbers
-              </Header>
-              <div>Tracespace View</div>
-            </div>
-          </Button>
-          {this.props.hasInteractiveBom && <InteractiveBomButton />}
         </div>
       </div>
     )
