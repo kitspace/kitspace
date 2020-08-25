@@ -2,7 +2,7 @@
 const React = require('react')
 const createClass = require('create-react-class')
 const LazyLoad = require('../lazy_load')
-const IBomIcon = require('./ibom_icon')
+const InteractiveBomButton = require('./interactive_bom_button')
 const TracespaceIcon = require('./tracespace_icon')
 const {Icon, Segment, Button, Header} = require('semantic-ui-react')
 
@@ -82,21 +82,7 @@ var BoardShowcase = createClass({
               <div>Tracespace View</div>
             </div>
           </Button>
-          {this.props.hasInteractiveBom && (
-            <Button
-              basic
-              as="a"
-              href={`/interactive_bom?${this.props.folder}`}
-            >
-              <div style={{display: 'flex', flexDirection: 'column'}}>
-                <Header as="h4">
-                  <IBomIcon />
-                  Assembly Guide
-                </Header>
-                <div>Interactive HTML BOM</div>
-              </div>
-            </Button>
-          )}
+          {this.props.hasInteractiveBom && <InteractiveBomButton />}
         </div>
       </div>
     )
