@@ -9,7 +9,6 @@ const InfoBar = require('./info_bar')
 const TitleBar = require('../title_bar')
 const FadeImage = require('../fade_image')
 const BuyParts = require('../buy_parts/buy_parts')
-const InteractiveBOMButton = require('./interactive_bom_button')
 const Readme = require('../readme')
 const semantic = require('semantic-ui-react')
 
