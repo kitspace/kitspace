@@ -62,7 +62,7 @@ const Page = createClass({
               <FadeImage src="images/top.svg" />
               <FadeImage src="images/bottom.svg" />
             </BoardShowcase>
-            <div className="boardshowcase-menu">
+            <div className="boardmenu">
               <semantic.Button
                 basic
                 as="a"
