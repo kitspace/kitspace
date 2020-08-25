@@ -4,7 +4,7 @@
 @import '../buy_parts/buy_parts';
 @import 'board_showcase';
 @import 'order_pcbs';
-@import 'interactive_bom_button';
+@import 'board_extras_menu';
 
 .disabledSite {
   color: $gray;
@@ -113,9 +113,4 @@
 
 .readme img {
   max-width: 100%;
-}
-
-.boardmenu {
-  display: flex;
-  justify-content: center;
 }

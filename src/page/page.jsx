@@ -6,8 +6,7 @@ const {Helmet} = require('react-helmet')
 const BoardShowcase = require('./board_showcase')
 const OrderPcbs = require('./order_pcbs')
 const InfoBar = require('./info_bar')
-const TracespaceIcon = require('./tracespace_icon')
-const InteractiveBomButton = require('./interactive_bom_button')
+const BoardExtrasMenu = require('./board_extras_menu')
 
 const TitleBar = require('../title_bar')
 const FadeImage = require('../fade_image')
@@ -62,22 +61,10 @@ const Page = createClass({
               <FadeImage src="images/top.svg" />
               <FadeImage src="images/bottom.svg" />
             </BoardShowcase>
-            <div className="boardmenu">
-              <semantic.Button
-                basic
-                as="a"
-                href={`https://tracespace.io/view/?boardUrl=${zipUrl}`}
-              >
-                <div style={{display: 'flex', flexDirection: 'column'}}>
-                  <semantic.Header as="h4">
-                    <TracespaceIcon />
-                    Inspect Gerbers
-                  </semantic.Header>
-                  <div>Tracespace View</div>
-                </div>
-              </semantic.Button>
-              {info.has_interactive_bom && <InteractiveBomButton />}
-            </div>
+            <BoardExtrasMenu
+              hasInteractiveBom={info.has_interactive_bom}
+              zipUrl={zipUrl}
+            />
             <OrderPcbs />
             <BuyParts lines={info.bom.lines} parts={info.bom.parts} />
             <div className="readme-container">
