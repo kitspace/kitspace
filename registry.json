@@ -1,22 +1,14 @@
 [
   {
-    "repo": "https://github.com/mattvenn/esp8266-breakout",
-    "hash": "fcb3107c66670035c7cb330f5d98eddde5d17f56"
+    "repo": "https://github.com/robotsrulz/SP_Adapter",
+    "hash": "0391e520c2f1e953f703b467ebe6b8022971771"
   },
   {
-    "repo": "https://github.com/kitspace-forks/arduino-uno",
-    "hash": "5f10c3e4d9709344153aecf65faaef492ddcb0d1"
+    "repo": "https://github.com/Ryzee119/OpenXenium",
+    "hash": "258afd3276aad81249772b9b5a7b13a95e917141"
   },
   {
-    "repo": "https://github.com/kitspace-forks/Bus_Pirate",
-    "hash": "0ca376a0eedd116e3ffdbd5dfd5398a67fdba708"
-  },
-  {
-    "repo": "https://github.com/Jan--Henrik/hoverboard-breakout",
-    "hash": "0771fb5fb3c7170d1aa8a67006e35e7d275a4c97"
-  },
-  {
-    "repo": "https://github.com/8BitMixtape/8BitmixtapeNEO_ShenzhenReady",
-    "hash": "d8f86818c2ad3206abc9b7a0ed26dfdf672dba10"
+    "repo": "https://github.com/GlasgowEmbedded/glasgow",
+    "hash": "d7e5a870dab4f527bc41b01ac16fb4b118d997cd"
   }
 ]
