@@ -5,6 +5,7 @@ const LazyLoad = require('../lazy_load')
 const IBomIcon = require('./ibom_icon')
 const TracespaceIcon = require('./tracespace_icon')
 const {Icon, Segment, Button, Header} = require('semantic-ui-react')
+const info = require('../info.json')
 
 var BoardShowcase = createClass({
   getInitialState: function() {
@@ -33,6 +34,8 @@ var BoardShowcase = createClass({
       backBoardClass += ' selectedBoard'
     }
     const children = this.props.children || [<div />, <div />]
+    const ibomUrl = `/interactive_bom?${info.id}`
+
     return (
       <div className="boardshowcase-with-menu">
         <div className="boardShowcaseContainer">
@@ -83,11 +86,7 @@ var BoardShowcase = createClass({
             </div>
           </Button>
           {this.props.hasInteractiveBom && (
-            <Button
-              basic
-              as="a"
-              href={`/interactive_bom?/${this.props.folder}`}
-            >
+            <Button basic as="a" href={ibomUrl}>
               <div style={{display: 'flex', flexDirection: 'column'}}>
                 <Header as="h4">
                   <IBomIcon />
