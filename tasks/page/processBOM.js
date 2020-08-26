@@ -8,6 +8,11 @@ const cp = require('child_process')
 const utils = require('../utils/utils')
 const getPartinfo = require('../../src/get_partinfo.js')
 
+const omitIBOMFile = 'omit-ibom-boards.txt'
+
+const omitIBOMBoards =
+  fs.readFileSync(omitIBOMFile, 'utf-8').split('\n').filter(Boolean)
+
 if (require.main !== module) {
   module.exports = function(config, boardInfo) {
     let bom
@@ -17,12 +22,27 @@ if (require.main !== module) {
     } else {
       bom = path.join(boardInfo.boardPath, '1-click-bom.tsv')
     }
-    const deps = [
+    let kicadPcbFile
+    if (
+      boardInfo.eda &&
+      boardInfo.eda.type === 'kicad' &&
+      boardInfo.eda.pcb != null
+    ) {
+      kicadPcbFile = path.join(boardInfo.repoPath, boardInfo.eda.pcb)
+    } else if (boardInfo.eda == null) {
+      const kicadPcbPattern = path.join(boardInfo.boardPath, '**/*.kicad_pcb')
+      kicadPcbFile = globule.find(kicadPcbPattern)[0]
+    }
+    let deps = [
       'build/.temp/boards.json',
       boardInfo.repoPath,
       bom,
-      boardInfo.yamlPath
+      boardInfo.yamlPath,
+      omitIBOMFile
     ]
+    if (kicadPcbFile != null) {
+      deps.push(kicadPcbFile)
+    }
     const targets = [
       `build/.temp/${boardInfo.boardPath}/info.json`,
       `build/${boardInfo.boardPath}/1-click-BOM.tsv`
@@ -89,6 +109,10 @@ if (require.main !== module) {
   })
   repo = repo.split('\t')[1].split(' ')[0]
   info.repo = repo
+
+  const repoName = repoPath.split('/').slice(1).join('/')
+  const omit = omitIBOMBoards.includes(info.id)
+  info.has_interactive_bom = !omit && deps.some((d) => d.endsWith('.kicad_pcb'))
 
   getPartinfo(info.bom.lines).then(parts => {
     info.bom.parts = parts

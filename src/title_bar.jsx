@@ -6,7 +6,8 @@ function TitleBar(props) {
   const isProjectRoute =
     isSubmitRoute ||
     props.route === '/' ||
-    RegExp('^/boards/').test(props.route)
+    RegExp('^/boards/').test(props.route) ||
+    RegExp('^/interactive_bom').test(props.route)
   return (
     <div className="titleBar">
       <div className="bigSiteMenu">
