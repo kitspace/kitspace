@@ -1,3 +1,6 @@
+const fs = require('fs')
+const globule = require('globule')
+
 const {RouterContext} = require('react-router')
 
 exports.processArgs = function(argv) {
@@ -71,4 +74,16 @@ exports.reactRender = function(jsx, html, output, router = false) {
   content.innerHTML = react
 
   return fs.writeFileSync(output, jsdom.serializeDocument(document))
+}
+
+exports.findBoardFile = function(path, ext, check) {
+  let f = globule.find(`${path}/**/*.` + ext)[0]
+  if ((check === undefined) || (f !== undefined && check(f))) {
+    return f
+  }
+  return undefined
+}
+
+exports.checkEagleFile = function(f) {
+  return fs.readFileSync(f, 'utf8').includes('eagle.dtd')
 }

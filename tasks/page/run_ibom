@@ -5,24 +5,31 @@ import sys
 import os
 import os.path
 import wx
+import pcbnew
 
 from InteractiveHtmlBom.InteractiveHtmlBom.core import ibom
 from InteractiveHtmlBom.InteractiveHtmlBom.core.config import Config
 from InteractiveHtmlBom.InteractiveHtmlBom.ecad import get_parser_by_extension
+from InteractiveHtmlBom.InteractiveHtmlBom.ecad.kicad import PcbnewParser
 from InteractiveHtmlBom.InteractiveHtmlBom.version import version
 
 
-kicad_file = os.path.abspath(sys.argv[1])
+board_file = os.path.abspath(sys.argv[1])
 info_file = os.path.abspath(sys.argv[2])
 out_file = os.path.abspath(sys.argv[3])
 
 BASEDIR = os.path.dirname(sys.argv[0])
 IBOM_CONFIG = os.path.join(BASEDIR, 'ibom_config/config.ini')
 
-os.chdir(os.path.dirname(kicad_file))
+os.chdir(os.path.dirname(board_file))
 
 logger = ibom.Logger(cli=True)
 ibom.log = logger
+
+board = None
+ext = os.path.splitext(board_file)[1]
+if ext == '.brd':
+    board = pcbnew.LoadBoard(board_file, pcbnew.IO_MGR.EAGLE)
 
 app = wx.App()
 
@@ -30,7 +37,10 @@ config = Config(version)
 config.config_file = IBOM_CONFIG
 config.load_from_ini()
 
-parser = get_parser_by_extension(kicad_file, config, logger)
+if board is None:
+    parser = get_parser_by_extension(board_file, config, logger)
+else:
+    parser = PcbnewParser(board_file, config, logger, board)
 
 pcbdata, components = parser.parse()
 if not pcbdata or not components:
