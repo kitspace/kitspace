@@ -31,7 +31,7 @@ if (require.main !== module) {
     } else if (boardInfo.eda == null) {
       pcbFile = utils.findBoardFile(boardInfo.boardPath, 'kicad_pcb')
     }
-    if (pcbFile === undefined) {
+    if (pcbFile == null) {
       pcbFile = utils.findBoardFile(boardInfo.boardPath, 'brd', utils.checkEagleFile)
     }
 

@@ -78,10 +78,10 @@ exports.reactRender = function(jsx, html, output, router = false) {
 
 exports.findBoardFile = function(path, ext, check) {
   let f = globule.find(`${path}/**/*.` + ext)[0]
-  if ((check === undefined) || (f !== undefined && check(f))) {
+  if ((check == null) || (f != null && check(f))) {
     return f
   }
-  return undefined
+  return null
 }
 
 exports.checkEagleFile = function(f) {

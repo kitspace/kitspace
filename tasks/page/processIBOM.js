@@ -20,11 +20,11 @@ if (require.main !== module) {
     } else if (boardInfo.eda == null) {
       pcbFile = utils.findBoardFile(boardInfo.boardPath, 'kicad_pcb')
     }
-    if (pcbFile === undefined) {
+    if (pcbFile == null) {
       pcbFile = utils.findBoardFile(boardInfo.boardPath, 'brd', utils.checkEagleFile)
     }
     const omit = omitIBOMBoards.includes(boardInfo.boardPath.split('/').slice(1).join('/'))
-    if (pcbFile === undefined || omit) {
+    if (pcbFile == null || omit) {
       return {deps: [], targets: [], moduleDep: false};
     }
     const deps = [
