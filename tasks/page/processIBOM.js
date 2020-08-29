@@ -13,7 +13,7 @@ if (require.main !== module) {
     let pcbFile
     if (
       boardInfo.eda &&
-      boardInfo.eda.type === 'kicad' &&
+      (boardInfo.eda.type === 'kicad' || boardInfo.eda.type === 'eagle') &&
       boardInfo.eda.pcb != null
     ) {
       pcbFile = path.join(boardInfo.repoPath, boardInfo.eda.pcb)

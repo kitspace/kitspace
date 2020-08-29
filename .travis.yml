@@ -25,6 +25,3 @@ cache:
   yarn: true
   directories:
     - ./build
-env:
-  - CACHED_BUILD=false
-
