@@ -74,7 +74,12 @@ if (require.main !== module) {
 
   if (gerbers.length === 1 && path.extname(gerbers[0]) === '.kicad_pcb') {
     const kicadPcbFile = gerbers[0]
-    const gerberFolder = path.join('/tmp/kitspace', root, 'gerbers')
+    const gerberFolder = path.join(
+      '/tmp/kitspace',
+      root,
+      'gerbers',
+      path.basename(kicadPcbFile)
+    )
     const plot_kicad_gerbers = path.join(__dirname, 'plot_kicad_gerbers')
     const cmd_plot = `${plot_kicad_gerbers} ${kicadPcbFile} ${gerberFolder}`
     cp.execSync(`mkdir -p ${gerberFolder}`)
