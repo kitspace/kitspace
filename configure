@@ -224,8 +224,9 @@ function getKitspaceYaml(folder) {
   return [{}, '']
 }
 
-const jsSrc = globule.find(['src/**/*.js', 'src/**/*.jsx']).
-      filter((p) => !p.includes('InteractiveHtmlBom'))
+const jsSrc = globule
+  .find(['src/**/*.js', 'src/**/*.jsx'])
+  .filter(p => !p.includes('InteractiveHtmlBom'))
 
 const jsMainTargets = ['build/.temp/interactive_bom/IBOM.jsx'].concat(
   jsSrc.map(function(f) {
@@ -236,7 +237,8 @@ const jsMainTargets = ['build/.temp/interactive_bom/IBOM.jsx'].concat(
       .from(f)
       .using('copy')
     return temp
-  }))
+  })
+)
 
 const jsPageTargets = {}
 for (const board of boards) {
@@ -283,7 +285,12 @@ ninja
   .from('src/interactive_bom/InteractiveHtmlBom/ibom.html')
   .using('copy')
 
-for (const name of ['bom-builder', '1-click-bom', 'newsletter', 'interactive_bom']) {
+for (const name of [
+  'bom-builder',
+  '1-click-bom',
+  'newsletter',
+  'interactive_bom'
+]) {
   // compile the sass scss into css
   ninja
     .edge(`build/.temp/${name}/${name}.css`)
@@ -410,22 +417,6 @@ globule.find('tasks/page/*.js').forEach(taskFile => {
 })
 
 if (config === 'production') {
-  const presentation_folders = globule.find(
-    path.join(__dirname, 'presentations/*'),
-    {filter: 'isDirectory'}
-  )
-  presentation_folders.forEach(folder => {
-    globule.find(path.join(folder, '**/*'), {filter: 'isFile'}).forEach(f => {
-      ninja
-        .edge(
-          ninjaBuildGen.escape(
-            path.join('build', path.relative('presentations', f))
-          )
-        )
-        .from(f)
-        .using('copy')
-    })
-  })
   ninja
     .edge('build/_redirects')
     .from('src/_redirects')
