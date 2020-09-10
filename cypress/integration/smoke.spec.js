@@ -10,6 +10,10 @@ describe('Smoke Test', () => {
     cy.scrollTo('bottom')
 
     cy.get('@boardList').should('have.length.above', 0)
+  })
+
+  it('assert the number of boards equal boards in `boards.json`', () => {
+    cy.get('div.boardList').as('boardList')
 
     cy.readFile(boardsPath).then(
       boards => {
