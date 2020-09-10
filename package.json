@@ -35,12 +35,15 @@
     "rst2mdown": "^0.1.0",
     "semantic-ui-css": "^2.2.4",
     "source-map-support": "^0.4.0",
+    "start-server-and-test": "^1.11.3",
     "uglifyify": "^3.0.1",
     "uglifyjs": "^2.4.10"
   },
   "scripts": {
     "watch": "./scripts/watch",
     "start": "./scripts/get_boards && npm run serve & npm run watch",
+    "smoke-test": "start-test serve 8080 cy:run",
+    "cy:run": "cypress run",
     "plug-reg": "./scripts/plug_versions",
     "get-boards": "./scripts/get_boards",
     "serve": "http-server build/",

@@ -19,7 +19,9 @@ script:
   - wget https://github.com/ninja-build/ninja/releases/download/v1.6.0/ninja-linux.zip
   - unzip ninja-linux.zip
   - if  [ "${CACHED_BUILD}" != "cached" ]; then ./ninja clean; fi
-  - ./ninja -j 2 && cp registry.json build/ && ./scripts/deploy
+  - ./ninja -j 2 && cp registry.json build/
+  - yarn smoke-test
+  - ./scripts/deploy
 cache:
   yarn: true
   directories:
