@@ -26,3 +26,5 @@ cache:
   yarn: true
   directories:
     - ./build
+    # needed to cache folder with Cypress binary
+    - ~/.cache
