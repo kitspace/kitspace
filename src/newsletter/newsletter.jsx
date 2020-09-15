@@ -13,10 +13,12 @@ function Newsletter() {
           curious, you can read the latest edition first:{' '}
           <a href="https://buttondown.email/kitspace/archive/kitspace-newsletter-1-assembling-projects/">
             #1: Kitspace Newsletter #1: Assembling Projects.
-          </a>
+          </a>{' '}
         </p>
         <p>
-          Subscribe below, don't worry, it's easy to unsubscribe if you change your mind later.
+          Subscribe below, don't worry, it's easy to unsubscribe if you change
+          your mind later. If you prefer, you can also{' '}
+          <a href="https://buttondown.email/kitspace/rss">subscribe via RSS</a>.{' '}
           If you just want to get in touch email{' '}
           <a href="mailto:info@kitspace.org">info@kitspace.org</a> instead.
         </p>
