@@ -5,7 +5,7 @@ const globule = require('globule')
 const cp = require('child_process')
 const {repoToFolder} = require('../../scripts/utils')
 
-      const boardDir = 'boards'
+const boardDir = 'boards'
 
 exports.parseProjects = (config, cached_build) => {
   let folders, registry
