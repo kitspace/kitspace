@@ -8,3 +8,4 @@ npm-debug.log
 .sass-cache/
 .DS_Store
 yarn-error.log
+cypress/videos
