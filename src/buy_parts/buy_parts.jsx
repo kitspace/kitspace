@@ -258,7 +258,24 @@ function RetailerButton(props) {
       label={{
         as: 'a',
         color,
-        content: ` ${props.numberOfLines}/${props.totalLines} lines (${props.numberOfParts} parts)`
+        content: (
+          <div
+            style={{
+              width: '100%',
+              display: 'flex',
+              justifyContent: 'space-between'
+            }}
+          >
+            <div>
+              {props.numberOfLines}/{props.totalLines} lines (
+              {props.numberOfParts} parts)
+            </div>
+            <div>
+              <semantic.Icon name="plus" />
+              <semantic.Icon name="shopping basket" />
+            </div>
+          </div>
+        )
       }}
       labelPosition="right"
       className={'retailerButton ' + color}
