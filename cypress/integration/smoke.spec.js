@@ -1,6 +1,7 @@
 describe('Smoke Test', () => {
   const boardsPath = './build/.temp/boards.json'
 
+  // This is a dummy commit to re-trigger the build!
   before(() => {
     cy.visit('/')
   })
