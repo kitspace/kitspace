@@ -1,0 +1,1042 @@
+travis_fold:start:worker_info
+[0K[33;1mWorker information[0m
+hostname: f65493da-a8e9-4d90-9a12-0036c6a6a37a@1.worker-org-8b5957499-85w5w.gce-production-3
+version: v6.2.17 https://github.com/travis-ci/worker/tree/bc420764f334fe0d096a417c80426f672f1b7d18
+instance: travis-job-f142004f-48e5-49e4-b1f6-30846c87cef0 travis-ci-sardonyx-xenial-1593004276-4d46c6b3 (via amqp)
+startup: 6.020169094s
+travis_fold:end:worker_info
+[0Ktravis_time:start:10b3e970
+[0Ktravis_time:end:10b3e970:start=1601464521173450525,finish=1601464521319148583,duration=145698058,event=no_world_writable_dirs
+[0Ktravis_time:start:09abefce
+[0Ktravis_time:end:09abefce:start=1601464521322025467,finish=1601464521325316278,duration=3290811,event=setup_filter
+[0Ktravis_time:start:10b21dd4
+[0Ktravis_time:end:10b21dd4:start=1601464521329621718,finish=1601464521342314587,duration=12692869,event=agent
+[0Ktravis_time:start:1578e9ac
+[0Ktravis_time:end:1578e9ac:start=1601464521346157274,finish=1601464521348744165,duration=2586891,event=check_unsupported
+[0Ktravis_time:start:15fca1a6
+[0Ktravis_fold:start:system_info
+[0K[33;1mBuild system information[0m
+Build language: node_js
+Build dist: xenial
+Build id: 731525611
+Job id: 731525612
+Runtime kernel version: 4.15.0-1077-gcp
+travis-build version: 68cdc09f
+[34m[1mBuild image provisioning date and time[0m
+Wed Jun 24 13:36:52 UTC 2020
+[34m[1mOperating System Details[0m
+Distributor ID:	Ubuntu
+Description:	Ubuntu 16.04.6 LTS
+Release:	16.04
+Codename:	xenial
+[34m[1mSystemd Version[0m
+systemd 229
+[34m[1mCookbooks Version[0m
+3f92a99 https://github.com/travis-ci/travis-cookbooks/tree/3f92a99
+[34m[1mgit version[0m
+git version 2.27.0
+[34m[1mbash version[0m
+GNU bash, version 4.3.48(1)-release (x86_64-pc-linux-gnu)
+[34m[1mgcc version[0m
+gcc (Ubuntu 5.4.0-6ubuntu1~16.04.12) 5.4.0 20160609
+[34m[1mdocker version[0m
+Client:
+ Version:           18.06.0-ce
+ API version:       1.38
+ Go version:        go1.10.3
+ Git commit:        0ffa825
+ Built:             Wed Jul 18 19:11:02 2018
+ OS/Arch:           linux/amd64
+ Experimental:      false
+
+Server:
+ Engine:
+  Version:          18.06.0-ce
+  API version:      1.38 (minimum version 1.12)
+  Go version:       go1.10.3
+  Git commit:       0ffa825
+  Built:            Wed Jul 18 19:09:05 2018
+  OS/Arch:          linux/amd64
+  Experimental:     false
+[34m[1mclang version[0m
+clang version 7.0.0 (tags/RELEASE_700/final)
+[34m[1mjq version[0m
+jq-1.5
+[34m[1mbats version[0m
+Bats 0.4.0
+[34m[1mshellcheck version[0m
+0.7.0
+[34m[1mshfmt version[0m
+v2.6.3
+[34m[1mccache version[0m
+3.2.4
+[34m[1mcmake version[0m
+cmake version 3.12.4
+[34m[1mheroku version[0m
+heroku/7.42.1 linux-x64 node-v12.16.2
+[34m[1mimagemagick version[0m
+Version: ImageMagick 6.8.9-9 Q16 x86_64 2019-11-12 http://www.imagemagick.org
+[34m[1mmd5deep version[0m
+4.4
+[34m[1mmercurial version[0m
+version 4.8
+[34m[1mmysql version[0m
+mysql  Ver 14.14 Distrib 5.7.30, for Linux (x86_64) using  EditLine wrapper
+[34m[1mopenssl version[0m
+OpenSSL 1.0.2g  1 Mar 2016
+[34m[1mpacker version[0m
+1.3.3
+[34m[1mpostgresql client version[0m
+psql (PostgreSQL) 10.13 (Ubuntu 10.13-1.pgdg16.04+1)
+[34m[1mragel version[0m
+Ragel State Machine Compiler version 6.8 Feb 2013
+[34m[1msudo version[0m
+1.8.16
+[34m[1mgzip version[0m
+gzip 1.6
+[34m[1mzip version[0m
+Zip 3.0
+[34m[1mvim version[0m
+VIM - Vi IMproved 7.4 (2013 Aug 10, compiled Mar 18 2020 14:06:17)
+[34m[1miptables version[0m
+iptables v1.6.0
+[34m[1mcurl version[0m
+curl 7.47.0 (x86_64-pc-linux-gnu) libcurl/7.47.0 GnuTLS/3.4.10 zlib/1.2.8 libidn/1.32 librtmp/2.3
+[34m[1mwget version[0m
+GNU Wget 1.17.1 built on linux-gnu.
+[34m[1mrsync version[0m
+rsync  version 3.1.1  protocol version 31
+[34m[1mgimme version[0m
+v1.5.4
+[34m[1mnvm version[0m
+0.35.3
+[34m[1mperlbrew version[0m
+/home/travis/perl5/perlbrew/bin/perlbrew  - App::perlbrew/0.88
+[34m[1mphpenv version[0m
+rbenv 1.1.2-30-gc879cb0
+[34m[1mrvm version[0m
+rvm 1.29.10 (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://rvm.io]
+[34m[1mdefault ruby version[0m
+ruby 2.5.3p105 (2018-10-18 revision 65156) [x86_64-linux]
+[34m[1mCouchDB version[0m
+couchdb 1.6.1
+[34m[1mElasticSearch version[0m
+5.5.0
+[34m[1mInstalled Firefox version[0m
+firefox 63.0.1
+[34m[1mMongoDB version[0m
+MongoDB 4.0.19
+[34m[1mPhantomJS version[0m
+2.1.1
+[34m[1mPre-installed PostgreSQL versions[0m
+9.4.26
+9.5.22
+9.6.18
+[34m[1mRedis version[0m
+redis-server 6.0.5
+[34m[1mPre-installed Go versions[0m
+1.11.1
+[34m[1mant version[0m
+Apache Ant(TM) version 1.9.6 compiled on July 20 2018
+[34m[1mmvn version[0m
+Apache Maven 3.6.3 (cecedd343002696d0abb50b32b541b8a6ba2883f)
+[34m[1mgradle version[0m
+Gradle 5.1.1!
+[34m[1mlein version[0m
+Leiningen 2.9.3 on Java 11.0.2 OpenJDK 64-Bit Server VM
+[34m[1mPre-installed Node.js versions[0m
+v10.21.0
+v11.0.0
+v12.18.1
+v4.9.1
+v6.17.1
+v8.12.0
+v8.17.0
+v8.9
+[34m[1mphpenv versions[0m
+  system
+  5.6
+  5.6.40
+  7.1
+  7.1.27
+  7.2
+* 7.2.15 (set by /home/travis/.phpenv/version)
+  hhvm
+  hhvm-stable
+[34m[1mcomposer --version[0m
+Composer version 1.8.4 2019-02-11 10:52:10
+[34m[1mPre-installed Ruby versions[0m
+ruby-2.3.8
+ruby-2.4.5
+ruby-2.5.3
+travis_fold:end:system_info
+[0K
+travis_time:end:15fca1a6:start=1601464521353929589,finish=1601464521364826374,duration=10896785,event=show_system_info
+[0Ktravis_time:start:03e23dee
+[0Ktravis_time:end:03e23dee:start=1601464521372739642,finish=1601464521399133482,duration=26393840,event=rm_riak_source
+[0Ktravis_time:start:159210da
+[0Ktravis_time:end:159210da:start=1601464521402358873,finish=1601464521407857446,duration=5498573,event=fix_rwky_redis
+[0Ktravis_time:start:02c600ae
+[0Ktravis_time:end:02c600ae:start=1601464521410879331,finish=1601464521787021220,duration=376141889,event=wait_for_network
+[0Ktravis_time:start:040d14bc
+[0Ktravis_time:end:040d14bc:start=1601464521795704235,finish=1601464522013008261,duration=217304026,event=update_apt_keys
+[0Ktravis_time:start:00c9c7b4
+[0Ktravis_time:end:00c9c7b4:start=1601464522018314012,finish=1601464522065791923,duration=47477911,event=fix_hhvm_source
+[0Ktravis_time:start:30b36171
+[0Ktravis_time:end:30b36171:start=1601464522070563672,finish=1601464522073358251,duration=2794579,event=update_mongo_arch
+[0Ktravis_time:start:1929f65d
+[0Ktravis_time:end:1929f65d:start=1601464522078459608,finish=1601464522116493290,duration=38033682,event=fix_sudo_enabled_trusty
+[0Ktravis_time:start:24986ee6
+[0Ktravis_time:end:24986ee6:start=1601464522120104809,finish=1601464522122654263,duration=2549454,event=update_glibc
+[0Ktravis_time:start:02c39752
+[0Ktravis_time:end:02c39752:start=1601464522131310797,finish=1601464522139655811,duration=8345014,event=clean_up_path
+[0Ktravis_time:start:194c3ec8
+[0Ktravis_time:end:194c3ec8:start=1601464522145161835,finish=1601464522153051825,duration=7889990,event=fix_resolv_conf
+[0Ktravis_time:start:04437cc0
+[0Ktravis_time:end:04437cc0:start=1601464522158411327,finish=1601464522166970660,duration=8559333,event=fix_etc_hosts
+[0Ktravis_time:start:09305bc0
+[0Ktravis_time:end:09305bc0:start=1601464522170636220,finish=1601464522179972100,duration=9335880,event=fix_mvn_settings_xml
+[0Ktravis_time:start:012e4796
+[0Ktravis_time:end:012e4796:start=1601464522183425038,finish=1601464522192684684,duration=9259646,event=no_ipv6_localhost
+[0Ktravis_time:start:0680dd46
+[0Ktravis_time:end:0680dd46:start=1601464522196445015,finish=1601464522198824382,duration=2379367,event=fix_etc_mavenrc
+[0Ktravis_time:start:196a7120
+[0Ktravis_time:end:196a7120:start=1601464522206446949,finish=1601464522210449644,duration=4002695,event=fix_wwdr_certificate
+[0Ktravis_time:start:014158b0
+[0Ktravis_time:end:014158b0:start=1601464522217650172,finish=1601464522242209136,duration=24558964,event=put_localhost_first
+[0Ktravis_time:start:05315f97
+[0Ktravis_time:end:05315f97:start=1601464522245316150,finish=1601464522249365108,duration=4048958,event=home_paths
+[0Ktravis_time:start:0a5e7522
+[0Ktravis_time:end:0a5e7522:start=1601464522256631821,finish=1601464522267263893,duration=10632072,event=disable_initramfs
+[0Ktravis_time:start:0e3e1ec8
+[0Ktravis_time:end:0e3e1ec8:start=1601464522270397331,finish=1601464522581299086,duration=310901755,event=disable_ssh_roaming
+[0Ktravis_time:start:0fc7eea3
+[0Ktravis_time:end:0fc7eea3:start=1601464522589049675,finish=1601464522592506124,duration=3456449,event=debug_tools
+[0Ktravis_time:start:1ac7ccd5
+[0Ktravis_time:end:1ac7ccd5:start=1601464522597055357,finish=1601464522599939339,duration=2883982,event=uninstall_oclint
+[0Ktravis_time:start:177d1d7c
+[0Ktravis_time:end:177d1d7c:start=1601464522606328752,finish=1601464522610106958,duration=3778206,event=rvm_use
+[0Ktravis_time:start:1566a0b3
+[0Ktravis_time:end:1566a0b3:start=1601464522613673187,finish=1601464522620775128,duration=7101941,event=rm_etc_boto_cfg
+[0Ktravis_time:start:11ea7e7c
+[0Ktravis_time:end:11ea7e7c:start=1601464522624090485,finish=1601464522628734796,duration=4644311,event=rm_oraclejdk8_symlink
+[0Ktravis_time:start:0c660a62
+[0Ktravis_time:end:0c660a62:start=1601464522631942424,finish=1601464522724955269,duration=93012845,event=enable_i386
+[0Ktravis_time:start:0baf4c0c
+[0Ktravis_time:end:0baf4c0c:start=1601464522730321160,finish=1601464522734946589,duration=4625429,event=update_rubygems
+[0Ktravis_time:start:009ba9e0
+[0Ktravis_time:end:009ba9e0:start=1601464522740801480,finish=1601464523479922656,duration=739121176,event=ensure_path_components
+[0Ktravis_time:start:099e11f8
+[0Ktravis_time:end:099e11f8:start=1601464523487262845,finish=1601464523490689101,duration=3426256,event=redefine_curl
+[0Ktravis_time:start:13149704
+[0Ktravis_time:end:13149704:start=1601464523496756030,finish=1601464523593541632,duration=96785602,event=nonblock_pipe
+[0Ktravis_time:start:0ca6cf06
+[0Ktravis_time:end:0ca6cf06:start=1601464523598341913,finish=1601464529629058012,duration=6030716099,event=apt_get_update
+[0Ktravis_time:start:2201b34e
+[0Ktravis_time:end:2201b34e:start=1601464529635900364,finish=1601464529638538088,duration=2637724,event=deprecate_xcode_64
+[0Ktravis_time:start:12a0fd1c
+[0Ktravis_time:end:12a0fd1c:start=1601464529643400666,finish=1601464532212212230,duration=2568811564,event=update_heroku
+[0Ktravis_time:start:0098cae2
+[0Ktravis_time:end:0098cae2:start=1601464532220006631,finish=1601464532222590179,duration=2583548,event=shell_session_update
+[0Ktravis_time:start:0e69f71b
+[0Ktravis_fold:start:docker_mtu
+[0Ktravis_fold:end:docker_mtu
+[0Ktravis_time:end:0e69f71b:start=1601464532227493229,finish=1601464534646194104,duration=2418700875,event=set_docker_mtu
+[0Ktravis_time:start:18f0eee0
+[0Ktravis_fold:start:resolvconf
+[0Ktravis_fold:end:resolvconf
+[0Ktravis_time:end:18f0eee0:start=1601464534652810904,finish=1601464534712878970,duration=60068066,event=resolvconf
+[0Ktravis_time:start:008a2625
+[0Ktravis_time:end:008a2625:start=1601464534720494036,finish=1601464534853652470,duration=133158434,event=maven_central_mirror
+[0Ktravis_time:start:1259b0f2
+[0Ktravis_time:end:1259b0f2:start=1601464534858084108,finish=1601464534942444547,duration=84360439,event=maven_https
+[0Ktravis_fold:start:apt
+[0K[33;1mAdding APT Sources[0m
+travis_time:start:134371dd
+[0K$ sudo -E apt-add-repository -y "ppa:js-reynaud/kicad-5.1"
+gpg: keyring `/tmp/tmpvoa9dj_y/secring.gpg' created
+gpg: keyring `/tmp/tmpvoa9dj_y/pubring.gpg' created
+gpg: requesting key 910F124E from hkp server keyserver.ubuntu.com
+gpg: /tmp/tmpvoa9dj_y/trustdb.gpg: trustdb created
+gpg: key 910F124E: public key "Launchpad PPA for j2010" imported
+gpg: Total number processed: 1
+gpg:               imported: 1  (RSA: 1)
+OK
+travis_time:end:134371dd:start=1601464534947192500,finish=1601464536306977860,duration=1359785360,event=prepare
+[0Ktravis_time:start:14fa261c
+[0K$ travis_apt_get_update
+travis_time:end:14fa261c:start=1601464536311263886,finish=1601464546500895631,duration=10189631745,event=prepare
+[0K[33;1mInstalling APT Packages[0m
+travis_time:start:0247ba45
+[0K$ sudo -E apt-get -yq --no-install-suggests --no-install-recommends $(travis_apt_get_options) install inkscape kicad
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  aspell aspell-en dictionaries-common gconf-service gconf-service-backend
+  gconf2 gconf2-common libaspell15 libatkmm-1.6-1v5 libavahi-glib1
+  libcairomm-1.0-1v5 libcdr-0.1-1 libenchant1c2a libfreeimage3 libgconf-2-4
+  libgl2ps0 libglew1.13 libglibmm-2.4-1v5 libglu1-mesa libgnomevfs2-0
+  libgnomevfs2-common libgsl2 libgtkmm-2.4-1v5 libgtkspell0 libhunspell-1.3-0
+  libjxr0 libmagick++-6.q16-5v5 libngspice-kicad liboce-foundation10
+  liboce-modeling10 liboce-ocaf-lite10 liboce-ocaf10 liboce-visualization10
+  libopenjp2-7 libpangomm-1.4-1v5 libpoppler-glib8 libpoppler58 libraw15
+  librevenge-0.0-0 libvisio-0.1-1 libwebp5 libwebpmux1 libwpd-0.10-10
+  libwpg-0.3-3 libwxbase3.0-0v5 libwxgtk3.0-0v5 python-wxgtk3.0
+  python-wxversion xsltproc
+Suggested packages:
+  aspell-doc spellutils gconf-defaults-service pstoedit dia | dia-gnome
+  libsvg-perl libxml-xql-perl python-uniconvertor extra-xdg-menus
+  kicad-locale-ko | kicad-locale-ru | kicad-locale-pl | kicad-locale-pt
+  | kicad-locale-ja | kicad-locale-id | kicad-locale-ca | kicad-locale-it
+  | kicad-locale-el | kicad-locale-zh | kicad-locale-de | kicad-locale-sl
+  | kicad-locale-cs | kicad-locale-bg | kicad-locale-sv | kicad-locale-lt
+  | kicad-locale-fi | kicad-locale-fr | kicad-locale-hu | kicad-locale-nl
+  | kicad-locale-es | kicad-locale-sk libenchant-voikko glew-utils
+  libgnomevfs2-bin libgnomevfs2-extra gamin | fam gnome-mime-data
+  gsl-ref-psdoc | gsl-doc-pdf | gsl-doc-info | gsl-ref-html poppler-data
+Recommended packages:
+  libgnomevfs2-extra libimage-magick-perl libwmf-bin python-lxml python-numpy
+  transfig kicad-libraries kicad-doc-en kicad-demos enchant hunspell-en-us
+  | hunspell-dictionary | myspell-dictionary
+The following NEW packages will be installed:
+  aspell aspell-en dictionaries-common gconf-service gconf-service-backend
+  gconf2 gconf2-common inkscape kicad libaspell15 libatkmm-1.6-1v5
+  libavahi-glib1 libcairomm-1.0-1v5 libcdr-0.1-1 libenchant1c2a libfreeimage3
+  libgconf-2-4 libgl2ps0 libglew1.13 libglibmm-2.4-1v5 libglu1-mesa
+  libgnomevfs2-0 libgnomevfs2-common libgsl2 libgtkmm-2.4-1v5 libgtkspell0
+  libhunspell-1.3-0 libjxr0 libmagick++-6.q16-5v5 libngspice-kicad
+  liboce-foundation10 liboce-modeling10 liboce-ocaf-lite10 liboce-ocaf10
+  liboce-visualization10 libopenjp2-7 libpangomm-1.4-1v5 libpoppler-glib8
+  libpoppler58 libraw15 librevenge-0.0-0 libvisio-0.1-1 libwebp5 libwebpmux1
+  libwpd-0.10-10 libwpg-0.3-3 libwxbase3.0-0v5 libwxgtk3.0-0v5 python-wxgtk3.0
+  python-wxversion xsltproc
+0 upgraded, 51 newly installed, 0 to remove and 141 not upgraded.
+Need to get 71.7 MB of archives.
+After this operation, 336 MB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libaspell15 amd64 0.60.7~20110707-3ubuntu0.1 [315 kB]
+Get:2 http://ppa.launchpad.net/js-reynaud/kicad-5.1/ubuntu xenial/main amd64 libngspice-kicad amd64 0.1-2~201902271304+d6f5a32~ubuntu16.04.1 [1,981 kB]
+Get:3 http://archive.ubuntu.com/ubuntu xenial/main amd64 dictionaries-common all 1.26.3 [185 kB]
+Get:4 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 aspell amd64 0.60.7~20110707-3ubuntu0.1 [73.9 kB]
+Get:5 http://archive.ubuntu.com/ubuntu xenial/main amd64 aspell-en all 7.1-0-1.1 [265 kB]
+Get:6 http://archive.ubuntu.com/ubuntu xenial/main amd64 gconf2-common all 3.2.6-3ubuntu6 [21.0 kB]
+Get:7 http://archive.ubuntu.com/ubuntu xenial/main amd64 libgconf-2-4 amd64 3.2.6-3ubuntu6 [84.6 kB]
+Get:8 http://archive.ubuntu.com/ubuntu xenial/main amd64 gconf-service-backend amd64 3.2.6-3ubuntu6 [57.5 kB]
+Get:9 http://ppa.launchpad.net/js-reynaud/kicad-5.1/ubuntu xenial/main amd64 kicad amd64 5.1.7-202009280723+a382d34a8~87~ubuntu16.04.1 [22.2 MB]
+Get:10 http://archive.ubuntu.com/ubuntu xenial/main amd64 gconf-service amd64 3.2.6-3ubuntu6 [2,046 B]
+Get:11 http://archive.ubuntu.com/ubuntu xenial/main amd64 gconf2 amd64 3.2.6-3ubuntu6 [65.8 kB]
+Get:12 http://archive.ubuntu.com/ubuntu xenial/main amd64 libglibmm-2.4-1v5 amd64 2.46.3-1 [460 kB]
+Get:13 http://archive.ubuntu.com/ubuntu xenial/main amd64 libatkmm-1.6-1v5 amd64 2.24.2-1 [61.7 kB]
+Get:14 http://archive.ubuntu.com/ubuntu xenial/main amd64 libcairomm-1.0-1v5 amd64 1.12.0-1 [41.6 kB]
+Get:15 http://archive.ubuntu.com/ubuntu xenial/main amd64 librevenge-0.0-0 amd64 0.0.4-4ubuntu1 [202 kB]
+Get:16 http://archive.ubuntu.com/ubuntu xenial/main amd64 libcdr-0.1-1 amd64 0.1.2-2ubuntu2 [335 kB]
+Get:17 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libavahi-glib1 amd64 0.6.32~rc+dfsg-1ubuntu2.3 [7,720 B]
+Get:18 http://archive.ubuntu.com/ubuntu xenial/main amd64 libgnomevfs2-common amd64 1:2.24.4-6.1ubuntu1 [23.0 kB]
+Get:19 http://archive.ubuntu.com/ubuntu xenial/main amd64 libgnomevfs2-0 amd64 1:2.24.4-6.1ubuntu1 [213 kB]
+Get:20 http://archive.ubuntu.com/ubuntu xenial/main amd64 libgsl2 amd64 2.1+dfsg-2 [840 kB]
+Get:21 http://archive.ubuntu.com/ubuntu xenial/main amd64 libpangomm-1.4-1v5 amd64 2.38.1-1 [42.0 kB]
+Get:22 http://archive.ubuntu.com/ubuntu xenial/main amd64 libgtkmm-2.4-1v5 amd64 1:2.24.4-2 [671 kB]
+Get:23 http://archive.ubuntu.com/ubuntu xenial/main amd64 libhunspell-1.3-0 amd64 1.3.3-4ubuntu1 [108 kB]
+Get:24 http://archive.ubuntu.com/ubuntu xenial/main amd64 libenchant1c2a amd64 1.6.0-10.1build2 [64.0 kB]
+Get:25 http://archive.ubuntu.com/ubuntu xenial/main amd64 libgtkspell0 amd64 2.0.16-1.1ubuntu1 [11.1 kB]
+Get:26 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libmagick++-6.q16-5v5 amd64 8:6.8.9.9-7ubuntu5.15 [136 kB]
+Get:27 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libpoppler58 amd64 0.41.0-0ubuntu1.14 [757 kB]
+Get:28 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libpoppler-glib8 amd64 0.41.0-0ubuntu1.14 [104 kB]
+Get:29 http://archive.ubuntu.com/ubuntu xenial/main amd64 libvisio-0.1-1 amd64 0.1.5-1ubuntu1 [198 kB]
+Get:30 http://archive.ubuntu.com/ubuntu xenial/main amd64 libwpd-0.10-10 amd64 0.10.1-1ubuntu1 [162 kB]
+Get:31 http://archive.ubuntu.com/ubuntu xenial/main amd64 libwpg-0.3-3 amd64 0.3.1-1ubuntu1 [46.0 kB]
+Get:32 http://archive.ubuntu.com/ubuntu xenial/main amd64 inkscape amd64 0.91-7ubuntu2 [12.3 MB]
+Get:33 http://archive.ubuntu.com/ubuntu xenial/main amd64 libglew1.13 amd64 1.13.0-2 [119 kB]
+Get:34 http://archive.ubuntu.com/ubuntu xenial/main amd64 libglu1-mesa amd64 9.0.0-2.1 [168 kB]
+Get:35 http://archive.ubuntu.com/ubuntu xenial-updates/universe amd64 liboce-foundation10 amd64 0.17.1-1ubuntu0.1 [1,207 kB]
+Get:36 http://archive.ubuntu.com/ubuntu xenial-updates/universe amd64 liboce-modeling10 amd64 0.17.1-1ubuntu0.1 [11.9 MB]
+Get:37 http://archive.ubuntu.com/ubuntu xenial-updates/universe amd64 liboce-ocaf-lite10 amd64 0.17.1-1ubuntu0.1 [1,049 kB]
+Get:38 http://archive.ubuntu.com/ubuntu xenial/universe amd64 libjxr0 amd64 1.1-6 [158 kB]
+Get:39 http://archive.ubuntu.com/ubuntu xenial-updates/universe amd64 libopenjp2-7 amd64 2.1.2-1.1+deb9u5build0.16.04.1 [112 kB]
+Get:40 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libraw15 amd64 0.17.1-1ubuntu0.5 [230 kB]
+Get:41 http://archive.ubuntu.com/ubuntu xenial/main amd64 libwebp5 amd64 0.4.4-1 [165 kB]
+Get:42 http://archive.ubuntu.com/ubuntu xenial/main amd64 libwebpmux1 amd64 0.4.4-1 [14.2 kB]
+Get:43 http://archive.ubuntu.com/ubuntu xenial-updates/universe amd64 libfreeimage3 amd64 3.17.0+ds1-2ubuntu0.1 [262 kB]
+Get:44 http://archive.ubuntu.com/ubuntu xenial/universe amd64 libgl2ps0 amd64 1.3.8-1.2 [35.5 kB]
+Get:45 http://archive.ubuntu.com/ubuntu xenial-updates/universe amd64 liboce-visualization10 amd64 0.17.1-1ubuntu0.1 [3,019 kB]
+Get:46 http://archive.ubuntu.com/ubuntu xenial-updates/universe amd64 liboce-ocaf10 amd64 0.17.1-1ubuntu0.1 [720 kB]
+Get:47 http://archive.ubuntu.com/ubuntu xenial-updates/universe amd64 libwxbase3.0-0v5 amd64 3.0.2+dfsg-1.3ubuntu0.1 [971 kB]
+Get:48 http://archive.ubuntu.com/ubuntu xenial-updates/universe amd64 libwxgtk3.0-0v5 amd64 3.0.2+dfsg-1.3ubuntu0.1 [4,344 kB]
+Get:49 http://archive.ubuntu.com/ubuntu xenial/universe amd64 python-wxversion all 3.0.2.0+dfsg-1build1 [12.7 kB]
+Get:50 http://archive.ubuntu.com/ubuntu xenial/universe amd64 python-wxgtk3.0 amd64 3.0.2.0+dfsg-1build1 [5,194 kB]
+Get:51 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 xsltproc amd64 1.1.28-2.1ubuntu0.3 [13.4 kB]
+
+Extracting templates from packages: 58%
+Extracting templates from packages: 100%
+Preconfiguring packages ...
+Fetched 71.7 MB in 6s (11.0 MB/s)
+Selecting previously unselected package libaspell15:amd64.
+(Reading database ... 
+(Reading database ... 5%
+(Reading database ... 10%
+(Reading database ... 15%
+(Reading database ... 20%
+(Reading database ... 25%
+(Reading database ... 30%
+(Reading database ... 35%
+(Reading database ... 40%
+(Reading database ... 45%
+(Reading database ... 50%
+(Reading database ... 55%
+(Reading database ... 60%
+(Reading database ... 65%
+(Reading database ... 70%
+(Reading database ... 75%
+(Reading database ... 80%
+(Reading database ... 85%
+(Reading database ... 90%
+(Reading database ... 95%
+(Reading database ... 100%
+(Reading database ... 124376 files and directories currently installed.)
+Preparing to unpack .../libaspell15_0.60.7~20110707-3ubuntu0.1_amd64.deb ...
+Unpacking libaspell15:amd64 (0.60.7~20110707-3ubuntu0.1) ...
+Selecting previously unselected package dictionaries-common.
+Preparing to unpack .../dictionaries-common_1.26.3_all.deb ...
+Adding 'diversion of /usr/share/dict/words to /usr/share/dict/words.pre-dictionaries-common by dictionaries-common'
+Unpacking dictionaries-common (1.26.3) ...
+Selecting previously unselected package aspell.
+Preparing to unpack .../aspell_0.60.7~20110707-3ubuntu0.1_amd64.deb ...
+Unpacking aspell (0.60.7~20110707-3ubuntu0.1) ...
+Selecting previously unselected package aspell-en.
+Preparing to unpack .../aspell-en_7.1-0-1.1_all.deb ...
+Unpacking aspell-en (7.1-0-1.1) ...
+Selecting previously unselected package gconf2-common.
+Preparing to unpack .../gconf2-common_3.2.6-3ubuntu6_all.deb ...
+Unpacking gconf2-common (3.2.6-3ubuntu6) ...
+Selecting previously unselected package libgconf-2-4:amd64.
+Preparing to unpack .../libgconf-2-4_3.2.6-3ubuntu6_amd64.deb ...
+Unpacking libgconf-2-4:amd64 (3.2.6-3ubuntu6) ...
+Selecting previously unselected package gconf-service-backend.
+Preparing to unpack .../gconf-service-backend_3.2.6-3ubuntu6_amd64.deb ...
+Unpacking gconf-service-backend (3.2.6-3ubuntu6) ...
+Selecting previously unselected package gconf-service.
+Preparing to unpack .../gconf-service_3.2.6-3ubuntu6_amd64.deb ...
+Unpacking gconf-service (3.2.6-3ubuntu6) ...
+Selecting previously unselected package gconf2.
+Preparing to unpack .../gconf2_3.2.6-3ubuntu6_amd64.deb ...
+Unpacking gconf2 (3.2.6-3ubuntu6) ...
+Selecting previously unselected package libglibmm-2.4-1v5:amd64.
+Preparing to unpack .../libglibmm-2.4-1v5_2.46.3-1_amd64.deb ...
+Unpacking libglibmm-2.4-1v5:amd64 (2.46.3-1) ...
+Selecting previously unselected package libatkmm-1.6-1v5:amd64.
+Preparing to unpack .../libatkmm-1.6-1v5_2.24.2-1_amd64.deb ...
+Unpacking libatkmm-1.6-1v5:amd64 (2.24.2-1) ...
+Selecting previously unselected package libcairomm-1.0-1v5:amd64.
+Preparing to unpack .../libcairomm-1.0-1v5_1.12.0-1_amd64.deb ...
+Unpacking libcairomm-1.0-1v5:amd64 (1.12.0-1) ...
+Selecting previously unselected package librevenge-0.0-0:amd64.
+Preparing to unpack .../librevenge-0.0-0_0.0.4-4ubuntu1_amd64.deb ...
+Unpacking librevenge-0.0-0:amd64 (0.0.4-4ubuntu1) ...
+Selecting previously unselected package libcdr-0.1-1:amd64.
+Preparing to unpack .../libcdr-0.1-1_0.1.2-2ubuntu2_amd64.deb ...
+Unpacking libcdr-0.1-1:amd64 (0.1.2-2ubuntu2) ...
+Selecting previously unselected package libavahi-glib1:amd64.
+Preparing to unpack .../libavahi-glib1_0.6.32~rc+dfsg-1ubuntu2.3_amd64.deb ...
+Unpacking libavahi-glib1:amd64 (0.6.32~rc+dfsg-1ubuntu2.3) ...
+Selecting previously unselected package libgnomevfs2-common.
+Preparing to unpack .../libgnomevfs2-common_1%3a2.24.4-6.1ubuntu1_amd64.deb ...
+Unpacking libgnomevfs2-common (1:2.24.4-6.1ubuntu1) ...
+Selecting previously unselected package libgnomevfs2-0:amd64.
+Preparing to unpack .../libgnomevfs2-0_1%3a2.24.4-6.1ubuntu1_amd64.deb ...
+Unpacking libgnomevfs2-0:amd64 (1:2.24.4-6.1ubuntu1) ...
+Selecting previously unselected package libgsl2:amd64.
+Preparing to unpack .../libgsl2_2.1+dfsg-2_amd64.deb ...
+Unpacking libgsl2:amd64 (2.1+dfsg-2) ...
+Selecting previously unselected package libpangomm-1.4-1v5:amd64.
+Preparing to unpack .../libpangomm-1.4-1v5_2.38.1-1_amd64.deb ...
+Unpacking libpangomm-1.4-1v5:amd64 (2.38.1-1) ...
+Selecting previously unselected package libgtkmm-2.4-1v5:amd64.
+Preparing to unpack .../libgtkmm-2.4-1v5_1%3a2.24.4-2_amd64.deb ...
+Unpacking libgtkmm-2.4-1v5:amd64 (1:2.24.4-2) ...
+Selecting previously unselected package libhunspell-1.3-0:amd64.
+Preparing to unpack .../libhunspell-1.3-0_1.3.3-4ubuntu1_amd64.deb ...
+Unpacking libhunspell-1.3-0:amd64 (1.3.3-4ubuntu1) ...
+Selecting previously unselected package libenchant1c2a:amd64.
+Preparing to unpack .../libenchant1c2a_1.6.0-10.1build2_amd64.deb ...
+Unpacking libenchant1c2a:amd64 (1.6.0-10.1build2) ...
+Selecting previously unselected package libgtkspell0.
+Preparing to unpack .../libgtkspell0_2.0.16-1.1ubuntu1_amd64.deb ...
+Unpacking libgtkspell0 (2.0.16-1.1ubuntu1) ...
+Selecting previously unselected package libmagick++-6.q16-5v5:amd64.
+Preparing to unpack .../libmagick++-6.q16-5v5_8%3a6.8.9.9-7ubuntu5.15_amd64.deb ...
+Unpacking libmagick++-6.q16-5v5:amd64 (8:6.8.9.9-7ubuntu5.15) ...
+Selecting previously unselected package libpoppler58:amd64.
+Preparing to unpack .../libpoppler58_0.41.0-0ubuntu1.14_amd64.deb ...
+Unpacking libpoppler58:amd64 (0.41.0-0ubuntu1.14) ...
+Selecting previously unselected package libpoppler-glib8:amd64.
+Preparing to unpack .../libpoppler-glib8_0.41.0-0ubuntu1.14_amd64.deb ...
+Unpacking libpoppler-glib8:amd64 (0.41.0-0ubuntu1.14) ...
+Selecting previously unselected package libvisio-0.1-1:amd64.
+Preparing to unpack .../libvisio-0.1-1_0.1.5-1ubuntu1_amd64.deb ...
+Unpacking libvisio-0.1-1:amd64 (0.1.5-1ubuntu1) ...
+Selecting previously unselected package libwpd-0.10-10:amd64.
+Preparing to unpack .../libwpd-0.10-10_0.10.1-1ubuntu1_amd64.deb ...
+Unpacking libwpd-0.10-10:amd64 (0.10.1-1ubuntu1) ...
+Selecting previously unselected package libwpg-0.3-3:amd64.
+Preparing to unpack .../libwpg-0.3-3_0.3.1-1ubuntu1_amd64.deb ...
+Unpacking libwpg-0.3-3:amd64 (0.3.1-1ubuntu1) ...
+Selecting previously unselected package inkscape.
+Preparing to unpack .../inkscape_0.91-7ubuntu2_amd64.deb ...
+Unpacking inkscape (0.91-7ubuntu2) ...
+Selecting previously unselected package libglew1.13:amd64.
+Preparing to unpack .../libglew1.13_1.13.0-2_amd64.deb ...
+Unpacking libglew1.13:amd64 (1.13.0-2) ...
+Selecting previously unselected package libglu1-mesa:amd64.
+Preparing to unpack .../libglu1-mesa_9.0.0-2.1_amd64.deb ...
+Unpacking libglu1-mesa:amd64 (9.0.0-2.1) ...
+Selecting previously unselected package liboce-foundation10:amd64.
+Preparing to unpack .../liboce-foundation10_0.17.1-1ubuntu0.1_amd64.deb ...
+Unpacking liboce-foundation10:amd64 (0.17.1-1ubuntu0.1) ...
+Selecting previously unselected package liboce-modeling10:amd64.
+Preparing to unpack .../liboce-modeling10_0.17.1-1ubuntu0.1_amd64.deb ...
+Unpacking liboce-modeling10:amd64 (0.17.1-1ubuntu0.1) ...
+Selecting previously unselected package liboce-ocaf-lite10:amd64.
+Preparing to unpack .../liboce-ocaf-lite10_0.17.1-1ubuntu0.1_amd64.deb ...
+Unpacking liboce-ocaf-lite10:amd64 (0.17.1-1ubuntu0.1) ...
+Selecting previously unselected package libjxr0:amd64.
+Preparing to unpack .../libjxr0_1.1-6_amd64.deb ...
+Unpacking libjxr0:amd64 (1.1-6) ...
+Selecting previously unselected package libopenjp2-7:amd64.
+Preparing to unpack .../libopenjp2-7_2.1.2-1.1+deb9u5build0.16.04.1_amd64.deb ...
+Unpacking libopenjp2-7:amd64 (2.1.2-1.1+deb9u5build0.16.04.1) ...
+Selecting previously unselected package libraw15:amd64.
+Preparing to unpack .../libraw15_0.17.1-1ubuntu0.5_amd64.deb ...
+Unpacking libraw15:amd64 (0.17.1-1ubuntu0.5) ...
+Selecting previously unselected package libwebp5:amd64.
+Preparing to unpack .../libwebp5_0.4.4-1_amd64.deb ...
+Unpacking libwebp5:amd64 (0.4.4-1) ...
+Selecting previously unselected package libwebpmux1:amd64.
+Preparing to unpack .../libwebpmux1_0.4.4-1_amd64.deb ...
+Unpacking libwebpmux1:amd64 (0.4.4-1) ...
+Selecting previously unselected package libfreeimage3:amd64.
+Preparing to unpack .../libfreeimage3_3.17.0+ds1-2ubuntu0.1_amd64.deb ...
+Unpacking libfreeimage3:amd64 (3.17.0+ds1-2ubuntu0.1) ...
+Selecting previously unselected package libgl2ps0.
+Preparing to unpack .../libgl2ps0_1.3.8-1.2_amd64.deb ...
+Unpacking libgl2ps0 (1.3.8-1.2) ...
+Selecting previously unselected package liboce-visualization10:amd64.
+Preparing to unpack .../liboce-visualization10_0.17.1-1ubuntu0.1_amd64.deb ...
+Unpacking liboce-visualization10:amd64 (0.17.1-1ubuntu0.1) ...
+Selecting previously unselected package liboce-ocaf10:amd64.
+Preparing to unpack .../liboce-ocaf10_0.17.1-1ubuntu0.1_amd64.deb ...
+Unpacking liboce-ocaf10:amd64 (0.17.1-1ubuntu0.1) ...
+Selecting previously unselected package libwxbase3.0-0v5:amd64.
+Preparing to unpack .../libwxbase3.0-0v5_3.0.2+dfsg-1.3ubuntu0.1_amd64.deb ...
+Unpacking libwxbase3.0-0v5:amd64 (3.0.2+dfsg-1.3ubuntu0.1) ...
+Selecting previously unselected package libwxgtk3.0-0v5:amd64.
+Preparing to unpack .../libwxgtk3.0-0v5_3.0.2+dfsg-1.3ubuntu0.1_amd64.deb ...
+Unpacking libwxgtk3.0-0v5:amd64 (3.0.2+dfsg-1.3ubuntu0.1) ...
+Selecting previously unselected package python-wxversion.
+Preparing to unpack .../python-wxversion_3.0.2.0+dfsg-1build1_all.deb ...
+Unpacking python-wxversion (3.0.2.0+dfsg-1build1) ...
+Selecting previously unselected package python-wxgtk3.0.
+Preparing to unpack .../python-wxgtk3.0_3.0.2.0+dfsg-1build1_amd64.deb ...
+Unpacking python-wxgtk3.0 (3.0.2.0+dfsg-1build1) ...
+Selecting previously unselected package libngspice-kicad.
+Preparing to unpack .../libngspice-kicad_0.1-2~201902271304+d6f5a32~ubuntu16.04.1_amd64.deb ...
+Unpacking libngspice-kicad (0.1-2~201902271304+d6f5a32~ubuntu16.04.1) ...
+Selecting previously unselected package xsltproc.
+Preparing to unpack .../xsltproc_1.1.28-2.1ubuntu0.3_amd64.deb ...
+Unpacking xsltproc (1.1.28-2.1ubuntu0.3) ...
+Selecting previously unselected package kicad.
+Preparing to unpack .../kicad_5.1.7-202009280723+a382d34a8~87~ubuntu16.04.1_amd64.deb ...
+Unpacking kicad (5.1.7-202009280723+a382d34a8~87~ubuntu16.04.1) ...
+Processing triggers for libc-bin (2.23-0ubuntu11) ...
+Processing triggers for man-db (2.7.5-1) ...
+Processing triggers for hicolor-icon-theme (0.15-0ubuntu1.1) ...
+Processing triggers for mime-support (3.59ubuntu1) ...
+Processing triggers for shared-mime-info (1.5-2ubuntu0.2) ...
+Setting up libaspell15:amd64 (0.60.7~20110707-3ubuntu0.1) ...
+Setting up dictionaries-common (1.26.3) ...
+Install emacsen-common for emacs24
+emacsen-common: Handling install of emacsen flavor emacs24
+Wrote /etc/emacs24/site-start.d/00debian-vars.elc
+Wrote /usr/share/emacs24/site-lisp/debian-startup.elc
+Install dictionaries-common for emacs24
+install/dictionaries-common: Byte-compiling for emacsen flavour emacs24
+Wrote /usr/share/emacs24/site-lisp/dictionaries-common/debian-ispell.elc
+Setting up aspell (0.60.7~20110707-3ubuntu0.1) ...
+Setting up aspell-en (7.1-0-1.1) ...
+Setting up gconf2-common (3.2.6-3ubuntu6) ...
+
+Creating config file /etc/gconf/2/path with new version
+Setting up libgconf-2-4:amd64 (3.2.6-3ubuntu6) ...
+Setting up libglibmm-2.4-1v5:amd64 (2.46.3-1) ...
+Setting up libatkmm-1.6-1v5:amd64 (2.24.2-1) ...
+Setting up libcairomm-1.0-1v5:amd64 (1.12.0-1) ...
+Setting up librevenge-0.0-0:amd64 (0.0.4-4ubuntu1) ...
+Setting up libcdr-0.1-1:amd64 (0.1.2-2ubuntu2) ...
+Setting up libavahi-glib1:amd64 (0.6.32~rc+dfsg-1ubuntu2.3) ...
+Setting up libgsl2:amd64 (2.1+dfsg-2) ...
+Setting up libpangomm-1.4-1v5:amd64 (2.38.1-1) ...
+Setting up libgtkmm-2.4-1v5:amd64 (1:2.24.4-2) ...
+Setting up libhunspell-1.3-0:amd64 (1.3.3-4ubuntu1) ...
+Setting up libenchant1c2a:amd64 (1.6.0-10.1build2) ...
+Setting up libgtkspell0 (2.0.16-1.1ubuntu1) ...
+Setting up libmagick++-6.q16-5v5:amd64 (8:6.8.9.9-7ubuntu5.15) ...
+Setting up libpoppler58:amd64 (0.41.0-0ubuntu1.14) ...
+Setting up libpoppler-glib8:amd64 (0.41.0-0ubuntu1.14) ...
+Setting up libvisio-0.1-1:amd64 (0.1.5-1ubuntu1) ...
+Setting up libwpd-0.10-10:amd64 (0.10.1-1ubuntu1) ...
+Setting up libwpg-0.3-3:amd64 (0.3.1-1ubuntu1) ...
+Setting up libglew1.13:amd64 (1.13.0-2) ...
+Setting up libglu1-mesa:amd64 (9.0.0-2.1) ...
+Setting up liboce-foundation10:amd64 (0.17.1-1ubuntu0.1) ...
+Setting up liboce-modeling10:amd64 (0.17.1-1ubuntu0.1) ...
+Setting up liboce-ocaf-lite10:amd64 (0.17.1-1ubuntu0.1) ...
+Setting up libjxr0:amd64 (1.1-6) ...
+Setting up libopenjp2-7:amd64 (2.1.2-1.1+deb9u5build0.16.04.1) ...
+Setting up libraw15:amd64 (0.17.1-1ubuntu0.5) ...
+Setting up libwebp5:amd64 (0.4.4-1) ...
+Setting up libwebpmux1:amd64 (0.4.4-1) ...
+Setting up libfreeimage3:amd64 (3.17.0+ds1-2ubuntu0.1) ...
+Setting up libgl2ps0 (1.3.8-1.2) ...
+Setting up liboce-visualization10:amd64 (0.17.1-1ubuntu0.1) ...
+Setting up liboce-ocaf10:amd64 (0.17.1-1ubuntu0.1) ...
+Setting up libwxbase3.0-0v5:amd64 (3.0.2+dfsg-1.3ubuntu0.1) ...
+Setting up libwxgtk3.0-0v5:amd64 (3.0.2+dfsg-1.3ubuntu0.1) ...
+Setting up python-wxversion (3.0.2.0+dfsg-1build1) ...
+Setting up python-wxgtk3.0 (3.0.2.0+dfsg-1build1) ...
+update-alternatives: using /usr/lib/wx/python/wx3.0.pth to provide /usr/lib/wx/python/wx.pth (wx.pth) in auto mode
+Setting up libngspice-kicad (0.1-2~201902271304+d6f5a32~ubuntu16.04.1) ...
+Setting up xsltproc (1.1.28-2.1ubuntu0.3) ...
+Setting up kicad (5.1.7-202009280723+a382d34a8~87~ubuntu16.04.1) ...
+Setting up gconf-service (3.2.6-3ubuntu6) ...
+Setting up gconf-service-backend (3.2.6-3ubuntu6) ...
+Setting up gconf2 (3.2.6-3ubuntu6) ...
+Setting up libgnomevfs2-common (1:2.24.4-6.1ubuntu1) ...
+Setting up libgnomevfs2-0:amd64 (1:2.24.4-6.1ubuntu1) ...
+Setting up inkscape (0.91-7ubuntu2) ...
+Processing triggers for libc-bin (2.23-0ubuntu11) ...
+Processing triggers for dictionaries-common (1.26.3) ...
+aspell-autobuildhash: processing: en [en-common].
+aspell-autobuildhash: processing: en [en-variant_0].
+aspell-autobuildhash: processing: en [en-variant_1].
+aspell-autobuildhash: processing: en [en-variant_2].
+aspell-autobuildhash: processing: en [en-w_accents-only].
+aspell-autobuildhash: processing: en [en-wo_accents-only].
+aspell-autobuildhash: processing: en [en_CA-variant_0].
+aspell-autobuildhash: processing: en [en_CA-variant_1].
+aspell-autobuildhash: processing: en [en_CA-w_accents-only].
+aspell-autobuildhash: processing: en [en_CA-wo_accents-only].
+aspell-autobuildhash: processing: en [en_GB-ise-w_accents-only].
+aspell-autobuildhash: processing: en [en_GB-ise-wo_accents-only].
+aspell-autobuildhash: processing: en [en_GB-ize-w_accents-only].
+aspell-autobuildhash: processing: en [en_GB-ize-wo_accents-only].
+aspell-autobuildhash: processing: en [en_GB-variant_0].
+aspell-autobuildhash: processing: en [en_GB-variant_1].
+aspell-autobuildhash: processing: en [en_US-w_accents-only].
+aspell-autobuildhash: processing: en [en_US-wo_accents-only].
+travis_time:end:0247ba45:start=1601464546505426571,finish=1601464572524217923,duration=26018791352,event=prepare
+[0Ktravis_fold:end:apt
+[0Ktravis_time:start:26954c0c
+[0Ktravis_time:end:26954c0c:start=1601464572528310283,finish=1601464572531060111,duration=2749828,event=fix_ps4
+[0Ktravis_time:start:0ed86318
+[0K
+travis_fold:start:git.checkout
+[0Ktravis_time:start:0ed1ee06
+[0K$ git clone --depth=50 --branch=smoke-test https://github.com/kitspace/kitspace.git kitspace/kitspace
+Cloning into 'kitspace/kitspace'...
+travis_time:end:0ed1ee06:start=1601464572539071803,finish=1601464573171674346,duration=632602543,event=checkout
+[0K$ cd kitspace/kitspace
+$ git checkout -qf 0baaf9b79d31634ec0de54e72479fce0be55603e
+travis_fold:end:git.checkout
+[0K
+travis_time:end:0ed1ee06:start=1601464572539071803,finish=1601464573194335375,duration=655263572,event=checkout
+[0Ktravis_time:start:098bd8bc
+[0K
+[33;1mSetting environment variables from repository settings[0m
+$ export GH_TOKEN=[secure]
+$ export SAUCE_USER_NAME=[secure]
+$ export SAUCE_ACCESS_KEY=[secure]
+$ export SSH_KEY=[secure]
+$ export NETLIFY_AUTH_TOKEN=[secure]
+$ export NETLIFY_SITE_ID=dcd151d6-f523-47fd-a3be-9de5c78a2480
+$ export CACHED_BUILD=cached
+$ export CYPRESS_KEY=[secure]
+
+travis_time:end:098bd8bc:start=1601464573198001424,finish=1601464573210373498,duration=12372074,event=env
+[0Ktravis_fold:start:nvm.install
+[0Ktravis_time:start:01271abd
+[0K$ nvm install 12
+Downloading and installing node v12.18.4...
+Downloading https://nodejs.org/dist/v12.18.4/node-v12.18.4-linux-x64.tar.xz...
+Computing checksum with sha256sum
+Checksums matched!
+Now using node v12.18.4 (npm v6.14.6)
+travis_time:end:01271abd:start=1601464573719765535,finish=1601464576602442570,duration=2882677035,event=setup
+[0Ktravis_fold:end:nvm.install
+[0K
+travis_fold:start:cache.1
+[0KSetting up build cache
+$ export CASHER_DIR=${TRAVIS_HOME}/.casher
+travis_time:start:0626c552
+[0K$ Installing caching utilities
+travis_time:end:0626c552:start=1601464577703043349,finish=1601464577804785000,duration=101741651,event=setup_casher
+[0Ktravis_time:start:036c9a82
+[0Ktravis_time:end:036c9a82:start=1601464577810721607,finish=1601464577813549916,duration=2828309,event=setup_casher
+[0Ktravis_time:start:0d3f6b62
+[0Kattempting to download cache archive[0m
+[32;1mfetching smoke-test/cache--linux-xenial-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855--node-12.tgz[0m
+[32;1mfound cache[0m
+travis_time:end:0d3f6b62:start=1601464577818361013,finish=1601464582407738851,duration=4589377838,event=setup_casher
+[0Ktravis_time:start:05e491b8
+[0Ktravis_time:end:05e491b8:start=1601464582413900426,finish=1601464582416787123,duration=2886697,event=setup_casher
+[0Ktravis_time:start:0698739c
+[0Kadding /home/travis/build/kitspace/kitspace/build to cache[0m
+creating directory /home/travis/build/kitspace/kitspace/build[0m
+adding /home/travis/.cache to cache[0m
+travis_time:end:0698739c:start=1601464582422697699,finish=1601464608476951563,duration=26054253864,event=setup_casher
+[0Ktravis_fold:end:cache.1
+[0K
+travis_fold:start:cache.yarn
+[0K
+travis_time:start:216fde8a
+[0Ktravis_time:end:216fde8a:start=1601464608484016519,finish=1601464608486926935,duration=2910416,event=setup_cache
+[0Ktravis_time:start:084ba3d8
+[0Kadding /home/travis/.cache/yarn to cache[0m
+travis_time:end:084ba3d8:start=1601464608491438427,finish=1601464628696767833,duration=20205329406,event=setup_cache
+[0Ktravis_fold:end:cache.yarn
+[0Ktravis_fold:start:cache.npm
+[0K
+travis_time:start:22406700
+[0Ktravis_time:end:22406700:start=1601464628877707612,finish=1601464628881207904,duration=3500292,event=setup_cache
+[0Ktravis_time:start:08f833fe
+[0Kadding /home/travis/build/kitspace/kitspace/node_modules to cache[0m
+creating directory /home/travis/build/kitspace/kitspace/node_modules[0m
+travis_time:end:08f833fe:start=1601464628890460895,finish=1601464649844315813,duration=20953854918,event=setup_cache
+[0Ktravis_fold:end:cache.npm
+[0K$ node --version
+v12.18.4
+$ npm --version
+6.14.6
+$ nvm --version
+0.36.0
+$ yarn --version
+1.22.4
+
+travis_fold:start:install
+[0Ktravis_time:start:05211b70
+[0K$ yarn --frozen-lockfile
+yarn install v1.22.4
+[1/4] Resolving packages...
+warning Resolution field "oniguruma@7.2.1" is incompatible with requested version "oniguruma@^6.1.0"
+success Already up-to-date.
+Done in 0.89s.
+travis_time:end:05211b70:start=1601464651187175242,finish=1601464652208096585,duration=1020921343,event=install
+[0Ktravis_fold:end:install
+[0Ktravis_time:start:0216c6a8
+[0K$ bash keep_alive.sh &
+keeping travis alive
+travis_time:end:0216c6a8:start=1601464652213661320,finish=1601464652218595906,duration=4934586,event=script
+[0K[32;1mThe command "bash keep_alive.sh &" exited with 0.[0m
+travis_time:start:109e640a
+[0K$ export NODE_ENV=production
+travis_time:end:109e640a:start=1601464652224917374,finish=1601464652229438125,duration=4520751,event=script
+[0K[32;1mThe command "export NODE_ENV=production" exited with 0.[0m
+travis_time:start:3645692a
+[0K$ ./scripts/plug_versions
+travis_time:end:3645692a:start=1601464652237645852,finish=1601464656792843078,duration=4555197226,event=script
+[0K[32;1mThe command "./scripts/plug_versions" exited with 0.[0m
+travis_time:start:2ee04fbe
+[0K$ ./scripts/get_boards production $CACHED_BUILD
+travis_time:end:2ee04fbe:start=1601464656802782001,finish=1601464656846528442,duration=43746441,event=script
+[0K[32;1mThe command "./scripts/get_boards production $CACHED_BUILD" exited with 0.[0m
+travis_time:start:165c1466
+[0K$ ./configure production $CACHED_BUILD
+generated ./build.ninja with 'production' cached=true config
+travis_time:end:165c1466:start=1601464656857908309,finish=1601464657895670499,duration=1037762190,event=script
+[0K[32;1mThe command "./configure production $CACHED_BUILD" exited with 0.[0m
+travis_time:start:18cca670
+[0K$ wget https://github.com/ninja-build/ninja/releases/download/v1.6.0/ninja-linux.zip
+--2020-09-30 11:17:37--  https://github.com/ninja-build/ninja/releases/download/v1.6.0/ninja-linux.zip
+Resolving github.com (github.com)... 140.82.112.3
+Connecting to github.com (github.com)|140.82.112.3|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://github-production-release-asset-2e65be.s3.amazonaws.com/1335132/c5b9a1a4-1e53-11e5-8944-56c6e46d59da?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20200930%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20200930T111738Z&X-Amz-Expires=300&X-Amz-Signature=6110d2ff15ff5bd87a83457f63ed0bcb2d7ab329fdc7c16c34199ce146ba1731&X-Amz-SignedHeaders=host&actor_id=0&key_id=0&repo_id=1335132&response-content-disposition=attachment%3B%20filename%3Dninja-linux.zip&response-content-type=application%2Foctet-stream [following]
+--2020-09-30 11:17:38--  https://github-production-release-asset-2e65be.s3.amazonaws.com/1335132/c5b9a1a4-1e53-11e5-8944-56c6e46d59da?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20200930%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20200930T111738Z&X-Amz-Expires=300&X-Amz-Signature=6110d2ff15ff5bd87a83457f63ed0bcb2d7ab329fdc7c16c34199ce146ba1731&X-Amz-SignedHeaders=host&actor_id=0&key_id=0&repo_id=1335132&response-content-disposition=attachment%3B%20filename%3Dninja-linux.zip&response-content-type=application%2Foctet-stream
+Resolving github-production-release-asset-2e65be.s3.amazonaws.com (github-production-release-asset-2e65be.s3.amazonaws.com)... 52.216.105.115
+Connecting to github-production-release-asset-2e65be.s3.amazonaws.com (github-production-release-asset-2e65be.s3.amazonaws.com)|52.216.105.115|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 71368 (70K) [application/octet-stream]
+Saving to: â€˜ninja-linux.zipâ€™
+
+     0K .......... .......... .......... .......... .......... 71% 3.69M 0s
+    50K .......... .........                                  100% 1.55M=0.03s
+
+2020-09-30 11:17:38 (2.66 MB/s) - â€˜ninja-linux.zipâ€™ saved [71368/71368]
+
+travis_time:end:18cca670:start=1601464657902608495,finish=1601464658253214092,duration=350605597,event=script
+[0K[32;1mThe command "wget https://github.com/ninja-build/ninja/releases/download/v1.6.0/ninja-linux.zip" exited with 0.[0m
+travis_time:start:1f00d140
+[0K$ unzip ninja-linux.zip
+Archive:  ninja-linux.zip
+  inflating: ninja                   
+travis_time:end:1f00d140:start=1601464658260513706,finish=1601464658272142168,duration=11628462,event=script
+[0K[32;1mThe command "unzip ninja-linux.zip" exited with 0.[0m
+travis_time:start:02a20447
+[0K$ if  [ "${CACHED_BUILD}" != "cached" ]; then ./ninja clean; fi
+travis_time:end:02a20447:start=1601464658279628323,finish=1601464658283968763,duration=4340440,event=script
+[0K[32;1mThe command "if  [ "${CACHED_BUILD}" != "cached" ]; then ./ninja clean; fi" exited with 0.[0m
+travis_time:start:018408d8
+[0K$ ./ninja -j 2 && cp registry.json build/
+[1/98] cp src/images/aisler.png build/images/aisler.png
+[2/98] cp src/images/Digikey-grey.ico build/images/Digikey-grey.ico
+[3/98] cp src/images/Digikey.ico build/images/Digikey.ico
+[4/98] cp src/images/Farnell-grey.ico build/images/Farnell-grey.ico
+[5/98] cp src/images/Farnell.ico build/images/Farnell.ico
+[6/98] cp src/images/favicon.png build/images/favicon.png
+[7/98] cp src/images/fireworks.png build/images/fireworks.png
+[8/98] cp src/images/fontello.eot build/images/fontello.eot
+[9/98] cp src/images/fontello.ttf build/images/fontello.ttf
+[10/98] cp src/images/fontello.woff build/images/fontello.woff
+[11/98] cp src/images/fontello.woff2 build/images/fontello.woff2
+[12/98] cp src/images/LCSC.ico build/images/LCSC.ico
+[13/98] cp src/images/logo_meta.png build/images/logo_meta.png
+[14/98] cp src/images/logo.png build/images/logo.png
+[15/98] cp src/images/logo.svg build/images/logo.svg
+[16/98] cp src/images/mag_icon.svg build/images/mag_icon.svg
+[17/98] cp src/images/Mouser-grey.ico build/images/Mouser-grey.ico
+[18/98] cp src/images/Mouser.ico build/images/Mouser.ico
+[19/98] cp src/images/Newark-grey.ico build/images/Newark-grey.ico
+[20/98] cp src/images/Newark.ico build/images/Newark.ico
+[21/98] cp src/images/NotoSans.ttf build/images/NotoSans.ttf
+[22/98] cp src/images/NotoSansBold.ttf build/images/NotoSansBold.ttf
+[23/98] cp src/images/oshpark.png build/images/oshpark.png
+[24/98] cp src/images/pcbshopper.png build/images/pcbshopper.png
+[25/98] cp src/images/pcbway.png build/images/pcbway.png
+[26/98] cp src/images/pmstudio.jpg build/images/pmstudio.jpg
+[27/98] cp src/images/royal_circuits.png build/images/royal_circuits.png
+[28/98] cp src/images/RS-grey.ico build/images/RS-grey.ico
+[29/98] cp src/images/RS.ico build/images/RS.ico
+[30/98] cp src/images/submit.svg build/images/submit.svg
+[31/98] cp src/board_builder.js build/.temp/board_builder.js
+[32/98] cp src/gerber_files.js build/.temp/gerber_files.js
+[33/98] cp src/submit/finish.jsx build/.temp/submit/finish.jsx
+[34/98] cp src/get_partinfo.js build/.temp/get_partinfo.js
+[35/98] cp src/is_visible.js build/.temp/is_visible.js
+[36/98] cp src/media_queries.js build/.temp/media_queries.js
+[37/98] cp src/submit/board_colors.js build/.temp/submit/board_colors.js
+[38/98] cp src/netlify-functions/submission-created.js build/.temp/netlify-functions/submission-created.js
+[39/98] cp src/submit/preview_readme.js build/.temp/submit/preview_readme.js
+[40/98] cp src/1-click-bom/1-click-bom.jsx build/.temp/1-click-bom/1-click-bom.jsx
+[41/98] cp src/1-click-bom/render_1-click-bom.jsx build/.temp/1-click-bom/render_1-click-bom.jsx
+[42/98] cp src/bom-builder/bom-builder.jsx build/.temp/bom-builder/bom-builder.jsx
+[43/98] cp src/bom-builder/render_bom-builder.jsx build/.temp/bom-builder/render_bom-builder.jsx
+[44/98] cp src/buy_parts/bom.jsx build/.temp/buy_parts/bom.jsx
+[45/98] cp src/buy_parts/buy_parts.jsx build/.temp/buy_parts/buy_parts.jsx
+[46/98] cp src/buy_parts/direct_stores.jsx build/.temp/buy_parts/direct_stores.jsx
+[47/98] cp src/buy_parts/install_prompt.jsx build/.temp/buy_parts/install_prompt.jsx
+[48/98] cp src/buy_parts/mpn_popup.jsx build/.temp/buy_parts/mpn_popup.jsx
+[49/98] cp src/buy_parts/tsv_table.jsx build/.temp/buy_parts/tsv_table.jsx
+[50/98] cp src/fade_image.jsx build/.temp/fade_image.jsx
+[51/98] cp src/index/board_card.jsx build/.temp/index/board_card.jsx
+[52/98] cp src/index/board_list.jsx build/.temp/index/board_list.jsx
+[53/98] cp src/index/index.jsx build/.temp/index/index.jsx
+[54/98] cp src/index/intro.jsx build/.temp/index/intro.jsx
+[55/98] cp src/index/render_index.jsx build/.temp/index/render_index.jsx
+[56/98] cp src/install_extension.jsx build/.temp/install_extension.jsx
+[57/98] cp src/lazy_load.jsx build/.temp/lazy_load.jsx
+[58/98] cp src/newsletter/newsletter.jsx build/.temp/newsletter/newsletter.jsx
+[59/98] cp src/newsletter/render_newsletter.jsx build/.temp/newsletter/render_newsletter.jsx
+[60/98] cp src/page/board_showcase.jsx build/.temp/page/board_showcase.jsx
+[61/98] cp src/page/info_bar.jsx build/.temp/page/info_bar.jsx
+[62/98] cp src/page/order_pcbs.jsx build/.temp/page/order_pcbs.jsx
+[63/98] cp src/page/page.jsx build/.temp/page/page.jsx
+[64/98] cp src/page/render_page.jsx build/.temp/page/render_page.jsx
+[65/98] cp src/submit/color_selector.jsx build/.temp/submit/color_selector.jsx
+[66/98] cp src/submit/preview_bom.jsx build/.temp/submit/preview_bom.jsx
+[67/98] cp src/submit/preview_gerbers.jsx build/.temp/submit/preview_gerbers.jsx
+[68/98] cp src/submit/render_submit.jsx build/.temp/submit/render_submit.jsx
+[69/98] cp src/submit/steps.jsx build/.temp/submit/steps.jsx
+[70/98] cp src/submit/submit.jsx build/.temp/submit/submit.jsx
+[71/98] cp src/submit/url_submit.jsx build/.temp/submit/url_submit.jsx
+[72/98] cp src/submit/util.jsx build/.temp/submit/util.jsx
+[73/98] cp src/title_bar.jsx build/.temp/title_bar.jsx
+[74/98] node -- tasks/makeBoardsJson.js boards -- production true build/.temp/boards.json
+[75/98] node-sass --sourcemap=none --load-path src/ src/bom-builder/bom-builder.scss build/.temp/bom-builder/bom-builder.css
+[76/98] node -- tasks/makeBomBuilder.js build/.temp/bom-builder/bom-builder.jsx src/bom-builder/bom-builder.html -- production true build/bom-builder/index.html
+Rendering Complete, saving .css file...
+Wrote CSS to /home/travis/build/kitspace/kitspace/build/.temp/bom-builder/bom-builder.css
+[77/98] node-sass --sourcemap=none --load-path src/ src/index/index.scss build/.temp/index.css
+Rendering Complete, saving .css file...
+Wrote CSS to /home/travis/build/kitspace/kitspace/build/.temp/index.css
+[78/98] postcss --use autoprefixer --autoprefixer.browsers          "last 2 versions, > 1%, Safari >= 8, iOS >= 8, Firefox ESR, Opera 12.1"         build/.temp/bom-builder/bom-builder.css -o build/bom-builder/bom-builder.css
+[79/98] node-sass --sourcemap=none --load-path src/ src/1-click-bom/1-click-bom.scss build/.temp/1-click-bom/1-click-bom.css
+Rendering Complete, saving .css file...
+Wrote CSS to /home/travis/build/kitspace/kitspace/build/.temp/1-click-bom/1-click-bom.css
+[80/98] node-sass --sourcemap=none --load-path src/ src/newsletter/newsletter.scss build/.temp/newsletter/newsletter.css
+Rendering Complete, saving .css file...
+Wrote CSS to /home/travis/build/kitspace/kitspace/build/.temp/newsletter/newsletter.css
+[81/98] postcss --use autoprefixer --autoprefixer.browsers          "last 2 versions, > 1%, Safari >= 8, iOS >= 8, Firefox ESR, Opera 12.1"         build/.temp/newsletter/newsletter.css -o build/newsletter/newsletter.css
+[82/98] browserify --extension='.jsx' --transform [ babelify     --presets [ @babel/react @babel/env ] ] -g uglifyify -x 1-click-bom-minimal -x @babel/polyfill -x browser-version -x create-react-class -x react -x react-dom -x react-double-scrollbar -x react-helmet -x react-hyperscript-helpers -x react-responsive -x react-search-input -x semantic-ui-react -x superagent build/.temp/1-click-bom/render_1-click-bom.jsx | uglifyjs --mangle --reserved '1-click-bom,1-click-bom-minimal,@babel/polyfill,browser-version,create-react-class,github-url-to-object,html-to-react,immutable,js-yaml,lodash.camelcase,marky-markdown,pcb-stackup,react,react-dom,react-double-scrollbar,react-helmet,react-hyperscript-helpers,react-markdown,react-responsive,react-router,react-search-input,redux,redux-immutable,semantic-ui-react,superagent,whats-that-gerber,xml-element-string'                     --compress 'sequences=true,properties=true,dead_code=true,drop_debugger=true,unsafe=false,conditionals=true,comparisons=true,evaluate=true,booleans=true,loops=true,unused=false,hoist_funs=true,hoist_vars=false,if_return=true,join_vars=true,cascade=true,side_effects=true,warnings=true' > build/1-click-bom/app.js
+[83/98] node-sass --sourcemap=none --load-path src/ src/page/page.scss build/.temp/page.css
+Rendering Complete, saving .css file...
+Wrote CSS to /home/travis/build/kitspace/kitspace/build/.temp/page.css
+[84/98] browserify --extension='.jsx' --transform [ babelify     --presets [ @babel/react @babel/env ] ] -g uglifyify -x 1-click-bom-minimal -x @babel/polyfill -x browser-version -x create-react-class -x react -x react-dom -x react-double-scrollbar -x react-helmet -x react-hyperscript-helpers -x react-responsive -x react-search-input -x semantic-ui-react -x superagent build/.temp/bom-builder/render_bom-builder.jsx | uglifyjs --mangle --reserved '1-click-bom,1-click-bom-minimal,@babel/polyfill,browser-version,create-react-class,github-url-to-object,html-to-react,immutable,js-yaml,lodash.camelcase,marky-markdown,pcb-stackup,react,react-dom,react-double-scrollbar,react-helmet,react-hyperscript-helpers,react-markdown,react-responsive,react-router,react-search-input,redux,redux-immutable,semantic-ui-react,superagent,whats-that-gerber,xml-element-string'                     --compress 'sequences=true,properties=true,dead_code=true,drop_debugger=true,unsafe=false,conditionals=true,comparisons=true,evaluate=true,booleans=true,loops=true,unused=false,hoist_funs=true,hoist_vars=false,if_return=true,join_vars=true,cascade=true,side_effects=true,warnings=true' > build/bom-builder/app.js
+[85/98] postcss --use autoprefixer --autoprefixer.browsers          "last 2 versions, > 1%, Safari >= 8, iOS >= 8, Firefox ESR, Opera 12.1"         build/.temp/1-click-bom/1-click-bom.css -o build/1-click-bom/1-click-bom.css
+[86/98] node-sass --sourcemap=none --load-path src/ src/submit/submit.scss build/.temp/submit.css
+Rendering Complete, saving .css file...
+Wrote CSS to /home/travis/build/kitspace/kitspace/build/.temp/submit.css
+[87/98] browserify --extension='.jsx' --transform [ babelify     --presets [ @babel/react @babel/env ] ] -g uglifyify -x 1-click-bom-minimal -x @babel/polyfill -x browser-version -x create-react-class -x react -x react-dom -x react-double-scrollbar -x react-helmet -x react-hyperscript-helpers -x react-responsive -x react-search-input -x semantic-ui-react -x superagent build/.temp/newsletter/render_newsletter.jsx | uglifyjs --mangle --reserved '1-click-bom,1-click-bom-minimal,@babel/polyfill,browser-version,create-react-class,github-url-to-object,html-to-react,immutable,js-yaml,lodash.camelcase,marky-markdown,pcb-stackup,react,react-dom,react-double-scrollbar,react-helmet,react-hyperscript-helpers,react-markdown,react-responsive,react-router,react-search-input,redux,redux-immutable,semantic-ui-react,superagent,whats-that-gerber,xml-element-string'                     --compress 'sequences=true,properties=true,dead_code=true,drop_debugger=true,unsafe=false,conditionals=true,comparisons=true,evaluate=true,booleans=true,loops=true,unused=false,hoist_funs=true,hoist_vars=false,if_return=true,join_vars=true,cascade=true,side_effects=true,warnings=true' > build/newsletter/app.js
+[88/98] postcss --use autoprefixer --autoprefixer.browsers          "last 2 versions, > 1%, Safari >= 8, iOS >= 8, Firefox ESR, Opera 12.1"         build/.temp/page.css -o build/page.css
+[89/98] postcss --use autoprefixer --autoprefixer.browsers          "last 2 versions, > 1%, Safari >= 8, iOS >= 8, Firefox ESR, Opera 12.1"         build/.temp/submit.css -o build/submit.css
+[90/98] node -- tasks/makeOneClickBom.js build/.temp/1-click-bom/1-click-bom.jsx src/1-click-bom/1-click-bom.html -- production true build/1-click-bom/index.html
+[91/98] postcss --use autoprefixer --autoprefixer.browsers          "last 2 versions, > 1%, Safari >= 8, iOS >= 8, Firefox ESR, Opera 12.1"         build/.temp/index.css -o build/index.css
+[92/98] browserify --extension='.jsx' --transform [ babelify     --presets [ @babel/react @babel/env ] ] -g uglifyify -x 1-click-bom-minimal -x @babel/polyfill -x browser-version -x create-react-class -x react -x react-dom -x react-double-scrollbar -x react-helmet -x react-hyperscript-helpers -x react-responsive -x react-search-input -x semantic-ui-react -x superagent build/.temp/submit/render_submit.jsx | uglifyjs --mangle --reserved '1-click-bom,1-click-bom-minimal,@babel/polyfill,browser-version,create-react-class,github-url-to-object,html-to-react,immutable,js-yaml,lodash.camelcase,marky-markdown,pcb-stackup,react,react-dom,react-double-scrollbar,react-helmet,react-hyperscript-helpers,react-markdown,react-responsive,react-router,react-search-input,redux,redux-immutable,semantic-ui-react,superagent,whats-that-gerber,xml-element-string'                     --compress 'sequences=true,properties=true,dead_code=true,drop_debugger=true,unsafe=false,conditionals=true,comparisons=true,evaluate=true,booleans=true,loops=true,unused=false,hoist_funs=true,hoist_vars=false,if_return=true,join_vars=true,cascade=true,side_effects=true,warnings=true' > build/submit/app.js
+[93/98] node -- tasks/makeNewsletter.js build/.temp/newsletter/newsletter.jsx src/newsletter/newsletter.html -- production true build/newsletter/index.html
+[94/98] cp src/_redirects build/_redirects
+[95/98] node -- tasks/makeSubmit.js build/.temp/submit/submit.jsx src/submit/submit.html -- production true build/submit/index.html
+[96/98] node -- tasks/makeSearchIndex.js build/.temp/boards/github.com/jasiek/antenna-analyser/info.json build/.temp/boards/github.com/8BitMixtape/8BitmixtapeNEO_BerlinerSchule_SZ-RDY/info.json build/.temp/boards/github.com/eulerlab/open-visual-stimulator/boards/lcr_add-on/info.json build/.temp/boards/github.com/GlasgowEmbedded/glasgow/Glasgow_revC1/info.json build/.temp/boards/github.com/Jan--Henrik/hoverboard-breakout/nunchuk_breakout/info.json build/.temp/boards/github.com/8BitMixtape/NextLevelEdition/info.json build/.temp/boards/github.com/squaresolid/tiger_biosynth/info.json build/.temp/boards/gitlab.com/bath_open_instrumentation_group/sangaboard/sangaboard_v0.3/info.json build/.temp/boards/gitlab.com/erigas/gnukey/info.json build/.temp/boards/github.com/mattvenn/teensy-audio-fx/info.json build/.temp/boards/github.com/kitspace-forks/neo/info.json build/.temp/boards/github.com/eez-open/modular-psu/mcu/info.json build/.temp/boards/gitlab.com/alexander.kutschera/singingplants/info.json build/.temp/boards/github.com/kitspace-forks/FM_Transmitter/info.json build/.temp/boards/git.defproc.co.uk/DefProc/piezo-sensor/info.json build/.temp/boards/gitlab.com/bath_open_instrumentation_group/sangaboard/sangaboard_v0.4/info.json build/.temp/boards/github.com/ozel/DIY_particle_detector/alpha-spectrometer/info.json build/.temp/boards/github.com/less-smog/hardware/info.json build/.temp/boards/github.com/borgel/sympetrum-v2/info.json build/.temp/boards/github.com/squaresolid/fish-caller/info.json build/.temp/boards/github.com/kitspace-forks/BQ25570_Harvester/info.json build/.temp/boards/github.com/julbouln/ifusb/info.json build/.temp/boards/github.com/carrotIndustries/pluto/info.json build/.temp/boards/github.com/joeycastillo/The-Open-Book/Open-Book/info.json build/.temp/boards/github.com/free-pdk/easy-pdk-programmer-hardware/info.json build/.temp/boards/github.com/eez-open/modular-psu/dcm220/info.json build/.temp/boards/github.com/jpralves/cseduino/info.json build/.temp/boards/github.com/kammce/SJTwo/info.json build/.temp/boards/github.com/kitspace-forks/arduino-uno/info.json build/.temp/boards/github.com/kitspace-forks/HACK/info.json build/.temp/boards/github.com/LincolnUehara/Aquarius/info.json build/.temp/boards/github.com/GaudiLabs/ChaosLooper/info.json build/.temp/boards/github.com/8BitMixtape/8BitmixtapeNEO_ShenzhenReady/info.json build/.temp/boards/github.com/ozel/DIY_particle_detector/electron-detector/info.json build/.temp/boards/github.com/pcbsz/AtariSynth/info.json build/.temp/boards/github.com/Jan--Henrik/OtterScreenAdapter/info.json build/.temp/boards/github.com/fossasia/pslab-hardware/info.json build/.temp/boards/github.com/kitspace-forks/Bus_Pirate/info.json build/.temp/boards/github.com/ollyoid/ShenzhenPostcard/info.json build/.temp/boards/github.com/8BitMixtape/ESPTINY86_MixtapePCB/info.json build/.temp/boards/github.com/sgmk/microNoise_SZ-Ready/info.json build/.temp/boards/github.com/BadenLab/Spikeling/info.json build/.temp/boards/github.com/python-ugame/ugame-10-hardware/info.json build/.temp/boards/github.com/emard/ulx3s/info.json build/.temp/boards/github.com/kanflo/aaduino/info.json build/.temp/boards/github.com/kasbah/push-on-hold-off/info.json build/.temp/boards/github.com/aleksas/interferometer/info.json build/.temp/boards/github.com/dusjagr/ESPTINY86_Stompbox/info.json build/.temp/boards/github.com/kimitobo/Neocococat/info.json build/.temp/boards/github.com/dvdfreitag/Signal-Detector/info.json build/.temp/boards/github.com/8BitMixtape/mCore_Mixtape/info.json 'build/.temp/boards/github.com/pyr0ball/pyr0piezo/Pyr0-Piezo Z-Probe Business Card DIY Module/info.json' build/.temp/boards/gitlab.com/openflexure/ofm-illumination/info.json build/.temp/boards/github.com/Jan--Henrik/Otter-Iron/info.json build/.temp/boards/github.com/Jan--Henrik/hoverboard-breakout/bobbycar_breakout/info.json build/.temp/boards/github.com/ollyoid/TuneShroom/info.json build/.temp/boards/github.com/morgulbrut/LoRa32_Node/info.json build/.temp/boards/gitlab.com/xengi/darling/info.json build/.temp/boards/github.com/pcbsz/SimpleAmp/info.json build/.temp/boards/github.com/UDXS/Arduitsy/info.json build/.temp/boards/github.com/arturo182/bbq10kbd_breakout/info.json build/.temp/boards/github.com/kasbah/corners/info.json build/.temp/boards/github.com/eez-open/modular-psu/dcp405/info.json 'build/.temp/boards/github.com/pyr0ball/pyr0piezo/Pyr0-Piezo Z-Probe Standalone Module/info.json' build/.temp/boards/github.com/dusjagr/PN001_Pop-Neuron_ShenzhenReady/info.json build/.temp/boards/github.com/RoboticsBrno/RB3200-ESP32universal/info.json build/.temp/boards/github.com/kasbah/nomech/info.json build/.temp/boards/github.com/jasiek/ESP8266-PowerMonitor/info.json build/.temp/boards/github.com/intajay/uduino/info.json build/.temp/boards/github.com/JarrettR/USBvil/info.json build/.temp/boards/github.com/kitspace/jelly/info.json build/.temp/boards/github.com/pcbsz/LM386/info.json build/.temp/boards/github.com/InaneCoding/KOS01_IdealDiode20A/info.json build/.temp/boards/github.com/robotsrulz/SP_Adapter/info.json build/.temp/boards/github.com/julbouln/ice40_eink_controller/info.json build/.temp/boards/github.com/kb-consulting/pt101a/info.json build/.temp/boards/github.com/Jan--Henrik/USB-LED-Otter/info.json build/.temp/boards/github.com/GenericLab/Unagi_Gar-Lampli/info.json build/.temp/boards/github.com/Jan--Henrik/CH330_Hardware/info.json build/.temp/boards/github.com/maltman23/ArduTouch/info.json build/.temp/boards/github.com/GenericLab/GOSH-Board_UGM/info.json build/.temp/boards/github.com/descampsa/DynamixelShield/info.json build/.temp/boards/github.com/eez-open/modular-psu/aux-ps/info.json build/.temp/boards/github.com/kasbah/maulwurf/info.json build/.temp/boards/github.com/mattvenn/esp8266-breakout/info.json build/.temp/boards/github.com/rwb27/openflexure_nano_motor_controller/info.json build/.temp/boards/github.com/Neotron-Compute/Neotron-32-Hardware/info.json build/.temp/boards/github.com/sgmk/solarbird_shenzen_rdy/info.json build/.temp/boards/github.com/Sussex-Neuroscience/voltage-amplifier/info.json build/.temp/boards/github.com/eulerlab/open-visual-stimulator/boards/ssr_board/info.json build/.temp/boards/gogs.zenerdio.de/sebastian/satnogs-diplexer/info.json build/.temp/boards/github.com/eulerlab/open-visual-stimulator/boards/mosfet_circuit/info.json build/.temp/boards/github.com/nerdyscout/NodeMCU/PIS/info.json build/.temp/boards/github.com/im-tomu/tomu-hardware/info.json build/.temp/boards/github.com/sci-bots/teensy-3.2-clone.kicad/info.json build/.temp/boards/github.com/amchagas/fast-response-diode/info.json build/.temp/boards/github.com/eez-open/modular-psu/bp3c/info.json build/.temp/boards/github.com/kitspace/ruler/info.json build/.temp/boards/github.com/Jan--Henrik/OtterPill/info.json build/.temp/boards/github.com/eulerlab/open-visual-stimulator/boards/mosfet_circuit_plus_voltage_regulator/info.json build/.temp/boards/github.com/Ryzee119/OpenXenium/info.json build/.temp/boards/github.com/alpharesearch/ESP8266_DS18B20/info.json build/.temp/boards/github.com/amchagas/Flypi/info.json build/.temp/boards/github.com/joeycastillo/The-Open-Book/eBook-Wing/info.json -- production true build/.temp/search_index.json
+[97/98] browserify --extension='.jsx' --transform [ babelify     --presets [ @babel/react @babel/env ] ] -g uglifyify -x 1-click-bom-minimal -x @babel/polyfill -x browser-version -x create-react-class -x react -x react-dom -x react-double-scrollbar -x react-helmet -x react-hyperscript-helpers -x react-responsive -x react-search-input -x semantic-ui-react -x superagent build/.temp/index/render_index.jsx | uglifyjs --mangle --reserved '1-click-bom,1-click-bom-minimal,@babel/polyfill,browser-version,create-react-class,github-url-to-object,html-to-react,immutable,js-yaml,lodash.camelcase,marky-markdown,pcb-stackup,react,react-dom,react-double-scrollbar,react-helmet,react-hyperscript-helpers,react-markdown,react-responsive,react-router,react-search-input,redux,redux-immutable,semantic-ui-react,superagent,whats-that-gerber,xml-element-string'                     --compress 'sequences=true,properties=true,dead_code=true,drop_debugger=true,unsafe=false,conditionals=true,comparisons=true,evaluate=true,booleans=true,loops=true,unused=false,hoist_funs=true,hoist_vars=false,if_return=true,join_vars=true,cascade=true,side_effects=true,warnings=true' > build/app.js
+[98/98] node -- tasks/makeIndex.js build/.temp/index/index.jsx src/index/index.html build/.temp/boards.json build/.temp/search_index.json -- production true build/index.html
+WARN: Dropping side-effect-free statement [-:4936,10742]
+travis_time:end:018408d8:start=1601464658293101502,finish=1601464699538856635,duration=41245755133,event=script
+[0K[32;1mThe command "./ninja -j 2 && cp registry.json build/" exited with 0.[0m
+travis_time:start:3059933d
+[0K$ yarn smoke-test
+yarn run v1.22.4
+$ start-test serve 8080 'cypress run --record --key $CYPRESS_KEY'
+1: starting server using command "npm run serve"
+and when url "[ 'http://localhost:8080' ]" is responding with HTTP status code 200
+running tests using command "cypress run --record --key $CYPRESS_KEY"
+
+npm WARN lifecycle The node binary used for scripts is /tmp/yarn--1601464699724-0.3449712013727484/node but npm is using /home/travis/.nvm/versions/node/v12.18.4/bin/node itself. Use the `--scripts-prepend-node-path` option to include the path for the node binary npm was executed with.
+
+> kitspace@1.0.0 serve /home/travis/build/kitspace/kitspace
+> http-server build/
+
+[33mStarting up http-server, serving [39m[36mbuild/[39m[33m
+Available on:[39m
+[32m  http://127.0.0.1:8080[39m
+[32m  http://10.20.0.114:8080[39m
+Hit CTRL-C to stop the server
+[2020-09-30T11:18:22.038Z] "[36mHEAD[39m [36m/[39m" "axios/0.19.2"
+(node:9111) [DEP0066] DeprecationWarning: OutgoingMessage.prototype._headers is deprecated
+
+[90m====================================================================================================[39m
+
+[0m  ([4m[1mRun Starting[22m[24m)[0m
+
+[90m  â”Œ[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”[39m
+[90m  â”‚[39m [90mCypress:[39m    5.1.0                                                                              [90mâ”‚[39m
+[90m  â”‚[39m [90mBrowser:[39m    Electron 83 [90m(headless)[39m                                                             [90mâ”‚[39m
+[90m  â”‚[39m [90mSpecs:[39m      [0m1 found (smoke.spec.js)[0m                                                            [90mâ”‚[39m
+[90m  â”‚[39m [90mParams:[39m     Tag: false, Group: false, Parallel: false                                          [90mâ”‚[39m
+[90m  â”‚[39m [90mRun URL:[39m    [0mhttps://dashboard.cypress.io/projects/pk2d9c/runs/50[0m                               [90mâ”‚[39m
+[90m  â””[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”˜[39m
+
+
+[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m
+                                                                                                    
+  Running:  [90msmoke.spec.js[39m                                                                   [90m(1 of 1)[39m
+  Estimated: [90m2 seconds[39m
+
+[0m[0m
+[0m  Smoke Test[0m
+[2020-09-30T11:18:29.288Z] "[36mGET[39m [36m/[39m" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/5.1.0 Chrome/83.0.4103.122 Electron/9.2.1 Safari/537.36"
+[2020-09-30T11:18:29.396Z] "[36mGET[39m [36m/index.css[39m" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/5.1.0 Chrome/83.0.4103.122 Electron/9.2.1 Safari/537.36"
+[2020-09-30T11:18:29.412Z] "[36mGET[39m [36m/images/logo.svg[39m" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/5.1.0 Chrome/83.0.4103.122 Electron/9.2.1 Safari/537.36"
+[2020-09-30T11:18:29.418Z] "[36mGET[39m [36m/vendor.js[39m" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/5.1.0 Chrome/83.0.4103.122 Electron/9.2.1 Safari/537.36"
+[2020-09-30T11:18:29.487Z] "[36mGET[39m [36m/semantic.min.css[39m" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/5.1.0 Chrome/83.0.4103.122 Electron/9.2.1 Safari/537.36"
+[2020-09-30T11:18:29.494Z] "[36mGET[39m [36m/app.js[39m" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/5.1.0 Chrome/83.0.4103.122 Electron/9.2.1 Safari/537.36"
+[2020-09-30T11:18:29.833Z] "[36mGET[39m [36m/boards/github.com/jasiek/antenna-analyser/images/top.png[39m" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/5.1.0 Chrome/83.0.4103.122 Electron/9.2.1 Safari/537.36"
+[2020-09-30T11:18:29.843Z] "[36mGET[39m [36m/boards/github.com/8BitMixtape/8BitmixtapeNEO_BerlinerSchule_SZ-RDY/images/top.png[39m" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/5.1.0 Chrome/83.0.4103.122 Electron/9.2.1 Safari/537.36"
+[2020-09-30T11:18:29.858Z] "[36mGET[39m [36m/boards/github.com/eulerlab/open-visual-stimulator/boards/lcr_add-on/images/top.png[39m" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/5.1.0 Chrome/83.0.4103.122 Electron/9.2.1 Safari/537.36"
+[2020-09-30T11:18:29.893Z] "[36mGET[39m [36m/boards/github.com/Jan--Henrik/hoverboard-breakout/nunchuk_breakout/images/top.png[39m" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/5.1.0 Chrome/83.0.4103.122 Electron/9.2.1 Safari/537.36"
+[2020-09-30T11:18:29.895Z] "[36mGET[39m [36m/boards/github.com/8BitMixtape/NextLevelEdition/images/top.png[39m" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/5.1.0 Chrome/83.0.4103.122 Electron/9.2.1 Safari/537.36"
+[2020-09-30T11:18:29.947Z] "[36mGET[39m [36m/boards/github.com/GlasgowEmbedded/glasgow/Glasgow_revC1/images/top.png[39m" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/5.1.0 Chrome/83.0.4103.122 Electron/9.2.1 Safari/537.36"
+[2020-09-30T11:18:29.987Z] "[36mGET[39m [36m/themes/default/assets/fonts/icons.woff2[39m" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/5.1.0 Chrome/83.0.4103.122 Electron/9.2.1 Safari/537.36"
+[2020-09-30T11:18:29.999Z] "[36mGET[39m [36m/images/NotoSans.ttf[39m" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/5.1.0 Chrome/83.0.4103.122 Electron/9.2.1 Safari/537.36"
+[2020-09-30T11:18:30.010Z] "[36mGET[39m [36m/images/NotoSansBold.ttf[39m" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/5.1.0 Chrome/83.0.4103.122 Electron/9.2.1 Safari/537.36"
+  [32m  âœ“[0m[90m checks that boards are rendered to screen[0m[31m (1286ms)[0m
+  [32m  âœ“[0m[90m assert the number of boards equal boards in `boards.json`[0m[31m (234ms)[0m
+
+
+[92m [0m[32m 2 passing[0m[90m (2s)[0m
+
+[2020-09-30T11:18:30.879Z] "[36mGET[39m [36m/boards/github.com/eulerlab/open-visual-stimulator/boards/mosfet_circuit_plus_voltage_regulator/images/top.png[39m" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/5.1.0 Chrome/83.0.4103.122 Electron/9.2.1 Safari/537.36"
+[2020-09-30T11:18:30.891Z] "[36mGET[39m [36m/boards/github.com/Ryzee119/OpenXenium/images/top.png[39m" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/5.1.0 Chrome/83.0.4103.122 Electron/9.2.1 Safari/537.36"
+[2020-09-30T11:18:30.920Z] "[36mGET[39m [36m/boards/github.com/alpharesearch/ESP8266_DS18B20/images/top.png[39m" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/5.1.0 Chrome/83.0.4103.122 Electron/9.2.1 Safari/537.36"
+[2020-09-30T11:18:30.934Z] "[36mGET[39m [36m/boards/github.com/amchagas/Flypi/images/top.png[39m" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/5.1.0 Chrome/83.0.4103.122 Electron/9.2.1 Safari/537.36"
+[2020-09-30T11:18:30.948Z] "[36mGET[39m [36m/boards/github.com/joeycastillo/The-Open-Book/eBook-Wing/images/top.png[39m" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/5.1.0 Chrome/83.0.4103.122 Electron/9.2.1 Safari/537.36"
+
+[32m  ([4m[1mResults[22m[24m)[39m
+
+[90m  â”Œ[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”[39m
+[90m  â”‚[39m [90mTests:[39m        [32m2[39m                                                                                [90mâ”‚[39m
+[90m  â”‚[39m [90mPassing:[39m      [32m2[39m                                                                                [90mâ”‚[39m
+[90m  â”‚[39m [90mFailing:[39m      [32m0[39m                                                                                [90mâ”‚[39m
+[90m  â”‚[39m [90mPending:[39m      [32m0[39m                                                                                [90mâ”‚[39m
+[90m  â”‚[39m [90mSkipped:[39m      [32m0[39m                                                                                [90mâ”‚[39m
+[90m  â”‚[39m [90mScreenshots:[39m  [32m0[39m                                                                                [90mâ”‚[39m
+[90m  â”‚[39m [90mVideo:[39m        [32mtrue[39m                                                                             [90mâ”‚[39m
+[90m  â”‚[39m [90mDuration:[39m     [32m1 second[39m                                                                         [90mâ”‚[39m
+[90m  â”‚[39m [90mEstimated:[39m    [32m2 seconds[39m                                                                        [90mâ”‚[39m
+[90m  â”‚[39m [90mSpec Ran:[39m     [32m[32msmoke.spec.js[32m[39m                                                                    [90mâ”‚[39m
+[90m  â””[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”˜[39m
+
+
+[36m  ([4m[1mVideo[22m[24m)[39m
+
+[90m [39m [90m-[39m  [90mStarted processing:[39m  [36mCompressing to 32 CRF[39m                                                     
+[90m [39m [90m-[39m  [90mFinished processing:[39m [36m/home/travis/build/kitspace/kitspace/cypress/videos/smoke.s[39m     [90m(1 second)[39m
+[90m [39m                         [36mpec.js.mp4[39m                                                                
+
+
+[34m  ([4m[1mUploading Results[22m[24m)[39m
+
+  - Done Uploading [90m(1/1)[39m [34m/home/travis/build/kitspace/kitspace/cypress/videos/smoke.spec.js.mp4[39m
+
+[90m====================================================================================================[39m
+
+[0m  ([4m[1mRun Finished[22m[24m)[0m
+
+
+[90m   [39m    [90mSpec[39m                                              [90mTests[39m  [90mPassing[39m  [90mFailing[39m  [90mPending[39m  [90mSkipped[39m [90m [39m
+[90m  â”Œ[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mï¿½ï¿½ï¿½[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”[39m
+[90m  â”‚[39m [32mâœ”[39m  [0msmoke.spec.js[0m                            [90m00:01[39m        [0m2[0m        [32m2[39m        [90m-[39m        [90m-[39m        [90m-[39m [90mâ”‚[39m
+[90m  â””[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”˜[39m
+[90m   [39m [32mâœ”[39m  [32mAll specs passed![39m                        [90m00:01[39m        [0m2[0m        [32m2[39m        [90m-[39m        [90m-[39m        [90m-[39m [90m [39m
+
+
+[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m[90mâ”€[39m
+                                                                                                       
+  Recorded Run: [90mhttps://dashboard.cypress.io/projects/pk2d9c/runs/50[39m                                   
+
+[31mhttp-server stopped.[39m
+Done in 14.91s.
+travis_time:end:3059933d:start=1601464699544992984,finish=1601464714583478491,duration=15038485507,event=script
+[0K[32;1mThe command "yarn smoke-test" exited with 0.[0m
+travis_time:start:00ceb7fa
+[0K$ ./scripts/deploy
+Warning: Permanently added 'preview.kitspace.org,52.51.61.84' (ECDSA) to the list of known hosts.
+
+travis_time:end:00ceb7fa:start=1601464714591393546,finish=1601464717699303245,duration=3107909699,event=script
+[0K[32;1mThe command "./scripts/deploy" exited with 0.[0m
+travis_fold:start:cache.2
+[0Kstore build cache
+travis_time:start:0005e69c
+[0Ktravis_time:end:0005e69c:start=1601464717704865407,finish=1601464717708343898,duration=3478491,event=cache
+[0Ktravis_time:start:3ceb9848
+[0K[32;1mchanges detected (content changed, file is created, or file is deleted):\n/home/travis/build/kitspace/kitspace/build/app.js
+/home/travis/build/kitspace/kitspace/build/index.html
+/home/travis/build/kitspace/kitspace/build/.ninja_log
+/home/travis/build/kitspace/kitspace/build/submit/app.js
+/home/travis/build/kitspace/kitspace/build/.temp/boards.json
+/home/travis/build/kitspace/kitspace/build/.temp/search_index.json
+/home/travis/build/kitspace/kitspace/node_modules/.cache/@babel/register/.babel.7.10.2.production.json\n[0m
+[32;1mchanges detected, packing new archive[0m
+[32;1muploading smoke-test/cache--linux-xenial-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855--node-12.tgz[0m
+[32;1mcache uploaded[0m
+travis_time:end:3ceb9848:start=1601464717713066535,finish=1601464770313273756,duration=52600207221,event=cache
+[0Ktravis_fold:end:cache.2
+[0K
+
+Done. Your build exited with 0.
+/home/travis/.travis/functions: line 536:  8164 Terminated              bash keep_alive.sh
