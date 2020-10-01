@@ -2,11 +2,13 @@
 const React = require('react')
 const createClass = require('create-react-class')
 
+const SearchInput = require('react-search-input').default
+
 const BoardCard = require('./board_card')
 
 var BoardList = createClass({
   render() {
-    if (this.props.data.length === 0 && this.props.searching) {
+    if (this.props.data.length === 0) {
       return (
         <div>
           <div style={{height: '30vh'}} />
