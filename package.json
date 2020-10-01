@@ -43,7 +43,7 @@
     "watch": "./scripts/watch",
     "start": "./scripts/get_boards && npm run serve & npm run watch",
     "smoke-test": "start-test serve 8080 'cypress run --record --key $CYPRESS_KEY'",
-    "cy:run": "cypress run",
+    "cy:run": "start-test serve 8080 'cypress run'",
     "plug-reg": "./scripts/plug_versions",
     "get-boards": "./scripts/get_boards",
     "serve": "http-server build/",
