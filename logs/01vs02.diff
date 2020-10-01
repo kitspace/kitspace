@@ -1,0 +1,106 @@
+3c3
+< hostname: 7a242bc8-01ed-4ccc-bfdd-25c6021f29e7@1.worker-org-77db9856dc-ddgsc.gce-production-3
+---
+> hostname: 434f714e-8251-439c-8155-24aef90aa05a@1.worker-org-8b5957499-tp5r2.gce-production-3
+5,6c5,6
+< instance: travis-job-b6f1c0d9-97e9-4c9a-9cc8-4df02afaf925 travis-ci-sardonyx-xenial-1593004276-4d46c6b3 (via amqp)
+< startup: 6.083623215s
+---
+> instance: travis-job-dbb50b96-d773-4dc1-a013-5ba3de2e4367 travis-ci-sardonyx-xenial-1593004276-4d46c6b3 (via amqp)
+> startup: 6.169317351s
+172,173c172,173
+< gpg: keyring `/tmp/tmp4pk9z69t/secring.gpg' created
+< gpg: keyring `/tmp/tmp4pk9z69t/pubring.gpg' created
+---
+> gpg: keyring `/tmp/tmp0xbjns5f/secring.gpg' created
+> gpg: keyring `/tmp/tmp0xbjns5f/pubring.gpg' created
+175c175
+< gpg: /tmp/tmp4pk9z69t/trustdb.gpg: trustdb created
+---
+> gpg: /tmp/tmp0xbjns5f/trustdb.gpg: trustdb created
+283c283
+< Fetched 71.7 MB in 7s (9,909 kB/s)
+---
+> Fetched 71.7 MB in 6s (10.5 MB/s)
+582,584d581
+< [32;1mfetching smoke-test/cache-linux-xenial-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855--node-12.tgz[0m
+< [32;1mfetching smoke-test/cache--node-12.tgz[0m
+< [32;1mfetching master/cache--linux-xenial-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855--node-12.tgz[0m
+614,633c611,612
+< [2/4] Fetching packages...
+< warning atom-language-diff@1.0.2: The engine "atom" appears to be invalid.
+< warning atom-language-nginx@0.6.1: The engine "atom" appears to be invalid.
+< warning language-dart@0.1.1: The engine "atom" appears to be invalid.
+< warning language-erlang@2.0.0: The engine "atom" appears to be invalid.
+< warning language-glsl@2.0.4: The engine "atom" appears to be invalid.
+< warning language-haxe@0.2.1: The engine "atom" appears to be invalid.
+< warning language-ini@1.23.0: The engine "atom" appears to be invalid.
+< warning language-rust@0.4.12: The engine "atom" appears to be invalid.
+< warning language-stylus@0.5.2: The engine "atom" appears to be invalid.
+< info fsevents@2.1.2: The platform "linux" is incompatible with this module.
+< info "fsevents@2.1.2" is an optional dependency and failed compatibility check. Excluding it from installation.
+< info fsevents@1.2.11: The platform "linux" is incompatible with this module.
+< info "fsevents@1.2.11" is an optional dependency and failed compatibility check. Excluding it from installation.
+< [3/4] Linking dependencies...
+< warning " > pcb-stackup-core@4.0.0-next.13" has unmet peer dependency "gerber-to-svg@^4.0.0".
+< warning " > pcb-stackup-core@4.0.0-next.13" has incorrect peer dependency "whats-that-gerber@^4.0.0".
+< warning " > eslint-plugin-react@6.10.3" has incorrect peer dependency "eslint@^2.0.0 || ^3.0.0".
+< [4/4] Building fresh packages...
+< Done in 28.63s.
+---
+> success Already up-to-date.
+> Done in 0.94s.
+740,742c719,721
+< --2020-09-30 08:57:48--  https://github.com/ninja-build/ninja/releases/download/v1.6.0/ninja-linux.zip
+< Resolving github.com (github.com)... 140.82.112.3
+< Connecting to github.com (github.com)|140.82.112.3|:443... connected.
+---
+> --2020-09-30 09:12:46--  https://github.com/ninja-build/ninja/releases/download/v1.6.0/ninja-linux.zip
+> Resolving github.com (github.com)... 140.82.112.4
+> Connecting to github.com (github.com)|140.82.112.4|:443... connected.
+744,747c723,726
+< Location: https://github-production-release-asset-2e65be.s3.amazonaws.com/1335132/c5b9a1a4-1e53-11e5-8944-56c6e46d59da?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20200930%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20200930T085748Z&X-Amz-Expires=300&X-Amz-Signature=5debb506fc0badd5d05f8392069729c8a0240609a464746be05990e523b1e6f3&X-Amz-SignedHeaders=host&actor_id=0&key_id=0&repo_id=1335132&response-content-disposition=attachment%3B%20filename%3Dninja-linux.zip&response-content-type=application%2Foctet-stream [following]
+< --2020-09-30 08:57:48--  https://github-production-release-asset-2e65be.s3.amazonaws.com/1335132/c5b9a1a4-1e53-11e5-8944-56c6e46d59da?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20200930%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20200930T085748Z&X-Amz-Expires=300&X-Amz-Signature=5debb506fc0badd5d05f8392069729c8a0240609a464746be05990e523b1e6f3&X-Amz-SignedHeaders=host&actor_id=0&key_id=0&repo_id=1335132&response-content-disposition=attachment%3B%20filename%3Dninja-linux.zip&response-content-type=application%2Foctet-stream
+< Resolving github-production-release-asset-2e65be.s3.amazonaws.com (github-production-release-asset-2e65be.s3.amazonaws.com)... 52.217.14.148
+< Connecting to github-production-release-asset-2e65be.s3.amazonaws.com (github-production-release-asset-2e65be.s3.amazonaws.com)|52.217.14.148|:443... connected.
+---
+> Location: https://github-production-release-asset-2e65be.s3.amazonaws.com/1335132/c5b9a1a4-1e53-11e5-8944-56c6e46d59da?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20200930%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20200930T091246Z&X-Amz-Expires=300&X-Amz-Signature=e5e4c7c23f2fcd4799774f62b97930f659329787a671e1babf4e61e2711fd764&X-Amz-SignedHeaders=host&actor_id=0&key_id=0&repo_id=1335132&response-content-disposition=attachment%3B%20filename%3Dninja-linux.zip&response-content-type=application%2Foctet-stream [following]
+> --2020-09-30 09:12:46--  https://github-production-release-asset-2e65be.s3.amazonaws.com/1335132/c5b9a1a4-1e53-11e5-8944-56c6e46d59da?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20200930%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20200930T091246Z&X-Amz-Expires=300&X-Amz-Signature=e5e4c7c23f2fcd4799774f62b97930f659329787a671e1babf4e61e2711fd764&X-Amz-SignedHeaders=host&actor_id=0&key_id=0&repo_id=1335132&response-content-disposition=attachment%3B%20filename%3Dninja-linux.zip&response-content-type=application%2Foctet-stream
+> Resolving github-production-release-asset-2e65be.s3.amazonaws.com (github-production-release-asset-2e65be.s3.amazonaws.com)... 52.216.115.3
+> Connecting to github-production-release-asset-2e65be.s3.amazonaws.com (github-production-release-asset-2e65be.s3.amazonaws.com)|52.216.115.3|:443... connected.
+752,753c731,732
+<      0K .......... .......... .......... .......... .......... 71% 1.60M 0s
+<     50K .......... .........                                  100%  689K=0.06s
+---
+>      0K .......... .......... .......... .......... .......... 71% 3.75M 0s
+>     50K .......... .........                                  100% 1.59M=0.03s
+755c734
+< 2020-09-30 08:57:48 (1.15 MB/s) - â€˜ninja-linux.zipâ€™ saved [71368/71368]
+---
+> 2020-09-30 09:12:46 (2.71 MB/s) - â€˜ninja-linux.zipâ€™ saved [71368/71368]
+766c745,767
+< ninja: error: 'build/.temp/boards/github.com/BadenLab/Openspritzer/info.json', needed by 'build/.temp/search_index.json', missing and no known rule to make it
+---
+> [1/5109] cp src/buy_parts/direct_stores.jsx build/.temp/boards/github.com/8BitMixtape/8BitmixtapeNEO_BerlinerSchule_SZ-RDY/buy_parts/direct_stores.jsx
+> [2/5109] cp src/netlify-functions/submission-created.js build/.temp/boards/github.com/8BitMixtape/8BitmixtapeNEO_BerlinerSchule_SZ-RDY/netlify-functions/submission-created.js
+> [3/5109] cp src/submit/board_colors.js build/.temp/boards/github.com/8BitMixtape/8BitmixtapeNEO_BerlinerSchule_SZ-RDY/submit/board_colors.js
+> [4/5109] browserify --extension='.jsx' --transform [ babelify     --presets [ @babel/react @babel/env ] ] -g uglifyify -r 1-click-bom-minimal -r @babel/polyfill -r browser-version -r create-react-class -r react -r react-dom -r react-double-scrollbar -r react-helmet -r react-hyperscript-helpers -r react-responsive -r react-search-input -r semantic-ui-react -r superagent  | uglifyjs --mangle --reserved '1-click-bom,1-click-bom-minimal,@babel/polyfill,browser-version,create-react-class,github-url-to-object,html-to-react,immutable,js-yaml,lodash.camelcase,marky-markdown,pcb-stackup,react,react-dom,react-double-scrollbar,react-helmet,react-hyperscript-helpers,react-markdown,react-responsive,react-router,react-search-input,redux,redux-immutable,semantic-ui-react,superagent,whats-that-gerber,xml-element-string'                     --compress 'sequences=true,properties=true,dead_code=true,drop_debugger=true,unsafe=false,conditionals=true,comparisons=true,evaluate=true,booleans=true,loops=true,unused=false,hoist_funs=true,hoist_vars=false,if_return=true,join_vars=true,cascade=true,side_effects=true,warnings=true' > build/vendor.js
+> [5/5109] cp src/images/aisler.png build/images/aisler.png
+> [6/5109] cp src/images/Digikey-grey.ico build/images/Digikey-grey.ico
+> [7/5109] cp src/images/Digikey.ico build/images/Digikey.ico
+> [8/5109] cp src/images/Farnell-grey.ico build/images/Farnell-grey.ico
+> [9/5109] cp src/images/Farnell.ico build/images/Farnell.ico
+> [10/5109] cp src/images/favicon.png build/images/favicon.png
+> [11/5109] cp src/images/fireworks.png build/images/fireworks.png
+> [12/5109] cp src/images/fontello.eot build/images/fontello.eot
+> [13/5109] cp src/images/fontello.ttf build/images/fontello.ttf
+> [14/5109] cp src/images/fontello.woff build/images/fontello.woff
+> [15/5109] cp src/images/fontello.woff2 build/images/fontello.woff2
+> [16/5109] cp src/images/LCSC.ico build/images/LCSC.ico
+> [17/5109] cp src/images/logo_meta.png build/images/logo_meta.png
+> [18/5109] cp src/images/logo.png build/images/logo.png
+> [19/5109] cp src/images/logo.svg build/images/logo.svg
+> [20/5109] cp src/images/mag_icon.svg build/images/mag_icon.svg
+> [21/5109] cp src/images/Mouser-grey.ico build/images/Mouser-grey.ico
+> [22/5109] cp src/images/Mouser.ico build/images/Mouser.ico
+> [23/5109] cp src/images/Newark-grey.ico build/images/Newark-grey.ico
