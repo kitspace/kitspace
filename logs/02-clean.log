@@ -1,0 +1,767 @@
+travis_fold:start:worker_info
+[0K[33;1mWorker information[0m
+hostname: 434f714e-8251-439c-8155-24aef90aa05a@1.worker-org-8b5957499-tp5r2.gce-production-3
+version: v6.2.17 https://github.com/travis-ci/worker/tree/bc420764f334fe0d096a417c80426f672f1b7d18
+instance: travis-job-dbb50b96-d773-4dc1-a013-5ba3de2e4367 travis-ci-sardonyx-xenial-1593004276-4d46c6b3 (via amqp)
+startup: 6.169317351s
+travis_fold:end:worker_info
+[0Ktravis_fold:start:system_info
+[0K[33;1mBuild system information[0m
+Build language: node_js
+Build dist: xenial
+Build id: 731525611
+Job id: 731525612
+Runtime kernel version: 4.15.0-1077-gcp
+travis-build version: 68cdc09f
+[34m[1mBuild image provisioning date and time[0m
+Wed Jun 24 13:36:52 UTC 2020
+[34m[1mOperating System Details[0m
+Distributor ID:	Ubuntu
+Description:	Ubuntu 16.04.6 LTS
+Release:	16.04
+Codename:	xenial
+[34m[1mSystemd Version[0m
+systemd 229
+[34m[1mCookbooks Version[0m
+3f92a99 https://github.com/travis-ci/travis-cookbooks/tree/3f92a99
+[34m[1mgit version[0m
+git version 2.27.0
+[34m[1mbash version[0m
+GNU bash, version 4.3.48(1)-release (x86_64-pc-linux-gnu)
+[34m[1mgcc version[0m
+gcc (Ubuntu 5.4.0-6ubuntu1~16.04.12) 5.4.0 20160609
+[34m[1mdocker version[0m
+Client:
+ Version:           18.06.0-ce
+ API version:       1.38
+ Go version:        go1.10.3
+ Git commit:        0ffa825
+ Built:             Wed Jul 18 19:11:02 2018
+ OS/Arch:           linux/amd64
+ Experimental:      false
+
+Server:
+ Engine:
+  Version:          18.06.0-ce
+  API version:      1.38 (minimum version 1.12)
+  Go version:       go1.10.3
+  Git commit:       0ffa825
+  Built:            Wed Jul 18 19:09:05 2018
+  OS/Arch:          linux/amd64
+  Experimental:     false
+[34m[1mclang version[0m
+clang version 7.0.0 (tags/RELEASE_700/final)
+[34m[1mjq version[0m
+jq-1.5
+[34m[1mbats version[0m
+Bats 0.4.0
+[34m[1mshellcheck version[0m
+0.7.0
+[34m[1mshfmt version[0m
+v2.6.3
+[34m[1mccache version[0m
+3.2.4
+[34m[1mcmake version[0m
+cmake version 3.12.4
+[34m[1mheroku version[0m
+heroku/7.42.1 linux-x64 node-v12.16.2
+[34m[1mimagemagick version[0m
+Version: ImageMagick 6.8.9-9 Q16 x86_64 2019-11-12 http://www.imagemagick.org
+[34m[1mmd5deep version[0m
+4.4
+[34m[1mmercurial version[0m
+version 4.8
+[34m[1mmysql version[0m
+mysql  Ver 14.14 Distrib 5.7.30, for Linux (x86_64) using  EditLine wrapper
+[34m[1mopenssl version[0m
+OpenSSL 1.0.2g  1 Mar 2016
+[34m[1mpacker version[0m
+1.3.3
+[34m[1mpostgresql client version[0m
+psql (PostgreSQL) 10.13 (Ubuntu 10.13-1.pgdg16.04+1)
+[34m[1mragel version[0m
+Ragel State Machine Compiler version 6.8 Feb 2013
+[34m[1msudo version[0m
+1.8.16
+[34m[1mgzip version[0m
+gzip 1.6
+[34m[1mzip version[0m
+Zip 3.0
+[34m[1mvim version[0m
+VIM - Vi IMproved 7.4 (2013 Aug 10, compiled Mar 18 2020 14:06:17)
+[34m[1miptables version[0m
+iptables v1.6.0
+[34m[1mcurl version[0m
+curl 7.47.0 (x86_64-pc-linux-gnu) libcurl/7.47.0 GnuTLS/3.4.10 zlib/1.2.8 libidn/1.32 librtmp/2.3
+[34m[1mwget version[0m
+GNU Wget 1.17.1 built on linux-gnu.
+[34m[1mrsync version[0m
+rsync  version 3.1.1  protocol version 31
+[34m[1mgimme version[0m
+v1.5.4
+[34m[1mnvm version[0m
+0.35.3
+[34m[1mperlbrew version[0m
+/home/travis/perl5/perlbrew/bin/perlbrew  - App::perlbrew/0.88
+[34m[1mphpenv version[0m
+rbenv 1.1.2-30-gc879cb0
+[34m[1mrvm version[0m
+rvm 1.29.10 (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://rvm.io]
+[34m[1mdefault ruby version[0m
+ruby 2.5.3p105 (2018-10-18 revision 65156) [x86_64-linux]
+[34m[1mCouchDB version[0m
+couchdb 1.6.1
+[34m[1mElasticSearch version[0m
+5.5.0
+[34m[1mInstalled Firefox version[0m
+firefox 63.0.1
+[34m[1mMongoDB version[0m
+MongoDB 4.0.19
+[34m[1mPhantomJS version[0m
+2.1.1
+[34m[1mPre-installed PostgreSQL versions[0m
+9.4.26
+9.5.22
+9.6.18
+[34m[1mRedis version[0m
+redis-server 6.0.5
+[34m[1mPre-installed Go versions[0m
+1.11.1
+[34m[1mant version[0m
+Apache Ant(TM) version 1.9.6 compiled on July 20 2018
+[34m[1mmvn version[0m
+Apache Maven 3.6.3 (cecedd343002696d0abb50b32b541b8a6ba2883f)
+[34m[1mgradle version[0m
+Gradle 5.1.1!
+[34m[1mlein version[0m
+Leiningen 2.9.3 on Java 11.0.2 OpenJDK 64-Bit Server VM
+[34m[1mPre-installed Node.js versions[0m
+v10.21.0
+v11.0.0
+v12.18.1
+v4.9.1
+v6.17.1
+v8.12.0
+v8.17.0
+v8.9
+[34m[1mphpenv versions[0m
+  system
+  5.6
+  5.6.40
+  7.1
+  7.1.27
+  7.2
+* 7.2.15 (set by /home/travis/.phpenv/version)
+  hhvm
+  hhvm-stable
+[34m[1mcomposer --version[0m
+Composer version 1.8.4 2019-02-11 10:52:10
+[34m[1mPre-installed Ruby versions[0m
+ruby-2.3.8
+ruby-2.4.5
+ruby-2.5.3
+travis_fold:end:system_info
+[0K
+[0Ktravis_fold:start:docker_mtu
+[0Ktravis_fold:end:docker_mtu
+[0Ktravis_fold:start:resolvconf
+[0Ktravis_fold:end:resolvconf
+[0Ktravis_fold:start:apt
+[0K[33;1mAdding APT Sources[0m
+[0K$ sudo -E apt-add-repository -y "ppa:js-reynaud/kicad-5.1"
+gpg: keyring `/tmp/tmp0xbjns5f/secring.gpg' created
+gpg: keyring `/tmp/tmp0xbjns5f/pubring.gpg' created
+gpg: requesting key 910F124E from hkp server keyserver.ubuntu.com
+gpg: /tmp/tmp0xbjns5f/trustdb.gpg: trustdb created
+gpg: key 910F124E: public key "Launchpad PPA for j2010" imported
+gpg: Total number processed: 1
+gpg:               imported: 1  (RSA: 1)
+OK
+[0K$ travis_apt_get_update
+[0K[33;1mInstalling APT Packages[0m
+[0K$ sudo -E apt-get -yq --no-install-suggests --no-install-recommends $(travis_apt_get_options) install inkscape kicad
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  aspell aspell-en dictionaries-common gconf-service gconf-service-backend
+  gconf2 gconf2-common libaspell15 libatkmm-1.6-1v5 libavahi-glib1
+  libcairomm-1.0-1v5 libcdr-0.1-1 libenchant1c2a libfreeimage3 libgconf-2-4
+  libgl2ps0 libglew1.13 libglibmm-2.4-1v5 libglu1-mesa libgnomevfs2-0
+  libgnomevfs2-common libgsl2 libgtkmm-2.4-1v5 libgtkspell0 libhunspell-1.3-0
+  libjxr0 libmagick++-6.q16-5v5 libngspice-kicad liboce-foundation10
+  liboce-modeling10 liboce-ocaf-lite10 liboce-ocaf10 liboce-visualization10
+  libopenjp2-7 libpangomm-1.4-1v5 libpoppler-glib8 libpoppler58 libraw15
+  librevenge-0.0-0 libvisio-0.1-1 libwebp5 libwebpmux1 libwpd-0.10-10
+  libwpg-0.3-3 libwxbase3.0-0v5 libwxgtk3.0-0v5 python-wxgtk3.0
+  python-wxversion xsltproc
+Suggested packages:
+  aspell-doc spellutils gconf-defaults-service pstoedit dia | dia-gnome
+  libsvg-perl libxml-xql-perl python-uniconvertor extra-xdg-menus
+  kicad-locale-ko | kicad-locale-ru | kicad-locale-pl | kicad-locale-pt
+  | kicad-locale-ja | kicad-locale-id | kicad-locale-ca | kicad-locale-it
+  | kicad-locale-el | kicad-locale-zh | kicad-locale-de | kicad-locale-sl
+  | kicad-locale-cs | kicad-locale-bg | kicad-locale-sv | kicad-locale-lt
+  | kicad-locale-fi | kicad-locale-fr | kicad-locale-hu | kicad-locale-nl
+  | kicad-locale-es | kicad-locale-sk libenchant-voikko glew-utils
+  libgnomevfs2-bin libgnomevfs2-extra gamin | fam gnome-mime-data
+  gsl-ref-psdoc | gsl-doc-pdf | gsl-doc-info | gsl-ref-html poppler-data
+Recommended packages:
+  libgnomevfs2-extra libimage-magick-perl libwmf-bin python-lxml python-numpy
+  transfig kicad-libraries kicad-doc-en kicad-demos enchant hunspell-en-us
+  | hunspell-dictionary | myspell-dictionary
+The following NEW packages will be installed:
+  aspell aspell-en dictionaries-common gconf-service gconf-service-backend
+  gconf2 gconf2-common inkscape kicad libaspell15 libatkmm-1.6-1v5
+  libavahi-glib1 libcairomm-1.0-1v5 libcdr-0.1-1 libenchant1c2a libfreeimage3
+  libgconf-2-4 libgl2ps0 libglew1.13 libglibmm-2.4-1v5 libglu1-mesa
+  libgnomevfs2-0 libgnomevfs2-common libgsl2 libgtkmm-2.4-1v5 libgtkspell0
+  libhunspell-1.3-0 libjxr0 libmagick++-6.q16-5v5 libngspice-kicad
+  liboce-foundation10 liboce-modeling10 liboce-ocaf-lite10 liboce-ocaf10
+  liboce-visualization10 libopenjp2-7 libpangomm-1.4-1v5 libpoppler-glib8
+  libpoppler58 libraw15 librevenge-0.0-0 libvisio-0.1-1 libwebp5 libwebpmux1
+  libwpd-0.10-10 libwpg-0.3-3 libwxbase3.0-0v5 libwxgtk3.0-0v5 python-wxgtk3.0
+  python-wxversion xsltproc
+0 upgraded, 51 newly installed, 0 to remove and 141 not upgraded.
+Need to get 71.7 MB of archives.
+After this operation, 336 MB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libaspell15 amd64 0.60.7~20110707-3ubuntu0.1 [315 kB]
+Get:2 http://ppa.launchpad.net/js-reynaud/kicad-5.1/ubuntu xenial/main amd64 libngspice-kicad amd64 0.1-2~201902271304+d6f5a32~ubuntu16.04.1 [1,981 kB]
+Get:3 http://archive.ubuntu.com/ubuntu xenial/main amd64 dictionaries-common all 1.26.3 [185 kB]
+Get:4 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 aspell amd64 0.60.7~20110707-3ubuntu0.1 [73.9 kB]
+Get:5 http://archive.ubuntu.com/ubuntu xenial/main amd64 aspell-en all 7.1-0-1.1 [265 kB]
+Get:6 http://archive.ubuntu.com/ubuntu xenial/main amd64 gconf2-common all 3.2.6-3ubuntu6 [21.0 kB]
+Get:7 http://ppa.launchpad.net/js-reynaud/kicad-5.1/ubuntu xenial/main amd64 kicad amd64 5.1.7-202009280723+a382d34a8~87~ubuntu16.04.1 [22.2 MB]
+Get:8 http://archive.ubuntu.com/ubuntu xenial/main amd64 libgconf-2-4 amd64 3.2.6-3ubuntu6 [84.6 kB]
+Get:9 http://archive.ubuntu.com/ubuntu xenial/main amd64 gconf-service-backend amd64 3.2.6-3ubuntu6 [57.5 kB]
+Get:10 http://archive.ubuntu.com/ubuntu xenial/main amd64 gconf-service amd64 3.2.6-3ubuntu6 [2,046 B]
+Get:11 http://archive.ubuntu.com/ubuntu xenial/main amd64 gconf2 amd64 3.2.6-3ubuntu6 [65.8 kB]
+Get:12 http://archive.ubuntu.com/ubuntu xenial/main amd64 libglibmm-2.4-1v5 amd64 2.46.3-1 [460 kB]
+Get:13 http://archive.ubuntu.com/ubuntu xenial/main amd64 libatkmm-1.6-1v5 amd64 2.24.2-1 [61.7 kB]
+Get:14 http://archive.ubuntu.com/ubuntu xenial/main amd64 libcairomm-1.0-1v5 amd64 1.12.0-1 [41.6 kB]
+Get:15 http://archive.ubuntu.com/ubuntu xenial/main amd64 librevenge-0.0-0 amd64 0.0.4-4ubuntu1 [202 kB]
+Get:16 http://archive.ubuntu.com/ubuntu xenial/main amd64 libcdr-0.1-1 amd64 0.1.2-2ubuntu2 [335 kB]
+Get:17 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libavahi-glib1 amd64 0.6.32~rc+dfsg-1ubuntu2.3 [7,720 B]
+Get:18 http://archive.ubuntu.com/ubuntu xenial/main amd64 libgnomevfs2-common amd64 1:2.24.4-6.1ubuntu1 [23.0 kB]
+Get:19 http://archive.ubuntu.com/ubuntu xenial/main amd64 libgnomevfs2-0 amd64 1:2.24.4-6.1ubuntu1 [213 kB]
+Get:20 http://archive.ubuntu.com/ubuntu xenial/main amd64 libgsl2 amd64 2.1+dfsg-2 [840 kB]
+Get:21 http://archive.ubuntu.com/ubuntu xenial/main amd64 libpangomm-1.4-1v5 amd64 2.38.1-1 [42.0 kB]
+Get:22 http://archive.ubuntu.com/ubuntu xenial/main amd64 libgtkmm-2.4-1v5 amd64 1:2.24.4-2 [671 kB]
+Get:23 http://archive.ubuntu.com/ubuntu xenial/main amd64 libhunspell-1.3-0 amd64 1.3.3-4ubuntu1 [108 kB]
+Get:24 http://archive.ubuntu.com/ubuntu xenial/main amd64 libenchant1c2a amd64 1.6.0-10.1build2 [64.0 kB]
+Get:25 http://archive.ubuntu.com/ubuntu xenial/main amd64 libgtkspell0 amd64 2.0.16-1.1ubuntu1 [11.1 kB]
+Get:26 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libmagick++-6.q16-5v5 amd64 8:6.8.9.9-7ubuntu5.15 [136 kB]
+Get:27 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libpoppler58 amd64 0.41.0-0ubuntu1.14 [757 kB]
+Get:28 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libpoppler-glib8 amd64 0.41.0-0ubuntu1.14 [104 kB]
+Get:29 http://archive.ubuntu.com/ubuntu xenial/main amd64 libvisio-0.1-1 amd64 0.1.5-1ubuntu1 [198 kB]
+Get:30 http://archive.ubuntu.com/ubuntu xenial/main amd64 libwpd-0.10-10 amd64 0.10.1-1ubuntu1 [162 kB]
+Get:31 http://archive.ubuntu.com/ubuntu xenial/main amd64 libwpg-0.3-3 amd64 0.3.1-1ubuntu1 [46.0 kB]
+Get:32 http://archive.ubuntu.com/ubuntu xenial/main amd64 inkscape amd64 0.91-7ubuntu2 [12.3 MB]
+Get:33 http://archive.ubuntu.com/ubuntu xenial/main amd64 libglew1.13 amd64 1.13.0-2 [119 kB]
+Get:34 http://archive.ubuntu.com/ubuntu xenial/main amd64 libglu1-mesa amd64 9.0.0-2.1 [168 kB]
+Get:35 http://archive.ubuntu.com/ubuntu xenial-updates/universe amd64 liboce-foundation10 amd64 0.17.1-1ubuntu0.1 [1,207 kB]
+Get:36 http://archive.ubuntu.com/ubuntu xenial-updates/universe amd64 liboce-modeling10 amd64 0.17.1-1ubuntu0.1 [11.9 MB]
+Get:37 http://archive.ubuntu.com/ubuntu xenial-updates/universe amd64 liboce-ocaf-lite10 amd64 0.17.1-1ubuntu0.1 [1,049 kB]
+Get:38 http://archive.ubuntu.com/ubuntu xenial/universe amd64 libjxr0 amd64 1.1-6 [158 kB]
+Get:39 http://archive.ubuntu.com/ubuntu xenial-updates/universe amd64 libopenjp2-7 amd64 2.1.2-1.1+deb9u5build0.16.04.1 [112 kB]
+Get:40 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libraw15 amd64 0.17.1-1ubuntu0.5 [230 kB]
+Get:41 http://archive.ubuntu.com/ubuntu xenial/main amd64 libwebp5 amd64 0.4.4-1 [165 kB]
+Get:42 http://archive.ubuntu.com/ubuntu xenial/main amd64 libwebpmux1 amd64 0.4.4-1 [14.2 kB]
+Get:43 http://archive.ubuntu.com/ubuntu xenial-updates/universe amd64 libfreeimage3 amd64 3.17.0+ds1-2ubuntu0.1 [262 kB]
+Get:44 http://archive.ubuntu.com/ubuntu xenial/universe amd64 libgl2ps0 amd64 1.3.8-1.2 [35.5 kB]
+Get:45 http://archive.ubuntu.com/ubuntu xenial-updates/universe amd64 liboce-visualization10 amd64 0.17.1-1ubuntu0.1 [3,019 kB]
+Get:46 http://archive.ubuntu.com/ubuntu xenial-updates/universe amd64 liboce-ocaf10 amd64 0.17.1-1ubuntu0.1 [720 kB]
+Get:47 http://archive.ubuntu.com/ubuntu xenial-updates/universe amd64 libwxbase3.0-0v5 amd64 3.0.2+dfsg-1.3ubuntu0.1 [971 kB]
+Get:48 http://archive.ubuntu.com/ubuntu xenial-updates/universe amd64 libwxgtk3.0-0v5 amd64 3.0.2+dfsg-1.3ubuntu0.1 [4,344 kB]
+Get:49 http://archive.ubuntu.com/ubuntu xenial/universe amd64 python-wxversion all 3.0.2.0+dfsg-1build1 [12.7 kB]
+Get:50 http://archive.ubuntu.com/ubuntu xenial/universe amd64 python-wxgtk3.0 amd64 3.0.2.0+dfsg-1build1 [5,194 kB]
+Get:51 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 xsltproc amd64 1.1.28-2.1ubuntu0.3 [13.4 kB]
+
+Extracting templates from packages: 58%
+Extracting templates from packages: 100%
+Preconfiguring packages ...
+Fetched 71.7 MB in 6s (10.5 MB/s)
+Selecting previously unselected package libaspell15:amd64.
+(Reading database ... 
+(Reading database ... 5%
+(Reading database ... 10%
+(Reading database ... 15%
+(Reading database ... 20%
+(Reading database ... 25%
+(Reading database ... 30%
+(Reading database ... 35%
+(Reading database ... 40%
+(Reading database ... 45%
+(Reading database ... 50%
+(Reading database ... 55%
+(Reading database ... 60%
+(Reading database ... 65%
+(Reading database ... 70%
+(Reading database ... 75%
+(Reading database ... 80%
+(Reading database ... 85%
+(Reading database ... 90%
+(Reading database ... 95%
+(Reading database ... 100%
+(Reading database ... 124376 files and directories currently installed.)
+Preparing to unpack .../libaspell15_0.60.7~20110707-3ubuntu0.1_amd64.deb ...
+Unpacking libaspell15:amd64 (0.60.7~20110707-3ubuntu0.1) ...
+Selecting previously unselected package dictionaries-common.
+Preparing to unpack .../dictionaries-common_1.26.3_all.deb ...
+Adding 'diversion of /usr/share/dict/words to /usr/share/dict/words.pre-dictionaries-common by dictionaries-common'
+Unpacking dictionaries-common (1.26.3) ...
+Selecting previously unselected package aspell.
+Preparing to unpack .../aspell_0.60.7~20110707-3ubuntu0.1_amd64.deb ...
+Unpacking aspell (0.60.7~20110707-3ubuntu0.1) ...
+Selecting previously unselected package aspell-en.
+Preparing to unpack .../aspell-en_7.1-0-1.1_all.deb ...
+Unpacking aspell-en (7.1-0-1.1) ...
+Selecting previously unselected package gconf2-common.
+Preparing to unpack .../gconf2-common_3.2.6-3ubuntu6_all.deb ...
+Unpacking gconf2-common (3.2.6-3ubuntu6) ...
+Selecting previously unselected package libgconf-2-4:amd64.
+Preparing to unpack .../libgconf-2-4_3.2.6-3ubuntu6_amd64.deb ...
+Unpacking libgconf-2-4:amd64 (3.2.6-3ubuntu6) ...
+Selecting previously unselected package gconf-service-backend.
+Preparing to unpack .../gconf-service-backend_3.2.6-3ubuntu6_amd64.deb ...
+Unpacking gconf-service-backend (3.2.6-3ubuntu6) ...
+Selecting previously unselected package gconf-service.
+Preparing to unpack .../gconf-service_3.2.6-3ubuntu6_amd64.deb ...
+Unpacking gconf-service (3.2.6-3ubuntu6) ...
+Selecting previously unselected package gconf2.
+Preparing to unpack .../gconf2_3.2.6-3ubuntu6_amd64.deb ...
+Unpacking gconf2 (3.2.6-3ubuntu6) ...
+Selecting previously unselected package libglibmm-2.4-1v5:amd64.
+Preparing to unpack .../libglibmm-2.4-1v5_2.46.3-1_amd64.deb ...
+Unpacking libglibmm-2.4-1v5:amd64 (2.46.3-1) ...
+Selecting previously unselected package libatkmm-1.6-1v5:amd64.
+Preparing to unpack .../libatkmm-1.6-1v5_2.24.2-1_amd64.deb ...
+Unpacking libatkmm-1.6-1v5:amd64 (2.24.2-1) ...
+Selecting previously unselected package libcairomm-1.0-1v5:amd64.
+Preparing to unpack .../libcairomm-1.0-1v5_1.12.0-1_amd64.deb ...
+Unpacking libcairomm-1.0-1v5:amd64 (1.12.0-1) ...
+Selecting previously unselected package librevenge-0.0-0:amd64.
+Preparing to unpack .../librevenge-0.0-0_0.0.4-4ubuntu1_amd64.deb ...
+Unpacking librevenge-0.0-0:amd64 (0.0.4-4ubuntu1) ...
+Selecting previously unselected package libcdr-0.1-1:amd64.
+Preparing to unpack .../libcdr-0.1-1_0.1.2-2ubuntu2_amd64.deb ...
+Unpacking libcdr-0.1-1:amd64 (0.1.2-2ubuntu2) ...
+Selecting previously unselected package libavahi-glib1:amd64.
+Preparing to unpack .../libavahi-glib1_0.6.32~rc+dfsg-1ubuntu2.3_amd64.deb ...
+Unpacking libavahi-glib1:amd64 (0.6.32~rc+dfsg-1ubuntu2.3) ...
+Selecting previously unselected package libgnomevfs2-common.
+Preparing to unpack .../libgnomevfs2-common_1%3a2.24.4-6.1ubuntu1_amd64.deb ...
+Unpacking libgnomevfs2-common (1:2.24.4-6.1ubuntu1) ...
+Selecting previously unselected package libgnomevfs2-0:amd64.
+Preparing to unpack .../libgnomevfs2-0_1%3a2.24.4-6.1ubuntu1_amd64.deb ...
+Unpacking libgnomevfs2-0:amd64 (1:2.24.4-6.1ubuntu1) ...
+Selecting previously unselected package libgsl2:amd64.
+Preparing to unpack .../libgsl2_2.1+dfsg-2_amd64.deb ...
+Unpacking libgsl2:amd64 (2.1+dfsg-2) ...
+Selecting previously unselected package libpangomm-1.4-1v5:amd64.
+Preparing to unpack .../libpangomm-1.4-1v5_2.38.1-1_amd64.deb ...
+Unpacking libpangomm-1.4-1v5:amd64 (2.38.1-1) ...
+Selecting previously unselected package libgtkmm-2.4-1v5:amd64.
+Preparing to unpack .../libgtkmm-2.4-1v5_1%3a2.24.4-2_amd64.deb ...
+Unpacking libgtkmm-2.4-1v5:amd64 (1:2.24.4-2) ...
+Selecting previously unselected package libhunspell-1.3-0:amd64.
+Preparing to unpack .../libhunspell-1.3-0_1.3.3-4ubuntu1_amd64.deb ...
+Unpacking libhunspell-1.3-0:amd64 (1.3.3-4ubuntu1) ...
+Selecting previously unselected package libenchant1c2a:amd64.
+Preparing to unpack .../libenchant1c2a_1.6.0-10.1build2_amd64.deb ...
+Unpacking libenchant1c2a:amd64 (1.6.0-10.1build2) ...
+Selecting previously unselected package libgtkspell0.
+Preparing to unpack .../libgtkspell0_2.0.16-1.1ubuntu1_amd64.deb ...
+Unpacking libgtkspell0 (2.0.16-1.1ubuntu1) ...
+Selecting previously unselected package libmagick++-6.q16-5v5:amd64.
+Preparing to unpack .../libmagick++-6.q16-5v5_8%3a6.8.9.9-7ubuntu5.15_amd64.deb ...
+Unpacking libmagick++-6.q16-5v5:amd64 (8:6.8.9.9-7ubuntu5.15) ...
+Selecting previously unselected package libpoppler58:amd64.
+Preparing to unpack .../libpoppler58_0.41.0-0ubuntu1.14_amd64.deb ...
+Unpacking libpoppler58:amd64 (0.41.0-0ubuntu1.14) ...
+Selecting previously unselected package libpoppler-glib8:amd64.
+Preparing to unpack .../libpoppler-glib8_0.41.0-0ubuntu1.14_amd64.deb ...
+Unpacking libpoppler-glib8:amd64 (0.41.0-0ubuntu1.14) ...
+Selecting previously unselected package libvisio-0.1-1:amd64.
+Preparing to unpack .../libvisio-0.1-1_0.1.5-1ubuntu1_amd64.deb ...
+Unpacking libvisio-0.1-1:amd64 (0.1.5-1ubuntu1) ...
+Selecting previously unselected package libwpd-0.10-10:amd64.
+Preparing to unpack .../libwpd-0.10-10_0.10.1-1ubuntu1_amd64.deb ...
+Unpacking libwpd-0.10-10:amd64 (0.10.1-1ubuntu1) ...
+Selecting previously unselected package libwpg-0.3-3:amd64.
+Preparing to unpack .../libwpg-0.3-3_0.3.1-1ubuntu1_amd64.deb ...
+Unpacking libwpg-0.3-3:amd64 (0.3.1-1ubuntu1) ...
+Selecting previously unselected package inkscape.
+Preparing to unpack .../inkscape_0.91-7ubuntu2_amd64.deb ...
+Unpacking inkscape (0.91-7ubuntu2) ...
+Selecting previously unselected package libglew1.13:amd64.
+Preparing to unpack .../libglew1.13_1.13.0-2_amd64.deb ...
+Unpacking libglew1.13:amd64 (1.13.0-2) ...
+Selecting previously unselected package libglu1-mesa:amd64.
+Preparing to unpack .../libglu1-mesa_9.0.0-2.1_amd64.deb ...
+Unpacking libglu1-mesa:amd64 (9.0.0-2.1) ...
+Selecting previously unselected package liboce-foundation10:amd64.
+Preparing to unpack .../liboce-foundation10_0.17.1-1ubuntu0.1_amd64.deb ...
+Unpacking liboce-foundation10:amd64 (0.17.1-1ubuntu0.1) ...
+Selecting previously unselected package liboce-modeling10:amd64.
+Preparing to unpack .../liboce-modeling10_0.17.1-1ubuntu0.1_amd64.deb ...
+Unpacking liboce-modeling10:amd64 (0.17.1-1ubuntu0.1) ...
+Selecting previously unselected package liboce-ocaf-lite10:amd64.
+Preparing to unpack .../liboce-ocaf-lite10_0.17.1-1ubuntu0.1_amd64.deb ...
+Unpacking liboce-ocaf-lite10:amd64 (0.17.1-1ubuntu0.1) ...
+Selecting previously unselected package libjxr0:amd64.
+Preparing to unpack .../libjxr0_1.1-6_amd64.deb ...
+Unpacking libjxr0:amd64 (1.1-6) ...
+Selecting previously unselected package libopenjp2-7:amd64.
+Preparing to unpack .../libopenjp2-7_2.1.2-1.1+deb9u5build0.16.04.1_amd64.deb ...
+Unpacking libopenjp2-7:amd64 (2.1.2-1.1+deb9u5build0.16.04.1) ...
+Selecting previously unselected package libraw15:amd64.
+Preparing to unpack .../libraw15_0.17.1-1ubuntu0.5_amd64.deb ...
+Unpacking libraw15:amd64 (0.17.1-1ubuntu0.5) ...
+Selecting previously unselected package libwebp5:amd64.
+Preparing to unpack .../libwebp5_0.4.4-1_amd64.deb ...
+Unpacking libwebp5:amd64 (0.4.4-1) ...
+Selecting previously unselected package libwebpmux1:amd64.
+Preparing to unpack .../libwebpmux1_0.4.4-1_amd64.deb ...
+Unpacking libwebpmux1:amd64 (0.4.4-1) ...
+Selecting previously unselected package libfreeimage3:amd64.
+Preparing to unpack .../libfreeimage3_3.17.0+ds1-2ubuntu0.1_amd64.deb ...
+Unpacking libfreeimage3:amd64 (3.17.0+ds1-2ubuntu0.1) ...
+Selecting previously unselected package libgl2ps0.
+Preparing to unpack .../libgl2ps0_1.3.8-1.2_amd64.deb ...
+Unpacking libgl2ps0 (1.3.8-1.2) ...
+Selecting previously unselected package liboce-visualization10:amd64.
+Preparing to unpack .../liboce-visualization10_0.17.1-1ubuntu0.1_amd64.deb ...
+Unpacking liboce-visualization10:amd64 (0.17.1-1ubuntu0.1) ...
+Selecting previously unselected package liboce-ocaf10:amd64.
+Preparing to unpack .../liboce-ocaf10_0.17.1-1ubuntu0.1_amd64.deb ...
+Unpacking liboce-ocaf10:amd64 (0.17.1-1ubuntu0.1) ...
+Selecting previously unselected package libwxbase3.0-0v5:amd64.
+Preparing to unpack .../libwxbase3.0-0v5_3.0.2+dfsg-1.3ubuntu0.1_amd64.deb ...
+Unpacking libwxbase3.0-0v5:amd64 (3.0.2+dfsg-1.3ubuntu0.1) ...
+Selecting previously unselected package libwxgtk3.0-0v5:amd64.
+Preparing to unpack .../libwxgtk3.0-0v5_3.0.2+dfsg-1.3ubuntu0.1_amd64.deb ...
+Unpacking libwxgtk3.0-0v5:amd64 (3.0.2+dfsg-1.3ubuntu0.1) ...
+Selecting previously unselected package python-wxversion.
+Preparing to unpack .../python-wxversion_3.0.2.0+dfsg-1build1_all.deb ...
+Unpacking python-wxversion (3.0.2.0+dfsg-1build1) ...
+Selecting previously unselected package python-wxgtk3.0.
+Preparing to unpack .../python-wxgtk3.0_3.0.2.0+dfsg-1build1_amd64.deb ...
+Unpacking python-wxgtk3.0 (3.0.2.0+dfsg-1build1) ...
+Selecting previously unselected package libngspice-kicad.
+Preparing to unpack .../libngspice-kicad_0.1-2~201902271304+d6f5a32~ubuntu16.04.1_amd64.deb ...
+Unpacking libngspice-kicad (0.1-2~201902271304+d6f5a32~ubuntu16.04.1) ...
+Selecting previously unselected package xsltproc.
+Preparing to unpack .../xsltproc_1.1.28-2.1ubuntu0.3_amd64.deb ...
+Unpacking xsltproc (1.1.28-2.1ubuntu0.3) ...
+Selecting previously unselected package kicad.
+Preparing to unpack .../kicad_5.1.7-202009280723+a382d34a8~87~ubuntu16.04.1_amd64.deb ...
+Unpacking kicad (5.1.7-202009280723+a382d34a8~87~ubuntu16.04.1) ...
+Processing triggers for libc-bin (2.23-0ubuntu11) ...
+Processing triggers for man-db (2.7.5-1) ...
+Processing triggers for hicolor-icon-theme (0.15-0ubuntu1.1) ...
+Processing triggers for mime-support (3.59ubuntu1) ...
+Processing triggers for shared-mime-info (1.5-2ubuntu0.2) ...
+Setting up libaspell15:amd64 (0.60.7~20110707-3ubuntu0.1) ...
+Setting up dictionaries-common (1.26.3) ...
+Install emacsen-common for emacs24
+emacsen-common: Handling install of emacsen flavor emacs24
+Wrote /etc/emacs24/site-start.d/00debian-vars.elc
+Wrote /usr/share/emacs24/site-lisp/debian-startup.elc
+Install dictionaries-common for emacs24
+install/dictionaries-common: Byte-compiling for emacsen flavour emacs24
+Wrote /usr/share/emacs24/site-lisp/dictionaries-common/debian-ispell.elc
+Setting up aspell (0.60.7~20110707-3ubuntu0.1) ...
+Setting up aspell-en (7.1-0-1.1) ...
+Setting up gconf2-common (3.2.6-3ubuntu6) ...
+
+Creating config file /etc/gconf/2/path with new version
+Setting up libgconf-2-4:amd64 (3.2.6-3ubuntu6) ...
+Setting up libglibmm-2.4-1v5:amd64 (2.46.3-1) ...
+Setting up libatkmm-1.6-1v5:amd64 (2.24.2-1) ...
+Setting up libcairomm-1.0-1v5:amd64 (1.12.0-1) ...
+Setting up librevenge-0.0-0:amd64 (0.0.4-4ubuntu1) ...
+Setting up libcdr-0.1-1:amd64 (0.1.2-2ubuntu2) ...
+Setting up libavahi-glib1:amd64 (0.6.32~rc+dfsg-1ubuntu2.3) ...
+Setting up libgsl2:amd64 (2.1+dfsg-2) ...
+Setting up libpangomm-1.4-1v5:amd64 (2.38.1-1) ...
+Setting up libgtkmm-2.4-1v5:amd64 (1:2.24.4-2) ...
+Setting up libhunspell-1.3-0:amd64 (1.3.3-4ubuntu1) ...
+Setting up libenchant1c2a:amd64 (1.6.0-10.1build2) ...
+Setting up libgtkspell0 (2.0.16-1.1ubuntu1) ...
+Setting up libmagick++-6.q16-5v5:amd64 (8:6.8.9.9-7ubuntu5.15) ...
+Setting up libpoppler58:amd64 (0.41.0-0ubuntu1.14) ...
+Setting up libpoppler-glib8:amd64 (0.41.0-0ubuntu1.14) ...
+Setting up libvisio-0.1-1:amd64 (0.1.5-1ubuntu1) ...
+Setting up libwpd-0.10-10:amd64 (0.10.1-1ubuntu1) ...
+Setting up libwpg-0.3-3:amd64 (0.3.1-1ubuntu1) ...
+Setting up libglew1.13:amd64 (1.13.0-2) ...
+Setting up libglu1-mesa:amd64 (9.0.0-2.1) ...
+Setting up liboce-foundation10:amd64 (0.17.1-1ubuntu0.1) ...
+Setting up liboce-modeling10:amd64 (0.17.1-1ubuntu0.1) ...
+Setting up liboce-ocaf-lite10:amd64 (0.17.1-1ubuntu0.1) ...
+Setting up libjxr0:amd64 (1.1-6) ...
+Setting up libopenjp2-7:amd64 (2.1.2-1.1+deb9u5build0.16.04.1) ...
+Setting up libraw15:amd64 (0.17.1-1ubuntu0.5) ...
+Setting up libwebp5:amd64 (0.4.4-1) ...
+Setting up libwebpmux1:amd64 (0.4.4-1) ...
+Setting up libfreeimage3:amd64 (3.17.0+ds1-2ubuntu0.1) ...
+Setting up libgl2ps0 (1.3.8-1.2) ...
+Setting up liboce-visualization10:amd64 (0.17.1-1ubuntu0.1) ...
+Setting up liboce-ocaf10:amd64 (0.17.1-1ubuntu0.1) ...
+Setting up libwxbase3.0-0v5:amd64 (3.0.2+dfsg-1.3ubuntu0.1) ...
+Setting up libwxgtk3.0-0v5:amd64 (3.0.2+dfsg-1.3ubuntu0.1) ...
+Setting up python-wxversion (3.0.2.0+dfsg-1build1) ...
+Setting up python-wxgtk3.0 (3.0.2.0+dfsg-1build1) ...
+update-alternatives: using /usr/lib/wx/python/wx3.0.pth to provide /usr/lib/wx/python/wx.pth (wx.pth) in auto mode
+Setting up libngspice-kicad (0.1-2~201902271304+d6f5a32~ubuntu16.04.1) ...
+Setting up xsltproc (1.1.28-2.1ubuntu0.3) ...
+Setting up kicad (5.1.7-202009280723+a382d34a8~87~ubuntu16.04.1) ...
+Setting up gconf-service (3.2.6-3ubuntu6) ...
+Setting up gconf-service-backend (3.2.6-3ubuntu6) ...
+Setting up gconf2 (3.2.6-3ubuntu6) ...
+Setting up libgnomevfs2-common (1:2.24.4-6.1ubuntu1) ...
+Setting up libgnomevfs2-0:amd64 (1:2.24.4-6.1ubuntu1) ...
+Setting up inkscape (0.91-7ubuntu2) ...
+Processing triggers for libc-bin (2.23-0ubuntu11) ...
+Processing triggers for dictionaries-common (1.26.3) ...
+aspell-autobuildhash: processing: en [en-common].
+aspell-autobuildhash: processing: en [en-variant_0].
+aspell-autobuildhash: processing: en [en-variant_1].
+aspell-autobuildhash: processing: en [en-variant_2].
+aspell-autobuildhash: processing: en [en-w_accents-only].
+aspell-autobuildhash: processing: en [en-wo_accents-only].
+aspell-autobuildhash: processing: en [en_CA-variant_0].
+aspell-autobuildhash: processing: en [en_CA-variant_1].
+aspell-autobuildhash: processing: en [en_CA-w_accents-only].
+aspell-autobuildhash: processing: en [en_CA-wo_accents-only].
+aspell-autobuildhash: processing: en [en_GB-ise-w_accents-only].
+aspell-autobuildhash: processing: en [en_GB-ise-wo_accents-only].
+aspell-autobuildhash: processing: en [en_GB-ize-w_accents-only].
+aspell-autobuildhash: processing: en [en_GB-ize-wo_accents-only].
+aspell-autobuildhash: processing: en [en_GB-variant_0].
+aspell-autobuildhash: processing: en [en_GB-variant_1].
+aspell-autobuildhash: processing: en [en_US-w_accents-only].
+aspell-autobuildhash: processing: en [en_US-wo_accents-only].
+[0Ktravis_fold:end:apt
+[0K
+travis_fold:start:git.checkout
+[0K$ git clone --depth=50 --branch=smoke-test https://github.com/kitspace/kitspace.git kitspace/kitspace
+Cloning into 'kitspace/kitspace'...
+[0K$ cd kitspace/kitspace
+$ git checkout -qf 0baaf9b79d31634ec0de54e72479fce0be55603e
+travis_fold:end:git.checkout
+[0K
+[0K
+[33;1mSetting environment variables from repository settings[0m
+$ export GH_TOKEN=[secure]
+$ export SAUCE_USER_NAME=[secure]
+$ export SAUCE_ACCESS_KEY=[secure]
+$ export SSH_KEY=[secure]
+$ export NETLIFY_AUTH_TOKEN=[secure]
+$ export NETLIFY_SITE_ID=dcd151d6-f523-47fd-a3be-9de5c78a2480
+$ export CACHED_BUILD=cached
+$ export CYPRESS_KEY=[secure]
+$ export CACHED_BUILD=false
+
+[0Ktravis_fold:start:nvm.install
+[0K$ nvm install 12
+Downloading and installing node v12.18.4...
+Downloading https://nodejs.org/dist/v12.18.4/node-v12.18.4-linux-x64.tar.xz...
+Computing checksum with sha256sum
+Checksums matched!
+Now using node v12.18.4 (npm v6.14.6)
+[0Ktravis_fold:end:nvm.install
+[0K
+travis_fold:start:cache.1
+[0KSetting up build cache
+$ export CASHER_DIR=${TRAVIS_HOME}/.casher
+[0K$ Installing caching utilities
+[0Kattempting to download cache archive[0m
+[32;1mfetching smoke-test/cache--linux-xenial-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855--node-12.tgz[0m
+[32;1mfound cache[0m
+[0Kadding /home/travis/build/kitspace/kitspace/build to cache[0m
+creating directory /home/travis/build/kitspace/kitspace/build[0m
+adding /home/travis/.cache to cache[0m
+[0Ktravis_fold:end:cache.1
+[0K
+travis_fold:start:cache.yarn
+[0K
+[0Kadding /home/travis/.cache/yarn to cache[0m
+[0Ktravis_fold:end:cache.yarn
+[0Ktravis_fold:start:cache.npm
+[0K
+[0Kadding /home/travis/build/kitspace/kitspace/node_modules to cache[0m
+creating directory /home/travis/build/kitspace/kitspace/node_modules[0m
+[0Ktravis_fold:end:cache.npm
+[0K$ node --version
+v12.18.4
+$ npm --version
+6.14.6
+$ nvm --version
+0.36.0
+$ yarn --version
+1.22.4
+
+travis_fold:start:install
+[0K$ yarn --frozen-lockfile
+yarn install v1.22.4
+[1/4] Resolving packages...
+warning Resolution field "oniguruma@7.2.1" is incompatible with requested version "oniguruma@^6.1.0"
+success Already up-to-date.
+Done in 0.94s.
+[0Ktravis_fold:end:install
+[0K$ bash keep_alive.sh &
+keeping travis alive
+[0K[32;1mThe command "bash keep_alive.sh &" exited with 0.[0m
+[0K$ export NODE_ENV=production
+[0K[32;1mThe command "export NODE_ENV=production" exited with 0.[0m
+[0K$ ./scripts/plug_versions
+[0K[32;1mThe command "./scripts/plug_versions" exited with 0.[0m
+[0K$ ./scripts/get_boards production $CACHED_BUILD
+git clone --depth=1 https://github.com/kammce/SJTwo boards/github.com/kammce/SJTwo && cd boards/github.com/kammce/SJTwo && git checkout 71c0454bd80e321cb968c9908375ef504d213592 || git fetch --unshallow && git checkout 71c0454bd80e321cb968c9908375ef504d213592
+git clone --depth=1 https://github.com/mattvenn/esp8266-breakout boards/github.com/mattvenn/esp8266-breakout && cd boards/github.com/mattvenn/esp8266-breakout && git checkout fcb3107c66670035c7cb330f5d98eddde5d17f56 || git fetch --unshallow && git checkout fcb3107c66670035c7cb330f5d98eddde5d17f56
+git clone --depth=1 https://github.com/kitspace-forks/arduino-uno boards/github.com/kitspace-forks/arduino-uno && cd boards/github.com/kitspace-forks/arduino-uno && git checkout 5f10c3e4d9709344153aecf65faaef492ddcb0d1 || git fetch --unshallow && git checkout 5f10c3e4d9709344153aecf65faaef492ddcb0d1
+git clone --depth=1 https://github.com/kitspace-forks/Bus_Pirate boards/github.com/kitspace-forks/Bus_Pirate && cd boards/github.com/kitspace-forks/Bus_Pirate && git checkout 0ca376a0eedd116e3ffdbd5dfd5398a67fdba708 || git fetch --unshallow && git checkout 0ca376a0eedd116e3ffdbd5dfd5398a67fdba708
+git clone --depth=1 https://github.com/kitspace-forks/HACK boards/github.com/kitspace-forks/HACK && cd boards/github.com/kitspace-forks/HACK && git checkout 9ce81027df5e860ee78c101ade40bf73724c5ed6 || git fetch --unshallow && git checkout 9ce81027df5e860ee78c101ade40bf73724c5ed6
+git clone --depth=1 https://github.com/kitspace-forks/FM_Transmitter boards/github.com/kitspace-forks/FM_Transmitter && cd boards/github.com/kitspace-forks/FM_Transmitter && git checkout c5bc25967eca4a79c5fe849e97a7f9eaf18b5622 || git fetch --unshallow && git checkout c5bc25967eca4a79c5fe849e97a7f9eaf18b5622
+git clone --depth=1 https://github.com/kasbah/nomech boards/github.com/kasbah/nomech && cd boards/github.com/kasbah/nomech && git checkout 6f17ad72a2e060d6e49be8ad1857586f29aa95b9 || git fetch --unshallow && git checkout 6f17ad72a2e060d6e49be8ad1857586f29aa95b9
+git clone --depth=1 https://github.com/kasbah/push-on-hold-off boards/github.com/kasbah/push-on-hold-off && cd boards/github.com/kasbah/push-on-hold-off && git checkout 1767c8a49f24ec5edccf65e79b7f442e7b6e34ef || git fetch --unshallow && git checkout 1767c8a49f24ec5edccf65e79b7f442e7b6e34ef
+git clone --depth=1 https://github.com/kitspace-forks/BQ25570_Harvester boards/github.com/kitspace-forks/BQ25570_Harvester && cd boards/github.com/kitspace-forks/BQ25570_Harvester && git checkout c75ab856e683456c96bf3afe9a2a942815c94b77 || git fetch --unshallow && git checkout c75ab856e683456c96bf3afe9a2a942815c94b77
+git clone --depth=1 https://github.com/JarrettR/USBvil boards/github.com/JarrettR/USBvil && cd boards/github.com/JarrettR/USBvil && git checkout 3832f59edf0a5128e121c289e2159ea012fcb84a || git fetch --unshallow && git checkout 3832f59edf0a5128e121c289e2159ea012fcb84a
+git clone --depth=1 https://github.com/8BitMixtape/NextLevelEdition boards/github.com/8BitMixtape/NextLevelEdition && cd boards/github.com/8BitMixtape/NextLevelEdition && git checkout 20b07cdba27d0a22534fc177c74ff1fb37b55839 || git fetch --unshallow && git checkout 20b07cdba27d0a22534fc177c74ff1fb37b55839
+git clone --depth=1 https://github.com/dvdfreitag/Signal-Detector boards/github.com/dvdfreitag/Signal-Detector && cd boards/github.com/dvdfreitag/Signal-Detector && git checkout 6978ba247948e1a5631f9671909d77d109ff48ec || git fetch --unshallow && git checkout 6978ba247948e1a5631f9671909d77d109ff48ec
+git clone --depth=1 https://github.com/robotsrulz/SP_Adapter boards/github.com/robotsrulz/SP_Adapter && cd boards/github.com/robotsrulz/SP_Adapter && git checkout 0391e520c2f1e953f703b467ebe6b8022971771 || git fetch --unshallow && git checkout 0391e520c2f1e953f703b467ebe6b8022971771
+git clone --depth=1 https://github.com/pcbsz/SimpleAmp boards/github.com/pcbsz/SimpleAmp && cd boards/github.com/pcbsz/SimpleAmp && git checkout 191814ff027424dacb2dcb6338dcb106aabb6e34 || git fetch --unshallow && git checkout 191814ff027424dacb2dcb6338dcb106aabb6e34
+git clone --depth=1 https://github.com/pcbsz/AtariSynth boards/github.com/pcbsz/AtariSynth && cd boards/github.com/pcbsz/AtariSynth && git checkout 01f1a8f3757f1df6ac006d43ca73025f4823716d || git fetch --unshallow && git checkout 01f1a8f3757f1df6ac006d43ca73025f4823716d
+git clone --depth=1 https://git.defproc.co.uk/DefProc/piezo-sensor boards/git.defproc.co.uk/DefProc/piezo-sensor && cd boards/git.defproc.co.uk/DefProc/piezo-sensor && git checkout 1ef4e9e30e43871aa7bf8f66e8445466eba78b1f || git fetch --unshallow && git checkout 1ef4e9e30e43871aa7bf8f66e8445466eba78b1f
+git clone --depth=1 https://github.com/pcbsz/LM386 boards/github.com/pcbsz/LM386 && cd boards/github.com/pcbsz/LM386 && git checkout 4357cd14d514eb6f87ac8fccb7892a4360037be4 || git fetch --unshallow && git checkout 4357cd14d514eb6f87ac8fccb7892a4360037be4
+git clone --depth=1 https://github.com/kanflo/aaduino boards/github.com/kanflo/aaduino && cd boards/github.com/kanflo/aaduino && git checkout c15edf9b93594ae34dc815a2a9521514c13dbef7 || git fetch --unshallow && git checkout c15edf9b93594ae34dc815a2a9521514c13dbef7
+git clone --depth=1 https://github.com/descampsa/DynamixelShield boards/github.com/descampsa/DynamixelShield && cd boards/github.com/descampsa/DynamixelShield && git checkout db88b0d38da6d8e0d6a9795e888b87b78f5a5d1c || git fetch --unshallow && git checkout db88b0d38da6d8e0d6a9795e888b87b78f5a5d1c
+git clone --depth=1 https://github.com/jpralves/cseduino boards/github.com/jpralves/cseduino && cd boards/github.com/jpralves/cseduino && git checkout fdd4f17f623e047a3bd46c20e6cd8c0b9608c42f || git fetch --unshallow && git checkout fdd4f17f623e047a3bd46c20e6cd8c0b9608c42f
+git clone --depth=1 https://github.com/kitspace-forks/neo boards/github.com/kitspace-forks/neo && cd boards/github.com/kitspace-forks/neo && git checkout 52cbbc640340f5f7e78ae13aefcf514cef4361be || git fetch --unshallow && git checkout 52cbbc640340f5f7e78ae13aefcf514cef4361be
+git clone --depth=1 https://github.com/InaneCoding/KOS01_IdealDiode20A boards/github.com/InaneCoding/KOS01_IdealDiode20A && cd boards/github.com/InaneCoding/KOS01_IdealDiode20A && git checkout 61fcdd7f007040bcf7b4e579f6e848b230cee084 || git fetch --unshallow && git checkout 61fcdd7f007040bcf7b4e579f6e848b230cee084
+git clone --depth=1 https://github.com/UDXS/Arduitsy boards/github.com/UDXS/Arduitsy && cd boards/github.com/UDXS/Arduitsy && git checkout fb8981733111a1eb9f0db3147ae2c8de593514c5 || git fetch --unshallow && git checkout fb8981733111a1eb9f0db3147ae2c8de593514c5
+git clone --depth=1 https://github.com/kitspace/jelly boards/github.com/kitspace/jelly && cd boards/github.com/kitspace/jelly && git checkout 1aa64547af16ef68da820e9623b1f314b949547e || git fetch --unshallow && git checkout 1aa64547af16ef68da820e9623b1f314b949547e
+git clone --depth=1 https://github.com/GenericLab/Unagi_Gar-Lampli boards/github.com/GenericLab/Unagi_Gar-Lampli && cd boards/github.com/GenericLab/Unagi_Gar-Lampli && git checkout d40ac086af9021f6abc0d81ac374c98b3f5182fb || git fetch --unshallow && git checkout d40ac086af9021f6abc0d81ac374c98b3f5182fb
+git clone --depth=1 https://github.com/kimitobo/Neocococat boards/github.com/kimitobo/Neocococat && cd boards/github.com/kimitobo/Neocococat && git checkout 460fb2ac79f51f2a66dc11689ca4044c34d56092 || git fetch --unshallow && git checkout 460fb2ac79f51f2a66dc11689ca4044c34d56092
+git clone --depth=1 https://github.com/RoboticsBrno/RB3200-ESP32universal/ boards/github.com/RoboticsBrno/RB3200-ESP32universal/ && cd boards/github.com/RoboticsBrno/RB3200-ESP32universal/ && git checkout 7933202eb494bd7cb640ea98742f5b0b6ce26423 || git fetch --unshallow && git checkout 7933202eb494bd7cb640ea98742f5b0b6ce26423
+git clone --depth=1 https://github.com/intajay/uduino boards/github.com/intajay/uduino && cd boards/github.com/intajay/uduino && git checkout 55c8181bf2ff85a45e2c933ac0646b90b139702a || git fetch --unshallow && git checkout 55c8181bf2ff85a45e2c933ac0646b90b139702a
+git clone --depth=1 https://github.com/8BitMixtape/8BitmixtapeNEO_ShenzhenReady boards/github.com/8BitMixtape/8BitmixtapeNEO_ShenzhenReady && cd boards/github.com/8BitMixtape/8BitmixtapeNEO_ShenzhenReady && git checkout d8f86818c2ad3206abc9b7a0ed26dfdf672dba10 || git fetch --unshallow && git checkout d8f86818c2ad3206abc9b7a0ed26dfdf672dba10
+git clone --depth=1 https://github.com/julbouln/ice40_eink_controller boards/github.com/julbouln/ice40_eink_controller && cd boards/github.com/julbouln/ice40_eink_controller && git checkout ecfc12dac7919a04ee528727886e8ef9fcbb0386 || git fetch --unshallow && git checkout ecfc12dac7919a04ee528727886e8ef9fcbb0386
+git clone --depth=1 https://github.com/julbouln/ifusb boards/github.com/julbouln/ifusb && cd boards/github.com/julbouln/ifusb && git checkout 1b2a002bc89ac2553b43b002c6cbbf2151b77827 || git fetch --unshallow && git checkout 1b2a002bc89ac2553b43b002c6cbbf2151b77827
+git clone --depth=1 https://github.com/borgel/sympetrum-v2 boards/github.com/borgel/sympetrum-v2 && cd boards/github.com/borgel/sympetrum-v2 && git checkout adb39f72cde3bd12c6f9a885d8f3a2cded4c36ad || git fetch --unshallow && git checkout adb39f72cde3bd12c6f9a885d8f3a2cded4c36ad
+git clone --depth=1 https://github.com/im-tomu/tomu-hardware boards/github.com/im-tomu/tomu-hardware && cd boards/github.com/im-tomu/tomu-hardware && git checkout 10878e4cca6baaf682bfb324b2a22bd5c8029819 || git fetch --unshallow && git checkout 10878e4cca6baaf682bfb324b2a22bd5c8029819
+git clone --depth=1 https://github.com/dusjagr/PN001_Pop-Neuron_ShenzhenReady boards/github.com/dusjagr/PN001_Pop-Neuron_ShenzhenReady && cd boards/github.com/dusjagr/PN001_Pop-Neuron_ShenzhenReady && git checkout f6a40c4c02fbdc4fcf91e77a625e151bae11c246 || git fetch --unshallow && git checkout f6a40c4c02fbdc4fcf91e77a625e151bae11c246
+git clone --depth=1 https://github.com/GaudiLabs/ChaosLooper boards/github.com/GaudiLabs/ChaosLooper && cd boards/github.com/GaudiLabs/ChaosLooper && git checkout 5b1a859bfba316f84977002121bb947b8e783e49 || git fetch --unshallow && git checkout 5b1a859bfba316f84977002121bb947b8e783e49
+git clone --depth=1 https://github.com/python-ugame/ugame-10-hardware boards/github.com/python-ugame/ugame-10-hardware && cd boards/github.com/python-ugame/ugame-10-hardware && git checkout 9bde264ba4399485b96ca13a2ded8def1d335441 || git fetch --unshallow && git checkout 9bde264ba4399485b96ca13a2ded8def1d335441
+git clone --depth=1 https://github.com/sgmk/microNoise_SZ-Ready boards/github.com/sgmk/microNoise_SZ-Ready && cd boards/github.com/sgmk/microNoise_SZ-Ready && git checkout d57ae9e03786baa077854e2538aa245539fa3ffa || git fetch --unshallow && git checkout d57ae9e03786baa077854e2538aa245539fa3ffa
+git clone --depth=1 https://github.com/sgmk/solarbird_shenzen_rdy boards/github.com/sgmk/solarbird_shenzen_rdy && cd boards/github.com/sgmk/solarbird_shenzen_rdy && git checkout e1c3f277e13a9254b3a13044a41fdba479f72253 || git fetch --unshallow && git checkout e1c3f277e13a9254b3a13044a41fdba479f72253
+git clone --depth=1 https://github.com/kasbah/maulwurf boards/github.com/kasbah/maulwurf && cd boards/github.com/kasbah/maulwurf && git checkout aba4cbbbef4d3119ae83b0aca11c71f461cbad5c || git fetch --unshallow && git checkout aba4cbbbef4d3119ae83b0aca11c71f461cbad5c
+git clone --depth=1 https://github.com/squaresolid/tiger_biosynth boards/github.com/squaresolid/tiger_biosynth && cd boards/github.com/squaresolid/tiger_biosynth && git checkout 0b910738e1b78b1ab203976e4f6987f93aba8c87 || git fetch --unshallow && git checkout 0b910738e1b78b1ab203976e4f6987f93aba8c87
+git clone --depth=1 https://github.com/squaresolid/fish-caller boards/github.com/squaresolid/fish-caller && cd boards/github.com/squaresolid/fish-caller && git checkout 2f7032d60203318c89b73411017fc5e61af30904 || git fetch --unshallow && git checkout 2f7032d60203318c89b73411017fc5e61af30904
+git clone --depth=1 https://github.com/jasiek/antenna-analyser boards/github.com/jasiek/antenna-analyser && cd boards/github.com/jasiek/antenna-analyser && git checkout f4652411ae4deebd3e55c1f170af1530d204d90e || git fetch --unshallow && git checkout f4652411ae4deebd3e55c1f170af1530d204d90e
+git clone --depth=1 https://github.com/amchagas/Flypi boards/github.com/amchagas/Flypi && cd boards/github.com/amchagas/Flypi && git checkout bc499344746500dacdded820ce6d12cf06998cdd || git fetch --unshallow && git checkout bc499344746500dacdded820ce6d12cf06998cdd
+git clone --depth=1 https://github.com/less-smog/hardware boards/github.com/less-smog/hardware && cd boards/github.com/less-smog/hardware && git checkout 5de76d0082d70de41122f2993c4643c48ca0db0c || git fetch --unshallow && git checkout 5de76d0082d70de41122f2993c4643c48ca0db0c
+git clone --depth=1 https://github.com/8BitMixtape/8BitmixtapeNEO_BerlinerSchule_SZ-RDY boards/github.com/8BitMixtape/8BitmixtapeNEO_BerlinerSchule_SZ-RDY && cd boards/github.com/8BitMixtape/8BitmixtapeNEO_BerlinerSchule_SZ-RDY && git checkout 70e8bc8c06d59dbef582eeb5e8f797dfcd0f90bd || git fetch --unshallow && git checkout 70e8bc8c06d59dbef582eeb5e8f797dfcd0f90bd
+git clone --depth=1 https://github.com/emard/ulx3s boards/github.com/emard/ulx3s && cd boards/github.com/emard/ulx3s && git checkout 68ec912debda051089169dc9424bf57df6eb0044 || git fetch --unshallow && git checkout 68ec912debda051089169dc9424bf57df6eb0044
+git clone --depth=1 https://github.com/kitspace/ruler boards/github.com/kitspace/ruler && cd boards/github.com/kitspace/ruler && git checkout c8c87e085a1c7104499768b69039fbe720ed2921 || git fetch --unshallow && git checkout c8c87e085a1c7104499768b69039fbe720ed2921
+git clone --depth=1 https://github.com/BadenLab/Spikeling boards/github.com/BadenLab/Spikeling && cd boards/github.com/BadenLab/Spikeling && git checkout c5a1a8325c5809c2649053fb805d00168098094e || git fetch --unshallow && git checkout c5a1a8325c5809c2649053fb805d00168098094e
+git clone --depth=1 https://github.com/rwb27/openflexure_nano_motor_controller boards/github.com/rwb27/openflexure_nano_motor_controller && cd boards/github.com/rwb27/openflexure_nano_motor_controller && git checkout 18a19977dde0cd78f14154c41073a857e2332e54 || git fetch --unshallow && git checkout 18a19977dde0cd78f14154c41073a857e2332e54
+git clone --depth=1 https://github.com/morgulbrut/LoRa32_Node boards/github.com/morgulbrut/LoRa32_Node && cd boards/github.com/morgulbrut/LoRa32_Node && git checkout 39d4bdac7fe4fa08bc62be12099fee765231813d || git fetch --unshallow && git checkout 39d4bdac7fe4fa08bc62be12099fee765231813d
+git clone --depth=1 https://github.com/GenericLab/GOSH-Board_UGM/ boards/github.com/GenericLab/GOSH-Board_UGM/ && cd boards/github.com/GenericLab/GOSH-Board_UGM/ && git checkout bbd6fa9e8fded2dd820c5c36a7a48184f988c0df || git fetch --unshallow && git checkout bbd6fa9e8fded2dd820c5c36a7a48184f988c0df
+git clone --depth=1 https://github.com/dusjagr/ESPTINY86_Stompbox boards/github.com/dusjagr/ESPTINY86_Stompbox && cd boards/github.com/dusjagr/ESPTINY86_Stompbox && git checkout 7570272d165bc5b99edb48228117eb42bd3bb302 || git fetch --unshallow && git checkout 7570272d165bc5b99edb48228117eb42bd3bb302
+git clone --depth=1 https://github.com/8BitMixtape/mCore_Mixtape boards/github.com/8BitMixtape/mCore_Mixtape && cd boards/github.com/8BitMixtape/mCore_Mixtape && git checkout 8b1215882c0205fdfd6ec60154b4d83bdecc2236 || git fetch --unshallow && git checkout 8b1215882c0205fdfd6ec60154b4d83bdecc2236
+git clone --depth=1 https://github.com/kasbah/corners boards/github.com/kasbah/corners && cd boards/github.com/kasbah/corners && git checkout 79adf8d0b616ccdc2046e6b2c53d06165a0c75c1 || git fetch --unshallow && git checkout 79adf8d0b616ccdc2046e6b2c53d06165a0c75c1
+git clone --depth=1 https://github.com/maltman23/ArduTouch boards/github.com/maltman23/ArduTouch && cd boards/github.com/maltman23/ArduTouch && git checkout 8175655315dead175b74787ea1a55a423f996573 || git fetch --unshallow && git checkout 8175655315dead175b74787ea1a55a423f996573
+git clone --depth=1 https://gogs.zenerdio.de/sebastian/satnogs-diplexer boards/gogs.zenerdio.de/sebastian/satnogs-diplexer && cd boards/gogs.zenerdio.de/sebastian/satnogs-diplexer && git checkout 8208717b58c7efb025edc232feb786e8701e20c1 || git fetch --unshallow && git checkout 8208717b58c7efb025edc232feb786e8701e20c1
+git clone --depth=1 https://github.com/alpharesearch/ESP8266_DS18B20 boards/github.com/alpharesearch/ESP8266_DS18B20 && cd boards/github.com/alpharesearch/ESP8266_DS18B20 && git checkout 286eac0c4eed8b09d638772a7c5acf853e715e4e || git fetch --unshallow && git checkout 286eac0c4eed8b09d638772a7c5acf853e715e4e
+git clone --depth=1 https://github.com/Jan--Henrik/CH330_Hardware boards/github.com/Jan--Henrik/CH330_Hardware && cd boards/github.com/Jan--Henrik/CH330_Hardware && git checkout 7a79f8372914275077f0afd97e32b04bd02032a6 || git fetch --unshallow && git checkout 7a79f8372914275077f0afd97e32b04bd02032a6
+git clone --depth=1 https://github.com/8BitMixtape/ESPTINY86_MixtapePCB boards/github.com/8BitMixtape/ESPTINY86_MixtapePCB && cd boards/github.com/8BitMixtape/ESPTINY86_MixtapePCB && git checkout 5cc07a4e75615d2ac462850c15b1cc831ba609fc || git fetch --unshallow && git checkout 5cc07a4e75615d2ac462850c15b1cc831ba609fc
+git clone --depth=1 https://github.com/ollyoid/ShenzhenPostcard boards/github.com/ollyoid/ShenzhenPostcard && cd boards/github.com/ollyoid/ShenzhenPostcard && git checkout 7ef3e024ff9f87989491587d15e735ad1fc36ec7 || git fetch --unshallow && git checkout 7ef3e024ff9f87989491587d15e735ad1fc36ec7
+git clone --depth=1 https://gitlab.com/erigas/gnukey boards/gitlab.com/erigas/gnukey && cd boards/gitlab.com/erigas/gnukey && git checkout e6b53b9cc1a4dc2e3705ff681c2cea42611e38d9 || git fetch --unshallow && git checkout e6b53b9cc1a4dc2e3705ff681c2cea42611e38d9
+git clone --depth=1 https://gitlab.com/alexander.kutschera/singingplants boards/gitlab.com/alexander.kutschera/singingplants && cd boards/gitlab.com/alexander.kutschera/singingplants && git checkout ba66568f821c450c2ed32c3572ae195dd361042d || git fetch --unshallow && git checkout ba66568f821c450c2ed32c3572ae195dd361042d
+git clone --depth=1 https://gitlab.com/xengi/darling boards/gitlab.com/xengi/darling && cd boards/gitlab.com/xengi/darling && git checkout f0509e23480bacb922878b92ba83ceec52c56c2a || git fetch --unshallow && git checkout f0509e23480bacb922878b92ba83ceec52c56c2a
+git clone --depth=1 https://github.com/Jan--Henrik/hoverboard-breakout boards/github.com/Jan--Henrik/hoverboard-breakout && cd boards/github.com/Jan--Henrik/hoverboard-breakout && git checkout 0771fb5fb3c7170d1aa8a67006e35e7d275a4c97 || git fetch --unshallow && git checkout 0771fb5fb3c7170d1aa8a67006e35e7d275a4c97
+git clone --depth=1 https://github.com/eulerlab/open-visual-stimulator boards/github.com/eulerlab/open-visual-stimulator && cd boards/github.com/eulerlab/open-visual-stimulator && git checkout 7d4e9abeb864383bf5d6ac8c8f571c0682f35e17 || git fetch --unshallow && git checkout 7d4e9abeb864383bf5d6ac8c8f571c0682f35e17
+git clone --depth=1 https://gitlab.com/bath_open_instrumentation_group/sangaboard boards/gitlab.com/bath_open_instrumentation_group/sangaboard && cd boards/gitlab.com/bath_open_instrumentation_group/sangaboard && git checkout f7cd46b9b8f86bceef766d735eeae45814fdaa44 || git fetch --unshallow && git checkout f7cd46b9b8f86bceef766d735eeae45814fdaa44
+git clone --depth=1 https://github.com/kb-consulting/pt101a boards/github.com/kb-consulting/pt101a && cd boards/github.com/kb-consulting/pt101a && git checkout 91d3dda4def1d24874b182407aaca5989a38824a || git fetch --unshallow && git checkout 91d3dda4def1d24874b182407aaca5989a38824a
+git clone --depth=1 https://github.com/fossasia/pslab-hardware boards/github.com/fossasia/pslab-hardware && cd boards/github.com/fossasia/pslab-hardware && git checkout 84dc2b08f0df32772ac58f7f7f127f32161bda14 || git fetch --unshallow && git checkout 84dc2b08f0df32772ac58f7f7f127f32161bda14
+git clone --depth=1 https://github.com/Jan--Henrik/OtterScreenAdapter boards/github.com/Jan--Henrik/OtterScreenAdapter && cd boards/github.com/Jan--Henrik/OtterScreenAdapter && git checkout 54df46df179fa9d24d8d11d9b58393dc1223f01f || git fetch --unshallow && git checkout 54df46df179fa9d24d8d11d9b58393dc1223f01f
+git clone --depth=1 https://github.com/arturo182/bbq10kbd_breakout boards/github.com/arturo182/bbq10kbd_breakout && cd boards/github.com/arturo182/bbq10kbd_breakout && git checkout 3c328f4e7f06f405dce756bdb918baf7dcc453e1 || git fetch --unshallow && git checkout 3c328f4e7f06f405dce756bdb918baf7dcc453e1
+git clone --depth=1 https://github.com/Jan--Henrik/OtterPill boards/github.com/Jan--Henrik/OtterPill && cd boards/github.com/Jan--Henrik/OtterPill && git checkout c033e82f45b81fecea1fc791fa9b9601e81b530d || git fetch --unshallow && git checkout c033e82f45b81fecea1fc791fa9b9601e81b530d
+git clone --depth=1 https://github.com/carrotIndustries/pluto boards/github.com/carrotIndustries/pluto && cd boards/github.com/carrotIndustries/pluto && git checkout 3f25b12a9d1c7eb931cf74858881f92337a70776 || git fetch --unshallow && git checkout 3f25b12a9d1c7eb931cf74858881f92337a70776
+git clone --depth=1 https://github.com/ollyoid/TuneShroom boards/github.com/ollyoid/TuneShroom && cd boards/github.com/ollyoid/TuneShroom && git checkout e427f740520a45baf1a6512793d73a0380f83e4d || git fetch --unshallow && git checkout e427f740520a45baf1a6512793d73a0380f83e4d
+git clone --depth=1 https://github.com/sci-bots/teensy-3.2-clone.kicad boards/github.com/sci-bots/teensy-3.2-clone.kicad && cd boards/github.com/sci-bots/teensy-3.2-clone.kicad && git checkout 1c30c12b9032a361e0fc6df5e3f28426a2bfa930 || git fetch --unshallow && git checkout 1c30c12b9032a361e0fc6df5e3f28426a2bfa930
+git clone --depth=1 https://github.com/eez-open/modular-psu boards/github.com/eez-open/modular-psu && cd boards/github.com/eez-open/modular-psu && git checkout f68850055c1bf03bc252e7e8759d6430998145a3 || git fetch --unshallow && git checkout f68850055c1bf03bc252e7e8759d6430998145a3
+git clone --depth=1 https://github.com/Jan--Henrik/USB-LED-Otter boards/github.com/Jan--Henrik/USB-LED-Otter && cd boards/github.com/Jan--Henrik/USB-LED-Otter && git checkout 69a556e363dded3b96d79bd564bedf71d41ad129 || git fetch --unshallow && git checkout 69a556e363dded3b96d79bd564bedf71d41ad129
+git clone --depth=1 https://github.com/Jan--Henrik/Otter-Iron boards/github.com/Jan--Henrik/Otter-Iron && cd boards/github.com/Jan--Henrik/Otter-Iron && git checkout 974dfcd1b28fe5cff8f7c0202190f6cdd128852a || git fetch --unshallow && git checkout 974dfcd1b28fe5cff8f7c0202190f6cdd128852a
+git clone --depth=1 https://github.com/Sussex-Neuroscience/voltage-amplifier boards/github.com/Sussex-Neuroscience/voltage-amplifier && cd boards/github.com/Sussex-Neuroscience/voltage-amplifier && git checkout e8aa30762d97eefb251e771d3c61f1b8fc52f2da || git fetch --unshallow && git checkout e8aa30762d97eefb251e771d3c61f1b8fc52f2da
+git clone --depth=1 https://github.com/ozel/DIY_particle_detector boards/github.com/ozel/DIY_particle_detector && cd boards/github.com/ozel/DIY_particle_detector && git checkout 90c180207c5cd1f046aafa8c136f81ef37fb75d9 || git fetch --unshallow && git checkout 90c180207c5cd1f046aafa8c136f81ef37fb75d9
+git clone --depth=1 https://github.com/free-pdk/easy-pdk-programmer-hardware boards/github.com/free-pdk/easy-pdk-programmer-hardware && cd boards/github.com/free-pdk/easy-pdk-programmer-hardware && git checkout 26745b03a3ee575324e0f124db433ff1ed3c9ea4 || git fetch --unshallow && git checkout 26745b03a3ee575324e0f124db433ff1ed3c9ea4
+git clone --depth=1 https://github.com/mattvenn/teensy-audio-fx boards/github.com/mattvenn/teensy-audio-fx && cd boards/github.com/mattvenn/teensy-audio-fx && git checkout 107ee3b82b307ba1a4f112c25a73f3614ff6fd7f || git fetch --unshallow && git checkout 107ee3b82b307ba1a4f112c25a73f3614ff6fd7f
+git clone --depth=1 https://github.com/LincolnUehara/Aquarius boards/github.com/LincolnUehara/Aquarius && cd boards/github.com/LincolnUehara/Aquarius && git checkout 0cf1a5438f00b51e099b0173a9eedeaed0154f46 || git fetch --unshallow && git checkout 0cf1a5438f00b51e099b0173a9eedeaed0154f46
+git clone --depth=1 https://github.com/amchagas/fast-response-diode boards/github.com/amchagas/fast-response-diode && cd boards/github.com/amchagas/fast-response-diode && git checkout 9bbb6577a0c31b99fa1c232b3678be9f26c8aa7e || git fetch --unshallow && git checkout 9bbb6577a0c31b99fa1c232b3678be9f26c8aa7e
+git clone --depth=1 https://gitlab.com/openflexure/ofm-illumination boards/gitlab.com/openflexure/ofm-illumination && cd boards/gitlab.com/openflexure/ofm-illumination && git checkout ada6bb29144582c14c7bdc2e4341c7c20696ed68 || git fetch --unshallow && git checkout ada6bb29144582c14c7bdc2e4341c7c20696ed68
+git clone --depth=1 https://github.com/nerdyscout/NodeMCU boards/github.com/nerdyscout/NodeMCU && cd boards/github.com/nerdyscout/NodeMCU && git checkout 92ecdf12eb5566f736ce0b60222b3c75975c1bd1 || git fetch --unshallow && git checkout 92ecdf12eb5566f736ce0b60222b3c75975c1bd1
+git clone --depth=1 https://github.com/aleksas/interferometer boards/github.com/aleksas/interferometer && cd boards/github.com/aleksas/interferometer && git checkout 96d6bdf3fd9d38a97e719cc063b176a612747b8f || git fetch --unshallow && git checkout 96d6bdf3fd9d38a97e719cc063b176a612747b8f
+git clone --depth=1 https://github.com/GlasgowEmbedded/glasgow boards/github.com/GlasgowEmbedded/glasgow && cd boards/github.com/GlasgowEmbedded/glasgow && git checkout bcebaa02c48cd893877f22b1c86d8b3aa959efa6 || git fetch --unshallow && git checkout bcebaa02c48cd893877f22b1c86d8b3aa959efa6
+git clone --depth=1 https://github.com/pyr0ball/pyr0piezo boards/github.com/pyr0ball/pyr0piezo && cd boards/github.com/pyr0ball/pyr0piezo && git checkout 202a1f750cf69350f7d796fec1f5f4306abe110d || git fetch --unshallow && git checkout 202a1f750cf69350f7d796fec1f5f4306abe110d
+git clone --depth=1 https://github.com/jasiek/ESP8266-PowerMonitor boards/github.com/jasiek/ESP8266-PowerMonitor && cd boards/github.com/jasiek/ESP8266-PowerMonitor && git checkout 0abebfba2d5d519d51189c7fd0d975552a2148b7 || git fetch --unshallow && git checkout 0abebfba2d5d519d51189c7fd0d975552a2148b7
+git clone --depth=1 https://github.com/Ryzee119/OpenXenium boards/github.com/Ryzee119/OpenXenium && cd boards/github.com/Ryzee119/OpenXenium && git checkout edd7c9ade50a392cbaef5bc166de49ed25856041 || git fetch --unshallow && git checkout edd7c9ade50a392cbaef5bc166de49ed25856041
+git clone --depth=1 https://github.com/Neotron-Compute/Neotron-32-Hardware boards/github.com/Neotron-Compute/Neotron-32-Hardware && cd boards/github.com/Neotron-Compute/Neotron-32-Hardware && git checkout 0d11ffb87ae06d20506d9d51f98c0f56984d64a0 || git fetch --unshallow && git checkout 0d11ffb87ae06d20506d9d51f98c0f56984d64a0
+git clone --depth=1 https://github.com/joeycastillo/The-Open-Book boards/github.com/joeycastillo/The-Open-Book && cd boards/github.com/joeycastillo/The-Open-Book && git checkout 1229de084a632016d4776dc67a98aea9a2310723 || git fetch --unshallow && git checkout 1229de084a632016d4776dc67a98aea9a2310723
+[0K[32;1mThe command "./scripts/get_boards production $CACHED_BUILD" exited with 0.[0m
+[0K$ ./configure production $CACHED_BUILD
+generated ./build.ninja with 'production' cached=false config
+[0K[32;1mThe command "./configure production $CACHED_BUILD" exited with 0.[0m
+[0K$ wget https://github.com/ninja-build/ninja/releases/download/v1.6.0/ninja-linux.zip
+--2020-09-30 09:12:46--  https://github.com/ninja-build/ninja/releases/download/v1.6.0/ninja-linux.zip
+Resolving github.com (github.com)... 140.82.112.4
+Connecting to github.com (github.com)|140.82.112.4|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://github-production-release-asset-2e65be.s3.amazonaws.com/1335132/c5b9a1a4-1e53-11e5-8944-56c6e46d59da?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20200930%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20200930T091246Z&X-Amz-Expires=300&X-Amz-Signature=e5e4c7c23f2fcd4799774f62b97930f659329787a671e1babf4e61e2711fd764&X-Amz-SignedHeaders=host&actor_id=0&key_id=0&repo_id=1335132&response-content-disposition=attachment%3B%20filename%3Dninja-linux.zip&response-content-type=application%2Foctet-stream [following]
+--2020-09-30 09:12:46--  https://github-production-release-asset-2e65be.s3.amazonaws.com/1335132/c5b9a1a4-1e53-11e5-8944-56c6e46d59da?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20200930%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20200930T091246Z&X-Amz-Expires=300&X-Amz-Signature=e5e4c7c23f2fcd4799774f62b97930f659329787a671e1babf4e61e2711fd764&X-Amz-SignedHeaders=host&actor_id=0&key_id=0&repo_id=1335132&response-content-disposition=attachment%3B%20filename%3Dninja-linux.zip&response-content-type=application%2Foctet-stream
+Resolving github-production-release-asset-2e65be.s3.amazonaws.com (github-production-release-asset-2e65be.s3.amazonaws.com)... 52.216.115.3
+Connecting to github-production-release-asset-2e65be.s3.amazonaws.com (github-production-release-asset-2e65be.s3.amazonaws.com)|52.216.115.3|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 71368 (70K) [application/octet-stream]
+Saving to: â€˜ninja-linux.zipâ€™
+
+     0K .......... .......... .......... .......... .......... 71% 3.75M 0s
+    50K .......... .........                                  100% 1.59M=0.03s
+
+2020-09-30 09:12:46 (2.71 MB/s) - â€˜ninja-linux.zipâ€™ saved [71368/71368]
+
+[0K[32;1mThe command "wget https://github.com/ninja-build/ninja/releases/download/v1.6.0/ninja-linux.zip" exited with 0.[0m
+[0K$ unzip ninja-linux.zip
+Archive:  ninja-linux.zip
+  inflating: ninja                   
+[0K[32;1mThe command "unzip ninja-linux.zip" exited with 0.[0m
+[0K$ if  [ "${CACHED_BUILD}" != "cached" ]; then ./ninja clean; fi
+[1/1] rm -rf build
+[0K[32;1mThe command "if  [ "${CACHED_BUILD}" != "cached" ]; then ./ninja clean; fi" exited with 0.[0m
+[0K$ ./ninja -j 2 && cp registry.json build/
+[1/5109] cp src/buy_parts/direct_stores.jsx build/.temp/boards/github.com/8BitMixtape/8BitmixtapeNEO_BerlinerSchule_SZ-RDY/buy_parts/direct_stores.jsx
+[2/5109] cp src/netlify-functions/submission-created.js build/.temp/boards/github.com/8BitMixtape/8BitmixtapeNEO_BerlinerSchule_SZ-RDY/netlify-functions/submission-created.js
+[3/5109] cp src/submit/board_colors.js build/.temp/boards/github.com/8BitMixtape/8BitmixtapeNEO_BerlinerSchule_SZ-RDY/submit/board_colors.js
+[4/5109] browserify --extension='.jsx' --transform [ babelify     --presets [ @babel/react @babel/env ] ] -g uglifyify -r 1-click-bom-minimal -r @babel/polyfill -r browser-version -r create-react-class -r react -r react-dom -r react-double-scrollbar -r react-helmet -r react-hyperscript-helpers -r react-responsive -r react-search-input -r semantic-ui-react -r superagent  | uglifyjs --mangle --reserved '1-click-bom,1-click-bom-minimal,@babel/polyfill,browser-version,create-react-class,github-url-to-object,html-to-react,immutable,js-yaml,lodash.camelcase,marky-markdown,pcb-stackup,react,react-dom,react-double-scrollbar,react-helmet,react-hyperscript-helpers,react-markdown,react-responsive,react-router,react-search-input,redux,redux-immutable,semantic-ui-react,superagent,whats-that-gerber,xml-element-string'                     --compress 'sequences=true,properties=true,dead_code=true,drop_debugger=true,unsafe=false,conditionals=true,comparisons=true,evaluate=true,booleans=true,loops=true,unused=false,hoist_funs=true,hoist_vars=false,if_return=true,join_vars=true,cascade=true,side_effects=true,warnings=true' > build/vendor.js
+[5/5109] cp src/images/aisler.png build/images/aisler.png
+[6/5109] cp src/images/Digikey-grey.ico build/images/Digikey-grey.ico
+[7/5109] cp src/images/Digikey.ico build/images/Digikey.ico
+[8/5109] cp src/images/Farnell-grey.ico build/images/Farnell-grey.ico
+[9/5109] cp src/images/Farnell.ico build/images/Farnell.ico
+[10/5109] cp src/images/favicon.png build/images/favicon.png
+[11/5109] cp src/images/fireworks.png build/images/fireworks.png
+[12/5109] cp src/images/fontello.eot build/images/fontello.eot
+[13/5109] cp src/images/fontello.ttf build/images/fontello.ttf
+[14/5109] cp src/images/fontello.woff build/images/fontello.woff
+[15/5109] cp src/images/fontello.woff2 build/images/fontello.woff2
+[16/5109] cp src/images/LCSC.ico build/images/LCSC.ico
+[17/5109] cp src/images/logo_meta.png build/images/logo_meta.png
+[18/5109] cp src/images/logo.png build/images/logo.png
+[19/5109] cp src/images/logo.svg build/images/logo.svg
+[20/5109] cp src/images/mag_icon.svg build/images/mag_icon.svg
+[21/5109] cp src/images/Mouser-grey.ico build/images/Mouser-grey.ico
+[22/5109] cp src/images/Mouser.ico build/images/Mouser.ico
+[23/5109] cp src/images/Newark-grey.ico build/images/Newark-grey.ico
