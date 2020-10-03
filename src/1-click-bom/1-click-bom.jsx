@@ -20,8 +20,7 @@ function BomBuilder(props) {
           you on sites like Digikey and Mouser. It lets you simply click on the
           "buy parts" links on Kitspace to get the right parts. You can also use
           it directly with your own spreadsheets or with our{' '}
-          <a href="/bom-builder">BOM Builder</a>
-          tool.
+          <a href="/bom-builder">BOM Builder</a> tool.
         </p>
         <p>
           <a href="https://github.com/kitspace/1clickBOM#readme">
