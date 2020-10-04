@@ -6,9 +6,5 @@
   {
     "repo": "https://github.com/GlasgowEmbedded/glasgow",
     "hash": "d7e5a870dab4f527bc41b01ac16fb4b118d997cd"
-  },
-  {
-    "repo": "https://github.com/nerdyscout/NodeMCU",
-    "hash": "d13256dda2496a6f1eca573888859d6b21cd9416"
   }
 ]
