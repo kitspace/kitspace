@@ -33,8 +33,8 @@ exports.parseProjects = (config, cached_build) => {
         )
         .map(p => repoToFolder(p.repo))
     }
-    if (fs.existsSync('build/.temp/boards.json')) {
-      boards = JSON.parse(fs.readFileSync('build/.temp/boards.json').toString())
+    if (fs.existsSync('previous-boards.json')) {
+      boards = JSON.parse(fs.readFileSync('previous-boards.json').toString())
     }
     // remove any boards that are being updated
     boards = boards.filter(x => {
