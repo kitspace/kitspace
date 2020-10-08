@@ -26,4 +26,4 @@ cache:
     # needed to cache folder with Cypress binary
     - ~/.cache
 env:
-  - CACHED_BUILD=false
+  - CACHED_BUILD=cached
