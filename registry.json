@@ -1,6 +1,370 @@
 [
   {
+    "repo": "https://github.com/kammce/SJTwo",
+    "hash": "71c0454bd80e321cb968c9908375ef504d213592"
+  },
+  {
+    "repo": "https://github.com/mattvenn/esp8266-breakout",
+    "hash": "fcb3107c66670035c7cb330f5d98eddde5d17f56"
+  },
+  {
+    "repo": "https://github.com/kitspace-forks/arduino-uno",
+    "hash": "5f10c3e4d9709344153aecf65faaef492ddcb0d1"
+  },
+  {
+    "repo": "https://github.com/kitspace-forks/Bus_Pirate",
+    "hash": "0ca376a0eedd116e3ffdbd5dfd5398a67fdba708"
+  },
+  {
+    "repo": "https://github.com/kitspace-forks/HACK",
+    "hash": "9ce81027df5e860ee78c101ade40bf73724c5ed6"
+  },
+  {
+    "repo": "https://github.com/kitspace-forks/FM_Transmitter",
+    "hash": "c5bc25967eca4a79c5fe849e97a7f9eaf18b5622"
+  },
+  {
+    "repo": "https://github.com/kasbah/nomech",
+    "hash": "6f17ad72a2e060d6e49be8ad1857586f29aa95b9"
+  },
+  {
+    "repo": "https://github.com/kasbah/push-on-hold-off",
+    "hash": "1767c8a49f24ec5edccf65e79b7f442e7b6e34ef"
+  },
+  {
+    "repo": "https://github.com/kitspace-forks/BQ25570_Harvester",
+    "hash": "c75ab856e683456c96bf3afe9a2a942815c94b77"
+  },
+  {
+    "repo": "https://github.com/JarrettR/USBvil",
+    "hash": "3832f59edf0a5128e121c289e2159ea012fcb84a"
+  },
+  {
+    "repo": "https://github.com/8BitMixtape/NextLevelEdition",
+    "hash": "20b07cdba27d0a22534fc177c74ff1fb37b55839"
+  },
+  {
+    "repo": "https://github.com/dvdfreitag/Signal-Detector",
+    "hash": "6978ba247948e1a5631f9671909d77d109ff48ec"
+  },
+  {
     "repo": "https://github.com/robotsrulz/SP_Adapter",
     "hash": "0391e520c2f1e953f703b467ebe6b8022971771"
+  },
+  {
+    "repo": "https://github.com/pcbsz/SimpleAmp",
+    "hash": "191814ff027424dacb2dcb6338dcb106aabb6e34"
+  },
+  {
+    "repo": "https://github.com/pcbsz/AtariSynth",
+    "hash": "01f1a8f3757f1df6ac006d43ca73025f4823716d"
+  },
+  {
+    "repo": "https://git.defproc.co.uk/DefProc/piezo-sensor",
+    "hash": "1ef4e9e30e43871aa7bf8f66e8445466eba78b1f"
+  },
+  {
+    "repo": "https://github.com/pcbsz/LM386",
+    "hash": "4357cd14d514eb6f87ac8fccb7892a4360037be4"
+  },
+  {
+    "repo": "https://github.com/kanflo/aaduino",
+    "hash": "c15edf9b93594ae34dc815a2a9521514c13dbef7"
+  },
+  {
+    "repo": "https://github.com/descampsa/DynamixelShield",
+    "hash": "db88b0d38da6d8e0d6a9795e888b87b78f5a5d1c"
+  },
+  {
+    "repo": "https://github.com/jpralves/cseduino",
+    "hash": "fdd4f17f623e047a3bd46c20e6cd8c0b9608c42f"
+  },
+  {
+    "repo": "https://github.com/kitspace-forks/neo",
+    "hash": "52cbbc640340f5f7e78ae13aefcf514cef4361be"
+  },
+  {
+    "repo": "https://github.com/InaneCoding/KOS01_IdealDiode20A",
+    "hash": "61fcdd7f007040bcf7b4e579f6e848b230cee084"
+  },
+  {
+    "repo": "https://github.com/UDXS/Arduitsy",
+    "hash": "fb8981733111a1eb9f0db3147ae2c8de593514c5"
+  },
+  {
+    "repo": "https://github.com/kitspace/jelly",
+    "hash": "1aa64547af16ef68da820e9623b1f314b949547e"
+  },
+  {
+    "repo": "https://github.com/GenericLab/Unagi_Gar-Lampli",
+    "hash": "d40ac086af9021f6abc0d81ac374c98b3f5182fb"
+  },
+  {
+    "repo": "https://github.com/kimitobo/Neocococat",
+    "hash": "460fb2ac79f51f2a66dc11689ca4044c34d56092"
+  },
+  {
+    "repo": "https://github.com/RoboticsBrno/RB3200-ESP32universal/",
+    "hash": "7933202eb494bd7cb640ea98742f5b0b6ce26423"
+  },
+  {
+    "repo": "https://github.com/intajay/uduino",
+    "hash": "55c8181bf2ff85a45e2c933ac0646b90b139702a"
+  },
+  {
+    "repo": "https://github.com/8BitMixtape/8BitmixtapeNEO_ShenzhenReady",
+    "hash": "d8f86818c2ad3206abc9b7a0ed26dfdf672dba10"
+  },
+  {
+    "repo": "https://github.com/julbouln/ice40_eink_controller",
+    "hash": "ecfc12dac7919a04ee528727886e8ef9fcbb0386"
+  },
+  {
+    "repo": "https://github.com/julbouln/ifusb",
+    "hash": "1b2a002bc89ac2553b43b002c6cbbf2151b77827"
+  },
+  {
+    "repo": "https://github.com/borgel/sympetrum-v2",
+    "hash": "adb39f72cde3bd12c6f9a885d8f3a2cded4c36ad"
+  },
+  {
+    "repo": "https://github.com/im-tomu/tomu-hardware",
+    "hash": "10878e4cca6baaf682bfb324b2a22bd5c8029819"
+  },
+  {
+    "repo": "https://github.com/dusjagr/PN001_Pop-Neuron_ShenzhenReady",
+    "hash": "f6a40c4c02fbdc4fcf91e77a625e151bae11c246"
+  },
+  {
+    "repo": "https://github.com/GaudiLabs/ChaosLooper",
+    "hash": "5b1a859bfba316f84977002121bb947b8e783e49"
+  },
+  {
+    "repo": "https://github.com/python-ugame/ugame-10-hardware",
+    "hash": "9bde264ba4399485b96ca13a2ded8def1d335441"
+  },
+  {
+    "repo": "https://github.com/sgmk/microNoise_SZ-Ready",
+    "hash": "d57ae9e03786baa077854e2538aa245539fa3ffa"
+  },
+  {
+    "repo": "https://github.com/sgmk/solarbird_shenzen_rdy",
+    "hash": "e1c3f277e13a9254b3a13044a41fdba479f72253"
+  },
+  {
+    "repo": "https://github.com/kasbah/maulwurf",
+    "hash": "aba4cbbbef4d3119ae83b0aca11c71f461cbad5c"
+  },
+  {
+    "repo": "https://github.com/squaresolid/tiger_biosynth",
+    "hash": "0b910738e1b78b1ab203976e4f6987f93aba8c87"
+  },
+  {
+    "repo": "https://github.com/squaresolid/fish-caller",
+    "hash": "2f7032d60203318c89b73411017fc5e61af30904"
+  },
+  {
+    "repo": "https://github.com/jasiek/antenna-analyser",
+    "hash": "f4652411ae4deebd3e55c1f170af1530d204d90e"
+  },
+  {
+    "repo": "https://github.com/amchagas/Flypi",
+    "hash": "bc499344746500dacdded820ce6d12cf06998cdd"
+  },
+  {
+    "repo": "https://github.com/less-smog/hardware",
+    "hash": "5de76d0082d70de41122f2993c4643c48ca0db0c"
+  },
+  {
+    "repo": "https://github.com/8BitMixtape/8BitmixtapeNEO_BerlinerSchule_SZ-RDY",
+    "hash": "70e8bc8c06d59dbef582eeb5e8f797dfcd0f90bd"
+  },
+  {
+    "repo": "https://github.com/emard/ulx3s",
+    "hash": "616b723b9e203e8879895beb0642e2f6bb1073fa"
+  },
+  {
+    "repo": "https://github.com/kitspace/ruler",
+    "hash": "c8c87e085a1c7104499768b69039fbe720ed2921"
+  },
+  {
+    "repo": "https://github.com/BadenLab/Spikeling",
+    "hash": "c5a1a8325c5809c2649053fb805d00168098094e"
+  },
+  {
+    "repo": "https://github.com/rwb27/openflexure_nano_motor_controller",
+    "hash": "18a19977dde0cd78f14154c41073a857e2332e54"
+  },
+  {
+    "repo": "https://github.com/morgulbrut/LoRa32_Node",
+    "hash": "39d4bdac7fe4fa08bc62be12099fee765231813d"
+  },
+  {
+    "repo": "https://github.com/GenericLab/GOSH-Board_UGM/",
+    "hash": "bbd6fa9e8fded2dd820c5c36a7a48184f988c0df"
+  },
+  {
+    "repo": "https://github.com/dusjagr/ESPTINY86_Stompbox",
+    "hash": "7570272d165bc5b99edb48228117eb42bd3bb302"
+  },
+  {
+    "repo": "https://github.com/8BitMixtape/mCore_Mixtape",
+    "hash": "8b1215882c0205fdfd6ec60154b4d83bdecc2236"
+  },
+  {
+    "repo": "https://github.com/kasbah/corners",
+    "hash": "79adf8d0b616ccdc2046e6b2c53d06165a0c75c1"
+  },
+  {
+    "repo": "https://github.com/maltman23/ArduTouch",
+    "hash": "8175655315dead175b74787ea1a55a423f996573"
+  },
+  {
+    "repo": "https://gogs.zenerdio.de/sebastian/satnogs-diplexer",
+    "hash": "8208717b58c7efb025edc232feb786e8701e20c1"
+  },
+  {
+    "repo": "https://github.com/alpharesearch/ESP8266_DS18B20",
+    "hash": "286eac0c4eed8b09d638772a7c5acf853e715e4e"
+  },
+  {
+    "repo": "https://github.com/Jan--Henrik/CH330_Hardware",
+    "hash": "7a79f8372914275077f0afd97e32b04bd02032a6"
+  },
+  {
+    "repo": "https://github.com/8BitMixtape/ESPTINY86_MixtapePCB",
+    "hash": "5cc07a4e75615d2ac462850c15b1cc831ba609fc"
+  },
+  {
+    "repo": "https://github.com/ollyoid/ShenzhenPostcard",
+    "hash": "7ef3e024ff9f87989491587d15e735ad1fc36ec7"
+  },
+  {
+    "repo": "https://gitlab.com/erigas/gnukey",
+    "hash": "e6b53b9cc1a4dc2e3705ff681c2cea42611e38d9"
+  },
+  {
+    "repo": "https://gitlab.com/alexander.kutschera/singingplants",
+    "hash": "ba66568f821c450c2ed32c3572ae195dd361042d"
+  },
+  {
+    "repo": "https://gitlab.com/xengi/darling",
+    "hash": "f0509e23480bacb922878b92ba83ceec52c56c2a"
+  },
+  {
+    "repo": "https://github.com/Jan--Henrik/hoverboard-breakout",
+    "hash": "0771fb5fb3c7170d1aa8a67006e35e7d275a4c97"
+  },
+  {
+    "repo": "https://github.com/eulerlab/open-visual-stimulator",
+    "hash": "7d4e9abeb864383bf5d6ac8c8f571c0682f35e17"
+  },
+  {
+    "repo": "https://gitlab.com/bath_open_instrumentation_group/sangaboard",
+    "hash": "f7cd46b9b8f86bceef766d735eeae45814fdaa44"
+  },
+  {
+    "repo": "https://github.com/kb-consulting/pt101a",
+    "hash": "91d3dda4def1d24874b182407aaca5989a38824a"
+  },
+  {
+    "repo": "https://github.com/fossasia/pslab-hardware",
+    "hash": "84dc2b08f0df32772ac58f7f7f127f32161bda14"
+  },
+  {
+    "repo": "https://github.com/Jan--Henrik/OtterScreenAdapter",
+    "hash": "54df46df179fa9d24d8d11d9b58393dc1223f01f"
+  },
+  {
+    "repo": "https://github.com/arturo182/bbq10kbd_breakout",
+    "hash": "3c328f4e7f06f405dce756bdb918baf7dcc453e1"
+  },
+  {
+    "repo": "https://github.com/Jan--Henrik/OtterPill",
+    "hash": "c033e82f45b81fecea1fc791fa9b9601e81b530d"
+  },
+  {
+    "repo": "https://github.com/carrotIndustries/pluto",
+    "hash": "3f25b12a9d1c7eb931cf74858881f92337a70776"
+  },
+  {
+    "repo": "https://github.com/ollyoid/TuneShroom",
+    "hash": "e427f740520a45baf1a6512793d73a0380f83e4d"
+  },
+  {
+    "repo": "https://github.com/sci-bots/teensy-3.2-clone.kicad",
+    "hash": "1c30c12b9032a361e0fc6df5e3f28426a2bfa930"
+  },
+  {
+    "repo": "https://github.com/eez-open/modular-psu",
+    "hash": "f68850055c1bf03bc252e7e8759d6430998145a3"
+  },
+  {
+    "repo": "https://github.com/Jan--Henrik/USB-LED-Otter",
+    "hash": "69a556e363dded3b96d79bd564bedf71d41ad129"
+  },
+  {
+    "repo": "https://github.com/Jan--Henrik/Otter-Iron",
+    "hash": "974dfcd1b28fe5cff8f7c0202190f6cdd128852a"
+  },
+  {
+    "repo": "https://github.com/Sussex-Neuroscience/voltage-amplifier",
+    "hash": "e8aa30762d97eefb251e771d3c61f1b8fc52f2da"
+  },
+  {
+    "repo": "https://github.com/ozel/DIY_particle_detector",
+    "hash": "90c180207c5cd1f046aafa8c136f81ef37fb75d9"
+  },
+  {
+    "repo": "https://github.com/free-pdk/easy-pdk-programmer-hardware",
+    "hash": "26745b03a3ee575324e0f124db433ff1ed3c9ea4"
+  },
+  {
+    "repo": "https://github.com/mattvenn/teensy-audio-fx",
+    "hash": "107ee3b82b307ba1a4f112c25a73f3614ff6fd7f"
+  },
+  {
+    "repo": "https://github.com/LincolnUehara/Aquarius",
+    "hash": "0cf1a5438f00b51e099b0173a9eedeaed0154f46"
+  },
+  {
+    "repo": "https://github.com/amchagas/fast-response-diode",
+    "hash": "9bbb6577a0c31b99fa1c232b3678be9f26c8aa7e"
+  },
+  {
+    "repo": "https://gitlab.com/openflexure/ofm-illumination",
+    "hash": "ada6bb29144582c14c7bdc2e4341c7c20696ed68"
+  },
+  {
+    "repo": "https://github.com/nerdyscout/NodeMCU",
+    "hash": "fe573c7ae0aefc1df434e01902963f209a5b8db3"
+  },
+  {
+    "repo": "https://github.com/aleksas/interferometer",
+    "hash": "96d6bdf3fd9d38a97e719cc063b176a612747b8f"
+  },
+  {
+    "repo": "https://github.com/GlasgowEmbedded/glasgow",
+    "hash": "696b94ac66bf3803335bb63423dce5beede8d4b2"
+  },
+  {
+    "repo": "https://github.com/pyr0ball/pyr0piezo",
+    "hash": "202a1f750cf69350f7d796fec1f5f4306abe110d"
+  },
+  {
+    "repo": "https://github.com/jasiek/ESP8266-PowerMonitor",
+    "hash": "0abebfba2d5d519d51189c7fd0d975552a2148b7"
+  },
+  {
+    "repo": "https://github.com/Ryzee119/OpenXenium",
+    "hash": "edd7c9ade50a392cbaef5bc166de49ed25856041"
+  },
+  {
+    "repo": "https://github.com/Neotron-Compute/Neotron-32-Hardware",
+    "hash": "0d11ffb87ae06d20506d9d51f98c0f56984d64a0"
+  },
+  {
+    "repo": "https://github.com/joeycastillo/The-Open-Book",
+    "hash": "e0f4bde7badb082745948edfa37242ee2e08c03a"
   }
-  ]
+]
