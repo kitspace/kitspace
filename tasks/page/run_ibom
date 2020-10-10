@@ -4,6 +4,7 @@ import json
 import sys
 import os
 import os.path
+import tempfile
 import wx
 import pcbnew
 
@@ -29,7 +30,11 @@ ibom.log = logger
 board = None
 ext = os.path.splitext(board_file)[1]
 if ext == '.brd':
-    board = pcbnew.LoadBoard(board_file, pcbnew.IO_MGR.EAGLE)
+    tmp_board = pcbnew.LoadBoard(board_file, pcbnew.IO_MGR.EAGLE)
+    with tempfile.TemporaryDirectory() as tmpdir:
+        tmp_board_file = os.path.join(tmpdir, 'eagle_import.kicad_pcb')
+        pcbnew.SaveBoard(tmp_board_file, tmp_board)
+        board = pcbnew.LoadBoard(tmp_board_file)
 
 app = wx.App()
 
