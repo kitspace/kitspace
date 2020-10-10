@@ -9,15 +9,23 @@ function Newsletter() {
       <semantic.Container style={{marginTop: 50}}>
         <p>
           Often people say to us: "Wow that's a nice printed circuit board. I
-          would like to subscribe to your newsletter." Now you can! Let us know
-          what would like to hear about exactly. Don't worry, it's easy to
-          unsubscribe if you change your mind later. If you just want to get in
-          touch email <a href="mailto:info@kitspace.org">info@kitspace.org</a>{' '}
-          instead.
+          would like to subscribe to your newsletter." Now you can! If you're
+          curious, you can read the latest edition first:{' '}
+          <a href="https://buttondown.email/kitspace/archive/kitspace-newsletter-1-assembling-projects/">
+            #1: Kitspace Newsletter #1: Assembling Projects.
+          </a>{' '}
+        </p>
+        <p>
+          Subscribe below, don't worry, it's easy to unsubscribe if you change
+          your mind later. If you prefer, you can also{' '}
+          <a href="https://buttondown.email/kitspace/rss">subscribe via RSS</a>.{' '}
+          If you just want to get in touch email{' '}
+          <a href="mailto:info@kitspace.org">info@kitspace.org</a> instead.
         </p>
         <semantic.Form
           name="newsletter"
           method="POST"
+          action="POST"
           data-netlify="true"
           style={{padding: 15}}
         >
@@ -38,40 +46,7 @@ function Newsletter() {
               <input name="bot-field" />
             </label>
           </div>
-          <semantic.Form.Group grouped>
-            <label>Interested in:</label>
-            <semantic.Form.Field
-              label="Updates about Kitspace itself"
-              name="updates"
-              control="input"
-              type="checkbox"
-              defaultChecked
-            />
-            <semantic.Form.Field
-              label="New projects added"
-              name="new_projects"
-              control="input"
-              type="checkbox"
-              defaultChecked
-            />
-            <semantic.Form.Field
-              label="Articles and tutorials"
-              name="articles"
-              control="input"
-              type="checkbox"
-              defaultChecked
-            />
-          </semantic.Form.Group>
-          <semantic.Form.Field inline size="tiny">
-            <label htmlFor="anything_else">Anything else: </label>
-            <input
-              style={{height: 13}}
-              type="text"
-              name="anything_else"
-              id="anything_else"
-            />
-          </semantic.Form.Field>
-          <semantic.Button primary type="submit" style={{marginTop: 30}}>
+          <semantic.Button primary type="submit">
             Subscribe
           </semantic.Button>
         </semantic.Form>

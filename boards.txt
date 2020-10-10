@@ -90,3 +90,7 @@ https://github.com/jasiek/ESP8266-PowerMonitor
 https://github.com/Ryzee119/OpenXenium
 https://github.com/Neotron-Compute/Neotron-32-Hardware
 https://github.com/joeycastillo/The-Open-Book
+https://github.com/BadenLab/LED-Zappelin
+https://github.com/BadenLab/Openspritzer
+https://github.com/Sussex-Neuroscience/pmt-combiner
+https://github.com/Chromico/linux-penguin-PCB-badge

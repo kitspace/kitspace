@@ -8,6 +8,9 @@ addons:
     packages:
       - inkscape
       - kicad
+      - xvfb
+services:
+  - xvfb
 script:
   - bash keep_alive.sh &
   - export NODE_ENV=production

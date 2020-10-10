@@ -1,0 +1,2 @@
+github.com/kimitobo/Neocococat
+github.com/Chromico/linux-penguin-PCB-badge

@@ -1,16 +1,17 @@
 const React = require('react')
 const createClass = require('create-react-class')
+const semantic = require('semantic-ui-react')
 const {Helmet} = require('react-helmet')
 
 const BoardShowcase = require('./board_showcase')
 const OrderPcbs = require('./order_pcbs')
 const InfoBar = require('./info_bar')
+const BoardExtrasMenu = require('./board_extras_menu')
 
 const TitleBar = require('../title_bar')
 const FadeImage = require('../fade_image')
 const BuyParts = require('../buy_parts/buy_parts')
 const Readme = require('../readme')
-const semantic = require('semantic-ui-react')
 
 const info = require('../info.json')
 const description =
@@ -56,10 +57,14 @@ const Page = createClass({
           <div className="pageContainer">
             <img style={{display: 'none'}} src="/images/flags.png" />
             <InfoBar info={info} />
-            <BoardShowcase zipUrl={zipUrl}>
+            <BoardShowcase zipUrl={zipUrl} folder={folder}>
               <FadeImage src="images/top.svg" />
               <FadeImage src="images/bottom.svg" />
             </BoardShowcase>
+            <BoardExtrasMenu
+              hasInteractiveBom={info.has_interactive_bom}
+              zipUrl={zipUrl}
+            />
             <OrderPcbs />
             <BuyParts lines={info.bom.lines} parts={info.bom.parts} />
             <div className="readme-container">

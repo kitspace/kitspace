@@ -1,0 +1,49 @@
+#!/usr/bin/env python
+
+import json
+import sys
+import os
+import os.path
+import wx
+
+from InteractiveHtmlBom.InteractiveHtmlBom.core import ibom
+from InteractiveHtmlBom.InteractiveHtmlBom.core.config import Config
+from InteractiveHtmlBom.InteractiveHtmlBom.ecad import get_parser_by_extension
+from InteractiveHtmlBom.InteractiveHtmlBom.version import version
+
+
+kicad_file = os.path.abspath(sys.argv[1])
+info_file = os.path.abspath(sys.argv[2])
+out_file = os.path.abspath(sys.argv[3])
+
+BASEDIR = os.path.dirname(sys.argv[0])
+IBOM_CONFIG = os.path.join(BASEDIR, 'ibom_config/config.ini')
+
+os.chdir(os.path.dirname(kicad_file))
+
+logger = ibom.Logger(cli=True)
+ibom.log = logger
+
+app = wx.App()
+
+config = Config(version)
+config.config_file = IBOM_CONFIG
+config.load_from_ini()
+
+parser = get_parser_by_extension(kicad_file, config, logger)
+
+pcbdata, components = parser.parse()
+if not pcbdata or not components:
+    logger.error('Parsing failed.')
+    sys.exit(1)
+
+pcbdata['bom'] = ibom.generate_bom(components, config, None)
+pcbdata['ibom_version'] = config.version
+
+with open(info_file) as ifp:
+    info = json.load(ifp)
+    pcbdata['summary'] = info['summary']
+    pcbdata['metadata']['title'] = info['id'].split('/')[-1]
+
+with open(out_file, 'w') as fp:
+    json.dump(pcbdata, fp)

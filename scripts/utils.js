@@ -29,16 +29,16 @@ function readRepos() {
     .readFileSync('./boards.txt', {encoding: 'utf8'})
     .split('\n')
     .filter(l => l !== '')
-  repos.reduce(function (prev, repo) {
+  const prev = []
+  repos.forEach(repo => {
     const folder = repoToFolder(repo)
     if (prev.includes(folder)) {
       console.error(`duplicate folder output for boards.txt: ${folder}`)
       return process.exit(1)
     } else {
       prev.push(folder)
-      return prev
     }
-  }, [])
+  })
   return repos
 }
 

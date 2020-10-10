@@ -6,7 +6,8 @@ function TitleBar(props) {
   const isProjectRoute =
     isSubmitRoute ||
     props.route === '/' ||
-    RegExp('^/boards/').test(props.route)
+    RegExp('^/boards/').test(props.route) ||
+    RegExp('^/interactive_bom').test(props.route)
   return (
     <div className="titleBar">
       <div className="bigSiteMenu">
@@ -124,6 +125,12 @@ function ContactMenu(props) {
         <semantic.Menu.Item className="contact-button">
           <semantic.Button labelPosition="right" icon color="blue">
             <semantic.Icon inverted name="comments" />
+            {/* just here to force the loading of
+                brand-icons before the menu is visible */}
+            <semantic.Icon
+              name="twitter"
+              style={{visibility: 'hidden', width: '0px', height: '0px'}}
+            />
             Make contact
           </semantic.Button>
         </semantic.Menu.Item>

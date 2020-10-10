@@ -4,7 +4,7 @@
 /boards/github.com/monostable/* /boards/github.com/kitspace/:splat
 /boards/github.com/ozel/diy_particle_detector/diy%20alpha%20spectrometer /boards/github.com/ozel/diy_particle_detector/alpha-spectrometer
 /boards/github.com/ozel/diy_particle_detector/diy%20electron%20detector /boards/github.com/ozel/diy_particle_detector/electron-detector
-/meetup /making-products-meetup/ 302
 /oshcamp2016 https://monostable.co.uk/presentations/oshcamp2016-kitnic
 /fosdem2017 https://monostable.co.uk/presentations/fosdem2017-kitnic
 /boards/gitlab.com/bath_open_instrumentation_group/sangaboard/ /boards/gitlab.com/bath_open_instrumentation_group/sangaboard/sangaboard_v0.3/
+/boards/github.com/joeycastillo/the-open-book/ /boards/github.com/joeycastillo/the-open-book/ebook-wing/

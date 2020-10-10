@@ -1,6 +1,15 @@
 @import '../common';
 @import '../colors';
 
+.boardshowcase-with-menu {
+  display: flex;
+  flex-direction: column;
+}
+
+.boardShowcaseContainer {
+  flex-grow: 1;
+}
+
 @include breakpoint(small_width) {
   .boardContainer {
     border: 5px solid $dove-gray;
@@ -32,12 +41,9 @@
     display: none;
   }
 }
-.traceSpaceLink{
+.traceSpaceLink {
   background-color: #000;
   font-weight: normal;
-}
-.boardShowcase:hover {
-  box-shadow: 0 0.1em 0.5em $azure-radiance;
 }
 
 .boardShowcase {
@@ -122,43 +128,25 @@
   z-index: 1;
 }
 
-#traceSpaceLogo{
+#traceSpaceLogo {
   fill: #30c2c2;
   z-index: 2;
   height: 10;
   width: 10;
 }
 
-.overlay{
-  color: #FFF;
+.overlay {
+  color: #fff;
   position: absolute;
   height: 100%;
   width: 100%;
   opacity: 0;
 }
 
-.shadow{
+.shadow {
   background: #000;
   position: absolute;
   height: 100%;
   width: 100%;
   opacity: 0;
-}
-
-.overlay p{
-  font-size: 30px;
-  width: 100%;
-  text-align: right;
-  position: absolute;
-  bottom: 0px;
-  right: 10px;
-  pointer-events: none;
-}
-
-.overlay:hover{
-  opacity: 1;
-}
-
-.shadow:hover{
-  opacity: 0.3;
 }
