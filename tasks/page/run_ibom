@@ -4,6 +4,7 @@ import json
 import sys
 import os
 import os.path
+import shutil
 import tempfile
 import wx
 import pcbnew
@@ -31,10 +32,11 @@ board = None
 ext = os.path.splitext(board_file)[1]
 if ext == '.brd':
     tmp_board = pcbnew.LoadBoard(board_file, pcbnew.IO_MGR.EAGLE)
-    with tempfile.TemporaryDirectory() as tmpdir:
-        tmp_board_file = os.path.join(tmpdir, 'eagle_import.kicad_pcb')
-        pcbnew.SaveBoard(tmp_board_file, tmp_board)
-        board = pcbnew.LoadBoard(tmp_board_file)
+    tmpdir = tempfile.mkdtemp()
+    tmpfile = os.path.join(tmpdir, 'import_{}.kicad_pcb'.format(os.getpid()))
+    pcbnew.SaveBoard(tmpfile, tmp_board)
+    board = pcbnew.LoadBoard(tmpfile)
+    shutil.rmtree(tmpdir, ignore_errors=True)
 
 app = wx.App()
 
