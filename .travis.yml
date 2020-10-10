@@ -14,7 +14,7 @@ script:
   - ./scripts/plug_versions
   - ./scripts/get_boards production $CACHED_BUILD
   - if  [ "${CACHED_BUILD}" == "cached" ]; then echo "cached build" && mv build/.temp/boards.json previous-boards.json; fi
-  - cat previous-boards.json
+  - - if test -f previous-boards.json; then cat previous-boards.json; fi
   - ./configure production $CACHED_BUILD
   - wget https://github.com/ninja-build/ninja/releases/download/v1.6.0/ninja-linux.zip
   - unzip ninja-linux.zip
