@@ -12,7 +12,7 @@ if (require.main !== module) {
     return {deps, targets, moduleDep}
   }
 } else {
-  const {config, cached_build, deps, targets} = utils.processArgs(process.argv)
+  const {config, cached_build, targets} = utils.processArgs(process.argv)
 
   const boards = parseProjects(config, cached_build)
 
