@@ -9,7 +9,7 @@ describe('Smoke Test', () => {
     cy.get('div.boardList').as('boardList')
     cy.scrollTo('bottom')
 
-    cy.get('@boardList').should('have.length.above', 100)
+    cy.get('@boardList').should('have.length.above', 0)
   })
 
   it('assert the number of boards equal boards in `boards.json`', () => {
@@ -17,6 +17,7 @@ describe('Smoke Test', () => {
 
     cy.readFile(boardsPath).then(
       boards => {
+        assert(boards.length > 100)
         cy.get('@boardList').children().should('have.length', boards.length)
       })
   })
