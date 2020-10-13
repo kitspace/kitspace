@@ -18,7 +18,7 @@ exports.parseProjects = (config, cached_build) => {
 
   let boards = []
 
-  if (cached_build) {
+  if (cached_build && fs.existsSync('previous-boards.json')) {
     let new_folders = []
     if (fs.existsSync('build/registry.json')) {
       const cached_registry = JSON.parse(
@@ -33,9 +33,7 @@ exports.parseProjects = (config, cached_build) => {
         )
         .map(p => repoToFolder(p.repo))
     }
-    if (fs.existsSync('build/.temp/boards.json')) {
-      boards = JSON.parse(fs.readFileSync('build/.temp/boards.json').toString())
-    }
+    boards = JSON.parse(fs.readFileSync('previous-boards.json').toString())
     // remove any boards that are being updated
     boards = boards.filter(x => {
       return !new_folders.find(
