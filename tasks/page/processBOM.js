@@ -1,5 +1,4 @@
 const fs = require('fs')
-const globule = require('globule')
 const path = require('path')
 const yaml = require('js-yaml')
 const oneClickBOM = require('1-click-bom')
@@ -22,17 +21,20 @@ if (require.main !== module) {
     } else {
       bom = path.join(boardInfo.boardPath, '1-click-bom.tsv')
     }
-    let kicadPcbFile
+    let pcbFile
     if (
       boardInfo.eda &&
-      boardInfo.eda.type === 'kicad' &&
+      (boardInfo.eda.type === 'kicad' || boardInfo.eda.type === 'eagle') &&
       boardInfo.eda.pcb != null
     ) {
-      kicadPcbFile = path.join(boardInfo.repoPath, boardInfo.eda.pcb)
+      pcbFile = path.join(boardInfo.repoPath, boardInfo.eda.pcb)
     } else if (boardInfo.eda == null) {
-      const kicadPcbPattern = path.join(boardInfo.boardPath, '**/*.kicad_pcb')
-      kicadPcbFile = globule.find(kicadPcbPattern)[0]
+      pcbFile = utils.findBoardFile(boardInfo.boardPath, 'kicad_pcb')
     }
+    if (pcbFile == null) {
+      pcbFile = utils.findBoardFile(boardInfo.boardPath, 'brd', utils.checkEagleFile)
+    }
+
     let deps = [
       'build/.temp/boards.json',
       boardInfo.repoPath,
@@ -40,8 +42,8 @@ if (require.main !== module) {
       boardInfo.yamlPath,
       omitIBOMFile
     ]
-    if (kicadPcbFile != null) {
-      deps.push(kicadPcbFile)
+    if (pcbFile != null) {
+      deps.push(pcbFile)
     }
     const targets = [
       `build/.temp/${boardInfo.boardPath}/info.json`,
@@ -112,7 +114,8 @@ if (require.main !== module) {
 
   const repoName = repoPath.split('/').slice(1).join('/')
   const omit = omitIBOMBoards.includes(info.id)
-  info.has_interactive_bom = !omit && deps.some((d) => d.endsWith('.kicad_pcb'))
+  info.has_interactive_bom =
+    !omit && deps.some((d) => d.endsWith('.kicad_pcb') || d.endsWith('.brd'))
 
   getPartinfo(info.bom.lines).then(parts => {
     info.bom.parts = parts
