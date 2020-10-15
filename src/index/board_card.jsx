@@ -22,6 +22,8 @@ function truncate(input, len, fromStart) {
 
 const BoardCard = createClass({
   render: function() {
+    const id = this.props.data.id
+    const path = id.toLowerCase()
     let image
     if (this.props.lazyLoad) {
       image = (
@@ -35,16 +37,14 @@ const BoardCard = createClass({
               if (matches) {
                 return (
                   <FadeImage
-                    src={
-                      'boards/' + this.props.data.id + '/images/top-large.png'
-                    }
+                    src={'boards/' + path + '/images/top-large.png'}
                     className="img"
                   />
                 )
               } else {
                 return (
                   <FadeImage
-                    src={'boards/' + this.props.data.id + '/images/top.png'}
+                    src={'boards/' + path + '/images/top.png'}
                     className="img"
                   />
                 )
@@ -54,25 +54,20 @@ const BoardCard = createClass({
         </LazyLoad>
       )
     } else {
-      image = (
-        <img
-          src={'boards/' + this.props.data.id + '/images/top.svg'}
-          className="img"
-        />
-      )
+      image = <img src={'boards/' + path + '/images/top.svg'} className="img" />
     }
     return (
       <div className="boardCard">
-        <a href={'/boards/' + this.props.data.id}>
+        <a href={'/boards/' + path + '/'}>
           <div className="imgContainer">{image}</div>
           <div className="title">
-            {this.props.data.id
+            {id
               .split('/')
               .slice(-1)
               .join(' / ')}
           </div>
           <div className="url">
-            {this.props.data.id
+            {id
               .split('/')
               .slice(0, 2)
               .join(' / ')}
