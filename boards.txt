@@ -94,3 +94,4 @@ https://github.com/BadenLab/LED-Zappelin
 https://github.com/BadenLab/Openspritzer
 https://github.com/Sussex-Neuroscience/pmt-combiner
 https://github.com/Chromico/linux-penguin-PCB-badge
+https://gitlab.com/openflexure/openflexure-simple-illumination
