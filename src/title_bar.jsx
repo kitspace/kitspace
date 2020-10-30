@@ -84,6 +84,9 @@ function SiteMenuItems(props) {
       >
         {'1-click BOM'}
       </semantic.Menu.Item>
+      <semantic.Menu.Item as="a" href="https://shop.kitspace.org">
+        {'Shop'}
+      </semantic.Menu.Item>
     </>
   )
 }
