@@ -65,6 +65,30 @@ const Page = createClass({
               hasInteractiveBom={info.has_interactive_bom}
               zipUrl={zipUrl}
             />
+            {/ozel\/diy_particle_detector/.test(info.id) && (
+              <semantic.Button
+                style={{width: '100%', marginTop: 20}}
+                size="huge"
+                basic
+                color="blue"
+                as="a"
+                href="https://shop.kitspace.org/buy/electron-detector/"
+              >
+                <span
+                  style={{
+                    width: '100%',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    marginBottom: 10
+                  }}
+                >
+                  <semantic.Image src="/images/electron_thumbnail.jpeg" />
+                </span>
+                {/electron-detector/.test(info.id)
+                  ? 'Order a Ready-to-Build Kit'
+                  : 'Order a Ready-to-Build Kit of the Electron Detector Variant'}
+              </semantic.Button>
+            )}
             <OrderPcbs />
             <BuyParts lines={info.bom.lines} parts={info.bom.parts} />
             <div className="readme-container">
