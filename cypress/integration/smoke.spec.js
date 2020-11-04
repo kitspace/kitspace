@@ -17,8 +17,8 @@ describe('Smoke Test', () => {
 
     cy.readFile(boardsPath).then(boards => {
       assert(
-        boards.length >= 113,
-        `not enough boards in boards.json, expecting at least 113 got ${boards.length}`
+        boards.length >= 114,
+        `not enough boards in boards.json, expecting at least 114 got ${boards.length}`
       )
       cy.get('@boardList')
         .children()
