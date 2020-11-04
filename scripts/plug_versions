@@ -6,14 +6,16 @@ const repos = utils.readRepos()
 const registry = JSON.parse(fs.readFileSync('registry.json', 'utf8'))
 
 Promise.all(
-  repos.map(async repo => {
-    const existing = registry.find(({repo: r}) => r === repo)
-    if (existing != null) {
-      return existing
-    }
-    const hash = await utils.getVersion(repo)
-    return {repo, hash}
-  })
+  repos.map(
+    (async repo => {
+      const existing = registry.find(({repo: r}) => r === repo)
+      if (existing != null) {
+        return existing
+      }
+      const hash = await utils.getVersion(repo)
+      return {repo, hash}
+    }).catch(e => console.error(e))
+  )
 )
   .then(repos => {
     fs.writeFileSync('registry.json', JSON.stringify(repos, null, 2))
