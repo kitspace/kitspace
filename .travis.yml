@@ -24,7 +24,7 @@ script:
   - if  [ "${CACHED_BUILD}" != "cached" ]; then ./ninja clean; fi
   - ./ninja -j 2 && cp registry.json build/
   - echo "$(cat build/.temp/boards.json)"
-  - yarn smoke-test && ./scripts/deploy
+  - if [ "${TRAVIS_PULL_REQUEST}" != "false" ]; then yarn smoke-test && ./scripts/deploy; fi
 cache:
   yarn: true
   directories:
