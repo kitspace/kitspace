@@ -2,19 +2,33 @@
 @import '../common';
 
 .PcbMenu {
+  display: flex;
   padding: 16px 0;
   margin-bottom: 20px;
-
-  .ui.borderless {
-    width: 100%;
-    border: 0px;
-    box-shadow: 0 0 0 0;
-  }
+  justify-content: space-between;
+  width: 100%;
+  flex-wrap: wrap;
 
   &__container {
     display: flex;
     justify-content: space-around;
     width: 100%;
+  }
+
+  &__link {
+    min-width: 140px;
+    margin: 10px;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    i.flag {
+      margin-left: 5px;
+    }
+    border-radius: 5px;
+  }
+
+  &__link:hover {
+    background: #f2f2f2;
   }
 
   &__sub-title {
@@ -25,24 +39,30 @@
   &__links-container {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
+    @media (max-width: 1475px) {
+      flex-direction: column;
+    }
   }
 
-  &__group {
-    flex: 0 1 33%;
-    width: 33%;
+  &__sub-title {
+    margin-top: 30px;
   }
 
   &__download {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: flex-start;
+    margin-top: 50px;
+    width: 270px;
+    font-weight: normal;
+    font-size: 12px;
+    a:hover {
+      text-decoration: none;
+    }
   }
 
   &__compare {
+    width: 270px;
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
   }
 
   i {
@@ -53,12 +73,7 @@
     min-width: 100px;
   }
 
-  //XXX if you change this change it in the .jsx too!
   @media (max-width: 920px) {
-    .ui.menu {
-      width: 100%;
-    }
-
     &__container {
       flex-direction: column;
       justify-content: center;
