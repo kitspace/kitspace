@@ -40,7 +40,7 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    @media (max-width: 1475px) {
+    @media (max-width: 1328px) {
       flex-direction: column;
     }
   }
@@ -51,16 +51,19 @@
 
   &__download {
     margin-top: 50px;
-    width: 270px;
-    font-weight: normal;
-    font-size: 12px;
+    width: 210px;
+    a {
+      font-family: Lato, "Helvetica Neue", Arial, Helvetica, sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+    }
     a:hover {
       text-decoration: none;
     }
   }
 
   &__compare {
-    width: 270px;
+    width: 210px;
     display: flex;
     flex-direction: column;
   }
