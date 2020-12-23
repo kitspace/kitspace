@@ -8,6 +8,7 @@ if (require.main !== module) {
     if (config === 'production') {
       deps = [
         'build/.temp/interactive_bom/interactive_bom.jsx',
+        'build/.temp/interactive_bom/IBOM.jsx',
         'src/interactive_bom/interactive_bom.html',
         'build/.temp/interactive_bom/IBOM.jsx',
       ]
