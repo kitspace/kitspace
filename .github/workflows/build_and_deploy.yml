@@ -1,0 +1,9 @@
+name: Build and deploy
+
+on: [push]
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
