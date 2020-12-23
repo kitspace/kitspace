@@ -1,0 +1,23 @@
+stages:
+  - build
+  - deploy
+
+build:
+  stage: build
+  image: ubuntu:18.04
+  before_script:
+    - apt-get update -qq && apt-get install -y software-properties-common curl
+    - add-apt-repository -y ppa:kicad/kicad-5.1-releases
+    - curl -sL https://deb.nodesource.com/setup_14.x -o nodesource_setup.sh
+    - bash nodesource_setup.sh
+    - curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+    - echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+    - apt-get update -qq
+    - apt-get install -qq -y kicad inkscape imagemagick nodejs yarn git ninja
+  script:
+    - export NODE_ENV=production
+    - ./scripts/plug_versions
+    - ./scripts/get_boards production false
+    - ./configure production false
+    - ./ninja -j 2 && cp registry.json build/
+    - yarn smoke-test
