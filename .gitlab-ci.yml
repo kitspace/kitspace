@@ -13,7 +13,7 @@ build:
     - curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
     - echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
     - apt-get update -qq
-    - apt-get install -qq -y kicad inkscape imagemagick nodejs yarn git ninja-build
+    - apt-get install -qq -y kicad inkscape imagemagick nodejs yarn git ninja-build build-essential
     - yarn install
   script:
     - export NODE_ENV=production
