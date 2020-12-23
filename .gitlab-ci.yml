@@ -20,5 +20,5 @@ build:
     - ./scripts/plug_versions
     - ./scripts/get_boards production false
     - ./configure production false
-    - ./ninja -j 2 && cp registry.json build/
+    - ninja -j 2 && cp registry.json build/
     - yarn smoke-test
