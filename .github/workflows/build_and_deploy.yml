@@ -19,8 +19,11 @@ jobs:
           sudo apt-get install -qq -y kicad inkscape imagemagick nodejs yarn git ninja-build build-essential
           yarn install
       - name: Build
+        env:
+          CYPRESS_KEY: ${{ secrets.CYPRESS_KEY }}
+          CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID }}
+          NODE_ENV: production
         run: |
-          export NODE_ENV=production
           ./scripts/plug_versions
           ./scripts/get_boards production false
           ./configure production false
