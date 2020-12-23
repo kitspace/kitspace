@@ -20,6 +20,7 @@ build:
     - yarn install
   script:
     - export NODE_ENV=production
+    - export PATH="$(pwd)/node_modules/.bin:$PATH"
     - ./scripts/plug_versions
     - ./scripts/get_boards production false
     - ./configure production false
