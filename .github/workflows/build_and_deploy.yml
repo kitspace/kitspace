@@ -30,6 +30,6 @@ jobs:
           ./scripts/plug_versions
           ./scripts/get_boards production false
           ./configure production false
-          ninja -j 2 && cp registry.json build/
+          xvfb-run --auto-servernum ninja -j 2 && cp registry.json build/
       - name: Test
         run: yarn smoke-test
