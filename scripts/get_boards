@@ -41,7 +41,7 @@ registry.forEach(({repo, hash}) => {
       }
     })
   } else {
-    cmd = `git clone --depth=1 ${repo} ${folder} && cd ${folder} && git checkout ${hash} || git fetch --unshallow && git checkout ${hash}`
+    cmd = `git clone ${repo} ${folder} && cd ${folder} && git checkout ${hash}`
     console.log(cmd)
     return cp.exec(cmd, function(err, out) {
       if (err != null) {
