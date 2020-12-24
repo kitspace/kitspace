@@ -33,6 +33,6 @@ jobs:
       - name: Build
         uses: GabrielBB/xvfb-action@v1
         with:
-          run: ninja -j 2
+          run: PATH="$(pwd)/node_modules/.bin:$PATH" && ninja -j 2
       - name: Test
         run: yarn smoke-test
