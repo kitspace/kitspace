@@ -30,8 +30,8 @@ jobs:
           ./scripts/plug_versions
           ./scripts/get_boards production false
           ./configure production false
-          export DISPLAY=':99.0'
-          Xvfb :99 -screen 0 1024x768x24 &
+          export DISPLAY=:1.0
+          Xvfb :1 -screen 0 1024x768x24 &
           ninja -j 2 && cp registry.json build/
       - name: Test
         run: yarn smoke-test
