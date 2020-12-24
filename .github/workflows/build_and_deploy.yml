@@ -30,6 +30,8 @@ jobs:
           ./scripts/plug_versions
           ./scripts/get_boards production false
           ./configure production false
-          xvfb-run --auto-servernum ninja -j 2 && cp registry.json build/
+          export DISPLAY=':99.0'
+          Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
+          ninja -j 2 && cp registry.json build/
       - name: Test
         run: yarn smoke-test
