@@ -4,7 +4,7 @@ node_js:
 addons:
   apt:
     sources:
-      - sourceline: 'ppa:js-reynaud/kicad-5.1'
+      - sourceline: 'ppa:kicad/kicad-5.1-releases'
     packages:
       - inkscape
       - kicad
