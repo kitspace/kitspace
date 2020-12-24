@@ -21,17 +21,15 @@ jobs:
           sudo apt-get install -qq -y kicad inkscape xvfb imagemagick nodejs yarn git ninja-build build-essential
           yarn install
       - name: Build
-        uses: GabrielBB/xvfb-action@v1
         env:
           CYPRESS_KEY: ${{ secrets.CYPRESS_KEY }}
           CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID }}
           NODE_ENV: production
-        with:
-          run: |
-            export PATH="$(pwd)/node_modules/.bin:$PATH"
-            ./scripts/plug_versions
-            ./scripts/get_boards production false
-            ./configure production false
-            ninja -j 2 && cp registry.json build/
+        run: |
+          export PATH="$(pwd)/node_modules/.bin:$PATH"
+          ./scripts/plug_versions
+          ./scripts/get_boards production false
+          ./configure production false
+          xvfb-run --auto-servernum ninja -j 2 && cp registry.json build/
       - name: Test
         run: yarn smoke-test
