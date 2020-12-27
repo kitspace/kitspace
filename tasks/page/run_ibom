@@ -6,7 +6,6 @@ import os
 import os.path
 import shutil
 import tempfile
-import wx
 import pcbnew
 
 from InteractiveHtmlBom.InteractiveHtmlBom.core import ibom
@@ -41,8 +40,6 @@ if ext == '.brd':
     pcbnew.SaveBoard(tmpfile, tmp_board)
     board = pcbnew.LoadBoard(tmpfile)
     shutil.rmtree(tmpdir, ignore_errors=True)
-
-app = wx.App()
 
 config = Config(version)
 config.config_file = IBOM_CONFIG
