@@ -23,7 +23,7 @@ script:
   - wget https://github.com/ninja-build/ninja/releases/download/v1.6.0/ninja-linux.zip
   - unzip ninja-linux.zip
   - if  [ "${CACHED_BUILD}" != "cached" ]; then ./ninja clean; fi
-  - ./ninja -j 2 && cp registry.json build/
+  - iINTERACTIVE_HTML_BOM_NO_DISPLAY=true ./ninja -j 2 && cp registry.json build/
   - echo "$(cat build/.temp/boards.json)"
   - if [ "${TRAVIS_PULL_REQUEST}" != "true" ]; then yarn smoke-test && ./scripts/deploy; fi
 cache:
