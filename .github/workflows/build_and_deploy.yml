@@ -30,7 +30,7 @@ jobs:
           ./scripts/plug_versions
           ./scripts/get_boards production false
           ./configure production false
-          Xvfb :0 &
-          DISPLAY=:0 ninja -j 2 && cp registry.json build/
+          'Xvfb :0 &'
+          'DISPLAY=":0" ninja -j 2 && cp registry.json build/'
       - name: Test
         run: yarn smoke-test
