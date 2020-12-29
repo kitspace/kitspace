@@ -31,7 +31,6 @@ jobs:
           ./scripts/get_boards production false
           ./configure production false
           Xvfb :99 -ac -nolisten tcp &
-          xvfb=$!
           export DISPLAY=":99"
           ninja -j 2 && cp registry.json build/
       - name: Test
