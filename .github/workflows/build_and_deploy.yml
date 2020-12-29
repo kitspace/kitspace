@@ -26,12 +26,10 @@ jobs:
           CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID }}
           NODE_ENV: production
         run: |
-          export PATH="$(pwd)/node_modules/.bin:$PATH"
-          ./scripts/plug_versions
-          ./scripts/get_boards production false
-          ./configure production false
           Xvfb :99 -ac -nolisten tcp &
           export DISPLAY=":99"
           ./test_x
+          node test_x.js
+          ninja -f test_x_ninja.build
       - name: Test
         run: yarn smoke-test

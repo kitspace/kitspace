@@ -1,0 +1,8 @@
+rule test_x_node
+  command = node test_x.js
+  description = test
+rule test_x_python
+  command = ./test_x
+  description = test2
+build test_file1: test_x_node
+build test_file2: test_x_python
