@@ -44,5 +44,6 @@ if (require.main !== module) {
   let infoFile = deps[1];
   let ibom = targets[0];
   const run_ibom = path.join(__dirname, 'run_ibom')
+  process.env.DISPLAY = ":99"
   cp.execSync(`${run_ibom} "${pcbFile}" "${infoFile}" "${ibom}"`)
 }
