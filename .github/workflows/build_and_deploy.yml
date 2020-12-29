@@ -32,6 +32,6 @@ jobs:
           ./configure production false
           Xvfb :99 -ac -nolisten tcp &
           export DISPLAY=":99"
-          ninja -j 2 && cp registry.json build/
+          ninja -j 1 && cp registry.json build/
       - name: Test
         run: yarn smoke-test
