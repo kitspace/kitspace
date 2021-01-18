@@ -59,7 +59,7 @@ let OrderPcbs = createClass({
             <h4>Compare PCB Prices:</h4>
           </div>
           <div className="PcbMenu__links-container">
-            <a href={pcbShopperUrl} className="PcbMenu__link">
+            <a rel="nofollow" href={pcbShopperUrl} className="PcbMenu__link">
               <img src="/images/pcbshopper.png" />
             </a>
           </div>
