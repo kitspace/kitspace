@@ -32,22 +32,22 @@ let OrderPcbs = createClass({
           </div>
 
           <div className="PcbMenu__links-container">
-            <a href={aislerUrl} className="PcbMenu__link">
+            <a rel="nofollow" href={aislerUrl} className="PcbMenu__link">
               <img src="/images/aisler.png" />
               <semantic.Flag name="de" />
             </a>
 
-            <a href={pcbwayUrl} className="PcbMenu__link">
+            <a rel="nofollow" href={pcbwayUrl} className="PcbMenu__link">
               <img src="/images/pcbway.png" />
               <semantic.Flag name="cn" />
             </a>
 
-            <a href={jlcpcbUrl} className="PcbMenu__link">
+            <a rel="nofollow" href={jlcpcbUrl} className="PcbMenu__link">
               <img src="/images/jlcpcb.png" />
               <semantic.Flag name="cn" />
             </a>
 
-            <a href={oshparkUrl} className="PcbMenu__link">
+            <a rel="nofollow" href={oshparkUrl} className="PcbMenu__link">
               <img src="/images/oshpark.png" />
               <semantic.Flag name="us" />
             </a>
