@@ -16,8 +16,6 @@ if (require.main !== module) {
 
   const boards = parseProjects(config, cached_build)
 
-  inPlaceShuffleArray(boards)
-
   const boardJson = fs.openSync(targets[0], 'w')
   fs.write(boardJson, JSON.stringify(boards), err => {
     if (err) {
@@ -27,9 +25,3 @@ if (require.main !== module) {
   })
 }
 
-function inPlaceShuffleArray(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1))
-    ;[array[i], array[j]] = [array[j], array[i]] // eslint-disable-line no-param-reassign
-  }
-}

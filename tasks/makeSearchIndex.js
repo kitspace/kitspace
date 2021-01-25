@@ -36,5 +36,17 @@ if (require.main !== module) {
     indices.push(index)
   })
 
+
+  inPlaceShuffleArray(indices)
+
   fs.writeFileSync(targets[0], JSON.stringify(indices))
+}
+
+function inPlaceShuffleArray(array) {
+  console.log('inPlaceShuffleArray')
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    // eslint-disable-next-line no-param-reassign
+    ;[array[i], array[j]] = [array[j], array[i]]
+  }
 }
