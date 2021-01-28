@@ -96,3 +96,4 @@ https://github.com/Chromico/linux-penguin-PCB-badge
 https://gitlab.com/openflexure/openflexure-simple-illumination
 https://github.com/Ryzee119/usb64
 https://github.com/Ryzee119/ogx360
+https://gitlab.com/pierros/astrohat
