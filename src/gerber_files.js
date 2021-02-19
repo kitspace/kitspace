@@ -3,8 +3,7 @@ const path = require('path')
 
 function gerberFiles(files, gerberPath) {
   if (gerberPath != null) {
-    const regex = RegExp('^' + gerberPath)
-    files = files.filter(f => regex.test(f))
+    files = files.filter(f => f.startsWith(gerberPath))
   }
   const layers = files
     .map(f => ({path: f, type: whatsThatGerber(path.basename(f))}))
