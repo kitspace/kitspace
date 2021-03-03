@@ -1,10 +1,6 @@
 [
   {
-    "repo": "https://github.com/robotsrulz/SP_Adapter",
-    "hash": "0391e520c2f1e953f703b467ebe6b8022971771"
-  },
-  {
-    "repo": "https://github.com/GlasgowEmbedded/glasgow",
-    "hash": "d7e5a870dab4f527bc41b01ac16fb4b118d997cd"
+    "repo": "https://gitlab.com/drid/f800gs-led-turn-signal",
+    "hash": "63a7bed5a5023c8fbdd8cb5f4e71d05ec3c6d562"
   }
 ]
