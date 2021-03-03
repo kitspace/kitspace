@@ -76,7 +76,7 @@ if (require.main !== module) {
     const kicadPcbFile = gerbers[0]
     const gerberFolder = path.join('/tmp/kitspace', root, 'gerbers')
     const plot_kicad_gerbers = path.join(__dirname, 'plot_kicad_gerbers')
-    const cmd_plot = `${plot_kicad_gerbers} ${kicadPcbFile} ${gerberFolder}`
+    const cmd_plot = `'${plot_kicad_gerbers}' '${kicadPcbFile}' '${gerberFolder}'`
     cp.execSync(`mkdir -p ${gerberFolder}`)
     cp.execSync(cmd_plot)
     gerbers = globule.find(path.join(gerberFolder, '*'))
