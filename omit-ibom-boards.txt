@@ -2,3 +2,4 @@ github.com/kimitobo/Neocococat
 github.com/Chromico/linux-penguin-PCB-badge
 github.com/sgmk/solarbird_shenzen_rdy
 github.com/free-pdk/easy-pdk-programmer-hardware
+gitlab.com/drid/f800gs-led-turn-signal
