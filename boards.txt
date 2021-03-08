@@ -98,3 +98,4 @@ https://github.com/Ryzee119/usb64
 https://github.com/Ryzee119/ogx360
 https://gitlab.com/pierros/astrohat
 https://gitlab.com/drid/f800gs-led-turn-signal
+https://github.com/intergalaktik/firefly
