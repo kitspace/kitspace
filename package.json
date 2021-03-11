@@ -66,7 +66,7 @@
     "js-yaml": "^3.3.1",
     "lodash.camelcase": "^4.3.0",
     "marky-markdown": "https://github.com/kasbah/marky-markdown#kitspace-fork",
-    "pcb-stackup": "4.0.0-next.13",
+    "pcb-stackup": "^4.2.5",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-double-scrollbar": "^0.0.15",
@@ -81,13 +81,11 @@
     "screenfull": "^5.0.2",
     "semantic-ui-react": "^0.88.2",
     "superagent": "^5.2.2",
-    "whats-that-gerber": "4.0.0-next.13",
+    "whats-that-gerber": "^4.2.2",
     "xml-element-string": "^1.0.0"
   },
   "sasslintConfig": "./src/.sass-lint.yml",
   "resolutions": {
-    "pcb-stackup-core": "4.0.0-next.13",
-    "whats-that-gerber": "4.0.0-next.13",
     "oniguruma": "7.2.1",
     "sanitize-html": "1.6.1"
   }

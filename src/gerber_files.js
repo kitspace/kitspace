@@ -5,14 +5,27 @@ function gerberFiles(files, gerberPath) {
   if (gerberPath != null) {
     files = files.filter(f => f.startsWith(gerberPath))
   }
-  const layers = files
-    .map(f => ({path: f, type: whatsThatGerber(path.basename(f))}))
-    .filter(({type}) => type !== 'drw')
-  const possibleGerbers = layers.map(({path}) => path)
-  const possibleTypes = layers.map(({type}) => type)
-  const duplicates = possibleTypes.reduce((prev, t) => {
-    return prev || possibleTypes.indexOf(t) !== possibleTypes.lastIndexOf(t)
-  }, false)
+  const layers = whatsThatGerber(files)
+  const possibleGerbers = Object.keys(layers).filter(
+    k => layers[k].type != null
+  )
+  let duplicates = false
+  const types = []
+  for (const k of possibleGerbers) {
+    if (
+      types.find(
+        t =>
+          t.type === layers[k].type &&
+          t.side === layers[k].side &&
+          t.side !== 'inner'
+      ) != null
+    ) {
+      duplicates = true
+      break
+    } else {
+      types.push(layers[k])
+    }
+  }
   if (!duplicates) {
     return possibleGerbers
   }
