@@ -10,7 +10,7 @@ const aislerUrl = `https://aisler.net/p/new?url=${zipUrl}&ref=kitspace`
 const pcbwayUrl = `https://www.pcbway.com/QuickOrderOnline.aspx?fileurl=${zipUrl}&from=kitspace`
 const oshparkUrl = `https://oshpark.com/import?url=${zipUrl}`
 const pcbShopperUrl = `https://pcbshopper.com/?Width=${width}&Height=${height}&Units=mm&Layers=${layers}&Quantity=1&GetPrices`
-const jlcpcbUrl = `https://cart.jlcpcb.com/quote?fileurl=${zipUrl}&from=kitspace`
+const jlcpcbUrl = `https://jlcpcb.com/CWL?fileurl=${zipUrl}&from=kitspace`
 
 let OrderPcbs = createClass({
   render() {
