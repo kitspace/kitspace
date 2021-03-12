@@ -23,7 +23,7 @@ if (require.main !== module) {
     let gerbers = gerberFiles(files, boardInfo.gerbers).map(p =>
       path.join(boardInfo.repoPath, p)
     )
-    if (gerbers.length < 2) {
+    if (gerbers.length < 5) {
       let kicadPcbFile
       if (
         boardInfo.eda &&
@@ -161,9 +161,7 @@ if (require.main !== module) {
       }
       zipInfo.width = Math.ceil(zipInfo.width)
       zipInfo.height = Math.ceil(zipInfo.height)
-      zipInfo.layers = stackup.layers.filter(layer => {
-        return layer.type.includes('cu') // copper layers - tcu, bcu, icu
-      }).length
+      zipInfo.layers = stackup.layers.filter(l => l.type === 'copper').length
       fs.writeFileSync(zipInfoPath, JSON.stringify(zipInfo))
 
       fs.writeFile(unOptimizedSvgPath, stackup.top.svg, function(err) {
