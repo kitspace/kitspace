@@ -32,22 +32,74 @@ let OrderPcbs = createClass({
           </div>
 
           <div className="PcbMenu__links-container">
-            <a rel="nofollow" href={aislerUrl} className="PcbMenu__link">
+            <a
+              rel="nofollow"
+              href={aislerUrl}
+              className="PcbMenu__link"
+              target="_blank"
+              onClick={e => {
+                e.preventDefault()
+                window.plausible != null &&
+                  window.plausible('Quote PCB', {
+                    props: {vendor: 'Aisler', project: folder}
+                  })
+                window.open(aislerUrl, '_blank')
+              }}
+            >
               <img src="/images/aisler.png" />
               <semantic.Flag name="de" />
             </a>
 
-            <a rel="nofollow" href={pcbwayUrl} className="PcbMenu__link">
+            <a
+              rel="nofollow"
+              href={pcbwayUrl}
+              className="PcbMenu__link"
+              target="_blank"
+              onClick={e => {
+                e.preventDefault()
+                window.plausible != null &&
+                  window.plausible('Quote PCB', {
+                    props: {vendor: 'PCBWay', project: folder}
+                  })
+                window.open(pcbwayUrl, '_blank')
+              }}
+            >
               <img src="/images/pcbway.png" />
               <semantic.Flag name="cn" />
             </a>
 
-            <a rel="nofollow" href={jlcpcbUrl} className="PcbMenu__link">
+            <a
+              rel="nofollow"
+              href={jlcpcbUrl}
+              className="PcbMenu__link"
+              target="_blank"
+              onClick={e => {
+                e.preventDefault()
+                window.plausible != null &&
+                  window.plausible('Quote PCB', {
+                    props: {vendor: 'JLCPCB', project: folder}
+                  })
+                window.open(jlcpcbUrl, '_blank')
+              }}
+            >
               <img src="/images/jlcpcb.png" />
               <semantic.Flag name="cn" />
             </a>
 
-            <a rel="nofollow" href={oshparkUrl} className="PcbMenu__link">
+            <a
+              rel="nofollow"
+              href={oshparkUrl}
+              className="PcbMenu__link"
+              target="_blank"
+              onClick={e => {
+                e.preventDefault()
+                window.plausible != null &&
+                  window.plausible('Quote PCB', {
+                    props: {vendor: 'OSHPark', project: folder}
+                  })
+                window.open(oshparkUrl, '_blank')
+              }}
+            >
               <img src="/images/oshpark.png" />
               <semantic.Flag name="us" />
             </a>
