@@ -54,6 +54,15 @@ const BuyParts = createClass({
             case 'register':
               this.setState({
                 buyParts: retailer => {
+                  window.plausible != null &&
+                    window.plausible('Quote Parts', {
+                      props: {
+                        project: this.props.project,
+                        retailer,
+                        multiplier: this.getMultiplier(),
+                        withExtension: true
+                      }
+                    })
                   window.postMessage(
                     {
                       from: 'page',

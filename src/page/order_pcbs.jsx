@@ -41,7 +41,7 @@ let OrderPcbs = createClass({
                 e.preventDefault()
                 window.plausible != null &&
                   window.plausible('Quote PCB', {
-                    props: {vendor: 'Aisler', project: folder}
+                    props: {vendor: 'Aisler', project: this.props.project}
                   })
                 window.open(aislerUrl, '_blank')
               }}
@@ -59,7 +59,7 @@ let OrderPcbs = createClass({
                 e.preventDefault()
                 window.plausible != null &&
                   window.plausible('Quote PCB', {
-                    props: {vendor: 'PCBWay', project: folder}
+                    props: {vendor: 'PCBWay', project: this.props.project}
                   })
                 window.open(pcbwayUrl, '_blank')
               }}
@@ -77,7 +77,7 @@ let OrderPcbs = createClass({
                 e.preventDefault()
                 window.plausible != null &&
                   window.plausible('Quote PCB', {
-                    props: {vendor: 'JLCPCB', project: folder}
+                    props: {vendor: 'JLCPCB', project: this.props.project}
                   })
                 window.open(jlcpcbUrl, '_blank')
               }}
@@ -95,7 +95,7 @@ let OrderPcbs = createClass({
                 e.preventDefault()
                 window.plausible != null &&
                   window.plausible('Quote PCB', {
-                    props: {vendor: 'OSHPark', project: folder}
+                    props: {vendor: 'OSHPark', project: this.props.project}
                   })
                 window.open(oshparkUrl, '_blank')
               }}
@@ -111,7 +111,20 @@ let OrderPcbs = createClass({
             <h4>Compare PCB Prices:</h4>
           </div>
           <div className="PcbMenu__links-container">
-            <a rel="nofollow" href={pcbShopperUrl} className="PcbMenu__link">
+            <a
+              rel="nofollow"
+              href={pcbShopperUrl}
+              className="PcbMenu__link"
+              onClick={e => {
+                e.preventDefault()
+                window.plausible != null &&
+                  window.plausible('Quote PCB', {
+                    props: {vendor: 'PCB Shopper', project: this.props.project}
+                  })
+                window.open(pcbShopperUrl, '_blank')
+              }}
+            >
+              >
               <img src="/images/pcbshopper.png" />
             </a>
           </div>

@@ -65,8 +65,12 @@ const Page = createClass({
               hasInteractiveBom={info.has_interactive_bom}
               zipUrl={zipUrl}
             />
-            <OrderPcbs />
-            <BuyParts lines={info.bom.lines} parts={info.bom.parts} />
+            <OrderPcbs project={info.id} />
+            <BuyParts
+              project={info.id}
+              lines={info.bom.lines}
+              parts={info.bom.parts}
+            />
             <div className="readme-container">
               <Readme />
             </div>
