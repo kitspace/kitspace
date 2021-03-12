@@ -52,10 +52,9 @@ const Step1 = createClass({
       const yamlColor = (board.yaml || {}).color
       showcase = (
         <div className={`pcb-${board.color}`}>
-          {' '}
           <BoardShowcase>
-            {top}
-            {bottom}
+            <div dangerouslySetInnerHTML={{__html: top}} />
+            <div dangerouslySetInnerHTML={{__html: bottom}} />
           </BoardShowcase>
         </div>
       )

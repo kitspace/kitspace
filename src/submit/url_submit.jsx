@@ -97,32 +97,8 @@ function buildBoard(dispatch, layers) {
         const svgs = {top, bottom}
         dispatch({type: 'setSvgs', value: {svgs}})
       }
-    },
-    createElement
+    }
   )
-}
-
-function createElement(type, props, children) {
-  if (type === 'style') {
-    return
-  }
-  Object.keys(props).forEach(key => {
-    let newKey
-    if (key === 'xmlns:xlink') {
-      newKey = 'xmlnsXlink'
-    } else if (key === 'xlink:href') {
-      newKey = 'xlinkHref'
-    } else if (key === 'class') {
-      newKey = 'className'
-    } else if (/-/.test(key)) {
-      newKey = camelCase(key)
-    }
-    if (newKey && newKey !== key) {
-      props[newKey] = props[key]
-      delete props[key]
-    }
-  })
-  return React.createElement(type, props, children)
 }
 
 function kitspaceYaml(files) {
