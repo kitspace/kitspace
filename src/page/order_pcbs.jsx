@@ -14,6 +14,15 @@ const jlcpcbUrl = `https://cart.jlcpcb.com/quote?fileurl=${zipUrl}&from=kitspace
 
 let OrderPcbs = createClass({
   render() {
+    const getAnalyticsHandler = (href, vendor, target) => e => {
+      e.preventDefault()
+      window.plausible('Order PCB', {
+        props: {project: this.props.project, vendor}
+      })
+      setTimeout(() => {
+        window.open(href, target)
+      }, 100)
+    }
     return (
       <div className="PcbMenu">
         <div className="PcbMenu__group PcbMenu__download">
@@ -36,15 +45,8 @@ let OrderPcbs = createClass({
               rel="nofollow"
               href={aislerUrl}
               className="PcbMenu__link"
-              target="_blank"
-              onClick={e => {
-                e.preventDefault()
-                window.plausible != null &&
-                  window.plausible('Order PCB', {
-                    props: {vendor: 'Aisler', project: this.props.project}
-                  })
-                window.open(aislerUrl, '_blank')
-              }}
+              onClick={getAnalyticsHandler(aislerUrl, 'Aisler', '_self')}
+              onAuxClick={getAnalyticsHandler(aislerUrl, 'Aisler', '_blank')}
             >
               <img src="/images/aisler.png" />
               <semantic.Flag name="de" />
