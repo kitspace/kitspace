@@ -40,7 +40,7 @@ let OrderPcbs = createClass({
               onClick={e => {
                 e.preventDefault()
                 window.plausible != null &&
-                  window.plausible('Quote PCB', {
+                  window.plausible('Order PCB', {
                     props: {vendor: 'Aisler', project: this.props.project}
                   })
                 window.open(aislerUrl, '_blank')
@@ -58,7 +58,7 @@ let OrderPcbs = createClass({
               onClick={e => {
                 e.preventDefault()
                 window.plausible != null &&
-                  window.plausible('Quote PCB', {
+                  window.plausible('Order PCB', {
                     props: {vendor: 'PCBWay', project: this.props.project}
                   })
                 window.open(pcbwayUrl, '_blank')
@@ -76,7 +76,7 @@ let OrderPcbs = createClass({
               onClick={e => {
                 e.preventDefault()
                 window.plausible != null &&
-                  window.plausible('Quote PCB', {
+                  window.plausible('Order PCB', {
                     props: {vendor: 'JLCPCB', project: this.props.project}
                   })
                 window.open(jlcpcbUrl, '_blank')
@@ -94,7 +94,7 @@ let OrderPcbs = createClass({
               onClick={e => {
                 e.preventDefault()
                 window.plausible != null &&
-                  window.plausible('Quote PCB', {
+                  window.plausible('Order PCB', {
                     props: {vendor: 'OSHPark', project: this.props.project}
                   })
                 window.open(oshparkUrl, '_blank')
@@ -118,7 +118,7 @@ let OrderPcbs = createClass({
               onClick={e => {
                 e.preventDefault()
                 window.plausible != null &&
-                  window.plausible('Quote PCB', {
+                  window.plausible('Order PCB', {
                     props: {vendor: 'PCB Shopper', project: this.props.project}
                   })
                 window.open(pcbShopperUrl, '_blank')

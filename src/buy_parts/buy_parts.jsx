@@ -55,7 +55,7 @@ const BuyParts = createClass({
               this.setState({
                 buyParts: retailer => {
                   window.plausible != null &&
-                    window.plausible('Quote Parts', {
+                    window.plausible('Buy Parts', {
                       props: {
                         project: this.props.project,
                         retailer,
