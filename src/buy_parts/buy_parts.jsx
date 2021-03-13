@@ -58,9 +58,8 @@ const BuyParts = createClass({
                     window.plausible('Buy Parts', {
                       props: {
                         project: this.props.project,
-                        retailer,
-                        multiplier: this.getMultiplier(),
-                        withExtension: true
+                        vendor: retailer,
+                        multiplier: this.getMultiplier()
                       }
                     })
                   window.postMessage(
