@@ -16,12 +16,12 @@ let OrderPcbs = createClass({
   render() {
     const getAnalyticsHandler = (href, vendor, target) => e => {
       e.preventDefault()
+      const callback = () => window.open(href, target)
+      setTimeout(callback, 1000)
       window.plausible('Order PCB', {
+        callback,
         props: {project: this.props.project, vendor}
       })
-      setTimeout(() => {
-        window.open(href, target)
-      }, 100)
     }
     return (
       <div className="PcbMenu">
@@ -56,15 +56,8 @@ let OrderPcbs = createClass({
               rel="nofollow"
               href={pcbwayUrl}
               className="PcbMenu__link"
-              target="_blank"
-              onClick={e => {
-                e.preventDefault()
-                window.plausible != null &&
-                  window.plausible('Order PCB', {
-                    props: {vendor: 'PCBWay', project: this.props.project}
-                  })
-                window.open(pcbwayUrl, '_blank')
-              }}
+              onClick={getAnalyticsHandler(pcbwayUrl, 'PCBWay', '_self')}
+              onAuxClick={getAnalyticsHandler(pcbwayUrl, 'PCBWay', '_blank')}
             >
               <img src="/images/pcbway.png" />
               <semantic.Flag name="cn" />
@@ -74,15 +67,8 @@ let OrderPcbs = createClass({
               rel="nofollow"
               href={jlcpcbUrl}
               className="PcbMenu__link"
-              target="_blank"
-              onClick={e => {
-                e.preventDefault()
-                window.plausible != null &&
-                  window.plausible('Order PCB', {
-                    props: {vendor: 'JLCPCB', project: this.props.project}
-                  })
-                window.open(jlcpcbUrl, '_blank')
-              }}
+              onClick={getAnalyticsHandler(jlcpcbUrl, 'JLCPCB', '_self')}
+              onAuxClick={getAnalyticsHandler(jlcpcbUrl, 'JLCPCB', '_blank')}
             >
               <img src="/images/jlcpcb.png" />
               <semantic.Flag name="cn" />
@@ -92,15 +78,8 @@ let OrderPcbs = createClass({
               rel="nofollow"
               href={oshparkUrl}
               className="PcbMenu__link"
-              target="_blank"
-              onClick={e => {
-                e.preventDefault()
-                window.plausible != null &&
-                  window.plausible('Order PCB', {
-                    props: {vendor: 'OSHPark', project: this.props.project}
-                  })
-                window.open(oshparkUrl, '_blank')
-              }}
+              onClick={getAnalyticsHandler(oshparkUrl, 'OSHPark', '_self')}
+              onAuxClick={getAnalyticsHandler(oshparkUrl, 'OSHPark', '_blank')}
             >
               <img src="/images/oshpark.png" />
               <semantic.Flag name="us" />
@@ -117,14 +96,16 @@ let OrderPcbs = createClass({
               rel="nofollow"
               href={pcbShopperUrl}
               className="PcbMenu__link"
-              onClick={e => {
-                e.preventDefault()
-                window.plausible != null &&
-                  window.plausible('Order PCB', {
-                    props: {vendor: 'PCB Shopper', project: this.props.project}
-                  })
-                window.open(pcbShopperUrl, '_blank')
-              }}
+              onClick={getAnalyticsHandler(
+                pcbShopperUrl,
+                'PCB Shopper',
+                '_self'
+              )}
+              onAuxClick={getAnalyticsHandler(
+                pcbShopperUrl,
+                'PCB Shopper',
+                '_blank'
+              )}
             >
               >
               <img src="/images/pcbshopper.png" />
