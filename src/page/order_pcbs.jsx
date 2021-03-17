@@ -15,7 +15,7 @@ const jlcpcbUrl = `https://cart.jlcpcb.com/quote?fileurl=${zipUrl}&from=kitspace
 let OrderPcbs = createClass({
   render() {
     const trackClick = vendor => e => {
-      window.plausible('Order PCB', {
+      window.plausible('Order PCBs', {
         props: {project: this.props.project, vendor}
       })
     }
