@@ -14,15 +14,10 @@ const jlcpcbUrl = `https://cart.jlcpcb.com/quote?fileurl=${zipUrl}&from=kitspace
 
 let OrderPcbs = createClass({
   render() {
-    const trackClick = vendor => {
+    const trackClick = vendor => e => {
       window.plausible('Order PCB', {
         props: {project: this.props.project, vendor}
       })
-    }
-    const trackAndOpenNewTab = (href, vendor) => e => {
-      e.preventDefault()
-      window.open(href, '_blank')
-      trackClick(vendor)
     }
     return (
       <div className="PcbMenu">
@@ -47,8 +42,8 @@ let OrderPcbs = createClass({
               href={aislerUrl}
               target="_blank"
               className="PcbMenu__link"
-              onClick={trackAndOpenNewTab(aislerUrl, 'Aisler')}
-              onAuxClick={() => trackClick('Aisler')}
+              onClick={trackClick('Aisler')}
+              onAuxClick={trackClick('Aisler')}
             >
               <img src="/images/aisler.png" />
               <semantic.Flag name="de" />
@@ -59,8 +54,8 @@ let OrderPcbs = createClass({
               href={pcbwayUrl}
               target="_blank"
               className="PcbMenu__link"
-              onClick={trackAndOpenNewTab(pcbwayUrl, 'PCBWay')}
-              onAuxClick={() => trackClick('PCBWay')}
+              onClick={trackClick('PCBWay')}
+              onAuxClick={trackClick('PCBWay')}
             >
               <img src="/images/pcbway.png" />
               <semantic.Flag name="cn" />
@@ -71,8 +66,8 @@ let OrderPcbs = createClass({
               href={jlcpcbUrl}
               target="_blank"
               className="PcbMenu__link"
-              onClick={trackAndOpenNewTab(jlcpcbUrl, 'JLCPCB')}
-              onAuxClick={() => trackClick('JLCPCB')}
+              onClick={trackClick('JLCPCB')}
+              onAuxClick={trackClick('JLCPCB')}
             >
               <img src="/images/jlcpcb.png" />
               <semantic.Flag name="cn" />
@@ -83,8 +78,8 @@ let OrderPcbs = createClass({
               href={oshparkUrl}
               target="_blank"
               className="PcbMenu__link"
-              onClick={trackAndOpenNewTab(oshparkUrl, 'OSHPark')}
-              onAuxClick={() => trackClick('OSHPark')}
+              onClick={trackClick('OSHPark')}
+              onAuxClick={trackClick('OSHPark')}
             >
               <img src="/images/oshpark.png" />
               <semantic.Flag name="us" />
@@ -102,8 +97,8 @@ let OrderPcbs = createClass({
               href={pcbShopperUrl}
               target="_blank"
               className="PcbMenu__link"
-              onClick={trackAndOpenNewTab(pcbShopperUrl, 'PCBShopper')}
-              onAuxClick={() => trackClick('PCBShopper')}
+              onClick={trackClick('PCBShopper')}
+              onAuxClick={trackClick('PCBShopper')}
             >
               >
               <img src="/images/pcbshopper.png" />
