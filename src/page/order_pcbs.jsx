@@ -14,14 +14,15 @@ const jlcpcbUrl = `https://cart.jlcpcb.com/quote?fileurl=${zipUrl}&from=kitspace
 
 let OrderPcbs = createClass({
   render() {
-    const getAnalyticsHandler = (href, vendor, target) => e => {
-      e.preventDefault()
-      const callback = () => window.open(href, target)
-      setTimeout(callback, 1000)
+    const trackClick = vendor => {
       window.plausible('Order PCB', {
-        callback,
         props: {project: this.props.project, vendor}
       })
+    }
+    const trackAndOpenNewTab = (href, vendor) => e => {
+      e.preventDefault()
+      window.open(href, '_blank')
+      trackClick(vendor)
     }
     return (
       <div className="PcbMenu">
@@ -44,9 +45,10 @@ let OrderPcbs = createClass({
             <a
               rel="nofollow"
               href={aislerUrl}
+              target="_blank"
               className="PcbMenu__link"
-              onClick={getAnalyticsHandler(aislerUrl, 'Aisler', '_self')}
-              onAuxClick={getAnalyticsHandler(aislerUrl, 'Aisler', '_blank')}
+              onClick={trackAndOpenNewTab(aislerUrl, 'Aisler')}
+              onAuxClick={() => trackClick('Aisler')}
             >
               <img src="/images/aisler.png" />
               <semantic.Flag name="de" />
@@ -55,9 +57,10 @@ let OrderPcbs = createClass({
             <a
               rel="nofollow"
               href={pcbwayUrl}
+              target="_blank"
               className="PcbMenu__link"
-              onClick={getAnalyticsHandler(pcbwayUrl, 'PCBWay', '_self')}
-              onAuxClick={getAnalyticsHandler(pcbwayUrl, 'PCBWay', '_blank')}
+              onClick={trackAndOpenNewTab(pcbwayUrl, 'PCBWay')}
+              onAuxClick={() => trackClick('PCBWay')}
             >
               <img src="/images/pcbway.png" />
               <semantic.Flag name="cn" />
@@ -66,9 +69,10 @@ let OrderPcbs = createClass({
             <a
               rel="nofollow"
               href={jlcpcbUrl}
+              target="_blank"
               className="PcbMenu__link"
-              onClick={getAnalyticsHandler(jlcpcbUrl, 'JLCPCB', '_self')}
-              onAuxClick={getAnalyticsHandler(jlcpcbUrl, 'JLCPCB', '_blank')}
+              onClick={trackAndOpenNewTab(jlcpcbUrl, 'JLCPCB')}
+              onAuxClick={() => trackClick('JLCPCB')}
             >
               <img src="/images/jlcpcb.png" />
               <semantic.Flag name="cn" />
@@ -77,9 +81,10 @@ let OrderPcbs = createClass({
             <a
               rel="nofollow"
               href={oshparkUrl}
+              target="_blank"
               className="PcbMenu__link"
-              onClick={getAnalyticsHandler(oshparkUrl, 'OSHPark', '_self')}
-              onAuxClick={getAnalyticsHandler(oshparkUrl, 'OSHPark', '_blank')}
+              onClick={trackAndOpenNewTab(oshparkUrl, 'OSHPark')}
+              onAuxClick={() => trackClick('OSHPark')}
             >
               <img src="/images/oshpark.png" />
               <semantic.Flag name="us" />
@@ -95,17 +100,10 @@ let OrderPcbs = createClass({
             <a
               rel="nofollow"
               href={pcbShopperUrl}
+              target="_blank"
               className="PcbMenu__link"
-              onClick={getAnalyticsHandler(
-                pcbShopperUrl,
-                'PCB Shopper',
-                '_self'
-              )}
-              onAuxClick={getAnalyticsHandler(
-                pcbShopperUrl,
-                'PCB Shopper',
-                '_blank'
-              )}
+              onClick={trackAndOpenNewTab(pcbShopperUrl, 'PCBShopper')}
+              onAuxClick={() => trackClick('PCBShopper')}
             >
               >
               <img src="/images/pcbshopper.png" />
