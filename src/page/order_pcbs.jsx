@@ -100,7 +100,6 @@ let OrderPcbs = createClass({
               onClick={trackClick('PCBShopper')}
               onAuxClick={trackClick('PCBShopper')}
             >
-              >
               <img src="/images/pcbshopper.png" />
             </a>
           </div>
