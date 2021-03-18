@@ -78,7 +78,7 @@ var Main = createClass({
     }
     if (term.length > 2) {
       window.plausible('Search', {
-        props: {term, number_of_results: results.length}
+        props: {term, number_of_results: result.length}
       })
     }
     this.setState({result: result, searching: term.length > 0})
