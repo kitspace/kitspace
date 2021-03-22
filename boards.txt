@@ -101,3 +101,4 @@ https://gitlab.com/drid/f800gs-led-turn-signal
 https://github.com/Sussex-Neuroscience/odour-stimulator
 https://github.com/intergalaktik/firefly
 https://github.com/Ryzee119/tinyogx360
+https://gitlab.com/openflexure/openflexure-constant-current-illumination
