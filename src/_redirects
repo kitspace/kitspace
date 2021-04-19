@@ -10,3 +10,4 @@
 /boards/github.com/joeycastillo/the-open-book/ /boards/github.com/joeycastillo/the-open-book/ebook-wing/
 /boards/github.com/aleksas/interferometer https://github.com/aleksas/interferometer
 /boards/gitlab.com/drid/f800gs-led-turn-signal/ /boards/gitlab.com/drid/f800gs-led-turn-signal/f800gs_led_turn_signal_dual_row/
+/boards/github.com/isobianin/BeeHive/* /boards/github.com/BeeHive-org/BeeHive/:splat
