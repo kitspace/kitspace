@@ -103,3 +103,4 @@ https://github.com/intergalaktik/firefly
 https://github.com/Ryzee119/tinyogx360
 https://gitlab.com/openflexure/openflexure-constant-current-illumination
 https://github.com/isobianin/BeeHive
+https://github.com/drspangle/infidel-sensor
