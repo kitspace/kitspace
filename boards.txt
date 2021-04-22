@@ -81,7 +81,7 @@ https://github.com/free-pdk/easy-pdk-programmer-hardware
 https://github.com/mattvenn/teensy-audio-fx
 https://github.com/LincolnUehara/Aquarius
 https://github.com/amchagas/fast-response-diode
-https://gitlab.com/openflexure/ofm-illumination
+https://gitlab.com/openflexure/openflexure-phase-contrast-illumination
 https://github.com/nerdyscout/NodeMCU
 https://github.com/GlasgowEmbedded/glasgow
 https://github.com/pyr0ball/pyr0piezo

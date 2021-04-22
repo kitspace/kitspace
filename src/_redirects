@@ -11,3 +11,5 @@
 /boards/github.com/aleksas/interferometer https://github.com/aleksas/interferometer
 /boards/gitlab.com/drid/f800gs-led-turn-signal/ /boards/gitlab.com/drid/f800gs-led-turn-signal/f800gs_led_turn_signal_dual_row/
 /boards/github.com/isobianin/BeeHive/* /boards/github.com/BeeHive-org/BeeHive/:splat
+/boards/gitlab.com/openflexure/ofm-illumination/ /boards/github.com/openflexure/openflexure-phase-contrast-illumination/
+/boards/gitlab.com/openflexure/openflexure-constant-current-illumination/ /boards/gitlab.com/openflexure/openflexure-constant-current-illumination/ofm_cc_illumination_single
