@@ -72,15 +72,6 @@ if (require.main !== module) {
   const root = deps[0]
   let gerbers = deps.slice(1)
 
-  if (gerbers.length === 1 && path.extname(gerbers[0]) === '.kicad_pcb') {
-    const kicadPcbFile = gerbers[0]
-    const gerberFolder = path.join('/tmp/kitspace', root, 'gerbers')
-    const plot_kicad_gerbers = path.join(__dirname, 'plot_kicad_gerbers')
-    const cmd_plot = `'${plot_kicad_gerbers}' '${kicadPcbFile}' '${gerberFolder}'`
-    cp.execSync(`mkdir -p ${gerberFolder}`)
-    cp.execSync(cmd_plot)
-    gerbers = globule.find(path.join(gerberFolder, '*'))
-  }
   const [
     topSvgPath,
     bottomSvgPath,
@@ -93,9 +84,21 @@ if (require.main !== module) {
     topWithBgndPath
   ] = targets
 
+  const folder = path.relative('build/', path.dirname(zipPath))
+
+  if (gerbers.length === 1 && path.extname(gerbers[0]) === '.kicad_pcb') {
+    const kicadPcbFile = gerbers[0]
+    const gerberFolder = path.join('/tmp/kitspace', folder, 'gerbers')
+    const plot_kicad_gerbers = path.join(__dirname, 'plot_kicad_gerbers')
+    const cmd_plot = `'${plot_kicad_gerbers}' '${kicadPcbFile}' '${gerberFolder}'`
+    cp.execSync(`mkdir -p ${gerberFolder}`)
+    cp.execSync(cmd_plot)
+    gerbers = globule.find(path.join(gerberFolder, '*'))
+  }
+
   const zipInfo = {
     zipPath: path.basename(zipPath),
-    folder: path.relative('build/', path.dirname(zipPath))
+    folder
   }
   const zip = new Jszip()
 
