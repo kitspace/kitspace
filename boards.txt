@@ -104,4 +104,4 @@ https://github.com/Ryzee119/tinyogx360
 https://gitlab.com/openflexure/openflexure-constant-current-illumination
 https://github.com/BeeHive-org/BeeHive
 https://github.com/drspangle/infidel-sensor
-https://github.com/MaslowCNC/Electronic
+https://github.com/MaslowCNC/Electronics
