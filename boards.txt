@@ -105,4 +105,5 @@ https://gitlab.com/openflexure/openflexure-constant-current-illumination
 https://github.com/BeeHive-org/BeeHive
 https://github.com/drspangle/infidel-sensor
 https://github.com/jharwinbarrozo/3-ch-diversity-system
+https://github.com/weirdgyn/Driverino-Shield
 https://github.com/weirdgyn/GPSMux
