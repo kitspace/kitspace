@@ -9,6 +9,7 @@ if (require.main !== module) {
       deps = [
         'build/.temp/interactive_bom/interactive_bom.jsx',
         'src/interactive_bom/interactive_bom.html',
+        'build/.temp/interactive_bom/IBOM.jsx',
       ]
       return {deps, targets, moduleDep: true}
     } else if (config === 'dev') {
