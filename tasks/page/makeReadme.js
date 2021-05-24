@@ -66,7 +66,16 @@ if (require.main !== module) {
 
     html = cheerio$.html()
   }
-  const reactComponent = converter.convert(`<div class='readme'>${html}</div>`)
+  let reactComponent = converter.convert(`<div class='readme'>${html}</div>`)
+
+  // And now we have to work around this bug in htmltojsx:
+  // https://github.com/reactjs/react-magic/issues/158. The solution
+  // adopted here is pretty reprehensible. A more principled approach
+  // would be to fix the htmltojsx package, but the PR open to fix
+  // this problem is stale, and I don't want to take the time to
+  // freshen it up...
+  reactComponent = reactComponent.replace(/{"/g, '"').replace(/"}/g, '"')
+
   fs.writeFileSync(
     readmeJsx,
     `const React = require('react');React.createClass = require('create-react-class');\n${reactComponent}\nmodule.exports = Readme;\n`
