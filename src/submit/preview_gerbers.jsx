@@ -25,8 +25,8 @@ with a gerbers field.
 (Note: adding multiple projects in one repository _is_ supported by Kitspace but not by this preview yet.)
 
 If you run into any other problems please get in touch via
-[Element.im chat](https://app.element.io/#/room/#kitspace:matrix.org)
-, IRC (irc.libera.chat#kitspace) or [Github Issues](https://github.com/kitspace/kitspace/issues). 
+[Element chat](https://app.element.io/#/room/#kitspace:matrix.org)
+, IRC (irc.libera.chat#kitspace) or [Github Issues](https://github.com/kitspace/kitspace/issues).
 You can also use the [Tracespace Viewer](http://viewer.tracespace.io) to try
 and figure out any issues with the board rendering.
 

@@ -31,7 +31,7 @@ You can get similar renderings and also inspect invdividual layers, using the [t
 
 ## Get in touch
 
- - [Join Riot.im chat][riot.im] or IRC freenode#kitspace
+ - [Join Element chat][element-chat] or irc.libera.chat#kitspace
  - [Subscribe to our newsletter](https://kitspace.org/newsletter/)
  - [Follow us on Twitter](https://twitter.com/kitspaceorg)
 
@@ -285,7 +285,7 @@ Visit http://127.0.0.1:8080 in your browser to see your local development site.
 [yamllint]: http://www.yamllint.com
 [1clickbom#making]: https://1clickbom.com/#making-a-1-click-bom
 [travis-status]: https://travis-ci.org/kitspace/kitspace.svg?branch=master
-[riot.im]: https://riot.im/app/#/room/#kitspace:matrix.org
+[element-chat]: https://app.element.io/#/room/#kitspace:matrix.org
 
 [4]: https://help.github.com/articles/create-a-repo/
 [5]: https://help.github.com/articles/adding-a-file-to-a-repository/

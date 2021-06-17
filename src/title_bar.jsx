@@ -96,7 +96,7 @@ function SocialMenuItems(props) {
     <>
       <semantic.Menu.Item
         as="a"
-        href="https://riot.im/app/#/room/#kitspace:matrix.org"
+        href="https://app.element.io/#/room/#kitspace:matrix.org"
       >
         <semantic.Icon name="chat" />
         Chat
