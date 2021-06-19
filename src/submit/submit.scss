@@ -1,198 +1,254 @@
 @import '../page/page';
+@import '../buy_parts/bom';
 @import '../colors';
 @import '../common';
 @import '/semantic.min.css';
 
 .ui.container {
-    margin-top: 50px;
-    margin-bottom: 50px;
+  margin-top: 50px;
+  margin-bottom: 50px;
 }
 
 code {
-    background-color:$lightlightgray;
+  background-color: $lightlightgray;
 }
 
 .ui.input {
-    max-width: 500px;
-    flex-grow: 2;
-    width:100%;
+  max-width: 500px;
+  flex-grow: 2;
+  width: 100%;
 }
 
 .submitButton {
-   min-width: 94px;
+  min-width: 94px;
 }
 
 #greenButton {
-   background-color: rgba(19, 80, 18, 0.9);
+  background-color: rgba(19, 80, 18, 0.9);
 }
 
 #redButton {
-   background-color: #d41212;
+  background-color: #d41212;
 }
 
 #blueButton {
-   background-color: #122e6f;
+  background-color: #122e6f;
 }
 
 #blackButton {
-   background-color: black;
+  background-color: black;
 }
 
 #whiteButton {
-   background-color: white;
-
+  background-color: white;
 }
 
 #orangeButton {
-   background-color: #f29c1c;
+  background-color: #f29c1c;
 }
 
 #purpleButton {
-   background-color: #653b86;
+  background-color: #653b86;
 }
 
 #yellowButton {
-   background-color: #dfdf90;
+  background-color: #dfdf90;
 }
 
 .step {
-    font-weight:normal;
+  font-weight: normal;
 }
 
 .step:hover {
-   text-decoration: none;
+  text-decoration: none;
 }
 
 .stepsContainer {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 #submitForm {
-    flex-grow: 1;
-    width: 50%;
-    margin-bottom: 0px;
+  flex-grow: 1;
+  width: 50%;
+  margin-bottom: 0px;
 }
 
 .Step1 {
-   #submitForm {
-      width: 100%;
-   }
+  #submitForm {
+    width: 100%;
+  }
 }
 
 .messageContainer {
-   margin-top: 30px;
-   width: 100%;
+  margin-top: 30px;
+  width: 100%;
 }
 
 button {
-   display: flex;
-   justify-content: center;
-   align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.pcb-stackup_fr4 {color: #4D542C;}
-.pcb-stackup_cu {color: lightgrey;}
-.pcb-stackup_sp {color: rgba(0, 0, 0, 0.0);}
-.pcb-stackup_out {color: black;}
+.pcb-stackup_fr4 {
+  color: #4d542c;
+}
+.pcb-stackup_cu {
+  color: lightgrey;
+}
+.pcb-stackup_sp {
+  color: rgba(0, 0, 0, 0);
+}
+.pcb-stackup_out {
+  color: black;
+}
 
 .pcb-green {
-     .pcb-stackup_cf {color: goldenrod;}
-     .pcb-stackup_sm {color: rgba(  0,  68,   0, 0.90);}
-     .pcb-stackup_ss {color: white;}
+  .pcb-stackup_cf {
+    color: goldenrod;
+  }
+  .pcb-stackup_sm {
+    color: rgba(0, 68, 0, 0.9);
+  }
+  .pcb-stackup_ss {
+    color: white;
+  }
 }
 
 .pcb-red {
-     .pcb-stackup_cf {color: goldenrod;}
-     .pcb-stackup_sm {color: rgba(139,   0,   0, 0.90);}
-     .pcb-stackup_ss {color: white;}
+  .pcb-stackup_cf {
+    color: goldenrod;
+  }
+  .pcb-stackup_sm {
+    color: rgba(139, 0, 0, 0.9);
+  }
+  .pcb-stackup_ss {
+    color: white;
+  }
 }
 
 .pcb-blue {
-     .pcb-stackup_cf {color: silver;}
-     .pcb-stackup_sm {color: rgba(  0,  30, 104, 0.90);}
-     .pcb-stackup_ss {color: white;}
+  .pcb-stackup_cf {
+    color: silver;
+  }
+  .pcb-stackup_sm {
+    color: rgba(0, 30, 104, 0.9);
+  }
+  .pcb-stackup_ss {
+    color: white;
+  }
 }
 
 .pcb-black {
-     .pcb-stackup_cf {color: silver;}
-     .pcb-stackup_sm {color: rgba(  0,   0,   0, 0.90);}
-     .pcb-stackup_ss {color: white;}
+  .pcb-stackup_cf {
+    color: silver;
+  }
+  .pcb-stackup_sm {
+    color: rgba(0, 0, 0, 0.9);
+  }
+  .pcb-stackup_ss {
+    color: white;
+  }
 }
 
 .pcb-white {
-     .pcb-stackup_cf {color: goldenrod;}
-     .pcb-stackup_sm {color: rgba(255, 255, 255, 0.90);}
-     .pcb-stackup_ss {color: black;}
+  .pcb-stackup_cf {
+    color: goldenrod;
+  }
+  .pcb-stackup_sm {
+    color: rgba(255, 255, 255, 0.9);
+  }
+  .pcb-stackup_ss {
+    color: black;
+  }
 }
 
 .pcb-orange {
-     .pcb-stackup_cf {color: silver;}
-     .pcb-stackup_sm {color: rgba(195, 107,   0, 0.90);}
-     .pcb-stackup_ss {color: white;}
+  .pcb-stackup_cf {
+    color: silver;
+  }
+  .pcb-stackup_sm {
+    color: rgba(195, 107, 0, 0.9);
+  }
+  .pcb-stackup_ss {
+    color: white;
+  }
 }
 
 .pcb-purple {
-     .pcb-stackup_cf {color: goldenrod;}
-     .pcb-stackup_sm {color: rgba( 46,   0,  81, 0.90);}
-     .pcb-stackup_ss {color: white;}
+  .pcb-stackup_cf {
+    color: goldenrod;
+  }
+  .pcb-stackup_sm {
+    color: rgba(46, 0, 81, 0.9);
+  }
+  .pcb-stackup_ss {
+    color: white;
+  }
 }
 
 .pcb-yellow {
-     .pcb-stackup_cf {color: goldenrod;}
-     .pcb-stackup_sm {color: rgba(255, 255, 102, 0.50);}
-     .pcb-stackup_ss {color: black;}
+  .pcb-stackup_cf {
+    color: goldenrod;
+  }
+  .pcb-stackup_sm {
+    color: rgba(255, 255, 102, 0.5);
+  }
+  .pcb-stackup_ss {
+    color: black;
+  }
 }
 
 .colorSelector {
-   display:flex;
-   align-items: center;
-   flex-grow: 1;
-   margin-right: 16px !important;
-   margin-top: 35px;
-   @include breakpoint(semantic_container) {
-      align-items: flex-start;
-      min-height: 90px;
-   }
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  margin-right: 16px !important;
+  margin-top: 35px;
+  @include breakpoint(semantic_container) {
+    align-items: flex-start;
+    min-height: 90px;
+  }
 }
 
 .userInputSegment {
-   margin-top:40px;
-   display: flex;
-   flex-wrap: wrap;
-   justify-content: space-around;
-   align-items:center;
+  margin-top: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .nextButtonContainer {
-    display: flex;
-    flex-grow: 1;
-    width: 50%;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  flex-grow: 1;
+  width: 50%;
+  align-items: center;
+  justify-content: center;
 }
 
-.colorSelect:hover, #whiteButton.colorSelect:hover {
-   border: 2px solid lightgrey;
+.colorSelect:hover,
+#whiteButton.colorSelect:hover {
+  border: 2px solid lightgrey;
 }
 
 .colorSelect {
-   cursor: pointer;
-   width: 32px;
-   height: 32px;
-   margin: 4px;
-   border: 1px solid lightgrey;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  margin: 4px;
+  border: 1px solid lightgrey;
 }
 #whiteButton {
-   border: 1px solid lightgrey;
+  border: 1px solid lightgrey;
 }
 
-.colorSelect.selected, #whiteButton.selected {
-   border: 4px solid lightgrey !important;
+.colorSelect.selected,
+#whiteButton.selected {
+  border: 4px solid lightgrey !important;
 }
 
 .instructions {
-   margin-top:32px;
+  margin-top: 32px;
 }
-
-

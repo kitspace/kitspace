@@ -1,21 +1,15 @@
-var React = require('react')
-var ReactDOM = require('react-dom')
-var isVisible = require('./is_visible')
+const React = require('react')
+const createClass = require('create-react-class')
+const ReactDOM = require('react-dom')
+const isVisible = require('./is_visible')
 
-var LazyLoad = React.createClass({
+const LazyLoad = createClass({
   displayName: 'LazyLoad',
-  propTypes: {
-    distance: React.PropTypes.number,
-    component: React.PropTypes.node.isRequired,
-    children: React.PropTypes.node.isRequired,
-    once: React.PropTypes.bool
-  },
-
   getDefaultProps: function() {
     return {
-      distance: 100
-      , component: <div></div>
-      , once: false
+      distance: 100,
+      component: <div />,
+      once: false
     }
   },
 
@@ -38,7 +32,7 @@ var LazyLoad = React.createClass({
     if (this.props.once && this.state.visible) {
       return
     }
-    var el = ReactDOM.findDOMNode(this)
+    const el = ReactDOM.findDOMNode(this)
     this.setState({
       visible: isVisible(el, this.props.distance)
     })

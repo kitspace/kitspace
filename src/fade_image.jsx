@@ -1,11 +1,7 @@
-var React = require('react')
+const React = require('react')
+const createClass = require('create-react-class')
 
-var FadeImage = React.createClass({
-  propTypes: {
-    style: React.PropTypes.any,
-    speed: React.PropTypes.any,
-    src: React.PropTypes.string.isRequired
-  },
+const FadeImage = createClass({
   getInitialState: function() {
     return {opacity: 0}
   },
@@ -14,7 +10,7 @@ var FadeImage = React.createClass({
     this.setState({opacity: 1})
   },
 
-  render: function (){
+  render: function() {
     //this vs including an Object.assign polyfill
     var style = this.props.style || {}
     style.transition = 'opacity ' + (this.props.speed || 1) + 's'

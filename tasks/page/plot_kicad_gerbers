@@ -1,0 +1,134 @@
+#!/usr/bin/env python2
+
+"""
+    A python script example to create various plot files from a board:
+    Fab files
+    Doc files
+    Gerber files
+
+    Adapted from: https://github.com/gregdavill/kicadScripts
+
+    Important note:
+        this python script does not plot frame references.
+        the reason is it is not yet possible from a python script because plotting
+        plot frame references needs loading the corresponding page layout file
+        (.wks file) or the default template.
+
+        This info (the page layout template) is not stored in the board, and therefore
+        not available.
+
+        Do not try to change SetPlotFrameRef(False) to SetPlotFrameRef(true)
+        the result is the pcbnew lib will crash if you try to plot
+        the unknown frame references template.
+"""
+
+from datetime import datetime
+from pcbnew import *
+from shutil import copy
+import logging
+import os
+import shutil
+import sys
+import time
+import zipfile
+
+
+filename = sys.argv[1]
+output_directory = os.path.abspath(sys.argv[2])
+project_name = os.path.splitext(os.path.split(filename)[1])[0]
+project_path = os.path.abspath(os.path.split(filename)[0])
+
+print("plotting gerbers to {}".format(output_directory))
+
+today = datetime.now().strftime("%Y%m%d_%H%M%S")
+
+board = LoadBoard(filename)
+
+pctl = PLOT_CONTROLLER(board)
+
+popt = pctl.GetPlotOptions()
+
+popt.SetOutputDirectory(output_directory)
+
+# Set some important plot options:
+popt.SetPlotFrameRef(False)
+popt.SetLineWidth(FromMM(0.35))
+
+popt.SetAutoScale(False)
+popt.SetScale(1)
+popt.SetMirror(False)
+popt.SetUseGerberAttributes(False)
+popt.SetExcludeEdgeLayer(True)
+popt.SetScale(1)
+popt.SetUseAuxOrigin(True)
+popt.SetNegative(False)
+popt.SetPlotReference(True)
+popt.SetPlotValue(True)
+popt.SetPlotInvisibleText(False)
+
+# This by gerbers only (also the name is truly horrid!)
+# remove solder mask from silk to be sure there is no silk on pads
+popt.SetSubtractMaskFromSilk(True)
+
+
+plot_plan = [
+    ("F_Cu", F_Cu, "Top layer"),
+    ("B_Cu", B_Cu, "Bottom layer"),
+    ("B_Mask", B_Mask, "Mask Bottom"),
+    ("F_Mask", F_Mask, "Mask top"),
+    ("B_Paster", B_Paste, "Paste Bottom"),
+    ("F_Paste", F_Paste, "Paste Top"),
+    ("F_SilkS", F_SilkS, "Silk Top"),
+    ("B_SilkS", B_SilkS, "Silk Bottom"),
+    ("Edge_Cuts", Edge_Cuts, "Edges"),
+]
+
+popt.SetMirror(False)
+popt.SetDrillMarksType(PCB_PLOT_PARAMS.NO_DRILL_SHAPE)
+
+fab_files = []
+
+# Functional Gerber Plots
+for layer_info in plot_plan:
+    pctl.SetLayer(layer_info[1])
+    pctl.OpenPlotfile(layer_info[0], PLOT_FORMAT_GERBER, layer_info[2])
+    pctl.PlotLayer()
+    time.sleep(0.01)
+    pctl.ClosePlot()
+
+
+# generate internal copper layers, if any
+lyrcnt = board.GetCopperLayerCount()
+
+for innerlyr in range(1, lyrcnt - 1):
+    pctl.SetLayer(innerlyr)
+    lyrname = "Inner%s" % innerlyr
+    pctl.OpenPlotfile(lyrname, PLOT_FORMAT_GERBER, "Inner")
+    pctl.PlotLayer()
+    time.sleep(0.01)
+    pctl.ClosePlot()
+
+
+# Fabricators need drill files.
+# sometimes a drill map file is asked (for verification purpose)
+drlwriter = EXCELLON_WRITER(board)
+drlwriter.SetMapFileFormat(PLOT_FORMAT_PDF)
+
+mirror = False
+minimalHeader = False
+offset = board.GetAuxOrigin()
+mergeNPTH = True
+drlwriter.SetOptions(mirror, minimalHeader, offset, mergeNPTH)
+
+metricFmt = True
+drlwriter.SetFormat(metricFmt)
+
+genDrl = True
+genMap = False
+drlwriter.CreateDrillandMapFilesSet(output_directory, genDrl, genMap)
+
+srcPlot = os.path.join(output_directory, project_name + ".drl")
+
+# A text file to report drill statistics
+rptfn = output_directory + "/drill_report.txt"
+drlwriter.GenDrillReportFile(rptfn)

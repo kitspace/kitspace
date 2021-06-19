@@ -1,262 +1,475 @@
 #!/usr/bin/env node
 let config, uglifyjs
 const ninjaBuildGen = require('ninja-build-gen')
-const globule       = require('globule')
-const path          = require('path')
-
+const globule = require('globule')
+const path = require('path')
+const yaml = require('js-yaml')
+const fs = require('fs')
 
 if (process.argv[2] === 'production') {
-    config = 'production'
+  config = 'production'
 } else {
-    config = 'dev'
+  config = 'dev'
 }
 
+const cached_build = process.argv[3] === 'cached'
 
 const ninja = ninjaBuildGen('1.5.1', 'build/')
-
 
 ninja.header(`#generated from ${path.basename(module.filename)} \
 with '${config}' config`)
 
-
 // - Rules - #
 
-ninja.rule('copy').run('cp $in $out')
-    .description('$command')
+ninja
+  .rule('copy')
+  .run('cp $in $out')
+  .description('$command')
 
-
-ninja.rule('remove').run('rm -rf $in')
-    .description('$command')
-
+ninja
+  .rule('remove')
+  .run('rm -rf $in')
+  .description('$command')
 
 let browserify = `browserify --extension='.jsx' --transform [ babelify \
-    --presets [ react es2015 ] ]`
-
+    --presets [ @babel/react @babel/env ] ]`
 
 if (config === 'dev') {
-    browserify += ' --debug'
+  browserify += ' --debug --full-paths'
 } else {
-    browserify += ' -g uglifyify'
+  browserify += ' -g uglifyify'
 }
 
-const dependencies = Object.keys(require('./package.json').dependencies)
-    .filter(name => name !== 'semantic-ui-css')
-const excludes = `-x ${dependencies.join(' -x ')}`
-const requires = `-r ${dependencies.join(' -r ')}`
+function isSubmitDependency(name) {
+  const dependencies = [
+    '1-click-bom',
+    'github-url-to-object',
+    'html-to-react',
+    'immutable',
+    'js-yaml',
+    'lodash.camelcase',
+    'marky-markdown',
+    'path',
+    'pcb-stackup',
+    'react-router',
+    'react-markdown',
+    'redux',
+    'redux-immutable',
+    'rst2mdown',
+    'url',
+    'whats-that-gerber',
+    'whats-that-gerber',
+    'xml-element-string'
+  ]
 
+  return dependencies.some(dependency => dependency === name)
+}
 
+const dependencies = Object.keys(require('./package.json').dependencies).filter(
+  name => name !== 'semantic-ui-css'
+)
+const excludes = `-x ${dependencies
+  .filter(name => !isSubmitDependency(name))
+  .join(' -x ')}`
+const requires = `-r ${dependencies
+  .filter(name => !isSubmitDependency(name))
+  .join(' -r ')}`
 
 let rule = ninja.rule('node-task')
 if (config === 'production') {
-    rule.run(`node -- $in -- ${config} $out`)
+  rule.run(`node -- $in -- ${config} ${cached_build} $out`)
 } else {
-    //write to $out.d depfile in makefile format for ninja to keep track of deps
-    rule.run(`browserify --list $taskFile > $out.d \
-        && if [ '$jsMain' != '' ]; then ${browserify} --list $jsMain >> $out.d; fi \
-        && ./scripts/depfileify $out $out.d \
-        && node -- $in -- ${config} $targetFiles`)
-    .depfile('$out.d')
-    .description(`node -- $in -- ${config} $targetFiles`)
+  //write to $dotd depfile in makefile format for ninja to keep track of deps
+  rule
+    .run(
+      `browserify --list $taskFile > '$dotd' \
+        && if [ '$jsMain' != '' ]; then ${browserify} --list $jsMain >> '$dotd'; fi \
+        && ./scripts/depfileify $out '$dotd' \
+        && node -- $in -- ${config} ${cached_build} $targetFiles`
+    )
+    .depfile("'$dotd'")
+    .description(`node -- $in -- ${config} ${cached_build} $targetFiles`)
 }
-
-
 
 rule = ninja.rule('browserify')
 if (config === 'production') {
-    let compress_opts = {
-        sequences     : true,//join consecutive statements with the “comma operator”
-        properties    : true,  // optimize property access: a["foo"] → a.foo
-        dead_code     : true,  // discard unreachable code
-        drop_debugger : true,  // discard “debugger” statements
-        unsafe        : false, // some unsafe optimizations (see below)
-        conditionals  : true,  // optimize if-s and conditional expressions
-        comparisons   : true,  // optimize comparisons
-        evaluate      : true,  // evaluate constant expressions
-        booleans      : true,  // optimize boolean expressions
-        loops         : true,  // optimize loops
-        unused        : false, // drop unused variables/functions
-        hoist_funs    : true,  // hoist function declarations
-        hoist_vars    : false, // hoist variable declarations
-        if_return     : true,  // optimize if-s followed by return/continue
-        join_vars     : true,  // join var declarations
-        cascade       : true,  // try to cascade `right` into `left` in sequences
-        side_effects  : true,  // drop side-effect-free statements
-        warnings      : true
-    }
+  let compress_opts = {
+    sequences: true, //join consecutive statements with the “comma operator”
+    properties: true, // optimize property access: a["foo"] → a.foo
+    dead_code: true, // discard unreachable code
+    drop_debugger: true, // discard “debugger” statements
+    unsafe: false, // some unsafe optimizations (see below)
+    conditionals: true, // optimize if-s and conditional expressions
+    comparisons: true, // optimize comparisons
+    evaluate: true, // evaluate constant expressions
+    booleans: true, // optimize boolean expressions
+    loops: true, // optimize loops
+    unused: false, // drop unused variables/functions
+    hoist_funs: true, // hoist function declarations
+    hoist_vars: false, // hoist variable declarations
+    if_return: true, // optimize if-s followed by return/continue
+    join_vars: true, // join var declarations
+    cascade: true, // try to cascade `right` into `left` in sequences
+    side_effects: true, // drop side-effect-free statements
+    warnings: true
+  }
 
-    compress_opts = Object.keys(compress_opts).map(key => {
-        return `${key}=${compress_opts[key]}`
-    })
+  compress_opts = Object.keys(compress_opts).map(key => {
+    return `${key}=${compress_opts[key]}`
+  })
 
-    uglifyjs = `uglifyjs --mangle --reserved '${dependencies}' \
+  uglifyjs = `uglifyjs --mangle --reserved '${dependencies}' \
                     --compress '${compress_opts}'`
 
-    rule.run(`${browserify} ${excludes} $in | ${uglifyjs} > $out`)
+  rule.run(`${browserify} ${excludes} $in | ${uglifyjs} > $out`)
 } else {
-    rule.run(`${browserify} ${excludes} --list $in > $out.d \
-        && ./scripts/depfileify $out $out.d \
+  rule
+    .run(
+      `${browserify} ${excludes} --list $in > '$dotd' \
+        && ./scripts/depfileify $out '$dotd' \
         && ${browserify} ${excludes} $in -o $out`
     )
-    .depfile('$out.d')
+    .depfile("'$dotd'")
     .description(`browserify ${excludes} $in -o $out`)
 }
 
 rule = ninja.rule('browserify-require')
 if (config === 'production') {
-    rule.run(`${browserify} ${requires} $in | ${uglifyjs} > $out`)
+  rule.run(`${browserify} ${requires} $in | ${uglifyjs} > $out`)
 } else {
-    rule.run(`${browserify} ${requires} $in -o $out`)
+  rule.run(`${browserify} ${requires} $in -o $out`)
 }
-
 
 ninja.rule('sass').run('node-sass --sourcemap=none --load-path $path $in $out')
 
 ninja.rule('autoprefix')
-    .run(`postcss --use autoprefixer --autoprefixer.browsers \
+  .run(`postcss --use autoprefixer --autoprefixer.browsers \
          "last 2 versions, > 1%, Safari >= 8, iOS >= 8, Firefox ESR, Opera 12.1"\
          $in -o $out`)
-
 
 // - Edges - #
 
 ninja.edge('build/vendor.js').using('browserify-require')
 
-
-const images = globule.find('src/images/*')
-for (var f of images) {
-    ninja.edge(f.replace('src','build')).from(f).using('copy')
+const images = globule.find('src/images/**/*', {filter: 'isFile'})
+for (const f of images) {
+  ninja
+    .edge(ninjaBuildGen.escape(f.replace('src', 'build')))
+    .from(f)
+    .using('copy')
 }
 
+let repositories = globule.find('boards/*/*/*', {filter: 'isDirectory'})
 
-const boardFolders = globule.find('boards/*/*/*', {filter:'isDirectory'})
+if (cached_build) {
+  const previous_path = './build/registry.json'
+  let previous_registry
+  if (fs.existsSync(previous_path)) {
+    previous_registry = require(previous_path)
+  }
+  const new_registry = require('./registry.json')
+  if (previous_registry) {
+    repositories = []
+    const {repoToFolder} = require('./scripts/utils')
+    for (const project of new_registry) {
+      const previous = previous_registry.find(
+        p => p.repo === project.repo && p.hash === project.hash
+      )
+      if (!previous) {
+        repositories.push(repoToFolder(project.repo))
+      }
+    }
+  }
+}
 
+const boards = repositories.reduce((newBoards, folder) => {
+  const [info, yamlPath] = getKitspaceYaml(folder)
+  if (info.multi) {
+    for (let board in info.multi) {
+      const boardInfo = info.multi[board]
+      boardInfo.multiKey = board
+      boardInfo.yamlPath = yamlPath
+      boardInfo.repoPath = folder
+      boardInfo.boardPath = path.join(folder, board)
+      newBoards.push(boardInfo)
+    }
+  } else {
+    info.yamlPath = yamlPath
+    info.repoPath = folder
+    info.boardPath = folder
+    newBoards.push(info)
+  }
+  return newBoards
+}, [])
 
-const jsSrc = globule.find(['src/**/*.js', 'src/**/*.jsx'])
+function getKitspaceYaml(folder) {
+  let file, filePath
 
+  if (fs.existsSync(`${folder}/kitnic.yaml`)) {
+    file = fs.readFileSync(`${folder}/kitnic.yaml`)
+    filePath = `${folder}/kitnic.yaml`
+  } else if (fs.existsSync(`${folder}/kitspace.yaml`)) {
+    file = fs.readFileSync(`${folder}/kitspace.yaml`)
+    filePath = `${folder}/kitspace.yaml`
+  } else if (fs.existsSync(`${folder}/kitspace.yml`)) {
+    file = fs.readFileSync(`${folder}/kitspace.yml`)
+    filePath = `${folder}/kitspace.yml`
+  }
 
-const jsMainTargets = jsSrc.map(function(f) {
-    const temp = f.replace('src', 'build/.temp')
-    ninja.edge(temp).from(f).using('copy')
+  if (file != null) {
+    const info = yaml.safeLoad(file)
+    return [info, filePath]
+  }
+
+  return [{}, '']
+}
+
+const jsSrc = globule.find(['src/**/*.js', 'src/**/*.jsx']).
+      filter((p) => !p.includes('InteractiveHtmlBom'))
+
+const jsMainTargets = ['build/.temp/interactive_bom/IBOM.jsx'].concat(
+  jsSrc.map(function(f) {
+    const temp = ninjaBuildGen.escape(f.replace('src', 'build/.temp'))
+    f = ninjaBuildGen.escape(f)
+    ninja
+      .edge(temp)
+      .from(f)
+      .using('copy')
     return temp
-})
-
+  }))
 
 const jsPageTargets = {}
-for (var folder of boardFolders) {
-    jsPageTargets[folder] = []
-    jsSrc.map(function(f) {
-        const temp = f.replace('src', `build/.temp/${folder}`)
-        jsPageTargets[folder].push(temp)
-        return ninja.edge(temp).from(f).using('copy')
+for (const board of boards) {
+  const folder = board.boardPath
+  jsPageTargets[folder] = []
+  jsSrc
+    .filter(s => !/readme\.jsx$/.test(s))
+    .forEach(f => {
+      const temp = f.replace(
+        'src',
+        `build/.temp/${ninjaBuildGen.escape(folder)}`
+      )
+      jsPageTargets[folder].push(temp)
+      ninja
+        .edge(temp)
+        .from(ninjaBuildGen.escape(f))
+        .using('copy')
     })
 }
-
 
 const sassSrc = globule.find('src/**/*.scss')
 
-ninja.edge('build/.temp/index.css').from('src/index/index.scss')
-    .need(sassSrc).assign('path', 'src/')
+ninja
+  .edge('build/.temp/index.css')
+  .from('src/index/index.scss')
+  .need(sassSrc)
+  .assign('path', 'src/')
+  .using('sass')
+
+const ibomJs = globule.find(['src/interactive_bom/InteractiveHtmlBom/*.js'])
+
+ninja
+  .rule('concat')
+  .run('cat $in > $out')
+  .description('Concatenate files')
+
+ninja
+  .edge('build/ibom-scripts.js')
+  .from(ibomJs)
+  .using('concat')
+
+ninja
+  .edge('build/.temp/interactive_bom/InteractiveHtmlBom/ibom.html')
+  .from('src/interactive_bom/InteractiveHtmlBom/ibom.html')
+  .using('copy')
+
+for (const name of ['bom-builder', '1-click-bom', 'newsletter', 'interactive_bom']) {
+  // compile the sass scss into css
+  ninja
+    .edge(`build/.temp/${name}/${name}.css`)
+    .from(`src/${name}/${name}.scss`)
+    .need(sassSrc)
+    .assign('path', 'src/')
     .using('sass')
 
-
-ninja.edge('build/.temp/page.css').from('src/page/page.scss')
-    .need(sassSrc).assign('path', 'src/')
-    .using('sass')
-
-
-ninja.edge('build/.temp/submit.css').from('src/submit/submit.scss')
-    .need(sassSrc).assign('path', 'src/')
-    .using('sass')
-
-ninja.edge('build/index.css').from('build/.temp/index.css')
+  // autoprefix the css
+  ninja
+    .edge(`build/${name}/${name}.css`)
+    .from(`build/.temp/${name}/${name}.css`)
     .using('autoprefix')
 
-
-ninja.edge('build/page.css').from('build/.temp/page.css')
-    .using('autoprefix')
-
-
-ninja.edge('build/submit.css').from('build/.temp/submit.css')
-    .using('autoprefix')
-
-
-ninja.edge('build/app.js').from('build/.temp/index/render_index.jsx')
+  // bundle the app.js
+  ninja
+    .edge(`build/${name}/app.js`)
+    .assign(`dotd`, `build/${name}/app.js.d`)
+    .from(`build/.temp/${name}/render_${name}.jsx`)
     .need(jsMainTargets)
-    .need('build/.temp/boards.json')
     .using('browserify')
+}
 
+ninja
+  .edge('build/.temp/page.css')
+  .from('src/page/page.scss')
+  .need(sassSrc)
+  .assign('path', 'src/')
+  .using('sass')
 
-ninja.edge('build/submit/app.js').from('build/.temp/submit/render_submit.jsx')
-    .need(jsMainTargets)
+ninja
+  .edge('build/.temp/submit.css')
+  .from('src/submit/submit.scss')
+  .need(sassSrc)
+  .assign('path', 'src/')
+  .using('sass')
+
+ninja
+  .edge('build/index.css')
+  .from('build/.temp/index.css')
+  .using('autoprefix')
+
+ninja
+  .edge('build/page.css')
+  .from('build/.temp/page.css')
+  .using('autoprefix')
+
+ninja
+  .edge('build/submit.css')
+  .from('build/.temp/submit.css')
+  .using('autoprefix')
+
+ninja
+  .edge('build/app.js')
+  .assign('dotd', 'build/app.js.d')
+  .from('build/.temp/index/render_index.jsx')
+  .need(jsMainTargets)
+  .need('build/.temp/search_index.json')
+  .using('browserify')
+
+ninja
+  .edge('build/submit/app.js')
+  .assign('dotd', 'build/submit/app.js.d')
+  .from('build/.temp/submit/render_submit.jsx')
+  .need(jsMainTargets)
+  .using('browserify')
+
+for (const board of boards) {
+  const boardPath = board.boardPath
+  const escapedFolder = ninjaBuildGen.escape(boardPath)
+  ninja
+    .edge(`build/${escapedFolder}/app.js`)
+    .assign('dotd', `build/${escapedFolder}/app.js.d`)
+    .need(`build/.temp/${escapedFolder}/info.json`)
+    .need(`build/.temp/${escapedFolder}/zip-info.json`)
+    .need(`build/.temp/${escapedFolder}/readme.jsx`)
+    .need(jsPageTargets[boardPath])
+    .from(`build/.temp/${escapedFolder}/page/render_page.jsx`)
     .using('browserify')
-
-
-for (folder of boardFolders) {
-    ninja.edge(`build/${folder}/app.js`)
-        .need(`build/.temp/${folder}/info.json`)
-        .need(`build/.temp/${folder}/zip-info.json`)
-        .need(`build/.temp/${folder}/readme.jsx`)
-        .need(jsPageTargets[folder])
-        .from(`build/.temp/${folder}/page/render_page.jsx`)
-        .using('browserify')
 }
 
 function addEdge(taskFile, task) {
-    if (config === 'production') {
-        return ninja.edge(task.targets)
-            .from([taskFile].concat(task.deps))
-            .using('node-task')
-    } else {
-        const edge = ninja.edge(task.targets[0])
-            .from([taskFile].concat(task.deps))
-            .assign('taskFile', taskFile)
-            .assign('targetFiles', task.targets.join(' '))
-            .using('node-task')
-        if (task.moduleDep) {
-            edge.assign('jsMain', task.deps[0])
-        }
-        task.targets.slice(1).map((target) =>
-            ninja.edge(target).from(task.targets[0]))
+  if (config === 'production') {
+    return ninja
+      .edge(task.targets.map(ninjaBuildGen.escape))
+      .from([taskFile].concat(task.deps).map(ninjaBuildGen.escape))
+      .using('node-task')
+  } else {
+    const targetFiles =
+      "'" + task.targets.map(ninjaBuildGen.escape).join("' '") + "'"
+    const edge = ninja
+      .edge(ninjaBuildGen.escape(task.targets[0]))
+      .from([taskFile].concat(task.deps).map(ninjaBuildGen.escape))
+      .assign('taskFile', taskFile)
+      .assign('targetFiles', targetFiles)
+      .assign('dotd', task.targets[0] + '.d')
+      .using('node-task')
+    if (task.moduleDep) {
+      edge.assign('jsMain', ninjaBuildGen.escape(task.deps[0]))
     }
+    task.targets
+      .slice(1)
+      .forEach(target =>
+        ninja
+          .edge(ninjaBuildGen.escape(target))
+          .from(ninjaBuildGen.escape(task.targets[0]))
+      )
+  }
 }
 
 globule.find('tasks/*.js').forEach(taskFile => {
-    const task = require(`./${path.dirname(taskFile)}/${path.basename(taskFile)}`)
-    addEdge(taskFile, task(config))
+  const task = require(`./${path.dirname(taskFile)}/${path.basename(taskFile)}`)
+  addEdge(taskFile, task(config))
 })
-
 
 globule.find('tasks/page/*.js').forEach(taskFile => {
-    const task = require(`./${path.dirname(taskFile)}/${path.basename(taskFile)}`)
-    boardFolders.forEach(folder => addEdge(taskFile, task(config, folder)))
+  const task = require(`./${path.dirname(taskFile)}/${path.basename(taskFile)}`)
+  boards.forEach(board => {
+    let t = task(config, board)
+    if (t.targets.length > 0) {
+      addEdge(taskFile, t)
+    }
+  })
 })
-
 
 if (config === 'production') {
-    const presentation_folders = globule.find(path.join(__dirname, 'presentations/*'), {filter:'isDirectory'})
-    presentation_folders.forEach(folder => {
-        globule.find(path.join(folder, '**/*'), {filter: 'isFile'}).forEach(f => {
-            ninja.edge(path.join('build', path.relative('presentations', f))).from(f).using('copy')
-        })
+  const presentation_folders = globule.find(
+    path.join(__dirname, 'presentations/*'),
+    {filter: 'isDirectory'}
+  )
+  presentation_folders.forEach(folder => {
+    globule.find(path.join(folder, '**/*'), {filter: 'isFile'}).forEach(f => {
+      ninja
+        .edge(
+          ninjaBuildGen.escape(
+            path.join('build', path.relative('presentations', f))
+          )
+        )
+        .from(f)
+        .using('copy')
     })
-    ninja.edge('build/_redirects').from('src/_redirects').using('copy')
+  })
+  ninja
+    .edge('build/_redirects')
+    .from('src/_redirects')
+    .using('copy')
 }
 
+ninja
+  .rule('sed')
+  .run(
+    "sed -e 's/themes\\/default\\/assets\\/images\\/flags\\.png/\\/images\\/flags.png/' $in > $out"
+  )
+  .description('$command')
 
-ninja.edge('build/semantic.min.css').from('node_modules/semantic-ui-css/semantic.min.css').using('copy')
-globule.find('node_modules/semantic-ui-css/themes/default/assets/fonts/*').forEach(file => {
-    ninja.edge(file.replace('node_modules/semantic-ui-css', 'build')).from(file).using('copy')
-})
+ninja
+  .edge('build/semantic.min.css')
+  .from('node_modules/semantic-ui-css/semantic.min.css')
+  .using('sed')
 
+globule
+  .find('node_modules/semantic-ui-css/themes/default/assets/fonts/*')
+  .forEach(file => {
+    ninja
+      .edge(file.replace('node_modules/semantic-ui-css', 'build'))
+      .from(file)
+      .using('copy')
+  })
 
-ninja.edge('clean').from('build/').using('remove')
+ninja
+  .edge('build/images/flags.png')
+  .from('node_modules/semantic-ui-css/themes/default/assets/images/flags.png')
+  .using('copy')
 
+ninja
+  .edge('clean')
+  .from('build/')
+  .using('remove')
 
-const all = ninja.edges.filter(c => !c.targets.includes('clean'))
-    .reduce((prev, c) => prev.concat(c.targets), [])
+const all = ninja.edges
+  .filter(c => !c.targets.includes('clean'))
+  .reduce((prev, c) => prev.concat(c.targets), [])
 ninja.edge('all').from(all)
 ninja.byDefault('all')
 
-
 ninja.save('build.ninja')
-console.log(`generated ./build.ninja with '${config}' config`)
+console.info(
+  `generated ./build.ninja with '${config}' cached=${cached_build} config`
+)

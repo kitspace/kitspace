@@ -1,20 +1,31 @@
 language: node_js
 node_js:
-  - "6"
-env:
-  - CXX=g++-4.8
+  - "12"
 addons:
   apt:
     sources:
-      - ubuntu-toolchain-r-test
+      - sourceline: 'ppa:js-reynaud/kicad-5.1'
     packages:
-      - g++-4.8
       - inkscape
+      - kicad
+      - xvfb
+services:
+  - xvfb
 script:
+  - bash keep_alive.sh &
   - export NODE_ENV=production
   - ./scripts/plug_versions
-  - ./scripts/get_boards production
-  - ./configure production
+  - ./scripts/get_boards production $CACHED_BUILD
+  - if  [ "${CACHED_BUILD}" == "cached" ] && [ -f "build/.temp/boards.json" ]; then mv build/.temp/boards.json previous-boards.json; fi
+  - ./configure production $CACHED_BUILD
   - wget https://github.com/ninja-build/ninja/releases/download/v1.6.0/ninja-linux.zip
   - unzip ninja-linux.zip
-  - ./ninja -j 5 && ./scripts/deploy
+  - if  [ "${CACHED_BUILD}" != "cached" ]; then ./ninja clean; fi
+  - ./ninja -j 2 && cp registry.json build/ || travis_terminate 1;
+  - if [ "${TRAVIS_PULL_REQUEST}" == "false" ]; then yarn smoke-test && ./scripts/deploy; fi
+cache:
+  yarn: true
+  directories:
+    - ./build
+    # needed to cache folder with Cypress binary
+    - ~/.cache

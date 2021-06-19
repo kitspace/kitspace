@@ -11,77 +11,81 @@ $mobile-caption-h: $caption-h * 3;
 $mobile-summary-h: $summary-h * 3 + 48;
 
 .boardCard:hover {
-    box-shadow: 0 .1em .5em $azure-radiance;
+  box-shadow: 0 0.1em 0.5em $azure-radiance;
 }
 
 .boardCard {
-    border: 1px solid $alto;
-    border-radius: 4px;
-    cursor: pointer;
-    display: inline-table;
-    margin: 8px;
+  border: 1px solid $alto;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-table;
+  margin: 8px;
+  overflow: hidden;
+  width: $image-w + 32px + 16px;
+
+  a:hover {
+    text-decoration: none;
+  }
+
+  .imgContainer {
+    background-color: $mine-shaft;
+    padding-bottom: 16px;
+    padding-top: 16px;
+    height: $image-h + 32px;
+    vertical-align: middle;
+    position: relative;
+  }
+
+  .img {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    max-width: $image-w;
+    max-height: $image-h;
+  }
+
+  .title {
+    background-color: $alabaster;
+    color: $mine-shaft;
+    font-size: 18px;
+    font-weight: bold;
+    height: $caption-h;
+    line-height: $caption-h;
+    opacity: 1;
+    padding-left: 10px;
+    text-align: left;
+    vertical-align: bottom;
     overflow: hidden;
-    width: $image-w + 32px + 16px;
+    text-overflow: ellipsis;
+    width: 286px;
+    white-space: nowrap;
+  }
 
-    a:hover {
-        text-decoration: none;
-    }
+  .url {
+    background-color: $alabaster;
+    color: $gray;
+    font-size: 13px;
+    font-weight: normal;
+    opacity: 1;
+    padding-left: 10px;
+    text-align: left;
+  }
 
-    .imgContainer {
-        background-color: $mine-shaft;
-        padding-bottom: 16px;
-        padding-top: 16px;
-        height: $image-h + 32px;
-        vertical-align: middle;
-        position: relative;
-    }
-
-    .img {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        margin: auto;
-        max-width: $image-w;
-        max-height: $image-h;
-    }
-
-    .title {
-        background-color: $alabaster;
-        color: $mine-shaft;
-        font-size: 18px;
-        font-weight: bold;
-        height: $caption-h;
-        line-height: $caption-h;
-        opacity: 1;
-        padding-left: 10px;
-        text-align: left;
-        vertical-align: bottom;
-    }
-
-    .url {
-        background-color: $alabaster;
-        color: $gray;
-        font-size: 13px;
-        font-weight: normal;
-        opacity: 1;
-        padding-left: 10px;
-        text-align: left;
-    }
-
-    .summary {
-        background-color: $alabaster;
-        color: $mine-shaft;
-        font-size: 16px;
-        font-weight: normal;
-        height: $summary-h;
-        margin-bottom: 10px;
-        opacity: 1;
-        overflow: hidden;
-        padding: 8px 10px 5px;
-        text-align: left;
-        vertical-align: top;
-        visibility: visible;
-    }
+  .summary {
+    background-color: $alabaster;
+    color: $mine-shaft;
+    font-size: 16px;
+    font-weight: normal;
+    height: $summary-h;
+    margin-bottom: 10px;
+    opacity: 1;
+    overflow: hidden;
+    padding: 8px 10px 5px;
+    text-align: left;
+    vertical-align: top;
+    visibility: visible;
+  }
 }

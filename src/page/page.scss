@@ -1,104 +1,116 @@
 @import '../colors';
 @import '../common';
 @import '../title_bar';
-@import 'bom';
+@import '../buy_parts/buy_parts';
 @import 'board_showcase';
-@import 'gerbers';
-@import 'buy_parts';
-@import 'bom_install_prompt';
-@import 'extension_compatibility_prompt';
+@import 'order_pcbs';
+@import 'board_extras_menu';
 
-    .disabledSite {
-        color: $gray;
-        cursor: default;
-        user-select: none;
-    }
+.disabledSite {
+  color: $gray;
+  cursor: default;
+  user-select: none;
+}
 
-    .subtitleText {
-        color: $gray;
-        font-size: 14px;
-        text-align: center;
+.subtitleText {
+  color: $gray;
+  font-size: 14px;
+  text-align: left;
+  margin: 3px;
+  margin-left: 0px;
+}
 
-    }
+.titleText {
+  border-radius: 5px;
+  color: black;
+  font-size: 24px;
+  line-height: 40px;
+  text-align: left;
+  vertical-align: middle;
+  width: 100%;
+}
 
-    .titleText {
-        border-radius: 5px;
-        color: $white;
-        font-size: 24px;
-        line-height: 40px;
-        text-align: center;
-        vertical-align: middle;
-        width: 100%;
+.infoBar {
+  margin-top: 10px;
+  padding: 20px;
+}
 
-    }
+.infoBarTitle {
+  margin: 10px;
+  line-height: 1em;
+}
 
-    .infoBar {
-        margin-top: 10px;
-        padding: 20px;
-    }
+.infoBarSummary {
+  margin: 10px;
+  margin-left: 0px;
+}
 
-    .infoBarSummary {
-        margin-bottom: 10px;
-        margin-top: 5px;
-        line-height: 1em;
-    }
+.infoBarInner {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+}
 
-    .infoBarInner {
-        display: flex;
-        flex-flow: row wrap;
-        justify-content: space-around;
-    }
+.infoBarWebsiteLink {
+  font-size: 14px;
+  text-align: left;
+  margin: 10px;
+}
+.infoBarSiteLink {
+  margin-top: 8px;
+}
 
-    .infoBarLinksContainer {
-        display: flex;
-        flex-flow: row wrap;
-        flex-grow: 2;
-        justify-content: space-around;
-        margin-top: 5px;
-    }
+.infoBarLinkContainer {
+  display: flex;
+  justify-content: space-between;
+}
 
-    .infoBarLinks {
-        margin-left: 5px;
-        margin-right: 5px;
-    }
+.infoBarLinks {
+  margin-left: 5px;
+  margin-right: 5px;
+}
 
-    .pageContainer {
-        padding: 0 10%;
+.pageContainer {
+  padding: 0 10%;
 
-        @include breakpoint(small_width) {
-            padding: 0;
-        }
-    }
+  @include breakpoint(small_width) {
+    padding: 0;
+  }
+}
 
-    .readme {
-        margin: 15px 5px 5px 5px;
-        padding: 20px;
-        border-radius: 5px;
-        border: 1px solid #EEEEEE;
-    }
+.readme-container {
+  margin-top: 15px;
+  padding: 20px;
+  border-radius: 5px;
+  border: 1px solid #eeeeee;
+}
 
-    .readme .highlight {
-        overflow-x: auto;
-    }
+.readme {
+  max-width: 1000px;
+}
 
-    .deep-link > a:hover {
-        text-decoration: none;
-    }
+.readme .highlight {
+  overflow-x: auto;
+}
 
-    .readme {
-        word-wrap: break-word;
-    }
+.deep-link > a:hover {
+  text-decoration: none;
+}
 
-    .readme code, .readme .highlight {
-            padding: 0;
-            padding-top: 0.2em;
-            padding-bottom: 0.2em;
-            margin: 0;
-            font-size: 85%;
-            background-color: rgba(0,0,0,0.04);
-            border-radius: 3px;
-    }
+.readme {
+  word-wrap: break-word;
+}
 
-    .readme img {
-        max-width:100%;
-    }
+.readme code,
+.readme .highlight {
+  padding: 0.2em 0.4em 0.2em 0.4em;
+  margin: 0;
+  font-size: 85%;
+  background-color: rgba(0, 0, 0, 0.04);
+  border-radius: 3px;
+}
+
+.readme img {
+  max-width: 100%;
+}

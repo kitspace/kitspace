@@ -1,42 +1,53 @@
 #!/usr/bin/env node
-let registry;
-const fs = require('fs');
-const cp = require('child_process');
-const utils = require('./utils');
+const fs = require('fs')
+const cp = require('child_process')
+const utils = require('./utils')
+const mkdirp = require('mkdirp')
 
+let registry
 if (process.argv[2] === 'production') {
-    registry = JSON.parse(fs.readFileSync('registry.json'));
+  registry = JSON.parse(fs.readFileSync('registry.json', 'utf8'))
 } else {
-    registry = JSON.parse(fs.readFileSync('dev_registry.json'));
+  registry = JSON.parse(fs.readFileSync('dev_registry.json', 'utf8'))
 }
 
+if (process.argv[3] === 'cached') {
+  let cached_registry = []
+  if (fs.existsSync('build/registry.json')) {
+    cached_registry = JSON.parse(fs.readFileSync('build/registry.json', 'utf8'))
+  }
+  registry = registry.filter(
+    project =>
+      !cached_registry.find(
+        p => p.repo === project.repo && p.hash === project.hash
+      )
+  )
+}
 
-for (let {repo, hash} of registry) {
-    const folder = utils.repoToFolder(repo);
-    fs.exists(folder, (function(folder, repo, hash, exists) {
-        let cmd;
-        if (exists) {
-            cmd = `cd ${folder} && git checkout ${hash} \
+mkdirp.sync('boards/')
+registry.forEach(({repo, hash}) => {
+  const folder = utils.repoToFolder(repo)
+  const exists = fs.existsSync(folder)
+  let cmd
+  if (exists) {
+    cmd = `cd ${folder} && git checkout ${hash} \
 || git fetch --unshallow && git checkout ${hash} \
-|| git pull origin master && git checkout ${hash}`;
-            console.log(cmd);
-            return cp.exec(cmd, function(err, out){
-                if (err != null) {
-                    console.error(err);
-                    return process.exit(err.code);
-                }
-            });
-        } else {
-            cmd = `git clone --depth=1 ${repo} ${folder} \
-&& cd ${folder} && git checkout ${hash} \
-|| git fetch --unshallow && git checkout ${hash}`;
-            console.log(cmd);
-            return cp.exec(cmd, function(err, out){
-                if (err != null) {
-                    console.error(err);
-                    return process.exit(err.code);
-                }
-    });
-        }}).bind(undefined, folder, repo, hash)
-    );
-}
+|| git pull origin master && git checkout ${hash}`
+    console.log(cmd)
+    return cp.exec(cmd, function(err, out) {
+      if (err != null) {
+        console.error(err)
+        return process.exit(err.code)
+      }
+    })
+  } else {
+    cmd = `git clone ${repo} ${folder} && cd ${folder} && git checkout ${hash}`
+    console.log(cmd)
+    return cp.exec(cmd, function(err, out) {
+      if (err != null) {
+        console.error(err)
+        return process.exit(err.code)
+      }
+    })
+  }
+})

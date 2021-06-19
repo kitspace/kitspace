@@ -1,37 +1,30 @@
 'use strict'
-const React     = require('react')
+const React = require('react')
+const createClass = require('create-react-class')
+
+const SearchInput = require('react-search-input').default
 
 const BoardCard = require('./board_card')
-const Intro     = require('./intro')
 
-var BoardList = React.createClass({
-  propTypes: {
-    data: React.PropTypes.array,
-    searching: React.PropTypes.bool
-  },
-  render: function () {
-    const intro = this.props.searching ? null : <Intro />
+var BoardList = createClass({
+  render() {
     if (this.props.data.length === 0) {
       return (
         <div>
-          <div style={{height:'40%'}}></div>
-          <div style={{width:'100%', textAlign:'center'}}>
-                Sorry, no results.
+          <div style={{height: '30vh'}} />
+          <div style={{width: '100%', textAlign: 'center'}}>
+            Sorry, no result. <a href="/submit">Add your project!</a>
           </div>
         </div>
       )
     }
     const cardNodes = this.props.data.map(function(data, index) {
-      return (
-        <BoardCard data={data} key={data.id + index}
-          lazyLoad={true}/>
-      )
+      return <BoardCard data={data} key={data.id + index} lazyLoad={true} />
     })
     return (
       <div>
-          {intro}
-        <div className='boardList'>
-          {cardNodes}
+        <div className="boardListContainer">
+          <div className="boardList">{cardNodes}</div>
         </div>
       </div>
     )

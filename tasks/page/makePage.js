@@ -1,38 +1,38 @@
-const fs    = require('fs');
-const utils = require('../utils/utils');
+const fs = require('fs')
+const utils = require('../utils/utils')
 
 if (require.main !== module) {
-    module.exports = function(config, folder) {
-        let deps;
-        let targets = [`build/${folder}/index.html`];
-        if (config === 'production') {
-            deps = [
-                `build/.temp/${folder}/page/page.jsx`,
-                'src/page/page.html',
-                `build/.temp/${folder}/info.json`,
-                `build/.temp/${folder}/readme.jsx`,
-                `build/.temp/${folder}/zip-info.json`
-            ];
-            return {deps, targets, moduleDep: true};
-        } else if (config === 'dev') {
-            deps = ['src/page/page.html'];
-            targets = [`build/${folder}/index.html`];
-            return {deps, targets, moduleDep: false};
-        }
-    };
-
-} else {
-    let html;
-    const {config, deps, targets} = utils.processArgs(process.argv);
-    const index = targets[0];
+  module.exports = function(config, boardInfo) {
+    const folder = boardInfo.boardPath
+    let deps
+    let targets = [`build/${folder}/index.html`]
     if (config === 'production') {
-        //do server-side rendering
-        const jsx = deps[0];
-        html = deps[1];
-        utils.reactRender(jsx, html, index);
+      deps = [
+        `build/.temp/${folder}/page/page.jsx`,
+        'src/page/page.html',
+        `build/.temp/${folder}/info.json`,
+        `build/.temp/${folder}/readme.jsx`,
+        `build/.temp/${folder}/zip-info.json`
+      ]
+      return {deps, targets, moduleDep: true}
     } else if (config === 'dev') {
-        //just copy the page.html to index.html
-        html = deps[0];
-        fs.createReadStream(html).pipe(fs.createWriteStream(index));
+      deps = ['src/page/page.html']
+      targets = [`build/${folder}/index.html`]
+      return {deps, targets, moduleDep: false}
     }
+  }
+} else {
+  let html
+  const {config, deps, targets} = utils.processArgs(process.argv)
+  const index = targets[0]
+  if (config === 'production') {
+    //do server-side rendering
+    const jsx = deps[0]
+    html = deps[1]
+    utils.reactRender(jsx, html, index)
+  } else if (config === 'dev') {
+    //just copy the page.html to index.html
+    html = deps[0]
+    fs.createReadStream(html).pipe(fs.createWriteStream(index))
+  }
 }

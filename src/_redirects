@@ -1,1 +1,15 @@
 /jelly /boards/github.com/monostable/jelly
+/boards/github.com/prometheus-science/* /boards/github.com/amchagas/:splat
+/boards/github.com/kitnic-forks/* /boards/github.com/kitspace-forks/:splat
+/boards/github.com/monostable/* /boards/github.com/kitspace/:splat
+/boards/github.com/ozel/diy_particle_detector/diy%20alpha%20spectrometer /boards/github.com/ozel/diy_particle_detector/alpha-spectrometer
+/boards/github.com/ozel/diy_particle_detector/diy%20electron%20detector /boards/github.com/ozel/diy_particle_detector/electron-detector
+/oshcamp2016 https://monostable.co.uk/presentations/oshcamp2016-kitnic
+/fosdem2017 https://monostable.co.uk/presentations/fosdem2017-kitnic
+/boards/gitlab.com/bath_open_instrumentation_group/sangaboard/ /boards/gitlab.com/bath_open_instrumentation_group/sangaboard/sangaboard_v0.3/
+/boards/github.com/joeycastillo/the-open-book/ /boards/github.com/joeycastillo/the-open-book/ebook-wing/
+/boards/github.com/aleksas/interferometer https://github.com/aleksas/interferometer
+/boards/gitlab.com/drid/f800gs-led-turn-signal/ /boards/gitlab.com/drid/f800gs-led-turn-signal/f800gs_led_turn_signal_dual_row/
+/boards/github.com/isobianin/BeeHive/* /boards/github.com/BeeHive-org/BeeHive/:splat
+/boards/gitlab.com/openflexure/ofm-illumination/ /boards/github.com/openflexure/openflexure-phase-contrast-illumination/
+/boards/gitlab.com/openflexure/openflexure-constant-current-illumination/ /boards/gitlab.com/openflexure/openflexure-constant-current-illumination/ofm_cc_illumination_single

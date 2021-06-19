@@ -1,8 +1,10 @@
 'use strict'
-const React     = require('react')
-const LazyLoad  = require('../lazy_load')
+const React = require('react')
+const createClass = require('create-react-class')
+const LazyLoad = require('../lazy_load')
+const {Icon, Segment} = require('semantic-ui-react')
 
-var BoardShowcase = React.createClass({
+var BoardShowcase = createClass({
   getInitialState: function() {
     return {
       viewFrontBoard: true
@@ -20,7 +22,7 @@ var BoardShowcase = React.createClass({
       viewFrontBoard: false
     })
   },
-  render: function () {
+  render: function() {
     var frontBoardClass = 'frontBoard boardDiagram '
     var backBoardClass = 'backBoard boardDiagram '
     if (this.state.viewFrontBoard) {
@@ -30,37 +32,39 @@ var BoardShowcase = React.createClass({
     }
     const children = this.props.children || [<div />, <div />]
     return (
-      <div className="boardShowcaseContainer">
-        <div className="toggleBoardView responsiveTabs">
-          <button
-          disabled={this.state.viewFrontBoard}
-          className="circuitToggleBtn circuitFrontBtn"
-          onClick={this.frontBoardView}>
-            Front
-          </button>
-          <button
-          disabled={!this.state.viewFrontBoard}
-          className="circuitToggleBtn circuitBackBtn"
-          onClick={this.backBoardView}>
-            Back
-          </button>
-        </div>
-        <div className="boardShowcase">
-          <LazyLoad once={true}
-            component={React.createElement('div', {className:'img'})}
-            distance={300}>
-            <div className="boardContainer">
-              <div className={frontBoardClass}>
-                {children[0]}
+      <div className="boardshowcase-with-menu">
+        <div className="boardShowcaseContainer">
+          <div className="toggleBoardView responsiveTabs">
+            <button
+              disabled={this.state.viewFrontBoard}
+              className="circuitToggleBtn circuitFrontBtn"
+              onClick={this.frontBoardView}
+            >
+              Front
+            </button>
+            <button
+              disabled={!this.state.viewFrontBoard}
+              className="circuitToggleBtn circuitBackBtn"
+              onClick={this.backBoardView}
+            >
+              Back
+            </button>
+          </div>
+          <div className="boardShowcase">
+            <LazyLoad
+              once={true}
+              component={React.createElement('div', {className: 'img'})}
+              distance={300}
+            >
+              <div className="boardContainer">
+                <div className={frontBoardClass}>{children[0]}</div>
+                <div className="circuitBorderContainer">
+                  <div className="circuitBorder" />
+                </div>
+                <div className={backBoardClass}>{children[1]}</div>
               </div>
-              <div className="circuitBorderContainer">
-                <div className="circuitBorder"></div>
-              </div>
-              <div className={backBoardClass}>
-                {children[1]}
-              </div>
-            </div>
-          </LazyLoad>
+            </LazyLoad>
+          </div>
         </div>
       </div>
     )

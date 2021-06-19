@@ -1,0 +1,52 @@
+@import 'mpn_popup';
+
+.TsvTable.collapsed {
+  td {
+    max-width: 200px;
+  }
+}
+
+.TsvTable {
+  border-bottom-left-radius: 0px !important;
+  border-bottom-right-radius: 0px !important;
+
+  td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  td.marked.orange {
+    border-left: 13px solid #ff9e39 !important;
+  }
+
+  td.marked.green {
+    border-left: 13px solid #62b9a4 !important;
+  }
+
+  td.marked.purple {
+    border-left: 13px solid #985dff !important;
+  }
+
+  td.marked.yellow {
+    border-left: 13px solid #f2ef11 !important;
+  }
+
+  td.marked.black {
+    border-left: 13px solid #000000 !important;
+  }
+
+  td.marked.blue {
+    border-left: 13px solid #181887 !important;
+  }
+
+  td.marked.lightblue {
+    border-left: 13px solid lightblue !important;
+  }
+  tr.selected {
+    background: rgba(0, 0, 0, 0.05) !important;
+  }
+
+  td.error {
+    background: rgb(255, 246, 246) !important;
+  }
+}

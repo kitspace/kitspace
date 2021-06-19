@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Interactive BOM</title>
+        <meta name="description" content='Kitspace is a place to share electronics projects.'>
+        <style>
+          @font-face {
+            font-family: 'Noto Sans';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Noto Sans'), local('NotoSans'), url(/images/NotoSans.ttf) format('truetype');
+          }
+          @font-face {
+            font-family: 'Noto Sans';
+            font-style: normal;
+            font-weight: 700;
+            src: local('Noto Sans Bold'), local('NotoSans-Bold'), url(/images/NotoSansBold.ttf) format('truetype');
+          }
+          #content { height: 100%; }
+          #content > div { height: 100%; }
+          #content > div > div.ibom_wrapper { height: 100%; }
+          #content > div > div.ibom_wrapper > div.ibom { height: calc(100% - 70px); }
+          #content div.ibom .menu input[type="checkbox"] { margin: 3px 3px 3px 4px; }
+          #content div.ibom .menu input[type="radio"] { margin: 3px 3px 3px 4px; }
+          #content div.ibom .menu-content { box-sizing: content-box; }
+          #content div.ibom .shameless-plug span { margin-right: 2px; }
+          .topmostdiv {
+            --pcb-edge-color: black;
+            --pad-color: #878787;
+            --pad-color-highlight: #D04040;
+            --pin1-outline-color: #ffb629;
+            --pin1-outline-color-highlight: #b4ff03;
+            --silkscreen-edge-color: #aa4;
+            --silkscreen-polygon-color: #4aa;
+            --silkscreen-text-color: #4aa;
+            --fabrication-edge-color: #907651;
+            --fabrication-polygon-color: #907651;
+            --fabrication-text-color: #a27c24;
+            --track-color: #def5f1;
+            --track-color-highlight: #D04040;
+            --zone-color: #def5f1;
+            --zone-color-highlight: #d0404080;
+          }
+        </style>
+        <script type="text/javascript" src=/vendor.js></script>
+        <script type="text/javascript" src="/ibom-scripts.js"></script>
+        <script>
+          var config = {
+            'dark_mode': false,
+            'show_pads': true,
+            'show_fabrication': false,
+            'show_silkscreen': true,
+            'highlight_pin1': true,
+            'redraw_on_drag': true,
+            'board_rotation': 0,
+            'checkboxes': 'Sourced,Placed',
+            'bom_view': 'left-right',
+            'layer_view': 'FB',
+            'extra_fields': []
+          };
+          var pcbdata = null;
+        </script>
+        <link
+          rel="icon"
+          type="image/png"
+          href="/images/favicon.png">
+        <link rel="stylesheet" href="interactive_bom.css">
+        <script async defer data-domain="kitspace.org" src="https://plausible.io/js/plausible.outbound-links.js"></script>
+        <script>window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
+        <script type="text/javascript">
+          var _paq = _paq || [];
+          /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+          _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+          _paq.push(["setCookieDomain", "*.kitspace.org"]);
+          _paq.push(["setDomains", ["*.kitspace.org"]]);
+          _paq.push(['trackPageView']);
+          _paq.push(['enableLinkTracking']);
+          (function() {
+            var u="https://matomo.kitspace.org/";
+            _paq.push(['setTrackerUrl', u+'piwik.php']);
+            _paq.push(['setSiteId', '1']);
+            var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+            g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+          })();
+        </script>
+    </head>
+    <body>
+        <div id="content"></div>
+        <script type="text/javascript" src=app.js></script>
+    </body>
+</html>
