@@ -19,6 +19,6 @@ then
     rm -f key-file
 else
     mv build/.temp .
-    npx netlify deploy --prod --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --dir=build/
+    npx netlify deploy --prodIfUnlocked --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --dir=build/
     mv .temp build/
 fi
