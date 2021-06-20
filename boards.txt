@@ -108,3 +108,4 @@ https://github.com/jharwinbarrozo/3-ch-diversity-system
 https://github.com/weirdgyn/Driverino-Shield
 https://github.com/weirdgyn/GPSMux
 https://github.com/kelu124/bomanz
+https://github.com/nasa-jpl/open-source-rover
