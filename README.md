@@ -1,6 +1,6 @@
 # https://kitspace.org
 
-[![build status][travis-status]](https://travis-ci.org/kitspace/kitspace)
+[![Build and deploy workflow status badge](https://github.com/kitspace/kitspace/actions/workflows/build_and_deploy.yml/badge.svg?branch=master)](https://github.com/kitspace/kitspace/actions/workflows/build_and_deploy.yml?query=branch%3Amaster)
 [![Backers on Open Collective](https://opencollective.com/kitspace/backers/badge.svg)](#backers)
 [![Sponsors on Open Collective](https://opencollective.com/kitspace/sponsors/badge.svg)](#sponsors)
 
@@ -284,7 +284,6 @@ Visit http://127.0.0.1:8080 in your browser to see your local development site.
 [1clickbom]: https://1clickBOM.com
 [yamllint]: http://www.yamllint.com
 [1clickbom#making]: https://1clickbom.com/#making-a-1-click-bom
-[travis-status]: https://travis-ci.org/kitspace/kitspace.svg?branch=master
 [element-chat]: https://app.element.io/#/room/#kitspace:matrix.org
 
 [4]: https://help.github.com/articles/create-a-repo/
