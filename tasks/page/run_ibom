@@ -6,8 +6,10 @@ import os
 import os.path
 import shutil
 import tempfile
-import wx
 import pcbnew
+
+# Tell ibom we don't want to use the screen
+os.environ['INTERACTIVE_HTML_BOM_NO_DISPLAY'] = ''
 
 from InteractiveHtmlBom.InteractiveHtmlBom.core import ibom
 from InteractiveHtmlBom.InteractiveHtmlBom.core.config import Config
@@ -21,7 +23,6 @@ info_file = os.path.abspath(sys.argv[2])
 out_file = os.path.abspath(sys.argv[3])
 
 BASEDIR = os.path.dirname(sys.argv[0])
-IBOM_CONFIG = os.path.join(BASEDIR, 'ibom_config/config.ini')
 
 os.chdir(os.path.dirname(board_file))
 
@@ -42,11 +43,12 @@ if ext == '.brd':
     board = pcbnew.LoadBoard(tmpfile)
     shutil.rmtree(tmpdir, ignore_errors=True)
 
-app = wx.App()
 
 config = Config(version)
-config.config_file = IBOM_CONFIG
-config.load_from_ini()
+config.open_browser = False
+config.bom_name_format = 'interactive_bom'
+config.include_tracks = True
+config.include_nets = True
 
 if board is None:
     parser = get_parser_by_extension(board_file, config, logger)
@@ -65,6 +67,9 @@ with open(info_file) as ifp:
     info = json.load(ifp)
     pcbdata['summary'] = info['summary']
     pcbdata['metadata']['title'] = info['id'].split('/')[-1]
+
+# rename footprints to modules
+pcbdata['modules'] = pcbdata.pop('footprints')
 
 with open(out_file, 'w') as fp:
     json.dump(pcbdata, fp)
