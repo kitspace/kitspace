@@ -31,6 +31,6 @@ jobs:
           ninja -j 2 && cp registry.json build/
       - name: Test
         env:
-          CYPRESS_KEY: ${{ secrets.CYPRESS_KEY }}
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_KEY }}
           CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID }}
         run: yarn smoke-test
