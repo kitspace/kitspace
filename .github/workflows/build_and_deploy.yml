@@ -22,8 +22,6 @@ jobs:
           yarn install --frozen-lockfile
       - name: Build
         env:
-          CYPRESS_KEY: ${{ secrets.CYPRESS_KEY }}
-          CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID }}
           NODE_ENV: production
         run: |
           export PATH="$(pwd)/node_modules/.bin:$PATH"
@@ -32,4 +30,7 @@ jobs:
           ./configure production false
           ninja -j 2 && cp registry.json build/
       - name: Test
+        env:
+          CYPRESS_KEY: ${{ secrets.CYPRESS_KEY }}
+          CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID }}
         run: yarn smoke-test
