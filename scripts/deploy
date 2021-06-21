@@ -14,7 +14,7 @@ then
 elif  [ "${branch_name}" != "master" -o "${GITHUB_REPOSITORY}" != "kitspace/kitspace" ]
 then
     echo -e "User-agent: *\nDisallow: /\n" > build/robots.txt
-    echo -e "${SSH_KEY}" > key-file
+    echo -e "${PREVIEW_DEPLOY_SSH_KEY}" > key-file
     chmod 600 key-file
     # replace all / with .
     folder=${branch_name//\//.}

@@ -31,3 +31,9 @@ jobs:
           ninja -j 2 && cp registry.json build/
       - name: Test
         run: yarn cy:run
+      - name: Deploy
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          PREVIEW_DEPLOY_SSH_KEY: ${{ secrets.PREVIEW_DEPLOY_SSH_KEY }}
+        run: ./scripts/deploy
