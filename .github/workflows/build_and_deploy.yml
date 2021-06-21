@@ -1,0 +1,42 @@
+name: Build and deploy
+
+on: [push]
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+      - name: Install dependencies
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y software-properties-common curl
+          sudo add-apt-repository -y ppa:kicad/kicad-5.1-releases
+          curl -sL https://deb.nodesource.com/setup_14.x -o nodesource_setup.sh
+          sudo bash nodesource_setup.sh
+          curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+          echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+          sudo apt-get update -qq
+          sudo apt-get install -qq -y kicad inkscape imagemagick nodejs yarn git ninja-build build-essential
+          yarn install --frozen-lockfile
+      - name: Build
+        env:
+          NODE_ENV: production
+        run: |
+          export PATH="$(pwd)/node_modules/.bin:$PATH"
+          ./scripts/plug_versions
+          ./scripts/get_boards production false
+          ./configure production false
+          ninja -j 2 && cp registry.json build/
+      - name: Test
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID }}
+        run: yarn smoke-test
+      - name: Deploy
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          PREVIEW_DEPLOY_SSH_KEY: ${{ secrets.PREVIEW_DEPLOY_SSH_KEY }}
+        run: ./scripts/deploy
