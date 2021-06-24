@@ -63,19 +63,6 @@ var Main = createClass({
   searchUpdated(term) {
     const filters = ['id', 'summary', 'bom']
     const result = boards.filter(ReactSearchInput.createFilter(term, filters))
-    if (typeof _paq !== 'undefined' && term.length > 2) {
-      _paq.push([
-        'trackSiteSearch',
-        // Search keyword searched for
-        term,
-        // Search category selected in your search engine. If you do not need
-        //this, set to false
-        'Boards',
-        // Number of results on the Search results page. Zero indicates a 'No
-        // Result Search Keyword'. Set to false if you don't know
-        result.length
-      ])
-    }
     if (term.length > 2) {
       if (result.length === 0) {
         window.plausible('Searches Without Results', {
