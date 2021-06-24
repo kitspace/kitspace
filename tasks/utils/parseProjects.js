@@ -85,6 +85,7 @@ const getBoardInfo = (project, folder) => {
 
   if (board.summary === '' && /^github.com/.test(board.id)) {
     const ghInfo = getGithubInfo(folder)
+    console.log('ghInfo', JSON.stringify(ghInfo, null, 2))
     if (__guard__(ghInfo, x => x.description) != null) {
       board.summary = ghInfo.description
     } else {
