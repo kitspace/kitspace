@@ -68,8 +68,5 @@ with open(info_file) as ifp:
     pcbdata['summary'] = info['summary']
     pcbdata['metadata']['title'] = info['id'].split('/')[-1]
 
-# rename footprints to modules
-pcbdata['modules'] = pcbdata.pop('footprints')
-
 with open(out_file, 'w') as fp:
     json.dump(pcbdata, fp)
