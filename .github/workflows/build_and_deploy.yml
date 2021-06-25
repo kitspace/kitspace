@@ -35,11 +35,6 @@ jobs:
           ./scripts/get_boards production false
           ./configure production false
           ninja -j 2 && cp registry.json build/
-      - name: Test
-        env:
-          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-          CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID }}
-        run: yarn smoke-test
       - name: Deploy
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
