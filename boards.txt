@@ -1,1 +1,2 @@
 https://github.com/kitspace-forks/OtterCastAmp
+https://github.com/kitspace-forks/OtterCastAudioV2
