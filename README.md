@@ -20,6 +20,16 @@ project page are what allow a design to be manufactured:
 
 Help us build an open hardware repository of useful electronics projects!
 
+## Get in touch
+
+ - [Subscribe to the Kitspace newsletter](https://kitspace.org/newsletter/)
+ - [Follow Kitspace on Twitter](https://twitter.com/kitspaceorg)
+ - Join our chatroom: _choose your preferred platform, they are bridged so we can all talk across platforms_
+     - [Discord](https://discord.gg/nFjDCZqghC)
+     - [Matrix.org][element-chat]
+     - IRC: irc.libera.chat#kitspace (e.g. [via Kiwi IRC](https://kiwiirc.com/nextclient/irc.libera.chat/kitspace))
+
+
 ## How many people visit the site?
 
 Our visitor stats are public [on plausible.io](https://plausible.io/kitspace.org).
@@ -28,12 +38,6 @@ Our visitor stats are public [on plausible.io](https://plausible.io/kitspace.org
 
 The renderings of the PCB files are made using [pcb-stackup](https://github.com/tracespace/pcb-stackup).
 You can get similar renderings and also inspect invdividual layers, using the [tracespace gerber viewer](https://tracespace.io/view).
-
-## Get in touch
-
- - [Join Element chat][element-chat] or irc.libera.chat#kitspace
- - [Subscribe to our newsletter](https://kitspace.org/newsletter/)
- - [Follow us on Twitter](https://twitter.com/kitspaceorg)
 
 ## Adding your project
 
