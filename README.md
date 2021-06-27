@@ -34,10 +34,10 @@ Help us build an open hardware repository of useful electronics projects!
 
 Our visitor stats are public [on plausible.io](https://plausible.io/kitspace.org).
 
-## pcb-stackup
+## Tracespace
 
-The renderings of the PCB files are made using [pcb-stackup](https://github.com/tracespace/pcb-stackup).
-You can get similar renderings and also inspect invdividual layers, using the [tracespace gerber viewer](https://tracespace.io/view).
+The renderings of the PCB files are made using [Tracespace tools](https://github.com/tracespace/tracespace).
+You can get similar renderings and also inspect invdividual layers, using the [Tracespace Gerber viewer](https://tracespace.io/view).
 
 ## Adding your project
 
