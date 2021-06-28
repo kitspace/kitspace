@@ -33,7 +33,7 @@ jobs:
           export PATH="$(pwd)/node_modules/.bin:$PATH"
           ./scripts/plug_versions
           # to save bandwidth and avoid being rate-limited on lfs fetches
-          git lfs uninstall
+          git config --global lfs.fetchexclude '*'
           ./scripts/get_boards production false
           ./configure production false
           ninja -j 2 && cp registry.json build/
