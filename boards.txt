@@ -1,2 +1,2 @@
 https://github.com/dhairyashah1/USBee32-S2
-https://github.com/kitspace-forks/satellite_tracker
+https://github.com/m3cinc/infidel
