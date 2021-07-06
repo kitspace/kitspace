@@ -113,3 +113,4 @@ https://github.com/Tyler-Ward/stacklight-hardware
 https://github.com/gregdavill/d20-hardware
 https://github.com/hutscape/oak
 https://github.com/dhairyashah1/USBee32-S2
+https://github.com/m3cinc/infidel
