@@ -1,2 +1,2 @@
 https://github.com/dhairyashah1/USBee32-S2
-https://github.com/m3cinc/infidel
+https://github.com/kitspace-forks/hydromisc
