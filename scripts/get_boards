@@ -31,24 +31,37 @@ registry.forEach(({repo, hash}) => {
   let cmd
   if (exists) {
     cmd = `cd ${folder} && git checkout ${hash} \
-|| cd ${folder} && git fetch --unshallow && git checkout ${hash} \
-|| cd ${folder} && git pull origin master && git checkout ${hash}`
+|| git fetch --unshallow && git checkout ${hash} \
+|| && git pull origin master && git checkout ${hash}`
     console.log(cmd)
-    return cp.exec(cmd, function(err, out) {
+    cp.exec(cmd, function(err, out) {
       if (err != null) {
         console.error(err)
-        return process.exit(err.code)
+        process.exit(err.code)
       }
     })
   } else {
     cmd = `git clone --depth=1 ${repo} ${folder} \
-&& cd ${folder} && git checkout ${hash} \
-|| cd ${folder} && git fetch --unshallow && git checkout ${hash}`
+&& cd ${folder} && git checkout ${hash}`
+    // exception for glasgow and pslab-hardware as they don't work with the shallow clone
+    if (
+      repo === 'https://github.com/GlasgowEmbedded/glasgow' ||
+      repo === 'https://github.com/fossasia/pslab-hardware'
+    ) {
+      cmd = `git clone ${repo} ${folder} \
+&& cd ${folder} && git checkout ${hash}`
+    }
     console.log(cmd)
-    return cp.exec(cmd, function(err, out) {
+    cp.exec(cmd, function(err, out) {
       if (err != null) {
-        console.error(err)
-        return process.exit(err.code)
+        cmd = `cd ${folder} && git fetch --unshallow && git checkout ${hash}`
+        console.log(cmd)
+        cp.exec(cmd, function(err, out) {
+          if (err != null) {
+            console.error(err)
+            process.exit(err.code)
+          }
+        })
       }
     })
   }
