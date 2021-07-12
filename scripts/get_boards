@@ -43,8 +43,11 @@ registry.forEach(({repo, hash}) => {
   } else {
     cmd = `git clone --depth=1 ${repo} ${folder} \
 && cd ${folder} && git checkout ${hash}`
-    // exception for glasgow as it doesn't work with the shallow clone
-    if (repo === 'https://github.com/GlasgowEmbedded/glasgow') {
+    // exception for glasgow and pslab-hardware as they don't work with the shallow clone
+    if (
+      repo === 'https://github.com/GlasgowEmbedded/glasgow' ||
+      repo === 'https://github.com/fossasia/pslab-hardware'
+    ) {
       cmd = `git clone ${repo} ${folder} \
 && cd ${folder} && git checkout ${hash}`
     }
