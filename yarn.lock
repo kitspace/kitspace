@@ -8,7 +8,7 @@
 
 "1-click-bom@https://github.com/kitspace/npm-1-click-bom":
   version "1.3.1"
-  resolved "https://github.com/kitspace/npm-1-click-bom#d654935edf348015bc726d7e66dd167757060cbe"
+  resolved "https://github.com/kitspace/npm-1-click-bom#d15fe58ffb7934ca510ac7c19c3ad267bebaf9f8"
   dependencies:
     electro-grammar "https://github.com/kitspace/electro-grammar#dev2"
     s-expression "^3.0.3"
