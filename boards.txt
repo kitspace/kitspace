@@ -118,3 +118,4 @@ https://github.com/bru4bas/gelatino-board
 https://github.com/vektorious/test_tube_photometer
 https://github.com/Ottercast/OtterCastAudioV2
 https://github.com/Ottercast/OtterCastAmp
+https://github.com/LibreSolar/mppt-1210-hus
