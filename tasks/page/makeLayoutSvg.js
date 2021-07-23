@@ -39,10 +39,12 @@ if (require.main !== module) {
         r = await superagent.get(url).accept('application/json')
       }
 
-      const svgUrl = `https://remote-processor.kitspace.org/processed/files/${id}/images/layout.svg`
+      if (r.body.status !== 'failed') {
+        const svgUrl = `https://remote-processor.kitspace.org/processed/files/${id}/images/layout.svg`
 
-      r = await superagent.get(svgUrl)
-      fs.writeFileSync(svgPath, r.body)
+        r = await superagent.get(svgUrl)
+        fs.writeFileSync(svgPath, r.body)
+      }
     })
 
   Promise.race([
