@@ -10,8 +10,8 @@ const apiToken =
 if (require.main !== module) {
   module.exports = function(config, boardInfo) {
     const buildFolder = boardInfo.boardPath.replace('boards', 'build/boards')
-    const files = globule.find(path.join(boardInfo.boardPath, '**'))
-    const kicadPcbPath = findKicadPcbFile(boardInfo.boardPath, files, boardInfo)
+    const files = globule.find(path.join(boardInfo.repoPath, '**'))
+    const kicadPcbPath = findKicadPcbFile(boardInfo.repoPath, files, boardInfo)
     let deps = []
     let targets = []
     if (kicadPcbPath != null) {

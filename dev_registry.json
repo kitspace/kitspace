@@ -1,7 +1,7 @@
 [
   {
-    "repo": "https://github.com/mattvenn/esp8266-breakout",
-    "hash": "fcb3107c66670035c7cb330f5d98eddde5d17f56"
+    "repo": "https://github.com/BeeHive-org/BeeHive",
+    "hash": "c09e1da62b488f4e445e4fbd892eca9eb69fa96e"
   },
   {
     "repo": "https://github.com/kitspace-forks/arduino-uno",
