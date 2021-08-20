@@ -104,6 +104,9 @@ if (require.main !== module) {
     console.error('ERROR: No lines in BOM found')
     process.exit(1)
   }
+  info.bom.lines.forEach(line => {
+    delete line.retailers['JLC Assembly']
+  })
   info.bom.tsv = oneClickBOM.writeTSV(info.bom.lines)
 
   let repo = cp.execSync(`cd '${repoPath}' && git remote -v`, {
