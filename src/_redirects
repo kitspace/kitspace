@@ -14,3 +14,4 @@
 /boards/gitlab.com/openflexure/ofm-illumination/ /boards/github.com/openflexure/openflexure-phase-contrast-illumination/
 /boards/gitlab.com/openflexure/openflexure-constant-current-illumination/ /boards/gitlab.com/openflexure/openflexure-constant-current-illumination/ofm_cc_illumination_single
 /boards/github.com/beehive-org/beehive/boards/peltier https://github.com/BeeHive-org/BeeHive/tree/master/hardware/archive/peltier
+/boards/github.com/Jan--Henrik/* /boards/github.com/Jana-Marie/:splat
