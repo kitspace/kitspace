@@ -23,7 +23,7 @@ const BuyParts = createClass({
       buyParts: installExtension,
       buyMultiplier: 1,
       buyAddPercent: 0,
-      adding: {}
+      adding: {},
     }
   },
   getMultiplier() {
@@ -48,7 +48,7 @@ const BuyParts = createClass({
         if (event.data.from == 'extension') {
           this.setState({
             extensionWaiting: false,
-            extensionPresence: 'present'
+            extensionPresence: 'present',
           })
           switch (event.data.message) {
             case 'register':
@@ -58,8 +58,8 @@ const BuyParts = createClass({
                     props: {
                       project: this.props.project,
                       vendor: retailer,
-                      multiplier: this.getMultiplier()
-                    }
+                      multiplier: this.getMultiplier(),
+                    },
                   })
                   window.postMessage(
                     {
@@ -67,17 +67,17 @@ const BuyParts = createClass({
                       message: 'quickAddToCart',
                       value: {
                         retailer,
-                        multiplier: this.getMultiplier()
-                      }
+                        multiplier: this.getMultiplier(),
+                      },
                     },
                     '*'
                   )
-                }
+                },
               })
               break
             case 'updateAddingState':
               this.setState({
-                adding: event.data.value
+                adding: event.data.value,
               })
               break
           }
@@ -90,7 +90,7 @@ const BuyParts = createClass({
     const mult = this.getMultiplier()
     const lines = this.props.lines.map(line => {
       return Object.assign({}, line, {
-        quantity: Math.ceil(line.quantity * mult)
+        quantity: Math.ceil(line.quantity * mult),
       })
     })
     return oneClickBom.writeTSV(lines)
@@ -107,7 +107,7 @@ const BuyParts = createClass({
             if (line.retailers[name]) {
               return [
                 numberOfLines + 1,
-                numberOfParts + Math.ceil(mult * line.quantity)
+                numberOfParts + Math.ceil(mult * line.quantity),
               ]
             }
             return [numberOfLines, numberOfParts]
@@ -132,28 +132,44 @@ const BuyParts = createClass({
         }
       })
       .filter(x => x != null)
+    const disabled = retailerButtons.length === 0
     return (
       <div className="BuyParts">
-        <semantic.Header textAlign="center" as="h3" attached="top">
+        <semantic.Header
+          disabled={disabled}
+          textAlign="center"
+          as="h3"
+          attached="top"
+        >
           <semantic.Icon
             style={{fontSize: '14pt', marginBottom: 5}}
             name="shopping basket"
           />
           Buy Parts
         </semantic.Header>
-        <InstallPrompt
-          extensionPresence={this.state.extensionPresence}
-          bomInstallLink={installExtension}
-        />
-        <AdjustQuantity
-          buyMultiplier={this.state.buyMultiplier}
-          buyAddPercent={this.state.buyAddPercent}
-          setBuyMultiplier={v => this.setState({buyMultiplier: v})}
-          setBuyAddPercent={v => this.setState({buyAddPercent: v})}
-        />
-        <semantic.Segment className="buttonSegment" attached>
-          {retailerButtons}
-        </semantic.Segment>
+        {disabled ? (
+          <semantic.Segment disabled={true} className="buttonSegment" attached>
+            <p style={{color: 'rgba(0, 0, 0, 0.87)'}}>
+              No purchaseable parts have been specified for this project yet.
+            </p>
+          </semantic.Segment>
+        ) : (
+          <>
+            <InstallPrompt
+              extensionPresence={this.state.extensionPresence}
+              bomInstallLink={installExtension}
+            />
+            <AdjustQuantity
+              buyMultiplier={this.state.buyMultiplier}
+              buyAddPercent={this.state.buyAddPercent}
+              setBuyMultiplier={v => this.setState({buyMultiplier: v})}
+              setBuyAddPercent={v => this.setState({buyAddPercent: v})}
+            />
+            <semantic.Segment className="buttonSegment" attached>
+              {retailerButtons}
+            </semantic.Segment>
+          </>
+        )}
         <Bom
           attached
           parts={this.props.parts}
@@ -168,7 +184,7 @@ const BuyParts = createClass({
         />
       </div>
     )
-  }
+  },
 })
 
 function AdjustQuantity(props) {
@@ -178,7 +194,7 @@ function AdjustQuantity(props) {
       <semantic.Icon
         style={{
           margin: 5,
-          marginTop: 0
+          marginTop: 0,
         }}
         name="delete"
       />
@@ -203,7 +219,7 @@ function AdjustQuantity(props) {
       <semantic.Icon
         style={{
           margin: 10,
-          marginTop: 0
+          marginTop: 0,
         }}
         name="plus"
       />
@@ -270,7 +286,7 @@ function RetailerButton(props) {
             style={{
               width: '100%',
               display: 'flex',
-              justifyContent: 'space-between'
+              justifyContent: 'space-between',
             }}
           >
             <div>
@@ -282,7 +298,7 @@ function RetailerButton(props) {
               <semantic.Icon name="shopping basket" />
             </div>
           </div>
-        )
+        ),
       }}
       labelPosition="right"
       className={'retailerButton ' + color}
