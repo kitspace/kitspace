@@ -132,28 +132,44 @@ const BuyParts = createClass({
         }
       })
       .filter(x => x != null)
+    const disabled = retailerButtons.length === 0
     return (
       <div className="BuyParts">
-        <semantic.Header textAlign="center" as="h3" attached="top">
+        <semantic.Header
+          disabled={disabled}
+          textAlign="center"
+          as="h3"
+          attached="top"
+        >
           <semantic.Icon
             style={{fontSize: '14pt', marginBottom: 5}}
             name="shopping basket"
           />
           Buy Parts
         </semantic.Header>
-        <InstallPrompt
-          extensionPresence={this.state.extensionPresence}
-          bomInstallLink={installExtension}
-        />
-        <AdjustQuantity
-          buyMultiplier={this.state.buyMultiplier}
-          buyAddPercent={this.state.buyAddPercent}
-          setBuyMultiplier={v => this.setState({buyMultiplier: v})}
-          setBuyAddPercent={v => this.setState({buyAddPercent: v})}
-        />
-        <semantic.Segment className="buttonSegment" attached>
-          {retailerButtons}
-        </semantic.Segment>
+        {disabled ? (
+          <semantic.Segment disabled={true} className="buttonSegment" attached>
+            <p style={{color: 'rgba(0, 0, 0, 0.87)'}}>
+              No purchaseable parts have been specified for this project yet.
+            </p>
+          </semantic.Segment>
+        ) : (
+          <>
+            <InstallPrompt
+              extensionPresence={this.state.extensionPresence}
+              bomInstallLink={installExtension}
+            />
+            <AdjustQuantity
+              buyMultiplier={this.state.buyMultiplier}
+              buyAddPercent={this.state.buyAddPercent}
+              setBuyMultiplier={v => this.setState({buyMultiplier: v})}
+              setBuyAddPercent={v => this.setState({buyAddPercent: v})}
+            />
+            <semantic.Segment className="buttonSegment" attached>
+              {retailerButtons}
+            </semantic.Segment>
+          </>
+        )}
         <Bom
           attached
           parts={this.props.parts}
