@@ -49,23 +49,47 @@ Currently the `kitspace.yaml` makes use of the following fields:
 
 ```yaml
 summary: A description for your project
-site: A site you would like to link to (include http:// or https://)
-color: The solder resist color of the preview rendering. Can be one of:
-       - green
-       - red
-       - blue
-       - black
-       - white
-       - orange
-       - purple
-       - yellow
-bom: A path to your 1-click-bom in case it isn't `1-click-bom.tsv`.
-gerbers: A path to your folder of gerbers in case it isn't `gerbers/`.
+
+site: https://example.com # A site you would like to link to (include http:// or https://)
+
+color: purple # for example
+   # The solder resist color of the preview rendering. If left undefined "green" is used. Can be one of:
+       # - green
+       # - red
+       # - blue
+       # - black
+       # - white
+       # - orange
+       # - purple
+       # - yellow
+
+bom: my-bom.xlsx
+  # A path to your 1-click-bom in case it isn't `1-click-bom.tsv`. Supported extensions are:
+  # - .tsv
+  # - .csv
+  # - .ods
+  # - .xlsx
+  # Check out https://github.com/kitspace/1clickBOM#readme for more details
+
+
+gerbers: my/gerber/folder # A path to your folder of gerbers in case it isn't `gerbers/`.
+
 eda:
-  type: kicad
-  pcb: path/to/your/file.kicad_pcb
-readme: A path to your README file in case it isn't in the repository root directory.
-multi: Identifier field only used if the repository contains multiple projects.
+  type: kicad # or eagle
+  pcb: path/to/your/file.kicad_pcb # your/eagle.brd
+
+readme: my/special/readme.md # A path to your README file in case it isn't in the repository root directory.
+
+pcb-services: [aisler, pcbway, oshpark, jlcpcb]
+  # A list of the PCB services you would like to have included on your
+  # page. If left undefined all are included. Otherwise ust be a list of Kitspace
+  # sponsors, possible values are:
+  #      - aisler
+  #      - pcbway
+  #      - oshpark
+  #      - jlcpcb
+
+multi: # Identifier field only used if the repository contains multiple projects. See below for details.
 
 ```
 Paths should be in UNIX style (i.e. use `/` not `\`) and relative to the root

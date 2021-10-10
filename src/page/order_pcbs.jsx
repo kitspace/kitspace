@@ -6,18 +6,37 @@ const mediaQueries = require('../media_queries')
 const {zipPath, folder, width, height, layers} = require('../zip-info.json')
 
 const zipUrl = `https://kitspace.org/${folder}/${zipPath}`
-const aislerUrl = `https://aisler.net/p/new?url=${zipUrl}&ref=kitspace`
-const pcbwayUrl = `https://www.pcbway.com/QuickOrderOnline.aspx?fileurl=${zipUrl}&from=kitspace`
-const oshparkUrl = `https://oshpark.com/import?url=${zipUrl}`
+
+const urls = {
+  aisler: `https://aisler.net/p/new?url=${zipUrl}&ref=kitspace`,
+  pcbway: `https://www.pcbway.com/QuickOrderOnline.aspx?fileurl=${zipUrl}&from=kitspace`,
+  oshpark: `https://oshpark.com/import?url=${zipUrl}`,
+  jlcpcb: `https://cart.jlcpcb.com/quote?fileurl=${zipUrl}&from=kitspace`,
+}
+
+const niceNames = {
+  aisler: 'Aisler',
+  pcbway: 'PCBWay',
+  oshpark: 'OSHPark',
+  jlcpcb: 'JLCPCB',
+}
+
 const pcbShopperUrl = `https://pcbshopper.com/?Width=${width}&Height=${height}&Units=mm&Layers=${layers}&Quantity=1&GetPrices`
-const jlcpcbUrl = `https://cart.jlcpcb.com/quote?fileurl=${zipUrl}&from=kitspace`
+
+const defaultPcbServices = Object.keys(niceNames)
 
 let OrderPcbs = createClass({
   render() {
     const trackClick = vendor => e => {
       window.plausible('Order PCBs', {
-        props: {project: this.props.project, vendor}
+        props: {project: this.props.project, vendor: niceNames[vendor]},
       })
+    }
+    let pcbServices = this.props.pcbServices
+    if (pcbServices === undefined) {
+      pcbServices = defaultPcbServices
+    } else if (pcbServices === null) {
+      pcbServices = []
     }
     return (
       <div className="PcbMenu">
@@ -37,53 +56,19 @@ let OrderPcbs = createClass({
           </div>
 
           <div className="PcbMenu__links-container">
-            <a
-              rel="nofollow"
-              href={aislerUrl}
-              target="_blank"
-              className="PcbMenu__link"
-              onClick={trackClick('Aisler')}
-              onAuxClick={trackClick('Aisler')}
-            >
-              <img src="/images/aisler.png" />
-              <semantic.Flag name="de" />
-            </a>
-
-            <a
-              rel="nofollow"
-              href={pcbwayUrl}
-              target="_blank"
-              className="PcbMenu__link"
-              onClick={trackClick('PCBWay')}
-              onAuxClick={trackClick('PCBWay')}
-            >
-              <img src="/images/pcbway.png" />
-              <semantic.Flag name="cn" />
-            </a>
-
-            <a
-              rel="nofollow"
-              href={jlcpcbUrl}
-              target="_blank"
-              className="PcbMenu__link"
-              onClick={trackClick('JLCPCB')}
-              onAuxClick={trackClick('JLCPCB')}
-            >
-              <img src="/images/jlcpcb.png" />
-              <semantic.Flag name="cn" />
-            </a>
-
-            <a
-              rel="nofollow"
-              href={oshparkUrl}
-              target="_blank"
-              className="PcbMenu__link"
-              onClick={trackClick('OSHPark')}
-              onAuxClick={trackClick('OSHPark')}
-            >
-              <img src="/images/oshpark.png" />
-              <semantic.Flag name="us" />
-            </a>
+            {pcbServices.map(vendor => (
+              <a
+                rel="nofollow"
+                href={urls[vendor]}
+                target="_blank"
+                className="PcbMenu__link"
+                onClick={trackClick(vendor)}
+                onAuxClick={trackClick(vendor)}
+                key={vendor}
+              >
+                <img alt={`${vendor} logo`} src={`/images/${vendor}.png`} />
+              </a>
+            ))}
           </div>
         </div>
 
@@ -106,7 +91,7 @@ let OrderPcbs = createClass({
         </div>
       </div>
     )
-  }
+  },
 })
 
 module.exports = OrderPcbs

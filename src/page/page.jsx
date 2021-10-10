@@ -30,6 +30,7 @@ const Page = createClass({
       .slice(-1)
       .join(' / ')
     const titleText = `${idText} on Kitspace`
+    let pcbServices = info['pcb-services']
     return (
       <div>
         <Helmet>
@@ -65,7 +66,7 @@ const Page = createClass({
               hasInteractiveBom={info.has_interactive_bom}
               zipUrl={zipUrl}
             />
-            <OrderPcbs project={info.id} />
+            <OrderPcbs pcbServices={pcbServices} project={info.id} />
             <BuyParts
               project={info.id}
               lines={info.bom.lines}
@@ -78,7 +79,7 @@ const Page = createClass({
         </div>
       </div>
     )
-  }
+  },
 })
 
 module.exports = Page

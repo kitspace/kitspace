@@ -9,8 +9,10 @@ const getPartinfo = require('../../src/get_partinfo.js')
 
 const omitIBOMFile = 'omit-ibom-boards.txt'
 
-const omitIBOMBoards =
-  fs.readFileSync(omitIBOMFile, 'utf-8').split('\n').filter(Boolean)
+const omitIBOMBoards = fs
+  .readFileSync(omitIBOMFile, 'utf-8')
+  .split('\n')
+  .filter(Boolean)
 
 if (require.main !== module) {
   module.exports = function(config, boardInfo) {
@@ -32,7 +34,11 @@ if (require.main !== module) {
       pcbFile = utils.findBoardFile(boardInfo.boardPath, 'kicad_pcb')
     }
     if (pcbFile == null) {
-      pcbFile = utils.findBoardFile(boardInfo.boardPath, 'brd', utils.checkEagleFile)
+      pcbFile = utils.findBoardFile(
+        boardInfo.boardPath,
+        'brd',
+        utils.checkEagleFile
+      )
     }
 
     let deps = [
@@ -40,14 +46,14 @@ if (require.main !== module) {
       boardInfo.repoPath,
       bom,
       boardInfo.yamlPath,
-      omitIBOMFile
+      omitIBOMFile,
     ]
     if (pcbFile != null) {
       deps.push(pcbFile)
     }
     const targets = [
       `build/.temp/${boardInfo.boardPath}/info.json`,
-      `build/${boardInfo.boardPath}/1-click-BOM.tsv`
+      `build/${boardInfo.boardPath}/1-click-BOM.tsv`,
     ]
     return {deps, targets, moduleDep: false}
   }
@@ -81,6 +87,7 @@ if (require.main !== module) {
     kitspaceYaml = kitspaceYaml.multi[yamlKey]
   }
   info.site = kitspaceYaml.site || ''
+  info['pcb-services'] = kitspaceYaml['pcb-services']
 
   if (/\.tsv$|\.csv$|\.kicad_pcb$/i.test(bomPath)) {
     var content = fs.readFileSync(bomPath, {encoding: 'utf8'})
@@ -88,7 +95,7 @@ if (require.main !== module) {
     var content = fs.readFileSync(bomPath)
   }
   info.bom = oneClickBOM.parse(content, {
-    ext: /\.kicad_pcb$/i.test(bomPath) ? 'kicad_pcb' : null
+    ext: /\.kicad_pcb$/i.test(bomPath) ? 'kicad_pcb' : null,
   })
   if (info.bom.invalid != null) {
     info.bom.invalid.forEach(invalid => {
@@ -110,15 +117,18 @@ if (require.main !== module) {
   info.bom.tsv = oneClickBOM.writeTSV(info.bom.lines)
 
   let repo = cp.execSync(`cd '${repoPath}' && git remote -v`, {
-    encoding: 'utf8'
+    encoding: 'utf8',
   })
   repo = repo.split('\t')[1].split(' ')[0]
   info.repo = repo
 
-  const repoName = repoPath.split('/').slice(1).join('/')
+  const repoName = repoPath
+    .split('/')
+    .slice(1)
+    .join('/')
   const omit = omitIBOMBoards.includes(info.id)
   info.has_interactive_bom =
-    !omit && deps.some((d) => d.endsWith('.kicad_pcb') || d.endsWith('.brd'))
+    !omit && deps.some(d => d.endsWith('.kicad_pcb') || d.endsWith('.brd'))
 
   getPartinfo(info.bom.lines).then(parts => {
     info.bom.parts = parts
