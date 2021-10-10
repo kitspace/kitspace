@@ -150,7 +150,7 @@ const BuyParts = createClass({
         {disabled ? (
           <semantic.Segment disabled={true} className="buttonSegment" attached>
             <p style={{color: 'rgba(0, 0, 0, 0.87)'}}>
-              No purchaseable parts have been specified for this project yet.
+              No parts to buy have been specified in this project's BOM yet.
             </p>
           </semantic.Segment>
         ) : (
