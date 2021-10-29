@@ -120,3 +120,4 @@ https://github.com/Ottercast/OtterCastAudioV2
 https://github.com/Ottercast/OtterCastAmp
 https://github.com/LibreSolar/mppt-1210-hus
 https://gitlab.com/LouisLab/pivr
+https://github.com/sci-bots/dropbot-120-channel-test-board.kicad
