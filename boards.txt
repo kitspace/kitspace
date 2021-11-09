@@ -1,2 +1,2 @@
 https://github.com/kitspace-forks/arduino-uno
-https://github.com/kitspace-forks/dropbot-40-channel-HV-switching-board.kicad
+https://github.com/kitspace-forks/b-parasite
