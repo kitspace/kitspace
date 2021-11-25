@@ -126,3 +126,4 @@ https://github.com/sci-bots/dropbot-control-board.kicad
 https://github.com/sci-bots/dropbot-120-channel-pogo-pin-board.kicad
 https://github.com/sci-bots/dropbot-front-panel.kicad
 https://github.com/intergalaktik/ulx4m
+https://github.com/SdtElectronics/Xassette-Asterisk
