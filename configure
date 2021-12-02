@@ -140,7 +140,7 @@ if (config === 'production') {
   rule.run(`${browserify} ${requires} $in -o $out`)
 }
 
-ninja.rule('sass').run('node-sass --sourcemap=none --load-path $path $in $out')
+ninja.rule('sass').run('sass --no-source-map --load-path $path $in $out')
 
 ninja.rule('autoprefix')
   .run(`postcss --use autoprefixer --autoprefixer.browsers \
