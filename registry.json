@@ -18,5 +18,10 @@
   {
     "repo": "https://github.com/Jana-Marie/hoverboard-breakout",
     "hash": "6dd7e0fe411f46c289d237290503cfcea1191d8c"
+  },
+  {
+    "repo": "https://github.com/hutscape/oak",
+    "hash":"0624e3903b46b712077e7e19820b0e28a0374d60"
   }
+
 ]
