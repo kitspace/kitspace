@@ -21,7 +21,10 @@
   },
   {
     "repo": "https://github.com/hutscape/oak",
-    "hash":"0624e3903b46b712077e7e19820b0e28a0374d60"
+    "hash": "0624e3903b46b712077e7e19820b0e28a0374d60"
+  },
+  {
+    "repo": "https://github.com/Ottercast/OtterCastAudioV2",
+    "hash": "0f15b5b442e1414ec5205cc8464fc810a0cea3c2"
   }
-
 ]
