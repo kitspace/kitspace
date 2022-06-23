@@ -43,11 +43,11 @@ exports.reactRender = function(jsx, html, output, router = false) {
   }
 
   const rawHtml = fs.readFileSync(html, {encoding: 'utf8'})
-  const document = jsdom.jsdom(rawHtml)
+  const document = new jsdom.JSDOM(rawHtml)
 
   const helmet = Helmet.renderStatic()
 
-  const {head} = jsdom.jsdom(`<head>
+  const {head} = new jsdom.JSDOM(`<head>
        ${helmet.title.toString()}
        ${helmet.meta.toString()}
        ${helmet.link.toString()}
@@ -73,7 +73,7 @@ exports.reactRender = function(jsx, html, output, router = false) {
   const content = document.getElementById('content')
   content.innerHTML = react
 
-  return fs.writeFileSync(output, jsdom.serializeDocument(document))
+  return fs.writeFileSync(output, document.serialize())
 }
 
 exports.findBoardFile = function(path, ext, check) {
