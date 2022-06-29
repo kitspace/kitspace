@@ -6,3 +6,5 @@ gitlab.com/drid/f800gs-led-turn-signal/F800GS_LED_Turn_Signal_Dual_Row
 gitlab.com/drid/f800gs-led-turn-signal/F800GS_LED_Turn_Signal_Single_Row
 github.com/kasbah/maulwurf
 github.com/kelu124/bomanz
+github.com/morgulbrut/LoRa32_Node
+github.com/8BitMixtape/ESPTINY86_MixtapePCB

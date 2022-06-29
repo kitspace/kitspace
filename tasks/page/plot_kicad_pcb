@@ -1,0 +1,165 @@
+#!/usr/bin/env python3
+
+"""
+Generates Gerber or SVG files from .kicad_pcb
+
+USAGE:
+./plot_kicad_pcb gerber x.kicad_pcb output_directory/
+./plot_kicad_pcb svg x.kicad_pcb /tmp/directory/ output.svg
+"""
+
+import time
+import os
+import sys
+import glob
+import re
+import xml.etree.ElementTree as ET
+import pcbnew
+
+
+plot_format = sys.argv[1]
+input_file = sys.argv[2]
+plot_directory = os.path.abspath(sys.argv[3])
+if plot_format == "svg":
+    plot_format = pcbnew.PLOT_FORMAT_SVG
+    output_file = sys.argv[4]
+    from util import remove_color, empty_svg
+    from shrink_svg import shrink_svg
+elif plot_format == "gerber":
+    plot_format = pcbnew.PLOT_FORMAT_GERBER
+else:
+    print(f"Only 'svg' or 'gerber' supported, got: '{plot_format}'")
+    sys.exit(1)
+
+board = pcbnew.LoadBoard(input_file)
+plot_control = pcbnew.PLOT_CONTROLLER(board)
+plot_options = plot_control.GetPlotOptions()
+plot_options.SetOutputDirectory(plot_directory)
+plot_options.SetPlotFrameRef(False)
+plot_options.SetSketchPadLineWidth(pcbnew.FromMM(0.35))
+plot_options.SetAutoScale(False)
+plot_options.SetMirror(False)
+plot_options.SetUseGerberAttributes(False)
+plot_options.SetExcludeEdgeLayer(True)
+plot_options.SetScale(1)
+plot_options.SetUseAuxOrigin(True)
+plot_options.SetNegative(False)
+plot_options.SetPlotReference(True)
+plot_options.SetPlotValue(True)
+plot_options.SetPlotInvisibleText(False)
+plot_options.SetDrillMarksType(pcbnew.PCB_PLOT_PARAMS.NO_DRILL_SHAPE)
+plot_options.SetSvgPrecision(aPrecision=1, aUseInch=False)
+
+# remove solder mask from silk to be sure there is no silk on pads
+plot_options.SetSubtractMaskFromSilk(True)
+
+
+plot_plan = []
+if plot_format == pcbnew.PLOT_FORMAT_GERBER:
+    copper_layer_count = board.GetCopperLayerCount()
+    plot_plan = (
+        [("F_Cu", pcbnew.F_Cu)]
+        + [(f"Inner{n}", n) for n in range(1, copper_layer_count - 1)]
+        + [
+            ("B_Cu", pcbnew.B_Cu),
+            ("B_Mask", pcbnew.B_Mask),
+            ("F_Mask", pcbnew.F_Mask),
+            ("B_Paste", pcbnew.B_Paste),
+            ("F_Paste", pcbnew.F_Paste),
+            ("F_SilkS", pcbnew.F_SilkS),
+            ("B_SilkS", pcbnew.B_SilkS),
+            ("Edge_Cuts", pcbnew.Edge_Cuts),
+        ]
+    )
+
+elif plot_format == pcbnew.PLOT_FORMAT_SVG:
+    start = pcbnew.PCBNEW_LAYER_ID_START
+    end = pcbnew.PCBNEW_LAYER_ID_START + pcbnew.PCB_LAYER_ID_COUNT
+    for i in range(start, end):
+        name = pcbnew.LayerName(i).replace(".", "_")
+        plot_plan.append((name, i))
+
+
+for (layer_name, layer_id) in plot_plan:
+    plot_control.SetLayer(layer_id)
+    plot_control.OpenPlotfile(layer_name, plot_format, aSheetDesc=layer_name)
+    plot_control.PlotLayer()
+    time.sleep(0.01)
+    plot_control.ClosePlot()
+
+
+if plot_format == pcbnew.PLOT_FORMAT_SVG:
+
+    ET.register_namespace("", "http://www.w3.org/2000/svg")
+
+    layers = []
+    for (layer_name, _) in plot_plan:
+        fileglob = os.path.join(plot_directory, f"*-{layer_name}.svg")
+        (filepath,) = glob.glob(fileglob)
+        tree = ET.parse(filepath)
+        layers.append((layer_name, tree))
+
+    new_tree = empty_svg()
+    new_root = new_tree.getroot()
+
+    # map to names used in the kicad theme json
+    to_css_map = {
+        "f_cu": "copper f",
+        "b_cu": "copper b",
+        "f_adhesive": "f_adhes",
+        "b_adhesive": "b_adhes",
+        "f_silkscreen": "f_silks",
+        "b_silkscreen": "b_silks",
+        "user_drawings": "dwgs_user",
+        "user_eco1": "eco1_user",
+        "user_eco2": "eco2_user",
+        "f_couryard": "f_crtyd",
+        "b_couryard": "b_crtyd",
+    }
+
+    for (layer_name, tree) in layers:
+        css_class = layer_name.lower()
+        if css_class in to_css_map:
+            css_class = to_css_map[css_class]
+        elif m := re.match(r"in(\d+)_cu", css_class):
+            css_class = f"copper in{m[1]}"
+
+        layer = tree.getroot()
+        g = ET.SubElement(
+            new_root,
+            "g",
+            {
+                "class": f"kicad_svg_layer {css_class}",
+            },
+        )
+        for child in layer:
+            for e in child.iter():
+                remove_color(e)
+            g.append(child)
+
+    shrink_svg(new_tree, margin=1500)
+
+    folder = os.path.dirname(output_file)
+    os.makedirs(folder, exist_ok=True)
+    new_tree.write(output_file)
+
+elif plot_format == pcbnew.PLOT_FORMAT_GERBER:
+    drill_writer = pcbnew.EXCELLON_WRITER(board)
+    drill_writer.SetMapFileFormat(pcbnew.PLOT_FORMAT_PDF)
+
+    mirror = False
+    minimal_header = False
+    offset = board.GetDesignSettings().GetAuxOrigin()
+    merge_npth = True
+    drill_writer.SetOptions(mirror, minimal_header, offset, merge_npth)
+
+    metric_format = True
+    drill_writer.SetFormat(metric_format)
+
+    gen_drl = True
+    gen_map = False
+    drill_writer.CreateDrillandMapFilesSet(plot_directory, gen_drl, gen_map)
+
+    # A text file to report drill statistics
+    drill_report_filename = plot_directory + "/drill_report.txt"
+    drill_writer.GenDrillReportFile(drill_report_filename)

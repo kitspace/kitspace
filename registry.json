@@ -10,21 +10,5 @@
   {
     "repo": "https://github.com/GlasgowEmbedded/glasgow",
     "hash": "d7e5a870dab4f527bc41b01ac16fb4b118d997cd"
-  },
-  {
-    "repo": "https://github.com/Jana-Marie/Otter-Iron",
-    "hash": "17f78666fb8a5a901fad2c600c10c04e3e95f0ae"
-  },
-  {
-    "repo": "https://github.com/Jana-Marie/hoverboard-breakout",
-    "hash": "6dd7e0fe411f46c289d237290503cfcea1191d8c"
-  },
-  {
-    "repo": "https://github.com/hutscape/oak",
-    "hash": "0624e3903b46b712077e7e19820b0e28a0374d60"
-  },
-  {
-    "repo": "https://github.com/Ottercast/OtterCastAudioV2",
-    "hash": "0f15b5b442e1414ec5205cc8464fc810a0cea3c2"
   }
 ]

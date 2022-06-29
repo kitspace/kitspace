@@ -60,7 +60,7 @@ if not pcbdata or not components:
     logger.error('Parsing failed.')
     sys.exit(1)
 
-pcbdata['bom'] = ibom.generate_bom(components, config, None)
+pcbdata['bom'] = ibom.generate_bom(components, config)
 pcbdata['ibom_version'] = config.version
 
 with open(info_file) as ifp:
