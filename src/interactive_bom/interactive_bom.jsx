@@ -8,6 +8,22 @@ const screenfull = require('screenfull')
 const TitleBar = require('../title_bar')
 const IBOM = require('./IBOM')
 
+if (typeof window !== 'undefined') {
+  window.config = {
+    dark_mode: false,
+    show_pads: true,
+    show_fabrication: false,
+    show_silkscreen: true,
+    highlight_pin1: true,
+    redraw_on_drag: true,
+    board_rotation: 0,
+    checkboxes: 'Sourced,Placed',
+    bom_view: 'left-right',
+    layer_view: 'FB',
+    fields: ['Value', 'Footprint']
+  }
+}
+
 const descriptionFixed =
   ' - Shared on Kitspace - Kitspace is a place to share ready to order electronics designs. You can order the right components for this project with a few clicks.'
 
