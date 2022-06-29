@@ -8,3 +8,4 @@ github.com/kasbah/maulwurf
 github.com/kelu124/bomanz
 github.com/morgulbrut/LoRa32_Node
 github.com/8BitMixtape/ESPTINY86_MixtapePCB
+github.com/balthazar-space/balthazarPSU3
