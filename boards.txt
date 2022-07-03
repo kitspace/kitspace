@@ -1,3 +1,4 @@
+https://github.com/Open-Gamma-Project/Open-Gamma-Detector
 https://github.com/kammce/SJTwo
 https://github.com/mattvenn/esp8266-breakout
 https://github.com/kitspace-forks/arduino-uno
