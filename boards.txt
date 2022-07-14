@@ -55,6 +55,7 @@ https://github.com/dusjagr/ESPTINY86_Stompbox
 https://github.com/8BitMixtape/mCore_Mixtape
 https://github.com/kasbah/corners
 https://github.com/maltman23/ArduTouch
+https://gogs.zenerdio.de/sebastian/satnogs-diplexer
 https://github.com/alpharesearch/ESP8266_DS18B20
 https://github.com/Jana-Marie/CH330_Hardware
 https://github.com/8BitMixtape/ESPTINY86_MixtapePCB
