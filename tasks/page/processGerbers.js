@@ -34,6 +34,9 @@ if (require.main !== module) {
       } else if (boardInfo.eda == null) {
         const kicadPcbPattern = path.join(boardInfo.repoPath, '**/*.kicad_pcb')
         kicadPcbFile = globule.find(kicadPcbPattern)[0]
+        if (kicadPcbFile != null) {
+          kicadPcbFile = path.relative(boardInfo.repoPath, kicadPcbFile)
+        }
       }
       if (kicadPcbFile != null) {
         gerbers = [path.join(boardInfo.repoPath, kicadPcbFile)]
