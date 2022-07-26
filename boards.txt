@@ -1,1 +1,2 @@
 https://github.com/kitspace-forks/arduino-uno
+https://gitlab.com/salfter/rc2014-compat
