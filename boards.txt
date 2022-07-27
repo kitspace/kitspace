@@ -1,2 +1,2 @@
 https://github.com/kitspace-forks/arduino-uno
-https://github.com/FundamentalFrequency/LMN-3-ECAD
+https://github.com/kitspace-forks/LMN-3-ECAD
