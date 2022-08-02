@@ -136,3 +136,4 @@ https://github.com/balthazar-space/balthazarPSU3
 https://github.com/balthazar-space/Unifying-PCB
 https://github.com/bschwind/key-ripper
 https://github.com/taylorconor/threeboard
+https://gitlab.com/salfter/rc2014-compat
