@@ -1,5 +1,9 @@
 [
   {
+    "repo": "https://github.com/rosmo-robot/micro-bot",
+    "hash": "15b7805ebad4a4c7b251b6c6c8e8539b4fbe2a64"
+  },
+  {
     "repo": "https://github.com/robotsrulz/SP_Adapter",
     "hash": "0391e520c2f1e953f703b467ebe6b8022971771"
   },
