@@ -1,5 +1,5 @@
 https://github.com/Open-Gamma-Project/AFBR-SiPM-Carrier-Board
-https://github.com/Open-Gamma-Project/SiPM-Carrier-Board
+https://github.com/Open-Gamma-Project/MicroFC-SiPM-Carrier-Board
 https://github.com/Open-Gamma-Project/Open-Gamma-Detector
 https://github.com/kammce/SJTwo
 https://github.com/mattvenn/esp8266-breakout
