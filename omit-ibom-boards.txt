@@ -11,3 +11,5 @@ github.com/8BitMixtape/ESPTINY86_MixtapePCB
 github.com/balthazar-space/balthazarPSU3
 github.com/balthazar-space/Unifying-PCB
 github.com/amchagas/fast-response-diode
+gogs.zenerdio.de/sebastian/satnogs-diplexer
+github.com/8BitMixtape/NextLevelEdition
