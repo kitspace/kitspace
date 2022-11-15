@@ -1,3 +1,4 @@
+https://github.com/Open-Gamma-Project/Mini-SiD
 https://github.com/Open-Gamma-Project/AFBR-SiPM-Carrier-Board
 https://github.com/Open-Gamma-Project/MicroFC-SiPM-Carrier-Board
 https://github.com/Open-Gamma-Project/Open-Gamma-Detector
