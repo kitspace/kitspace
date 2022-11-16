@@ -101,7 +101,7 @@ module.exports = (layers, color, callback, createElement) => {
     layers,
     {
       color: styleToOption(colorToStyle[color]),
-      outlineGapFill: 1.27,
+      outlineGapFill: 9,
       id: 'pcb-stackup',
       createElement: createElement || xmlElementString
     },
