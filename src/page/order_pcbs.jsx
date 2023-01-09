@@ -12,6 +12,7 @@ const urls = {
   pcbway: `https://www.pcbway.com/QuickOrderOnline.aspx?fileurl=${zipUrl}&from=kitspace`,
   oshpark: `https://oshpark.com/import?url=${zipUrl}`,
   jlcpcb: `https://cart.jlcpcb.com/quote?fileurl=${zipUrl}&from=kitspace`,
+  pcbgogo: `https://www.pcbgogo.com/pcb-fabrication-quote.html?fileurl=${zipUrl}`
 }
 
 const niceNames = {
@@ -19,6 +20,7 @@ const niceNames = {
   pcbway: 'PCBWay',
   oshpark: 'OSHPark',
   jlcpcb: 'JLCPCB',
+  pcbgogo: 'PCBGoGo',
 }
 
 const pcbShopperUrl = `https://pcbshopper.com/?Width=${width}&Height=${height}&Units=mm&Layers=${layers}&Quantity=1&GetPrices`
