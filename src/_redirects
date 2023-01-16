@@ -16,5 +16,6 @@
 /boards/gitlab.com/openflexure/openflexure-constant-current-illumination/ /boards/gitlab.com/openflexure/openflexure-constant-current-illumination/ofm_cc_illumination_single
 /boards/github.com/beehive-org/beehive/boards/peltier https://github.com/BeeHive-org/BeeHive/tree/master/hardware/archive/peltier
 /boards/github.com/jan--henrik/* /boards/github.com/jana-marie/:splat
-/boards/github.com/Open-Gamma-Project/SiPM-Carrier-Board/ /boards/github.com/open-gamma-project/microfc-sipm-carrier-board/
-/boards/github.com/open-gamma-project/sipm-carrier-board/ /boards/github.com/open-gamma-project/microfc-sipm-carrier-board/
+/boards/github.com/Open-Gamma-Project/SiPM-Carrier-Board/ /boards/github.com/opengammaproject/microfc-sipm-carrier-board/
+/boards/github.com/open-gamma-project/sipm-carrier-board/ /boards/github.com/opengammaproject/microfc-sipm-carrier-board/
+/boards/github.com/open-gamma-project/* /boards/github.com/opengammaproject/:splat
