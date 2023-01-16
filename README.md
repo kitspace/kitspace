@@ -80,15 +80,6 @@ eda:
 
 readme: my/special/readme.md # A path to your README file in case it isn't in the repository root directory.
 
-pcb-services: [aisler, pcbway, oshpark, jlcpcb]
-  # A list of the PCB services you would like to have included on your
-  # page. If left undefined all are included. Otherwise ust be a list of Kitspace
-  # sponsors, possible values are:
-  #      - aisler
-  #      - pcbway
-  #      - oshpark
-  #      - jlcpcb
-
 multi: # Identifier field only used if the repository contains multiple projects. See below for details.
 
 ```
