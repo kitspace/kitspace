@@ -1,7 +1,7 @@
-https://github.com/Open-Gamma-Project/Mini-SiD
-https://github.com/Open-Gamma-Project/AFBR-SiPM-Carrier-Board
-https://github.com/Open-Gamma-Project/MicroFC-SiPM-Carrier-Board
-https://github.com/Open-Gamma-Project/Open-Gamma-Detector
+https://github.com/OpenGammaProject/Mini-SiD
+https://github.com/OpenGammaProject/AFBR-SiPM-Carrier-Board
+https://github.com/OpenGammaProject/MicroFC-SiPM-Carrier-Board
+https://github.com/OpenGammaProject/Open-Gamma-Detector
 https://github.com/kammce/SJTwo
 https://github.com/mattvenn/esp8266-breakout
 https://github.com/kitspace-forks/arduino-uno
