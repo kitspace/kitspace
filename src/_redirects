@@ -20,3 +20,4 @@
 /boards/github.com/open-gamma-project/sipm-carrier-board/ /boards/github.com/opengammaproject/microfc-sipm-carrier-board/
 /boards/github.com/Open-Gamma-Project/* /boards/github.com/opengammaproject/:splat
 /boards/github.com/open-gamma-project/* /boards/github.com/opengammaproject/:splat
+/boards/github.com/bschwind/key-ripper/ /boards/github.com/bschwind/key-ripper/key-ripper/
