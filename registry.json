@@ -1,9 +1,5 @@
 [
   {
-    "repo": "https://github.com/bschwind/key-ripper",
-    "hash": "9924de7c7e503b4c9ffd341388c27f704f23bb49"
-  },
-  {
     "repo": "https://github.com/rosmo-robot/micro-bot",
     "hash": "15b7805ebad4a4c7b251b6c6c8e8539b4fbe2a64"
   },
