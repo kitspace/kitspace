@@ -16,7 +16,7 @@ if (require.main !== module) {
     if (boardInfo.readme) {
       deps.push(path.join(boardInfo.repoPath, boardInfo.readme))
     } else {
-      const pattern = `${boardInfo.boardPath}/readme?(\.markdown|\.mdown|\.mkdn|\.md|\.rst)`
+      const pattern = `${boardInfo.repoPath}/readme?(\.markdown|\.mdown|\.mkdn|\.md|\.rst)`
       const readmes = glob.sync(pattern, {nocase: true})
 
       if (readmes.length > 0) {
