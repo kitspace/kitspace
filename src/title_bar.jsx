@@ -56,7 +56,7 @@ function TitleBar(props) {
 function AddAProjectButton() {
   return (
     <semantic.Menu.Item>
-      <semantic.Button icon labelPosition="left" color="green" href="/submit">
+      <semantic.Button icon labelPosition="left" color="green" href="https://github.com/kitspace/kitspace#adding-your-project">
         <semantic.Icon name="plus" />
         Add a project
       </semantic.Button>
