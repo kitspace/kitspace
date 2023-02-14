@@ -1,2 +1,2 @@
 https://github.com/kitspace-forks/arduino-uno
-https://github.com/rbaron/b-parasite
+https://github.com/kitspace-forks/USBI2C01
