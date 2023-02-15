@@ -142,5 +142,6 @@ https://gitlab.com/salfter/rc2014-compat
 https://gitlab.com/salfter/rrf_rpi_skr_adapter
 https://github.com/rosmo-robot/micro-bot
 https://github.com/MaxZimmer/Spikeling-V2
+https://github.com/mlab-modules/USBI2C01
 https://github.com/dtomcat/ArdPromSD
 https://github.com/rbaron/b-parasite
