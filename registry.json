@@ -14,5 +14,9 @@
   {
     "repo": "https://github.com/GlasgowEmbedded/glasgow",
     "hash": "d7e5a870dab4f527bc41b01ac16fb4b118d997cd"
+  },
+  {
+    "repo": "https://github.com/bschwind/key-ripper",
+    "hash": "3ac8f8b42a66c14d329118d3b595449a0c04d355"
   }
 ]
