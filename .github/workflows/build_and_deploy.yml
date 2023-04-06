@@ -1,10 +1,7 @@
 name: Build and deploy
 
 on:
-  schedule:
-    # run every 3 hours on the 33rd minute (github actions sees higher usage on
-    # the 0th minute)
-    - cron: 33 */3 * * *
+  workflow_dispatch:
   push:
 
 jobs:
