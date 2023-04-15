@@ -20,6 +20,10 @@
     "hash": "2af1eef430b2382d22d3c8a95abe18ccc1ee5dc7"
   },
   {
+    "repo": "https://github.com/rbaron/b-parasite",
+    "hash": "4b277bd62f61f7daaa7c2353b8dc8a5e4dd7da9a"
+  },
+  {
     "repo": "https://github.com/bschwind/key-ripper",
     "hash": "3ac8f8b42a66c14d329118d3b595449a0c04d355"
   }
