@@ -40,15 +40,13 @@ plot_options.SetSketchPadLineWidth(pcbnew.FromMM(0.35))
 plot_options.SetAutoScale(False)
 plot_options.SetMirror(False)
 plot_options.SetUseGerberAttributes(False)
-plot_options.SetExcludeEdgeLayer(True)
 plot_options.SetScale(1)
 plot_options.SetUseAuxOrigin(True)
 plot_options.SetNegative(False)
 plot_options.SetPlotReference(True)
 plot_options.SetPlotValue(True)
 plot_options.SetPlotInvisibleText(False)
-plot_options.SetDrillMarksType(pcbnew.PCB_PLOT_PARAMS.NO_DRILL_SHAPE)
-plot_options.SetSvgPrecision(aPrecision=1, aUseInch=False)
+plot_options.SetDrillMarksType(pcbnew.DRILL_MARKS_NO_DRILL_SHAPE)
 
 # remove solder mask from silk to be sure there is no silk on pads
 plot_options.SetSubtractMaskFromSilk(True)
@@ -82,7 +80,7 @@ elif plot_format == pcbnew.PLOT_FORMAT_SVG:
 
 for (layer_name, layer_id) in plot_plan:
     plot_control.SetLayer(layer_id)
-    plot_control.OpenPlotfile(layer_name, plot_format, aSheetDesc=layer_name)
+    plot_control.OpenPlotfile(layer_name, plot_format)
     plot_control.PlotLayer()
     time.sleep(0.01)
     plot_control.ClosePlot()
@@ -137,7 +135,7 @@ if plot_format == pcbnew.PLOT_FORMAT_SVG:
                 remove_color(e)
             g.append(child)
 
-    shrink_svg(new_tree, margin=1500)
+    shrink_svg(new_tree, margin_mm=1.5)
 
     folder = os.path.dirname(output_file)
     os.makedirs(folder, exist_ok=True)
