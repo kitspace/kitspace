@@ -1,57 +1,168 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!-- HTML Meta Tags -->
-        <title>Kitspace</title>
-        <meta name="description" content='Kitspace is a place to share ready to order open hardware electronics projects. You can order the the circuit board and all the components for a project with just a few clicks.'>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- HTML Meta Tags -->
+    <title>Kitspace</title>
+    <meta
+      name="description"
+      content="Kitspace is a place to share ready to order open hardware electronics projects. You can order the the circuit board and all the components for a project with just a few clicks."
+    />
 
-        <!-- Google / Search Engine Tags -->
-        <meta itemprop="name" content="Kit Space">
-        <meta itemprop="description" content='Kitspace is a place to share ready to order open hardware electronics projects. You can order the the circuit board and all the components for a project with just a few clicks.'>
-        <meta itemprop="image" content="https://kitspace.org/images/logo_meta.png">
+    <!-- Google / Search Engine Tags -->
+    <meta itemprop="name" content="Kit Space" />
+    <meta
+      itemprop="description"
+      content="Kitspace is a place to share ready to order open hardware electronics projects. You can order the the circuit board and all the components for a project with just a few clicks."
+    />
+    <meta
+      itemprop="image"
+      content="https://kitspace.org/images/logo_meta.png"
+    />
 
-        <!-- Facebook Meta Tags -->
-        <meta property="og:type" content="website">
-        <meta property="og:title" content="Kitspace">
-        <meta property="og:description" content='Kitspace is a place to share ready to order open hardware electronics projects. You can order the the circuit board and all components for a project with just a few clicks.'>
-        <meta property="og:image" content="https://kitspace.org/images/logo_meta.png">
-        <meta property="og:image:width" content=500>
-        <meta property="og:image:height" content=269>
+    <!-- Facebook Meta Tags -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Kitspace" />
+    <meta
+      property="og:description"
+      content="Kitspace is a place to share ready to order open hardware electronics projects. You can order the the circuit board and all components for a project with just a few clicks."
+    />
+    <meta
+      property="og:image"
+      content="https://kitspace.org/images/logo_meta.png"
+    />
+    <meta property="og:image:width" content="500" />
+    <meta property="og:image:height" content="269" />
 
-        <!-- Twitter Meta Tags -->
-        <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:title" content="Kitspace">
-        <meta name="twitter:description" content='Kitspace is a place to share ready to order open hardware electronics projects. You can order the circuit board and all components for a project with just a few clicks.'>
-        <meta name="twitter:image" content="https://kitspace.org/images/logo_meta.png">
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Kitspace" />
+    <meta
+      name="twitter:description"
+      content="Kitspace is a place to share ready to order open hardware electronics projects. You can order the circuit board and all components for a project with just a few clicks."
+    />
+    <meta
+      name="twitter:image"
+      content="https://kitspace.org/images/logo_meta.png"
+    />
 
-        <style>
-          @font-face {
-              font-family: 'Noto Sans';
-              font-style: normal;
-              font-weight: 400;
-              src: local('Noto Sans'), local('NotoSans'), url(/images/NotoSans.ttf) format('truetype');
-          }
-          @font-face {
-              font-family: 'Noto Sans';
-              font-style: normal;
-              font-weight: 700;
-              src: local('Noto Sans Bold'), local('NotoSans-Bold'), url(/images/NotoSansBold.ttf) format('truetype');
-          }
-        </style>
-        <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/mflpmlediakefinapghmabapjeippfdi">
-        <link
-            rel="icon"
-            type="image/png"
-            href="/images/favicon.png">
-        <link rel="stylesheet" href="index.css">
-    </head>
-    <body>
-        <div id="content"></div>
-        <script type="text/javascript" src=/vendor.js></script>
-        <script type="text/javascript" src=app.js></script>
-        <script async defer data-domain="kitspace.org" src="https://plausible.io/js/plausible.outbound-links.js"></script>
-        <script>window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
-    </body>
+    <style>
+      @font-face {
+        font-family: 'Noto Sans';
+        font-style: normal;
+        font-weight: 400;
+        src: local('Noto Sans'), local('NotoSans'),
+          url(/images/NotoSans.ttf) format('truetype');
+      }
+      @font-face {
+        font-family: 'Noto Sans';
+        font-style: normal;
+        font-weight: 700;
+        src: local('Noto Sans Bold'), local('NotoSans-Bold'),
+          url(/images/NotoSansBold.ttf) format('truetype');
+      }
+    </style>
+    <link rel="stylesheet" href="index.css" />
+    <link
+      rel="chrome-webstore-item"
+      href="https://chrome.google.com/webstore/detail/mflpmlediakefinapghmabapjeippfdi"
+    />
+    <link
+      rel="icon"
+      sizes="16x16"
+      type="image/png"
+      href="/images/icons/favicon-16x16.png"
+    />
+    <link
+      rel="icon"
+      sizes="32x32"
+      type="image/png"
+      href="/images/icons/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      sizes="48x48"
+      type="image/png"
+      href="/images/icons/favicon-48x48.png"
+    />
+    <link
+      rel="icon"
+      sizes="96x96"
+      type="image/png"
+      href="/images/icons/favicon-96x96.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="57x57"
+      type="image/png"
+      href="/images/icons/apple-touch-icon-57x57.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="60x60"
+      type="image/png"
+      href="/images/icons/apple-touch-icon-60x60.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="72x72"
+      type="image/png"
+      href="/images/icons/apple-touch-icon-72x72.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="76x76"
+      type="image/png"
+      href="/images/icons/apple-touch-icon-76x76.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="114x114"
+      type="image/png"
+      href="/images/icons/apple-touch-icon-114x114.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="120x120"
+      type="image/png"
+      href="/images/icons/apple-touch-icon-120x120.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="144x144"
+      type="image/png"
+      href="/images/icons/apple-touch-icon-144x144.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="152x152"
+      type="image/png"
+      href="/images/icons/apple-touch-icon-152x152.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      type="image/png"
+      href="/images/icons/apple-touch-icon-180x180.png"
+    />
+  </head>
+  <body>
+    <div id="content"></div>
+    <script type="text/javascript" src=/vendor.js/>
+    <script type="text/javascript" src="app.js" />
+    <script
+      async
+      defer
+      data-domain="kitspace.org"
+      src="https://plausible.io/js/plausible.outbound-links.js"
+    ></script>
+    <script>
+      window.plausible =
+        window.plausible ||
+        function () {
+          ;(window.plausible.q = window.plausible.q || []).push(arguments)
+        }
+    </script>
+  </body>
 </html>
