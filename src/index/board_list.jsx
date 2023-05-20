@@ -13,7 +13,7 @@ var BoardList = createClass({
         <div>
           <div style={{height: '30vh'}} />
           <div style={{width: '100%', textAlign: 'center'}}>
-            Sorry, no result. <a href="/submit">Add your project!</a>
+            Sorry, no result. <a href="https://github.com/kitspace/kitspace#adding-your-project">Add your project!</a>
           </div>
         </div>
       )
