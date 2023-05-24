@@ -43,7 +43,7 @@ function BomBuilder(props) {
           style={{maxWidth: '90%'}}
           width="560"
           height="315"
-          src="https://www.youtube.com/embed/U7GB7RV1VzE"
+          src="https://www.youtube.com/embed/2poJVSSmSos"
           frameBorder="0"
           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
