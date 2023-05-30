@@ -1,42 +1,92 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <style>
-          @font-face {
-              font-family: 'Noto Sans';
-              font-style: normal;
-              font-weight: 400;
-              src: local('Noto Sans'), local('NotoSans'), url(/images/NotoSans.ttf) format('truetype');
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      @font-face {
+        font-family: 'Noto Sans';
+        font-style: normal;
+        font-weight: 400;
+        src: local('Noto Sans'), local('NotoSans'),
+          url(/images/NotoSans.ttf) format('truetype');
+      }
+      @font-face {
+        font-family: 'Noto Sans';
+        font-style: normal;
+        font-weight: 700;
+        src: local('Noto Sans Bold'), local('NotoSans-Bold'),
+          url(/images/NotoSansBold.ttf) format('truetype');
+      }
+    </style>
+    <script type="text/javascript">
+      window.addEventListener(
+        'message',
+        function(event) {
+          if (event.source != window) return
+          if (event.data.type && event.data.type === 'FromExtension') {
+            window.setExtensionLinks()
           }
-          @font-face {
-              font-family: 'Noto Sans';
-              font-style: normal;
-              font-weight: 700;
-              src: local('Noto Sans Bold'), local('NotoSans-Bold'), url(/images/NotoSansBold.ttf) format('truetype');
-          }
-        </style>
-        <script type="text/javascript" >
-            window.addEventListener("message", function(event) {
-              if (event.source != window)
-                return;
-              if (event.data.type && (event.data.type === 'FromExtension')) {
-                window.setExtensionLinks();
-              }
-            }, false);
-        </script>
-        <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/mflpmlediakefinapghmabapjeippfdi">
-        <link rel="icon"
-              type="image/png"
-              href="/images/favicon.png">
-        <link rel="stylesheet" href="/page.css">
-    </head>
-    <body>
-        <div id="content"></div>
-        <script type="text/javascript" src=/vendor.js></script>
-        <script type="text/javascript" src=app.js></script>
-        <script async defer data-domain="kitspace.org" src="https://plausible.io/js/plausible.outbound-links.js"></script>
-        <script>window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
-    </body>
+        },
+        false
+      )
+    </script>
+    <link
+      rel="chrome-webstore-item"
+      href="https://chrome.google.com/webstore/detail/mflpmlediakefinapghmabapjeippfdi"
+    />
+    <link
+      href="/images/apple-touch-icon.png"
+      rel="apple-touch-icon"
+      sizes="180x180"
+    />
+    <link
+      href="/images/favicon-96x96.png"
+      rel="icon"
+      sizes="96x96"
+      type="image/png"
+    />
+    <link
+      href="/images/favicon-48x48.png"
+      rel="icon"
+      sizes="48x48"
+      type="image/png"
+    />
+    <link
+      href="/images/favicon-32x32.png"
+      rel="icon"
+      sizes="32x32"
+      type="image/png"
+    />
+    <link
+      href="/images/favicon-16x16.png"
+      rel="icon"
+      sizes="16x16"
+      type="image/png"
+    />
+    <link
+      color="#373737"
+      href="/images/safari-pinned-tab.svg"
+      rel="mask-icon"
+    />
+    <link rel="stylesheet" href="/page.css" />
+  </head>
+  <body>
+    <div id="content"></div>
+    <script type="text/javascript" src="/vendor.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+    <script
+      async
+      defer
+      data-domain="kitspace.org"
+      src="https://plausible.io/js/plausible.outbound-links.js"
+    ></script>
+    <script>
+      window.plausible =
+        window.plausible ||
+        function() {
+          ;(window.plausible.q = window.plausible.q || []).push(arguments)
+        }
+    </script>
+  </body>
 </html>
