@@ -3,7 +3,6 @@ name: Build and deploy
 on:
   workflow_dispatch:
   push:
-  workflow_dispatch:
 
 jobs:
   build_and_deploy:
